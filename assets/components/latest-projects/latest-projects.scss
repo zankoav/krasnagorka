@@ -1,0 +1,150 @@
+@import "./../../common/constants";
+
+.latest-projects {
+    position: relative;
+    padding-bottom: 3rem;
+
+    &__swiper-wrapper {
+        margin-bottom: 4rem;
+
+        @include sm{
+            margin-bottom: 3rem;
+        }
+    }
+
+    &__slide{
+        @include sm{
+            padding: 0 .25rem;
+        }
+    }
+
+    &__swiper{
+        max-width: calc(100% + 2rem);
+        margin: 0 -1rem;
+
+        @include sm{
+            max-width: 100%;
+            margin: 0 4rem;
+        }
+
+        @include md{
+            margin: 0 4rem;
+        }
+
+        @include lg{
+            margin: 0 5rem;
+        }
+    }
+
+    &__title {
+        margin-bottom: 2.5rem;
+    }
+
+    &__pagination {
+
+        @include sm {
+            display: none;
+        }
+
+        .swiper-pagination-bullet-active{
+            background-color: $PRIMARY;
+        }
+
+        .swiper-pagination-bullet{
+            border-radius: 0;
+
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    &__next, &__prev {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px 0 rgba(0, 102, 176, 0.14);
+        top: initial;
+        bottom: 2.5rem;
+
+        @include sm {
+            width: 40px;
+            height: 40px;
+            bottom: 0;
+            background-size: 40px 40px;
+        }
+
+        @include lg {
+            width: 50px;
+            height: 50px;
+            background-size: 50px 50px;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__next {
+        background: rgba(230, 232, 235, 0.85) url("./../../images/swiper/right.svg");
+        background-size: cover;
+
+        @include sm {
+            bottom: initial;
+            top: 54%;
+            right: 1rem;
+        }
+
+        @include md {
+            top: 55%;
+            right: 2rem;
+        }
+    }
+
+    &__prev {
+        background: rgba(230, 232, 235, 0.85) url("./../../images/swiper/left.svg");
+        background-size: cover;
+
+        @include sm {
+            bottom: initial;
+            top: 54%;
+            left: 1rem;
+        }
+
+        @include md {
+            top: 55%;
+            left: 2rem;
+        }
+    }
+
+    &__all{
+        text-align: center;
+        margin-top: 1rem;
+
+        @include sm{
+            margin-top: 0;
+        }
+    }
+
+    &__view-all{
+        color: $GRAY_LIGHT;
+        text-decoration: underline;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        transition: .4s;
+
+        &:hover{
+            color: $PRIMARY;
+        }
+
+        &:after, &:before{
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background-color: $GRAY_LIGHT_2;
+            margin: 0 1rem;
+        }
+    }
+}

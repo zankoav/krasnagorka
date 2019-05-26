@@ -1,0 +1,46 @@
+mixin latest-projects()
+    section.latest-projects
+        .container
+            +title('Recent Projects', 'h2', 'latest-projects__title')
+            .swiper-container.latest-projects__swiper
+                .swiper-wrapper.latest-projects__swiper-wrapper
+                    .swiper-slide.latest-projects__slide
+                        +project-cart(
+                        'https://avatars.mds.yandex.net/get-pdb/881477/aad96621-654c-474a-aeca-32fb93d81035/s600',
+                        'Molotok by MTBank',
+                        'Shop',
+                        '20.12.2019',
+                        '48')
+                    .swiper-slide.latest-projects__slide
+                        +project-cart(
+                        'https://i1.7fon.org/thumb/z119233.jpg',
+                        'Molotok by MTBank',
+                        'Vetrina',
+                        '20.12.2019',
+                        '48')
+                    .swiper-slide.latest-projects__slide
+                        +project-cart(
+                        'https://avatars.mds.yandex.net/get-pdb/881477/aad96621-654c-474a-aeca-32fb93d81035/s600',
+                        'Molotok by MTBank',
+                        'Landing',
+                        '20.12.2019',
+                        '48')
+                    .swiper-slide.latest-projects__slide
+                        +project-cart(
+                        'https://avatars.mds.yandex.net/get-pdb/881477/aad96621-654c-474a-aeca-32fb93d81035/s600',
+                        'Molotok by MTBank',
+                        'Vetrina',
+                        '20.12.2019',
+                        '48')
+                    .swiper-slide.latest-projects__slide
+                        +project-cart(
+                        'https://avatars.mds.yandex.net/get-pdb/881477/aad96621-654c-474a-aeca-32fb93d81035/s600',
+                        'Molotok by MTBank',
+                        'Portfolio',
+                        '20.12.2019',
+                        '48')
+                .swiper-pagination.latest-projects__pagination
+            .swiper-button-next.latest-projects__next
+            .swiper-button-prev.latest-projects__prev
+            .latest-projects__all
+                a.latest-projects__view-all(href="#") View All

@@ -1,0 +1,299 @@
+@import "./../../common/constants";
+
+.header {
+
+    &__top {
+        background-color: $BLUE_DARK;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+
+
+        @include lg {
+            position: relative;
+            padding: .5rem 0;
+            top: initial;
+            left: initial;
+        }
+    }
+
+    &__top-inner {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__bottom {
+        padding: 1rem 0 .75rem;
+        background-color: $BLUE;
+        margin-top: 40px;
+
+        @include sm {
+            padding: 1.25rem 0 1rem;
+        }
+
+        @include lg {
+            margin-top: 0;
+        }
+    }
+
+    &__bottom-inner {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__logo {
+        display: block;
+        line-height: 1;
+
+        small {
+            color: $LIGHT;
+            font-size: 12px;
+            letter-spacing: 0;
+            margin-left: .5rem;
+
+            @include sm {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &__bottom-inner-logo-link {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        font-weight: 900;
+        color: $LIGHT;
+        letter-spacing: 2px;
+
+        @include sm {
+            font-size: 2.5rem;
+            letter-spacing: .25rem;
+        }
+
+        i {
+            display: inline-block;
+            transition: .4s;
+
+            &:hover {
+                color: $PRIMARY;
+                transform: translateY(-.25rem) scale(1.4);
+            }
+        }
+
+        .red {
+            background-color: $PRIMARY;
+            width: 5px;
+            height: 5px;
+            margin: auto 4px 0 0;
+
+            &:hover {
+                background-color: $LIGHT;
+            }
+
+            @include sm {
+                width: 8px;
+                height: 8px;
+                margin: auto 8px 0 0;
+            }
+        }
+    }
+}
+
+.contacts {
+    display: flex;
+    flex-basis: 74px;
+
+    @include sm {
+        flex-basis: 74px;
+    }
+
+    @include lg {
+        flex-basis: initial;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        padding: .5rem 0 .5rem 1rem;
+
+        @include lg {
+            font-size: 1rem;
+            margin-left: 1.5rem;
+            padding: 0;
+        }
+
+        i {
+            color: $LIGHT;
+
+            @include sm {
+                margin-left: .5rem;
+            }
+
+            @include lg{
+                margin-left: 0;
+                margin-right: .5rem;
+            }
+        }
+
+        span {
+
+            display: none;
+
+            @include lg {
+                font-weight: 500;
+                color: $WHITE;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.burger {
+    padding: 14px;
+    flex-basis: 74px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    @include sm {
+        flex-basis: 90px;
+    }
+
+    @include lg {
+        display: none;
+    }
+
+    span {
+        height: 3px;
+        border-radius: 1px;
+        width: 32px;
+        background-color: $LIGHT;
+        transition: .4s;
+        transform-origin: center;
+    }
+
+    &_active {
+
+        span {
+            transform: translateY(4px) rotate(45deg);
+            &:last-child {
+                transform: translateY(-4px) rotate(-45deg);
+            }
+        }
+    }
+}
+
+.socials {
+    flex-basis: 74px;
+
+    @include sm {
+        flex-basis: 90px;
+    }
+}
+
+.menu {
+    align-self: center;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 40px);
+    top: 40px;
+    right: 0;
+    z-index: 999;
+    background-color: $BLUE_DARK;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+    transition: top .6s;
+
+    @include lg {
+        width: initial;
+        top: initial;
+        right: initial;
+        position: static;
+        display: block;
+        background-color: transparent;
+        padding-bottom: 0;
+    }
+
+    &_active {
+        top: calc(40px - 100%);
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+
+        @include lg {
+            flex-direction: row;
+        }
+
+    }
+
+    &__item {
+
+        margin-left: 1rem;
+
+        @include lg {
+            margin-left: 0;
+        }
+
+        a {
+            color: $LIGHT;
+            text-transform: uppercase;
+            font-size: 24px;
+            display: block;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: .4s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+            @include sm {
+                font-size: 32px;
+                padding: 1rem 0;
+            }
+
+            @include lg {
+                padding: 0 0 0 1.5rem;
+                font-size: 18px;
+            }
+        }
+
+        &_active {
+            a {
+                &:hover {
+                    transform: scale(1);
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: -2rem;
+                    width: 4px;
+                    height: 100%;
+                    background-color: $PRIMARY;
+
+                    @include sm {
+                        width: 6px;
+                    }
+
+                    @include lg {
+                        width: 40px;
+                        height: 4px;
+                        bottom: -6px;
+                        left: calc(50% - .5rem);
+                    }
+                }
+            }
+        }
+    }
+}

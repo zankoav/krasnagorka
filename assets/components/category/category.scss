@@ -1,0 +1,104 @@
+@import "../../common/constants";
+
+.category {
+
+    &__breadcrumbs {
+        margin-top: 1rem;
+    }
+
+    &__title {
+        margin-top: 1rem;
+
+        @include sm {
+            margin-top: 1rem;
+        }
+
+        @include md {
+            margin-top: 1.5rem;
+        }
+
+        @include lg {
+            margin-top: 1rem;
+        }
+    }
+
+    &__content {
+        margin: 1rem -1rem 0;
+        max-width: initial;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+
+        @include sm {
+            margin: 0 -1rem;
+        }
+
+        @include lg {
+            margin: 0 -1rem;
+        }
+    }
+
+    &__menu {
+        max-width: 100%;
+        flex: 1 0 100%;
+        padding: 0 1rem;
+        margin-bottom: 3rem;
+
+        @include sm {
+            margin-bottom: 4rem;
+        }
+
+        @include md {
+            max-width: 14rem;
+            flex: 1 0 14rem;
+        }
+    }
+
+    &__projects {
+        max-width: 100%;
+        flex: 1 0 100%;
+        padding: 0 1rem 2rem;
+        position: relative;
+
+        @include md {
+            max-width: calc(100% - 14rem);
+            flex: 1 0 calc(100% - 14rem);
+        }
+
+        @include lg {
+            padding-left: 5rem;
+        }
+
+        .subtitle-big {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    &__row{
+        max-width: initial;
+        margin: 0 -1rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__col{
+        padding: 0 1rem 3rem;
+        max-width: 100%;
+        flex: 1 0 100%;
+
+        @include sm{
+            max-width: 50%;
+            flex: 1 0 50%;
+        }
+
+        @include lg{
+            max-width: 33.333%;
+            flex: 1 0 33.333%;
+        }
+
+        @include hd{
+            max-width: 25%;
+            flex: 1 0 25%;
+        }
+    }
+}

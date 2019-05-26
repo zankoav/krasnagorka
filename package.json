@@ -1,0 +1,48 @@
+{
+  "name": "krasnagorka",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "scripts": {
+    "wp": "NODE_ENV=2 webpack --mode production",
+    "build": "set NODE_ENV=1 && webpack --mode production",
+    "dev": "set NODE_ENV=0 && webpack-dev-server --open --mode development"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/zankoav/krasnagorka.git"
+  },
+  "keywords": [],
+  "author": "zankoav",
+  "license": "ISC",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "assets-webpack-plugin": "^3.6.0",
+    "autoprefixer": "^8.6.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "fancybox": "^3.0.1",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template-pug": "^1.1.1",
+    "node-sass": "^4.9.3",
+    "postcss-loader": "^2.1.6",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "resolve-url-loader": "^2.3.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "jquery-smooth-scroll": "^2.2.0",
+    "swiper": "^4.3.5"
+  }
+}

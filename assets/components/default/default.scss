@@ -1,0 +1,36 @@
+@import "../../common/constants";
+
+.default {
+
+    margin-bottom: 2rem;
+
+    &__breadcrumbs {
+        margin-top: 1rem;
+    }
+
+    &__title {
+        margin-top: 1rem;
+
+        @include sm {
+            margin-top: 1rem;
+        }
+
+        @include md {
+            margin-top: 1.5rem;
+        }
+
+        @include lg {
+            margin-top: 1rem;
+        }
+    }
+
+    &__container{
+        color: $GRAY_LIGHT;
+    }
+
+    .editor-content{
+        &:nth-child(1){
+            margin-top: 0;
+        }
+    }
+}

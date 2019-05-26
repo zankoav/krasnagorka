@@ -32,33 +32,29 @@
 
 	function calendar_scripts() {
 		wp_enqueue_style( 'fullcalendar_public_style', CALENDAR_ROOT_URI . 'css/public_style.css' );
-		wp_register_script( 'moment', CALENDAR_ROOT_URI . 'js/moment.js' );
-		wp_register_script( 'fullcalendar', CALENDAR_ROOT_URI . 'js/fullcalendar.min.js' );
-		wp_register_script( 'fullcalendar_locale', CALENDAR_ROOT_URI . 'js/ru.js' );
-		wp_register_script( 'public_calendar', CALENDAR_ROOT_URI . 'js/public.js' );
 
-		wp_enqueue_script( 'moment', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'fullcalendar_locale', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'fullcalendar', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'public_calendar', array( 'jquery' ), false, false );
+		wp_enqueue_script( 'moment',CALENDAR_ROOT_URI . 'js/moment.js' , array( 'jquery' ), false, true );
+		wp_enqueue_script( 'fullcalendar',CALENDAR_ROOT_URI . 'js/fullcalendar.min.js', array( 'jquery' ), false, true );
+        wp_enqueue_script( 'fullcalendar_locale',CALENDAR_ROOT_URI . 'js/ru.js', array( 'jquery', 'moment' ), false, true );
+        wp_enqueue_script( 'public_calendar',CALENDAR_ROOT_URI . 'js/public.js', array( 'jquery' ), false, true );
 	}
 
-	add_action( "wp_enqueue_scripts", "calendar_scripts" );
+	if(!is_admin()){
+        add_action( "wp_enqueue_scripts", "calendar_scripts" );
+    }
 
-	function my_enqueue( $hook ) {
+	function my_enqueue() {
 		wp_enqueue_style( 'fullcalendar_admin_style', CALENDAR_ROOT_URI . 'css/admin_style.css' );
-		wp_register_script( 'moment', CALENDAR_ROOT_URI . 'js/moment.js' );
-		wp_register_script( 'fullcalendar', CALENDAR_ROOT_URI . 'js/fullcalendar.min.js' );
-		wp_register_script( 'fullcalendar_locale', CALENDAR_ROOT_URI . 'js/ru.js' );
-		wp_register_script( 'admin_calendar', CALENDAR_ROOT_URI . 'js/admin.js' );
 
-		wp_enqueue_script( 'moment', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'fullcalendar_locale', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'fullcalendar', array( 'jquery' ), false, false );
-		wp_enqueue_script( 'admin_calendar', array( 'jquery' ), false, false );
+		wp_enqueue_script( 'moment', CALENDAR_ROOT_URI . 'js/moment.js', array( 'jquery' ), false, true );
+        wp_enqueue_script( 'fullcalendar',CALENDAR_ROOT_URI . 'js/fullcalendar.min.js',  array( 'jquery' ), false, true );
+        wp_enqueue_script( 'fullcalendar_locale',CALENDAR_ROOT_URI . 'js/ru.js', array( 'jquery', 'moment' ), false, true );
+		wp_enqueue_script( 'admin_calendar',CALENDAR_ROOT_URI . 'js/admin.js',  array( 'jquery' ), false, true );
 	}
 
-	add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+    if(is_admin()){
+        add_action( 'admin_enqueue_scripts', 'my_enqueue' );
+    }
 
 	add_action( 'rest_api_init', function () {
 		register_rest_route( 'calendars', '/(?P<slug>[a-z0-9\-]+)', [

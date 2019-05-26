@@ -1,0 +1,131 @@
+@import "../../common/constants";
+
+.contact-page {
+
+    margin-bottom: 2rem;
+
+    &__breadcrumbs {
+        margin-top: 1rem;
+    }
+
+    &__title {
+        margin-top: 1rem;
+
+        @include sm {
+            margin-top: 1rem;
+        }
+
+        @include md {
+            margin-top: 1.5rem;
+        }
+
+        @include lg {
+            margin-top: 1rem;
+        }
+    }
+
+    &__row {
+        max-width: initial;
+        margin: 1rem -1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+
+        @include lg {
+            margin: 2rem -2rem 0;
+        }
+    }
+
+    &__col {
+        padding: 0 0 3rem;
+        max-width: 100%;
+        flex: 1 0 100%;
+
+        &:last-child{
+            padding-bottom: 0;
+        }
+
+        @include md {
+            padding: 0 1rem 3rem;
+
+            &:first-child{
+                max-width: 30%;
+                flex: 1 0 30%;
+            }
+            &:last-child{
+                max-width: 70%;
+                flex: 1 0 70%;
+            }
+        }
+
+        @include lg {
+            padding: 1rem 2rem;
+            &:first-child{
+                max-width: 40%;
+                flex: 1 0 40%;
+            }
+            &:last-child{
+                max-width: 60%;
+                flex: 1 0 60%;
+            }
+        }
+
+        @include hd{
+            &:first-child{
+                max-width: 35%;
+                flex: 1 0 35%;
+            }
+            &:last-child{
+                max-width: 65%;
+                flex: 1 0 65%;
+            }
+        }
+    }
+
+    &__item{
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        margin-bottom: .75rem;
+
+        i{
+            color: $BLUE;
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            border-radius: 50%;
+            border: 1px solid $BLUE;
+
+        }
+
+        &:hover{
+            .contact-page__item-value_link{
+                color: $PRIMARY;
+            }
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__item-value{
+        color: $GRAY;
+        transition: .4s;
+    }
+
+    &__info-title{
+        margin-bottom: 1rem;
+        color: $BLUE_DARK;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    iframe{
+        margin-bottom: 1rem;
+    }
+
+}

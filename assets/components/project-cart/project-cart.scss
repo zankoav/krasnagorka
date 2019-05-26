@@ -1,0 +1,80 @@
+@import "../../common/constants";
+
+.project-cart {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+
+    &__img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px $GRAY_LIGHT;
+    }
+
+    &__button {
+        padding: .5rem 3rem;
+        color: $WHITE;
+        letter-spacing: 1px;
+        font-weight: bold;
+        background-color: $BLUE_LIGHT;
+        align-self: center;
+        transition: .4s;
+        border-radius: 4px;
+        margin-top: 1rem;
+
+        &:hover {
+            background-color: $PRIMARY;
+            box-shadow: 0 2px 20px 0 rgba(156, 36, 52, .5);
+        }
+    }
+
+    &__title {
+        color: $BLUE_DARK;
+        font-size: 22px;
+        font-weight: 500;
+        margin-bottom: 1rem;
+    }
+
+    &__type {
+        margin-bottom: .5rem;
+        color: $GRAY;
+
+        &:before {
+            content: attr(data-before);
+            font-weight: 500;
+        }
+    }
+    &__type-link {
+        color: $GRAY;
+        text-decoration: underline;
+        transition: .4s;
+
+        &:hover {
+            color: $PRIMARY;
+        }
+    }
+
+    &__release {
+        margin-bottom: .5rem;
+        color: $GRAY;
+        &:before {
+            content: attr(data-before);
+            font-weight: 500;
+        }
+    }
+
+    &__time-spent {
+        color: $GRAY;
+        &:before {
+            content: attr(data-before);
+            font-weight: 500;
+        }
+
+        &:after {
+            content: attr(data-spent);
+            margin-left: 2px;
+        }
+    }
+}

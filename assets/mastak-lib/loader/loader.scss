@@ -1,0 +1,53 @@
+$BGC_LOADER: #fff;
+$C_SPINNER: #000;
+
+@mixin loader() {
+    $SVG_LOADER_DEFAULT : './images/default.svg';
+    $SVG_LOADER_MTB : './images/mtb.svg';
+    $SVG_LOADER_EGG : './images/egg.svg';
+    $SVG_LOADER_ZANKOAV : './images/zankoav.svg';
+
+    $LOADER: $SVG_LOADER_ZANKOAV;
+
+    .body_overflow_hidden {
+        overflow: hidden;
+    }
+
+    .loader {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10000;
+        background-color: $BGC_LOADER;
+
+        &__spinner {
+            position: relative;
+
+            &:after {
+                content: '';
+                width: 60px;
+                height: 60px;
+                display: block;
+                text-align: center;
+                transform-origin: center;
+                background: url($LOADER) no-repeat;
+                background-size: cover;
+                animation: spinner 1s linear infinite;
+            }
+        }
+    }
+
+    @keyframes spinner {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

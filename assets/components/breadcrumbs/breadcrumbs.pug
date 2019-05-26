@@ -1,0 +1,9 @@
+mixin breadcrumbs(...items)
+    .breadcrumbs
+        - for(var i=0; i < items.length;i++)
+            if (items.length === 1)
+                span.breadcrumbs__link.breadcrumbs__link_last= items[i]
+            if (i === items.length - 1)
+                span.breadcrumbs__link.breadcrumbs__link_last= items[i]
+            else
+                a(href="#" title=item).breadcrumbs__link.breadcrumbs__link= items[i]

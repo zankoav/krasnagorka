@@ -1,0 +1,66 @@
+@import "./../../common/constants";
+
+.coockie {
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: $GRAY;
+    width: 100%;
+    z-index: 99999;
+    padding: .5rem 3rem;
+    animation: show-coockie .6s;
+
+    @media (min-width: map_get($MEDIA, SM)) {
+        padding: .5rem 4rem;
+    }
+
+    &__title {
+        text-align: center;
+        font-size: 12px;
+        color: $WHITE;
+    }
+
+    &__info {
+        color: $WHITE;
+        transition: color .6s;
+        text-decoration: underline;
+        margin-left: 4px;
+        &:hover {
+            color: $DARK;
+        }
+
+    }
+
+    &__close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        color: #fff;
+        height: 100%;
+        position: absolute;
+        right: 0;
+        width: 3rem;
+        top: 0;
+        transition: all .6s;
+        z-index: 10;
+
+        @media (min-width: map_get($MEDIA, SM)) {
+            width: 4rem;
+        }
+
+        &:hover {
+            color: $DARK;
+        }
+    }
+}
+
+@keyframes show-coockie {
+    0% {
+        bottom: -70px;
+    }
+    100% {
+        bottom: 0;
+    }
+}

@@ -231,7 +231,7 @@
                 <div class="price__table-more-block">
                     <a href="#" class="price__table-more">
                         <img class="price__arrow-more"
-                             src="/wp-content/themes/itfactory/mastak/src/icons/left-arrow-gray.e83982.svg" alt="arrow">
+                             src=<?=CORE_PATH?>"src/icons/left-arrow-gray.e83982.svg" alt="arrow">
                     </a>
                 </div>
             <?php endif; ?>

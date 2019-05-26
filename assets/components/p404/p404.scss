@@ -1,0 +1,37 @@
+@import "../../common/constants";
+
+.p404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3rem 0;
+
+    &__title{
+        color: $BLUE;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 1.5;
+
+        @include sm{
+            font-size: 64px;
+        }
+
+        @include hd{
+            font-size: 72px;
+        }
+    }
+
+    &__subtitle{
+        color: $GRAY_LIGHT;
+        font-size: 20px;
+
+        @include sm{
+            font-size: 24px;
+        }
+
+        @include hd{
+            font-size: 32px;
+        }
+    }
+}

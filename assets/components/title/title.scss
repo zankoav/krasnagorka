@@ -1,0 +1,75 @@
+@import "./../../common/constants";
+
+.title {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: $BLUE_DARK;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin: 4rem 0 2rem;
+
+    @include sm {
+        font-size: 32px;
+        margin: 5rem 0 3rem;
+    }
+
+    &:after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 4px;
+        margin: .125rem auto 0;
+        background-color: $PRIMARY;
+
+        @include sm {
+            height: 6px;
+        }
+    }
+
+    &_default{
+        margin: 2rem 0;
+    }
+
+    &_inner {
+        margin: 2rem 0;
+
+        @include sm{
+            margin: 2rem 0 3rem;
+        }
+
+        @include lg{
+            margin: 2rem 0 4rem;
+        }
+
+        @include hd{
+            margin: 2rem 0 3rem;
+        }
+    }
+
+    &_user{
+        margin: 0 0 2rem;
+
+
+        @include md{
+            text-align: initial;
+        }
+
+        &:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: $PRIMARY;
+
+            @include sm {
+                height: 6px;
+            }
+
+            @include md{
+                width: 80px;
+                margin: .125rem 0 0 60px;
+            }
+        }
+    }
+}

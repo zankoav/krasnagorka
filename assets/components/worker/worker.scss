@@ -1,0 +1,70 @@
+@import "./../../common/constants";
+
+.worker {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__img-wrapper {
+        overflow: hidden;
+        border-radius: 50%;
+        position: relative;
+        border: 2px solid $WHITE;
+        box-shadow: 0 2px 4px $GRAY;
+        margin: 0 2rem 1rem;
+        max-width: 320px;
+
+        @include sm {
+            margin: 0 0 1rem;
+        }
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    &__view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $WHITE;
+        background-color: $BLACK_07;
+        opacity: 0;
+        font-size: 32px;
+        font-weight: 600;
+        transition: .4s;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &__title {
+        color: $BLUE;
+        font-size: 22px;
+        line-height: 1;
+        margin-bottom: .5rem;
+        font-weight: 600;
+
+        @include sm {
+            font-size: 24px;
+        }
+    }
+
+    &__position, &__skill {
+        color: $GRAY_LIGHT;
+        line-height: 1.25;
+
+        @include sm {
+            font-size: 18px;
+        }
+    }
+}

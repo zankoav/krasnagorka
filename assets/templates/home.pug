@@ -1,0 +1,15 @@
+include ./../mixins
+doctype html
+html
+    +head()
+    body(class="body_overflow_hidden")
+        +loader('loader__spinner_egg')
+        +coockie()
+        .app
+            +header()
+            main.home
+                +welcome()
+                +latest-projects()
+            +contactForm()
+            +partners()
+            +footer()

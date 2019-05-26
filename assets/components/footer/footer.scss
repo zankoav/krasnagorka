@@ -1,0 +1,121 @@
+@import "./../../common/constants";
+
+.footer {
+    background-color : $BLUE;
+    padding          : 3rem 0;
+    position         : relative;
+
+    &:after {
+        content          : '';
+        position         : fixed;
+        height           : 500px;
+        width            : 100%;
+        z-index          : -1;
+        background-color : $BLUE;
+        bottom           : -500px;
+        left             : 0;
+    }
+
+    &__row {
+        display         : flex;
+        justify-content : space-between;
+        align-items     : center;
+        flex-direction  : column;
+
+        @include sm {
+            flex-direction : row;
+        }
+    }
+
+    &__wrapp {
+        display : flex;
+
+        @include sm {
+            text-align : left;
+        }
+    }
+
+    &__point {
+        margin      : 4px 4px 0;
+        line-height : 1;
+        color       : $BLUE_LIGHT_2;
+        font-size   : 16px;
+    }
+
+    &__coockies {
+        color           : $BLUE_LIGHT_2;
+        font-size       : 16px;
+        max-width       : 110px;
+        transition      : color .4s;
+        text-decoration : underline;
+
+        @include sm {
+            max-width : 150px;
+        }
+
+        &:hover {
+            color : $PRIMARY;
+        }
+    }
+
+    &__copy {
+        color     : $BLUE_LIGHT_2;
+        font-size : 16px;
+        max-width : initial;
+
+        @include sm {
+            margin-top : initial;
+            text-align : right;
+        }
+    }
+
+    &__logo {
+        font-size      : 24px;
+        transition     : color .4s;
+        text-align     : center;
+        font-weight    : 900;
+        letter-spacing : 2px;
+        text-transform : uppercase;
+        color          : $LIGHT;
+        margin         : 1rem 0;
+
+        &:hover {
+            color : $PRIMARY;
+        }
+
+        @include sm {
+            margin     : initial;
+            text-align : center;
+        }
+
+        span {
+            &:nth-child(2) {
+                margin-left : 4px;
+                color       : $PRIMARY;
+            }
+        }
+    }
+
+    &__col {
+        @include sm {
+            flex-basis : 33.333%;
+        }
+    }
+
+    &__unp-wrapper {
+        display        : flex;
+        flex-direction : column;
+        align-items    : center;
+    }
+
+    &__unp {
+        margin-bottom : 1rem;
+        font-weight   : 500;
+        color         : $BLUE_LIGHT_2;
+
+        @include sm {
+            margin-top    : .25rem;
+            margin-bottom : 0;
+        }
+    }
+}

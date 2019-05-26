@@ -1,0 +1,9 @@
+mixin project-cart(img, title, type, release, timeSpent)
+    .project-cart
+        img.project-cart__img(src=img, alt=title)
+        .project-cart__title= title
+        .project-cart__release(data-before='Release: ')= release
+        .project-cart__type(data-before='Type: ')
+            a.project-cart__type-link(href="#")= type
+        .project-cart__time-spent(data-before='Spent: ', data-spent='h')= timeSpent
+        a.project-cart__button(href="#") View

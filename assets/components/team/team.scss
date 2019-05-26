@@ -1,0 +1,67 @@
+@import "../../common/constants";
+
+.team {
+
+    margin-bottom: 2rem;
+
+    &__breadcrumbs {
+        margin-top: 1rem;
+    }
+
+    &__title {
+        margin-top: 1rem;
+
+        @include sm {
+            margin-top: 1rem;
+        }
+
+        @include md {
+            margin-top: 1.5rem;
+        }
+
+        @include lg {
+            margin-top: 1rem;
+        }
+    }
+
+    &__row{
+        max-width: initial;
+        margin: 0 -1rem;
+        display: flex;
+        flex-wrap: wrap;
+
+        @include lg{
+            margin: 0 -2rem;
+        }
+
+        @include hd{
+            margin: 0 -3rem;
+        }
+    }
+
+    &__col{
+        padding: 0 1rem 4rem;
+        max-width: 100%;
+        flex: 1 0 100%;
+
+        @include sm{
+            max-width: 50%;
+            flex: 1 0 50%;
+        }
+
+        @include md{
+            max-width: 33.333%;
+            flex: 1 0 33.333%;
+        }
+
+        @include lg{
+            padding: 0 2rem 3rem;
+            max-width: 25%;
+            flex: 1 0 25%;
+        }
+
+        @include hd{
+            padding: 0 3rem 3rem;
+        }
+    }
+}
