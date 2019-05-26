@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="47px" viewBox="0 0 64 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>tv</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Opportunities-Desktop" transform="translate(-344.000000, -1274.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Group" transform="translate(81.000000, 1235.000000)">
+                <g id="tv" transform="translate(263.000000, 39.000000)">
+                    <path d="M64,40.5909091 L64,0 L0,0 L0,40.5909091 L22.4,40.5909091 L22.4,44.8636364 L12.8,44.8636364 L12.8,47 L51.2,47 L51.2,44.8636364 L41.6,44.8636364 L41.6,40.5909091 L64,40.5909091 Z M39.4666667,44.8636364 L24.5333333,44.8636364 L24.5333333,40.5909091 L39.4666667,40.5909091 L39.4666667,44.8636364 Z M2.13333333,38.4545455 L2.13333333,2.13636364 L61.8666667,2.13636364 L61.8666667,38.4545455 L2.13333333,38.4545455 Z" id="Shape"></path>
+                    <path d="M3,3 L3,35 L60,35 L60,3 L3,3 Z M57.8888889,32.7931034 L5.11111111,32.7931034 L5.11111111,5.20689655 L57.8888889,5.20689655 L57.8888889,32.7931034 Z" id="Shape"></path>
+                    <rect id="Rectangle-path" x="50" y="35" width="3" height="3"></rect>
+                    <rect id="Rectangle-path" x="53" y="35" width="3" height="3"></rect>
+                    <rect id="Rectangle-path" x="56" y="35" width="3" height="3"></rect>
+                    <rect id="Rectangle-path" x="29" y="35" width="7" height="3"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

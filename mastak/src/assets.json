@@ -1,0 +1,38 @@
+{
+    "common": {
+        "js": "/src/js/common.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/common.7bb15fb55b01b21244bf.min.css"
+    },
+    "opportunities": {
+        "js": "/src/js/opportunities.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/opportunities.7bb15fb55b01b21244bf.min.css"
+    },
+    "house": {
+        "js": "/src/js/house.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/house.7bb15fb55b01b21244bf.min.css"
+    },
+    "events": {
+        "js": "/src/js/events.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/events.7bb15fb55b01b21244bf.min.css"
+    },
+    "reviews": {
+        "js": "/src/js/reviews.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/reviews.7bb15fb55b01b21244bf.min.css"
+    },
+    "prices": {
+        "js": "/src/js/prices.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/prices.7bb15fb55b01b21244bf.min.css"
+    },
+    "booking": {
+        "js": "/src/js/booking.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/booking.7bb15fb55b01b21244bf.min.css"
+    },
+    "houses": {
+        "js": "/src/js/houses.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/houses.7bb15fb55b01b21244bf.min.css"
+    },
+    "index": {
+        "js": "/src/js/index.7bb15fb55b01b21244bf.min.js",
+        "css": "/src/css/index.7bb15fb55b01b21244bf.min.css"
+    }
+}

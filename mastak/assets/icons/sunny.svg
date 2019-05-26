@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="34px" viewBox="0 0 48 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>krasn-icons2-02 copy 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main-Desktop" transform="translate(-1030.000000, -705.000000)" stroke="#E0DEDE">
+            <g id="krasn-icons2-02-copy-4" transform="translate(1030.000000, 705.000000)">
+                <circle id="Oval" fill="#FBE800" transform="translate(14.000000, 15.000000) rotate(-14.010000) translate(-14.000000, -15.000000) " cx="14" cy="15" r="8"></circle>
+                <path d="M46.9999605,24.2876443 C46.9957566,21.4153644 45.52238,18.7298933 43.0619846,17.110036 C40.6015892,15.4901788 37.4707916,15.1443869 34.6941274,16.185819 C33.729483,12.0287781 29.9287565,9.05519043 25.5104572,9.00075886 C21.0921579,8.94632728 17.213852,11.8253125 16.1393322,15.9572318 L15.8391899,15.9572318 C10.9574401,15.9572318 7,19.7723854 7,24.4786159 C7,29.1848464 10.9574401,33 15.8391899,33 C16.1393322,33 16.4214659,32.9855325 16.7066011,32.9594909 L16.7066011,33 L37.5304718,33 C37.6715387,33 37.815607,33 37.9596753,33 C38.1037436,33 38.2598175,33 38.3888787,33 L38.532947,33 C43.3021672,32.7136353 47.0139678,28.8942806 46.9999605,24.2876443 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+                <path d="M0,19 L6,18" id="Shape" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M0,8 L6,10" id="Shape" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M10,0 L12,5" id="Shape" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M23,2 L20,7" id="Shape" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

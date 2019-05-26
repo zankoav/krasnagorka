@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Events-Desktop" transform="translate(-966.000000, -485.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="Group-6" transform="translate(700.000000, 468.000000)">
+                <g id="favorite-heart-button" transform="translate(266.000000, 17.000000)">
+                    <path d="M9.5,19 L8.17,17.5543478 C3.23,12.8043478 0,9.60326087 0,5.67934783 C0,2.47826087 2.28,0 5.225,0 C6.84,0 8.455,0.826086957 9.5,2.16847826 C10.545,0.826086957 12.16,0 13.775,0 C16.72,0 19,2.47826087 19,5.67934783 C19,9.60326087 15.77,12.8043478 10.83,17.5543478 L9.5,19 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
