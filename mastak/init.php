@@ -415,38 +415,36 @@
 
 
 	function get_mastak_header_small_view_image() {
-        $image_size = wp_is_mobile() ? 'iphone' : 'laptop';
-
         if ( is_post_type_archive( 'house' ) ) {
-			echo get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_header_image'];
+			return get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_header_image_id'];
 		} else if ( is_post_type_archive( 'opportunity' ) ) {
-			echo get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_header_image'];
+            return get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_header_image_id'];
 		} else if ( is_post_type_archive( 'event' ) ) {
-			echo get_option( 'mastak_event_appearance_options' )['mastak_event_submenu_header_image'];
+            return get_option( 'mastak_event_appearance_options' )['mastak_event_submenu_header_image_id'];
 		} else if ( is_singular( 'house' ) ) {
-			echo get_post_meta( get_the_ID(), "mastak_house_header_image", true );
+            return get_post_meta( get_the_ID(), "mastak_house_header_image_id", true );
 		} else if ( is_singular( 'opportunity' ) ) {
-			echo get_post_meta( get_the_ID(), "mastak_opportunity_header_image", true );
+            return get_post_meta( get_the_ID(), "mastak_opportunity_header_image_id", true );
 		} else if ( is_singular( 'event' ) ) {
-			echo get_post_meta( get_the_ID(), "mastak_event_header_image", true );
+            return get_post_meta( get_the_ID(), "mastak_event_header_image_id", true );
 		} else if ( is_page_template( "template-mastak-prices.php" ) ) {
-			echo get_option( 'mastak_price_appearance_options' )['mastak_price_submenu_header_image'];
+            return get_option( 'mastak_price_appearance_options' )['mastak_price_submenu_header_image_id'];
 		} else if ( is_page_template( "reviews-page-template.php" ) ) {
-			echo get_option( 'mastak_reviews_appearance_options' )['mastak_reviews_image'];
+            return get_option( 'mastak_reviews_appearance_options' )['mastak_reviews_image_id'];
 		} else if ( is_page_template( "template-mastak-booking.php" ) ) {
-			echo get_option( 'mastak_booking_appearance_options' )['mastak_booking_image'];
+            return get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
 		} else if ( is_page_template( "template-mastak-map.php" ) ) {
-			echo get_option( 'mastak_map_appearance_options' )['mastak_map_image'];
+            return get_option( 'mastak_map_appearance_options' )['mastak_map_image_id'];
 		} else if ( is_page_template( "mastak-page-default-template.php" ) ) {
-			echo get_the_post_thumbnail_url();
+            return get_post_thumbnail_id();
 		}else if ( is_404() ) {
-			echo get_option( 'mastak_theme_options' )['bgimage_404'];
+            return get_option( 'mastak_theme_options' )['bgimage_404_id'];
 		} else {
-			echo "#";
+            return null;
 		}
 	}
 
-    add_action( 'mastak_header_small_view_image', 'get_mastak_header_small_view_image' );
+    add_filter( 'mastak_header_small_view_image', 'get_mastak_header_small_view_image' );
 
 	function get_mastak_header_small_view_title() {
 		if ( is_post_type_archive( 'house' ) ) {

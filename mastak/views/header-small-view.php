@@ -156,8 +156,15 @@
         </div>
     </nav>
     <div class="main-slide">
-        <div class="main-slide__slide-img-wrapper"
-             style="background-image: url('<?php do_action("mastak_header_small_view_image"); ?>');"></div>
+        <div class="main-slide__slide-img-wrapper">
+            <?php
+                $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
+                $slide_image_id = apply_filters("mastak_header_small_view_image", null);?>
+            <img class="object-fit-img"
+                 src="<?= wp_get_attachment_image_url( $slide_image_id, $image_size ) ?>"
+                 srcset="<?= wp_get_attachment_image_srcset( $slide_image_id, $image_size ) ?>"
+                 sizes="<?= wp_get_attachment_image_sizes(  $slide_image_id, $image_size ) ?>">
+        </div>
         <div class="main-slide__slide-content">
             <?php do_action("mastak_header_small_view_title"); ?>
         </div>
