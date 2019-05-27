@@ -23,14 +23,13 @@
 
 <?php
 	$isCommentsPage = true;
-	$number         = '';
+	$number         = 33;
 
 	$comments = get_comments( array(
 		'post_id'      => 9105,
 		'status'       => 'approve',
 		'number'       => $number,
-		'hierarchical' => 'threaded',
-        'count'=> 33
+		'hierarchical' => 'threaded'
 	) );
 ?>
 
