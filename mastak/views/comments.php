@@ -23,7 +23,7 @@
 
 <?php
 	$isCommentsPage = true;
-	$number         = 33;
+	$number         = 20;
 
 	$comments = get_comments( array(
 		'post_id'      => 9105,
