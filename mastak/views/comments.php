@@ -29,7 +29,8 @@
 		'post_id'      => 9105,
 		'status'       => 'approve',
 		'number'       => $number,
-		'hierarchical' => 'threaded'
+		'hierarchical' => 'threaded',
+        'count'=> 33
 	) );
 ?>
 
