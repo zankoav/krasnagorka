@@ -1,12 +1,13 @@
 <?php wp_footer();
     if (is_page_template("template-mastak-map.php")): ?>
+
+
+
+        <!--        GGG-->
+
+
+        <!--ROUTE SCRIPT-->
         <script>
-
-            function startThried(){
-                setTimeout(googleMapInit, 3000);
-            }
-
-
             function googleMapInit() {
 
 
@@ -157,10 +158,12 @@
                         codeAddress();
                 }
 
-                google.maps.event.addDomListener(window, 'load', initialize);
+                
+                initialize();
+                // google.maps.event.addDomListener(window, 'load', initialize);
             }
         </script>
-        <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=startThried"></script>
+        <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
 
 
     <?php endif; ?>
