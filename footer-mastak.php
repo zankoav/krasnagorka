@@ -158,8 +158,11 @@
                         codeAddress();
                 }
 
+                setTimeout(function () {
+                    console.log('initialize');
+                    initialize();
+                }, 3000);
 
-                initialize();
                 // google.maps.event.addDomListener(window, 'load', initialize);
             }
         </script>

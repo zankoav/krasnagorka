@@ -138,7 +138,7 @@
 		}
 
 		if ( is_page_template( 'template-mastak-map.php' ) ) {
-		    
+
 			$scriptsData = get_assets_json( "booking" );
             $scriptsHouseData = get_assets_json( "house" );
 
