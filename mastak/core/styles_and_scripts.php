@@ -138,12 +138,9 @@
 		}
 
 		if ( is_page_template( 'template-mastak-map.php' ) ) {
-
-//
-//
-
+		    
 			$scriptsData = get_assets_json( "booking" );
-//            $scriptsHouseData = get_assets_json( "house" );
+            $scriptsHouseData = get_assets_json( "house" );
 
             wp_dequeue_script('jquery');
             wp_dequeue_script('jquery-core');
@@ -153,7 +150,7 @@
             wp_enqueue_script('jquery-migrate', false, array(), false, true);
             wp_enqueue_script( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["js"], false, null, true );
             wp_enqueue_script( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["js"], false, null, true );
-            //wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
+            wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
 
 			wp_enqueue_style( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["css"], false, null );
 
