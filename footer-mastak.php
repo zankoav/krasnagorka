@@ -3,12 +3,14 @@
 
 
 
-            <!--        GGG-->
+        <!--        GGG-->
 
-            <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places"></script>
+        <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
 
-            <!--ROUTE SCRIPT-->
-            <script>
+        <!--ROUTE SCRIPT-->
+        <script>
+            function googleMapInit() {
+
 
                 var map_route, routeDirectionsService, marker_route, autocomplete, geocoder;
 
@@ -148,7 +150,7 @@
                         directionsRenderers[i].setMap(null);
                     for (var i = 0; i < infoWindows.length; i++)
 
-                infoWindows[i].setMap(null);
+                        infoWindows[i].setMap(null);
                 }
 
                 //analise every transmittable event, and if "Enter" pressed start codeAddress().
@@ -158,8 +160,8 @@
                 }
 
                 google.maps.event.addDomListener(window, 'load', initialize);
-
-            </script>
+            }
+        </script>
 
     <?php endif; ?>
 
