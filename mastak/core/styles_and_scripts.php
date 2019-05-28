@@ -143,7 +143,7 @@
 //
 
 			$scriptsData = get_assets_json( "booking" );
-            $scriptsHouseData = get_assets_json( "house" );
+//            $scriptsHouseData = get_assets_json( "house" );
 
             wp_dequeue_script('jquery');
             wp_dequeue_script('jquery-core');
@@ -155,7 +155,6 @@
             wp_enqueue_script( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["js"], false, null, true );
             //wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
 
-            wp_enqueue_style( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["css"], false, null );
 			wp_enqueue_style( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["css"], false, null );
 
             wp_dequeue_script( 'public_calendar' );
