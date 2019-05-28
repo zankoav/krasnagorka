@@ -8,7 +8,158 @@
 
         <!--ROUTE SCRIPT-->
         <script>
+            function googleMapInit() {
 
+
+                var map_route, routeDirectionsService, marker_route, autocomplete, geocoder;
+
+                var directionsRenderers = [];
+                var infoWindows = [];
+
+                //pointsList
+                var mapCenter = new google.maps.LatLng(55.695710, 27.022041);
+                var mapDestination = new google.maps.LatLng(55.768488, 27.086631);
+                var mapStart = new google.maps.LatLng(53.902603, 27.544849);
+                var mapSlobodka = new google.maps.LatLng(55.684264, 27.179945);
+                var mapMinsk = new google.maps.LatLng(53.90453979999999, 27.561524400000053);
+                var mapBegoml = new google.maps.LatLng(54.729464, 28.063619);
+                var mapMyadel = new google.maps.LatLng(54.876854, 26.941103);
+
+                function initialize() {
+
+                    map_route = new google.maps.Map(document.getElementById('map-route-canvas'), {
+                        scrollwheel: false,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    });
+
+                    var input = (document.getElementById('pac-input'));
+                    var button = (document.getElementById('pac-input-button'));
+
+                    geocoder = new google.maps.Geocoder();
+
+                    map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                    map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(button);
+
+                    autocomplete = new google.maps.places.Autocomplete(input);
+                    autocomplete.bindTo('bounds', map_route);
+
+                    requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
+
+                    marker_route = new google.maps.Marker({
+                        map: map_route,
+                        anchorPoint: new google.maps.Point(0, -29)
+                    });
+
+                    var infowindowDest = new google.maps.InfoWindow({
+                        map: map_route,
+                        position: mapDestination,
+                        content: '<div><strong>Красногорка</strong><br>'
+                    });
+                    infoWindows.push(infowindowDest);
+
+                    var infowindowSlob = new google.maps.InfoWindow({
+                        map: map_route,
+                        position: mapSlobodka,
+                        content: '<div><strong>Слободка</strong><br>'
+                    });
+                    infoWindows.push(infowindowSlob);
+
+                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                        var place = autocomplete.getPlace();
+                        showRoute(place.geometry.location)
+                    });
+                }
+
+                //this function make route request
+                function requestDirections(start, end, provideRouteAlternatives, travelMode) {
+                    routeDirectionsService = new google.maps.DirectionsService();
+
+                    var requestForRouteMap = {
+                        origin: start,
+                        destination: end,
+                        travelMode: travelMode,
+                        provideRouteAlternatives: provideRouteAlternatives
+                    };
+
+                    routeDirectionsService.route(requestForRouteMap, function (response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+
+                            for (var i = 0, len = response.routes.length; i < len; i++) {
+                                var directionsRenderer = new google.maps.DirectionsRenderer({
+                                    map: map_route,
+                                    directions: response,
+                                    routeIndex: i,
+                                    suppressmarker: true, //route selectors delete (white points)
+                                    polylineOptions: {
+                                        strokeColor: "#c3242a"
+                                    }
+                                });
+                                directionsRenderers.push(directionsRenderer);
+                            }
+                        } else {
+                            $("#error").append("Unable to retrieve your route<br />");
+                        }
+                    });
+                }
+
+                //handel Enter key presses: request geotag for value from textbox, and call showRoute()
+                function codeAddress() {
+                    var address = document.getElementById('pac-input').value;
+                    geocoder.geocode({'address': address}, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            showRoute(results[0].geometry.location);
+                        } else {
+                            alert('Такого места не найдено');
+                        }
+                    });
+                }
+
+                //show route from startPosition to mapSlobodka and from mapSlobodka to mapDestination.
+                //especially route for Minsk
+                function showRoute(startPosition) {
+                    clearMap();
+
+                    marker_route.setVisible(false);
+
+                    marker_route.setPosition(startPosition);
+                    marker_route.setVisible(true);
+
+                    requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
+
+                    //Minsk is especially city :)
+                    if (startPosition.lat() < 54.0 && startPosition.lat() > 53.7 && startPosition.lng() > 27.3 && startPosition.lng() < 27.7) {
+                        requestDirections(startPosition, mapBegoml, false, google.maps.DirectionsTravelMode.DRIVING);
+                        requestDirections(mapBegoml, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
+                        requestDirections(startPosition, mapMyadel, false, google.maps.DirectionsTravelMode.DRIVING);
+                        requestDirections(mapMyadel, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
+                    } else {
+                        requestDirections(startPosition, mapSlobodka, true, google.maps.DirectionsTravelMode.DRIVING);
+                    }
+
+                    var infowindowDest = new google.maps.InfoWindow({
+                        map: map_route,
+                        position: mapDestination,
+                        content: '<div><strong>Красногорка</strong><br>'
+                    });
+                    infoWindows.push(infowindowDest);
+                }
+
+                function clearMap() {
+                    for (var i = 0; i < directionsRenderers.length; i++)
+                        directionsRenderers[i].setMap(null);
+                    for (var i = 0; i < infoWindows.length; i++)
+
+                        infoWindows[i].setMap(null);
+                }
+
+                //analise every transmittable event, and if "Enter" pressed start codeAddress().
+                function isEnterPressed(d, e) {
+                    if (d != "" && e.keyCode == 13)
+                        codeAddress();
+                }
+
+                google.maps.event.addDomListener(window, 'load', initialize);
+            }
         </script>
         <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
 
