@@ -1023,8 +1023,6 @@
 
 	add_action( 'pre_get_posts', 'get_all_opportunity_posts' );
 
-	add_theme_support( 'post-thumbnails' );
-	add_image_size( 'calendar-thumb', 330, 100, array( 'center', 'center' ) );
 
     function mastak_seo_meta_title(){
 
@@ -1043,6 +1041,7 @@
     }
 
     add_action( 'after_setup_theme', 'zankoav_theme_init' );
+    add_theme_support( 'post-thumbnails' );
 
     function zankoav_theme_init() {
         
@@ -1080,6 +1079,11 @@
          */
         add_image_size( 'map_iphone_5', 272);
         add_image_size( 'map_laptop', 738);
+
+        /**
+         * Booking sizes
+         */
+        add_image_size( 'calendar-thumb', 330, 100, array( 'center', 'center' ) );
 
     }
 
