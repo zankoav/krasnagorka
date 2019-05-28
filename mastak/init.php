@@ -1075,6 +1075,11 @@
         add_image_size( 'about_us_tablet', 590);
         add_image_size( 'about_us_laptop', 960);
 
+        /**
+         * Map sizes
+         */
+        add_image_size( 'map_iphone_5', 272);
+        add_image_size( 'map_laptop', 738);
 
     }
 
