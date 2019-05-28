@@ -159,7 +159,6 @@
                 }
 
                 setTimeout(function () {
-                    console.log('initialize');
                     initialize();
                 }, 3000);
 
