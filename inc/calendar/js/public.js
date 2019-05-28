@@ -1,6 +1,5 @@
 jQuery(document).ready(function (e) {
     setTimeout(function () {
-        console.log('calendar init');
         e('[id^="calendar_"]').each(function () {
             cUrl = e(this).data("url"), e(this).fullCalendar({
                 height: 300,
