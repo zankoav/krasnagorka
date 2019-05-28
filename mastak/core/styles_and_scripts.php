@@ -132,6 +132,10 @@
 			wp_enqueue_script( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["js"], false, null, true );
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
 
+            wp_dequeue_script('jquery-fancybox');
+            wp_dequeue_script('jquery-easing');
+            wp_dequeue_script('jquery-mousewheel');
+
             wp_enqueue_style( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["css"], false, null );
             wp_dequeue_style('contact-form-7');
 
