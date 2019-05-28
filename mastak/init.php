@@ -1085,6 +1085,11 @@
          */
         add_image_size( 'calendar-thumb', 330, 100, array( 'center', 'center' ) );
 
+        /**
+         * Opportunities sizes
+         */
+        add_image_size( 'icon-64', 64);
+
     }
 
     if ( ! function_exists( 'presscore_blog_title' ) ) :
