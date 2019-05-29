@@ -50,23 +50,25 @@
 
 		if ( is_post_type_archive( 'house' ) ) {
 
-			add_action( 'wp_print_scripts', 'my_site_WI_dequeue_script', 100 );
-			add_action( 'wp_enqueue_scripts', 'give_dequeue_plugin_css', 100 );
-
-			add_filter( 'wp_get_attachment_image_src', 'delete_width_height', 10, 4 );
-
 			$scriptsData = get_assets_json( "houses" );
             $scriptsHouseData = get_assets_json( "house" );
 
-
-            wp_enqueue_style( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["css"], false, null );
-			wp_enqueue_script( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["js"], false, null, true );
-
-			wp_enqueue_style( 'houses', $themeUri . '/mastak' . $scriptsData["houses"]["css"], false, null );
+            wp_dequeue_script('jquery');
+            wp_dequeue_script('jquery-core');
+            wp_dequeue_script('jquery-migrate');
+            wp_enqueue_script('jquery', false, array(), false, true);
+            wp_enqueue_script('jquery-core', false, array(), false, true);
+            wp_enqueue_script('jquery-migrate', false, array(), false, true);
+            wp_enqueue_script( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["js"], false, null, true );
 			wp_enqueue_script( 'houses', $themeUri . '/mastak' . $scriptsData["houses"]["js"], false, null, true );
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
 
-			add_yandex_map();
+            wp_enqueue_style( 'houses', $themeUri . '/mastak' . $scriptsData["houses"]["css"], false, null );
+            wp_dequeue_style('contact-form-7');
+
+            wp_add_inline_style('events',
+                'div.wpcf7{margin:0;padding:0}div.wpcf7 .screen-reader-response{position:absolute;overflow:hidden;clip:rect(1px,1px,1px,1px);height:1px;width:1px;margin:0;padding:0;border:0}div.wpcf7-response-output{margin:2em .5em 1em;padding:.2em 1em;border:2px solid red}div.wpcf7-mail-sent-ok{border:2px solid #398f14}div.wpcf7-aborted,div.wpcf7-mail-sent-ng{border:2px solid red}div.wpcf7-spam-blocked{border:2px solid orange}div.wpcf7-acceptance-missing,div.wpcf7-validation-errors{border:2px solid #f7e700}.wpcf7-form-control-wrap{position:relative}span.wpcf7-not-valid-tip{color:red;font-size:1em;font-weight:400;display:block}.use-floating-validation-tip span.wpcf7-not-valid-tip{position:absolute;top:20%;left:20%;z-index:100;border:1px solid red;background:#fff;padding:.2em .8em}span.wpcf7-list-item{display:inline-block;margin:0 0 0 1em}span.wpcf7-list-item-label::after,span.wpcf7-list-item-label::before{content:" "}.wpcf7-display-none{display:none}div.wpcf7 .ajax-loader{visibility:hidden;display:inline-block;background-image:url(/wp-content/plugins/contact-form-7/images/ajax-loader.gif);width:16px;height:16px;border:none;padding:0;margin:0 0 0 4px;vertical-align:middle}div.wpcf7 .ajax-loader.is-active{visibility:visible}div.wpcf7 div.ajax-error{display:none}div.wpcf7 .placeheld{color:#888}div.wpcf7 input[type=file]{cursor:pointer}div.wpcf7 input[type=file]:disabled{cursor:default}div.wpcf7 .wpcf7-submit:disabled{cursor:not-allowed}'
+            );
 		}
 
 		if ( is_post_type_archive( 'event' ) ) {

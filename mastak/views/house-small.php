@@ -1,12 +1,18 @@
 <?php
     $isTerem    = get_post_meta(get_the_ID(), "mastak_house_is_it_terem", true);
     $targetOpen = get_post_meta(get_the_ID(), "new_page", true) ? '_blank' : '_self';
+    $icon_id    = get_post_thumbnail_id();
+    $size = wp_is_mobile() ? 'houses_last_iphone_5' : 'houses_last_laptop';
+
 ?>
 
 <div class="our-house">
     <div class="our-house__header-image">
         <a href="<?= get_the_permalink(); ?>" target="_blank" class="our-house__header-image-wrap">
-            <?php the_post_thumbnail("full", array('class' => "our-house__image")); ?>
+            <img class="object-fit-img"
+                 src="<?= wp_get_attachment_image_url( $icon_id, $size ); ?>"
+                 srcset="<?= wp_get_attachment_image_srcset(  $icon_id, $size ); ?>"
+                 sizes="<?= wp_get_attachment_image_sizes(  $icon_id, $size ); ?>">
         </a>
     </div>
     <div class="our-house__content <?= $isTerem ? 'our-house__content_terem' : ''; ?>">
