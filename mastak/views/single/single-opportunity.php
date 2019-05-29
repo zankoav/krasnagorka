@@ -15,6 +15,6 @@
         </div>
     </div>
     <div class="opportunity__image-wrapper">
-        <?php the_post_thumbnail('medium', ['class' => 'opportunity__image']); ?>
+        <?php the_post_thumbnail('opportunity_small_iphone_5', ['class' => 'object-fit-img']); ?>
     </div>
 </a>

@@ -1090,6 +1090,12 @@
          */
         add_image_size( 'icon-64', 64);
 
+        /**
+         * Events sizes
+         */
+        add_image_size( 'events_last_iphone_5', 250, 200, array( 'center', 'center' ));
+        add_image_size( 'events_last_laptop', 135, 90, array( 'center', 'center' ));
+
     }
 
     if ( ! function_exists( 'presscore_blog_title' ) ) :
