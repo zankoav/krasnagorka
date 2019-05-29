@@ -37,6 +37,5 @@
              src="<?= wp_get_attachment_image_url( $icon_id, $size ); ?>"
              srcset="<?= wp_get_attachment_image_srcset(  $icon_id, $size ); ?>"
              sizes="<?= wp_get_attachment_image_sizes(  $icon_id, $size ); ?>">
-
     </div>
 </a>
