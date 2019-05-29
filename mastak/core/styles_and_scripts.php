@@ -6,7 +6,7 @@
 		global $themeUri;
 
 		if ( is_singular( 'house' ) ) {
-		    
+
 			$scriptsData = get_assets_json( "house" );
 
             wp_dequeue_script('jquery');
