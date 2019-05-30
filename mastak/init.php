@@ -1102,6 +1102,12 @@
         add_image_size( 'houses_last_iphone_5', 320, 240, array( 'center', 'center' ));
         add_image_size( 'houses_last_laptop', 300, 420, array( 'center', 'center' ));
 
+        /**
+         * Welcome tab
+         */
+        add_image_size( 'welcome_tab_iphone_5', 320, 214, array( 'center', 'center' ));
+        add_image_size( 'welcome_tab_laptop', 240, 160, array( 'center', 'center' ));
+
     }
 
     if ( ! function_exists( 'presscore_blog_title' ) ) :

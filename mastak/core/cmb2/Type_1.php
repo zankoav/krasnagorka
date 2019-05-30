@@ -5,6 +5,7 @@
 		public $mastak_event_tab_type_1_title;
 		public $mastak_event_tab_type_1_description;
 		public $mastak_event_tab_type_1_image;
+		public $mastak_event_tab_type_1_image_id;
 
 		public function __construct( $tab_id ) {
 			parent::__construct( $tab_id );
@@ -16,6 +17,10 @@
 
 		public function getImage() {
 			return $this->mastak_event_tab_type_1_image;
+		}
+
+		public function getImageId() {
+			return $this->mastak_event_tab_type_1_image_id;
 		}
 
 		public function getDescription() {

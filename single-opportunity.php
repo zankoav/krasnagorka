@@ -16,7 +16,8 @@
         $subtitle       = get_post_meta(get_the_ID(), "mastak_opportunity_subtitle", true);
         global $kgCooke;
         $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
-
+        $imageId = get_post_thumbnail_id();
+        $size = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
         get_template_part("mastak/views/header", "small-view"); ?>
 
         <div class="b-bgc-wrapper">
@@ -32,10 +33,11 @@
                         <div class="accordion-mixed__content-inner">
                             <div class="house-description">
                                 <div class="house-description__header">
-                                    <?php
-                                        the_post_thumbnail("full", array('class' => "house-description__image"));
-                                        the_title('<p class="house-description__title">', '</p>');
-                                    ?>
+                                    <img class="house-description__image"
+                                         src="<?= wp_get_attachment_image_url( $imageId, $size ); ?>"
+                                         srcset="<?= wp_get_attachment_image_srcset(  $imageId, $size ); ?>"
+                                         sizes="<?= wp_get_attachment_image_sizes(  $imageId, $size ); ?>">
+                                    <?php the_title('<p class="house-description__title">', '</p>'); ?>
                                     <div class="house-description__text big-text content-text">
                                         <?php the_content(); ?>
                                     </div>

@@ -23,13 +23,15 @@
     global $kgCooke;
     $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
     $isEmployment  = isset($_GET['employment']);
+    $size = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
+
 ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-    <?php get_template_part("mastak/views/header", "small-view"); ?>
-
-
+    <?php
+    get_template_part("mastak/views/header", "small-view");
+    $imageId = get_post_thumbnail_id(); ?>
     <div class="b-bgc-wrapper">
         <section class="b-container header-title">
             <h2 class="header-title__subtitle"><?= $subtitle; ?></h2>
@@ -45,10 +47,11 @@
                     <div class="accordion-mixed__content-inner">
                         <div class="house-description">
                             <div class="house-description__header">
-                                <?php
-                                    the_post_thumbnail("full", array('class' => "house-description__image"));
-                                    the_title('<h3 class="house-description__title">', '</h3>');
-                                ?>
+                                <img class="house-description__image"
+                                     src="<?= wp_get_attachment_image_url( $imageId, $size ); ?>"
+                                     srcset="<?= wp_get_attachment_image_srcset(  $imageId, $size ); ?>"
+                                     sizes="<?= wp_get_attachment_image_sizes(  $imageId, $size ); ?>">
+                                <?php the_title('<h3 class="house-description__title">', '</h3>'); ?>
                                 <div class="house-description__text big-text content-text">
                                     <?php the_content(); ?>
                                 </div>
