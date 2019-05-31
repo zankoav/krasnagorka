@@ -319,7 +319,7 @@
                                 <div class="video_wrapper">
                                     <script>
                                         setTimeout(function () {
-                                            $('.video_wrapper').append('<iframe src="https://www.youtube.com/embed/<?= $video; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                            jQuery('.video_wrapper').append('<iframe src="https://www.youtube.com/embed/<?= $video; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
                                         }, 3000);
                                     </script>
                                 </div>

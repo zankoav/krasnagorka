@@ -13,7 +13,7 @@
                     <div id="vide-<?= $index?>" class="video-tab-wrapper">
                         <script>
                             setTimeout(function () {
-                                $('#vide-<?= $index?>').append('<iframe src="https://www.youtube.com/embed/<?= $video['video']; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                jQuery('#vide-<?= $index?>').append('<iframe src="https://www.youtube.com/embed/<?= $video['video']; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
                             }, 3000);
                         </script>
 <!--                        --><?//= wp_oembed_get(esc_url($video['video'])); ?>
