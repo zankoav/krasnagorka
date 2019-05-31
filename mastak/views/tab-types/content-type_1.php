@@ -13,7 +13,6 @@
                  src="<?= wp_get_attachment_image_url( $tab->getImageId(), $size ); ?>"
                  srcset="<?= wp_get_attachment_image_srcset(  $tab->getImageId(), $size ); ?>"
                  sizes="<?= wp_get_attachment_image_sizes(  $tab->getImageId(), $size ); ?>">
-<!--            <img src="--><?//= $tab->getImage(); ?><!--" class="house-description__image" alt="image">-->
             <p class="house-description__title"><?= $tab->getTitle(); ?></p>
             <div class="house-description__text big-text content-text">
 				<?= wpautop( $tab->getDescription() ); ?>

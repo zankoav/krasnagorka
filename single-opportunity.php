@@ -89,8 +89,11 @@
                             <div data-mixed-conent="5" class="accordion-mixed__content">
                                 <div class="accordion-mixed__content-inner">
                                     <div class="video_wrapper">
-                                        <iframe src="https://www.youtube.com/embed/<?= $video; ?>"
-                                                frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                                        <script>
+                                            setTimeout(function () {
+                                                $('.video_wrapper').append('<iframe src="https://www.youtube.com/embed/<?= $video; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                            }, 3000);
+                                        </script>
                                     </div>
                                 </div>
                             </div>
