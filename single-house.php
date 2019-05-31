@@ -8,7 +8,6 @@
 
     $current_season_id = get_option('mastak_theme_options')['current_season'];
 
-    //	$price_byn = (int) get_post_meta( get_the_ID(), "mastak_house_price", true );
     $price_byn = (int)get_post_meta($current_season_id, "house_price_" . get_the_ID(), true);
     $price     = get_current_price($price_byn);
     $isTerem   = get_post_meta(get_the_ID(), "mastak_house_is_it_terem", true);
