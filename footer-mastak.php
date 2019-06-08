@@ -268,6 +268,30 @@
             f.parentNode.insertBefore(s, f);
         }, 3000);
     })(window, document);
+
+    // Идентификатор цели: 13
+    function jivo_onIntroduction(){
+        console.log('jivo_onIntroduction');
+    }
+
+    // Идентификатор цели: 14
+    function jivo_onMessageSent(){
+        console.log('jivo_onMessageSent');
+    }
+
+    // Идентификатор цели: 15
+    function jivo_onAccept(){
+        console.log('jivo_onAccept');
+    }
+
+    function jivo_onOpen(){
+        console.log('jivo_onOpen');
+    }
+
+    function jivo_onClose(){
+        console.log('jivo_onClose');
+    }
+
 </script>
 <!-- {/literal} END JIVOSITE CODE -->
 
