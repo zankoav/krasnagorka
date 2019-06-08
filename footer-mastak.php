@@ -289,13 +289,21 @@
 </noscript>
 <script>
     jQuery('.contacts-menu__button--phone').click(function(){
-        console.log('send tel click');
         ga('send', {
             hitType: 'event',
             eventCategory: 'tel',
             eventAction: 'click'
         });
     });
+
+    jQuery('#footer-submit-form').click(function(){
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'form_foot',
+            eventAction: 'otpravit'
+        });
+    });
+
 </script>
 <!-- Код CallTracking -->
 <script async src="//app.call-tracking.by/scripts/calltracking.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>
