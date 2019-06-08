@@ -271,17 +271,29 @@
 
     // Идентификатор цели: 13
     function jivo_onIntroduction(){
-        console.log('jivo_onIntroduction');
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'JivoSite',
+            eventAction: 'User gave contacts during chat'
+        });
     }
 
     // Идентификатор цели: 14
     function jivo_onMessageSent(){
-        console.log('jivo_onMessageSent');
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'JivoSite',
+            eventAction: 'Proactive invitation accepted'
+        });
     }
 
     // Идентификатор цели: 15
     function jivo_onAccept(){
-        console.log('jivo_onAccept');
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'JivoSite',
+            eventAction: 'Chat established'
+        });
     }
 
     function jivo_onOpen(){
