@@ -82,12 +82,12 @@
                                 <img src="<?= CORE_PATH ?>assets/icons/contacts-data/phone.svg" alt="phone"
                                      class="contacts-data__item-icon contacts-data__item-icon--top">
                                 <div class="contacts-data__item-text-wrapper">
-                                    <a href="tel: <?= $velcom; ?>" class="contacts-data__item-text"><?= $velcom; ?></a>
-                                    <a href="tel: <?= $mts; ?>" class="contacts-data__item-text"><?= $mts; ?></a>
-                                    <a href="tel: <?= $life; ?>" class="contacts-data__item-text"><?= $life; ?></a>
+                                    <a href="tel: <?= $velcom; ?>" class="contacts-data__item-text contacts-data__item-text_velcom"><?= $velcom; ?></a>
+                                    <a href="tel: <?= $mts; ?>" class="contacts-data__item-text contacts-data__item-text_mts"><?= $mts; ?></a>
+                                    <a href="tel: <?= $life; ?>" class="contacts-data__item-text contacts-data__item-text_life"><?= $life; ?></a>
                                 </div>
                             </div>
-                            <a href="mailto:<?= $email; ?>" class="contacts-data__item">
+                            <a href="mailto:<?= $email; ?>" class="contacts-data__item contacts-data__item_email">
                                 <img src="<?= CORE_PATH ?>assets/icons/contacts-data/envelope.svg"
                                      alt="envelope"
                                      class="contacts-data__item-icon">

@@ -278,15 +278,6 @@
         });
     }
 
-    // Идентификатор цели: 14
-    function jivo_onMessageSent(){
-        ga('send', {
-            hitType: 'event',
-            eventCategory: 'JivoSite',
-            eventAction: 'Proactive invitation accepted'
-        });
-    }
-
     // Идентификатор цели: 15
     function jivo_onAccept(){
         ga('send', {
@@ -296,13 +287,14 @@
         });
     }
 
-    function jivo_onOpen(){
-        console.log('jivo_onOpen');
-    }
-
-    function jivo_onClose(){
-        console.log('jivo_onClose');
-    }
+    // Идентификатор цели: 14
+    // function jivo_onMessageSent(){
+    //     ga('send', {
+    //         hitType: 'event',
+    //         eventCategory: 'JivoSite',
+    //         eventAction: 'Offline form shown'
+    //     });
+    // }
 
 </script>
 <!-- {/literal} END JIVOSITE CODE -->
@@ -324,21 +316,102 @@
     </div>
 </noscript>
 <script>
+
+    // Menu Contacts button
     jQuery('.contacts-menu__button--phone').click(function(){
+        if(!jQuery(this).hasClass('contacts-menu__button_active')){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'tel_menu',
+                eventAction: 'click'
+            });
+        }
+    });
+
+    // Email
+    jQuery('.contacts-popup__email-text, .contacts-data__item_email').click(function(){
         ga('send', {
             hitType: 'event',
-            eventCategory: 'tel',
+            eventCategory: 'email',
             eventAction: 'click'
         });
     });
 
-    jQuery('#footer-submit-form').click(function(){
+    jQuery('.contacts-data__item-text_velcom, .phone-item__phone-number_velcom').click(function(){
         ga('send', {
             hitType: 'event',
-            eventCategory: 'form_foot',
-            eventAction: 'otpravit'
+            eventCategory: 'phone_velcom',
+            eventAction: 'click'
         });
     });
+
+    jQuery('.contacts-data__item-text_mts, .phone-item__phone-number_mts').click(function(){
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'phone_mts',
+            eventAction: 'click'
+        });
+    });
+
+    jQuery('.contacts-data__item-text_life, .phone-item__phone-number_life').click(function(){
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'phone_life',
+            eventAction: 'click'
+        });
+    });
+
+    jQuery('[href="#booking-order"]').click(function(){
+        let name = jQuery(this).data('name');
+        let prefix = 'Home ';
+        let category = 'house';
+        if(!name){
+            name = jQuery(this).data('event');
+            prefix = 'Event ';
+            category = 'events';
+        }
+        if(!name){
+            console.log('Error ga');
+            return;
+        }
+
+        ga('send', {
+            hitType: 'event',
+            eventCategory: category,
+            eventAction: 'click',
+            eventLabel: prefix + name
+        });
+    });
+
+    document.addEventListener('wpcf7mailsent', function (event) {
+
+        if ('2730' == event.detail.contactFormId) {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'form_bronirovanie',
+                eventAction: 'success_send'
+            });
+        }
+
+        if ('9102' == event.detail.contactFormId) {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'forma_questions',
+                eventAction: 'otpravit'
+            });
+        }
+
+        if ('8893' == event.detail.contactFormId) {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'form_foot',
+                eventAction: 'otpravit'
+            });
+        }
+
+    }, false);
+
+
 
 </script>
 <!-- Код CallTracking -->

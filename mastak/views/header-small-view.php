@@ -116,7 +116,7 @@
                         <div class="phone-item ">
                             <img src="<?= CORE_PATH; ?>assets/icons/velcome.svg" alt="icon-velcome"
                                  class="phone-item__icon phone-item__icon--velcome">
-                            <a href="tel: <?= $velcom; ?>" class="phone-item__phone-number"><?= $velcom; ?></a>
+                            <a href="tel: <?= $velcom; ?>" class="phone-item__phone-number phone-item__phone-number_velcom"><?= $velcom; ?></a>
                             <img src="<?= CORE_PATH; ?>assets/icons/social/viber.svg" alt="icon-viber"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--viber">
                             <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg" alt="icon-whatsapp"
@@ -129,12 +129,12 @@
                         <div class="phone-item">
                             <img src="<?= CORE_PATH; ?>assets/icons/mts.svg" alt="icon-mts"
                                  class="phone-item__icon phone-item__icon--mts">
-                            <a href="tel: <?= $mts; ?>" class="phone-item__phone-number"><?= $mts; ?></a>
+                            <a href="tel: <?= $mts; ?>" class="phone-item__phone-number phone-item__phone-number_mts"><?= $mts; ?></a>
                         </div>
                         <div class="phone-item">
                             <img src="<?= CORE_PATH; ?>assets/icons/life.svg" alt="icon-life"
                                  class="phone-item__icon phone-item__icon--life">
-                            <a href="tel: <?= $life; ?>" class="phone-item__phone-number"><?= $life; ?></a>
+                            <a href="tel: <?= $life; ?>" class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
                         </div>
                     </div>
                     <div class="contacts-popup__email">
