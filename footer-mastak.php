@@ -229,36 +229,62 @@
 
 </script>
 <!-- BEGIN JIVOSITE CODE {literal} -->
-<script type='text/javascript'>
-    (function () {
-        // var widget_id = '38m4hDlF7s';
-        // var d = document;
-        // var w = window;
-        //
-        // function l() {
-        //     var s = document.createElement('script');
-        //     s.type = 'text/javascript';
-        //     s.async = true;
-        //     s.src = '//code.jivosite.com/script/widget/' + widget_id;
-        //     var ss = document.getElementsByTagName('script')[0];
-        //     ss.parentNode.insertBefore(s, ss);
-        // }
-        //
-        // if (d.readyState == 'complete') {
-        //     l();
-        // } else {
-        //     if (w.attachEvent) {
-        //         w.attachEvent('onload', l);
-        //     } else {
-        //         w.addEventListener('load', l, false);
-        //     }
-        // }
-    })();</script>
+<!--<script type='text/javascript'>-->
+<!--    (function () {-->
+<!--        var widget_id = '38m4hDlF7s';-->
+<!--        var d = document;-->
+<!--        var w = window;-->
+        
+<!--        function l() {-->
+<!--            var s = document.createElement('script');-->
+<!--            s.type = 'text/javascript';-->
+<!--            s.async = true;-->
+<!--            s.src = '//code.jivosite.com/script/widget/' + widget_id;-->
+<!--            var ss = document.getElementsByTagName('script')[0];-->
+<!--            ss.parentNode.insertBefore(s, ss);-->
+<!--        }-->
+        
+<!--        if (d.readyState == 'complete') {-->
+<!--            l();-->
+<!--        } else {-->
+<!--            if (w.attachEvent) {-->
+<!--                w.attachEvent('onload', l);-->
+<!--            } else {-->
+<!--                w.addEventListener('load', l, false);-->
+<!--            }-->
+<!--        }-->
+<!--    })();</script>-->
 <!-- {/literal} END JIVOSITE CODE -->
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type="text/javascript">
     (function (w, d) {
         setTimeout(function () {
+            
+            // (function () {
+            //     var widget_id = '38m4hDlF7s';
+            //     var d = document;
+            //     var w = window;
+                
+            //     function l() {
+            //         var s = document.createElement('script');
+            //         s.type = 'text/javascript';
+            //         s.async = true;
+            //         s.src = '//code.jivosite.com/script/widget/' + widget_id;
+            //         var ss = document.getElementsByTagName('script')[0];
+            //         ss.parentNode.insertBefore(s, ss);
+            //     }
+                
+            //     if (d.readyState == 'complete') {
+            //         l();
+            //     } else {
+            //         if (w.attachEvent) {
+            //             w.attachEvent('onload', l);
+            //         } else {
+            //             w.addEventListener('load', l, false);
+            //         }
+            //     }
+            // })();
+            
             w.amo_jivosite_id = 'vPugBTo6M7';
             var s = document.createElement('script'), f = d.getElementsByTagName('script')[0];
             s.id = 'amo_jivosite_js';
@@ -266,10 +292,10 @@
             s.async = true;
             s.src = 'https://forms.amocrm.ru/chats/jivosite/jivosite.js';
             f.parentNode.insertBefore(s, f);
+            
         }, 3000);
     })(window, document);
 
-    // Идентификатор цели: 13
     function jivo_onIntroduction(){
         ga('send', {
             hitType: 'event',
@@ -278,7 +304,6 @@
         });
     }
 
-    // Идентификатор цели: 15
     function jivo_onAccept(){
         ga('send', {
             hitType: 'event',
@@ -287,14 +312,13 @@
         });
     }
 
-    // Идентификатор цели: 14
-    // function jivo_onMessageSent(){
-    //     ga('send', {
-    //         hitType: 'event',
-    //         eventCategory: 'JivoSite',
-    //         eventAction: 'Offline form shown'
-    //     });
-    // }
+    function jivo_onMessageSent(){
+        ga('send', {
+            hitType: 'event',
+            eventCategory: 'JivoSite',
+            eventAction: 'First Message sent'
+        });
+    }
 
 </script>
 <!-- {/literal} END JIVOSITE CODE -->

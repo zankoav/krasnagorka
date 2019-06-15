@@ -62,7 +62,7 @@
         <div class="more-questions__wrapper">
             <div class="more-questions__inner">
                 <p class="more-questions__title">Остались еще вопросы?</p>
-                <p class="more-questions__description">Обсудите все детали с менеджером</p>
+                <p class="more-questions__description">Укажите Ваш номер телефона - наш менеджер Вам перезвонит</p>
                 <?= do_shortcode('[contact-form-7 id="9102" title="Mastak have questions" html_class="more-questions__forma"]'); ?>
             </div>
         </div>
