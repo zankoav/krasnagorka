@@ -45,3 +45,8 @@ jQuery(document).ready(function (e) {
         
     }, 3000);
 });
+
+jQuery('.booking-houses__calendars-button').on('click', function () {
+    var calendarShortcode = jQuery(this).data('calendar');
+    console.log('calendarShortcode', calendarShortcode);
+});
