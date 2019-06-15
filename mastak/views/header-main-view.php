@@ -104,8 +104,8 @@
                 ?>
                 <img src="<?= $footer_logo_src[0]; ?>" alt="logo" class="logo__icon">
             </a>
-            <?php if (!empty($video)): ?>
-                <a href="<?= $video; ?>" class="online-video" target="_blank">
+            <?php if ($video): ?>
+                <a href="#" class="online-video" target="_blank">
                     <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg" alt="online-video"
                          class="online-video__icon">
                     <span class="online-video__title">смотреть ONLINE</span>

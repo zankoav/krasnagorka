@@ -222,10 +222,10 @@
         ));
 
         $cmb_options->add_field(array(
-            'name' => __('Видео страница', 'krasnagorka'),
-            'desc' => __('Видео страница', 'krasnagorka'),
+            'name' => __('Видео online', 'krasnagorka'),
+            'desc' => __('Видео online', 'krasnagorka'),
             'id'   => $prefix . 'video',
-            'type' => 'text_url'
+            'type' => 'checkbox'
         ));
 
         $cmb_options->add_field(array(
