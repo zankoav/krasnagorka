@@ -74,7 +74,7 @@
         .modal-online-video__video{
             background-color : #fff;
             padding: .5rem;
-            max-width: 320px;
+            max-width: 400px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
