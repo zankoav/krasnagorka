@@ -28,8 +28,8 @@
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
 
-                        <?php if (!empty($video)): ?>
-                            <a href="<?= $video; ?>" class="online-video online-video--menu" target="_blank">
+                        <?php if ($video): ?>
+                            <a href="#" class="online-video online-video--menu">
                                 <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg" alt="online-video"
                                      class="online-video__icon">
                                 <span class="online-video__title">смотреть ONLINE</span>
@@ -98,8 +98,8 @@
             <a href="/" class="logo">
                 <img src="<?= CORE_PATH; ?>assets/icons/logo.png" alt="logo" class="logo__icon">
             </a>
-            <?php if (!empty($video)): ?>
-                <a href="<?= $video; ?>" class="online-video" target="_blank">
+            <?php if ($video): ?>
+                <a href="#" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg" alt="online-video"
                          class="online-video__icon">
                     <span class="online-video__title">смотреть ONLINE</span>
