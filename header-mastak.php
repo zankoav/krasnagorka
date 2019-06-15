@@ -82,7 +82,8 @@
             width : 64px;
             height : 64px;
             background: url('/wp-content/themes/krasnagorka/mastak/src/icons/loading.svg') no-repeat;
-            background-size: contain;
+            background-size: 50%;
+            background-position: center center;
             animation: rotateInf 1s infinite;
         }
 
