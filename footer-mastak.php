@@ -451,9 +451,7 @@
 
     jQuery('.modal-online-video__container').on('click', function () {
         jQuery('.modal-online-video').fadeOut(function () {
-            if(videoTimer){
-                clearInterval(videoTimer);
-            }
+            clearInterval(videoTimer);
         })
     });
 
