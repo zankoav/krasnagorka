@@ -78,6 +78,19 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
+        .modal-online-video__spinner{
+            width : 64px;
+            height : 64px;
+            background: url('/wp-content/themes/krasnagorka/src/icons/loading.svg') no-repeat;
+            background-size: contain;
+            animation: rotateInf 1s infinite;
+        }
+
+        @keyframes rotateInf {
+            0%{transform: rotate(0)}
+            100%{transform: rotate(360deg)}
+        }
+
         @media (min-width: 768px){
             .modal-online-video__video{
                 padding: 1rem;
@@ -109,7 +122,7 @@
 <div class="modal-online-video">
     <div class="modal-online-video__container">
         <div class="modal-online-video__video">
-
+            <div class="modal-online-video__spinner"></div>
         </div>
     </div>
 </div>
