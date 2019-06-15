@@ -445,7 +445,7 @@
                 img.onload = function(){
                     jQuery('.modal-online-video__video').empty().append(img);
                 }
-            }, 100);
+            }, 60);
         });
     });
 
