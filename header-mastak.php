@@ -81,7 +81,7 @@
         .modal-online-video__spinner{
             width : 64px;
             height : 64px;
-            background: url('/wp-content/themes/krasnagorka/src/icons/loading.svg') no-repeat;
+            background: url('/wp-content/themes/krasnagorka/mastak/src/icons/loading.svg') no-repeat;
             background-size: contain;
             animation: rotateInf 1s infinite;
         }
