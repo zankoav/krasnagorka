@@ -441,7 +441,7 @@
         jQuery('.modal-online-video').fadeIn(function () {
             videoTimer = setInterval(function () {
                 var img = new Image();
-                img.src = 'http://375297763819.dyndns.mts.by:1081/snapshot.cgi?user=veter&pwd=veter&time='+(new Date()).getTime());
+                img.src = 'http://375297763819.dyndns.mts.by:1081/snapshot.cgi?user=veter&pwd=veter&time='+(new Date()).getTime();
                 img.onload = function(){
                     jQuery('.modal-online-video__video').empty().append(img);
                 }
