@@ -52,7 +52,37 @@
         fbq('init', '1020781118034010');
         fbq('track', 'PageView');
     </script>
+    <style>
+        .modal-online-video{
+            display : none;
+            position: fixed;
+            background-color : rgba(0,0,0,0.7);
+            align-items : center;
+            justify-content : center;
+            z-index: 1000;
+        }
+        .modal-online-video__container{
+            width : 100%;
+            height : 100%;
+            position: absolute;
+            display : flex;
+            justify-content : center;
+            align-items : center;
+        }
+        .modal-online-video__video{
+            background-color : #fff;
+            padding: .5rem;
+            max-width: 320px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
 
+        @media (min-width: 768px){
+            .modal-online-video__video{
+                padding: 1rem;
+                border-radius: .5rem;
+            }
+        }
+    </style>
 </head>
 <?php $bg_gray =
     (is_page_template("template-mastak-prices.php")
@@ -74,3 +104,10 @@
             height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
+<div class="modal-online-video">
+    <div class="modal-online-video__container">
+        <div class="modal-online-video__video">
+
+        </div>
+    </div>
+</div>

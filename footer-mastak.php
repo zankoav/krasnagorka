@@ -436,6 +436,27 @@
     }, false);
 
 
+    var videoTimer;
+    jQuery('.online-video').on('click', function () {
+        jQuery('.modal-online-video').fadeOut(function () {
+            videoTimer = setInterval(function () {
+                var img = new Image();
+                img.src = 'http://375297763819.dyndns.mts.by:1081/snapshot.cgi?user=veter&pwd=veter';
+                img.onload = function(){
+                    jQuery('.modal-online-video__video').empty().append(img);
+                }
+            }, 100);
+        });
+    });
+
+    jQuery('.modal-online-video__container').on('click', function () {
+        jQuery('.modal-online-video').fadeIn(function () {
+            if(videoTimer){
+                clearInterval(videoTimer);
+            }
+        })
+    });
+
 
 </script>
 <!-- Код CallTracking -->
