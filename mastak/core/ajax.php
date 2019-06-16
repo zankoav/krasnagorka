@@ -1,8 +1,7 @@
 <?php
     function calendar_action() {
         if(isset($_POST['calendar'])){
-            $calendar = $_POST['calendar'];
-            echo $calendar;
+            do_shortcode($_POST['calendar']);
         }
         wp_die();
     }
