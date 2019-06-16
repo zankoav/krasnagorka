@@ -1,6 +1,9 @@
 <?php
     function calendar_action() {
-        echo '<h2>Hello from calendar</h2>';
+        if(isset($_POST['calendar'])){
+            $calendar = $_POST['calendar'];
+            echo '<h2>'.$calendar.'</h2>';
+        }
         wp_die();
     }
     add_action( 'wp_ajax_calendar_action', 'calendar_action' );

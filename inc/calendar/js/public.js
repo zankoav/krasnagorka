@@ -53,12 +53,15 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         action: 'calendar_action',
         calendar: calendarShortcode
     };
+    var $parent = jQuery(this).parent().parent();
     jQuery.ajax(kg_ajax.url, {
         data: data,
         method: 'post',
         dataType: 'text/html',
         success: function (response) {
-            console.log(response);
+            if(response.responseText){
+                $parent.html(response.responseText);
+            }
         },
         error: function (x, y, z) {
             console.log(x);
