@@ -25,7 +25,6 @@
     ));
 
 ?>
-
     <section class="b-container header-title">
         <?php if (is_user_logged_in()):?>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
