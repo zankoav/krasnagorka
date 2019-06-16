@@ -57,7 +57,6 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
     jQuery.ajax(kg_ajax.url, {
         data: data,
         method: 'post',
-        dataType: 'text/html',
         success: function (response) {
             if(response.responseText){
                 console.log('responseText', responseText);
@@ -66,7 +65,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
             }
         },
         error: function (x, y, z) {
-            console.log(x);
+            console.log('error', x);
         }
     });
 });
