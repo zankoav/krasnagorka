@@ -27,7 +27,7 @@
 ?>
 
     <section class="b-container header-title">
-        <?php if (is_admin()):?>
+        <?php if (is_user_admin()):?>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
         <?php endif;?>
     </section>
