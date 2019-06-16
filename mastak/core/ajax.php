@@ -1,7 +1,8 @@
 <?php
     function calendar_action() {
         if(isset($_POST['calendar'])){
-            echo $_POST['calendar'];//do_shortcode($_POST['calendar']);
+            $calendar = str_replace('/', '', $_POST['calendar']);
+            echo $calendar;//do_shortcode($_POST['calendar']);
         }
         wp_die();
     }

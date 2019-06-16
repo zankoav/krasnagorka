@@ -50,8 +50,6 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
     var calendarShortcod = jQuery(this).data('calendar');
     console.log('before',calendarShortcod);
-    calendarShortcod.replace(/\"/g,'\'');
-    console.log('after',calendarShortcod);
     var data = {
         action: 'calendar_action',
         calendar: calendarShortcod
