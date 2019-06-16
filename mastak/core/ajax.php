@@ -1,8 +1,10 @@
 <?php
     function calendar_action() {
-        if(isset($_POST['calendar'])){
-            $calendar = str_replace('/', '', $_POST['calendar']);
-            echo do_shortcode($calendar);
+        if(isset($_POST['id'], $_POST['slug'])){
+            $id = 27;//$_POST['id'];
+            $slug = "terem-10";$_POST['slug'];
+
+            echo do_shortcode("[sbc_calendar id=\"$id\" slug=\"$slug\"]");
         }
         wp_die();
     }
