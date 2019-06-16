@@ -208,7 +208,11 @@
                      class="accordion-mixed__content <?= $isEmployment ? 'accordion-mixed__content--active' : '' ?>">
                     <?php if (!$isTerem) : ?>
                         <div class="accordion-mixed__content-inner">
-                            <?= do_shortcode(get_post_meta(get_the_ID(), "mastak_house_calendar", true)); ?>
+                            <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.png" alt="bgc" class="booking-houses__calendars-bgc">
+                            <div class="booking-houses__calendars-inner">
+                                <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
+                            </div>
+<!--                            --><?//= do_shortcode(get_post_meta(get_the_ID(), "mastak_house_calendar", true)); ?>
                         </div>
                     <?php else: ?>
                         <div class="booking-houses">
@@ -287,7 +291,13 @@
                                                     <?php endif; ?>
                                             </p>
                                         </div>
-                                        <div class="booking-houses__calendars"><?= do_shortcode($kalendar['calendar']); ?></div>
+                                        <div class="booking-houses__calendars">
+                                            <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.png" alt="bgc" class="booking-houses__calendars-bgc">
+                                            <div class="booking-houses__calendars-inner">
+                                                <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
+                                            </div>
+<!--                                            --><?//= do_shortcode($kalendar['calendar']); ?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
