@@ -1,6 +1,6 @@
 <?php
     function calendar_action() {
-        if(isset($_POST['id'], $_POST['slug'])){
+        if(isset($_POST['calendar']/*$_POST['id'], $_POST['slug']*/)){
             $id = 27;//$_POST['id'];
             $slug = "terem-10";$_POST['slug'];
 
