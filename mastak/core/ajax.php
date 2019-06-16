@@ -1,7 +1,7 @@
 <?php
     function calendar_action() {
         if(isset($_POST['calendar'])){
-            echo do_shortcode('[sbc_calendar id="28" slug="terem-11"]');
+            echo do_shortcode($_POST['calendar']);
         }
         wp_die();
     }

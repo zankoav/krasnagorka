@@ -48,10 +48,13 @@ jQuery(document).ready(function (e) {
 
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
-    var calendarShortcode = jQuery(this).data('calendar');
+    var calendarShortcod = jQuery(this).data('calendar');
+    console.log('before',calendarShortcod);
+    calendarShortcod.replace(/"/g,'\"');
+    console.log('after',calendarShortcod);
     var data = {
         action: 'calendar_action',
-        calendar: calendarShortcode
+        calendar: calendarShortcod
     };
     var $parent = jQuery(this).parent().parent();
     jQuery.ajax(kg_ajax.url, {
