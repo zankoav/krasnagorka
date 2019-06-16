@@ -43,6 +43,7 @@ var targetMargin;
 
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
+
     var calendarShortcod = jQuery(this).data('calendar');
     var attArray = calendarShortcod.split('\"');
     var data = {
@@ -51,6 +52,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         slug:attArray[3]
     };
     var $parent = jQuery(this).parent().parent();
+    jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
         method: 'post',
