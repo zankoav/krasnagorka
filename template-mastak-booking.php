@@ -27,7 +27,9 @@
 ?>
 
     <section class="b-container header-title">
-
+        <?php if (is_admin()):?>
+            <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
+        <?php endif;?>
     </section>
     <section class="b-container">
         <?php get_template_part('mastak/views/icons-description'); ?>

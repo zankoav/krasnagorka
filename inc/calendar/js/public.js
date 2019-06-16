@@ -97,3 +97,8 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         }
     });
 });
+
+jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
+    event.preventDefault();
+    jQuery('.booking-houses__calendars-button').trigger('click');
+});
