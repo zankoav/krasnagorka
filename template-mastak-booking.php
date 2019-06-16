@@ -27,6 +27,7 @@
 ?>
 
     <section class="b-container header-title">
+
     </section>
     <section class="b-container">
         <?php get_template_part('mastak/views/icons-description'); ?>
@@ -122,7 +123,6 @@
                                         <div class="booking-houses__calendars-inner">
                                             <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button booking-houses__calendars-button">Календарь бронирования</a>
                                         </div>
-                                        <?//= do_shortcode($kalendar['calendar']); ?>
                                     </div>
                                 </div>
                             </div>
