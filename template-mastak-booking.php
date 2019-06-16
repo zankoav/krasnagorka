@@ -120,7 +120,7 @@
                                     <div class="booking-houses__calendars">
                                         <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.png" alt="bgc" class="booking-houses__calendars-bgc">
                                         <div class="booking-houses__calendars-inner">
-                                            <a href="#" data-calendar="<?=$kalendar['calendar'];?>" class="our-house__button booking-houses__calendars-button">Календарь бронирования</a>
+                                            <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button booking-houses__calendars-button">Календарь бронирования</a>
                                         </div>
 <!--                                        --><?//= do_shortcode($kalendar['calendar']); ?>
                                     </div>
