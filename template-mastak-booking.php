@@ -122,8 +122,7 @@
                                         <div class="booking-houses__calendars-inner">
                                             <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button booking-houses__calendars-button">Календарь бронирования</a>
                                         </div>
-                                        <?php var_dump($kalendar['calendar']);?>
-<!--                                        --><?//= do_shortcode($kalendar['calendar']); ?>
+                                        <?//= do_shortcode($kalendar['calendar']); ?>
                                     </div>
                                 </div>
                             </div>
