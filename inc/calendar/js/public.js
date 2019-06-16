@@ -60,7 +60,9 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         dataType: 'text/html',
         success: function (response) {
             if(response.responseText){
-                $parent.html(response.responseText);
+                console.log('responseText', responseText);
+                console.log($parent);
+                $parent.empty().html(response.responseText);
             }
         },
         error: function (x, y, z) {
