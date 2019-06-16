@@ -201,7 +201,7 @@
                     <?php endif; ?>
                 </div>
                 <div data-mixed-tab="3"
-                     class="accordion-mixed__tab js-add-public-calendar <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
+                     class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '':' js-add-public-calendar-single';?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
                     КАЛЕНДАРИ
                 </div>
                 <div data-mixed-conent="3"
@@ -212,7 +212,6 @@
                             <div class="booking-houses__calendars-inner">
                                 <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
                             </div>
-<!--                            --><?//= do_shortcode(get_post_meta(get_the_ID(), "mastak_house_calendar", true)); ?>
                         </div>
                     <?php else: ?>
                         <div class="booking-houses">
@@ -296,7 +295,6 @@
                                             <div class="booking-houses__calendars-inner">
                                                 <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
                                             </div>
-<!--                                            --><?//= do_shortcode($kalendar['calendar']); ?>
                                         </div>
                                     </div>
                                 </div>
