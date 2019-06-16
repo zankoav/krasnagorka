@@ -49,5 +49,19 @@ jQuery(document).ready(function (e) {
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
     var calendarShortcode = jQuery(this).data('calendar');
-    console.log('calendarShortcode', calendarShortcode);
+    var data = {
+        action: 'calendar_action',
+        calendar: calendarShortcode
+    };
+    jQuery.ajax(kg_ajax.url, {
+        data: data,
+        method: 'post',
+        dataType: 'text/html',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (x, y, z) {
+            console.log(x);
+        }
+    });
 });

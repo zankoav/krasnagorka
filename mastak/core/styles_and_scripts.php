@@ -2,8 +2,9 @@
 
 
 	add_action( 'wp_enqueue_scripts', function () {
+        wp_localize_script( 'jquery', 'kg_ajax', array( 'url' => admin_url( 'admin-ajax.php' ) ) );
 
-		global $themeUri;
+        global $themeUri;
 
 		if ( is_singular( 'house' ) ) {
 
