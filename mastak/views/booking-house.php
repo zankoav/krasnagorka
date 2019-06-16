@@ -79,7 +79,7 @@
         <div class="booking-houses__calendars">
             <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.png" alt="bgc" class="booking-houses__calendars-bgc">
             <div class="booking-houses__calendars-inner">
-                <a href="#" data-calendar='<?=get_post_meta( get_the_ID(), "mastak_house_calendar", true );?>' class="our-house__button our-house__button--gray booking-houses__calendars-button">Календарь бронирования</a>
+                <a href="#" data-calendar='<?=get_post_meta( get_the_ID(), "mastak_house_calendar", true );?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
             </div>
         </div>
     </div>
