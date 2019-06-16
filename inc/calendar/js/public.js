@@ -58,10 +58,10 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         data: data,
         method: 'post',
         success: function (response) {
-            if(response.responseText){
-                console.log('responseText', responseText);
+            if(response){
+                console.log('responseText', response);
                 console.log($parent);
-                $parent.empty().html(response.responseText);
+                $parent.empty().html(response);
             }
         },
         error: function (x, y, z) {
