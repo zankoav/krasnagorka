@@ -49,7 +49,14 @@ jQuery(document).ready(function (e) {
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
     var calendarShortcod = jQuery(this).data('calendar');
-    console.log('before',calendarShortcod);
+    console.log('calendarShortcod',calendarShortcod);
+    var attArray = calendarShortcod.split('\"');
+    console.log('attArray', attArray);
+    
+
+    console.log('id',calendarShortcod);
+    console.log('slug',calendarShortcod);
+
     var data = {
         action: 'calendar_action',
         calendar: calendarShortcod
