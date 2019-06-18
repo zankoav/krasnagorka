@@ -11,6 +11,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         slug:attArray[3]
     };
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
+    var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
@@ -23,6 +24,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
                 $calendar.fullCalendar({
                     height: 300,
                     loading: function (r) {
+                        $parentDate.css({'max-width': 292});
                         if(!targetMargin){
                             var cielWidth = jQuery(jQuery(".fc-day-top")[0]).width();
                             if(cielWidth){
