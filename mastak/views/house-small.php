@@ -2,7 +2,7 @@
     $isTerem    = get_post_meta(get_the_ID(), "mastak_house_is_it_terem", true);
     $targetOpen = get_post_meta(get_the_ID(), "new_page", true) ? '_blank' : '_self';
     $icon_id    = get_post_thumbnail_id();
-    $size = wp_is_mobile() ? 'houses_last_iphone_5' : 'houses_last_laptop';
+    $size       = wp_is_mobile() ? 'houses_last_iphone_5' : 'houses_last_laptop';
 
 ?>
 
@@ -10,9 +10,9 @@
     <div class="our-house__header-image">
         <a href="<?= get_the_permalink(); ?>" target="_blank" class="our-house__header-image-wrap">
             <img class="object-fit-img"
-                 src="<?= wp_get_attachment_image_url( $icon_id, $size ); ?>"
-                 srcset="<?= wp_get_attachment_image_srcset(  $icon_id, $size ); ?>"
-                 sizes="<?= wp_get_attachment_image_sizes(  $icon_id, $size ); ?>">
+                 src="<?= wp_get_attachment_image_url($icon_id, $size); ?>"
+                 srcset="<?= wp_get_attachment_image_srcset($icon_id, $size); ?>"
+                 sizes="<?= wp_get_attachment_image_sizes($icon_id, $size); ?>">
         </a>
     </div>
     <div class="our-house__content <?= $isTerem ? 'our-house__content_terem' : ''; ?>">
@@ -96,12 +96,19 @@
                    class="our-house__button our-house__button--gray">
                     подробнее
                 </a>
-                <a href="#booking-order" data-name="<?=get_the_title();?>" class="fancybox-inline our-house__button b-ml-2">
+                <a href="#booking-order" data-name="<?= get_the_title(); ?>"
+                   class="fancybox-inline our-house__button b-ml-2">
                     забронировать
                 </a>
                 <?php if ($isTerem) : ?>
-                    <a href="<?= get_the_permalink().'?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray b-ml-2">
+                    <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>"
+                       class="our-house__button our-house__button--gray b-ml-2">
                         занятость номеров
+                    </a>
+                <?php else: ?>
+                    <a href="#" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>'
+                       class="our-house__button our-house__button--green booking-houses__calendars-button b-ml-2">
+                        Показать календарь
                     </a>
                 <?php endif; ?>
             </div>
@@ -112,12 +119,17 @@
                     календарь бронирования
                 </a>
                 <div class="our-house__calendar">
-                    <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.svg" alt="bgc" class="booking-houses__calendars-bgc">
+<!--                    <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.svg" alt="bgc"-->
+<!--                         class="booking-houses__calendars-bgc">-->
                     <div class="booking-houses__calendars-inner">
-                        <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
+<!--                        <a href="#" data-calendar='--><?//= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?><!--'-->
+<!--                           class="our-house__button our-house__button--green booking-houses__calendars-button b-ml-2">-->
+<!--                            Показать календарь-->
+<!--                        </a>-->
                     </div>
                 </div>
-                <a href="#booking-order" data-name="<?=get_the_title();?>" class="fancybox-inline our-house__button our-house__button_media_xs">
+                <a href="#booking-order" data-name="<?= get_the_title(); ?>"
+                   class="fancybox-inline our-house__button our-house__button_media_xs">
                     забронировать
                 </a>
             </div>

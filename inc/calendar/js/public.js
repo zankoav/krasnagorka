@@ -10,7 +10,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         id: attArray[1],
         slug:attArray[3]
     };
-    var $parent = jQuery(this).parent().parent();
+    var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
