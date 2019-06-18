@@ -9,9 +9,13 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
         scriptPublic = document.createElement('script');
         scriptPublic.onload = function() {
             func();
+            console.log('onload');
+            
         };
         scriptPublic.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/public.js";
         document.getElementsByTagName('body')[0].appendChild(scriptPublic);
+        console.log('appendChild');
+        
     }else{
         func();
     }
