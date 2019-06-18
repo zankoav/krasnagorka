@@ -76,6 +76,19 @@
             padding: .5rem;
             max-width: 320px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .modal-online-video__close{
+            position: absolute;
+            right: 1rem;
+            top : -1rem;
+            width : 2rem;
+            height: 2rem;
+            padding: .5rem;
+            border-radius: 100%;
+            background-color : #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .modal-online-video__spinner{
@@ -97,6 +110,10 @@
                 padding: 1rem;
                 border-radius: .5rem;
                 max-width: 720px;
+            }
+
+            .modal-online-video__close{
+                right: -1rem;
             }
         }
     </style>

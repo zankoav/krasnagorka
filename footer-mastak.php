@@ -165,7 +165,8 @@
                 // google.maps.event.addDomListener(window, 'load', initialize);
             }
         </script>
-        <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
+        <script async
+                src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
 
 
     <?php endif; ?>
@@ -234,7 +235,7 @@
 <!--        var widget_id = '38m4hDlF7s';-->
 <!--        var d = document;-->
 <!--        var w = window;-->
-        
+
 <!--        function l() {-->
 <!--            var s = document.createElement('script');-->
 <!--            s.type = 'text/javascript';-->
@@ -243,7 +244,7 @@
 <!--            var ss = document.getElementsByTagName('script')[0];-->
 <!--            ss.parentNode.insertBefore(s, ss);-->
 <!--        }-->
-        
+
 <!--        if (d.readyState == 'complete') {-->
 <!--            l();-->
 <!--        } else {-->
@@ -259,12 +260,12 @@
 <script type="text/javascript">
     (function (w, d) {
         setTimeout(function () {
-            
+
             // (function () {
             //     var widget_id = '38m4hDlF7s';
             //     var d = document;
             //     var w = window;
-                
+
             //     function l() {
             //         var s = document.createElement('script');
             //         s.type = 'text/javascript';
@@ -273,7 +274,7 @@
             //         var ss = document.getElementsByTagName('script')[0];
             //         ss.parentNode.insertBefore(s, ss);
             //     }
-                
+
             //     if (d.readyState == 'complete') {
             //         l();
             //     } else {
@@ -284,7 +285,7 @@
             //         }
             //     }
             // })();
-            
+
             w.amo_jivosite_id = 'vPugBTo6M7';
             var s = document.createElement('script'), f = d.getElementsByTagName('script')[0];
             s.id = 'amo_jivosite_js';
@@ -292,11 +293,11 @@
             s.async = true;
             s.src = 'https://forms.amocrm.ru/chats/jivosite/jivosite.js';
             f.parentNode.insertBefore(s, f);
-            
+
         }, 3000);
     })(window, document);
 
-    function jivo_onIntroduction(){
+    function jivo_onIntroduction() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'JivoSite',
@@ -304,7 +305,7 @@
         });
     }
 
-    function jivo_onAccept(){
+    function jivo_onAccept() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'JivoSite',
@@ -312,7 +313,7 @@
         });
     }
 
-    function jivo_onMessageSent(){
+    function jivo_onMessageSent() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'JivoSite',
@@ -342,8 +343,8 @@
 <script>
 
     // Menu Contacts button
-    jQuery('.contacts-menu__button--phone').click(function(){
-        if(!jQuery(this).hasClass('contacts-menu__button_active')){
+    jQuery('.contacts-menu__button--phone').click(function () {
+        if (!jQuery(this).hasClass('contacts-menu__button_active')) {
             ga('send', {
                 hitType: 'event',
                 eventCategory: 'tel_menu',
@@ -353,7 +354,7 @@
     });
 
     // Email
-    jQuery('.contacts-popup__email-text, .contacts-data__item_email').click(function(){
+    jQuery('.contacts-popup__email-text, .contacts-data__item_email').click(function () {
         ga('send', {
             hitType: 'event',
             eventCategory: 'email',
@@ -361,7 +362,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_velcom, .phone-item__phone-number_velcom').click(function(){
+    jQuery('.contacts-data__item-text_velcom, .phone-item__phone-number_velcom').click(function () {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_velcom',
@@ -369,7 +370,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_mts, .phone-item__phone-number_mts').click(function(){
+    jQuery('.contacts-data__item-text_mts, .phone-item__phone-number_mts').click(function () {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_mts',
@@ -377,7 +378,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_life, .phone-item__phone-number_life').click(function(){
+    jQuery('.contacts-data__item-text_life, .phone-item__phone-number_life').click(function () {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_life',
@@ -385,16 +386,16 @@
         });
     });
 
-    jQuery('[href="#booking-order"]').click(function(){
+    jQuery('[href="#booking-order"]').click(function () {
         let name = jQuery(this).data('name');
         let prefix = 'Home ';
         let category = 'house';
-        if(!name){
+        if (!name) {
             name = jQuery(this).data('event');
             prefix = 'Event ';
             category = 'events';
         }
-        if(!name){
+        if (!name) {
             console.log('Error ga');
             return;
         }
@@ -440,17 +441,22 @@
         jQuery('.modal-online-video').fadeIn(function () {
             var img = new Image();
             img.src = 'http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32';
-            img.onload = function() {
-                jQuery('.modal-online-video__video').empty().append(img);
+            img.onload = function () {
+                var closeButton = document.createElement('div');
+                closeButton.setAttribute('class', 'modal-online-video__close');
+                closeButton.addEventListener('click', modalClose);
+                jQuery('.modal-online-video__video').empty().append(img).append(closeButton);
             }
         });
     });
 
-    jQuery('.modal-online-video__container').on('click', function () {
+    jQuery('.modal-online-video__container').on('click', modalClose);
+
+    function modalClose() {
         jQuery('.modal-online-video').fadeOut(function () {
             jQuery('.modal-online-video__video').empty().html('<div class="modal-online-video__spinner"></div>');
         })
-    });
+    }
 
 
 </script>
