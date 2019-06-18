@@ -210,7 +210,7 @@
                         <div class="accordion-mixed__content-inner">
                             <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.svg" alt="bgc" class="booking-houses__calendars-bgc">
                             <div class="booking-houses__calendars-inner">
-                                <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
+                                <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
                             </div>
                         </div>
                     <?php else: ?>
@@ -293,7 +293,7 @@
                                         <div class="booking-houses__calendars">
                                             <img src="/wp-content/themes/krasnagorka/mastak/src/icons/calendar.svg" alt="bgc" class="booking-houses__calendars-bgc">
                                             <div class="booking-houses__calendars-inner">
-                                                <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Календарь бронирования</a>
+                                                <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
                                             </div>
                                         </div>
                                     </div>
