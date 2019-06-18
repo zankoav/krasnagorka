@@ -436,23 +436,18 @@
     }, false);
 
 
-    // var videoTimer;
     jQuery('.online-video').on('click', function () {
         jQuery('.modal-online-video').fadeIn(function () {
             var img = new Image();
             img.src = 'http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32';
-            img.onload = function(){
+            img.onload = function() {
                 jQuery('.modal-online-video__video').empty().append(img);
             }
-            // videoTimer = setInterval(function () {
-            //
-            // }, 100);
         });
     });
 
     jQuery('.modal-online-video__container').on('click', function () {
         jQuery('.modal-online-video').fadeOut(function () {
-            // clearInterval(videoTimer);
             jQuery('.modal-online-video__video').empty().html('<div class="modal-online-video__spinner"></div>');
         })
     });

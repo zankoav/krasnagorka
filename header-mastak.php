@@ -74,7 +74,7 @@
         .modal-online-video__video{
             background-color : #fff;
             padding: .5rem;
-            max-width: 400px;
+            max-width: 320px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
@@ -96,6 +96,7 @@
             .modal-online-video__video{
                 padding: 1rem;
                 border-radius: .5rem;
+                max-width: 720px;
             }
         }
     </style>
