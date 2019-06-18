@@ -77,6 +77,7 @@
             max-width: 320px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
             position: relative;
+            border-radius: .25rem;
         }
 
         .modal-online-video__close{
@@ -87,7 +88,9 @@
             height: 2rem;
             padding: .5rem;
             border-radius: 100%;
-            background-color : #fff;
+            background : #fff url("/wp-content/themes/krasnagorka/mastak/src/icons/cancel-music.svg") no-repeat;
+            background-size: 75% 75%;
+            background-position: center center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
