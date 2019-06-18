@@ -89,7 +89,7 @@
             padding: .5rem;
             border-radius: 100%;
             background : #fff url("/wp-content/themes/krasnagorka/mastak/src/icons/cancel-music.svg") no-repeat;
-            background-size: 75% 75%;
+            background-size: 50%;
             background-position: center center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
