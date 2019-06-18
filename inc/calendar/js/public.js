@@ -2,6 +2,8 @@ var targetMargin, scriptPublic;
 
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
+    console.log(this);
+    
     var func = loadCalendar.bind(this);
     if(!scriptPublic){
         scriptPublic = document.createElement('script');
