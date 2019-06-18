@@ -1,8 +1,20 @@
-var targetMargin;
+var targetMargin, scriptPublic;
 
 jQuery('.booking-houses__calendars-button').on('click', function (event) {
     event.preventDefault();
+    if(!scriptPublic){
+        scriptPublic = document.createElement('script');
+        scriptPublic.onload = function() {
+            loadCalendar.call(this);
+        };
+        scriptPublic.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/public.js";
+        document.getElementsByTagName('body')[0].appendChild(script);
+    }else{
+        loadCalendar.call(this);
+    }
+});
 
+function loadCalendar(obj) {
     var calendarShortcod = jQuery(this).data('calendar');
     var attArray = calendarShortcod.split('\"');
     var data = {
@@ -59,7 +71,7 @@ jQuery('.booking-houses__calendars-button').on('click', function (event) {
             console.log('error', x);
         }
     });
-});
+}
 
 jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
     event.preventDefault();
