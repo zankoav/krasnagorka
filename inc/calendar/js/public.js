@@ -1,9 +1,8 @@
 var targetMargin, scriptFullCalendar, scriptLocalCalendar;
 
-jQuery('.booking-houses__calendars-button').on('click', function (event) {
+jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
-    console.log(this);
-    
+
     var func = loadCalendar.bind(this);
     if(!scriptFullCalendar){
         scriptFullCalendar = document.createElement('script');

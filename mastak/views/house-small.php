@@ -115,7 +115,7 @@
         </div>
         <?php if (!$isTerem) : ?>
             <div class="our-house__date">
-                <a href="#" class="our-house__button-booking our-house__button-booking_active">
+                <a href="#" class="our-house__button-booking">
                     календарь бронирования
                 </a>
                 <div class="our-house__calendar">
