@@ -115,7 +115,7 @@
         </div>
         <?php if (!$isTerem) : ?>
             <div class="our-house__date">
-                <a href="#" class="our-house__button-booking">
+                <a href="#" class="our-house__button-booking" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>'>
                     календарь бронирования
                 </a>
                 <div class="our-house__calendar">
