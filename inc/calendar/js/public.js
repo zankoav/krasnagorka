@@ -1,18 +1,12 @@
-var targetMargin, scriptFullCalendar, scriptLocalCalendar, scriptMoment;
+var targetMargin, scriptFullCalendar, scriptLocalCalendar;
 
 jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
 
     var func = loadCalendar.bind(this);
-    if(!scriptLocalCalendar){
+    if(!scriptFullCalendar){
         scriptFullCalendar = document.createElement('script');
         scriptLocalCalendar = document.createElement('script');
-        scriptMoment = document.createElement('script');
-
-        scriptMoment.onload = function() {
-            scriptFullCalendar.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js";
-            document.getElementsByTagName('body')[0].appendChild(scriptFullCalendar);
-        };
 
         scriptFullCalendar.onload = function() {
             scriptLocalCalendar.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js";
@@ -22,8 +16,8 @@ jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('clic
             func();
         };
 
-        scriptMoment.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js";
-        document.getElementsByTagName('body')[0].appendChild(scriptMoment);
+        scriptFullCalendar.src = "https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js";
+        document.getElementsByTagName('body')[0].appendChild(scriptFullCalendar);
 
     }else{
         func();
