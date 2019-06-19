@@ -20,6 +20,9 @@
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsData["house"]["js"], false, null, true );
             wp_enqueue_script( 'zoom', $themeUri . '/mastak/src/js/jquery.zoom.min.js', false, null, true );
 
+            wp_dequeue_script( 'fullcalendar_locale' ); //If you're using disqus, etc.
+            wp_dequeue_script( 'fullcalendar' ); //If you're using disqus, etc.
+            
             wp_enqueue_style( 'house', $themeUri . '/mastak' . $scriptsData["house"]["css"], false, null );
             wp_dequeue_style('contact-form-7');
 
@@ -163,6 +166,10 @@
             wp_dequeue_script('jquery-fancybox');
             wp_dequeue_script('jquery-easing');
             wp_dequeue_script('jquery-mousewheel');
+            
+            
+            wp_dequeue_script( 'fullcalendar_locale' ); //If you're using disqus, etc.
+            wp_dequeue_script( 'fullcalendar' ); //If you're using disqus, etc.
 
             wp_enqueue_style( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["css"], false, null );
             wp_dequeue_style('contact-form-7');
