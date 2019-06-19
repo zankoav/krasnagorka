@@ -53,74 +53,80 @@
         fbq('track', 'PageView');
     </script>
     <style>
-        .modal-online-video{
-            display : none;
-            position: fixed;
-            width : 100%;
-            height : 100%;
-            background-color : rgba(0,0,0,0.5);
-            align-items : center;
+        .modal-online-video {
+            display          : none;
+            position         : fixed;
+            width            : 100%;
+            height           : 100%;
+            background-color : rgba(0, 0, 0, 0.5);
+            align-items      : center;
+            justify-content  : center;
+            z-index          : 1000;
+        }
+
+        .modal-online-video__container {
+            width           : 100%;
+            height          : 100%;
+            position        : absolute;
+            display         : flex;
             justify-content : center;
-            z-index: 1000;
+            align-items     : center;
         }
-        .modal-online-video__container{
-            width : 100%;
-            height : 100%;
-            position: absolute;
-            display : flex;
-            justify-content : center;
-            align-items : center;
+
+        .modal-online-video__video {
+            max-width : 100%;
+            position  : relative;
         }
-        .modal-online-video__video{
-            max-width:100%;
-            position: relative;
-        }
-        
+
         .modal-online-video__video img {
-            width:100%;
-            display: block;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.9);
+            width      : 100%;
+            display    : block;
+            box-shadow : 0 4px 8px rgba(0, 0, 0, 0.9);
         }
 
-        .modal-online-video__close{
-            position: absolute;
-            right: 1rem;
-            top : -1rem;
-            width : 2rem;
-            height: 2rem;
-            padding: .5rem;
-            border-radius: 100%;
-            background : #fff url("/wp-content/themes/krasnagorka/mastak/src/icons/cancel-music.svg") center center no-repeat;
-            background-size: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            cursor: pointer;
+        .modal-online-video__close {
+            position        : absolute;
+            right           : 1rem;
+            top             : -1rem;
+            width           : 2rem;
+            height          : 2rem;
+            padding         : .5rem;
+            border-radius   : 100%;
+            background      : #fff url("/wp-content/themes/krasnagorka/mastak/src/icons/cancel-music.svg") center center no-repeat;
+            background-size : 50%;
+            box-shadow      : 0 2px 4px rgba(0, 0, 0, 0.9);
+            cursor          : pointer;
         }
 
-        .modal-online-video__spinner{
-            width : 64px;
-            height : 64px;
-            margin:0 auto;
-            border-radius:100%;
-            background: #fff url('/wp-content/themes/krasnagorka/mastak/src/icons/loading.svg') no-repeat;
-            background-size: 50%;
-            background-position: center center;
-            animation: rotateInf 1s infinite;
+        .modal-online-video__spinner {
+            width               : 64px;
+            height              : 64px;
+            margin              : 0 auto;
+            border-radius       : 100%;
+            background          : #fff url('/wp-content/themes/krasnagorka/mastak/src/icons/loading.svg') no-repeat;
+            background-size     : 50%;
+            background-position : center center;
+            animation           : rotateInf 1s infinite;
         }
 
         @keyframes rotateInf {
-            0%{transform: rotate(0)}
-            100%{transform: rotate(360deg)}
+            0% {
+                transform : rotate(0)
+            }
+            100% {
+                transform : rotate(360deg)
+            }
         }
-        
-        @media (min-width: 768px){
-            .modal-online-video__close{
-                        right: -1rem;
-                    }
+
+        @media (min-width : 768px) {
+            .modal-online-video__close {
+                right : -1rem;
+            }
         }
-        
-        @media (min-width: 1024px){
-            .modal-online-video__video{
-                width: 1024px;
+
+        @media (min-width : 1024px) {
+            .modal-online-video__video {
+                width : 1024px;
             }
         }
     </style>
