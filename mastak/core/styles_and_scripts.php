@@ -73,7 +73,7 @@
 			wp_enqueue_script( 'houses', $themeUri . '/mastak' . $scriptsData["houses"]["js"], false, null, true );
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
 
-            wp_dequeue_script( 'moment' ); //If you're using disqus, etc.
+//            wp_dequeue_script( 'moment' ); //If you're using disqus, etc.
             wp_dequeue_script( 'fullcalendar_locale' ); //If you're using disqus, etc.
             wp_dequeue_script( 'fullcalendar' ); //If you're using disqus, etc.
 
