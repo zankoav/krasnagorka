@@ -202,7 +202,7 @@
                 </div>
                 <div data-mixed-tab="3"
                      class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '':' js-add-public-calendar-single';?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
-                    КАЛЕНДАРИ
+                    КАЛЕНДАРЬ БРОНИРОВАНИЯ
                 </div>
                 <div data-mixed-conent="3"
                      class="accordion-mixed__content <?= $isEmployment ? 'accordion-mixed__content--active' : '' ?>">
