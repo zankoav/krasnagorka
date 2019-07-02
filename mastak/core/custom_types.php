@@ -809,6 +809,12 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Кнопка бронирования',
+            'id'   => $prefix . 'add_order',
+            'type' => 'checkbox'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => __('Комментарий к цене', 'krasnagorka'),
             'id'   => $prefix . 'price_subtitle',
             'type' => 'textarea_small',

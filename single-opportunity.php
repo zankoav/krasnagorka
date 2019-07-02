@@ -14,10 +14,11 @@
         $price          = get_current_price($price_byn);
         $price_subtitle = get_post_meta(get_the_ID(), "mastak_opportunity_price_subtitle", true);
         $subtitle       = get_post_meta(get_the_ID(), "mastak_opportunity_subtitle", true);
+        $addOrderButton = get_post_meta(get_the_ID(), "mastak_opportunity_add_order", true);
         global $kgCooke;
         $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
-        $imageId = get_post_thumbnail_id();
-        $size = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
+        $imageId       = get_post_thumbnail_id();
+        $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
         get_template_part("mastak/views/header", "small-view"); ?>
 
         <div class="b-bgc-wrapper">
@@ -34,9 +35,9 @@
                             <div class="house-description">
                                 <div class="house-description__header">
                                     <img class="house-description__image"
-                                         src="<?= wp_get_attachment_image_url( $imageId, $size ); ?>"
-                                         srcset="<?= wp_get_attachment_image_srcset(  $imageId, $size ); ?>"
-                                         sizes="<?= wp_get_attachment_image_sizes(  $imageId, $size ); ?>">
+                                         src="<?= wp_get_attachment_image_url($imageId, $size); ?>"
+                                         srcset="<?= wp_get_attachment_image_srcset($imageId, $size); ?>"
+                                         sizes="<?= wp_get_attachment_image_sizes($imageId, $size); ?>">
                                     <?php the_title('<p class="house-description__title">', '</p>'); ?>
                                     <div class="house-description__text big-text content-text">
                                         <?php the_content(); ?>
@@ -106,18 +107,23 @@
                             <?= get_post_meta(get_the_ID(), "mastak_opportunity_residence", true); ?>
                         </div>
                     </div>
-                    <?php if ($price != 0): ?>
+                    <?php if ($price != 0 or $addOrderButton): ?>
                         <footer class="house-booking">
-                            <p class="house-booking__info house-booking__info_opportunity">
-                                <span class="opportunity__price-title">Стоимость услуги: </span>
-                                <span class="house-booking__price-per-men opportunity__price js-currency"
-                                      data-currency="<?= $currency_name; ?>"
-                                      data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
+                            <?php if ($price != 0): ?>
+                                <p class="house-booking__info house-booking__info_opportunity">
+                                    <span class="opportunity__price-title">Стоимость услуги: </span>
+                                    <span class="house-booking__price-per-men opportunity__price js-currency"
+                                          data-currency="<?= $currency_name; ?>"
+                                          data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
 
-                                <?php if (isset($price_subtitle) and !empty($price_subtitle)): ?>
-                                    <span class="opportunity__price-subtitle"> <?= $price_subtitle; ?></span>
-                                <?php endif; ?>
-                            </p>
+                                    <?php if (isset($price_subtitle) and !empty($price_subtitle)): ?>
+                                        <span class="opportunity__price-subtitle"> <?= $price_subtitle; ?></span>
+                                    <?php endif; ?>
+                                </p>
+                            <?php endif; ?>
+                            <?php if ($addOrderButton): ?>
+                                <a href="#booking-order" data-event="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
+                            <?php endif; ?>
                         </footer>
                     <?php endif; ?>
                 </div>
@@ -134,7 +140,12 @@
         get_template_part("mastak/views/reviews", "view");
         get_template_part("mastak/views/footer", "view");
         ?>
-
+        <div style="display:none" class="fancybox-hidden">
+            <div id="booking-order">
+                <p class="booking-order__title"></p>
+                <?= do_shortcode('[contact-form-7 id="2730" title="Отправить заявку на бронирование"]'); ?>
+            </div>
+        </div>
     <?php endwhile; endif; // end of the loop. ?>
 
 <?php get_footer('mastak'); ?>
