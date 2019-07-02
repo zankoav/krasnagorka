@@ -460,9 +460,25 @@
 
 
     jQuery('.base-place__coordinate-inner').on('click', function () {
-        var coordinatu = jQuery(this).html();
-        console.log(coordinatu);
+        CopyToClipboard('coordinate');
+        var tooltip = document.getElementById("coordinatsTooltip");
+        tooltip.innerHTML = "Координаты скопированы";
     });
+
+    function CopyToClipboard(containerid) {
+        if (document.selection) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(document.getElementById(containerid));
+            range.select().createTextRange();
+            document.execCommand("copy");
+
+        } else if (window.getSelection) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(containerid));
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+        }
+    }
 
 
 </script>
