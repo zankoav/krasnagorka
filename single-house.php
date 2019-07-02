@@ -377,11 +377,11 @@
                     </div>
                 </div>
                 <footer class="house-booking">
-                    <a href="#booking-order" data-name="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
                     <p class="house-booking__info">
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                     </p>
+                    <a href="#booking-order" data-name="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
                 </footer>
             </div>
         </div>

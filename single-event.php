@@ -52,7 +52,6 @@
             <?php endfor; ?>
             <footer class="house-booking">
                 <?php if (isset($price) and !empty($price) and $dateAgree): ?>
-                    <a href="#booking-order" data-event="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
                     <?php if ($price != 0): ?>
                         <p class="house-booking__info house-booking__info_event">
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
@@ -60,6 +59,7 @@
                             <span class="opportunity__price-subtitle opportunity__price-subtitle_event"><?= $price_subtitle ?></span>
                         </p>
                     <?php endif; ?>
+                    <a href="#booking-order" data-event="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
                 <?php endif; ?>
             </footer>
         </div>
