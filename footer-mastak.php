@@ -459,6 +459,12 @@
     }
 
 
+    jQuery('.base-place__coordinate-inner').on('click', function () {
+        var coordinatu = jQuery(this).html();
+        console.log(coordinatu);
+    });
+
+
 </script>
 <!-- Код CallTracking -->
 <script async src="//app.call-tracking.by/scripts/calltracking.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>

@@ -74,7 +74,8 @@
         <h2 class="header-title__subtitle b-mb-2">Контакты</h2>
         <div class="base-place__contacts">
             <p class="base-place__address"><?= $address; ?></p>
-            <p class="base-place__coordinate">Координаты: <?= $coordinate; ?></p>
+            <p class="base-place__coordinate">Координаты:
+                <span class="base-place__coordinate-inner"><?= $coordinate; ?></span></p>
             <div class="base-place__phones">
                 <div class="base-place__phones-block">
                     <p class="base-place__phone"><?= $velcom; ?></p>
