@@ -76,11 +76,11 @@
         <h2 class="header-title__subtitle b-mb-2">Контакты</h2>
         <div class="base-place__contacts">
             <p class="base-place__address"><?= $address; ?></p>
-            <div class="base-place__coordinate ">Координаты:
-                <span class="base-place__coordinate-inner tooltip">
+            <div class="base-place__coordinate">Координаты:
+                <div class="base-place__coordinate-inner tooltip">
                     <div id="coordinate"><?= $coordinate; ?></div>
                     <span class="tooltiptext" id="coordinatsTooltip">Копировать координаты?</span>
-                </span>
+                </div>
             </div>
             <div class="base-place__phones">
                 <div class="base-place__phones-block">
