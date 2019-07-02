@@ -76,7 +76,7 @@
             <p class="base-place__address"><?= $address; ?></p>
             <p class="base-place__coordinate ">Координаты:
                 <span class="base-place__coordinate-inner tooltip">
-                    <span id="coordinate"><?= $coordinate; ?></span>
+                    <div id="coordinate"><?= $coordinate; ?></div>
                     <span class="tooltiptext" id="coordinatsTooltip">Копировать координаты?</span>
                 </span></p>
             <div class="base-place__phones">

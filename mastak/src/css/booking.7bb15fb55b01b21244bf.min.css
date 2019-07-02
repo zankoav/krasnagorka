@@ -37,3 +37,4 @@ html,body{height:initial}.way__map{margin-bottom:2rem;margin-left:-1.5rem;margin
     visibility: visible;
     opacity: 1;
 }
+#coordinate{display:inline-block}

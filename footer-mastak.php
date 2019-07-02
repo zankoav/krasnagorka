@@ -459,25 +459,26 @@
     }
 
 
-    jQuery('.base-place__coordinate-inner').on('click', function () {
-        CopyToClipboard('coordinate');
-        var tooltip = document.getElementById("coordinatsTooltip");
-        tooltip.innerHTML = "Координаты скопированы";
-    });
+    jQuery('.base-place__coordinate-inner')
+        .on('click', function () {
+            CopyToClipboard('coordinate');
+            var tooltip = document.getElementById("coordinatsTooltip");
+            tooltip.innerHTML = "Координаты скопированы";
+        })
+        .on('mouseout', function () {
+            var tooltip = document.getElementById("coordinatsTooltip");
+            tooltip.innerHTML = "Копировать координаты?";
+        });
 
     function CopyToClipboard(containerid) {
-        if (document.selection) {
-            var range = document.body.createTextRange();
-            range.moveToElementText(document.getElementById(containerid));
-            range.select().createTextRange();
-            document.execCommand("copy");
-
-        } else if (window.getSelection) {
-            var range = document.createRange();
-            range.selectNode(document.getElementById(containerid));
-            window.getSelection().addRange(range);
-            document.execCommand("copy");
-        }
+        var el = document.getElementById(containerid);
+        var range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        document.execCommand('copy');
+        console.log("Contents copied to clipboard.");
     }
 
 
