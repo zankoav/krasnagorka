@@ -74,8 +74,8 @@
         <h2 class="header-title__subtitle b-mb-2">Контакты</h2>
         <div class="base-place__contacts">
             <p class="base-place__address"><?= $address; ?></p>
-            <p class="base-place__coordinate tooltip">Координаты:
-                <span class="base-place__coordinate-inner">
+            <p class="base-place__coordinate ">Координаты:
+                <span class="base-place__coordinate-inner tooltip">
                     <span id="coordinate"><?= $coordinate; ?></span>
                     <span class="tooltiptext" id="coordinatsTooltip">Копировать координаты?</span>
                 </span></p>
