@@ -399,6 +399,7 @@
 				// beta
 				'closed'        => true, // true to have the groups closed by default
 			),
+			'after_group' => 'add_js_for_repeatable_titles',
 		) );
 
 		$sbc_client->add_group_field( $group_field_event, array(
@@ -460,3 +461,34 @@
 		) );
 	}
 
+    function add_js_for_repeatable_titles() {
+    	add_action( 'admin_footer', 'add_js_for_repeatable_titles_to_footer' );
+    }
+
+    function add_js_for_repeatable_titles_to_footer() {
+	?>
+	<script type="text/javascript">
+	jQuery( function( $ ) {
+		var $box = $( document.getElementById( 'mastak_event_tab_type_8' ) );
+		console.log('$box',$box);
+		
+// 		var replaceOnKeyUp = function( evt ) {
+// 			var $this = $( evt.target );
+// 			console.log('replaceOnKeyUp',$this);
+// 			var id = 'title';
+// 			if ( evt.target.id.indexOf(id, evt.target.id.length - id.length) !== -1 ) {
+// 				$this.parents( '.cmb-row.cmb-repeatable-grouping' ).find( '.cmb-group-title' ).text( $this.val() );
+// 			}
+// 		};
+		$box
+			.on( 'cmb2_add_row cmb2_remove_row cmb2_shift_rows_complete', function(event){
+			    console.log('cmb2 event',event);
+			})
+			.on( 'keyup', function(event){
+			    console.log('replaceOnKeyUp',event);
+			} );
+// 		replaceTitles();
+	});
+	</script>
+	<?php
+}
