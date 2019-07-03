@@ -471,8 +471,8 @@
             jQuery(function ($) {
                 var $box = $(document.getElementById('mastak_event_tab_type_8'));
                 $box.on('cmb2_shift_rows_complete', function (event) {
-                    let isDownPressed = event.currentTarget.activeElement;//.classList.indexOf("move-down") > -1;
-                    let index = $(event.currentTarget).closest('.postbox.cmb-row.cmb-repeatable-grouping').data('iterator');
+                    let isDownPressed = event.currentTarget;//.classList.indexOf("move-down") > -1;
+                    let index = $(event.currentTarget).closest('.postbox.cmb-row.cmb-repeatable-grouping');//.data('iterator');
                     console.log('isDownPressed', isDownPressed);
                     console.log('index', index);
                 })
