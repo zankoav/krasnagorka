@@ -70,6 +70,11 @@
 
             </div>
         </div>
+        <?php
+            if (is_active_sidebar('prices-content') and $current_season_id == $season_id) {
+                dynamic_sidebar('prices-content');
+            }
+        ?>
     <?php endforeach; ?>
     <div class="seasons__added">
         <section class="b-container header-title">
@@ -117,12 +122,6 @@
                 </table>
             </div>
         </div>
-        <?php
-            /**
-             * Use buttons for documents
-             *  get_template_part("mastak/views/price", "buttons");
-             */
-        ?>
         <section class="b-container header-title">
             <h2 class="header-title__subtitle">Цены на рыбалку</h2>
         </section>
@@ -231,7 +230,7 @@
                 <div class="price__table-more-block">
                     <a href="#" class="price__table-more">
                         <img class="price__arrow-more"
-                             src=<?=CORE_PATH?>"src/icons/left-arrow-gray.e83982.svg" alt="arrow">
+                             src=<?= CORE_PATH ?>"src/icons/left-arrow-gray.e83982.svg" alt="arrow">
                     </a>
                 </div>
             <?php endif; ?>
@@ -240,11 +239,6 @@
 </div>
 
 <?php
-
-    if (is_active_sidebar('prices-content')) {
-        dynamic_sidebar('prices-content');
-    };
-
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");
     get_footer('mastak');
