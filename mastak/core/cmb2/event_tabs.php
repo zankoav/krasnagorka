@@ -473,8 +473,9 @@
                 $box.on('cmb2_shift_rows_complete', function (event) {
                     let isDownPressed = event.target.classList.contains("move-down");
                     let index = $(event.target).closest('[data-iterator]').data('iterator');
-                    console.log('isDownPressed', isDownPressed);
-                    console.log('index', index);
+                    let targetIndex = index + (isDownPressed ? 1 : -1);
+                    $('[data-iterator]').addClass('closed');
+                    $('[data-iterator=' + targetIndex + ']').removeClass('closed');
                 })
             });
         </script>
