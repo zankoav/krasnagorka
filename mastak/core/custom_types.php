@@ -513,6 +513,12 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Текст описание карты',
+            'id'   => $prefix . 'text_map',
+            'type' => 'wysiwyg'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => __('Кол-во гостей', 'krasnagorka'),
             'desc' => __('Кол-во гостей', 'krasnagorka'),
             'id'   => $prefix . 'guests',

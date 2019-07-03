@@ -22,7 +22,7 @@
     global $kgCooke;
     $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
     $isEmployment  = isset($_GET['employment']);
-    $size = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
+    $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 
 ?>
 
@@ -47,9 +47,9 @@
                         <div class="house-description">
                             <div class="house-description__header">
                                 <img class="house-description__image"
-                                     src="<?= wp_get_attachment_image_url( $imageId, $size ); ?>"
-                                     srcset="<?= wp_get_attachment_image_srcset(  $imageId, $size ); ?>"
-                                     sizes="<?= wp_get_attachment_image_sizes(  $imageId, $size ); ?>">
+                                     src="<?= wp_get_attachment_image_url($imageId, $size); ?>"
+                                     srcset="<?= wp_get_attachment_image_srcset($imageId, $size); ?>"
+                                     sizes="<?= wp_get_attachment_image_sizes($imageId, $size); ?>">
                                 <?php the_title('<h3 class="house-description__title">', '</h3>'); ?>
                                 <div class="house-description__text big-text content-text">
                                     <?php the_content(); ?>
@@ -201,7 +201,7 @@
                     <?php endif; ?>
                 </div>
                 <div data-mixed-tab="3"
-                     class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '':' js-add-public-calendar-single';?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
+                     class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '' : ' js-add-public-calendar-single'; ?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
                     КАЛЕНДАРЬ БРОНИРОВАНИЯ
                 </div>
                 <div data-mixed-conent="3"
@@ -209,7 +209,11 @@
                     <?php if (!$isTerem) : ?>
                         <div class="accordion-mixed__content-inner">
                             <div class="booking-houses__calendars-inner">
-                                <a href="#" data-calendar='<?=get_post_meta(get_the_ID(), "mastak_house_calendar", true);?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
+                                <a href="#"
+                                   data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>'
+                                   class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                    Показать календарь
+                                </a>
                             </div>
                         </div>
                     <?php else: ?>
@@ -291,7 +295,10 @@
                                         </div>
                                         <div class="booking-houses__calendars">
                                             <div class="booking-houses__calendars-inner">
-                                                <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
+                                                <a href="#" data-calendar='<?= $kalendar['calendar']; ?>'
+                                                   class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                                    Показать календарь
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -305,11 +312,16 @@
                 </div>
                 <div data-mixed-conent="4" class="accordion-mixed__content">
                     <div class="accordion-mixed__content-inner">
-                        <div id="ex3" class="map-zoom">
-                            <img src="<?= get_post_meta(get_the_ID(), "mastak_house_map", true); ?>" alt="map"
-                                 class="map-zoom__image"
-                                 data-big="<?= get_post_meta(get_the_ID(), "mastak_house_map", true); ?>">
-                            <p class="map-zoom__title">Кликни</p>
+                        <div class="base-place b-mb-2">
+                            <div class="base-place__image">
+                                <img src="<?= get_post_meta(get_the_ID(), "mastak_house_map", true); ?>" alt="map"
+                                     class="base-place__image-inner">
+                            </div>
+                            <div class="base-place__content">
+                                <div class="big-text content-text">
+                                    <?= wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true)); ?>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -381,7 +393,9 @@
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                     </p>
-                    <a href="#booking-order" data-name="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
+                    <a href="#booking-order" data-name="<?= get_the_title(); ?>"
+                       class="fancybox-inline house-booking__button">забронировать
+                    </a>
                 </footer>
             </div>
         </div>
