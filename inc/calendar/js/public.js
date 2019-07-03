@@ -76,7 +76,7 @@ function loadCalendar() {
                     eventOverlap: !1
                 });
 
-                var isAdmin = document.getElementById('#wpadminbar');
+                var isAdmin = document.getElementById('wpadminbar');
                 console.log('isAdmin', isAdmin);
 
                 if (isAdmin) {
