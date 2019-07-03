@@ -42,6 +42,7 @@ function loadCalendar() {
             if (response) {
                 $parent.empty().html(response);
                 var $calendar = $parent.find('[data-url]');
+                console.log('$calendar',$calendar);
                 var cUrl = $calendar.data("url");
                 $calendar.fullCalendar({
                     height: 300,
@@ -69,7 +70,8 @@ function loadCalendar() {
                     locale: "ru",
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
-                        url: cUrl, error: function () {
+                        url: cUrl,
+                        error: function () {
                             console.log("Ошибка загрузки данных")
                         }
                     },
