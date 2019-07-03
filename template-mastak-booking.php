@@ -26,9 +26,23 @@
 
 ?>
     <section class="b-container header-title">
-        <?php if (is_user_logged_in()):?>
+        <?php if (is_user_logged_in()): ?>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
-        <?php endif;?>
+            <select id="admin-month" name="admin-month" style="margin-left: 2rem;">
+                <option selected value="01">Январь</option>
+                <option value="02">Февраль</option>
+                <option value="03">Март</option>
+                <option value="04">Апрель</option>
+                <option value="05">Май</option>
+                <option value="06">Июнь</option>
+                <option value="07">Июль</option>
+                <option value="08">Август</option>
+                <option value="09">Сентябрь</option>
+                <option value="10">Октябрь</option>
+                <option value="11">Ноябрь</option>
+                <option value="12">Декабрь</option>
+            </select>
+        <?php endif; ?>
     </section>
     <section class="b-container">
         <?php get_template_part('mastak/views/icons-description'); ?>
@@ -121,7 +135,10 @@
                                     </div>
                                     <div class="booking-houses__calendars">
                                         <div class="booking-houses__calendars-inner">
-                                            <a href="#" data-calendar='<?=$kalendar['calendar'];?>' class="our-house__button our-house__button--green booking-houses__calendars-button">Показать календарь</a>
+                                            <a href="#" data-calendar='<?= $kalendar['calendar']; ?>'
+                                               class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                                Показать календарь
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

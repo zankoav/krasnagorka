@@ -75,14 +75,27 @@ function loadCalendar() {
                     },
                     eventOverlap: !1
                 });
-                var noTime = jQuery.fullCalendar.moment('2019-01-01');
-                $calendar.fullCalendar('gotoDate', noTime);
+
+                var isAdmin = jQuery('.booking-houses__calendars-all-button').length > 0;
+                if(isAdmin){
+                    setMonth($calendar);
+                }
             }
         },
         error: function (x, y, z) {
             console.log('error', x);
         }
     });
+}
+
+/**
+ *
+ * @param month 0-11 (0 - January)
+ */
+function setMonth($calendar) {
+    var month = jQuery("#admin-month :selected").val();
+    var noTime = jQuery.fullCalendar.moment('2019-'+month+'-01');
+    $calendar.fullCalendar('gotoDate', noTime);
 }
 
 jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
