@@ -78,9 +78,8 @@ function loadCalendar() {
 
                 var isAdmin = document.getElementById('wpadminbar');
                 if (isAdmin) {
-                    console.log('month', month);
                     var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
-                    console.log('noTime', noTime);
+                    console.log($calendar);
                     $calendar.fullCalendar('gotoDate', noTime);
                 }
             }
