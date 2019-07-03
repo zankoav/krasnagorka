@@ -76,7 +76,7 @@ function loadCalendar() {
                     eventOverlap: !1
                 });
 
-                var isAdmin = jQuery('.booking-houses__calendars-all-button').length > 0;
+                var isAdmin = document.getElementById('#wpadminbar');
                 if (isAdmin) {
                     console.log('go to');
                     var month = jQuery("#admin-month :selected").val();
