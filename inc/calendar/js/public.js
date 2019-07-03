@@ -1,4 +1,4 @@
-var targetMargin, scriptFullCalendar, scriptLocalCalendar;
+var targetMargin, scriptFullCalendar, scriptLocalCalendar, month;
 
 jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
@@ -77,10 +77,7 @@ function loadCalendar() {
                 });
 
                 var isAdmin = document.getElementById('wpadminbar');
-                console.log('isAdmin', isAdmin);
-
                 if (isAdmin) {
-                    var month = jQuery("#admin-month option:selected").val();
                     console.log('month', month);
                     var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
                     console.log('noTime', noTime);
@@ -94,9 +91,11 @@ function loadCalendar() {
     });
 }
 
+
 jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
     event.preventDefault();
     jQuery('.booking-houses__calendars-button').trigger('click');
     jQuery(this).remove();
+    month = jQuery("#admin-month option:selected").val();
     jQuery('#admin-month').remove();
 });
