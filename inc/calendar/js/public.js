@@ -67,14 +67,16 @@ function loadCalendar() {
                         1 == r ? $calendar.children("#cloader").show() : $calendar.children("#cloader").hide()
                     },
                     locale: "ru",
-                    header: {left: "prev", month: 0, center: "title", right: "next"},
+                    header: {left: "prev",center: "title", right: "next"},
                     events: {
                         url: cUrl, error: function () {
                             console.log("Ошибка загрузки данных")
                         }
                     },
                     eventOverlap: !1
-                })
+                });
+                var noTime = $.fullCalendar.moment('2019-01-01');
+                $calendar.fullCalendar('gotoDate', noTime);
             }
         },
         error: function (x, y, z) {
