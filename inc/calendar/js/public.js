@@ -80,8 +80,7 @@ function loadCalendar() {
                 console.log('isAdmin', isAdmin);
 
                 if (isAdmin) {
-                    console.log('go to');
-                    var month = jQuery("#admin-month :selected").val();
+                    var month = jQuery("#admin-month option:selected").val();
                     console.log('month', month);
                     var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
                     console.log('noTime', noTime);
