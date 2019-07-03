@@ -71,7 +71,7 @@
             </div>
         </div>
         <?php
-            if (is_active_sidebar('prices-content') and $current_season_id == $season_id) {
+            if (is_active_sidebar('prices-content') and ($current_season_id == $season_id)) {
                 dynamic_sidebar('prices-content');
             }
         ?>
