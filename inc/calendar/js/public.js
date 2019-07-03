@@ -67,8 +67,7 @@ function loadCalendar() {
                         1 == r ? $calendar.children("#cloader").show() : $calendar.children("#cloader").hide()
                     },
                     locale: "ru",
-                    month: 0,
-                    header: {left: "prev", center: "title", right: "next"},
+                    header: {left: "prev", month: 0, center: "title", right: "next"},
                     events: {
                         url: cUrl, error: function () {
                             console.log("Ошибка загрузки данных")
