@@ -471,7 +471,7 @@
             jQuery(function ($) {
                 var $box = $(document.getElementById('mastak_event_tab_type_8'));
                 $box.on('cmb2_shift_rows_complete', function (event) {
-                    let isDownPressed = event.target.classList.indexOf("move-down") > -1;
+                    let isDownPressed = event.target;//.classList.indexOf("move-down") > -1;
                     let index = $(event.target).closest('[data-iterator]').data('iterator');
                     console.log('isDownPressed', isDownPressed);
                     console.log('index', index);
