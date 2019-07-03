@@ -75,7 +75,7 @@ function loadCalendar() {
                     },
                     eventOverlap: !1
                 });
-                var noTime = $.fullCalendar.moment('2019-01-01');
+                var noTime = jQuery.fullCalendar.moment('2019-01-01');
                 $calendar.fullCalendar('gotoDate', noTime);
             }
         },
