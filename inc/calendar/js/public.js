@@ -77,6 +77,8 @@ function loadCalendar() {
                 });
 
                 var isAdmin = document.getElementById('#wpadminbar');
+                console.log('isAdmin', isAdmin);
+
                 if (isAdmin) {
                     console.log('go to');
                     var month = jQuery("#admin-month :selected").val();
