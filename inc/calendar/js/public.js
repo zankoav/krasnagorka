@@ -78,8 +78,11 @@ function loadCalendar() {
 
                 var isAdmin = jQuery('.booking-houses__calendars-all-button').length > 0;
                 if (isAdmin) {
+                    console.log('go to');
                     var month = jQuery("#admin-month :selected").val();
+                    console.log('month', month);
                     var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
+                    console.log('noTime', noTime);
                     $calendar.fullCalendar('gotoDate', noTime);
                 }
             }
