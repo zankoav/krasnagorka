@@ -67,7 +67,7 @@ function loadCalendar() {
                         1 == r ? $calendar.children("#cloader").show() : $calendar.children("#cloader").hide()
                     },
                     locale: "ru",
-                    header: {left: "prev",center: "title", right: "next"},
+                    header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl, error: function () {
                             console.log("Ошибка загрузки данных")
@@ -77,8 +77,10 @@ function loadCalendar() {
                 });
 
                 var isAdmin = jQuery('.booking-houses__calendars-all-button').length > 0;
-                if(isAdmin){
-                    setMonth($calendar);
+                if (isAdmin) {
+                    var month = jQuery("#admin-month :selected").val();
+                    var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
+                    $calendar.fullCalendar('gotoDate', noTime);
                 }
             }
         },
@@ -88,18 +90,9 @@ function loadCalendar() {
     });
 }
 
-/**
- *
- * @param month 0-11 (0 - January)
- */
-function setMonth($calendar) {
-    var month = jQuery("#admin-month :selected").val();
-    var noTime = jQuery.fullCalendar.moment('2019-'+month+'-01');
-    $calendar.fullCalendar('gotoDate', noTime);
-}
-
 jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
     event.preventDefault();
     jQuery('.booking-houses__calendars-button').trigger('click');
     jQuery(this).remove();
+    jQuery('#admin-month').remove();
 });

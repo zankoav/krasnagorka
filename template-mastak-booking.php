@@ -27,8 +27,16 @@
 ?>
     <section class="b-container header-title">
         <?php if (is_user_logged_in()): ?>
+            <style>
+                #admin-month {
+                    margin-left : 2rem;
+                    font-size   : 18px;
+                    height      : 36px;
+                    min-width   : 120px;
+                }
+            </style>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
-            <select id="admin-month" name="admin-month" style="margin-left: 2rem;">
+            <select id="admin-month" name="admin-month">
                 <option selected value="01">Январь</option>
                 <option value="02">Февраль</option>
                 <option value="03">Март</option>
