@@ -42,7 +42,6 @@ function loadCalendar() {
             if (response) {
                 $parent.empty().html(response);
                 var $calendar = $parent.find('[data-url]');
-                console.log('$calendar',$calendar);
                 var cUrl = $calendar.data("url");
                 $calendar.fullCalendar({
                     height: 300,
@@ -79,9 +78,8 @@ function loadCalendar() {
                 });
 
                 var isAdmin = document.getElementById('wpadminbar');
-                if (isAdmin) {
+                if (isAdmin && month) {
                     var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
-                    console.log($calendar);
                     $calendar.fullCalendar('gotoDate', noTime);
                 }
             }
