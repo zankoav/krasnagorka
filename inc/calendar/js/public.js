@@ -73,6 +73,7 @@ function loadCalendar() {
                             console.log("Ошибка загрузки данных")
                         }
                     },
+                    currentStart:0,
                     eventOverlap: !1
                 })
             }
