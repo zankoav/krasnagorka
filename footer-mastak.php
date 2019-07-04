@@ -436,7 +436,6 @@
 
     }, false);
 
-
     jQuery('.online-video').on('click', function () {
         jQuery('.modal-online-video').fadeIn(function () {
             var img = new Image();
@@ -478,7 +477,6 @@
         sel.removeAllRanges();
         sel.addRange(range);
         document.execCommand('copy');
-        console.log("Contents copied to clipboard.");
     }
 
 

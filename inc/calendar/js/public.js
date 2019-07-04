@@ -1,4 +1,5 @@
 var targetMargin, scriptFullCalendar, scriptLocalCalendar, month;
+var year = (new Date()).getFullYear();
 
 jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
@@ -79,7 +80,7 @@ function loadCalendar() {
 
                 var isAdmin = document.getElementById('wpadminbar');
                 if (isAdmin && month) {
-                    var noTime = jQuery.fullCalendar.moment('2019-' + month + '-01');
+                    var noTime = jQuery.fullCalendar.moment(year + '-' + month + '-01');
                     $calendar.fullCalendar('gotoDate', noTime);
                 }
             }
