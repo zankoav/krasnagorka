@@ -241,7 +241,7 @@
         </div>
     </div>
 </div>
-<div class="b-mt-2">
+<div class="b-mt-1">
     <?php get_template_part("mastak/views/reviews", "view"); ?>
 </div>
 <?php
