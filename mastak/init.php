@@ -1129,15 +1129,9 @@
 
     function house_archive_per_page( $query ) {
         if ( is_archive( 'house' ) ) {
-
-            $query->set( 'posts_per_page', -1 );
-            $query->set('meta_query', array(
-                array(
-                    'key'     => 'mastak_house_order',
-                    'type'    => 'numeric',
-                    'compare' => '>'
-                )
-            ));
+            $query->set( 'meta_key', 'mastak_house_order' );
+            $query->set( 'orderby', 'meta_value_num' );
+            $query->set( 'order', 'order' );
         }
     }
     add_filter( 'pre_get_posts', 'house_archive_per_page' );
