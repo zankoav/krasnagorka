@@ -1135,9 +1135,9 @@
                 $query->set( 'orderby', 'meta_value_num' );
                 $query->set( 'order', 'ASC' );
             }else if(is_archive( 'opportunity' )){
-                $query->set( 'meta_key', 'mastak_opportunity_order' );
-                $query->set( 'orderby', 'meta_value_num' );
-                $query->set( 'order', 'ASC' );
+//                $query->set( 'meta_key', 'mastak_opportunity_order' );
+//                $query->set( 'orderby', 'meta_value_num' );
+//                $query->set( 'order', 'ASC' );
             }
         }
     }
