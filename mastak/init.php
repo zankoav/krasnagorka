@@ -1128,8 +1128,8 @@
     endif;
 
     function house_archive_per_page( $query ) {
-        if ( is_archive( 'house' ) ) {
-//            $query->set( 'meta_key', 'mastak_house_order' );
+        if ( is_archive( 'house' ) and !is_admin() ) {
+            $query->set( 'meta_key', 'mastak_house_order' );
             $query->set( 'orderby', 'meta_value_num' );
             $query->set( 'order', 'DESC' );
         }
