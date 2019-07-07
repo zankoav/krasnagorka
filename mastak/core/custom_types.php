@@ -478,10 +478,10 @@
             'attributes'      => array(
                 'type'    => 'number',
                 'pattern' => '\d*',
+                'default' => '100'
             ),
             'sanitization_cb' => 'absint',
-            'escape_cb'       => 'absint',
-            'default' => '100'
+            'escape_cb'       => 'absint'
         ));
 
         $sbc_client->add_field(array(
@@ -836,10 +836,10 @@
             'attributes'      => array(
                 'type'    => 'number',
                 'pattern' => '\d*',
+                'default' => '100'
             ),
             'sanitization_cb' => 'absint',
-            'escape_cb'       => 'absint',
-            'default' => '100'
+            'escape_cb'       => 'absint'
         ));
 
         $sbc_client->add_field(array(
