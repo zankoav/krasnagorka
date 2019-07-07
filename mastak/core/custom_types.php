@@ -477,8 +477,7 @@
             'type'            => 'text',
             'attributes'      => array(
                 'type'    => 'number',
-                'pattern' => '\d*',
-                'default' => '100'
+                'pattern' => '\d*'
             ),
             'sanitization_cb' => 'absint',
             'escape_cb'       => 'absint'
@@ -836,7 +835,6 @@
             'attributes'      => array(
                 'type'    => 'number',
                 'pattern' => '\d*',
-                'default' => '100'
             ),
             'sanitization_cb' => 'absint',
             'escape_cb'       => 'absint'
