@@ -1130,7 +1130,7 @@
     function house_archive_per_page( $query ) {
         if ( is_archive( 'house' ) ) {
 
-//            $query->set( 'posts_per_page', 20 );
+            $query->set( 'posts_per_page', -1 );
             $query->set('meta_query', array(
                 array(
                     'key'     => 'mastak_house_order',
