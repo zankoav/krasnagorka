@@ -1129,7 +1129,7 @@
 
     function house_archive_per_page( $query ) {
         if ( !is_admin() and 'nav_menu_item' !== $query->get('post_type')) {
-            if(is_archive( 'house' )){
+            if(is_post_type_archive( 'house' )){
                 $query->set( 'meta_key', 'mastak_house_order' );
                 $query->set( 'orderby', 'meta_value_num' );
                 $query->set( 'order', 'ASC' );
