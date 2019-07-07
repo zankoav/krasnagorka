@@ -1133,6 +1133,6 @@
             $query->set( 'orderby', 'meta_value_num' );
             $query->set( 'order', 'DESC' );
         }
-//        return $query;
+        return $query;
     }
     add_filter( 'pre_get_posts', 'house_archive_per_page' );
