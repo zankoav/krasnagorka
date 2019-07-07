@@ -1128,10 +1128,17 @@
     endif;
 
     function house_archive_per_page( $query ) {
-        if ( is_archive( 'house' ) and !is_admin() and 'nav_menu_item' !== $query->get('post_type')) {
-            $query->set( 'meta_key', 'mastak_house_order' );
-            $query->set( 'orderby', 'meta_value_num' );
-            $query->set( 'order', 'ASC' );
+        if ( !is_admin() and 'nav_menu_item' !== $query->get('post_type')) {
+
+            if(is_archive( 'house' )){
+                $query->set( 'meta_key', 'mastak_house_order' );
+                $query->set( 'orderby', 'meta_value_num' );
+                $query->set( 'order', 'ASC' );
+            }else if(is_archive( 'opportunity' )){
+                $query->set( 'meta_key', 'mastak_opportunity_order' );
+                $query->set( 'orderby', 'meta_value_num' );
+                $query->set( 'order', 'ASC' );
+            }
         }
     }
     add_filter( 'pre_get_posts', 'house_archive_per_page' );
