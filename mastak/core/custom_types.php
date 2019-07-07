@@ -481,7 +481,7 @@
             ),
             'sanitization_cb' => 'absint',
             'escape_cb'       => 'absint',
-            'default' => 100
+            'default' => '100'
         ));
 
         $sbc_client->add_field(array(
@@ -839,7 +839,7 @@
             ),
             'sanitization_cb' => 'absint',
             'escape_cb'       => 'absint',
-            'default' => 100
+            'default' => '100'
         ));
 
         $sbc_client->add_field(array(
