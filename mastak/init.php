@@ -1131,16 +1131,14 @@
     }
     add_filter( 'pre_get_posts', 'sort_archive_per_page' );
 
-    function add_js_for_repeatable_titles() {
-        add_action('admin_footer', 'add_js_for_repeatable_titles_to_footer');
-    }
+
+    add_action('admin_footer', 'add_js_for_repeatable_titles_to_footer');
 
     function add_js_for_repeatable_titles_to_footer() {
         ?>
         <script type="text/javascript" data-zanko="true">
             jQuery(function ($) {
                 console.log('ready');
-                
                 var $box = $('.cmb-repeatable-group');
                 $box.on('cmb2_shift_rows_complete', function (event) {
                     let isDownPressed = event.target.classList.contains("move-down");

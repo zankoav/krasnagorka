@@ -398,8 +398,7 @@
                 'sortable'      => true,
                 // beta
                 'closed'        => true, // true to have the groups closed by default
-            ),
-            'after_group' => 'add_js_for_repeatable_titles',
+            )
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
