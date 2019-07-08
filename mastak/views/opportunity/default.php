@@ -9,8 +9,7 @@
             ),
         ),
         'meta_key'   => 'mastak_opportunity_order',
-        'orderby'    => 'meta_value_num',
-        'order'      => 'DESC'
+        'orderby'    => 'meta_value_num'
     );
     $query       = new WP_Query($args);
 ?>
