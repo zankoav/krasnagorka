@@ -21,7 +21,10 @@
     $houses_query = new WP_Query(array(
         'post_type'      => 'house',
         'post_status'    => 'publish',
-        'posts_per_page' => -1
+        'posts_per_page' => -1,
+        'meta_key'       => 'mastak_house_order',
+        'orderby'        => 'meta_value_num',
+        'order'          => 'ASC'
     ));
 
 ?>
