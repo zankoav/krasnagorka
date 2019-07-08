@@ -1144,8 +1144,8 @@
                     let isDownPressed = event.target.classList.contains("move-down");
                     let index = $(event.target).closest('[data-iterator]').data('iterator');
                     let targetIndex = index + (isDownPressed ? 1 : -1);
-                    $('[data-iterator]').addClass('closed');
-                    $('[data-iterator=' + targetIndex + ']').removeClass('closed');
+                    $(this).find('[data-iterator]').addClass('closed');
+                    $(this).find('[data-iterator=' + targetIndex + ']').removeClass('closed');
                 })
             });
         </script>
