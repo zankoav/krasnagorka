@@ -25,7 +25,21 @@
     $subtitle_1 = get_option('mastak_home_appearance_options')['mastak_home_subtitle_1'];
     $subtitle_2 = get_option('mastak_home_appearance_options')['mastak_home_subtitle_2'];
 
-    $opportunities_array = get_option('mastak_home_appearance_options')['mastak_home_opportunity_multicheckbox'];
+    $opportunities_ids   = get_option('mastak_home_appearance_options')['opportunity_home'];
+    $opportunities_array = [];
+    foreach ((array)$opportunities_ids as $key => $entry) {
+
+        $opportunityId = null;
+
+        if (isset($entry['main_opportunity'])) {
+            $opportunityId = esc_html($entry['main_opportunity']);
+        }
+
+        if (!empty($opportunityId)) {
+            $opportunities_array[] = $opportunityId;
+        }
+    }
+
     $opportunities_query = new WP_Query(
         array(
             'post_type' => 'opportunity',
@@ -85,9 +99,9 @@
                     <div class="swiper-slide about-us-slider__slide"
                          data-swiper-autoplay="<?= $portfolio_slider_delay; ?>">
                         <img class="object-fit-img"
-                             src="<?= wp_get_attachment_image_url( $itemImageId, $image_size ) ?>"
-                             srcset="<?= wp_get_attachment_image_srcset(  $itemImageId, $image_size ) ?>"
-                             sizes="<?= wp_get_attachment_image_sizes(  $itemImageId, $image_size ) ?>">
+                             src="<?= wp_get_attachment_image_url($itemImageId, $image_size) ?>"
+                             srcset="<?= wp_get_attachment_image_srcset($itemImageId, $image_size) ?>"
+                             sizes="<?= wp_get_attachment_image_sizes($itemImageId, $image_size) ?>">
 
                         <p class="about-us-slider__description">
                             <?= $item["portfolio_description"]; ?>
