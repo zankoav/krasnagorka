@@ -43,7 +43,8 @@
     $opportunities_query = new WP_Query(
         array(
             'post_type' => 'opportunity',
-            'post__in'  => $opportunities_array
+            'post__in'  => $opportunities_array,
+            'orderby' => 'post__in'
         )
     );
 
