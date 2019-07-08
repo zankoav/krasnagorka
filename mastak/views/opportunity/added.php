@@ -8,9 +8,9 @@
                 'value'   => 'added'
             ),
         ),
-//        'meta_key'   => 'mastak_house_order',
-//        'orderby'    => 'meta_value_num',
-//        'order'      => 'DESC'
+        'meta_key'   => 'mastak_opportunity_order',
+        'orderby'    => 'meta_value_num',
+        'order'      => 'DESC'
     );
     $query       = new WP_Query($args);
 ?>
