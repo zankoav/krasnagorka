@@ -1,5 +1,5 @@
 <?php
-
+    global $query;
 	$border_color   = get_post_meta( get_the_ID(), "mastak_opportunity_frame_color", true );
 	$isAdded        = "added" == get_post_meta( get_the_ID(), "mastak_opportunity_added_opportunity", true );
 	$price_byn      = (int) get_post_meta( get_the_ID(), "mastak_opportunity_price", true );
