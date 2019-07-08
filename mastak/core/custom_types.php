@@ -1357,6 +1357,29 @@
             'options_cb' => 'cmb2_get_opportunity_post_options',
         ));
 
+        $opportunity_home = $cmb_options->add_field(array(
+            'id'          => 'opportunity_home',
+            'type'        => 'group',
+            'description' => __('Услуги', 'krasnagorka'),
+            // 'repeatable'  => false, // use false if you want non-repeatable group
+            'options'     => array(
+                'group_title'   => __('Услуга {#}', 'krasnagorka'),
+                // since version 1.1.4, {#} gets replaced by row number
+                'add_button'    => __('Добавить Услугу', 'krasnagorka'),
+                'remove_button' => __('Удалить Услугу', 'krasnagorka'),
+                'sortable'      => true,
+                // beta
+                'closed'        => true, // true to have the groups closed by default
+            ),
+        ));
+
+        $cmb_options->add_group_field($opportunity_home, array(
+            'name'             => 'Услуга',
+            'id'               => 'main_opportunity',
+            'type'             => 'select',
+            'options_cb'       => 'show_service_options',
+        ));
+
         $cmb_options->add_field(array(
             'name' => 'Секция слайдера "О нас"',
             'id'   => 'portfolio_t',
