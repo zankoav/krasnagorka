@@ -1038,7 +1038,7 @@
     add_theme_support( 'post-thumbnails' );
 
     function zankoav_theme_init() {
-        
+
         add_image_size( 'footer-logo', 160, 160, false );
 
 
@@ -1138,9 +1138,7 @@
         ?>
         <script type="text/javascript" data-zanko="true">
             jQuery(function ($) {
-                console.log('ready');
-                var $box = $('.cmb-repeatable-group');
-                $box.on('cmb2_shift_rows_complete', function (event) {
+                $('.cmb-repeatable-group').on('cmb2_shift_rows_complete', function (event) {
                     let isDownPressed = event.target.classList.contains("move-down");
                     let index = $(event.target).closest('[data-iterator]').data('iterator');
                     let targetIndex = index + (isDownPressed ? 1 : -1);
