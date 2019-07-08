@@ -1139,6 +1139,8 @@
         ?>
         <script type="text/javascript" data-zanko="true">
             jQuery(function ($) {
+                console.log('ready');
+                
                 var $box = $('.cmb-repeatable-group');
                 $box.on('cmb2_shift_rows_complete', function (event) {
                     let isDownPressed = event.target.classList.contains("move-down");
