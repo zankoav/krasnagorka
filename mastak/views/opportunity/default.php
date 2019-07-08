@@ -12,7 +12,7 @@
         'orderby'    => 'meta_value_num',
         'order'      => 'DESC'
     );
-    $query       = new WP_Query($args);
+    $query_1       = new WP_Query($args);
 ?>
 <section class="b-container header-title">
     <h2 class="header-title__subtitle"><?= $sub_title_1; ?></h2>
@@ -21,8 +21,8 @@
     <div class="swiper-container opportunities opportunities--js">
         <div class="swiper-wrapper opportunities__wrapper">
             <?php
-                while ($query->have_posts()) {
-                    $query->next_post();
+                while ($query_1->have_posts()) {
+                    $query_1->next_post();
                     get_template_part("mastak/views/opportunity", "small");
                 }
                 wp_reset_postdata(); ?>
