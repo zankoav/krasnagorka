@@ -2,10 +2,6 @@
     if (is_page_template("template-mastak-map.php")): ?>
 
 
-
-        <!--        GGG-->
-
-
         <!--ROUTE SCRIPT-->
         <script>
             function googleMapInit() {

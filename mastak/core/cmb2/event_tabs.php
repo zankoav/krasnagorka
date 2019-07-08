@@ -469,7 +469,7 @@
         ?>
         <script type="text/javascript">
             jQuery(function ($) {
-                var $box = $(document.getElementById('mastak_event_tab_type_8'));
+                var $box = $('.cmb-repeatable-group');
                 $box.on('cmb2_shift_rows_complete', function (event) {
                     let isDownPressed = event.target.classList.contains("move-down");
                     let index = $(event.target).closest('[data-iterator]').data('iterator');
