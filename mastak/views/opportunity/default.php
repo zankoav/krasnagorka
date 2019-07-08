@@ -22,7 +22,7 @@
         <div class="swiper-wrapper opportunities__wrapper">
             <?php
                 while ($query->have_posts()) {
-                    $query->next_post();
+                    $query->the_post();
                     get_template_part("mastak/views/opportunity", "small");
                 }
                 wp_reset_postdata(); ?>
