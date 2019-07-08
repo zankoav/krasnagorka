@@ -47,6 +47,8 @@
         )
     );
 
+    var_dump($opportunities_array);
+
 ?>
 
 <section class="b-bgc-wrapper b-pb-2">
