@@ -39,7 +39,6 @@
                             ),
                             array(
                                 'key'     => 'mastak_event_order',
-                                'compare' => 'NOT EXISTS',
                                 'type'    => 'numeric',
                                 'compare' => '<'
                             )
