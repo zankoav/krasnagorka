@@ -1137,7 +1137,7 @@
 
     function add_js_for_repeatable_titles_to_footer() {
         ?>
-        <script type="text/javascript">
+        <script type="text/javascript" data-zanko="true">
             jQuery(function ($) {
                 var $box = $('.cmb-repeatable-group');
                 $box.on('cmb2_shift_rows_complete', function (event) {
