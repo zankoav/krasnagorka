@@ -1131,4 +1131,23 @@
     }
     add_filter( 'pre_get_posts', 'sort_archive_per_page' );
 
+    function add_js_for_repeatable_titles() {
+        add_action('admin_footer', 'add_js_for_repeatable_titles_to_footer');
+    }
 
+    function add_js_for_repeatable_titles_to_footer() {
+        ?>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                var $box = $('.cmb-repeatable-group');
+                $box.on('cmb2_shift_rows_complete', function (event) {
+                    let isDownPressed = event.target.classList.contains("move-down");
+                    let index = $(event.target).closest('[data-iterator]').data('iterator');
+                    let targetIndex = index + (isDownPressed ? 1 : -1);
+                    $('[data-iterator]').addClass('closed');
+                    $('[data-iterator=' + targetIndex + ']').removeClass('closed');
+                })
+            });
+        </script>
+        <?php
+    }
