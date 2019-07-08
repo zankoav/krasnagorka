@@ -84,6 +84,19 @@
         ));
 
         $sbc_client->add_field(array(
+            'name'            => 'Порядок',
+            'id'              => $prefix . 'order',
+            'description'     => __('Сортировка чем меньше - тем выше в списке', 'krasnagorka'),
+            'type'            => 'text',
+            'attributes'      => array(
+                'type'    => 'number',
+                'pattern' => '\d*'
+            ),
+            'sanitization_cb' => 'absint',
+            'escape_cb'       => 'absint'
+        ));
+
+        $sbc_client->add_field(array(
             'name'        => 'Дата начала мероприятия',
             'id'          => $prefix . 'date_start',
             'type'        => 'text_date_timestamp',

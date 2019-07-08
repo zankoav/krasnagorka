@@ -1350,13 +1350,6 @@
             'type' => 'text',
         ));
 
-        $cmb_options->add_field(array(
-            'name'       => __('Выберите услуги из списка', 'krasnagorka'),
-            'id'         => $prefix . 'opportunity_multicheckbox',
-            'type'       => 'multicheck',
-            'options_cb' => 'cmb2_get_opportunity_post_options',
-        ));
-
         $opportunity_home = $cmb_options->add_field(array(
             'id'          => 'opportunity_home',
             'type'        => 'group',
@@ -1377,7 +1370,7 @@
             'name'             => 'Услуга',
             'id'               => 'main_opportunity',
             'type'             => 'select',
-            'options_cb'       => 'show_service_options',
+            'options_cb'       => 'show_seasons_options',
         ));
 
         $cmb_options->add_field(array(

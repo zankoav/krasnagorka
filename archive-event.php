@@ -36,6 +36,12 @@
                             array(
                                 'key'     => 'mastak_event_hide_early',
                                 'compare' => 'NOT EXISTS'
+                            ),
+                            array(
+                                'key'     => 'mastak_event_order',
+                                'compare' => 'NOT EXISTS',
+                                'type'    => 'numeric',
+                                'compare' => '<'
                             )
                         )
                     ]
