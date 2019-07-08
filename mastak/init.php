@@ -502,14 +502,7 @@
 	add_action( 'mastak_header_small_view_title', 'get_mastak_header_small_view_title' );
 
 
-	function sort_opportunities( $query ) {
-		if ( $query->is_post_type_archive( 'opportunity' ) && $query->is_main_query() ) {
-			$query->set( 'orderby', 'meta_value' );
-			$query->set( 'meta_key', 'mastak_opportunity_added_opportunity' );
-		}
-	}
 
-	add_action( 'pre_get_posts', 'sort_opportunities' );
 
 
 	function mastak_remove_comment_fields( $fields ) {
@@ -1127,17 +1120,15 @@
 
     endif;
 
-    function house_archive_per_page( $query ) {
+    function sort_archive_per_page( $query ) {
         if ($query->is_main_query() and !is_admin() and ('nav_menu_item' !== $query->get('post_type'))) {
             if($query->is_post_type_archive( 'house' )){
                 $query->set( 'meta_key', 'mastak_house_order' );
                 $query->set( 'orderby', 'meta_value_num' );
                 $query->set( 'order', 'ASC' );
-            }else if($query->is_post_type_archive( 'opportunity' )){
-//                $query->set( 'meta_key', 'mastak_opportunity_order' );
-//                $query->set( 'orderby', 'meta_value_num' );
-//                $query->set( 'order', 'ASC' );
             }
         }
     }
-    add_filter( 'pre_get_posts', 'house_archive_per_page' );
+    add_filter( 'pre_get_posts', 'sort_archive_per_page' );
+
+
