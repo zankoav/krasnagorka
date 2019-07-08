@@ -13,6 +13,7 @@
         'order'      => 'DESC'
     );
     $query_2       = new WP_Query($args);
+    var_dump($query_2);
 ?>
 <section class="b-container header-title">
     <h2 class="header-title__subtitle"><?= $sub_title_2; ?></h2>
