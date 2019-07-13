@@ -31,7 +31,7 @@
     <section class="b-container header-title">
         <?php if (is_user_logged_in()): ?>
             <style>
-                #admin-month {
+                #admin-month, #admin-years {
                     margin-left : 2rem;
                     font-size   : 18px;
                     height      : 36px;
@@ -39,6 +39,11 @@
                 }
             </style>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
+            <select id="admin-years" name="admin-years">
+                <?php for ($year = 2015; $year < 2050; $year++): ?>
+                    <option <?= $year == date('Y') ? 'selected' : ''; ?> value="<?= $year; ?>"><?= $year; ?></option>
+                <?php endfor; ?>
+            </select>
             <select id="admin-month" name="admin-month">
                 <option selected value="01">Январь</option>
                 <option value="02">Февраль</option>

@@ -98,4 +98,6 @@ jQuery('.booking-houses__calendars-all-button').on('click', function (event) {
     jQuery(this).remove();
     month = jQuery("#admin-month option:selected").val();
     jQuery('#admin-month').remove();
+    year = jQuery("#admin-years option:selected").val();
+    jQuery('#admin-years').remove();
 });
