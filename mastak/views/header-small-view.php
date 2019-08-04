@@ -408,6 +408,7 @@
                     @media (min-width : 1280px) {
                         .breadcrumbs {
                             max-width     : 50%;
+                            flex          : 1 0 50%;
                             text-overflow : ellipsis;
                             overflow      : hidden;
                             white-space   : nowrap;
@@ -420,10 +421,12 @@
                     }
 
                     .breadcrumbs-wrapper__link {
+
                         display      : flex;
                         align-items  : center;
                         padding-left : 2rem;
                         max-width    : 50%;
+                        flex         : 1 0 50%;
                         color        : #999;
                         transition   : color .3s linear;
                     }
@@ -434,6 +437,7 @@
 
                     .breadcrumbs-wrapper__link-img {
                         flex-shrink  : 0;
+                        margin-left : auto;
                         margin-right : 1rem;
                         max-height   : 1.5rem;
                         display      : inline-block;
