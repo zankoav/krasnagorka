@@ -1,56 +1,18 @@
 @import "fonts";
 @import "reset";
 @import "constants";
+
 /**
  *  Add Swiper styles
  *  @import "./../../node_modules/swiper/dist/css/swiper.min.css";
+ *
+ *
+ *  Add Fortawesome styles
+ *  @import '~@fortawesome/fontawesome-free/css/all';
  */
-@import '~@fortawesome/fontawesome-free/css/all';
-@import "./../../node_modules/swiper/dist/css/swiper.min.css";
-
-body, html {
-    height: 100%;
-}
 
 body {
-    background-color: $LIGHT;
-    font-family: 'Roboto', sans-serif;
+    font-family : AvenirNextCyr-Regular, sans-serif;
 }
 
-.app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-    footer, header {
-        flex-shrink: 0;
-    }
-
-    main {
-        flex: 1 0 auto;
-    }
-}
-
-@include loader();
 @include container();
-@include editor-content();
-
-.customize-support {
-    .header__top {
-        top: 46px;
-
-        @include md {
-            top: 32px;
-        }
-
-        @include lg{
-            top: 0;
-        }
-    }
-
-    @media screen and (max-width: 600px) {
-        #wpadminbar {
-            position: fixed;
-        }
-    }
-}

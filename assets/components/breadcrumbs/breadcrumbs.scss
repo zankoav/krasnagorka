@@ -1,23 +1,5 @@
 @import "./../../common/constants";
 
 .breadcrumbs {
-
-    &>span{
-        color: $GRAY_LIGHT_1;
-        &:not(:last-child):after {
-            content: '|';
-            padding: 0 .25rem;
-        }
-    }
-
-    &__link {
-        font-size: 12px;
-        color: $GRAY_LIGHT_1;
-        line-height: 1.32;
-        transition: .4s;
-
-        &:hover {
-            color: $PRIMARY;
-        }
-    }
+    display : flex;
 }

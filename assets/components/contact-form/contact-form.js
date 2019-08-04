@@ -1,1 +1,0 @@
-import './contact-form.scss';

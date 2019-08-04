@@ -1,9 +1,12 @@
 mixin breadcrumbs(...items)
-    .breadcrumbs
-        - for(var i=0; i < items.length;i++)
-            if (items.length === 1)
-                span.breadcrumbs__link.breadcrumbs__link_last= items[i]
-            if (i === items.length - 1)
-                span.breadcrumbs__link.breadcrumbs__link_last= items[i]
-            else
-                a(href="#" title=item).breadcrumbs__link.breadcrumbs__link= items[i]
+    ol.breadcrumbs
+        - for(var i=1; i < items.length;i++)
+            - if(i === items.length - 1)
+                li.breadcrumbs__item.breadcrumbs__item_last
+                    span(itemprop="title")= items[i]
+            - else
+                li.breadcrumbs__item(itemscope itemtype="http://data-vocabulary.org/Breadcrumb")
+                    a.breadcrumbs__link(itemprop="url" href="http://bootstraptema.ru/")
+                        span(itemprop="title")= items[i]
+    script(type="application/ld+json")
+        include snippet-breadcrumbs.js
