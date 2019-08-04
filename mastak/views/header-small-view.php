@@ -400,6 +400,51 @@
                 dimox_breadcrumbs();
             } ?>
             <?php if ($isBreadcrumbsBannerEnabled): ?>
+                <style>
+                    .breadcrumbs-wrapper {
+                        display : none;
+                    }
+
+                    @media (min-width : 1280px) {
+                        .breadcrumbs {
+                            max-width     : 50%;
+                            text-overflow : ellipsis;
+                            overflow      : hidden;
+                            white-space   : nowrap;
+                        }
+
+                        .breadcrumbs-wrapper {
+                            justify-content : space-between;
+                            display         : flex;
+                        }
+                    }
+
+                    .breadcrumbs-wrapper__link {
+                        display      : flex;
+                        align-items  : center;
+                        padding-left : 2rem;
+                        max-width    : 50%;
+                        color        : #999;
+                        transition   : color .3s linear;
+                    }
+
+                    .breadcrumbs-wrapper__link:hover {
+                        color : #7ed321;
+                    }
+
+                    .breadcrumbs-wrapper__link-img {
+                        flex-shrink  : 0;
+                        margin-right : 1rem;
+                        max-height   : 1.5rem;
+                        display      : inline-block;
+                    }
+
+                    .breadcrumbs-wrapper__link-title {
+                        text-overflow : ellipsis;
+                        overflow      : hidden;
+                        white-space   : nowrap;
+                    }
+                </style>
                 <a href="<?= $breadcrumbsBannerLink; ?>" target="<?= $isBreadcrumbsBannerTargetLink; ?>"
                    class="breadcrumbs-wrapper__link"
                    style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
