@@ -11,6 +11,125 @@
     $weather = get_weather();
     global $kgCooke;
     $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
+
+    //    Banner
+    $isBreadcrumbsBannerEnabled      = $options['breadcrumb_banner_is_open'];
+    $isBreadcrumbsBannerTargetLink   = $options['breadcrumb_banner_is_target'] ? '_blank' : '_self';
+    $breadcrumbsBannerText           = $options['breadcrumb_banner_text'];
+    $breadcrumbsBannerLink           = $options['breadcrumb_banner_link'];
+    $breadcrumbsBannerImg            = $options['breadcrumb_banner_img'];
+    $breadcrumbsBannerAnimationType  = $options['breadcrumb_banner_animation_type'];
+    $breadcrumbsBannerAnimationDelay = empty($options['breadcrumb_banner_animation_delay']) ? 0 : $options['breadcrumb_banner_animation_delay'];
+
+    switch ($breadcrumbsBannerAnimationType) :
+        case 'fade' : ?>
+            <style>
+
+                .breadcrumbs-wrapper__link {
+                    opacity                   : 0;
+                    animation-fill-mode       : forwards;
+                    animation-name            : fadeBanner;
+                    animation-duration        : .6s;
+                    animation-timing-function : ease-in;
+                }
+
+                @keyframes fadeBanner {
+                    0% {
+                        opacity : 0;
+                    }
+                    100% {
+                        opacity : 1;
+                    }
+                }
+
+            </style>
+            <?php break;
+        case 'fade_blink_infinity' : ?>
+            <style>
+                .breadcrumbs-wrapper__link {
+                    opacity             : 0;
+                    animation           : fadeBanner 1s ease-in, blinkBanner 8s ease-in 4s infinite;
+                    animation-fill-mode : forwards;
+                }
+
+                @keyframes fadeBanner {
+                    0% {
+                        opacity : 0;
+                    }
+                    100% {
+                        opacity : 1;
+                    }
+                }
+
+                @keyframes blinkBanner {
+                    0% {
+                        color : #999;
+                    }
+                    40% {
+                        color : #999;
+                    }
+                    50% {
+                        color : #7ed321;
+                    }
+                    60% {
+                        color : #999;
+                    }
+                    100% {
+                        color : #999;
+                    }
+                }
+
+            </style>
+            <?php break;
+        case 'fade_puls_icon' : ?>
+            <style>
+                .breadcrumbs-wrapper__link {
+                    opacity                   : 0;
+                    animation-fill-mode       : forwards;
+                    animation-name            : fadeBanner;
+                    animation-duration        : .6s;
+                    animation-timing-function : ease-in;
+                }
+
+                .breadcrumbs-wrapper__link-img {
+                    animation-name            : pulsBanner;
+                    animation-duration        : 2s;
+                    animation-timing-function : ease-in;
+                    animation-iteration-count : infinite;
+                }
+
+                @keyframes fadeBanner {
+                    0% {
+                        opacity : 0;
+                    }
+                    100% {
+                        opacity : 1;
+                    }
+                }
+
+                @keyframes pulsBanner {
+                    0% {
+                        transform : scale(1) rotate(0);
+                    }
+                    25% {
+                        transform : scale(1.2) rotate(5deg);
+                    }
+                    50% {
+                        transform : scale(1) rotate(0);
+                    }
+                    75% {
+                        transform : scale(1.2) rotate(-5deg);
+                    }
+                    100% {
+                        transform : scale(1) rotate(0);
+                    }
+                }
+
+            </style>
+            <?php break;
+        default:
+            break;
+    endswitch;
 ?>
 
 <header class="header-second">
@@ -116,7 +235,8 @@
                         <div class="phone-item ">
                             <img src="<?= CORE_PATH; ?>assets/icons/velcome.svg" alt="icon-velcome"
                                  class="phone-item__icon phone-item__icon--velcome">
-                            <a href="tel: <?= $velcom; ?>" class="phone-item__phone-number phone-item__phone-number_velcom"><?= $velcom; ?></a>
+                            <a href="tel: <?= $velcom; ?>"
+                               class="phone-item__phone-number phone-item__phone-number_velcom"><?= $velcom; ?></a>
                             <img src="<?= CORE_PATH; ?>assets/icons/social/viber.svg" alt="icon-viber"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--viber">
                             <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg" alt="icon-whatsapp"
@@ -129,12 +249,14 @@
                         <div class="phone-item">
                             <img src="<?= CORE_PATH; ?>assets/icons/mts.svg" alt="icon-mts"
                                  class="phone-item__icon phone-item__icon--mts">
-                            <a href="tel: <?= $mts; ?>" class="phone-item__phone-number phone-item__phone-number_mts"><?= $mts; ?></a>
+                            <a href="tel: <?= $mts; ?>"
+                               class="phone-item__phone-number phone-item__phone-number_mts"><?= $mts; ?></a>
                         </div>
                         <div class="phone-item">
                             <img src="<?= CORE_PATH; ?>assets/icons/life.svg" alt="icon-life"
                                  class="phone-item__icon phone-item__icon--life">
-                            <a href="tel: <?= $life; ?>" class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
+                            <a href="tel: <?= $life; ?>"
+                               class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
                         </div>
                     </div>
                     <div class="contacts-popup__email">
@@ -158,12 +280,12 @@
     <div class="main-slide">
         <div class="main-slide__slide-img-wrapper">
             <?php
-                $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
-                $slide_image_id = apply_filters("mastak_header_small_view_image", null);?>
+                $image_size     = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
+                $slide_image_id = apply_filters("mastak_header_small_view_image", null); ?>
             <img class="object-fit-img"
-                 src="<?= wp_get_attachment_image_url( $slide_image_id, $image_size ) ?>"
-                 srcset="<?= wp_get_attachment_image_srcset( $slide_image_id, $image_size ) ?>"
-                 sizes="<?= wp_get_attachment_image_sizes(  $slide_image_id, $image_size ) ?>">
+                 src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
+                 srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
+                 sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
         </div>
         <div class="main-slide__slide-content">
             <?php do_action("mastak_header_small_view_title"); ?>
@@ -273,8 +395,19 @@
 </header>
 <div class="b-bgc-dark b-py-1">
     <div class="b-container">
-        <?php if (function_exists('dimox_breadcrumbs')) {
-            dimox_breadcrumbs();
-        } ?>
+        <div class="breadcrumbs-wrapper">
+            <?php if (function_exists('dimox_breadcrumbs')) {
+                dimox_breadcrumbs();
+            } ?>
+            <?php if ($isBreadcrumbsBannerEnabled): ?>
+                <a href="<?= $breadcrumbsBannerLink; ?>" target="<?= $isBreadcrumbsBannerTargetLink; ?>"
+                   class="breadcrumbs-wrapper__link"
+                   style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
+                    <img src="<?= $breadcrumbsBannerImg; ?>" class="breadcrumbs-wrapper__link-img"
+                         alt="banner icon">
+                    <p class="breadcrumbs-wrapper__link-title"><?= $breadcrumbsBannerText; ?></p>
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
 </div>

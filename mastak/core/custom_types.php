@@ -438,6 +438,71 @@
             'id'   => 'footer_logo',
             'type' => 'file'
         ));
+
+
+        $cmb_options->add_field(array(
+            'name' => __('Рекламный баннер в хлебных крошках', 'krasnagorka'),
+            'id'   => 'breadcrumb_banner',
+            'type' => 'title'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Включить баннер?',
+            'id'   => 'breadcrumb_banner_is_open',
+            'type' => 'checkbox'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Иконка баннера',
+            'description' => 'Рекомендованно формат SVG, PNG',
+            'id'   => 'breadcrumb_banner_img',
+            'type' => 'file'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Текст баннера',
+            'id'   => 'breadcrumb_banner_text',
+            'type' => 'textarea_small'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Ссылка',
+            'id'   => 'breadcrumb_banner_link',
+            'type' => 'text_url'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Открывать в новом окне?',
+            'id'   => 'breadcrumb_banner_is_target',
+            'type' => 'checkbox'
+        ));
+
+        $cmb_options->add_field(array(
+            'name'            => 'Задержка анимации',
+            'id'              => 'breadcrumb_banner_animation_delay',
+            'description'     => __('В милисекундах (1с = 1000мс)', 'krasnagorka'),
+            'type'            => 'text',
+            'attributes'      => array(
+                'type'    => 'number',
+                'pattern' => '\d*'
+            ),
+            'sanitization_cb' => 'absint',
+            'escape_cb'       => 'absint'
+        ));
+
+        $cmb_options->add_field(array(
+            'name'    => __('Тип анимации', 'krasnagorka'),
+            'desc'    => __('Выберите тип анимации', 'krasnagorka'),
+            'id'      => 'breadcrumb_banner_animation_type',
+            'type'    => 'select',
+            'default' => 'fade',
+            'options' => array(
+                'fade'  => __('Плавное появление', 'krasnagorka'),
+                'fade_blink_infinity' => __('Плавное появление и мерцание тексата', 'krasnagorka'),
+                'fade_puls_icon' => __('Плавное появление и пульсация иконки', 'krasnagorka'),
+            ),
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'mastak_register_theme_options_metabox');
