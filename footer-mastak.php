@@ -176,9 +176,9 @@
                 var $inputName = $('[name="your-name"]');
                 var $inputPhone = $('[name="tel"]');
                 var $inputEmail = $('[name="your-email"]');
-                setCookie('kg_name', $inputName.val(), {expires: year});
-                setCookie('kg_email', $inputEmail.val(), {expires: year});
-                setCookie('kg_phone', $inputPhone.val(), {expires: year});
+                setCookie('kg_name', $inputName.val(), {expires: year, path: '/'});
+                setCookie('kg_email', $inputEmail.val(), {expires: year, path: '/'});
+                setCookie('kg_phone', $inputPhone.val(), {expires: year, path: '/'});
             }
         }, false);
 
@@ -216,8 +216,32 @@
         }
 
         function setCookie(name, value, props) {
-            document.cookie = name +"=" + value + ";expires=" + props.expires
-                + ";domain=.krasnagorka.by;path=/";
+            props = props || {};
+            var exp = props.expires;
+            if (typeof exp == "number" && exp) {
+                var d = new Date();
+                d.setTime(d.getTime() + exp * 1000);
+                exp = props.expires = d;
+            }
+
+            if (exp && exp.toUTCString) {
+                props.expires = exp.toUTCString();
+            }
+            value = encodeURIComponent(value);
+            var updatedCookie = name + "=" + value;
+            for (var propName in props) {
+
+                updatedCookie += "; " + propName;
+
+                var propValue = props[propName]
+
+                if (propValue !== true) {
+                    updatedCookie += "=" + propValue;
+                }
+            }
+
+            document.cookie = updatedCookie;
+
         }
 
     })(jQuery);
