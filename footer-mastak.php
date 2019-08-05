@@ -168,21 +168,21 @@
     <?php endif; ?>
 
 <script type="text/javascript">
-    (function($){
+    (function ($) {
 
-        document.addEventListener( 'wpcf7mailsent', function( event ) {
-            if ( event.detail.contactFormId == '2730' ) {
-                var year = 3600*24*365;
+        document.addEventListener('wpcf7mailsent', function (event) {
+            if (event.detail.contactFormId == '2730') {
+                var year = 3600 * 24 * 365;
                 var $inputName = $('[name="your-name"]');
                 var $inputPhone = $('[name="tel"]');
                 var $inputEmail = $('[name="your-email"]');
-                setCookie('kg_name', $inputName.val(), {'expires': year});
-                setCookie('kg_email', $inputEmail.val(), {'expires': year});
-                setCookie('kg_phone', $inputPhone.val(), {'expires': year});
+                setCookie('kg_name', $inputName.val(), {expires: year, path: '/'});
+                setCookie('kg_email', $inputEmail.val(), {expires: year, path: '/'});
+                setCookie('kg_phone', $inputPhone.val(), {expires: year, path: '/'});
             }
-        }, false );
+        }, false);
 
-        $('.our-house__button, .house-booking__button').on('click', function(){
+        $('.our-house__button, .house-booking__button').on('click', function () {
 
             var name = getCookie('kg_name');
             var email = getCookie('kg_email');
@@ -194,15 +194,15 @@
             var $inputEmail = $('[name="your-email"]');
 
 
-            if(name && $inputName.val() == ''){
+            if (name && $inputName.val() == '') {
                 $inputName.val(name);
             }
 
-            if(email && $inputEmail.val() == ''){
+            if (email && $inputEmail.val() == '') {
                 $inputEmail.val(email);
             }
 
-            if(phone && $inputPhone.val() == '+'){
+            if (phone && $inputPhone.val() == '+') {
                 $inputPhone.val(phone);
             }
 
@@ -220,20 +220,24 @@
             var exp = props.expires
             if (typeof exp == "number" && exp) {
                 var d = new Date()
-                d.setTime(d.getTime() + exp*1000)
+                d.setTime(d.getTime() + exp * 1000)
                 exp = props.expires = d
             }
 
-            if(exp && exp.toUTCString) { props.expires = exp.toUTCString() }
+            if (exp && exp.toUTCString) {
+                props.expires = exp.toUTCString()
+            }
             value = encodeURIComponent(value)
             var updatedCookie = name + "=" + value
-            for(var propName in props){
+            for (var propName in props) {
 
                 updatedCookie += "; " + propName
 
                 var propValue = props[propName]
 
-                if(propValue !== true){ updatedCookie += "=" + propValue }
+                if (propValue !== true) {
+                    updatedCookie += "=" + propValue
+                }
             }
 
             document.cookie = updatedCookie
