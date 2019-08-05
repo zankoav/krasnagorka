@@ -167,6 +167,79 @@
 
     <?php endif; ?>
 
+<script type="text/javascript">
+    (function($){
+
+        document.addEventListener( 'wpcf7mailsent', function( event ) {
+            if ( event.detail.contactFormId == '2730' ) {
+                console.log('hello', event.detail.contactFormId);
+                var year = 3600*24*365;
+                var $inputName = $('[name="your-name"]');
+                var $inputPhone = $('[name="tel"]');
+                var $inputEmail = $('[name="your-email"]');
+                setCookie('kg_name', $inputName.val(), {'max-age': year});
+                setCookie('kg_email', $inputEmail.val(), {'max-age': year});
+                setCookie('kg_phone', $inputPhone.val(), {'max-age': year});
+            }
+        }, false );
+
+        $('.our-house__button, .house-booking__button').on('click', function(){
+
+            var name = getCookie('kg_name');
+            var email = getCookie('kg_email');
+            var phone = getCookie('kg_phone');
+
+            var $inputName = $('[name="your-name"]');
+            var $inputPhone = $('[name="tel"]');
+            var $inputEmail = $('[name="your-email"]');
+
+            if(name && $inputName.val() != ''){
+                $inputName.val(name);
+            }
+
+            if(email && $inputEmail.val() != ''){
+                $inputEmail.val(email);
+            }
+
+            if(phone && $inputPhone.val() != '+'){
+                $inputPhone.val(phone);
+            }
+
+        });
+
+        function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+
+        function setCookie(name, value, options = {}) {
+
+            options = {
+                path: '/',
+                // при необходимости добавьте другие значения по умолчанию
+                ...options
+            };
+
+            if (options.expires.toUTCString) {
+                options.expires = options.expires.toUTCString();
+            }
+
+            let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+            for (let optionKey in options) {
+                updatedCookie += "; " + optionKey;
+                let optionValue = options[optionKey];
+                if (optionValue !== true) {
+                    updatedCookie += "=" + optionValue;
+                }
+            }
+
+            document.cookie = updatedCookie;
+        }
+    })(jQuery);
+</script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function (d, w, c) {
@@ -225,63 +298,10 @@
     ga('send', 'pageview');
 
 </script>
-<!-- BEGIN JIVOSITE CODE {literal} -->
-<!--<script type='text/javascript'>-->
-<!--    (function () {-->
-<!--        var widget_id = '38m4hDlF7s';-->
-<!--        var d = document;-->
-<!--        var w = window;-->
 
-<!--        function l() {-->
-<!--            var s = document.createElement('script');-->
-<!--            s.type = 'text/javascript';-->
-<!--            s.async = true;-->
-<!--            s.src = '//code.jivosite.com/script/widget/' + widget_id;-->
-<!--            var ss = document.getElementsByTagName('script')[0];-->
-<!--            ss.parentNode.insertBefore(s, ss);-->
-<!--        }-->
-
-<!--        if (d.readyState == 'complete') {-->
-<!--            l();-->
-<!--        } else {-->
-<!--            if (w.attachEvent) {-->
-<!--                w.attachEvent('onload', l);-->
-<!--            } else {-->
-<!--                w.addEventListener('load', l, false);-->
-<!--            }-->
-<!--        }-->
-<!--    })();</script>-->
-<!-- {/literal} END JIVOSITE CODE -->
-<!-- BEGIN JIVOSITE CODE {literal} -->
 <script type="text/javascript">
     (function (w, d) {
         setTimeout(function () {
-
-            // (function () {
-            //     var widget_id = '38m4hDlF7s';
-            //     var d = document;
-            //     var w = window;
-
-            //     function l() {
-            //         var s = document.createElement('script');
-            //         s.type = 'text/javascript';
-            //         s.async = true;
-            //         s.src = '//code.jivosite.com/script/widget/' + widget_id;
-            //         var ss = document.getElementsByTagName('script')[0];
-            //         ss.parentNode.insertBefore(s, ss);
-            //     }
-
-            //     if (d.readyState == 'complete') {
-            //         l();
-            //     } else {
-            //         if (w.attachEvent) {
-            //             w.attachEvent('onload', l);
-            //         } else {
-            //             w.addEventListener('load', l, false);
-            //         }
-            //     }
-            // })();
-
             w.amo_jivosite_id = 'vPugBTo6M7';
             var s = document.createElement('script'), f = d.getElementsByTagName('script')[0];
             s.id = 'amo_jivosite_js';
