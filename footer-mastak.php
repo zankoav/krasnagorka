@@ -177,9 +177,9 @@
                 var $inputName = $('[name="your-name"]');
                 var $inputPhone = $('[name="tel"]');
                 var $inputEmail = $('[name="your-email"]');
-                setCookie('kg_name', $inputName.val(), {'max-age': year});
-                setCookie('kg_email', $inputEmail.val(), {'max-age': year});
-                setCookie('kg_phone', $inputPhone.val(), {'max-age': year});
+                setCookie('kg_name', $inputName.val(), {'expires': year});
+                setCookie('kg_email', $inputEmail.val(), {'expires': year});
+                setCookie('kg_phone', $inputPhone.val(), {'expires': year});
             }
         }, false );
 
