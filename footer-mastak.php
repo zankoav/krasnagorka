@@ -188,25 +188,22 @@
             var name = getCookie('kg_name');
             var email = getCookie('kg_email');
             var phone = getCookie('kg_phone');
-
-            console.log(email,name,phone);
-
+            
 
             var $inputName = $('[name="your-name"]');
             var $inputPhone = $('[name="tel"]');
             var $inputEmail = $('[name="your-email"]');
 
-            console.log($inputName.val(),$inputPhone.val(),$inputEmail.val());
 
-            if(name && $inputName.val() != ''){
+            if(name && $inputName.val() == ''){
                 $inputName.val(name);
             }
 
-            if(email && $inputEmail.val() != ''){
+            if(email && $inputEmail.val() == ''){
                 $inputEmail.val(email);
             }
 
-            if(phone && $inputPhone.val() != '+'){
+            if(phone && $inputPhone.val() == '+'){
                 $inputPhone.val(phone);
             }
 
