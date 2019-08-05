@@ -172,7 +172,6 @@
 
         document.addEventListener( 'wpcf7mailsent', function( event ) {
             if ( event.detail.contactFormId == '2730' ) {
-                console.log('hello', event.detail.contactFormId);
                 var year = 3600*24*365;
                 var $inputName = $('[name="your-name"]');
                 var $inputPhone = $('[name="tel"]');
@@ -188,7 +187,7 @@
             var name = getCookie('kg_name');
             var email = getCookie('kg_email');
             var phone = getCookie('kg_phone');
-            
+
 
             var $inputName = $('[name="your-name"]');
             var $inputPhone = $('[name="tel"]');

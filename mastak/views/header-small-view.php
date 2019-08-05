@@ -399,7 +399,7 @@
             <?php if (function_exists('dimox_breadcrumbs')) {
                 dimox_breadcrumbs();
             } ?>
-            <?php if ($isBreadcrumbsBannerEnabled): ?>
+            <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
                 <style>
                     .breadcrumbs-wrapper {
                         display : none;
