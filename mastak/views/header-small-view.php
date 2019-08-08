@@ -397,7 +397,7 @@
     <div class="b-container">
         <div class="breadcrumbs-wrapper">
             <?php if ( function_exists('yoast_breadcrumb') ) {
-                yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+                yoast_breadcrumb('<div class="breadcrumbs"', '</div>');
             }?>
 
             <?php if (function_exists('dimox_breadcrumbs')) {
