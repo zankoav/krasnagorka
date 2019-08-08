@@ -396,8 +396,12 @@
 <div class="b-bgc-dark b-py-1">
     <div class="b-container">
         <div class="breadcrumbs-wrapper">
+            <?php if ( function_exists('yoast_breadcrumb') ) {
+                yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+            }?>
+
             <?php if (function_exists('dimox_breadcrumbs')) {
-                dimox_breadcrumbs();
+                //dimox_breadcrumbs();
             } ?>
             <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
                 <style>
