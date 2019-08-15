@@ -42,6 +42,7 @@ function loadCalendar() {
         let start = jQuery(this).data('start');
         let end = jQuery(this).data('end');
 
+        console.log('$orderButton',$orderButton);
         console.log('date-1',start);
         console.log('date-2',end);
 
