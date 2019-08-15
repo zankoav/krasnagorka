@@ -53,6 +53,7 @@ function loadCalendar() {
             }
 
             jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+                console.log('gg');
                 $orderButton
                     .removeAttr('data-start')
                     .removeAttr('data-end');
