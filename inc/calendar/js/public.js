@@ -47,6 +47,8 @@ function loadCalendar() {
                 $calendar.fullCalendar({
                     height: 300,
                     loading: function (r) {
+                        console.log('loading', r);
+                        
                         $parentDate.css({'max-width': 292});
                         if (!targetMargin) {
                             var cielWidth = jQuery(jQuery(".fc-day-top")[0]).width();

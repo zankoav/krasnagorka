@@ -399,10 +399,6 @@
             <?php if ( function_exists('yoast_breadcrumb') ) {
                 yoast_breadcrumb('<div class="breadcrumbs">', '</div>');
             }?>
-
-            <?php if (function_exists('dimox_breadcrumbs')) {
-                //dimox_breadcrumbs();
-            } ?>
             <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
                 <style>
                     .breadcrumbs-wrapper {
