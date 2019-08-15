@@ -39,26 +39,28 @@ function loadCalendar() {
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     $orderButton.on('click', function(){
 
-        let start = $orderButton.data('start');
-        let end = $orderButton.data('end');
+        let start = jQuery(this).data('start');
+        let end = jQuery(this).data('end');
+
+        console.log('date-1',start);
+        console.log('date-2',end);
 
         setTimeout(function(){
             if(start){
                 jQuery('[name="date-1"]').val(start);
-                console.log('date-1',start);
+
             }
             if(end){
                 jQuery('[name="date-2"]').val(end);
-                console.log('date-2',end);
+
             }
 
             jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-                console.log('gg');
                 $orderButton
                     .removeAttr('data-start')
                     .removeAttr('data-end');
             });
-        }, 4);
+        }, 40);
     });
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
