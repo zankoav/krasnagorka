@@ -26,8 +26,9 @@ jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('clic
 });
 
 jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-    jQuery('[name="date-1"]').val('');
-    jQuery('[name="date-2"]').val('');
+    jQuery('.our-house__button[data-name]')
+        .attr('data-start', '')
+        .attr('data-end', '');
 });
 
 function loadCalendar() {
