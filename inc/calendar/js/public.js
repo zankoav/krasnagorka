@@ -35,6 +35,7 @@ function loadCalendar() {
     };
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
+    var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button');
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
@@ -81,14 +82,14 @@ function loadCalendar() {
                         return event.rendering === 'background';
                     },
                     unselect:function(jsEvent, view ) {
-                        jQuery(this)
+                        $orderButton
                             .data('date-start','')
                             .data('date-end','');
                     },
                     select: function(startDate, endDate) {
-                        console.log(jQuery(this));
-                        
-                        jQuery(this)
+                        console.log($orderButton);
+
+                        $orderButton
                             .data('date-start',startDate.format())
                             .data('date-end',endDate.format());
                     },
