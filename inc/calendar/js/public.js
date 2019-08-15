@@ -38,7 +38,7 @@ function loadCalendar() {
     };
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
-    var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
+    var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name], .house-booking__button[data-name]');
     $orderButton.on('click', function(){
         setTimeout(function(){
             jQuery('[name="date-1"]').val(_startDate);
