@@ -54,7 +54,6 @@ function loadCalendar() {
     }
     jQuery('.house-booking__button').on('click', setDate);
     $orderButton.on('click', setDate);
-    
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
@@ -98,6 +97,7 @@ function loadCalendar() {
                         }
                     },
                     selectOverlap: function(event) {
+                        console.log(event);
                         return event.rendering === 'background';
                     },
                     select: function(startDate, endDate) {
