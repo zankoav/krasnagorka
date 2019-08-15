@@ -8,8 +8,25 @@
     $subtitle_1 = get_option('mastak_houses_appearance_options')['subtitle_1'];
 
 ?>
-
-
+    <script type='application/ld+json'>
+        {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Executive Anvil",
+      "description":"Description",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.4",
+        "ratingCount": "89"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "lowPrice": "119.99",
+        "highPrice": "199.99",
+        "priceCurrency": "BYN"
+      }
+    }
+    </script>
     <section class="b-pb-25 b-bgc-wrapper">
         <section class="b-container header-title">
             <h1 class="header-title__subtitle"><?= $subtitle_1; ?></h1>
