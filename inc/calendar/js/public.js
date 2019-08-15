@@ -1,5 +1,7 @@
 var targetMargin, scriptFullCalendar, scriptLocalCalendar, month;
 var year = (new Date()).getFullYear();
+var _startDate = '';
+var _endDate = '';
 
 jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
@@ -47,12 +49,11 @@ function loadCalendar() {
         console.log('date-2',end);
 
         setTimeout(function(){
-            jQuery('[name="date-1"]').val(start ? start : '');
-            jQuery('[name="date-2"]').val(end ? end : '');
+            jQuery('[name="date-1"]').val(_startDate);
+            jQuery('[name="date-2"]').val(_endDate);
             jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-                $orderButton
-                    .removeAttr('data-start')
-                    .removeAttr('data-end');
+                _startDate = '';
+                _endDate = '';
             });
         }, 40);
     });
@@ -102,11 +103,9 @@ function loadCalendar() {
                         return event.rendering === 'background';
                     },
                     select: function(startDate, endDate) {
-                        $orderButton
-                            .attr('data-start',startDate.format())
-                            .attr('data-end',endDate.format());
-                    },
-                    eventOverlap: true
+                        _startDate = startDate.format();
+                        _endDate = endDate.subtract(1, 'days').format();
+                    }
                 });
 
                 var isAdmin = document.getElementById('wpadminbar');
