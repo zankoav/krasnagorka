@@ -25,6 +25,11 @@ jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('clic
     }
 });
 
+jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+    jQuery('[name="date-1"]').val('');
+    jQuery('[name="date-2"]').val('');
+});
+
 function loadCalendar() {
     var calendarShortcod = jQuery(this).data('calendar');
     var attArray = calendarShortcod.split('\"');
@@ -39,6 +44,9 @@ function loadCalendar() {
     $orderButton.on('click', function(){
         let start = jQuery(this).data('start');
         let end = jQuery(this).data('end');
+        console.log('start',start);
+        console.log('end',end);
+
         if(start){
             jQuery('[name="date-1"]').val(start);
         }
@@ -90,11 +98,6 @@ function loadCalendar() {
                     },
                     selectOverlap: function(event) {
                         return event.rendering === 'background';
-                    },
-                    unselect:function(jsEvent, view ) {
-                        $orderButton
-                            .attr('data-start','')
-                            .attr('data-end','');
                     },
                     select: function(startDate, endDate) {
                         $orderButton
