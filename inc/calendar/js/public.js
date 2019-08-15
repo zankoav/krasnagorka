@@ -26,9 +26,10 @@ jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('clic
 });
 
 jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+    console.log('clear buttons');
     jQuery('.our-house__button[data-name]')
-        .attr('data-start', '')
-        .attr('data-end', '');
+        .removeAttr('data-start')
+        .removeAttr('data-end');
 });
 
 function loadCalendar() {
@@ -46,14 +47,15 @@ function loadCalendar() {
 
         let start = $orderButton.data('start');
         let end = $orderButton.data('end');
-        console.log('start',start);
-        console.log('end',end);
+
         setTimeout(function(){
             if(start){
                 jQuery('[name="date-1"]').val(start);
+                console.log('date-1',start);
             }
             if(end){
                 jQuery('[name="date-2"]').val(end);
+                console.log('date-2',end);
             }
         }, 4);
     });
