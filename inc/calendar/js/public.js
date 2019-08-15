@@ -80,8 +80,15 @@ function loadCalendar() {
                     selectOverlap: function(event) {
                         return event.rendering === 'background';
                     },
+                    unselect:function(jsEvent, view ) {
+                        jQuery(this)
+                            .data('date-start','')
+                            .data('date-end','');
+                    },
                     select: function(startDate, endDate) {
-                        console.log('selected ' + startDate.format() + ' to ' + endDate.format());
+                        jQuery(this)
+                            .data('date-start',startDate.format())
+                            .data('date-end',endDate.format());
                     },
                     eventOverlap: !1
                 });
