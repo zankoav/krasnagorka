@@ -86,6 +86,8 @@ function loadCalendar() {
                             .data('date-end','');
                     },
                     select: function(startDate, endDate) {
+                        console.log(jQuery(this));
+                        
                         jQuery(this)
                             .data('date-start',startDate.format())
                             .data('date-end',endDate.format());
