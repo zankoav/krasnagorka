@@ -42,17 +42,19 @@ function loadCalendar() {
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     $orderButton.on('click', function(){
-        let start = jQuery(this).data('start');
-        let end = jQuery(this).data('end');
+
+        let start = $orderButton.data('start');
+        let end = $orderButton.data('end');
         console.log('start',start);
         console.log('end',end);
-
-        if(start){
-            jQuery('[name="date-1"]').val(start);
-        }
-        if(end){
-            jQuery('[name="date-2"]').val(end);
-        }
+        setTimeout(function(){
+            if(start){
+                jQuery('[name="date-1"]').val(start);
+            }
+            if(end){
+                jQuery('[name="date-2"]').val(end);
+            }
+        }, 4);
     });
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
