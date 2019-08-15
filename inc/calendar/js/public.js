@@ -47,8 +47,6 @@ function loadCalendar() {
                 $calendar.fullCalendar({
                     height: 300,
                     loading: function (r) {
-                        console.log('loading', r);
-                        
                         $parentDate.css({'max-width': 292});
                         if (!targetMargin) {
                             var cielWidth = jQuery(jQuery(".fc-day-top")[0]).width();
@@ -76,6 +74,18 @@ function loadCalendar() {
                         error: function () {
                             console.log("Ошибка загрузки данных")
                         }
+                    },
+                    eventClick: function(calEvent, jsEvent, view) {
+
+                        console.log('calEvent: ' + calEvent);
+                        console.log('--------: ');
+                        console.log('Event: ' + calEvent.title);
+                        console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                        console.log('View: ' + view.name);
+
+                        // change the border color just for fun
+                        jQuery(this).css('border-color', 'red');
+
                     },
                     eventOverlap: !1
                 });
