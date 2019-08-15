@@ -36,6 +36,16 @@ function loadCalendar() {
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
+    $orderButton.on('click', function(){
+        let start = jQuery(this).data('start');
+        let end = jQuery(this).data('end');
+        if(start){
+            jQuery('[name="date-1"]').val(start);
+        }
+        if(end){
+            jQuery('[name="date-2"]').val(end);
+        }
+    });
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
@@ -87,7 +97,6 @@ function loadCalendar() {
                             .attr('data-end','');
                     },
                     select: function(startDate, endDate) {
-                        console.log($orderButton);
                         $orderButton
                             .attr('data-start',startDate.format())
                             .attr('data-end',endDate.format());
