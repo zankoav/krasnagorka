@@ -38,8 +38,10 @@ function loadCalendar() {
     };
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
-    var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name], .house-booking__button[data-name]');
-    $orderButton.on('click', function(){
+    var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
+
+
+    function setDate(){
         console.log('gg',_startDate, _endDate);
         setTimeout(function(){
             jQuery('[name="date-1"]').val(_startDate);
@@ -49,7 +51,10 @@ function loadCalendar() {
                 _endDate = '';
             });
         }, 40);
-    });
+    }
+    jQuery('.house-booking__button').on('click', setDate);
+    $orderButton.on('click', setDate);
+    
     jQuery(this).remove();
     jQuery.ajax(kg_ajax.url, {
         data: data,
