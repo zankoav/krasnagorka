@@ -40,14 +40,6 @@ function loadCalendar() {
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     $orderButton.on('click', function(){
-
-        let start = $orderButton.data('start');
-        let end = $orderButton.data('end');
-
-        console.log('$orderButton',$orderButton);
-        console.log('date-1',start);
-        console.log('date-2',end);
-
         setTimeout(function(){
             jQuery('[name="date-1"]').val(_startDate);
             jQuery('[name="date-2"]').val(_endDate);
