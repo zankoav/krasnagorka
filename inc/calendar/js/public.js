@@ -39,23 +39,16 @@ function loadCalendar() {
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     $orderButton.on('click', function(){
 
-        let start = jQuery(this).data('start');
-        let end = jQuery(this).data('end');
+        let start = $orderButton.data('start');
+        let end = $orderButton.data('end');
 
         console.log('$orderButton',$orderButton);
         console.log('date-1',start);
         console.log('date-2',end);
 
         setTimeout(function(){
-            if(start){
-                jQuery('[name="date-1"]').val(start);
-
-            }
-            if(end){
-                jQuery('[name="date-2"]').val(end);
-
-            }
-
+            jQuery('[name="date-1"]').val(start ? start : '');
+            jQuery('[name="date-2"]').val(end ? end : '');
             jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
                 $orderButton
                     .removeAttr('data-start')
@@ -113,7 +106,7 @@ function loadCalendar() {
                             .attr('data-start',startDate.format())
                             .attr('data-end',endDate.format());
                     },
-                    eventOverlap: !1
+                    eventOverlap: true
                 });
 
                 var isAdmin = document.getElementById('wpadminbar');
