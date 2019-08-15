@@ -25,12 +25,6 @@ jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('clic
     }
 });
 
-jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-    console.log('clear buttons');
-    jQuery('.our-house__button[data-name]')
-        .removeAttr('data-start')
-        .removeAttr('data-end');
-});
 
 function loadCalendar() {
     var calendarShortcod = jQuery(this).data('calendar');
@@ -57,6 +51,12 @@ function loadCalendar() {
                 jQuery('[name="date-2"]').val(end);
                 console.log('date-2',end);
             }
+
+            jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+                $orderButton
+                    .removeAttr('data-start')
+                    .removeAttr('data-end');
+            });
         }, 4);
     });
     jQuery(this).remove();
