@@ -68,6 +68,8 @@ function loadCalendar() {
                         1 == r ? $calendar.children("#cloader").show() : $calendar.children("#cloader").hide()
                     },
                     locale: "ru",
+                    selectable: true,
+                    selectHelper: true,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
@@ -75,17 +77,11 @@ function loadCalendar() {
                             console.log("Ошибка загрузки данных")
                         }
                     },
-                    eventClick: function(calEvent, jsEvent, view) {
-
-                        console.log('calEvent: ' + calEvent);
-                        console.log('--------: ');
-                        console.log('Event: ' + calEvent.title);
-                        console.log('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                        console.log('View: ' + view.name);
-
-                        // change the border color just for fun
-                        jQuery(this).css('border-color', 'red');
-
+                    selectOverlap: function(event) {
+                        return event.rendering === 'background';
+                    },
+                    select: function(startDate, endDate) {
+                        console.log('selected ' + startDate.format() + ' to ' + endDate.format());
                     },
                     eventOverlap: !1
                 });
