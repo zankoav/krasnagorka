@@ -97,7 +97,6 @@ function loadCalendar() {
                         }
                     },
                     selectOverlap: function(event) {
-                        console.log(event);
                         return event.rendering === 'background';
                     },
                     select: function(startDate, endDate) {
