@@ -91,6 +91,7 @@ function loadCalendar() {
                     locale: "ru",
                     selectable: true,
                     selectHelper: true,
+                    selectMinDistance:1,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
@@ -106,13 +107,8 @@ function loadCalendar() {
                     selectAllow:function (selectInfo) {
                         var selectAllowStartDate = selectInfo.start.format('YYYY-MM-DD');
                         var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
-                        var isAllow = '15.09.2019' === selectAllowEndDate;
-
-                        console.log('selectAllowStartDate', selectAllowStartDate);
-                        console.log('selectAllowEndDate', selectAllowEndDate);
-                        console.log('is allow', isAllow);
-                        
-                        return isAllow;
+                        checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
+                        return true;
                     },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
@@ -131,6 +127,18 @@ function loadCalendar() {
             console.log('error', x);
         }
     });
+}
+
+function checkDateRange(events, startDate, endDate) {
+    if(startDate > endDate){
+        var tempDate = startDate;
+        startDate = endDate;
+        endDate = tempDate;
+    }
+
+    console.log('start', startDate);
+    console.log('end', endDate);
+
 }
 
 
