@@ -100,7 +100,7 @@ function loadCalendar() {
                         var selectAllowEndDate = selectInfo.end.format('l');
                         console.log('selectAllowEndDate', selectAllowEndDate);
                         console.log('is allow', eventEndData === selectAllowEndDate);
-                        return true;
+                        return eventEndData === selectAllowEndDate;
                     },
                     selectOverlap: function(event) {
                         eventEndData = event.end.format('l');
