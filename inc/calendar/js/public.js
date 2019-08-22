@@ -95,17 +95,17 @@ function loadCalendar() {
                     events: {
                         url: cUrl,
                         success: function(doc) {
-                            var obj = jQuery.parseJSON(doc);
-                            var events = [];
-                            $.each(obj, function(index, value) {
-
-                                events.push({
-                                    id: value['id'],
-                                    //all data
-                                });
-                                //console.log(value)
-                            });
-                            console.log(events);
+                            console.log('doc',doc);
+                            // var events = [];
+                            // jQuery.each(doc, function(index, value) {
+                            //
+                            //     events.push({
+                            //         id: value['id'],
+                            //         //all data
+                            //     });
+                            //     //console.log(value)
+                            // });
+                            // console.log(events);
                         },
                         error: function () {
                             console.log("Ошибка загрузки данных")
