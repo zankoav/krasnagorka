@@ -60,8 +60,6 @@ function loadCalendar() {
         method: 'post',
         success: function (response) {
             if (response) {
-                console.log("response", response);
-                
                 $parent.empty().html(response);
                 var $calendar = $parent.find('[data-url]');
                 var cUrl = $calendar.data("url");
@@ -91,7 +89,7 @@ function loadCalendar() {
                     locale: "ru",
                     selectable: true,
                     selectHelper: true,
-                    selectMinDistance:1,
+                    selectMinDistance:2,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
