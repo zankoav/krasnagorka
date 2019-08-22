@@ -39,7 +39,7 @@ function loadCalendar() {
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
-
+    var eventEndData;
 
     function setDate(){
         console.log('gg',_startDate, _endDate);
@@ -97,11 +97,14 @@ function loadCalendar() {
                         }
                     },
                     selectAllow:function (selectInfo) {
-                        console.log('selectAllow', selectInfo);
+                        var selectAllowEndDate = selectInfo.end.format('l');
+                        console.log('selectAllowEndDate', selectAllowEndDate);
+                        console.log('is allow', eventEndData === selectAllowEndDate);
                         return true;
                     },
                     selectOverlap: function(event) {
-                        console.log('selectOverlap', event);
+                        eventEndData = event.end.format('l');
+                        console.log('eventEndData', eventEndData);
                         return true;//event.rendering === 'background';
                     },
                     select: function(startDate, endDate) {
