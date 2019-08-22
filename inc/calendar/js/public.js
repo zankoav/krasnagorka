@@ -96,18 +96,23 @@ function loadCalendar() {
                         url: cUrl,
                         success: function(doc) {
                             events = doc;
+                            console.log(events);
+                            
                         },
                         error: function () {
                             console.log("Ошибка загрузки данных")
                         }
                     },
                     selectAllow:function (selectInfo) {
+                        var selectAllowStartDate = selectInfo.start.format('l');
                         var selectAllowEndDate = selectInfo.end.format('l');
+                        var isAllow = '15.9.2019' === selectAllowEndDate;
+
+                        console.log('selectAllowStartDate', selectAllowStartDate);
                         console.log('selectAllowEndDate', selectAllowEndDate);
-                        console.log('is allow', '15.9.2019' === selectAllowEndDate);
-                        console.log('events',this.events);
+                        console.log('is allow', isAllow);
                         
-                        return '15.9.2019' === selectAllowEndDate;
+                        return isAllow;
                     },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
