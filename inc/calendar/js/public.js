@@ -60,6 +60,8 @@ function loadCalendar() {
         method: 'post',
         success: function (response) {
             if (response) {
+                console.log("response", response);
+                
                 $parent.empty().html(response);
                 var $calendar = $parent.find('[data-url]');
                 var cUrl = $calendar.data("url");
