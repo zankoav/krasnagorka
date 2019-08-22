@@ -96,10 +96,14 @@ function loadCalendar() {
                             console.log("Ошибка загрузки данных")
                         }
                     },
-                    selectOverlap: function(event) {
-                        console.log('event', event);
-                        return true;//event.rendering === 'background';
+                    selectAllow:function (selectInfo) {
+                        console.log('selectInfo', selectInfo);
+                        return true;
                     },
+                    // selectOverlap: function(event) {
+                    //     console.log('event', event);
+                    //     return true;//event.rendering === 'background';
+                    // },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
                         _endDate = endDate.subtract(1, 'days').format();
