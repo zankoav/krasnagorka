@@ -97,13 +97,13 @@ function loadCalendar() {
                         }
                     },
                     selectAllow:function (selectInfo) {
-                        console.log('selectInfo', selectInfo);
+                        console.log('selectAllow', selectInfo);
                         return true;
                     },
-                    // selectOverlap: function(event) {
-                    //     console.log('event', event);
-                    //     return true;//event.rendering === 'background';
-                    // },
+                    selectOverlap: function(event) {
+                        console.log('selectOverlap', event);
+                        return true;//event.rendering === 'background';
+                    },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
                         _endDate = endDate.subtract(1, 'days').format();
