@@ -18,9 +18,34 @@
     $velcom         = $options['mastak_theme_options_velcome'];
     $mts            = $options['mastak_theme_options_mts'];
     $footer_logo_id = $options['footer_logo_id'];
+    
+    
+    $comments = get_comments( array(
+		'post_id'      => 9105,
+		'status'       => 'approve'
+	));
+        
+    // Comment Loop
+    $ratingCount = count($comments);
+    $allStars = 0;
+	foreach ( $comments as $comment ) {
+			$rating = get_comment_meta( $comment->comment_ID, 'rating_reviews', 1 );
+			
+			if(!empty($rating)){
+			    $allStars += $rating;
+			}else{
+			    $allStars +=4.25;
+			}
+	}
+    $ratingValue = number_format($allStars/$ratingCount, 2, '.', ''); 
+    $raiting = "Рейтинг: ".$ratingValue." - ".$ratingCount." голосов";
 
 ?>
-
+<style>
+    .contacts-data__item-text.contacts-data__item-text_raiting{
+        margin-bottom:0;
+    }
+</style>
 <footer class="footer-top">
     <div class="b-container">
         <div class="footer-top__wrapper">
@@ -92,9 +117,17 @@
                                      alt="envelope"
                                      class="contacts-data__item-icon">
                                 <div class="contacts-data__item-text-wrapper">
-                                    <span class="contacts-data__item-text"><?= $email; ?></span>
+                                    <span class="contacts-data__item-text contacts-data__item-text_raiting"><?= $email; ?></span>
                                 </div>
                             </a>
+                            <div class="contacts-data__item">
+                                <img src="<?= CORE_PATH ?>assets/icons/contacts-data/white_star.svg"
+                                     alt="envelope"
+                                     class="contacts-data__item-icon">
+                                <div class="contacts-data__item-text-wrapper">
+                                    <span class="contacts-data__item-text contacts-data__item-text_raiting"><?= $raiting; ?></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
