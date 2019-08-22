@@ -39,7 +39,7 @@ function loadCalendar() {
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
-    var eventEndData;
+    var events;
 
     function setDate(){
         console.log('gg',_startDate, _endDate);
@@ -95,17 +95,7 @@ function loadCalendar() {
                     events: {
                         url: cUrl,
                         success: function(doc) {
-                            console.log('doc',doc);
-                            // var events = [];
-                            // jQuery.each(doc, function(index, value) {
-                            //
-                            //     events.push({
-                            //         id: value['id'],
-                            //         //all data
-                            //     });
-                            //     //console.log(value)
-                            // });
-                            // console.log(events);
+                            events = doc;
                         },
                         error: function () {
                             console.log("Ошибка загрузки данных")
@@ -114,15 +104,10 @@ function loadCalendar() {
                     selectAllow:function (selectInfo) {
                         var selectAllowEndDate = selectInfo.end.format('l');
                         console.log('selectAllowEndDate', selectAllowEndDate);
-                        console.log('is allow', eventEndData === selectAllowEndDate);
+                        console.log('is allow', '15.9.2019' === selectAllowEndDate);
                         console.log('events',this.events);
                         
-                        return eventEndData === selectAllowEndDate;
-                    },
-                    selectOverlap: function(event) {
-                        eventEndData = event.end.format('l');
-                        console.log('eventEndData', eventEndData);
-                        return true;//event.rendering === 'background';
+                        return '15.9.2019' === selectAllowEndDate;
                     },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
