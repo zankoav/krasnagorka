@@ -89,7 +89,7 @@ function loadCalendar() {
                     locale: "ru",
                     selectable: true,
                     selectHelper: true,
-                    selectMinDistance:2,
+                    selectMinDistance:3,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
