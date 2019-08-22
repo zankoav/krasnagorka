@@ -104,9 +104,9 @@ function loadCalendar() {
                         }
                     },
                     selectAllow:function (selectInfo) {
-                        var selectAllowStartDate = selectInfo.start.format('l');
-                        var selectAllowEndDate = selectInfo.end.format('l');
-                        var isAllow = '15.9.2019' === selectAllowEndDate;
+                        var selectAllowStartDate = selectInfo.start.format('DD/MM/YYYY');
+                        var selectAllowEndDate = selectInfo.end.format('DD/MM/YYYY');
+                        var isAllow = '15.09.2019' === selectAllowEndDate;
 
                         console.log('selectAllowStartDate', selectAllowStartDate);
                         console.log('selectAllowEndDate', selectAllowEndDate);
