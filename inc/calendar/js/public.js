@@ -88,6 +88,7 @@ function loadCalendar() {
                     locale: "ru",
                     selectable: true,
                     selectHelper: true,
+                    selectLongPressDelay: 600,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
