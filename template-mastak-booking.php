@@ -156,6 +156,10 @@
                                                 Показать календарь
                                             </a>
                                         </div>
+                                        <a href="#booking-order" data-name="<?= $kalendar['title']; ?>"
+                                           class="fancybox-inline our-house__button our-house__button_media_xs">
+                                            забронировать
+                                        </a>
                                     </div>
                                 </div>
                             </div>

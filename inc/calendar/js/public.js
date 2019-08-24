@@ -51,9 +51,11 @@ function loadCalendar() {
             });
         }, 40);
     }
+    
     jQuery('.house-booking__button').on('click', setDate);
     $orderButton.on('click', setDate);
     jQuery(this).remove();
+
     jQuery.ajax(kg_ajax.url, {
         data: data,
         method: 'post',
