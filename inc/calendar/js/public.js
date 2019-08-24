@@ -115,8 +115,8 @@ function loadCalendar() {
                             $calendar.fullCalendar( 'unselect' );
                             console.log("Запрещено выделять один день");
                         }else{
-                            _startDate = startDate.format();
-                            _endDate = endDate.subtract(1, 'days').format();
+                            _startDate = start;
+                            _endDate = end;
                         }
                     }
                 });
