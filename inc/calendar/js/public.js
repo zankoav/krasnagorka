@@ -102,7 +102,7 @@ function loadCalendar() {
                     },
                     selectAllow:function (selectInfo) {
                         var selectAllowStartDate = selectInfo.start.format('YYYY-MM-DD');
-                        var selectAllowEndDate = selectInfo.end.subtract(1, 'days').format('YYYY-MM-DD');
+                        var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
                         return checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
                     },
                     select: function(startDate, endDate) {
