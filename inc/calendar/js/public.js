@@ -138,10 +138,10 @@ function checkDateRange(events, startDate, endDate) {
 
     for(var i = 0; i < events.length; i++){
         var event = events[i];
-        var startEvent = event.start;
+        var startEvent = jQuery.fullCalendar.moment(event.start, 'YYYY-MM-DD').add(1, 'day').format('YYYY-MM-DD');
         var endEvent = jQuery.fullCalendar.moment(event.end, 'YYYY-MM-DD').subtract(1, 'days').format('YYYY-MM-DD');
 
-        if(startDate < endEvent && endDate >= startEvent){
+        if(startDate < endEvent && endDate > startEvent){
             result = false;
             break;
         }
