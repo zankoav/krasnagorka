@@ -100,6 +100,10 @@ function loadCalendar() {
                             console.log("Ошибка загрузки данных")
                         }
                     },
+                    selectOverlap: function(event) {
+                        console.log(event);
+                        return event.rendering === 'background';
+                    },
                     selectAllow:function (selectInfo) {
                         var selectAllowStartDate = selectInfo.start.format('YYYY-MM-DD');
                         var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
