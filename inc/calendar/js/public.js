@@ -106,10 +106,17 @@ function loadCalendar() {
                         return checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
                     },
                     select: function(startDate, endDate) {
-                        _startDate = startDate.format();
-                        _endDate = endDate.subtract(1, 'days').format();
-                        if(_startDate === _endDate){
+                        var start = startDate.format();
+                        var end = endDate.subtract(1, 'days').format();
+
+                        if(start === end){
+                            _startDate = null;
+                            _endDate = null;
+                            this.fullCalendar( 'unselect' );
                             console.log("Запрещено выделять один день");
+                        }else{
+                            _startDate = startDate.format();
+                            _endDate = endDate.subtract(1, 'days').format();
                         }
                     }
                 });
