@@ -112,7 +112,7 @@ function loadCalendar() {
                         if(start === end){
                             _startDate = null;
                             _endDate = null;
-                            this.fullCalendar( 'unselect' );
+                            $calendar.fullCalendar( 'unselect' );
                             console.log("Запрещено выделять один день");
                         }else{
                             _startDate = startDate.format();
