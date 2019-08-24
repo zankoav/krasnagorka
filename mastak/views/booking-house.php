@@ -85,6 +85,10 @@
                     календарь
                 </a>
             </div>
+            <a href="#booking-order" data-name="<?= get_the_title(); ?>"
+               class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden">
+                забронировать
+            </a>
         </div>
     </div>
 </div>

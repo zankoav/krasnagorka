@@ -157,7 +157,7 @@
                                             </a>
                                         </div>
                                         <a href="#booking-order" data-name="<?= $kalendar['title']; ?>"
-                                           class="fancybox-inline our-house__button our-house__button_media_xs">
+                                           class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden">
                                             забронировать
                                         </a>
                                     </div>
@@ -176,7 +176,19 @@
         </div>
 
     </section>
+    <div style="display:none" class="fancybox-hidden">
+        <div id="booking-order">
+            <p class="booking-order__title"></p>
+            <?= do_shortcode('[contact-form-7 id="2730" title="Отправить заявку на бронирование"]'); ?>
+        </div>
+    </div>
 
+    <style>
+        .our-house__button-hidden{
+            display : none;
+            margin-top : 1.5rem;
+        }
+    </style>
 <?php
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");

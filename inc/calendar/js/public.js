@@ -39,6 +39,7 @@ function loadCalendar() {
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
+    var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
     var events;
 
     function setDate(){
@@ -51,7 +52,7 @@ function loadCalendar() {
             });
         }, 40);
     }
-    
+
     jQuery('.house-booking__button').on('click', setDate);
     $orderButton.on('click', setDate);
     jQuery(this).remove();
@@ -62,6 +63,7 @@ function loadCalendar() {
         success: function (response) {
             if (response) {
                 $parent.empty().html(response);
+                $orderBookingButton.removeClass('our-house__button-hidden');
                 var $calendar = $parent.find('[data-url]');
                 var cUrl = $calendar.data("url");
                 $calendar.fullCalendar({
