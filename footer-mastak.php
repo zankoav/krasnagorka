@@ -505,5 +505,15 @@
 </script>
 <!-- Код CallTracking -->
 <script async src="//app.call-tracking.by/scripts/calltracking.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>
+<style>
+    .button-animation {
+        animation : buttonShake 1s;
+    }
+    @keyframes buttonShake {
+        0%{background-color: #d0021b}
+        50%{background-color: #04a89f}
+        100%{background-color: #d0021b}
+    }
+</style>
 </body>
 </html>

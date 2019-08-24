@@ -42,7 +42,6 @@ function loadCalendar() {
     var events;
 
     function setDate(){
-        console.log('gg',_startDate, _endDate);
         setTimeout(function(){
             jQuery('[name="date-1"]').val(_startDate);
             jQuery('[name="date-2"]').val(_endDate);
@@ -88,13 +87,12 @@ function loadCalendar() {
                     },
                     locale: "ru",
                     selectable: true,
+                    selectHelper: true,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
                         success: function(doc) {
                             events = doc;
-                            console.log(events);
-                            
                         },
                         error: function () {
                             console.log("Ошибка загрузки данных")
@@ -113,10 +111,10 @@ function loadCalendar() {
                             _startDate = null;
                             _endDate = null;
                             $calendar.fullCalendar( 'unselect' );
-                            console.log("Запрещено выделять один день");
                         }else{
                             _startDate = start;
                             _endDate = end;
+                            buttonAnimate($orderButton);
                         }
                     }
                 });
@@ -132,6 +130,14 @@ function loadCalendar() {
             console.log('error', x);
         }
     });
+}
+
+function buttonAnimate($buttonView){
+    console.log($buttonView);
+    $buttonView.addClass('button-animation');
+    setTimeout(function(){
+        $buttonView.removeClass('button-animation');
+    }, 2000);
 }
 
 function checkDateRange(events, startDate, endDate) {
