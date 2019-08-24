@@ -139,7 +139,7 @@ function checkDateRange(events, startDate, endDate) {
     for(var i = 0; i < events.length; i++){
         var event = events[i];
         var startEvent = event.start;
-        var endEvent = event.end.subtract(1, 'days');
+        var endEvent = moment(event.end, 'YYYY-MM-DD').subtract(1, 'days').format('YYYY-MM-DD');
 
         if(startDate < endEvent && endDate > startEvent){
             result = false;
