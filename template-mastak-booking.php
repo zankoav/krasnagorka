@@ -78,7 +78,7 @@
                             <div class="booking-houses__wrapper booking-houses__wrapper_terem">
                                 <div class="booking-houses__item">
                                     <div class="booking-houses__header">
-                                        <h2 class="booking-houses__title"><?= $kalendar['title']; ?></h2>
+                                        <h2 class="booking-houses__title our-house__title"><?= $kalendar['title']; ?></h2>
                                     </div>
                                     <a href="<?= get_the_permalink(); ?>" target="_blank"
                                        class="booking-houses__image-wrapper">
@@ -157,7 +157,7 @@
                                             </a>
                                         </div>
                                         <a href="#booking-order" data-name="<?= $kalendar['title']; ?>"
-                                           class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden">
+                                           class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
                                             забронировать
                                         </a>
                                     </div>
@@ -186,6 +186,8 @@
     <style>
         .our-house__button-hidden{
             display : none;
+        }
+        .our-house__button_mt_15{
             margin-top : 1.5rem;
         }
     </style>

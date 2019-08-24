@@ -13,7 +13,7 @@
 <div class="booking-houses__wrapper">
     <div class="booking-houses__item">
         <div class="booking-houses__header">
-            <p class="booking-houses__title"><?= get_the_title(); ?></p>
+            <p class="booking-houses__title our-house__title"><?= get_the_title(); ?></p>
         </div>
         <a href="<?= get_the_permalink(); ?>" target="_blank"
            class="booking-houses__image-wrapper">
@@ -86,7 +86,7 @@
                 </a>
             </div>
             <a href="#booking-order" data-name="<?= get_the_title(); ?>"
-               class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden">
+               class="fancybox-inline our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
                 забронировать
             </a>
         </div>
