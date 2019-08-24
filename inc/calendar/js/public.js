@@ -88,8 +88,6 @@ function loadCalendar() {
                     },
                     locale: "ru",
                     selectable: true,
-                    selectHelper: true,
-                    selectMinDistance:3,
                     header: {left: "prev", center: "title", right: "next"},
                     events: {
                         url: cUrl,
@@ -104,13 +102,15 @@ function loadCalendar() {
                     },
                     selectAllow:function (selectInfo) {
                         var selectAllowStartDate = selectInfo.start.format('YYYY-MM-DD');
-                        var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
-                        checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
-                        return true;
+                        var selectAllowEndDate = selectInfo.end.subtract(1, 'days').format('YYYY-MM-DD');
+                        return checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
                     },
                     select: function(startDate, endDate) {
                         _startDate = startDate.format();
                         _endDate = endDate.subtract(1, 'days').format();
+                        if(_startDate === _endDate){
+                            console.log("Запрещено выделять один день");
+                        }
                     }
                 });
 
@@ -128,15 +128,26 @@ function loadCalendar() {
 }
 
 function checkDateRange(events, startDate, endDate) {
+    var result = true;
+
     if(startDate > endDate){
         var tempDate = startDate;
         startDate = endDate;
         endDate = tempDate;
     }
 
-    console.log('start', startDate);
-    console.log('end', endDate);
+    for(var i = 0; i < events.length; i++){
+        var event = events[i];
+        var startEvent = event.start;
+        var endEvent = event.end.subtract(1, 'days');
 
+        if(startDate < endEvent && endDate > startEvent){
+            result = false;
+            break;
+        }
+    }
+
+    return result;
 }
 
 
