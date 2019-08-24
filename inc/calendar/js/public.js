@@ -133,11 +133,10 @@ function loadCalendar() {
 }
 
 function buttonAnimate($buttonView){
-    console.log($buttonView);
     $buttonView.addClass('button-animation');
     setTimeout(function(){
         $buttonView.removeClass('button-animation');
-    }, 2000);
+    }, 1200);
 }
 
 function checkDateRange(events, startDate, endDate) {
