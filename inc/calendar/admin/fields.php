@@ -88,6 +88,10 @@ function sbc_orders_metabox() {
                 <li><b class="prepaid"></b>Предоплачено</li>
                 <li><b class="booked"></b>Оплачено</li>
                 </ul>
+                <div class="select-helper">
+                    <img src="/wp-content/themes/itfactory/mastak/assets/icons/date-clicking-selecting.png" class="select-helper__img" alt="Выделение дат заезда и выезда">
+                    <p class="select-helper__text">' . get_option('mastak_theme_options')['calendar_settings_message'] . 'Выделение свободных дат</p>    
+                </div>
                 </div></div>',
     ) );
 

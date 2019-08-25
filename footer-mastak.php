@@ -514,6 +514,28 @@
         50%{background-color: #04a89f}
         100%{background-color: #d0021b}
     }
+
+    .select-helper{
+        display : flex;
+        padding : 1rem 0;
+    }
+
+    .select-helper__img{
+        flex-shrink: 0;
+        max-width: 2rem;
+        margin-right : 1rem;
+    }
+
+    .select-helper__img{
+        flex-shrink: 0;
+        max-width: 2rem;
+        margin-right : 1rem;
+    }
+
+    .select-helper__text{
+        flex: 1;
+    }
+
 </style>
 </body>
 </html>

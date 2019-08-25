@@ -503,6 +503,17 @@
             ),
         ));
 
+        $cmb_options->add_field(array(
+            'name' => __('Настройки календаря', 'krasnagorka'),
+            'id'   => 'calendar_settings_title',
+            'type' => 'title'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Текст заголовка помощи при выделении дат бронирования',
+            'id'   => 'calendar_settings_message',
+            'type' => 'textarea_small'
+        ));
     }
 
     add_action('cmb2_admin_init', 'mastak_register_theme_options_metabox');
