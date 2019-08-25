@@ -537,6 +537,10 @@
         flex: 1;
     }
 
+    .our-house__calendar, .booking-houses__calendars-inner{
+        position: static;
+    }
+
 </style>
 </body>
 </html>
