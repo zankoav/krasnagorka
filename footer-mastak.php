@@ -518,7 +518,7 @@
     .select-helper{
         display : flex;
         align-items : center;
-        padding : 15px;
+        padding : 15px 15px 0 15px;
     }
 
     .select-helper__img{
