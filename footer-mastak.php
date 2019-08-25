@@ -517,7 +517,8 @@
 
     .select-helper{
         display : flex;
-        padding : 1rem 0;
+        align-items : center;
+        padding : 15px;
     }
 
     .select-helper__img{
@@ -528,7 +529,7 @@
 
     .select-helper__img{
         flex-shrink: 0;
-        max-width: 2rem;
+        max-width: 2.5rem;
         margin-right : 1rem;
     }
 
