@@ -542,6 +542,10 @@
     .select-helper__text{
         flex: 1;
     }
+    
+    .select-helper__text_success{
+        color: #04a89f
+    }
 
     .our-house__calendar, .booking-houses__calendars-inner{
         position: static;
