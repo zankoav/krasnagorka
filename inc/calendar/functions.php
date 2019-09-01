@@ -144,7 +144,7 @@
                 </ul>
                 <div class="select-helper">
                     <img src="/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png" class="select-helper__img" alt="Выделение дат заезда и выезда">
-                    <p class="select-helper__text">' . get_option('mastak_theme_options')['calendar_settings_message'] . 'Выделение свободных дат</p>    
+                    <p class="select-helper__text" data-helper-start="'.get_option('mastak_theme_options')['calendar_settings_message'].'" data-helper="'.get_option('mastak_theme_options')['calendar_settings_message_after'].'">' . get_option('mastak_theme_options')['calendar_settings_message'].'</p>    
                 </div>
                 </div>
                 </div>';

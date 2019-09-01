@@ -510,8 +510,14 @@
         ));
 
         $cmb_options->add_field(array(
-            'name' => 'Текст заголовка помощи при выделении дат бронирования',
+            'name' => 'Текст заголовка помощи до выделении дат бронирования',
             'id'   => 'calendar_settings_message',
+            'type' => 'textarea_small'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Текст заголовка после выделения дат бронирования',
+            'id'   => 'calendar_settings_message_after',
             'type' => 'textarea_small'
         ));
     }
