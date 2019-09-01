@@ -528,11 +528,13 @@
     }
 
     .select-helper_header{
+        font-size : 14px;
         padding : 0 0 1rem;
     }
 
     @media (min-width:1280px){
         .select-helper_header{
+            font-size : 16px;
             padding : 0 0 2rem;
         }
     }
