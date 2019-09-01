@@ -40,12 +40,11 @@ function loadCalendar() {
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
+    var $textHelper;
     var events;
 
     function setDate(){
-        console.log('ok', jQuery(this)[0], 'gg', $activeButton[0]);
         if(jQuery(this)[0] == $activeButton[0] || !$activeButton[0]){
-            console.log('ok');
             setTimeout(function(){
                 jQuery('[name="date-1"]').val(_startDate);
                 jQuery('[name="date-2"]').val(_endDate);
@@ -57,6 +56,9 @@ function loadCalendar() {
                 });
             }, 40);
         }
+        // jQuery('.select-helper__text_success')
+        //     .removeClass('select-helper__text_success')
+        //     .html($textHelper.data('helper-start'));
     }
 
     jQuery('.house-booking__button').on('click', setDate);
@@ -69,6 +71,7 @@ function loadCalendar() {
         success: function (response) {
             if (response) {
                 $parent.empty().html(response);
+                $textHelper = $parent.parent().find('.select-helper__text');
                 $orderBookingButton.removeClass('our-house__button-hidden');
                 var $calendar = $parent.find('[data-url]');
                 var cUrl = $calendar.data("url");
@@ -114,6 +117,11 @@ function loadCalendar() {
                         var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
                         return checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
                     },
+                    unselect: function(){
+                        $textHelper
+                            .removeClass('select-helper__text_success')
+                            .html($textHelper.data('helper-start'));
+                    },
                     select: function(startDate, endDate) {
                         var start = startDate.format();
                         var end = endDate.subtract(1, 'days').format();
@@ -125,6 +133,10 @@ function loadCalendar() {
                         }else{
                             _startDate = start;
                             _endDate = end;
+                            console.log('$textHelper',$textHelper);
+                            $textHelper
+                                .addClass('select-helper__text_success')
+                                .html($textHelper.data('helper'));
                             buttonAnimate($orderButton);
                         }
                     }
