@@ -528,7 +528,13 @@
     }
 
     .select-helper_header{
-        padding : 0 0 30px;
+        padding : 0 0 1rem;
+    }
+
+    @media (min-width:1280px){
+        .select-helper_header{
+            padding : 0 0 2rem;
+        }
     }
 
 
