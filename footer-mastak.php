@@ -528,7 +528,7 @@
     }
 
     .select-helper_header{
-        padding : 15px 0;
+        padding : 0 0 30px;
     }
 
 
