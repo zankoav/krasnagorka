@@ -208,12 +208,6 @@
 
         });
 
-        function getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
 
         function setCookie(name, value, props) {
             props = props || {};
@@ -245,6 +239,13 @@
         }
 
     })(jQuery);
+    
+    function getCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
 </script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -302,6 +303,11 @@
     ga('create', 'UA-85853604-1', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');
+    
+    var cid = getCookie("_ga");
+    cid = cid.replace(/GA1.2./g, '');
+    //console.log(cid);
+    jQuery('[name="user-cid"]').val(cid);
 
 </script>
 

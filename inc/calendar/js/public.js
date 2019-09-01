@@ -1,4 +1,4 @@
-var targetMargin, scriptFullCalendar, scriptLocalCalendar, month;
+var targetMargin, scriptFullCalendar, scriptLocalCalendar, month, $activeButton;
 var year = (new Date()).getFullYear();
 var _startDate = '';
 var _endDate = '';
@@ -43,14 +43,20 @@ function loadCalendar() {
     var events;
 
     function setDate(){
-        setTimeout(function(){
-            jQuery('[name="date-1"]').val(_startDate);
-            jQuery('[name="date-2"]').val(_endDate);
-            jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-                _startDate = '';
-                _endDate = '';
-            });
-        }, 40);
+        console.log('ok', jQuery(this)[0], 'gg', $activeButton[0]);
+        if(jQuery(this)[0] == $activeButton[0] || !$activeButton[0]){
+            console.log('ok');
+            setTimeout(function(){
+                jQuery('[name="date-1"]').val(_startDate);
+                jQuery('[name="date-2"]').val(_endDate);
+                jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+                    _startDate = '';
+                    _endDate = '';
+                    jQuery('[name="date-1"]').val(_startDate);
+                    jQuery('[name="date-2"]').val(_endDate);
+                });
+            }, 40);
+        }
     }
 
     jQuery('.house-booking__button').on('click', setDate);
@@ -138,6 +144,7 @@ function loadCalendar() {
 }
 
 function buttonAnimate($buttonView){
+    $activeButton = $buttonView;
     $buttonView.addClass('button-animation');
     setTimeout(function(){
         $buttonView.removeClass('button-animation');
