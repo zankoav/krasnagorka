@@ -527,6 +527,11 @@
         padding : 15px 15px 0 15px;
     }
 
+    .select-helper_header{
+        padding : 15px 0;
+    }
+
+
     .select-helper__img{
         flex-shrink: 0;
         max-width: 2rem;
