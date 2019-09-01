@@ -533,11 +533,19 @@
         align-items : flex-start;
     }
 
+    .select-helper_header .select-helper__img{
+        max-width: 26px;
+    }
+
     @media (min-width:1280px){
         .select-helper_header{
             align-items : center;
             font-size : 16px;
             padding : 0 0 2rem;
+        }
+
+        .select-helper_header .select-helper__img{
+            max-width: 2.5rem;
         }
     }
 
