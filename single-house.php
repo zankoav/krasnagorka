@@ -220,6 +220,10 @@
                         <div class="booking-houses">
                             <div class="booking-houses__icons-description">
                                 <?php get_template_part('mastak/views/icons-description'); ?>
+                                <div class="select-helper">
+                                    <img src="/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png" class="select-helper__img" alt="Выделение дат заезда и выезда">
+                                    <p class="select-helper__text"><?=get_option('mastak_theme_options')['calendar_settings_message_before'];?></p>
+                                </div>
                             </div>
                             <?php foreach ($kalendars as $kalendar) : ?>
                                 <div class="booking-houses__wrapper">
