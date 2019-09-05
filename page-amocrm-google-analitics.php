@@ -1,11 +1,13 @@
-
 <?php
+    $file = 'deal.log';
+
     define("CID_FIELD_ID", "634173");
-    define("TAGS_AVAILIBLE", ["1156623"]);
+    define("TAGS_AVAILIBLE", ["1156623", "1033267", "1156443"]);
     define("STATUSES_AVAILIBLE", [
-        "19518940" => "ПОДТВЕРДИТЬ БРОНИРОВАНИЕ"
+        "142" => "Успешно реализовано"
     ]);
     
+
     function getAvailibleTag($tags){
         $tagName = null;
         foreach($tags as $tag) {
@@ -22,7 +24,7 @@
         foreach($fields as $field) {
             if ($field["id"] === CID_FIELD_ID) {
                 $cid = $field["values"][0]["value"];
-               break;
+              break;
             }
         }
         return $cid;
@@ -67,25 +69,22 @@
     	gaSendData($data);
     }
     
-    if(!empty($_POST["leads"] and !empty($_POST["leads"]["update"] and !empty($_POST["leads"]["update"][0])))){
+    if(!empty($_POST["leads"] and !empty($_POST["leads"]["status"] and !empty($_POST["leads"]["status"][0])))){
         
-        $offer = $_POST["leads"]["update"][0];
+        $offer = $_POST["leads"]["status"][0];
         
         if($offer["name"] === "Сделка с сайта" ){
             
             $tagName = getAvailibleTag($offer["tags"]);
             $cid = getCid($offer["custom_fields"]);
             $statusName = STATUSES_AVAILIBLE[$offer["status_id"]];
-            
+            $time = date('Y-m-d H:i:s');
             if(!empty($tagName) and !empty($statusName) and !empty($cid)){
-                ga_send_event($statusName, $cid, 'amocrm', 'changestate');
-                $file = 'people.txt';
-                file_put_contents($file, json_encode(array("OK",$tagName, $statusName, $cid), JSON_UNESCAPED_UNICODE));
+                ga_send_event($statusName, $cid, 'amocrm', 'deal_complete');
+                file_put_contents($file, "$time, SUCCESS, tagName = $tagName, statusName = $statusName, cid = $cid".PHP_EOL , FILE_APPEND | LOCK_EX);
             }else{
-                $file = 'people.txt';
-                file_put_contents($file, json_encode(array("ERROR",$tagName, $statusName, $cid), JSON_UNESCAPED_UNICODE));
+                file_put_contents($file, "$time, INFO, tagName = $tagName, statusName = $statusName, cid = $cid".PHP_EOL , FILE_APPEND | LOCK_EX);
             }
         }
+        
     }
-    
-    wp_die();
