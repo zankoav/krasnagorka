@@ -28,7 +28,7 @@
                 <p class="review__text"><?= $child->comment_content; ?></p>
             </div>
             <div class="list-review__user">
-                <span class="list-review__user-name"><?= $child->comment_author; ?></span>
+                <span class="list-review__user-name">Администратор</span>
                 <span class="list-review__user-date"><?= date( "d.m.Y", strtotime( $child->comment_date ) ); ?></span>
             </div>
         </div>
