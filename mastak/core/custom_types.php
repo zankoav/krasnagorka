@@ -1464,7 +1464,7 @@
             'name'             => 'Услуга',
             'id'               => 'main_opportunity',
             'type'             => 'select',
-            'options_cb'       => 'show_seasons_options',
+            'options_cb'       => 'show_service_options',
         ));
 
         $cmb_options->add_field(array(
