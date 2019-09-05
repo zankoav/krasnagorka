@@ -71,13 +71,16 @@
                     </div>
                     <div data-mixed-conent="4" class="accordion-mixed__content">
                         <div class="accordion-mixed__content-inner">
-                            <div id="ex3" class="map-zoom">
-                                <?php $map = get_post_meta(get_the_ID(), "mastak_opportunity_map", true); ?>
-                                <img src="<?= $map; ?>"
-                                     alt="map"
-                                     class="map-zoom__image"
-                                     data-big="<?= $map; ?>">
-                                <p class="map-zoom__title">Кликни</p>
+                            <div class="base-place b-mb-2">
+                                <div class="base-place__image">
+                                    <img src="<?= get_post_meta(get_the_ID(), "mastak_opportunity_map", true); ?>" alt="map"
+                                         class="base-place__image-inner">
+                                </div>
+                                <div class="base-place__content">
+                                    <div class="big-text content-text">
+                                        <?= wpautop(get_post_meta(get_the_ID(), "mastak_opportunity_text_map", true)); ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

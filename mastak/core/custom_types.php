@@ -996,6 +996,12 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Текст описание карты',
+            'id'   => $prefix . 'text_map',
+            'type' => 'wysiwyg'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => 'Правила',
             'id'   => $prefix . 'residence',
             'type' => 'wysiwyg',
