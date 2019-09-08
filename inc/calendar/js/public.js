@@ -141,6 +141,7 @@ function loadCalendar() {
                         }
 
                         if($orderButton.hasClass('terem-button')){
+                            console.log('ok');
                             $orderButton.data('name',$title.html());
                         }
                     }
