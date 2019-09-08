@@ -124,9 +124,6 @@ function loadCalendar() {
                         $textHelper
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
-                        if($teremButton.length){
-                            $houseHiddenName.val('Терем');
-                        }
                     },
                     select: function(startDate, endDate) {
                         var start = startDate.format();
