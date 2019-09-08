@@ -398,7 +398,7 @@
                               data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                     </p>
                     <a href="#booking-order" data-name="<?= get_the_title(); ?>"
-                       class="fancybox-inline house-booking__button">забронировать
+                       class="fancybox-inline house-booking__button terem-button">забронировать
                     </a>
                 </footer>
             </div>

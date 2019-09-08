@@ -134,13 +134,15 @@ function loadCalendar() {
                         }else{
                             _startDate = start;
                             _endDate = end;
-                            console.log('$textHelper',$textHelper);
                             $textHelper
                                 .addClass('select-helper__text_success')
                                 .html($textHelper.data('helper'));
                             buttonAnimate($orderButton);
                         }
-                        console.log('title', $title.html());
+
+                        if($orderButton.hasClass('terem-button')){
+                            $orderButton.data('name',$title.html());
+                        }
                     }
                 });
 
