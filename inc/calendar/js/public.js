@@ -40,6 +40,7 @@ function loadCalendar() {
     var $title = jQuery(this).parent().parent().parent().find('.booking-houses__title');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
+    var $teremButton = jQuery(this).parent().parent().parent().find('.terem-button');
     var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
     var $textHelper;
     var events;
@@ -140,9 +141,9 @@ function loadCalendar() {
                             buttonAnimate($orderButton);
                         }
 
-                        if($orderButton.hasClass('terem-button')){
+                        if($teremButton.length){
                             console.log('ok');
-                            $orderButton.data('name',$title.html());
+                            $teremButton.data('name',$title.html());
                         }
                     }
                 });
