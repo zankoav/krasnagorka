@@ -144,6 +144,7 @@ function loadCalendar() {
 
                         if($teremButton.length){
                             $houseHiddenName.val($title.html());
+                            $teremButton.attr('data-name', $title.html());
                         }
                     }
                 });
