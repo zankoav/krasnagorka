@@ -123,6 +123,9 @@ function loadCalendar() {
                         $textHelper
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
+                        if($teremButton.length){
+                            $teremButton.attr('data-name','Терем');
+                        }
                     },
                     select: function(startDate, endDate) {
                         var start = startDate.format();
