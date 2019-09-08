@@ -146,7 +146,8 @@ function loadCalendar() {
                             setTimeout(function () {
                                 $houseHiddenName.val($title.html());
                                 $teremButton.attr('data-name', $title.html());
-                            }, 1000);
+                                console.log('title', $title.html());
+                            }, 5000);
                         }
                     }
                 });
