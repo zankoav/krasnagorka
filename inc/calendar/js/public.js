@@ -2,6 +2,7 @@ var targetMargin, scriptFullCalendar, scriptLocalCalendar, month, $activeButton;
 var year = (new Date()).getFullYear();
 var _startDate = '';
 var _endDate = '';
+var _title = 'Терем';
 
 jQuery('.booking-houses__calendars-button, .our-house__button-booking').on('click', function (event) {
     event.preventDefault();
@@ -143,11 +144,9 @@ function loadCalendar() {
                         }
 
                         if($teremButton.length){
-                            setTimeout(function () {
-                                $houseHiddenName.val($title.html());
-                                $teremButton.attr('data-name', $title.html());
-                                console.log('title', $title.html());
-                            }, 5000);
+                            _title = $title.html();
+                            $houseHiddenName.val(_title);
+                            $teremButton.attr('data-name', _title);
                         }
                     }
                 });
