@@ -143,8 +143,10 @@ function loadCalendar() {
                         }
 
                         if($teremButton.length){
-                            $houseHiddenName.val($title.html());
-                            $teremButton.attr('data-name', $title.html());
+                            setTimeout(function () {
+                                $houseHiddenName.val($title.html());
+                                $teremButton.attr('data-name', $title.html());
+                            }, 1000);
                         }
                     }
                 });
