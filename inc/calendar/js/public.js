@@ -41,6 +41,7 @@ function loadCalendar() {
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     var $teremButton = jQuery('.terem-button');
+    var $houseHiddenName = jQuery('[name="house-name"]');
     var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
     var $textHelper;
     var events;
@@ -124,7 +125,7 @@ function loadCalendar() {
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
                         if($teremButton.length){
-                            $teremButton.attr('data-name','Терем');
+                            $houseHiddenName.val('Терем');
                         }
                     },
                     select: function(startDate, endDate) {
@@ -145,7 +146,7 @@ function loadCalendar() {
                         }
 
                         if($teremButton.length){
-                            $teremButton.attr('data-name',$title.html());
+                            $houseHiddenName.val($title.html());
                         }
                     }
                 });
