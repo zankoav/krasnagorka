@@ -37,6 +37,7 @@ function loadCalendar() {
         slug: attArray[3]
     };
     var $parent = jQuery(this).parent().parent().parent().find('.booking-houses__calendars-inner');
+    var $title = jQuery(this).parent().parent().parent().find('.booking-houses__title');
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
@@ -139,6 +140,7 @@ function loadCalendar() {
                                 .html($textHelper.data('helper'));
                             buttonAnimate($orderButton);
                         }
+                        console.log('title', $title.html());
                     }
                 });
 
