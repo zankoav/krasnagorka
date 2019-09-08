@@ -47,6 +47,13 @@ function loadCalendar() {
     var $textHelper;
     var events;
 
+    $teremButton.on('click', function(){
+        var name = jQuery(this).data('name');
+        setTimeout(function () {
+            $houseHiddenName.val(name);
+        }, 500);
+    });
+
     function setDate(){
         if(jQuery(this)[0] == $activeButton[0] || !$activeButton[0]){
             setTimeout(function(){
@@ -147,6 +154,8 @@ function loadCalendar() {
                             _title = $title.html();
                             $houseHiddenName.val(_title);
                             $teremButton.attr('data-name', _title);
+
+
                         }
                     }
                 });
@@ -163,6 +172,8 @@ function loadCalendar() {
         }
     });
 }
+
+
 
 function buttonAnimate($buttonView){
     $activeButton = $buttonView;
