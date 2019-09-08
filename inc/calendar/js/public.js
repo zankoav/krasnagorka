@@ -141,6 +141,7 @@ function loadCalendar() {
                             buttonAnimate($orderButton);
                         }
 
+                        console.log('length', $teremButton.length);
                         if($teremButton.length){
                             console.log('ok');
                             $teremButton.data('name',$title.html());
