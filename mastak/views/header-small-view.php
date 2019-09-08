@@ -270,6 +270,13 @@
                         <span class="contacts-popup__working-time-text"><?= $time; ?></span>
                     </div>
                     <div class="contacts-popup__working-time-after">
+                        <?php if(empty($weekend)):
+                            $weekend = 'без выходных';
+                            ?>
+                        <?php else: ?>
+                            <img src="<?= CORE_PATH; ?>assets/icons/clock.svg" alt="icon-clock"
+                                 class="contacts-popup__icon contacts-popup__icon--clock">
+                        <?php endif; ?>
                         <span class="contacts-popup__working-time-after-text"><?= $weekend; ?></span>
                     </div>
                 </div>
