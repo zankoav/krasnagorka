@@ -128,6 +128,52 @@
 
             </style>
             <?php break;
+        case 'fade_puls_icon_only' : ?>
+            <style>
+                .breadcrumbs-wrapper__link {
+                    opacity                   : 0;
+                    animation-fill-mode       : forwards;
+                    animation-name            : fadeBanner;
+                    animation-duration        : .6s;
+                    animation-timing-function : ease-in;
+                }
+
+                .breadcrumbs-wrapper__link-img {
+                    animation-name            : pulsBanner;
+                    animation-duration        : 2s;
+                    animation-timing-function : ease-in;
+                    animation-iteration-count : infinite;
+                }
+
+                @keyframes fadeBanner {
+                    0% {
+                        opacity : 0;
+                    }
+                    100% {
+                        opacity : 1;
+                    }
+                }
+
+                @keyframes pulsBanner {
+                    0% {
+                        transform : scale(1);
+                    }
+                    25% {
+                        transform : scale(1.2);
+                    }
+                    50% {
+                        transform : scale(1);
+                    }
+                    75% {
+                        transform : scale(1.2);
+                    }
+                    100% {
+                        transform : scale(1);
+                    }
+                }
+
+            </style>
+            <?php break;
         default:
             break;
     endswitch;
@@ -460,7 +506,8 @@
                 <a href="<?= $breadcrumbsBannerLink; ?>" target="<?= $isBreadcrumbsBannerTargetLink; ?>"
                    class="breadcrumbs-wrapper__link"
                    style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
-                    <img src="<?= empty($breadcrumbsBannerImg) ? "/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/$breadcrumbsBannerImgDefault.svg" : $breadcrumbsBannerImg; ?>" class="breadcrumbs-wrapper__link-img"
+                    <img src="<?= empty($breadcrumbsBannerImg) ? "/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/$breadcrumbsBannerImgDefault.svg" : $breadcrumbsBannerImg; ?>"
+                         class="breadcrumbs-wrapper__link-img"
                          alt="banner icon">
                     <p class="breadcrumbs-wrapper__link-title"><?= $breadcrumbsBannerText; ?></p>
                 </a>

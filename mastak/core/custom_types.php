@@ -524,7 +524,8 @@
             'options' => array(
                 'fade'  => __('Плавное появление', 'krasnagorka'),
                 'fade_blink_infinity' => __('Плавное появление и мерцание тексата', 'krasnagorka'),
-                'fade_puls_icon' => __('Плавное появление и пульсация иконки', 'krasnagorka'),
+                'fade_puls_icon' => __('Плавное появление и пульсация иконки c поворотом', 'krasnagorka'),
+                'fade_puls_icon_only' => __('Плавное появление и пульсация иконки', 'krasnagorka'),
             ),
         ));
 
