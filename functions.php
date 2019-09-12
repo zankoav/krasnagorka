@@ -8,4 +8,8 @@
     require __DIR__ . '/inc/calendar/init.php';
     require __DIR__ . '/mastak/init.php';
 
-    add_filter( 'disable_wpseo_json_ld_search', '__return_true' );
+    function bybe_remove_yoast_json($data){
+        $data = array();
+        return $data;
+    }
+    add_filter('wpseo_json_ld_output', 'bybe_remove_yoast_json', 10, 1);
