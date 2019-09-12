@@ -18,6 +18,7 @@
     $breadcrumbsBannerText           = $options['breadcrumb_banner_text'];
     $breadcrumbsBannerLink           = $options['breadcrumb_banner_link'];
     $breadcrumbsBannerImg            = $options['breadcrumb_banner_img'];
+    $breadcrumbsBannerImgDefault     = $options['breadcrumb_banner_img_default'];
     $breadcrumbsBannerAnimationType  = $options['breadcrumb_banner_animation_type'];
     $breadcrumbsBannerAnimationDelay = empty($options['breadcrumb_banner_animation_delay']) ? 0 : $options['breadcrumb_banner_animation_delay'];
 
@@ -270,7 +271,7 @@
                         <span class="contacts-popup__working-time-text"><?= $time; ?></span>
                     </div>
                     <div class="contacts-popup__working-time">
-                        <?php if(empty($weekend)):
+                        <?php if (empty($weekend)):
                             $weekend = 'без выходных';
                             ?>
                         <?php else: ?>
@@ -403,9 +404,9 @@
 <div class="b-bgc-dark b-py-1">
     <div class="b-container">
         <div class="breadcrumbs-wrapper">
-            <?php if ( function_exists('yoast_breadcrumb') ) {
+            <?php if (function_exists('yoast_breadcrumb')) {
                 yoast_breadcrumb('<div class="breadcrumbs">', '</div>');
-            }?>
+            } ?>
             <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
                 <style>
                     .breadcrumbs-wrapper {
@@ -444,7 +445,7 @@
 
                     .breadcrumbs-wrapper__link-img {
                         flex-shrink  : 0;
-                        margin-left : auto;
+                        margin-left  : auto;
                         margin-right : 1rem;
                         max-height   : 1.5rem;
                         display      : inline-block;
@@ -459,7 +460,7 @@
                 <a href="<?= $breadcrumbsBannerLink; ?>" target="<?= $isBreadcrumbsBannerTargetLink; ?>"
                    class="breadcrumbs-wrapper__link"
                    style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
-                    <img src="<?= $breadcrumbsBannerImg; ?>" class="breadcrumbs-wrapper__link-img"
+                    <img src="<?= empty($breadcrumbsBannerImg) ? "/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/$breadcrumbsBannerImgDefault.svg" : $breadcrumbsBannerImg; ?>" class="breadcrumbs-wrapper__link-img"
                          alt="banner icon">
                     <p class="breadcrumbs-wrapper__link-title"><?= $breadcrumbsBannerText; ?></p>
                 </a>

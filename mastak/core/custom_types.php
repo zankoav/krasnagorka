@@ -453,10 +453,35 @@
         ));
 
         $cmb_options->add_field(array(
-            'name' => 'Иконка баннера',
+            'name' => 'Своя иконка',
             'description' => 'Рекомендованно формат SVG, PNG',
             'id'   => 'breadcrumb_banner_img',
             'type' => 'file'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Иконка баннера',
+            'description' => 'Рекомендованно формат SVG, PNG',
+            'id'   => 'breadcrumb_banner_img_default',
+            'type'    => 'select',
+            'default' => '1',
+            'options' => array(
+                '1'  => __('Сердце 1', 'krasnagorka'),
+                '2' => __('Подарок', 'krasnagorka'),
+                '3' => __('Вишенка', 'krasnagorka'),
+                '4' => __('Клубника', 'krasnagorka'),
+                '5' => __('Кусок торта', 'krasnagorka'),
+                '6' => __('Летящая звезда', 'krasnagorka'),
+                '7' => __('Колокольчик', 'krasnagorka'),
+                '8' => __('Оазис', 'krasnagorka'),
+                '9' => __('Пламя', 'krasnagorka'),
+                '10' => __('Звезда', 'krasnagorka'),
+                '11' => __('Сердце 2', 'krasnagorka'),
+                '12' => __('Ракета', 'krasnagorka'),
+                '13' => __('Новогодняя ель', 'krasnagorka'),
+                '14' => __('Кофети', 'krasnagorka'),
+            ),
+
         ));
 
         $cmb_options->add_field(array(
