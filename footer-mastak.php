@@ -1,11 +1,23 @@
 <?php wp_footer();
     if (is_page_template('reviews-page-template.php')):?>
-    <script>
-        function sendQueryComments(callback){
-            setTimeout(callback, 3000);
-            console.log('ok');
-        }
-    </script>
+        <script>
+            function sendQueryComments(callback) {
+                setTimeout(callback, 3000);
+                jQuery.ajax(kg_ajax.url, {
+                    data: JSON.stringify({range: 101}),
+                    method: 'post',
+                    success: function (response) {
+                        if (response) {
+                            console.log(response);
+                        }
+                    },
+                    error: function (x, y, z) {
+                        console.log('error', x);
+                    }
+                });
+
+            }
+        </script>
     <?php endif;
     if (is_page_template("template-mastak-map.php")): ?>
 
@@ -247,13 +259,13 @@
         }
 
     })(jQuery);
-    
+
     function getCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
-        }
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
 </script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -311,7 +323,7 @@
     ga('create', 'UA-85853604-1', 'auto');
     ga('require', 'displayfeatures');
     ga('send', 'pageview');
-    
+
     var cid = getCookie("_ga");
     cid = cid.replace(/GA1.2./g, '');
     //console.log(cid);
@@ -523,63 +535,69 @@
     .button-animation {
         animation : buttonShake .8s;
     }
+
     @keyframes buttonShake {
-        0%{background-color: #d0021b}
-        50%{background-color: #04a89f}
-        100%{background-color: #d0021b}
+        0% {
+            background-color : #d0021b
+        }
+        50% {
+            background-color : #04a89f
+        }
+        100% {
+            background-color : #d0021b
+        }
     }
 
-    .select-helper{
-        display : flex;
+    .select-helper {
+        display     : flex;
         align-items : center;
-        padding : 15px 15px 0 15px;
+        padding     : 15px 15px 0 15px;
     }
 
-    .select-helper_header{
-        font-size : 14px;
-        padding : 0 0 1rem;
+    .select-helper_header {
+        font-size   : 14px;
+        padding     : 0 0 1rem;
         align-items : flex-start;
     }
 
-    .select-helper_header .select-helper__img{
-        max-width: 26px;
+    .select-helper_header .select-helper__img {
+        max-width : 26px;
     }
 
-    @media (min-width:1280px){
-        .select-helper_header{
+    @media (min-width : 1280px) {
+        .select-helper_header {
             align-items : center;
-            font-size : 16px;
-            padding : 0 0 2rem;
+            font-size   : 16px;
+            padding     : 0 0 2rem;
         }
 
-        .select-helper_header .select-helper__img{
-            max-width: 2.5rem;
+        .select-helper_header .select-helper__img {
+            max-width : 2.5rem;
         }
     }
 
-
-    .select-helper__img{
-        flex-shrink: 0;
-        max-width: 2rem;
+    .select-helper__img {
+        flex-shrink  : 0;
+        max-width    : 2rem;
         margin-right : 1rem;
     }
 
-    .select-helper__img{
-        flex-shrink: 0;
-        max-width: 2.5rem;
+    .select-helper__img {
+        flex-shrink  : 0;
+        max-width    : 2.5rem;
         margin-right : 1rem;
     }
 
-    .select-helper__text{
-        flex: 1;
-    }
-    
-    .select-helper__text_success{
-        color: #04a89f
+    .select-helper__text {
+        flex : 1;
     }
 
-    .our-house__calendar, .booking-houses__calendars-inner{
-        position: static;
+    .select-helper__text_success {
+        color : #04a89f
+    }
+
+    .our-house__calendar, .booking-houses__calendars-inner {
+        position : static;
     }
 
 </style>
