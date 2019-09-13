@@ -16,9 +16,6 @@
                     },
                     body: data
                 })
-                    .then(function (response) {
-                        return response.json()
-                    })
                     .then(function (result) {
                         console.log('result', result);
 
