@@ -3,21 +3,28 @@
         <script>
             function sendQueryComments(callback) {
                 setTimeout(callback, 3000);
+
                 var data = new FormData();
                 data.set('range', 101);
-                jQuery.ajax(kg_ajax.url, {
-                    data: data,
-                    method: 'post',
-                    success: function (response) {
-                        if (response) {
-                            console.log(response);
-                        }
-                    },
-                    error: function (x, y, z) {
-                        console.log('error', x);
-                    }
-                });
+                data.set('action', 'comments_action');
 
+                fetch(kg_ajax.url, {
+                    method: 'post',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: data
+                })
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (result) {
+                        console.log('result', result);
+
+                    })
+                    .catch(function (error) {
+                        console.log('error', error)
+                    });
             }
         </script>
     <?php endif;

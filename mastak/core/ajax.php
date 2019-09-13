@@ -19,6 +19,6 @@
         wp_die();
     }
 
-    add_action('wp_ajax_calendar_action', 'comments_action');
-    add_action('wp_ajax_nopriv_calendar_action', 'comments_action');
+    add_action('wp_ajax_comments_action', 'comments_action');
+    add_action('wp_ajax_nopriv_comments_action', 'comments_action');
 
