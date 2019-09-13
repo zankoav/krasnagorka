@@ -9,20 +9,18 @@
                     range: 101
                 };
 
-                fetch(kg_ajax.url, {
+                jQuery.ajax(kg_ajax.url, {
+                    data: data,
                     method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: data
-                })
-                    .then(function (result) {
-                        console.log('result', result);
+                    success: function (response) {
+                        console.log(response);
 
-                    })
-                    .catch(function (error) {
-                        console.log('error', error)
-                    });
+                    },
+                    error: function (x, y, z) {
+                        console.log('error', x);
+                    }
+                });
+
             }
         </script>
     <?php endif;
