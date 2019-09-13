@@ -1,4 +1,14 @@
 <?php wp_footer();
+    if (is_page_template('reviews-page-template.php')):?>
+    <script>
+        (function buttonShowMore(){
+            var $button = jQuery('.show-more__button');
+            $button.on('click', function(){
+                console.log('buttonShowMore');
+            });
+        })();
+    </script>
+    <?php endif;
     if (is_page_template("template-mastak-map.php")): ?>
 
 
