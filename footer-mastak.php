@@ -3,7 +3,8 @@
     <script>
         function sendQueryComments(callback){
             setTimeout(callback, 3000);
-        };
+            console.log('ok');
+        }
     </script>
     <?php endif;
     if (is_page_template("template-mastak-map.php")): ?>
