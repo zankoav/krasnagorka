@@ -2,7 +2,6 @@
     if (is_page_template('reviews-page-template.php')):?>
         <script>
             function sendQueryComments(callback) {
-                setTimeout(callback, 3000);
 
                 var data = {
                     action: 'comments_action',
@@ -13,11 +12,12 @@
                     data: data,
                     method: 'post',
                     success: function (response) {
-                        console.log(response);
-
+                        callback();
+                        var data = JSON.parse(response);
+                        console.log('data', data);
                     },
                     error: function (x, y, z) {
-                        console.log('error', x);
+                        callback();
                     }
                 });
 
