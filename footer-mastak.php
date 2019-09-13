@@ -4,9 +4,10 @@
             function sendQueryComments(callback) {
                 setTimeout(callback, 3000);
 
-                var data = new FormData();
-                data.set('range', 101);
-                data.set('action', 'comments_action');
+                var data = {
+                    action: 'comments_action',
+                    range: 101
+                };
 
                 fetch(kg_ajax.url, {
                     method: 'post',
