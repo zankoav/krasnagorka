@@ -3,8 +3,10 @@
         <script>
             function sendQueryComments(callback) {
                 setTimeout(callback, 3000);
+                var data = new FormData();
+                data.set('range', 101);
                 jQuery.ajax(kg_ajax.url, {
-                    data: JSON.stringify({range: 101}),
+                    data: data,
                     method: 'post',
                     success: function (response) {
                         if (response) {
