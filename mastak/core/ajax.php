@@ -14,7 +14,7 @@
     function comments_action() {
         if (isset($_POST['range'])) {
 
-            $range    = $_POST['range'];
+            $range = $_POST['range'];
 
             $comments = get_comments(array(
                 'post_id'      => 9105,
@@ -23,6 +23,12 @@
                 'offset'       => $range,
                 'hierarchical' => 'threaded'
             ));
+
+            foreach ($comments as $comment) {
+                $rating            = get_comment_meta($comment->comment_ID, 'rating_reviews', 1);
+                $comment->raiting  = $rating;
+                $comment->children = $comment->get_children();
+            }
 
             echo json_encode(['comments' => $comments, 'status' => 1]);
         }
