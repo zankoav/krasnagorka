@@ -2,6 +2,7 @@
     if (is_page_template('reviews-page-template.php')):?>
         <script>
             var commentOffset = 20;
+
             function sendQueryComments(callback) {
 
                 var data = {
@@ -15,7 +16,10 @@
                     success: function (response) {
                         callback();
                         commentOffset += 20;
-                        console.log('response', response);
+                        var comments = JSON.parse(response);
+                        console.log('response', comments);
+                        var view = getCommentsView(comments);
+                        console.log('view', view);
                         // jQuery( ".js-comments" ).append( response )
                     },
                     error: function (x, y, z) {
@@ -23,6 +27,17 @@
                     }
                 });
 
+            }
+
+            function getCommentsView(comments) {
+                var result = '';
+                for (var i = 0; i < comments.length; i++) {
+                    result += `
+                        <div id="comment-${i}" class="list-review__item">
+                        </div>
+                    `;
+                }
+                return result;
             }
         </script>
     <?php endif;
