@@ -19,7 +19,7 @@
                         var response = JSON.parse(response);
                         console.log('response', response);
                         var view = getCommentsView(response.comments);
-                        jQuery( ".js-comments" ).append( response )
+                        jQuery( ".js-comments" ).append( view );
                     },
                     error: function (x, y, z) {
                         callback();
