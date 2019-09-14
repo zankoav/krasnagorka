@@ -20,14 +20,11 @@
                 'post_id'      => 9105,
                 'status'       => 'approve',
                 'number'       => 20,
-                'offset'       => 20,
+                'offset'       => $range,
                 'hierarchical' => 'threaded'
             ));
 
-            foreach ($comments as $comment) {
-                get_template_part("mastak/views/comment", (true ? "big" : "small"));
-            }
-//            echo json_encode(['range' => $range, 'status' => 1]);
+            echo json_encode(['comments' => $comments, 'status' => 1]);
         }
         wp_die();
     }

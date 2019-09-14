@@ -1,11 +1,12 @@
 <?php wp_footer();
     if (is_page_template('reviews-page-template.php')):?>
         <script>
+            var commentOffset = 20;
             function sendQueryComments(callback) {
 
                 var data = {
                     action: 'comments_action',
-                    range: 101
+                    range: commentOffset
                 };
 
                 jQuery.ajax(kg_ajax.url, {
@@ -13,8 +14,9 @@
                     method: 'post',
                     success: function (response) {
                         callback();
+                        commentOffset += 20;
                         console.log('response', response);
-                        jQuery( ".js-comments" ).append( response )
+                        // jQuery( ".js-comments" ).append( response )
                     },
                     error: function (x, y, z) {
                         callback();
