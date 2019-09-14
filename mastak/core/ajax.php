@@ -13,8 +13,21 @@
 
     function comments_action() {
         if (isset($_POST['range'])) {
-            $range = $_POST['range'];
-            echo json_encode(['range' => $range, 'status' => 1]);
+
+            $range    = $_POST['range'];
+
+            $comments = get_comments(array(
+                'post_id'      => 9105,
+                'status'       => 'approve',
+                'number'       => 20,
+                'offset'       => 20,
+                'hierarchical' => 'threaded'
+            ));
+
+            foreach ($comments as $comment) {
+                get_template_part("mastak/views/comment", (true ? "big" : "small"));
+            }
+//            echo json_encode(['range' => $range, 'status' => 1]);
         }
         wp_die();
     }

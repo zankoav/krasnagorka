@@ -37,7 +37,7 @@
     <p class="header-title__subtitle">Отзывы</p>
 </section>
 
-<div class="b-container">
+<div class="b-container js-comments">
     <?php
         foreach ($comments as $comment) {
             get_template_part("mastak/views/comment", ($isCommentsPage ? "big" : "small"));

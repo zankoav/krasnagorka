@@ -13,8 +13,8 @@
                     method: 'post',
                     success: function (response) {
                         callback();
-                        var data = JSON.parse(response);
-                        console.log('data', data);
+                        console.log('response', response);
+                        jQuery( ".js-comments" ).append( response )
                     },
                     error: function (x, y, z) {
                         callback();
