@@ -16,9 +16,9 @@
                     success: function (response) {
                         callback();
                         commentOffset += 20;
-                        var comments = JSON.parse(response);
-                        console.log('response', comments);
-                        var view = getCommentsView(comments);
+                        var response = JSON.parse(response);
+                        console.log('response', response);
+                        var view = getCommentsView(response.comments);
                         console.log('view', view);
                         // jQuery( ".js-comments" ).append( response )
                     },
@@ -31,11 +31,31 @@
 
             function getCommentsView(comments) {
                 var result = '';
-                for (var i = 0; i < comments.length; i++) {
+                for (var key in comments) {
                     result += `
-                        <div id="comment-${i}" class="list-review__item">
+                        <div id="comment-${key}" class="list-review__item">
+                            <div class="review review--full_width">
+                                 <div class="review__starts"></div>
+                                 <p class="review__text">${comments[key].comment_content}</p>
+                            </div>
+                            <div class="list-review__user">
+                                <span class="list-review__user-name">${comments[key].comment_author}</span>
+                                <span class="list-review__user-date">${comments[key].comment_date}</span>
+                            </div>
                         </div>
                     `;
+                }
+                return result;
+            }
+
+            function getStars( count ) {
+                var result = '';
+
+                for ( var i = 1; i <= 5; i++ ){
+                    var title = i <= count ? '' : 'empty-';
+                    result += `<img src="wp-content/themes/krasnagorka/mastak/assets/icons/${title}star.svg"
+                         alt="star"
+                         class="review__star">`
                 }
                 return result;
             }
