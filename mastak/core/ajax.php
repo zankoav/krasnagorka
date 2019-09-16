@@ -29,7 +29,7 @@
              */
             foreach ($comments as &$comment) {
                 $comment['raiting']  = get_comment_meta($comment->comment_ID, 'rating_reviews', 1);
-                $comment['children'] = $comment->get_children();
+                //$comment['children'] = $comment->get_children();
             }
 
             echo json_encode(['comments' => $comments, 'status' => 1]);
