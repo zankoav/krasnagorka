@@ -29,23 +29,27 @@
              * @var WP_Comment $comment
              */
             foreach ($comments as $comment) {
-                $date = date_create($comment->comment_date);
+                $date     = date_create($comment->comment_date);
                 $children = $comment->get_children();
-                $item = [
-                    'id' => $comment->comment_ID,
-                    'rating' => get_comment_meta($comment->comment_ID, 'rating_reviews', 1),
+                $item     = [
+                    'id'              => $comment->comment_ID,
+                    'rating'          => get_comment_meta($comment->comment_ID, 'rating_reviews', 1),
                     'comment_content' => $comment->comment_content,
-                    'comment_author' => $comment->comment_author,
-                    'comment_date' => date_format($date, 'd.m.Y'),
-                    'children' => $comment->get_children()
+                    'comment_author'  => $comment->comment_author,
+                    'comment_date'    => date_format($date, 'd.m.Y'),
+                    'children'        => $comment->get_children()
                 ];
 
-                if(count($children) > 0){
-                    $children_date = $children[0]->comment_content;
-                    $item['child'] = [
-                        'content'=> $children[0]->comment_content,
-                        'date'=> date_format($children_date, 'd.m.Y')
-                    ];
+                if (count($children) > 0) {
+                    foreach ($children as $child) {
+                        $children_date = $child->comment_content;
+                        $item['child'] = [
+                            'content' => $child->comment_content,
+                            'date'    => date_format($children_date, 'd.m.Y')
+                        ];
+                        break;
+                    }
+
                 }
                 $result[] = $item;
             }
