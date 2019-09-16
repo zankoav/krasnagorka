@@ -29,12 +29,13 @@
              * @var WP_Comment $comment
              */
             foreach ($comments as $comment) {
+                $date = date_create($comment->comment_date);
                 $result[] = [
                     'id' => $comment->comment_ID,
                     'rating' => get_comment_meta($comment->comment_ID, 'rating_reviews', 1),
                     'comment_content' => $comment->comment_content,
-                    'comment_autor' => $comment->comment_author,
-                    'comment_date' => date_format($comment->comment_date, 'd.m.Y'),
+                    'comment_author' => $comment->comment_author,
+                    'comment_date' => date_format($date, 'd.m.Y'),
                     'children' => $comment->get_children()
                 ];
             }

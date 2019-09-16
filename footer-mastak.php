@@ -61,7 +61,7 @@
 
                 for ( var i = 1; i <= 5; i++ ){
                     var title = i <= count ? '' : 'empty-';
-                    result += `<img src="wp-content/themes/krasnagorka/mastak/assets/icons/${title}star.svg"
+                    result += `<img src="/wp-content/themes/krasnagorka/mastak/assets/icons/${title}star.svg"
                          alt="star"
                          class="review__star">`
                 }
