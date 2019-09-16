@@ -34,7 +34,7 @@
                     'rating' => get_comment_meta($comment->comment_ID, 'rating_reviews', 1),
                     'comment_content' => $comment->comment_content,
                     'comment_autor' => $comment->comment_author,
-                    'comment_date' => $comment->comment_date,
+                    'comment_date' => date_format($comment->comment_date, 'd.m.Y'),
                     'children' => $comment->get_children()
                 ];
             }

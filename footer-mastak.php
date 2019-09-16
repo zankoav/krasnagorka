@@ -18,12 +18,12 @@
                         commentOffset += 20;
                         var response = JSON.parse(response);
                         console.log('response', response);
-                        // if(response.comments.length){
-                        //     var view = getCommentsView(response.comments);
-                        //     jQuery( ".js-comments" ).append( view );
-                        // }else{
-                        //     jQuery(".show-more").remove();
-                        // }
+                        if(response.comments.length){
+                            var view = getCommentsView(response.comments);
+                            jQuery( ".js-comments" ).append( view );
+                        }else{
+                            jQuery(".show-more").remove();
+                        }
                     },
                     error: function (x, y, z) {
                         callback();
@@ -34,16 +34,17 @@
 
             function getCommentsView(comments) {
                 var result = '';
-                for (var key in comments) {
+                for (var comment of comments) {
+                    var rating = getStars(comment.rating);
                     result += `
-                        <div id="comment-${key}" class="list-review__item">
+                        <div id="comment-${comment.id}" class="list-review__item">
                             <div class="review review--full_width">
-                                 <div class="review__starts"></div>
-                                 <p class="review__text">${comments[key].comment_content}</p>
+                                 <div class="review__starts">${rating}</div>
+                                 <p class="review__text">${comment.comment_content}</p>
                             </div>
                             <div class="list-review__user">
-                                <span class="list-review__user-name">${comments[key].comment_author}</span>
-                                <span class="list-review__user-date">${comments[key].comment_date}</span>
+                                <span class="list-review__user-name">${comment.comment_author}</span>
+                                <span class="list-review__user-date">${comment.comment_date}</span>
                             </div>
                         </div>
                     `;
@@ -52,6 +53,10 @@
             }
 
             function getStars( count ) {
+                if(!count){
+                    count = 4;
+                }
+                count = parseInt(count);
                 var result = '';
 
                 for ( var i = 1; i <= 5; i++ ){
