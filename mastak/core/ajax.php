@@ -24,7 +24,10 @@
                 'hierarchical' => 'threaded'
             ));
 
-            foreach ($comments as $comment) {
+            /**
+             * @var WP_Comment $comment
+             */
+            foreach ($comments as &$comment) {
                 $comment['raiting']  = get_comment_meta($comment->comment_ID, 'rating_reviews', 1);
                 $comment['children'] = $comment->get_children();
             }

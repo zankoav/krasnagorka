@@ -18,12 +18,12 @@
                         commentOffset += 20;
                         var response = JSON.parse(response);
                         console.log('response', response);
-                        if(response.comments.length){
-                            var view = getCommentsView(response.comments);
-                            jQuery( ".js-comments" ).append( view );
-                        }else{
-                            jQuery(".show-more").remove();
-                        }
+                        // if(response.comments.length){
+                        //     var view = getCommentsView(response.comments);
+                        //     jQuery( ".js-comments" ).append( view );
+                        // }else{
+                        //     jQuery(".show-more").remove();
+                        // }
                     },
                     error: function (x, y, z) {
                         callback();
