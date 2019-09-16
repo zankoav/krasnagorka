@@ -69,7 +69,7 @@
 
             function getStars( count ) {
                 if(!count){
-                    count = 4;
+                    count = 5;
                 }
                 count = parseInt(count);
                 var result = '';
