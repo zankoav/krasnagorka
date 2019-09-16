@@ -42,7 +42,7 @@
 
                 if (count($children) > 0) {
                     foreach ($children as $child) {
-                        $children_date = $child->comment_content;
+                        $children_date = $child->comment_date;
                         $item['child'] = [
                             'content' => $child->comment_content,
                             'date'    => date_format($children_date, 'd.m.Y')
