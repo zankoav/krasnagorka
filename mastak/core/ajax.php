@@ -45,7 +45,7 @@
                         $children_date = $child->comment_date;
                         $item['child'] = [
                             'content' => $child->comment_content,
-                            'date'    => date_format($children_date, 'd.m.Y')
+                            'date'    => date_format(date_create($children_date), 'd.m.Y')
                         ];
                         break;
                     }
