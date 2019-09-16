@@ -48,6 +48,21 @@
                             </div>
                         </div>
                     `;
+                    if(comment.child){
+                        result += `
+                            <div class="list-review__item list-review__item_answer">
+                                <div class="review review--full_width">
+                                    <p class="review__answer">Ответ:</p>
+                                    <p class="review__text">${comment.child.content}</p>
+                                </div>
+                                <div class="list-review__user">
+                                    <span class="list-review__user-name">Администратор</span>
+                                    <span class="list-review__user-date">${comment.child.date}</span>
+                                </div>
+                            </div>
+                        `;
+                    }
+
                 }
                 return result;
             }
