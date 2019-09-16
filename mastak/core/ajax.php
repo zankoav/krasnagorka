@@ -24,12 +24,19 @@
                 'hierarchical' => 'threaded'
             ));
 
+            $result = [];
             /**
              * @var WP_Comment $comment
              */
-            foreach ($comments as &$comment) {
-                $comment['raiting']  = get_comment_meta($comment->comment_ID, 'rating_reviews', 1);
-                //$comment['children'] = $comment->get_children();
+            foreach ($comments as $comment) {
+                $result[] = [
+                    'id' => $comment->comment_ID,
+                    'rating' => get_comment_meta($comment->comment_ID, 'rating_reviews', 1),
+                    'comment_content' => $comment->comment_content,
+                    'comment_autor' => $comment->comment_author,
+                    'comment_date' => $comment->comment_date,
+                    'children' => $comment->get_children()
+                ];
             }
 
             echo json_encode(['comments' => $comments, 'status' => 1]);
