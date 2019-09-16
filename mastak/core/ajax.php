@@ -39,7 +39,7 @@
                 ];
             }
 
-            echo json_encode(['comments' => $comments, 'status' => 1]);
+            echo json_encode(['comments' => $result, 'status' => 1]);
         }
         wp_die();
     }
