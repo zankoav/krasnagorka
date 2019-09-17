@@ -23,8 +23,11 @@
     get_template_part("mastak/views/header", "small-view"); ?>
 
 <div class="seasons">
-    <?php foreach ($seasons as $season_id => $season_title) : ?>
-        <div class="season-item <?= $current_season_id == $season_id ? 'season-item__current' : 'js-accordion' ?>">
+    <?php foreach ($seasons as $season_id => $season_title) :
+        $order_data = get_post_meta($season_id, "season_order", true);
+        $season_order = -1*(int)(empty($order_data) ? 0 : $order_data);
+        ?>
+        <div <?= $current_season_id != $season_id ? "style=\"order:$season_order;\"" : ''; ?> class="season-item <?= $current_season_id == $season_id ? 'season-item__current' : 'js-accordion' ?>">
             <section class="b-container header-title">
                 <h2 class="header-title__subtitle"><?= $season_title; ?></h2>
                 <?php if ($current_season_id == $season_id): ?>

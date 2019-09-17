@@ -71,5 +71,18 @@
 				'before_field' => 'BYN'
 			) );
 		}
+
+        $cmb_season->add_field(array(
+            'name'            => 'Порядок',
+            'id'              => 'season_order',
+            'description'     => __('Сортировка чем больше - тем выше в списке (0 до 100)', 'krasnagorka'),
+            'type'            => 'text',
+            'attributes'      => array(
+                'type'    => 'number',
+                'pattern' => '\d*'
+            ),
+            'sanitization_cb' => 'absint',
+            'escape_cb'       => 'absint'
+        ));
 	}
 

@@ -17,7 +17,6 @@
                         callback();
                         commentOffset += 20;
                         var response = JSON.parse(response);
-                        console.log('response', response);
                         if(response.comments.length){
                             var view = getCommentsView(response.comments);
                             jQuery( ".js-comments" ).append( view );
