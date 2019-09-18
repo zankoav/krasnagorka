@@ -405,7 +405,6 @@
             s.async = true;
             s.src = 'https://forms.amocrm.ru/chats/jivosite/jivosite.js';
             f.parentNode.insertBefore(s, f);
-
         }, 3000);
     })(window, document);
 
