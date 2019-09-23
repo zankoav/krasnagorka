@@ -12,11 +12,11 @@
 
         if (get_the_ID() == 10188) {
             var_dump($pieces[0]);
-            $pieces[0]['aggregateRating'] = [
-                '@type'       => 'AggregateRating',
-                'ratingValue' => 4.5,
-                'ratingCount' => 120
-            ];
+//            $pieces[0]['aggregateRating'] = [
+            //                '@type'       => 'AggregateRating',
+            //                'ratingValue' => 4.5,
+            //                'ratingCount' => 120
+            //            ];
             //            unset($pieces[0]);
             //            unset($pieces[2]);
             //            unset($pieces[3]);
