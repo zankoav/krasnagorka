@@ -11,7 +11,7 @@
     add_filter('wpseo_schema_graph_pieces', function ($pieces, $context) {
 
         if (get_the_ID() == 10188) {
-//            var_dump($pieces[0]);
+            var_dump($pieces[0]);
 //            $pieces[0]['aggregateRating'] = [
             //                '@type'       => 'AggregateRating',
             //                'ratingValue' => 4.5,
