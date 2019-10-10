@@ -1035,6 +1035,18 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Включить таб "Цены" ?',
+            'id'   => $prefix . 'price_tab_checkbox',
+            'type' => 'checkbox'
+        ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Текст для таба "Цены"',
+            'id'   => $prefix . 'price_tab_text',
+            'type' => 'wysiwyg'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => 'Открывать в новой вкладке',
             'id'   => 'new_page',
             'type' => 'checkbox'

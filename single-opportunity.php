@@ -10,11 +10,12 @@
 
 <?php if (have_posts()) :
     while (have_posts()) : the_post();
-        $price_byn      = (int)get_post_meta(get_the_ID(), "mastak_opportunity_price", true);
+        $post_id = get_the_ID();
+        $price_byn      = (int)get_post_meta($post_id, "mastak_opportunity_price", true);
         $price          = get_current_price($price_byn);
-        $price_subtitle = get_post_meta(get_the_ID(), "mastak_opportunity_price_subtitle", true);
-        $subtitle       = get_post_meta(get_the_ID(), "mastak_opportunity_subtitle", true);
-        $addOrderButton = get_post_meta(get_the_ID(), "mastak_opportunity_add_order", true);
+        $price_subtitle = get_post_meta($post_id, "mastak_opportunity_price_subtitle", true);
+        $subtitle       = get_post_meta($post_id, "mastak_opportunity_subtitle", true);
+        $addOrderButton = get_post_meta($post_id, "mastak_opportunity_add_order", true);
         global $kgCooke;
         $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
         $imageId       = get_post_thumbnail_id();
@@ -47,7 +48,7 @@
                         </div>
                     </div>
                     <?php
-                        $gellaryItems = get_post_meta(get_the_ID(), 'mastak_opportunity_gallery', 1);
+                        $gellaryItems = get_post_meta($post_id, 'mastak_opportunity_gallery', 1);
                         if (!empty($gellaryItems)): ?>
                             <div data-mixed-tab="2" class="accordion-mixed__tab">
                                 ФОТОГАЛЕРЕЯ
@@ -66,6 +67,20 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                    <?php
+                        $isShowPriceTabEnabled = get_post_meta($post_id, 'mastak_opportunity_price_tab_checkbox', 1);
+                        if ($isShowPriceTabEnabled): ?>
+                            <div data-mixed-tab="9" class="accordion-mixed__tab">
+                                Цены
+                            </div>
+                            <div data-mixed-conent="9" class="accordion-mixed__content">
+                                <div class="accordion-mixed__content-inner booking-houses__text">
+                                    <div class="big-text content-text">
+                                        <?= wpautop(get_post_meta($post_id, "mastak_opportunity_price_tab_text", true)); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     <div data-mixed-tab="4" class="accordion-mixed__tab">
                         расположение
                     </div>
@@ -73,19 +88,20 @@
                         <div class="accordion-mixed__content-inner">
                             <div class="base-place b-mb-2">
                                 <div class="base-place__image">
-                                    <img src="<?= get_post_meta(get_the_ID(), "mastak_opportunity_map", true); ?>" alt="map"
+                                    <img src="<?= get_post_meta($post_id, "mastak_opportunity_map", true); ?>"
+                                         alt="map"
                                          class="base-place__image-inner">
                                 </div>
                                 <div class="base-place__content">
                                     <div class="big-text content-text">
-                                        <?= wpautop(get_post_meta(get_the_ID(), "mastak_opportunity_text_map", true)); ?>
+                                        <?= wpautop(get_post_meta($post_id, "mastak_opportunity_text_map", true)); ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <?php
-                        $video = get_post_meta(get_the_ID(), "mastak_opportunity_video", true);
+                        $video = get_post_meta($post_id, "mastak_opportunity_video", true);
                         if (!empty($video)): ?>
                             <div data-mixed-tab="5" class="accordion-mixed__tab">
                                 ВИДЕО
@@ -107,7 +123,7 @@
                     </div>
                     <div data-mixed-conent="6" class="accordion-mixed__content">
                         <div class="accordion-mixed__content-inner booking-houses__text">
-                            <?= get_post_meta(get_the_ID(), "mastak_opportunity_residence", true); ?>
+                            <?= get_post_meta($post_id, "mastak_opportunity_residence", true); ?>
                         </div>
                     </div>
                     <?php if ($price != 0 or $addOrderButton): ?>
@@ -125,7 +141,9 @@
                                 </p>
                             <?php endif; ?>
                             <?php if ($addOrderButton): ?>
-                                <a href="#booking-order" data-event="<?=get_the_title();?>" class="fancybox-inline house-booking__button">забронировать</a>
+                                <a href="#booking-order" data-event="<?= get_the_title(); ?>"
+                                   class="fancybox-inline house-booking__button">забронировать
+                                </a>
                             <?php endif; ?>
                         </footer>
                     <?php endif; ?>
