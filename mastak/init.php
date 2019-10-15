@@ -250,6 +250,7 @@
 		}
 	}
 
+    update_mastak_weather();
 
 	function update_mastak_weather() {
 		$result  = [];
