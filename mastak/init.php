@@ -250,11 +250,9 @@
 		}
 	}
 
-    update_mastak_weather();
 
 	function update_mastak_weather() {
 		$result  = [];
-//		$api     = "http://api.apixu.com/v1/forecast.json?key=9bdc2c025cdf4992803115130182008&q=%D0%91%D1%80%D0%B0%D1%81%D0%BB%D0%B0%D0%B2&days=4&lang=ru";
 		$api     = "https://api.darksky.net/forecast/81b61e0936068afa7f3b5d5443c9f690/55.773202,27.072710?lang=ru&exclude=minutely,hourly,flags,alerts&units=auto";
 		$weather = json_decode( file_get_contents( $api ), true );
 
@@ -267,7 +265,7 @@
 					"text"    => $day["summary"],
 					"weekday" => get_day_by_date_format( $day["time"] ),
 					"temp"    => round( $day["temperatureMax"] ),
-					"icon"    => $day["icon"]
+					"icon"    => "https://darksky.net/images/weather-icons/".$day["icon"].".png"
 				];
 			}
 		}

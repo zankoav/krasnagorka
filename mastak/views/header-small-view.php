@@ -417,20 +417,15 @@
                                 <span><?= date('j'); ?></span><?= get_current_month_rus(); ?></div>
                         </div>
                         <div class="menu-bottom__details-sunny">
-                            <img class="menu-bottom__sunny-icon" src="<?= $weather[0]["icon"]; ?>"
+                            <img class="menu-bottom__sunny-icon" src="<?= $weather[1]["icon"]; ?>"
                                  alt="sunny">
-                            <div class="menu-bottom__sunny"><?= $weather[0]["text"]; ?></div>
+                            <div class="menu-bottom__sunny"><?= $weather[1]["text"]; ?></div>
                         </div>
-                        <p class="menu-bottom__degrees"><?= $weather[0]["temp"]; ?>
+                        <p class="menu-bottom__degrees"><?= $weather[1]["temp"]; ?>
                             <span>&deg;C</span>
                         </p>
                     </div>
                     <ul class="menu-bottom__days">
-                        <li class="menu-bottom__day">
-                            <p class="menu-bottom__day-text"><?= $weather[1]["weekday"]; ?></p>
-                            <img src="<?= $weather[1]["icon"]; ?>" alt="weather"
-                                 class="menu-bottom__day-icon">
-                        </li>
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[2]["weekday"]; ?></p>
                             <img src="<?= $weather[2]["icon"]; ?>" alt="weather"
@@ -439,6 +434,11 @@
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[3]["weekday"]; ?></p>
                             <img src="<?= $weather[3]["icon"]; ?>" alt="weather"
+                                 class="menu-bottom__day-icon">
+                        </li>
+                        <li class="menu-bottom__day">
+                            <p class="menu-bottom__day-text"><?= $weather[4]["weekday"]; ?></p>
+                            <img src="<?= $weather[4]["icon"]; ?>" alt="weather"
                                  class="menu-bottom__day-icon">
                         </li>
                     </ul>
