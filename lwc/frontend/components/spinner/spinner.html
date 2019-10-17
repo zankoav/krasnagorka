@@ -1,0 +1,10 @@
+<template>
+    <div class="spinner">
+        <img src={img}
+             alt="loader"
+             class="spinner__img">
+        <template if:true={text}>
+            <p class="spinner__text">{text}</p>
+        </template>
+    </div>
+</template>

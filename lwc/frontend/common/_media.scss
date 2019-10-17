@@ -1,0 +1,58 @@
+//MEDIA SCREENS:
+$MEDIA: (
+    SM: 768px,
+    MD: 1024px,
+    LG: 1280px,
+    XL: 1366px,
+    XLL: 1440px,
+    HD: 1920px,
+    XHD: 2560px
+);
+
+@mixin m-land {
+    @media (max-width: map_get($MEDIA, SM) - 1px) and (orientation: landscape) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media (min-width: map_get($MEDIA, SM)) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media (min-width: map_get($MEDIA, MD)) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media (min-width: map_get($MEDIA, LG)) {
+        @content;
+    }
+}
+
+@mixin xl {
+    @media (min-width: map_get($MEDIA, XL)) {
+        @content;
+    }
+}
+
+@mixin xll {
+    @media (min-width: map_get($MEDIA, XLL)) {
+        @content;
+    }
+}
+
+@mixin hd {
+    @media (min-width: map_get($MEDIA, HD)) {
+        @content;
+    }
+}
+
+@mixin xhd {
+    @media (min-width: map_get($MEDIA, XHD)) {
+        @content;
+    }
+}

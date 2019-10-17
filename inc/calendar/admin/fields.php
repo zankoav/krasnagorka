@@ -73,6 +73,10 @@ function sbc_orders_metabox() {
         ),
     ) );
 
+    $mastak_theme_options = get_option('mastak_theme_options');
+    $calendar_settings_message =  isset($mastak_theme_options['calendar_settings_message']) ? $mastak_theme_options['calendar_settings_message'] : '';
+    $calendar_settings_message_after =  isset($mastak_theme_options['calendar_settings_message_after']) ? $mastak_theme_options['calendar_settings_message_after'] : '';
+
     $sbc_order->add_field( array(
         'name'     => esc_html__( 'Выбрать календарь', 'sbc' ),
         'desc'     => esc_html__( 'выберите календарь для отображения', 'sbc' ),
@@ -90,7 +94,7 @@ function sbc_orders_metabox() {
                 </ul>
                 <div class="select-helper">
                     <img src="/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png" class="select-helper__img" alt="Выделение дат заезда и выезда">
-                    <p class="select-helper__text" data-helper-start="'.get_option('mastak_theme_options')['calendar_settings_message'].'" data-helper="'.get_option('mastak_theme_options')['calendar_settings_message_after'].'">' . get_option('mastak_theme_options')['calendar_settings_message'].'</p>    
+                    <p class="select-helper__text" data-helper-start="'.$calendar_settings_message.'" data-helper="'.$calendar_settings_message_after.'">' . $calendar_settings_message.'</p>    
                 </div>
                 </div></div>',
     ) );

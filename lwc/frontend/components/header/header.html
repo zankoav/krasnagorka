@@ -1,0 +1,31 @@
+<template>
+    <div class="container navigation">
+        <div class="navigation__inner">
+            <div class="navigation__left">
+                <a href="javascript:void(0)"
+                   onclick={showMenu}
+                   style="display: none"
+                   class="menu-burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+                <a href="/"
+                   class="menu-logo">
+                    <img src={imgs.logo}
+                         class="menu-logo__img"
+                         alt="Locator">
+                </a>
+                <div class="menu-logo__text">Locator stations uploader</div>
+            </div>
+            <div class="navigation__right">
+                <template if:true={_showLogout}>
+                    <a href="/admin/logout"
+                       class="button-logout">
+                        Logout
+                    </a>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

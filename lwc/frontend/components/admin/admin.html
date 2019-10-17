@@ -1,0 +1,41 @@
+<template>
+    <div class="app"
+         onuserlogout={userLogoutHandler}
+         onspinneroff={spinnerEnd}
+         onspinneron={spinnerStart}
+         onrestore={startRestore}>
+        <header class="app__header">
+            <z-header show-logout={isLoginUser}></z-header>
+        </header>
+        <div class="app__main">
+            <template if:true={isLoading}>
+                <z-spinner text={spinnerText}></z-spinner>
+            </template>
+            <template if:false={isLoading}>
+                <template if:true={isLoginUser}>
+                    <div class="container h_100">
+                        <div class="row h_100">
+                            <aside class="left-menu">
+                                <template if:true={backupVersions}>
+                                    <z-backups backups-items={backupVersions}></z-backups>
+                                </template>
+                            </aside>
+                            <main class="content">
+                                <z-content onsalseforceupdate={updateSalesforce}
+                                           onupdatedatabase={updateDataBase}></z-content>
+                            </main>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={isLoginUser}>
+                    <div class="app__main_center h_100">
+                        <z-login-form onloginsuccess={loginSuccessHandler}></z-login-form>
+                    </div>
+                </template>
+            </template>
+        </div>
+        <footer class="app__footer">
+            <z-footer></z-footer>
+        </footer>
+    </div>
+</template>

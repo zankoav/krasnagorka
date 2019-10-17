@@ -1,0 +1,133 @@
+@import 'fonts';
+@import 'reset';
+@import 'mixins';
+@import 'container';
+@import 'grid';
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    font-family: $FONT;
+    color: $GRAY_1;
+}
+
+body * {
+    color: $GRAY_2;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: $GRAY_1;
+
+    &__footer {
+        position: fixed;
+        border-top: 1px solid $WHITE;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        font-size: 12px;
+        font-weight: 500;
+        background-color: $GRAY_3;
+        padding: 0.5rem 0;
+        text-align: center;
+    }
+
+    &__header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        left: 0;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        height: $HEADER_HEIGHT;
+        background-color: $WHITE;
+        z-index: 1;
+    }
+
+    &__main {
+        overflow: scroll;
+        margin-top: $HEADER_HEIGHT;
+        max-height: calc(100% - 100px);
+        flex: 1 0 auto;
+
+        &_center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+.left-menu {
+    padding: 0 1rem;
+    max-width: 220px;
+    flex: 1 0 220px;
+}
+
+.content {
+    padding: 0 1rem;
+    max-width: calc(100% - 220px);
+    flex: 1 0 calc(100% - 220px);
+}
+
+.h_100 {
+    height: 100%;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-ib {
+    display: inline-block;
+}
+
+.d-b {
+    display: block;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.mb-3 {
+    margin-bottom: 3rem;
+}
+
+.ml-05 {
+    margin-left: 0.5rem;
+}
+
+.button-logout {
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: '';
+        background: url('./../icons/logout.svg') no-repeat;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-right: 0.5rem;
+    }
+}
+
+@include container();
+@include button();

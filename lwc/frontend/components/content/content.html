@@ -1,0 +1,120 @@
+<template>
+    <div class="main h_100">
+        <template if:false={isLoading}>
+            <div class="main__header">
+                <div class="main__header-title">Shell Stations</div>
+                <a href="javascript:void(0);"
+                   if:true={actualData}
+                   onclick={updateSalesforce}
+                   class="main__header-uploud-file main__header-uploud-file_ml-auto">
+                    <img class="main__header-uploud-file-icon"
+                         src={imgs.salesforce}
+                         alt="xlsx">
+                    <span class="main__header-uploud-file-settings-title">Update accounts</span>
+                </a>
+                <div class="main__header-uploud">
+                    <a href="javascript:void(0);"
+                       onclick={chooseFile}
+                       class="main__header-uploud-file">
+                        <input type="file"
+                               name="xlsxFile"
+                               onchange={xlsxChange}
+                               class="d-none"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                        <img class="main__header-uploud-file-icon"
+                             src={imgs.xlsx}
+                             alt="xlsx">
+                        <div class="main__header-uploud-file-settings">
+                            <div class="main__header-uploud-file-settings-title">Upload excel file</div>
+                            <template if:true={file}>
+                                <div class="main__header-uploud-file-settings-name">{file.name}</div>
+                            </template>
+                        </div>
+                    </a>
+                    <template if:true={file}>
+                        <a href="javascript:void(0);"
+                           onclick={previewXLSX}
+                           class="main__header-preview-button">
+                            Preview</a>
+                    </template>
+                </div>
+            </div>
+            <template if:true={previewColumns}>
+                <div class="main__preview-table">
+                    <div class="main__actual-data-wrapper">
+                        <h2 class="main__actual-data-title">Preview stations</h2>
+                        <span if:true={countStations}
+                              class="main__count-of-stations">{countStations}</span>
+                        <a href="javascript:void(0);"
+                           onclick={filterOnlyESI}
+                           class="main__filter-button">
+                            ESI only</a>
+                    </div>
+                    <z-table columns={previewColumns}
+                             all-rows={previewRows}
+                             half="true"></z-table>
+                    <div class="main__valifdation">
+                        <template if:true={isValid}>
+                            <div class="main__message main__message_success">
+                                <img class="main__message-icon"
+                                     src={imgs.success}
+                                     alt="success">
+                                <span class="main__message-text">Format is valid, you can update database</span>
+                            </div>
+                            <a href="javascript:void(0);"
+                               onclick={updateDataBase}
+                               class="button button_success">Update Database</a>
+                        </template>
+                        <template if:false={isValid}>
+                            <div class="main__message main__message_error">
+                                <img class="main__message-icon"
+                                     src={imgs.error}
+                                     alt="error">
+                                <span class="main__message-text">{errorMessage}</span>
+                            </div>
+                            <a href="javascript:void(0);"
+                               onclick={closePreview}
+                               class="main__valifdation-button">Close</a>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <div class="main__actual-data">
+                <template if:false={actualColumns}>
+                    <div class="main__actual-data-wrapper main__actual-data-wrapper_empty">
+                        <h2 class="main__actual-data-title main__actual-data-title_empty">Current database is empty</h2>
+                    </div>
+                </template>
+                <template if:true={actualColumns}>
+                    <div class="main__actual-data-wrapper">
+                        <h2 class="main__actual-data-title">Current database
+                            <template if:true={currentVersion}>
+                                <span class="main__actual-data-title-version">{currentVersion}</span>
+                            </template>
+                        </h2>
+                        <span if:true={countCurrentStations}
+                              class="main__count-of-stations main__count-of-stations_mr0">{countCurrentStations}</span>
+                    </div>
+                </template>
+                <template if:true={actualColumns}>
+                    <z-table columns={actualColumns}
+                             all-rows={actualData}
+                             half={previewRows}></z-table>
+                    <template if:true={isUpdate}>
+                        <div class="main__valifdation">
+                            <div class="main__message main__message_success">
+                                <img class="main__message-icon"
+                                     src={imgs.success}
+                                     alt="success">
+                                <span class="main__message-text">Database update successfull</span>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </template>
+        <template if:true={isLoading}>
+            <z-spinner text={spinnerText}></z-spinner>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,24 @@
+$MAX-WIDTH_LG: 1216px;
+$MAX-WIDTH_HD: 1312px;
+
+@mixin container() {
+    .container {
+        padding: 0 0.75rem;
+        position: relative;
+        width: 100%;
+
+        @include sm {
+            padding: 0 2rem;
+        }
+
+        @include lg {
+            // max-width: $MAX-WIDTH_LG;
+            // margin-left: auto;
+            // margin-right: auto;
+        }
+
+        @include hd {
+            // max-width: $MAX-WIDTH_HD;
+        }
+    }
+}
