@@ -250,7 +250,6 @@
 		}
 	}
 
-    update_mastak_weather();
 	function update_mastak_weather() {
 		$result  = [];
 		$api     = "https://api.darksky.net/forecast/81b61e0936068afa7f3b5d5443c9f690/55.773202,27.072710?lang=ru&exclude=minutely,hourly,flags,alerts&units=auto";
