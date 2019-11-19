@@ -1,4 +1,4 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LWCWebpackPlugin = require('lwc-webpack-plugin');
 const path = require('path');
@@ -6,27 +6,30 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
+
 module.exports = env => {
     const IS_DEV = env.MODE === 'development';
+    const publicPath = IS_DEV ? '' :'/wp-content/themes/krasnagorka/src/';
     const settins = {
         devtool: IS_DEV ? 'inline-source-map' : 'none',
-        devServer: {
-            contentBase: path.resolve(__dirname, 'public'),
-            proxy: {
-                '/': {
-                    target: 'http://localhost:3000',
-                    changeOrigin: true
-                }
-            }
-        },
+        // devServer: {
+        //     contentBase: path.resolve(__dirname, './../src'),
+        //     proxy: {
+        //         '/': {
+        //             target: 'http://localhost:3000',
+        //             changeOrigin: true
+        //         }
+        //     }
+        // },
         entry: {
-            admin: './frontend/admin.js'
+            booking: './frontend/booking.js'
         },
         output: {
-            path: path.resolve(__dirname, 'public'),
-            filename: 'javascript/[name].[hash].min.js',
+            path: path.resolve(__dirname, './../src'),
+            publicPath: publicPath,
+            filename: `javascript/[name].[hash].min.js`,
             chunkFilename:
-                'javascript/[name]' + (IS_DEV ? '.js' : '.[hash].min.js'),
+            'javascript/[name]' + (IS_DEV ? '.js' : '.[hash].min.js'),
             library: '[name]'
         },
         mode: env.MODE,
@@ -59,6 +62,7 @@ module.exports = env => {
                             },
                             {
                                 loader: 'sass-loader',
+
                                 options: {
                                     sourceMap: true
                                 }
@@ -75,11 +79,29 @@ module.exports = env => {
                             options: {
                                 outputPath: IS_DEV
                                     ? './frontend/icons/'
-                                    : './icons/',
+                                    : `/icons/`,
                                 name: '[name].[hash:6].[ext]',
                                 publicPath: IS_DEV
                                     ? '/frontend/icons/'
-                                    : '/icons/'
+                                    : `${publicPath}icons/`
+                            }
+                        }
+                    ]
+                },
+                // Font Loader
+                {
+                    test: /\.(eot|ttf|woff|woff2)$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                outputPath: IS_DEV
+                                    ? './frontend/fonts/'
+                                    : './fonts/',
+                                name: '[name].[hash:6].[ext]',
+                                publicPath: IS_DEV
+                                    ? '/frontend/fonts/'
+                                    : `${publicPath}fonts/`
                             }
                         }
                     ]
@@ -93,7 +115,7 @@ module.exports = env => {
                 }
             }),
             new ExtractTextPlugin({
-                filename: 'stylesheets/[name].[hash].min.css',
+                filename: `stylesheets/[name].[hash].min.css`,
                 disable: false,
                 allChunks: false
             })
@@ -110,7 +132,7 @@ module.exports = env => {
         settins.plugins.push(
             new AssetsPlugin({
                 filename: 'assets.json',
-                path: path.resolve(__dirname, 'public/')
+                path: path.resolve(__dirname, './../src')
             })
         );
     }
@@ -120,10 +142,10 @@ module.exports = env => {
             0,
             0,
             new HtmlWebpackPlugin({
-                title: 'Admin page',
-                filename: `admin.html`,
-                template: './frontend/admin.pug',
-                chunks: ['admin']
+                title: 'Booking page',
+                filename: `booking.html`,
+                template: './frontend/booking.pug',
+                chunks: ['booking']
             })
         );
     }

@@ -1,0 +1,62 @@
+@mixin padding() {
+
+    .px-075{
+        padding :{
+            left: .75rem;
+            right: .75rem;
+        }
+    }
+
+    .px-sm-05 {
+        @include sm {
+            padding   : {
+                left  : .5rem;
+                right : .5rem;
+            }
+        }
+    }
+
+    .py-30{
+        padding :{
+            top: 3rem;
+            bottom: 3rem;
+        }
+    }
+
+    .py-20{
+        padding :{
+            top: 2rem;
+            bottom: 2rem;
+        }
+    }
+
+    .py-15{
+        padding :{
+            top: 1.5rem;
+            bottom: 1.5rem;
+        }
+    }
+
+    .py-05{
+        padding :{
+            top: .5rem;
+            bottom: .5rem;
+        }
+    }
+
+    .py-025{
+        padding :{
+            top: .25rem;
+            bottom: .25rem;
+        }
+    }
+
+    .py-sm-15{
+        @include sm{
+            padding :{
+                top: 1.5rem;
+                bottom: 1.5rem;
+            }
+        }
+    }
+}

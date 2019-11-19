@@ -1,3 +1,5 @@
 <template>
-    <span class="copy">&copy; 2019 - 2020 All rights reserved</span>
+    <template if:true={model}>
+        <z-footer-bottom model={model.footerBottom}></z-footer-bottom>
+    </template>
 </template>

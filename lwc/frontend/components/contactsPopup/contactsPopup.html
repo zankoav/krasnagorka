@@ -1,0 +1,42 @@
+<template>
+    <div if:true={isOpen} class={cssClass}>
+        <input class="input-none" type="text" onblur={hidePopup}>
+       <div class="contacts-popup__card">
+           <div class="contacts-popup__item">
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.velcome} alt="velcom">
+                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+                   <img class="contacts-popup__item-messangers" src={icons.viber} alt="viber">
+                   <img class="contacts-popup__item-messangers" src={icons.whatsapp} alt="whatsapp">
+                   <img class="contacts-popup__item-messangers" src={icons.telegram} alt="telegram">
+               </div>
+           </div>
+           <div class="contacts-popup__item">
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.mts} alt="mts">
+                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+               </div>
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.life} alt="life">
+                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+               </div>
+           </div>
+           <div class="contacts-popup__item">
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.envelope} alt="life">
+                   <a class="contacts-popup__item-text contacts-popup__item-text_gray" href="mailto:info@krasnagorka.by">info@krasnagorka.by</a>
+               </div>
+           </div>
+           <div class="contacts-popup__item">
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.clock} alt="mts">
+                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">9:00 - 20:00 пн-пт</span>
+               </div>
+               <div class="contacts-popup__item-info">
+                   <img class="contacts-popup__item-icon" src={icons.clock} alt="mts">
+                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">11:00 - 20:00 сб,вс</span>
+               </div>
+           </div>
+       </div>
+    </div>
+</template>

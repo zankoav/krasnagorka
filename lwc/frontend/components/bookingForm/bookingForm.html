@@ -1,0 +1,46 @@
+<template>
+    <div class="booking-form">
+        <div class="container">
+            <div class="booking-form__content">
+                <h2 class="booking-form__title mb-15" data-before="Домик:">Бунгало</h2>
+                <div class="booking-form__group">
+                    <label for="fio" class="booking-form__label booking-form__label_required">ФИО</label>
+                    <input id="fio" type="text" class="booking-form__input" name="fio">
+                </div>
+                <input type="hidden" class="booking-form__input" name="message">
+                <div class="booking-form__group">
+                    <label for="phone" class="booking-form__label booking-form__label_required">Телефон</label>
+                    <input id="phone" type="tel" class="booking-form__input" name="phone">
+                </div>
+                <div class="booking-form__group">
+                    <label for="email" class="booking-form__label booking-form__label_required">E-mail</label>
+                    <input id="email" type="email" class="booking-form__input" name="email">
+                </div>
+                <div class="booking-form__group">
+                    <label for="date-start" class="booking-form__label booking-form__label_required">Дата заезда</label>
+                    <input id="date-start" type="date" class="booking-form__input" name="date-start">
+                </div>
+                <div class="booking-form__group">
+                    <label for="date-end" class="booking-form__label booking-form__label_required">Дата выезда</label>
+                    <input id="date-end" type="date" class="booking-form__input" name="date-end">
+                </div>
+                <div class="booking-form__group">
+                    <label for="count" class="booking-form__label booking-form__label_required">Количество людей</label>
+                    <input id="count" type="number" min="1" max="99" class="booking-form__input" name="count">
+                </div>
+                <div class="booking-form__group">
+                    <label for="comment" class="booking-form__label">Комментарий</label>
+                    <textarea id="comment" class="booking-form__input" rows="4" name="comment"></textarea>
+                </div>
+                <div class="booking-form__group booking-form__group_checkbox">
+                    <input id="contract" type="checkbox" class="booking-form__input" name="contract">
+                    <label for="contract" class="booking-form__label">Согласен с&nbsp;
+                        <a href="#">договором оферты</a></label>
+                </div>
+                <div class="booking-form__send-button-wrapper">
+                    <a href="javascript:void(0);" class="booking-form__send-button">Отправить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

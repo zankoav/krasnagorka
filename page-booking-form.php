@@ -3,7 +3,6 @@
     if (!defined('ABSPATH')) {
         exit;
     }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,9 +12,13 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="<?=$assets->css('booking');?>">
 </head>
 <body>
-    <h1>Hello world</h1>
+<script>
+    const model = `<?=$model->getBookingModel();?>`;
+</script>
+<script src="<?=$assets->js('booking');?>"></script>
 </body>
 </html>
 

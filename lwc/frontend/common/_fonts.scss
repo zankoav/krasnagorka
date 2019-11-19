@@ -1,4 +1,69 @@
-/**
-    font-family: 'Roboto', sans-serif;
- */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700,900&subset=cyrillic');
+@font-face {
+    font-family: 'AvenirNextCyr-Bold';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-Bold.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Bold.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Bold.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-BoldItalic';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-BoldItalic.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-BoldItalic.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-BoldItalic.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-Italic';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-Italic.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Italic.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Italic.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-Light';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-Light.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Light.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Light.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-UltraLight';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-UltraLight.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-UltraLight.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-UltraLight.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-LightItalic';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-LightItalic.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-LightItalic.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-LightItalic.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}
+
+@font-face {
+    font-family: 'AvenirNextCyr-Regular';
+    src: url('./../fonts/AvenirNextCyr/AvenirNextCyr-Regular.eot');
+    src: local('☺'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Regular.woff') format('woff'),
+    url('./../fonts/AvenirNextCyr/AvenirNextCyr-Regular.ttf') format('truetype');
+    font-display:swap;
+    font-style:normal
+}

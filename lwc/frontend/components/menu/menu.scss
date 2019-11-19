@@ -1,0 +1,265 @@
+@import './../../common/mixins';
+
+.menu {
+    display         : flex;
+    justify-content : space-between;
+    align-items     : center;
+    padding: 0 .25rem;
+    margin: 0 -.25rem;
+
+
+    @include lg {
+        overflow : initial;
+        padding: initial;
+    }
+
+    &__logo-wrapper {
+        display        : flex;
+        flex-direction : column;
+        align-items    : center;
+
+        @include lg {
+            flex-direction : row;
+        }
+    }
+
+    &__online-video {
+        display     : flex;
+        align-items : center;
+
+        @include lg {
+            margin-left : 3rem;
+        }
+    }
+
+    &__online-video-text {
+        color       : $WHITE;
+        display     : flex;
+        align-items : center;
+        font-size   : 13px;
+
+        &:before {
+            content       : attr(data-before);
+            margin-left   : .5rem;
+            margin-bottom : 2px;
+        }
+
+        &:after {
+            content     : attr(data-after);
+            margin-left : .25rem;
+        }
+    }
+
+    &__logo {
+        width  : 74px;
+        height : auto;
+    }
+
+    &__navigation {
+        order : -1;
+
+        @include lg {
+            order       : 0;
+            margin-left : auto;
+        }
+    }
+
+    &__navigation-list {
+        max-height : calc(100vh - 104px);
+        overflow-y : auto;
+        padding: 1rem 2rem;
+
+        @include lg {
+            max-height   : initial;
+            overflow-y   : initial;
+            display      : flex;
+            margin-right : 1rem;
+            padding: initial;
+        }
+    }
+
+    &__navigation-mobile-button {
+        @include lg {
+            display : none;
+        }
+    }
+
+    &__navigation-list-wrapper {
+        transition       : transform .4s ease-in;
+        position         : fixed;
+        width            : 100vw;
+        height           : 100vh;
+        top              : 0;
+        left             : 0;
+        transform        : translateX(-100vw);
+        padding          : 2rem 0;
+        z-index          : 999;
+        background-color : $GRAY;
+
+        @include sm {
+            max-width : 360px;
+            transform : translateX(-360px);
+        }
+
+        &_active {
+            transform : translateX(0);
+
+            @include lg {
+                transform : initial;
+            }
+        }
+
+        @include lg {
+            background-color : initial;
+            display          : block;
+            max-width        : 100%;
+            position         : initial;
+            width            : initial;
+            height           : initial;
+            top              : initial;
+            left             : initial;
+            transform        : initial;
+            z-index          : initial;
+            padding          : initial;
+        }
+    }
+
+    &__navigation-phone-icon, &__navigation-mobile-icon {
+        width : 44px;
+
+        @include lg {
+            width  : 28px;
+            height : 28px;
+        }
+    }
+
+    &__navigation-phone-icon {
+        animation : contact-button 2s linear infinite;
+    }
+
+    &__navigation-item {
+        position : relative;
+
+        @include lg {
+            margin      : 0 .5rem;
+            line-height : 13px;
+
+            &:last-child {
+                margin-right : 1rem;
+            }
+
+        }
+
+        a {
+            transition : color .4s;
+            color      : $GRAY_1;
+            display    : block;
+            padding    : .75rem 0;
+
+            &:hover {
+                color : $PRIMARY;
+            }
+
+            @include lg {
+                display   : initial;
+                font-size : 13px;
+                padding   : .25rem 0;
+                color     : $WHITE;
+            }
+        }
+
+        &_active {
+            a {
+                color : $PRIMARY;
+                @include lg {
+                    border-bottom : 1px solid $WHITE;
+                    color         : $WHITE;
+                    &:hover {
+                        color : $WHITE;
+                    }
+                }
+            }
+        }
+
+        &_has-child {
+            &:hover {
+                .menu__navigation-sublist {
+                    display : block;
+                }
+            }
+        }
+
+    }
+
+    &__navigation-sublist {
+        margin-left : 2rem;
+
+        .menu__navigation-item {
+            a {
+                padding : .25rem 0;
+            }
+        }
+
+        @include lg {
+            position         : absolute;
+            left             : 0;
+            margin-left      : initial;
+            top              : 18px;
+            max-width        : initial;
+            display          : none;
+            background-color : $WHITE;
+            padding          : .5rem;
+            border-radius    : .5rem;
+            box-shadow       : 0 2px 4px rgba($BLACK, .5);
+
+            .menu__navigation-item {
+                margin  : initial;
+                padding : .5rem;
+
+                a {
+                    white-space : nowrap;
+                    color       : #4a4a4a;
+
+                    &:hover {
+                        color : $PRIMARY;
+                    }
+                }
+
+                &_active {
+                    a {
+                        color : $PRIMARY;
+                    }
+                }
+            }
+
+        }
+    }
+
+    &__navigation-mobile-header {
+        display         : flex;
+        justify-content : space-between;
+        align-items     : center;
+        padding: 0 2rem 1.5rem;
+        box-shadow: 0 4px 6px -3px rgba($BLACK, .2);
+
+        @include lg {
+            display : none;
+        }
+    }
+
+    &__contacts{
+        position : relative;
+    }
+}
+
+@keyframes contact-button {
+    0%, 40%, 50%, 60%, to {
+        transform : scale(1) rotate(0)
+    }
+    45% {
+        transform : scale(1.1) rotate(-20deg);
+    }
+    55% {
+        transform : scale(1.1) rotate(-20deg)
+    }
+}

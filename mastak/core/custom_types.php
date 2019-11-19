@@ -168,7 +168,7 @@
          */
         $cmb_options = new_cmb2_box(array(
             'id'           => $prefix . 'page',
-            'title'        => esc_html__('Настройки темы (mastak)', 'krasnagorka'),
+            'title'        => esc_html__('НСТРОЙКИ ТЕМЫ KRASNAGORKA', 'krasnagorka'),
             'object_types' => array('options-page'),
 
             /*
@@ -178,9 +178,9 @@
 
             'option_key' => 'mastak_theme_options',
             // The option key and admin menu page slug.
-            'icon_url'   => 'dashicons-palmtree',
+            'icon_url'   => wp_get_attachment_image_src(get_option('mastak_theme_options')['footer_logo_id'], 'icon-menu')[0],//'dashicons-palmtree',
             // Menu icon. Only applicable if 'parent_slug' is left empty.
-            // 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
+             'menu_title'      => esc_html__( 'Krasnagorka', 'cmb2' ), // Falls back to 'title' (above).
             // 'parent_slug'     => 'themes.php', // Make options page a submenu item of the themes menu.
             // 'capability'      => 'manage_options', // Cap required to view options-page.
             // 'position'        => 1, // Menu position. Only applicable if 'parent_slug' is left empty.
@@ -215,6 +215,79 @@
             'options_cb'       => 'show_seasons_options',
         ));
 
+
+        $cmb_options->add_field(array(
+            'name' => __('Телефоны', 'krasnagorka'),
+            'id'   => 'phones_title',
+            'type' => 'title'
+        ));
+
+        $velcome = $cmb_options->add_field(array(
+            'desc' => __('Велком', 'krasnagorka'),
+            'id'   => $prefix . 'velcome',
+            'type' => 'text'
+        ));
+
+        $mts = $cmb_options->add_field(array(
+            'desc' => __('Мтс', 'krasnagorka'),
+            'id'   => $prefix . 'mts',
+            'type' => 'text'
+        ));
+
+        $life = $cmb_options->add_field(array(
+            'desc' => __('Лайф', 'krasnagorka'),
+            'id'   => $prefix . 'life',
+            'type' => 'text'
+        ));
+
+
+
+        $cmb2Grid = new \Cmb2Grid\Grid\Cmb2Grid($cmb_options);
+        $rowPhones = $cmb2Grid->addRow();
+        $rowPhones->addColumns(array($velcome,$mts,$life));
+
+        $cmb_options->add_field(array(
+            'name' => __('Социальные сети', 'krasnagorka'),
+            'id'   => 'socials_title',
+            'type' => 'title'
+        ));
+
+        $insta = $cmb_options->add_field(array(
+            'name' => 'Instagram',
+            'desc' => 'Instagram (url)',
+            'id'   => $prefix . 'instagram',
+            'type' => 'text_url'
+        ));
+
+        $fb = $cmb_options->add_field(array(
+            'name' => 'Facebook',
+            'desc' => 'Facebook (url)',
+            'id'   => $prefix . 'facebook',
+            'type' => 'text_url'
+        ));
+
+        $ok = $cmb_options->add_field(array(
+            'name' => 'Odnoklassniki',
+            'desc' => 'Odnoklassniki (url)',
+            'id'   => $prefix . 'odnoklassniki',
+            'type' => 'text_url'
+        ));
+
+        $vk = $cmb_options->add_field(array(
+            'name' => 'VK',
+            'desc' => 'VK (url)',
+            'id'   => $prefix . 'vkontakte',
+            'type' => 'text_url'
+        ));
+
+        $youtube = $cmb_options->add_field(array(
+            'name' => 'Youtube',
+            'desc' => 'Youtube (url)',
+            'id'   => $prefix . 'youtube',
+            'type' => 'text_url'
+        ));
+
+
         $cmb_options->add_field(array(
             'name' => __('Контактная информация', 'krasnagorka'),
             'id'   => 'contacts_title',
@@ -226,27 +299,6 @@
             'desc' => __('Видео online', 'krasnagorka'),
             'id'   => $prefix . 'video',
             'type' => 'checkbox'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => __('Велком', 'krasnagorka'),
-            'desc' => __('Номер телефона', 'krasnagorka'),
-            'id'   => $prefix . 'velcome',
-            'type' => 'text'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => __('Мтс', 'krasnagorka'),
-            'desc' => __('Номер телефона', 'krasnagorka'),
-            'id'   => $prefix . 'mts',
-            'type' => 'text'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => __('Лайф', 'krasnagorka'),
-            'desc' => __('Номер телефона', 'krasnagorka'),
-            'id'   => $prefix . 'life',
-            'type' => 'text'
         ));
 
         $cmb_options->add_field(array(
@@ -305,40 +357,7 @@
             'type' => 'text_url'
         ));
 
-        $cmb_options->add_field(array(
-            'name' => 'Instagram',
-            'desc' => 'Instagram (url)',
-            'id'   => $prefix . 'instagram',
-            'type' => 'text_url'
-        ));
 
-        $cmb_options->add_field(array(
-            'name' => 'Facebook',
-            'desc' => 'Facebook (url)',
-            'id'   => $prefix . 'facebook',
-            'type' => 'text_url'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => 'Odnoklassniki',
-            'desc' => 'Odnoklassniki (url)',
-            'id'   => $prefix . 'odnoklassniki',
-            'type' => 'text_url'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => 'Vkontakte',
-            'desc' => 'Vkontakte (url)',
-            'id'   => $prefix . 'vkontakte',
-            'type' => 'text_url'
-        ));
-
-        $cmb_options->add_field(array(
-            'name' => 'Youtube',
-            'desc' => 'Youtube (url)',
-            'id'   => $prefix . 'youtube',
-            'type' => 'text_url'
-        ));
 
         $cmb_options->add_field(array(
             'name' => 'Схема базы домов',
@@ -436,7 +455,11 @@
         $cmb_options->add_field(array(
             'name' => 'Логотип в подвале',
             'id'   => 'footer_logo',
-            'type' => 'file'
+            'type' => 'file',
+            'options' => array(
+                'url' => false, // Hide the text input for the url
+            ),
+            'preview_size' => 'footer-logo',
         ));
 
 

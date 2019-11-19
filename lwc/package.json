@@ -3,8 +3,6 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "BackStart": "node ./bin/www",
-        "BackWatch": "nodemon ./bin/www",
         "FrontBuild": "webpack --env.MODE=production",
         "FrontWatch": "webpack-dev-server --env.MODE=development --open"
     },

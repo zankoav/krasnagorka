@@ -1,0 +1,87 @@
+<template>
+    <div class="menu">
+        <div class="menu__logo-wrapper">
+            <a href="/">
+                <img src="https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/logo.png"
+                     alt="Краснагорка" class="menu__logo">
+            </a>
+            <a class="menu__online-video py-05" href="javascript:void(0);" onclick={showVideo}>
+                <img class="menu__online-video-icon" src={icons.onlineVideo} alt="Онлайн видео">
+                <span class="menu__online-video-text" data-before="смотреть" data-after="ONLINE"></span>
+            </a>
+        </div>
+        <nav class="menu__navigation">
+            <a class="menu__navigation-mobile-button" href="javascript:void(0);" onclick={showMenu}>
+                <img src={icons.menuIcon} alt="Меню" class="menu__navigation-mobile-icon">
+            </a>
+            <div class={menuCss}>
+                <div class="menu__navigation-mobile-header">
+                    <z-title title="Меню"></z-title>
+                    <a href="javascript:void(0);" onclick={hideMenu} >
+                        <img src={icons.closeIcon} alt="Закрыть" class="menu__navigation-mobile-icon">
+                    </a>
+                </div>
+                <ul class="menu__navigation-list">
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 1</a>
+                    </li>
+                    <li class="menu__navigation-item menu__navigation-item_active">
+                        <a href="#">Item 2</a>
+                    </li>
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 20</a>
+                    </li>
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 21</a>
+                    </li>
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 22</a>
+                    </li>
+                    <li class="menu__navigation-item menu__navigation-item_has-child">
+                        <a href="#">
+                            Item 3
+                        </a>
+                        <ul class="menu__navigation-sublist">
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 10</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 11</a>
+                            </li>
+                            <li class="menu__navigation-item menu__navigation-item_active">
+                                <a href="#">Item 12</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 13</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 14</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 15</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 16</a>
+                            </li>
+                            <li class="menu__navigation-item">
+                                <a href="#">Item 17</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 4</a>
+                    </li>
+                    <li class="menu__navigation-item">
+                        <a href="#">Item 5</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="menu__contacts">
+            <a class="menu__navigation-phone-button" href="javascript:void(0);" onclick={toggleContacts}>
+                <img src={icons.phone} alt="Phone" class="menu__navigation-phone-icon">
+            </a>
+            <z-contacts-popup onhidepopup={toggleContacts} is-open={contactsPopupIsOpen}></z-contacts-popup>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,18 @@
+@import './../../common/mixins';
+
+.title {
+    text-transform: uppercase;
+    font-family: AvenirNextCyr-Bold,sans-serif;
+    color: $GRAY_1;
+    font-size: 24px;
+
+    &:before, &:after {
+        content       : "/";
+        color         : #7ed321;
+        padding-right : 6px;
+    }
+
+    &:after{
+        padding-left: 6px;
+    }
+}

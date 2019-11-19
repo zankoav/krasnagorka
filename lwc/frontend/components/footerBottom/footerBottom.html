@@ -1,0 +1,26 @@
+<template>
+    <div if:true={model} class="footer-bottom py-30 py-sm-15">
+        <div class="container">
+            <div class="footer-bottom__content">
+                <div class="footer-bottom__left-side">
+                    <img src={model.logo}
+                         alt="Краснагорка" class="footer-bottom__logo mb-10 mb-sm-none mr-sm-15">
+                    <div class="footer-bottom__socials-container mb-30 mb-sm-none">
+                        <div class="footer-bottom__socials mb-10 mb-sm-025">
+                            <template for:each={socials} for:item="social">
+                                <a key={social.value} href={social.url} class="footer-bottom__socials-item px-075 px-sm-05">
+                                    <img src={social.icon}
+                                         alt={social.value} class="footer-bottom__social-icon">
+                                </a>
+                            </template>
+                        </div>
+                        <div class="footer-bottom__socials-text">
+                            База отдыха "Красногорка"
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom__right-side" lwc:dom="manual"></div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,71 @@
+@import './../../common/mixins';
+
+.footer-bottom {
+    background-color : $PRIMARY_10;
+    color            : $WHITE;
+
+    &__content {
+        display        : flex;
+        flex-direction : column;
+        text-align     : center;
+
+        @include sm {
+            flex-direction  : row;
+            justify-content : space-between;
+            text-align      : initial;
+        }
+    }
+
+    &__logo {
+        width      : 80px;
+        object-fit : cover;
+    }
+
+    &__socials {
+        display         : flex;
+        align-items     : center;
+        justify-content : center;
+
+        @include sm {
+            justify-content : flex-start;
+        }
+    }
+
+    &__socials-item {
+        @include sm {
+            &:first-child {
+                padding-left : 0;
+            }
+        }
+    }
+
+    &__social-icon {
+        max-width  : 1.75rem;
+        height     : 36px;
+        object-fit : contain;
+
+        @include sm {
+            height : 20px;
+        }
+    }
+
+    &__socials-text {
+        font-size : 13px;
+    }
+
+    &__right-side {
+        font-size : 13px;
+
+        @include sm {
+            text-align : right;
+        }
+    }
+
+    &__left-side {
+
+        @include sm {
+            display     : flex;
+            align-items : center;
+        }
+    }
+}

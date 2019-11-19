@@ -1,31 +1,19 @@
 @import 'constants';
 @import 'media';
+@import './../common/_container';
+@import './../common/_padding';
+@import './../common/_margin';
 
-@mixin button() {
-    .button {
-        padding: 0.375rem 1.5rem;
-        background-color: $GRAY_4;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-        transition: background-color 0.4s;
-        color: $WHITE;
-        text-transform: uppercase;
-        font-weight: 500;
-
-        &:hover {
-            background-color: $GRAY_2;
-        }
-
-        &_big {
-            font-size: 20px;
-            padding: 0.375rem 1.75rem;
-        }
-
-        &_success {
-            background-color: $RED_2;
-
-            &:hover {
-                background-color: $RED_3;
-            }
-        }
-    }
+@mixin button{
+    text-decoration: none;
+    border-radius: 6px;
+    padding: .5rem 1rem;
+    background-color: $RED;
+    color: $WHITE;
+    font-weight: 700;
+    text-align: center;
+    display: inline-block;
+    min-width: 150px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px 0 rgba($BLACK,.5);
 }

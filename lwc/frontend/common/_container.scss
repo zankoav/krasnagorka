@@ -1,24 +1,32 @@
-$MAX-WIDTH_LG: 1216px;
-$MAX-WIDTH_HD: 1312px;
+$MAX-WIDTH_LG: 1264px;
+$MAX-WIDTH_HD: 1600px;
+$MAX-WIDTH_SMALL: 900px;
 
 @mixin container() {
+
     .container {
-        padding: 0 0.75rem;
+        padding: 0 1rem;
         position: relative;
         width: 100%;
 
-        @include sm {
+        @include md {
             padding: 0 2rem;
         }
 
         @include lg {
-            // max-width: $MAX-WIDTH_LG;
-            // margin-left: auto;
-            // margin-right: auto;
+            max-width: $MAX-WIDTH_LG;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @include hd {
-            // max-width: $MAX-WIDTH_HD;
+            max-width: $MAX-WIDTH_HD;
+        }
+
+        &_small {
+            @include lg {
+                max-width: $MAX-WIDTH_SMALL;
+            }
         }
     }
 }

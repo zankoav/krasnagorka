@@ -1,0 +1,103 @@
+@import './../../common/mixins';
+
+.booking-form {
+
+
+    @include sm{
+        margin: 2rem 0;
+    }
+
+    @include lg{
+        margin: 3rem 0;
+    }
+
+    &__content {
+        background-color : $WHITE;
+        box-shadow: 0 2px 4px #bcbcbc;
+        padding: 2rem;
+        margin: 0 -1rem;
+
+        @include sm{
+            border-radius: .5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @include lg{
+            max-width: 700px;
+        }
+    }
+
+    &__title{
+        text-align: center;
+        font-family: AvenirNextCyr-Regular, sans-serif;
+        font-size : 24px;
+        font-weight : 600;
+        color: $GRAY_1;
+
+
+        &:before{
+            content: attr(data-before);
+            margin-right: .25rem;
+            font-weight : 400;
+        }
+    }
+
+    &__group{
+        display : flex;
+        flex-direction : column;
+        margin-bottom : 1rem;
+
+        &_checkbox{
+            flex-direction: row;
+            align-items: center;
+
+            label{
+                margin-left : .5rem;
+                a{
+                    color : inherit;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__label{
+        color : $GRAY_4;
+        font-size : 14px;
+
+        &_required{
+            &:after{
+                content: '*';
+                color : $RED;
+            }
+        }
+    }
+
+    &__input{
+        padding: .5rem;
+        font-size: 16px;
+        color : $GRAY_1;
+        border-radius: .25rem;
+        border: 2px solid $GRAY;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    &__send-button-wrapper{
+        display : flex;
+        justify-content : center;
+        padding-top : 1.5rem;
+        border-top: 1px solid $GRAY;
+
+        @include sm{
+            justify-content : flex-end;
+        }
+    }
+
+    &__send-button{
+        @include button;
+    }
+}
