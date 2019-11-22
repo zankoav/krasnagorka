@@ -140,7 +140,6 @@ export default class BookingForm extends LightningElement {
                 this.dateEnd.value = null;
                 this.count.value = null;
                 this.comment.value = null;
-                this.contract.value = null;
             })
             .catch(() => {
                 this.isLoading = false;
