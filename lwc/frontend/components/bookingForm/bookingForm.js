@@ -112,20 +112,6 @@ export default class BookingForm extends LightningElement {
             return;
         }
 
-        // const dataSend = {
-        //     fio: fio,
-        //     phone: phone,
-        //     email: email,
-        //     dateStart: dateStart,
-        //     dateEnd: dateEnd,
-        //     count: count,
-        //     comment: comment,
-        //     contract: contract,
-        //     houseName: this.houseName,
-        //     cid: this.cid,
-        //     spam: spam
-        // };
-
         this.formMessageError = null;
         this.isLoading = true;
 

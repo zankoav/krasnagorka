@@ -50,10 +50,37 @@
         }
 
         public function getBookingModel() {
+
+            $houseId = $_GET['houseId'];
+            $houseName = null;
+
+            if(isset($houseId)){
+
+                $post = get_post($houseId);
+                if(!empty($post) and $post->post_type === 'house'){
+                    $houseName = $post->post_title;
+                }else{
+                    $this->redirect_to_404();
+                }
+            }else{
+                $this->redirect_to_404();
+            }
+
             $result = [
+                'mainContent' => [
+                    "houseName" => $houseName,
+                ],
                 "footerBottom" => $this->getFooterBottom()
             ];
 
             return json_encode($result);
+        }
+
+        private function redirect_to_404(){
+            global $wp_query;
+            $wp_query->set_404();
+            status_header( 404 );
+            get_template_part( 404 );
+            exit();
         }
     }
