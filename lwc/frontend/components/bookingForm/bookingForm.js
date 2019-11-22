@@ -142,6 +142,7 @@ export default class BookingForm extends LightningElement {
                     dateEnd=${dateEnd}&
                     count=${count}&
                     contract=${contract}&
+                    comment=${comment}&
                     houseName=${this.houseName}&
                     cid=${this.cid}`,
                 message: spam
