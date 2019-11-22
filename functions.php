@@ -11,19 +11,25 @@
     $assets = new Assets();
     $model  = new Model();
 
-    add_action( 'admin_enqueue_scripts', 'load_admin_style' );
+    add_action('admin_enqueue_scripts', 'load_admin_style');
     function load_admin_style() {
-        wp_enqueue_style( 'admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0' );
+        wp_enqueue_style('admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0');
     }
 
 
     // for delete
 
     if (!isset($content_width)) {
-            $content_width = 1200; /* pixels */
-        }
-        require __DIR__ . '/inc/calendar/init.php';
-        require __DIR__ . '/mastak/init.php';
+        $content_width = 1200; /* pixels */
+    }
+    require __DIR__ . '/inc/calendar/init.php';
+    require __DIR__ . '/mastak/init.php';
+    require __DIR__ . '/rest/Booking_Form_Controller.php';
+
+    add_action('rest_api_init', function () {
+        $booking_form_controller = new Booking_Form_Controller();
+        $booking_form_controller->register_routes();
+    });
 
     //    add_filter('wpseo_schema_graph_pieces', function ($pieces, $context) {
     //

@@ -91,13 +91,34 @@
         justify-content : center;
         padding-top : 1.5rem;
         border-top: 1px solid $GRAY;
-
-        @include sm{
-            justify-content : flex-end;
-        }
     }
 
     &__send-button{
         @include button;
+
+        &_deprecated{
+            background-color : $GRAY_1;
+            cursor: not-allowed;
+
+            &:hover{
+                background-color : $GRAY_1;
+            }
+        }
+    }
+
+    &__message{
+        margin-top : 1rem;
+        font-size : 14px;
+        font-weight : 600;
+        color : $RED;
+        text-align : center;
+
+        &_success{
+            color: $GREEN;
+        }
+
+        &_error{
+            color : $RED;
+        }
     }
 }

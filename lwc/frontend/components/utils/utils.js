@@ -40,3 +40,25 @@ export function deleteCookie(name) {
 }
 
 
+export function getMonthTodayRu(){
+    const monthsRuList = [
+        'Января',
+        'Февраля',
+        'Марта',
+        'Апреля',
+        'Мая',
+        'Июня',
+        'Июля',
+        'Августа',
+        'Сентября',
+        'Октября',
+        'Ноября',
+        'Декабря'
+    ];
+    return monthsRuList[new Date().getUTCMonth()];
+}
+
+export function getDayNumberToday(){
+    return new Date().getUTCDate();
+}
+
