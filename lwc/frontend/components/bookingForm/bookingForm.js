@@ -22,7 +22,7 @@ export default class BookingForm extends LightningElement {
     @track isLoading;
     @api houseName = 'Бунгало';
 
-    connectedCallback(){
+    connectedCallback() {
         this.cid = 'testcid';
     }
 
@@ -112,19 +112,19 @@ export default class BookingForm extends LightningElement {
             return;
         }
 
-        const dataSend = {
-            fio: fio,
-            phone: phone,
-            email: email,
-            dateStart: dateStart,
-            dateEnd: dateEnd,
-            count: count,
-            comment: comment,
-            contract: contract,
-            houseName: this.houseName,
-            cid: this.cid,
-            spam: spam
-        };
+        // const dataSend = {
+        //     fio: fio,
+        //     phone: phone,
+        //     email: email,
+        //     dateStart: dateStart,
+        //     dateEnd: dateEnd,
+        //     count: count,
+        //     comment: comment,
+        //     contract: contract,
+        //     houseName: this.houseName,
+        //     cid: this.cid,
+        //     spam: spam
+        // };
 
         this.formMessageError = null;
         this.isLoading = true;
@@ -134,9 +134,20 @@ export default class BookingForm extends LightningElement {
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
             },
-            body: JSON.stringify(dataSend)
+            body: JSON.stringify({
+                data: `fio=${fio}&
+                    phone=${phone}&
+                    email=${email}&
+                    dateStart=${dateStart}&
+                    dateEnd=${dateEnd}&
+                    count=${count}&
+                    contract=${contract}&
+                    houseName=${this.houseName}&
+                    cid=${this.cid}`,
+                message: spam
+            })
         })
-            .then(response =>{
+            .then(response => {
                 return response.json();
             })
             .then(() => {
