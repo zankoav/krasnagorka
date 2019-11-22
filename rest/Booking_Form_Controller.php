@@ -47,7 +47,7 @@
             ];
 
             require_once WP_PLUGIN_DIR.'/amo-integration/AmoIntegration.php';
-//            new AmoIntegration($type, $request['data'], $href);
+            new AmoIntegration($type, $request['data'], $href);
             return new WP_REST_Response(['status'=> $request['data']], 200);
         }
 
