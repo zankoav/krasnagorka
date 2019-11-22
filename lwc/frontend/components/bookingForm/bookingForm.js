@@ -133,6 +133,14 @@ export default class BookingForm extends LightningElement {
             .then(() => {
                 this.isLoading = false;
                 this.formMessageSuccess = 'Поздравляем! Вы успешно выполнили бронь. Наш сотрудник скоро свяжется с вами для уточнения деталей';
+                this.fio.value = null;
+                this.phone.value = null;
+                this.email.value = null;
+                this.dateStart.value = null;
+                this.dateEnd.value = null;
+                this.count.value = null;
+                this.comment.value = null;
+                this.contract.value = null;
             })
             .catch(() => {
                 this.isLoading = false;
