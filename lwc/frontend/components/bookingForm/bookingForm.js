@@ -135,16 +135,7 @@ export default class BookingForm extends LightningElement {
                 'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify({
-                data: `fio=${fio}&
-                    phone=${phone}&
-                    email=${email}&
-                    dateStart=${dateStart}&
-                    dateEnd=${dateEnd}&
-                    count=${count}&
-                    contract=${contract}&
-                    comment=${comment}&
-                    houseName=${this.houseName}&
-                    cid=${this.cid}`,
+                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&houseName=${this.houseName}&cid=${this.cid}`,
                 message: spam
             })
         })
