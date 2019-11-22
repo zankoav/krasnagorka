@@ -576,6 +576,12 @@
             'id'   => 'calendar_settings_message_after',
             'type' => 'textarea_small'
         ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Договор оферты',
+            'id'   => 'contract_offer',
+            'type' => 'file'
+        ));
     }
 
     add_action('cmb2_admin_init', 'mastak_register_theme_options_metabox');

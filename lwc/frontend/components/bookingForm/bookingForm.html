@@ -2,7 +2,7 @@
     <div class="booking-form">
         <div class="container">
             <div class="booking-form__content">
-                <h2 class="booking-form__title mb-15" data-before="Домик:">Бунгало</h2>
+                <h2 class="booking-form__title mb-15" data-before="Домик:">{houseName}</h2>
                 <div class="booking-form__group">
                     <label for="fio" class="booking-form__label booking-form__label_required">ФИО</label>
                     <input id="fio" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="fio">
@@ -35,7 +35,7 @@
                 <div class="booking-form__group booking-form__group_checkbox">
                     <input id="contract" type="checkbox" class="booking-form__input" name="contract">
                     <label for="contract" onfocus={clearError} class="booking-form__label booking-form__label_required">Согласен с&nbsp;
-                        <a href="#">договором оферты</a></label>
+                        <a href={contractOffer} target="_blank">договором оферты</a></label>
                 </div>
 
                 <div class="booking-form__send-button-wrapper">

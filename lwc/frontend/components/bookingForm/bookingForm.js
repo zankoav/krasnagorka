@@ -17,10 +17,12 @@ const ERROR_DATE_END_INVALID = 'Дата выезда должны быть по
 
 export default class BookingForm extends LightningElement {
 
+    @api houseName;
+    @api contractOffer;
+
     @track formMessageSuccess;
     @track formMessageError;
     @track isLoading;
-    @api houseName = 'Бунгало';
 
     connectedCallback() {
         this.cid = 'testcid';

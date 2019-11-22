@@ -69,6 +69,7 @@
             $result = [
                 'mainContent' => [
                     "houseName" => $houseName,
+                    "contractOffer" => $this->baseModel['contract_offer']
                 ],
                 "footerBottom" => $this->getFooterBottom()
             ];
