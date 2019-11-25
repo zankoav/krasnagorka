@@ -89,8 +89,13 @@
     <template if:true={videoOpened}>
         <div class="online-video" onclick={closeOnlineVideo}>
             <div class="online-video__content">
-                <img src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&amp;pwd=veter&amp;resolution=32">
-                <div class="online-video__close" onclick={closeOnlineVideo}></div>
+                <template if:true={isVideoLoaded}>
+                    <div class="online-video__close" onclick={closeOnlineVideo}></div>
+                </template>
+                <template if:false={isVideoLoaded}>
+                    <div class="online-video__spinner"></div>
+                </template>
+                <img onloadeddata={videoLoaded} src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&amp;pwd=veter&amp;resolution=32">
             </div>
         </div>
     </template>

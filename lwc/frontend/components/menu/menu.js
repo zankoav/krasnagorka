@@ -15,6 +15,9 @@ export default class Menu extends LightningElement {
 
     @api model;
 
+    @track menuCss = MENU_NAVIGATION_CSS;
+    @track contactsPopupIsOpen;
+    @track videoOpened;
     @track icons = {
         onlineVideo: ONLINE_VIDEO,
         menuIcon: MENU_ICON,
@@ -22,12 +25,12 @@ export default class Menu extends LightningElement {
         closeIcon: CLOSE_ICON,
     };
 
-    @track menuCss = MENU_NAVIGATION_CSS;
-    @track contactsPopupIsOpen;
-    @track videoOpened;
-
     showVideo() {
         this.videoOpened = true;
+    }
+
+    videoLoaded(){
+        this.isVideoLoded = true;
     }
 
     closeOnlineVideo(){

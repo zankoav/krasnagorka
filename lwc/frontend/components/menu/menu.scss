@@ -253,12 +253,15 @@
 }
 
 .online-video{
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color : rgba($BLACK, 0.5);
     z-index: 1000;
 
     &__content{
@@ -267,7 +270,7 @@
 
     &__close{
         position: absolute;
-        right: 1rem;
+        right: -1rem;
         top: -1rem;
         width: 2rem;
         height: 2rem;
@@ -282,6 +285,27 @@
     img{
         display: block;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.9);
+    }
+
+    &__spinner {
+        width               : 64px;
+        height              : 64px;
+        margin              : 0 auto;
+        border-radius       : 100%;
+        background          : #fff url('//mastak/src/icons/loading.svg') no-repeat;
+        background-size     : 50%;
+        background-position : center center;
+        animation           : rotateInf 1s infinite;
+    }
+}
+
+
+@keyframes rotateInf {
+    0% {
+        transform : rotate(0)
+    }
+    100% {
+        transform : rotate(360deg)
     }
 }
 
