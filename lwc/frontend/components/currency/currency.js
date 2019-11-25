@@ -48,7 +48,8 @@ export default class Currency extends LightningElement {
         });
 
         const currencyCookieValue = getCookie(COOKIE_CURRENCY_SELECTED_KEY);
-
+        console.log('currencyCookieValue', currencyCookieValue);
+        
         if(!currencyCookieValue){
             this.currentCurrency = this.currencies.find(item => item.value === currencyCookieValue);
         }else{
