@@ -25,9 +25,14 @@ const ICONS = {
 
 export default class ContactsPopup extends LightningElement {
 
+    @api model;
 
     @track icons = ICONS;
     @track cssClass = DEFAULT_CSS_CLASS;
+    @track hrefVelcome;
+    @track hrefMts;
+    @track hrefLife;
+    @track hrefEmail;
 
     @api
     set isOpen(value) {
@@ -40,6 +45,13 @@ export default class ContactsPopup extends LightningElement {
         return this.cssClass === ACTIVE_CSS_CLASS;
     }
 
+
+    connectedCallback() {
+        this.hrefVelcome = `tel: ${this.model.velcome}`;
+        this.hrefMts = `tel: ${this.model.mts}`;
+        this.hrefLife = `tel: ${this.model.life}`;
+        this.hrefEmail = `mailto: ${this.model.email}`;
+    }
 
     hidePopup() {
         this.dispatchEvent(new CustomEvent('hidepopup'));

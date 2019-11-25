@@ -5,7 +5,7 @@
            <div class="contacts-popup__item">
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.velcome} alt="velcom">
-                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+                   <a class="contacts-popup__item-text" href={hrefVelcome}>{model.velcome}</a>
                    <img class="contacts-popup__item-messangers" src={icons.viber} alt="viber">
                    <img class="contacts-popup__item-messangers" src={icons.whatsapp} alt="whatsapp">
                    <img class="contacts-popup__item-messangers" src={icons.telegram} alt="telegram">
@@ -14,27 +14,27 @@
            <div class="contacts-popup__item">
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.mts} alt="mts">
-                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+                   <a class="contacts-popup__item-text" href={hrefMts}>{model.mts}</a>
                </div>
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.life} alt="life">
-                   <a class="contacts-popup__item-text" href="tel: +375 29 320 19 19">+375 29 320 19 19</a>
+                   <a class="contacts-popup__item-text" href={hrefLife}>{model.life}</a>
                </div>
            </div>
            <div class="contacts-popup__item">
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.envelope} alt="life">
-                   <a class="contacts-popup__item-text contacts-popup__item-text_gray" href="mailto:info@krasnagorka.by">info@krasnagorka.by</a>
+                   <a class="contacts-popup__item-text contacts-popup__item-text_gray" href={hrefEmail}>{model.email}</a>
                </div>
            </div>
            <div class="contacts-popup__item">
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.clock} alt="mts">
-                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">9:00 - 20:00 пн-пт</span>
+                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">{model.time}</span>
                </div>
                <div class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.clock} alt="mts">
-                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">11:00 - 20:00 сб,вс</span>
+                   <span class="contacts-popup__item-text contacts-popup__item-text_gray">{model.weekend}</span>
                </div>
            </div>
        </div>

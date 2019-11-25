@@ -1,6 +1,6 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 /* eslint-disable no-await-in-loop */
-import {LightningElement, track} from 'lwc';
+import {LightningElement, track, api} from 'lwc';
 import './menu.scss';
 
 import ONLINE_VIDEO from './../../icons/online-video.svg';
@@ -13,12 +13,14 @@ const MENU_NAVIGATION_ACTIVE_CSS = 'menu__navigation-list-wrapper menu__navigati
 
 export default class Menu extends LightningElement {
 
+    @api model;
+
     @track icons = {
         onlineVideo: ONLINE_VIDEO,
         menuIcon: MENU_ICON,
         phone: PHONE_ICON,
         closeIcon: CLOSE_ICON,
-    }
+    };
 
     @track menuCss = MENU_NAVIGATION_CSS;
     @track contactsPopupIsOpen;
