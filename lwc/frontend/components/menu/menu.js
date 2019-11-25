@@ -27,10 +27,11 @@ export default class Menu extends LightningElement {
     };
 
     showVideo() {
-        this.isVideoLoaded = true;
+        this.videoOpened = true;
     }
 
     videoLoaded(){
+        console.log('isVideoLoaded');
         this.isVideoLoaded = true;
     }
 
