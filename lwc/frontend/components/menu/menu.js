@@ -24,9 +24,14 @@ export default class Menu extends LightningElement {
 
     @track menuCss = MENU_NAVIGATION_CSS;
     @track contactsPopupIsOpen;
+    @track videoOpened;
 
     showVideo() {
-        console.log('show online video');
+        this.videoOpened = true;
+    }
+
+    closeOnlineVideo(){
+        this.videoOpened = false;
     }
 
     showMenu() {

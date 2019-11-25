@@ -86,4 +86,12 @@
             <z-contacts-popup model={model.popupContacts} onhidepopup={toggleContacts} is-open={contactsPopupIsOpen}></z-contacts-popup>
         </div>
     </div>
+    <template if:true={videoOpened}>
+        <div class="online-video" onclick={closeOnlineVideo}>
+            <div class="online-video__content">
+                <img src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&amp;pwd=veter&amp;resolution=32">
+                <div class="online-video__close" onclick={closeOnlineVideo}></div>
+            </div>
+        </div>
+    </template>
 </template>
