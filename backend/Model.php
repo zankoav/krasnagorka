@@ -14,45 +14,45 @@
             $this->baseModel = get_option('mastak_theme_options');
         }
 
-        public function getPopupContacts(){
+        public function getPopupContacts() {
             $options = $this->baseModel;
             return [
                 'velcome' => $options['mastak_theme_options_velcome'],
-                'mts' => $options['mastak_theme_options_mts'],
-                'life' => $options['mastak_theme_options_life'],
-                'email' => $options['mastak_theme_options_email'],
-                'time' => $options['mastak_theme_options_time'],
+                'mts'     => $options['mastak_theme_options_mts'],
+                'life'    => $options['mastak_theme_options_life'],
+                'email'   => $options['mastak_theme_options_email'],
+                'time'    => $options['mastak_theme_options_time'],
                 'weekend' => $options['mastak_theme_options_weekend'],
             ];
         }
 
-        public function getMainMenu(){
+        public function getMainMenu() {
             $menuItemsChildren = [];
-            $menuItemsParents = [];
-            $items = wp_get_nav_menu_items( 3 );
-            foreach ($items as $item){
-                if($item->menu_item_parent == 0){
+            $menuItemsParents  = [];
+            $items             = wp_get_nav_menu_items(3);
+            foreach ($items as $item) {
+                if ($item->menu_item_parent == 0) {
                     $menuItemsParents[$item->ID] = [
-                        'key' => $item->ID,
+                        'key'   => $item->ID,
                         'label' => $item->title,
-                        'href' => $item->url,
+                        'href'  => $item->url,
                     ];
-                }else{
+                } else {
                     $menuItemsChildren[] = [
-                        'key' => $item->ID,
-                        'label' => $item->title,
-                        'href' => $item->url,
-                        'parent' =>$item->menu_item_parent
+                        'key'    => $item->ID,
+                        'label'  => $item->title,
+                        'href'   => $item->url,
+                        'parent' => $item->menu_item_parent
                     ];
                 }
             }
 
-            foreach ($menuItemsChildren as $child){
-               if(empty($menuItemsParents[$child['parent']]['subItems'])){
-                   $menuItemsParents[$child['parent']]['subItems'] = [$child];
-               }else{
-                   $menuItemsParents[$child['parent']]['subItems'][] = $child;
-               }
+            foreach ($menuItemsChildren as $child) {
+                if (empty($menuItemsParents[$child['parent']]['subItems'])) {
+                    $menuItemsParents[$child['parent']]['subItems'] = [$child];
+                } else {
+                    $menuItemsParents[$child['parent']]['subItems'][] = $child;
+                }
             }
             return array_values($menuItemsParents);
         }
@@ -60,8 +60,8 @@
         public function getFooterBottom() {
             $footer_logo_id  = $this->baseModel['footer_logo_id'];
             $footer_logo_src = wp_get_attachment_image_src($footer_logo_id, 'footer-logo')[0];
-            $unp = wpautop($this->baseModel['mastak_theme_options_unp']);
-            $unp = str_replace("\n", "", $unp);
+            $unp             = wpautop($this->baseModel['mastak_theme_options_unp']);
+            $unp             = str_replace("\n", "", $unp);
 
             return [
                 "logo"    => $footer_logo_src,
@@ -92,41 +92,61 @@
 
         }
 
+        public function getCurrencies() {
+
+            return [
+                'byn' => 1,
+                'rur' => get_option('rur_currency'),
+                'usd' => get_option('usd_currency'),
+                'eur' => get_option('eur_currency')
+            ];
+        }
+
         public function getBookingModel() {
 
-            $houseId = $_GET['houseId'];
-            $houseName = null;
+            $bookingId = $_GET['booking'];
+            $title     = null;
+            $type      = null;
 
-            if(isset($houseId)){
+            if (isset($bookingId)) {
 
-                $post = get_post($houseId);
-                if(!empty($post) and $post->post_type === 'house'){
-                    $houseName = $post->post_title;
-                }else{
+                $post = get_post($bookingId);
+                if (!empty($post) and ($post->post_type === 'house' or $post->post_type === 'event')) {
+                    $title = $post->post_title;
+
+                    if ($post->post_type === 'house') {
+                        $type = 'Домик:';
+                    } else if ($post->post_type === 'event') {
+                        $type = 'Мероприятие:';
+                    }
+                } else {
                     $this->redirect_to_404();
                 }
-            }else{
+            } else {
                 $this->redirect_to_404();
             }
 
+
             $result = [
-                'mainMenu'=> $this->getMainMenu(),
-                'popupContacts'=> $this->getPopupContacts(),
-                'mainContent' => [
-                    "houseName" => $houseName,
+                'mainMenu'      => $this->getMainMenu(),
+                'currencies'      => $this->getCurrencies(),
+                'popupContacts' => $this->getPopupContacts(),
+                'mainContent'   => [
+                    "title"         => $title,
+                    "type"          => $type,
                     "contractOffer" => $this->baseModel['contract_offer']
                 ],
-                "footerBottom" => $this->getFooterBottom()
+                "footerBottom"  => $this->getFooterBottom()
             ];
 
             return json_encode($result);
         }
 
-        private function redirect_to_404(){
+        private function redirect_to_404() {
             global $wp_query;
             $wp_query->set_404();
-            status_header( 404 );
-            get_template_part( 404 );
+            status_header(404);
+            get_template_part(404);
             exit();
         }
     }

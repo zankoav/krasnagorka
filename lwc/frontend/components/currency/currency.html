@@ -2,8 +2,8 @@
     <div class="currency">
         <span class="currency__label">Выберите валюту</span>
         <div class="currency__wrapper">
-            <a class="currency__item currency__item_active" data-lang={currencyLabel} href="javascript:void(0)" onclick={showCurrenciesList}>
-                <img src={currencyFlag} alt={currencyLang} class="currency__flag">
+            <a class="currency__item currency__item_active" data-lang={currentCurrency.label} href="javascript:void(0)" onclick={showCurrenciesList}>
+                <img src={currentCurrency.icon} alt={currentCurrency.label} class="currency__flag">
             </a>
             <template if:true={isOpenList}>
                 <ul class="currency__list">

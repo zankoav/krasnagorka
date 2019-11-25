@@ -1,7 +1,7 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 /* eslint-disable no-await-in-loop */
-import {LightningElement, track} from 'lwc';
-import {setCookie} from "../utils/utils";
+import {LightningElement, track, api} from 'lwc';
+import {setCookie, getCookie} from "../utils/utils";
 import './currency.scss';
 
 const COOKIE_CURRENCY_SELECTED_KEY = 'cur_selected';
@@ -15,35 +15,46 @@ const EUR_FLAG = require('./../../icons/flags/eur.svg');
 
 export default class Currency extends LightningElement {
 
+    @api currenciesPrices;
     @track isOpenList;
-    @track currencyFlag = BYN_FLAG;
-    @track currencyLabel = 'byn';
+    @track currentCurrency;
     @track currencies = [
         {
             value: 'rur',
             label: 'rus',
-            price: 1,
             icon: RUS_FLAG,
         },
         {
             value: 'byn',
             label: 'byn',
-            price: 2,
             icon: BYN_FLAG,
         },
         {
             value: 'usd',
             label: 'usd',
-            price: 3,
             icon: USD_FLAG,
         },
         {
             value: 'eur',
             label: 'eur',
-            price: 4,
             icon: EUR_FLAG,
         },
     ];
+
+    connectedCallback(){
+
+        this.currencies.forEach(currency => {
+            currency.price = this.currenciesPrices[currency.value];
+        });
+
+
+        this.currentCurrency = getCookie(COOKIE_CURRENCY_SELECTED_KEY);
+        if(!this.currentCurrency){
+            this.currentCurrency = this.currencies.find(item => item.value === 'byn');
+            setCookie(COOKIE_CURRENCY_SELECTED_KEY, this.currentCurrency.value, {'max-age': MAX_AGE});
+            setCookie(COOKIE_CURRENCY_VALUE_KEY, this.currentCurrency.price, {'max-age': MAX_AGE});
+        }
+    }
 
     showCurrenciesList() {
         this.isOpenList = !this.isOpenList;
@@ -53,8 +64,7 @@ export default class Currency extends LightningElement {
         const currencyLabel = event.currentTarget.dataset.lang;
         const currency = this.currencies.find(item => item.label === currencyLabel);
         if (currency) {
-            this.currencyFlag = currency.icon;
-            this.currencyLabel = currency.label;
+            this.currentCurrency = currency;
             setCookie(COOKIE_CURRENCY_SELECTED_KEY, currency.value, {'max-age': MAX_AGE});
             setCookie(COOKIE_CURRENCY_VALUE_KEY, currency.price, {'max-age': MAX_AGE});
             this.isOpenList = false;

@@ -10,6 +10,7 @@ const ERROR_PHONE_EMPTY = 'Поле Телефон не заполнено';
 const ERROR_EMAIL_EMPTY = 'Поле Email не заполнено';
 const ERROR_DATE_START_EMPTY = 'Поле Дата заезда не заполнено';
 const ERROR_DATE_END_EMPTY = 'Поле Дата выезда не заполнено';
+const ERROR_PASSPORT_EMPTY = 'Поле паспорта не заполнено';
 const ERROR_COUNT_EMPTY = 'Поле Количество человек не заполнено';
 const ERROR_EMAIL_INVALID = 'Поле Email не валидно';
 const ERROR_CONTRACT_UNCHECKED = 'Вы не согласились с договором оферты';
@@ -17,7 +18,8 @@ const ERROR_DATE_END_INVALID = 'Дата выезда должны быть по
 
 export default class BookingForm extends LightningElement {
 
-    @api houseName;
+    @api objectType;
+    @api objectTitle;
     @api contractOffer;
 
     @track formMessageSuccess;
@@ -40,6 +42,7 @@ export default class BookingForm extends LightningElement {
         Inputmask({regex: "^[1-9][0-9]*$", "placeholder": ""}).mask(this.count);
         this.comment = this.template.querySelector('[name="comment"]');
         this.contract = this.template.querySelector('[name="contract"]');
+        this.passport = this.template.querySelector('[name="passport"]');
         this.spam = this.template.querySelector('[name="message"]');
     }
 
@@ -106,6 +109,13 @@ export default class BookingForm extends LightningElement {
             this.showError(ERROR_COUNT_EMPTY);
             return;
         }
+
+        const passport = this.passport.value;
+
+        if (!passport) {
+            this.showError(ERROR_PASSPORT_EMPTY);
+            return;
+        }
         const comment = this.comment.value;
         const contract = this.contract.checked;
 
@@ -123,7 +133,7 @@ export default class BookingForm extends LightningElement {
                 'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify({
-                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&houseName=${this.houseName}&cid=${this.cid}`,
+                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&houseName=${this.houseName}&cid=${this.cid}&passport=${passport}`,
                 message: spam
             })
         })
@@ -139,6 +149,7 @@ export default class BookingForm extends LightningElement {
                 this.dateStart.value = null;
                 this.dateEnd.value = null;
                 this.count.value = null;
+                this.passport.value = null;
                 this.comment.value = null;
             })
             .catch(() => {
