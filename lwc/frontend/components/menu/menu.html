@@ -95,7 +95,7 @@
                 <template if:false={isVideoLoaded}>
                     <div class="online-video__spinner"></div>
                 </template>
-                <img onloadeddata={videoLoaded} src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&amp;pwd=veter&amp;resolution=32">
+                <img onload={videoLoaded} src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&amp;pwd=veter&amp;resolution=32">
             </div>
         </div>
     </template>
