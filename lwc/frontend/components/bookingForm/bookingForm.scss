@@ -80,6 +80,8 @@
         color : $GRAY_1;
         border-radius: .25rem;
         border: 2px solid $GRAY;
+        width: 100%;
+        flex: 1;
 
         &:focus{
             outline: none;
