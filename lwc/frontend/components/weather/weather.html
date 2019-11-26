@@ -1,24 +1,24 @@
 <template>
     <div class="weather">
         <div class="weather__current">
-            <p class="weather__current-degrees">14</p>
+            <p class="weather__current-degrees">{weather.temperature}</p>
             <div class="weather__current-content">
-                <img class="weather__current-icon mr-05" src="https://darksky.net/images/weather-icons/rain.png"
-                     alt="sunny">
-                <p class="weather__current-description">Возможен небольшой дождь днем и вечером.</p>
+                <img class="weather__current-icon mr-05" src={weather.icon}
+                     alt="weather">
+                <p class="weather__current-description">{weather.description}</p>
             </div>
         </div>
         <ul class="weather__future">
-            <li class="weather__future-item" data-week-day="вт">
-                <img src="https://darksky.net/images/weather-icons/partly-cloudy-day.png" alt="weather"
+            <li class="weather__future-item" data-week-day={weather.firstDay.day}>
+                <img src={weather.firstDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
-            <li class="weather__future-item" data-week-day="ср">
-                <img src="https://darksky.net/images/weather-icons/partly-cloudy-day.png" alt="weather"
+            <li class="weather__future-item" data-week-day={weather.secondDay.day}>
+                <img src={weather.secondDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
-            <li class="weather__future-item" data-week-day="чт">
-                <img src="https://darksky.net/images/weather-icons/partly-cloudy-day.png" alt="weather"
+            <li class="weather__future-item" data-week-day={weather.thirdDay.day}>
+                <img src={weather.thirdDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
         </ul>
