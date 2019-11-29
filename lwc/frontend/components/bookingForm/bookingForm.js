@@ -111,11 +111,6 @@ export default class BookingForm extends LightningElement {
         }
 
         const passport = this.passport.value;
-
-        if (!passport) {
-            this.showError(ERROR_PASSPORT_EMPTY);
-            return;
-        }
         const comment = this.comment.value;
         const contract = this.contract.checked;
 
@@ -133,7 +128,7 @@ export default class BookingForm extends LightningElement {
                 'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify({
-                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&houseName=${this.houseName}&cid=${this.cid}&passport=${passport}`,
+                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${this.objectTitle}&cid=${this.cid}&passport=${passport}`,
                 message: spam
             })
         })

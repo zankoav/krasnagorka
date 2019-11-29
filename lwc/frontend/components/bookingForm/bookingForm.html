@@ -29,7 +29,7 @@
                     <input id="count" onfocus={clearError} maxlength="2" type="text" class="booking-form__input" name="count">
                 </div>
                 <div class="booking-form__group">
-                    <label for="passport" class="booking-form__label booking-form__label_required">Личный (идентификационный) номер</label>
+                    <label for="passport" class="booking-form__label">Личный (идентификационный) номер паспорта</label>
                     <input id="passport" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="passport">
                 </div>
                 <div class="booking-form__group">
@@ -37,7 +37,7 @@
                     <textarea id="comment" onfocus={clearError} maxlength="500"  class="booking-form__input" rows="4" name="comment"></textarea>
                 </div>
                 <div class="booking-form__group booking-form__group_checkbox">
-                    <input id="contract" type="checkbox" class="booking-form__input" name="contract">
+                    <input id="contract" type="checkbox" class="booking-form__input booking-form__input_left" name="contract">
                     <label for="contract" onfocus={clearError} class="booking-form__label booking-form__label_required">Согласен с&nbsp;
                         <a href={contractOffer} target="_blank">договором присоединения</a></label>
                 </div>

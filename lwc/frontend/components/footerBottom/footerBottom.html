@@ -3,7 +3,7 @@
         <div class="container">
             <div class="footer-bottom__content">
                 <div class="footer-bottom__left-side">
-                    <img src={model.logo}
+                    <img src={model.footerBottom.logo}
                          alt="Краснагорка" class="footer-bottom__logo mb-10 mb-sm-none mr-sm-15">
                     <div class="footer-bottom__socials-container mb-30 mb-sm-none">
                         <div class="footer-bottom__socials mb-10 mb-sm-025">
@@ -19,6 +19,9 @@
                         </div>
                     </div>
                 </div>
+                <template if:true={phone}>
+                    <p class="footer-bottom__phone mb-30 mb-sm-none">{phone}</p>
+                </template>
                 <div class="footer-bottom__right-side" lwc:dom="manual"></div>
             </div>
         </div>

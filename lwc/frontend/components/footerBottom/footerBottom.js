@@ -19,10 +19,12 @@ const SOCIALS_ICONS = {
 export default class FooterBottom extends LightningElement {
     @track socials;
     @track _model;
+    @track phone;
 
+    @api showMobilePhone;
     @api set model(value) {
         this._model = value;
-        this.socials = this.model.socials
+        this.socials = this.model.footerBottom.socials
             .map(item => {
                 return {
                     ...item,
@@ -30,13 +32,19 @@ export default class FooterBottom extends LightningElement {
                 };
             })
             .filter(item => item.url);
-    };
+    }
 
     get model() {
         return this._model;
     }
 
+    connectedCallback(){
+        if(this.showMobilePhone){
+            this.phone = this.model.popupContacts.velcome;
+        }
+    }
+
     renderedCallback() {
-        this.template.querySelector('.footer-bottom__right-side').innerHTML = this.model.unp;
+        this.template.querySelector('.footer-bottom__right-side').innerHTML = this.model.footerBottom.unp;
     }
 }
