@@ -1,11 +1,11 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 /* eslint-disable no-await-in-loop */
 import {LightningElement, track, api} from 'lwc'
-import {getCookie} from "../utils/utils";
+import {getCookie, setCookie} from "../utils/utils";
 import Inputmask from "inputmask";
-
 import './bookingForm.scss';
 
+const MAX_AGE = 3600 * 24 * 100;
 const ERROR_FIO_EMPTY = 'Поле ФИО не заполнено';
 const ERROR_PHONE_EMPTY = 'Поле Телефон не заполнено';
 const ERROR_EMAIL_EMPTY = 'Поле Email не заполнено';
@@ -47,6 +47,22 @@ export default class BookingForm extends LightningElement {
         this.contract = this.template.querySelector('[name="contract"]');
         this.passport = this.template.querySelector('[name="passport"]');
         this.spam = this.template.querySelector('[name="message"]');
+
+
+        const cookieFio = getCookie('kg_name');
+        if(cookieFio){
+            this.fio.value = cookieFio;
+        }
+
+        const cookiePhone = getCookie('kg_phone');
+        if(cookiePhone){
+            this.phone.value = cookiePhone;
+        }
+
+        const cookieEmail = getCookie('kg_email');
+        if(cookieEmail){
+            this.email.value = cookieEmail;
+        }
     }
 
     clearError() {
@@ -141,14 +157,14 @@ export default class BookingForm extends LightningElement {
             .then(() => {
                 this.isLoading = false;
                 this.formMessageSuccess = 'Поздравляем! Вы успешно выполнили бронь. Наш сотрудник скоро свяжется с вами для уточнения деталей';
-                this.fio.value = null;
-                this.phone.value = null;
-                this.email.value = null;
                 this.dateStart.value = null;
                 this.dateEnd.value = null;
                 this.count.value = null;
                 this.passport.value = null;
                 this.comment.value = null;
+                setCookie('kg_name', fio, {'max-age': MAX_AGE});
+                setCookie('kg_phone', phone, {'max-age': MAX_AGE});
+                setCookie('kg_email', email, {'max-age': MAX_AGE});
             })
             .catch(() => {
                 this.isLoading = false;
