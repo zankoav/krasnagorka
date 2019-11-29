@@ -240,7 +240,7 @@
 		$weather = get_option( 'mastak_weather' );
 		if ( ! empty( $weather ) ) {
 			$weatherArray = json_decode( $weather, true );
-			if ( $weatherArray === null or ( $weatherArray[0]["date"] < date( 'Y-m-d' ) ) ) {
+			if ( $weatherArray === null or ( $weatherArray[1]["date"] < date( 'Y-m-d' ) ) ) {
 				return update_mastak_weather();
 			} else {
 				return $weatherArray;
