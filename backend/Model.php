@@ -35,7 +35,7 @@
 
                 $days  = $weather["daily"]["data"];
                 $result = [
-                    'day' => $this->DAYS[date( 'w',$days[1]["time"])],
+                    'day' => date( 'w',$days[1]["time"]),
                     'temperature' => round($days[1]["temperatureMax"]),
                     'icon'        => "https://darksky.net/images/weather-icons/" . $days[1]["icon"] . ".png",
                     'description' => $days[1]["summary"],
