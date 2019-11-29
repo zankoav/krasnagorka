@@ -31,6 +31,14 @@ export default class BookingForm extends LightningElement {
         if(cid){
             this.cid = cid.replace(/GA1.2./g, '');
         }
+
+        this.fioValue =  getCookie('kg_name');
+        this.phoneValue =  getCookie('kg_phone');
+        this.emailValue =  getCookie('kg_email');
+
+        if( this.fioValue && this.phoneValue && this.emailValue){
+            this.isContactsExistsInCookies = true;
+        }
     }
 
     renderedCallback() {
@@ -49,19 +57,11 @@ export default class BookingForm extends LightningElement {
         this.spam = this.template.querySelector('[name="message"]');
 
 
-        const cookieFio = getCookie('kg_name');
-        if(cookieFio){
-            this.fio.value = cookieFio;
-        }
-
-        const cookiePhone = getCookie('kg_phone');
-        if(cookiePhone){
-            this.phone.value = cookiePhone;
-        }
-
-        const cookieEmail = getCookie('kg_email');
-        if(cookieEmail){
-            this.email.value = cookieEmail;
+        if(this.isContactsExistsInCookies){
+            this.isContactsExistsInCookies = false;
+            this.fio.value =  this.fioValue;
+            this.phone.value =  this.phoneValue;
+            this.email.value =  this.emailValue;
         }
     }
 
