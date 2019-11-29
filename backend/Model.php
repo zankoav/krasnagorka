@@ -158,8 +158,7 @@
 
                 $post = get_post($bookingId);
                 if (!empty($post) and ($post->post_type === 'house' or $post->post_type === 'event')) {
-                    $title = $post->post_title;
-
+                    $title = str_replace("\"", "\\\"", $post->post_title);
                     if ($post->post_type === 'house') {
                         $type = 'Домик:';
                     } else if ($post->post_type === 'event') {
