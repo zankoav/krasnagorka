@@ -172,11 +172,14 @@
                 $this->redirect_to_404();
             }
 
+            $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_laptop_hd' : 'header_tablet_p');
 
             $result = [
                 'mainMenu'      => $this->getMainMenu(),
                 'weather'       => $this->getWeather(),
                 'currencies'    => $this->getCurrencies(),
+                'pageTitle' => get_the_title(),
+                'pageBannerSrc' => $pageBannerSrc,
                 'popupContacts' => $this->getPopupContacts(),
                 'mainContent'   => [
                     "title"         => $title,

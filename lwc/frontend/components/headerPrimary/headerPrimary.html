@@ -1,13 +1,13 @@
 <template>
     <div class="header-primary">
-        <img class="header-primary__banner" src="https://cdn.shortpixel.ai/client/to_webp,q_glossy,ret_img/https://krasnagorka.by/wp-content/uploads/2018/04/Dizajn-bez-nazvaniya-320x422.png" alt="">
+        <img class="header-primary__banner" src={model.pageBannerSrc} alt={model.pageTitle}>
         <div class="header-primary__banner-layout"></div>
         <div class="container h-100 py-15">
             <div class="header-primary__content">
                 <div class="header-primary__menu">
                     <z-menu model={model}></z-menu>
                 </div>
-                <h1 class="header-primary__title">Бронирование</h1>
+                <h1 class="header-primary__title">{model.pageTitle}</h1>
                 <div class="header-primary__widget">
                     <z-widgets model={model}></z-widgets>
                 </div>
