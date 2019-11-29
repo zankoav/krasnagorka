@@ -96,8 +96,8 @@
                    class="our-house__button our-house__button--gray">
                     подробнее
                 </a>
-                <a href="#booking-order" data-name="<?= get_the_title(); ?>"
-                   class="fancybox-inline our-house__button b-ml-2">
+                <a href="/booking-form/?booking=<?= get_the_ID(); ?>"
+                   class="our-house__button b-ml-2" target="_blank">
                     забронировать
                 </a>
                 <?php if ($isTerem) : ?>
@@ -115,14 +115,15 @@
         </div>
         <?php if (!$isTerem) : ?>
             <div class="our-house__date">
-                <a href="#" class="our-house__button-booking" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>'>
+                <a href="#" class="our-house__button-booking"
+                   data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>'>
                     календарь бронирования
                 </a>
                 <div class="our-house__calendar">
                     <div class="booking-houses__calendars-inner"></div>
                 </div>
-                <a href="#booking-order" data-name="<?= get_the_title(); ?>"
-                   class="fancybox-inline our-house__button our-house__button_media_xs">
+                <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                   class="our-house__button our-house__button_media_xs" target="_blank">
                     забронировать
                 </a>
             </div>

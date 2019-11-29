@@ -18,12 +18,6 @@
             endwhile; ?>
         </div>
     </section>
-    <div style="display:none" class="fancybox-hidden">
-        <div id="booking-order">
-            <p class="booking-order__title"></p>
-            <?= do_shortcode('[contact-form-7 id="2730" title="Отправить заявку на бронирование"]'); ?>
-        </div>
-    </div>
     <div class="b-bgc-wrapper b-pb-25">
         <?php
             if (is_active_sidebar('our-houses-content')) {

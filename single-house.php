@@ -397,8 +397,8 @@
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                     </p>
-                    <a href="#booking-order" data-name="<?= get_the_title(); ?>"
-                       class="fancybox-inline house-booking__button terem-button">забронировать
+                    <a href="/booking-form/?booking=<?= get_the_ID() ?>" target="_blank"
+                       class="house-booking__button terem-button">забронировать
                     </a>
                 </footer>
             </div>
@@ -413,11 +413,5 @@
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");
     ?>
-    <div style="display:none" class="fancybox-hidden">
-        <div id="booking-order">
-            <p class="booking-order__title"></p>
-            <?= do_shortcode('[contact-form-7 id="2730" title="Отправить заявку на бронирование"]'); ?>
-        </div>
-    </div>
 <?php endwhile; endif; // end of the loop.?>
 <?php get_footer('mastak'); ?>
