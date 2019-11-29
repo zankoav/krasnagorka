@@ -172,7 +172,7 @@
                 $this->redirect_to_404();
             }
 
-            $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_laptop_hd' : 'header_tablet_p');
+            $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
 
             $result = [
                 'mainMenu'      => $this->getMainMenu(),
