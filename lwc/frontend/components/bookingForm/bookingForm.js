@@ -1,6 +1,7 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 /* eslint-disable no-await-in-loop */
-import {LightningElement, track, api} from 'lwc';
+import {LightningElement, track, api} from 'lwc'
+import {getCookie} from "../utils/utils";
 import Inputmask from "inputmask";
 
 import './bookingForm.scss';
@@ -26,7 +27,10 @@ export default class BookingForm extends LightningElement {
     @track isLoading;
 
     connectedCallback() {
-        this.cid = 'testcid';
+        const cid = getCookie("_ga");
+        if(cid){
+            this.cid = cid.replace(/GA1.2./g, '');
+        }
     }
 
     renderedCallback() {
