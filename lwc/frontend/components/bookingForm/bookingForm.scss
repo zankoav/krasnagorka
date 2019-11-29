@@ -31,7 +31,7 @@
     &__title{
         text-align: center;
         font-family: AvenirNextCyr-Regular, sans-serif;
-        font-size : 24px;
+        font-size : 18px;
         font-weight : 600;
         color: $GRAY_1;
 
@@ -40,6 +40,10 @@
             content: attr(data-before);
             margin-right: .25rem;
             font-weight : 400;
+        }
+
+        @include sm{
+            font-size : 24px;
         }
     }
 
