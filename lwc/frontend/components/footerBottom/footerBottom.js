@@ -20,6 +20,7 @@ export default class FooterBottom extends LightningElement {
     @track socials;
     @track _model;
     @track phone;
+    @track hrefPhone;
 
     @api showMobilePhone;
     @api set model(value) {
@@ -41,6 +42,7 @@ export default class FooterBottom extends LightningElement {
     connectedCallback(){
         if(this.showMobilePhone){
             this.phone = this.model.popupContacts.velcome;
+            this.hrefPhone = `tel: ${this.phone}`;
         }
     }
 
