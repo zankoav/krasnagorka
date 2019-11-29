@@ -41,7 +41,9 @@
                 'email' => $request['email'],
                 'dateStart' => $request['dateStart'],
                 'dateEnd' => $request['dateEnd'],
-                'houseName' => $request['bookingTitle'],
+                'bookingTitle' => $request['bookingTitle'],
+                'bookingType' => $request['bookingType'],
+                'passportId' => $request['passportId'],
                 'comment' => $request['comment'],
                 'cid' => $request['cid']
             ];

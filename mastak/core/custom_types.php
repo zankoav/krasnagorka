@@ -578,7 +578,7 @@
         ));
 
         $cmb_options->add_field(array(
-            'name' => 'Договор оферты',
+            'name' => 'Договор присоединения',
             'id'   => 'contract_offer',
             'type' => 'file'
         ));

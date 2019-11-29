@@ -10,10 +10,9 @@ const ERROR_PHONE_EMPTY = 'Поле Телефон не заполнено';
 const ERROR_EMAIL_EMPTY = 'Поле Email не заполнено';
 const ERROR_DATE_START_EMPTY = 'Поле Дата заезда не заполнено';
 const ERROR_DATE_END_EMPTY = 'Поле Дата выезда не заполнено';
-const ERROR_PASSPORT_EMPTY = 'Поле паспорта не заполнено';
 const ERROR_COUNT_EMPTY = 'Поле Количество человек не заполнено';
 const ERROR_EMAIL_INVALID = 'Поле Email не валидно';
-const ERROR_CONTRACT_UNCHECKED = 'Вы не согласились с договором оферты';
+const ERROR_CONTRACT_UNCHECKED = 'Вы не согласились с договором присоединения';
 const ERROR_DATE_END_INVALID = 'Дата выезда должны быть позже даты заезда';
 
 export default class BookingForm extends LightningElement {
@@ -128,7 +127,7 @@ export default class BookingForm extends LightningElement {
                 'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify({
-                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${this.objectTitle}&cid=${this.cid}&passport=${passport}`,
+                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${this.objectTitle}&bookingType=${this.objectType}&cid=${this.cid}&passportId=${passport}`,
                 message: spam
             })
         })
