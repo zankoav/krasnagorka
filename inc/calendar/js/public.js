@@ -46,6 +46,7 @@ function loadCalendar() {
     var $textHelper;
     var events;
 
+
     function setDate(){
         setTimeout(function(){
             const bookingId = jQuery($orderButton[0]).data('id');
@@ -122,7 +123,7 @@ function loadCalendar() {
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
 
-                        if(event && (event.target != $orderButton[0] || event.target != $orderButton[1]){
+                        if(event && (event.target != $orderButton[0] || event.target != $orderButton[1])){
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($orderButton[0]).attr('href', baseHref);
