@@ -123,6 +123,9 @@ function loadCalendar() {
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
 
+                        console.log($orderButton);
+                        console.log(event.target);
+
                         if(event && (event.target != $orderButton[0] || event.target != $orderButton[1])){
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
