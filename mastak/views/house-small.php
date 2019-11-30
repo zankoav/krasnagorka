@@ -123,6 +123,7 @@
                     <div class="booking-houses__calendars-inner"></div>
                 </div>
                 <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                   data-name="<?=get_the_title();?>"
                    class="our-house__button our-house__button_media_xs" target="_blank">
                     забронировать
                 </a>
