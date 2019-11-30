@@ -55,18 +55,24 @@ function loadCalendar() {
     });
 
     function setDate(){
-        if(jQuery(this)[0] == $activeButton[0] || !$activeButton[0]){
-            setTimeout(function(){
-                jQuery('[name="date-1"]').val(_startDate);
-                jQuery('[name="date-2"]').val(_endDate);
-                jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
-                    _startDate = '';
-                    _endDate = '';
-                    jQuery('[name="date-1"]').val(_startDate);
-                    jQuery('[name="date-2"]').val(_endDate);
-                });
-            }, 40);
-        }
+        setTimeout(function(){
+            const bookingId = jQuery($orderButton[0]).data('id');
+            const baseHref = `/booking-form/?booking=${bookingId}`;
+            jQuery($orderButton[0]).attr('href', baseHref);
+        }, 40);
+
+        // if(jQuery(this)[0] == $activeButton[0] || !$activeButton[0]){
+        //     setTimeout(function(){
+        //         jQuery('[name="date-1"]').val(_startDate);
+        //         jQuery('[name="date-2"]').val(_endDate);
+        //         jQuery('#fancybox-close, #fancybox-overlay').on('click', function(){
+        //             _startDate = '';
+        //             _endDate = '';
+        //             jQuery('[name="date-1"]').val(_startDate);
+        //             jQuery('[name="date-2"]').val(_endDate);
+        //         });
+        //     }, 40);
+        // }
         // jQuery('.select-helper__text_success')
         //     .removeClass('select-helper__text_success')
         //     .html($textHelper.data('helper-start'));
@@ -134,16 +140,10 @@ function loadCalendar() {
                             .html($textHelper.data('helper-start'));
 
                         if(event.target != $orderButton[0]){
-                            console.log('not this button');
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($orderButton[0]).attr('href', baseHref);
-                        }else{
-                            console.log('button');
                         }
-
-
-
 
                     },
                     select: function(startDate, endDate) {
