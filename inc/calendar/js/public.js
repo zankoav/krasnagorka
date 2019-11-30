@@ -178,6 +178,8 @@ function loadCalendar() {
 
 
 function buttonAnimate($buttonView){
+    console.log($buttonView);
+    
     $activeButton = $buttonView;
     $buttonView.addClass('button-animation');
     setTimeout(function(){
