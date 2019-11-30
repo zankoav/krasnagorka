@@ -128,13 +128,16 @@ function loadCalendar() {
                         var selectAllowEndDate = selectInfo.end.format('YYYY-MM-DD');
                         return checkDateRange(events,selectAllowStartDate, selectAllowEndDate);
                     },
-                    unselect: function(){
+                    unselect: function(event){
                         $textHelper
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
                         const bookingId = jQuery($orderButton[0]).data('id');
                         const baseHref = `/booking-form/?booking=${bookingId}`;
                         jQuery($orderButton[0]).attr('href', baseHref);
+
+                        console.log('event',event);
+
                     },
                     select: function(startDate, endDate) {
                         var start = startDate.format();
@@ -154,8 +157,6 @@ function loadCalendar() {
 
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-                            console.log('bookingId', bookingId);
-                            console.log('baseHref', baseHref);
                             jQuery($orderButton[0]).attr('href', baseHref);
                         }
 
