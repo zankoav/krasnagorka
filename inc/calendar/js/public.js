@@ -135,9 +135,7 @@ function loadCalendar() {
                             jQuery($orderButton[0]).attr('href', baseHref);
                         }
 
-                        if($teremButton.length){
-                            console.log(event);
-                            
+                        if($teremButton.length && event.target.classList.indexOf('terem-button') > -1){
                             const bookingId = jQuery($teremButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($teremButton[0]).attr('href', baseHref);
