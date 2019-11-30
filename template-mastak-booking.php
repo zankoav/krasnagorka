@@ -161,7 +161,7 @@
                                             Показать календарь
                                         </a>
                                     </div>
-                                    <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                                    <a href="/booking-form/?booking=<?= get_the_ID() ?>&terem=<?= $kalendar['title']; ?>"
                                        data-name="<?= $kalendar['title']; ?>"
                                        data-id="<?=get_the_ID();?>"
                                        target="_blank"
