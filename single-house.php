@@ -397,7 +397,10 @@
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                     </p>
-                    <a href="/booking-form/?booking=<?= get_the_ID() ?>" target="_blank"
+                    <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                       data-name="<?=get_the_title();?>"
+                       data-id="<?=get_the_ID();?>"
+                       target="_blank"
                        class="house-booking__button terem-button">забронировать
                     </a>
                 </footer>

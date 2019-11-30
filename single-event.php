@@ -60,6 +60,8 @@
                         </p>
                     <?php endif; ?>
                     <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                       data-name="<?=get_the_title();?>"
+                       data-id="<?=get_the_ID();?>"
                        target="_blank"
                        class="house-booking__button">забронировать
                     </a>
