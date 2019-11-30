@@ -151,6 +151,8 @@
         public function getBookingModel() {
 
             $bookingId = $_GET['booking'];
+            $dateFrom = $_GET['from'];
+            $dateTo = $_GET['to'];
             $title     = null;
             $type      = null;
 
@@ -187,6 +189,11 @@
                 ],
                 "footerBottom"  => $this->getFooterBottom()
             ];
+
+            if(!empty($dateFrom) and !empty($dateTo)){
+                $result['dateFrom'] = $dateFrom;
+                $result['dateTo'] = $dateTo;
+            }
 
             return json_encode($result);
         }

@@ -18,11 +18,11 @@
                 </div>
                 <div class="booking-form__group">
                     <label for="date-start" class="booking-form__label booking-form__label_required">Дата заезда</label>
-                    <input id="date-start" onfocus={clearError} type="date" class="booking-form__input" name="date-start">
+                    <input id="date-start" onfocus={clearError} type="date" value={dateFrom}  class="booking-form__input" name="date-start">
                 </div>
                 <div class="booking-form__group">
                     <label for="date-end" class="booking-form__label booking-form__label_required">Дата выезда</label>
-                    <input id="date-end" onfocus={clearError} type="date" class="booking-form__input" name="date-end">
+                    <input id="date-end" onfocus={clearError} type="date" value={dateTo} class="booking-form__input" name="date-end">
                 </div>
                 <div class="booking-form__group">
                     <label for="count" class="booking-form__label booking-form__label_required">Количество людей</label>

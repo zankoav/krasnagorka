@@ -132,6 +132,9 @@ function loadCalendar() {
                         $textHelper
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
+                        const bookingId = jQuery($orderButton[0]).data('id');
+                        const baseHref = `/booking-form/?booking=${bookingId}`;
+                        jQuery($orderButton[0]).attr('href', baseHref);
                     },
                     select: function(startDate, endDate) {
                         var start = startDate.format();

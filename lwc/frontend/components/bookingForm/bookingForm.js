@@ -21,6 +21,8 @@ export default class BookingForm extends LightningElement {
     @api objectType;
     @api objectTitle;
     @api contractOffer;
+    @api dateFrom;
+    @api dateTo;
 
     @track formMessageSuccess;
     @track formMessageError;
