@@ -59,6 +59,12 @@ function loadCalendar() {
             const bookingId = jQuery($orderButton[0]).data('id');
             const baseHref = `/booking-form/?booking=${bookingId}`;
             jQuery($orderButton[0]).attr('href', baseHref);
+
+            if($teremButton.length){
+                const bookingId = jQuery($teremButton[0]).data('id');
+                const baseHref = `/booking-form/?booking=${bookingId}`;
+                jQuery($teremButton[0]).attr('href', baseHref);
+            }
         }, 40);
     }
 
@@ -127,6 +133,12 @@ function loadCalendar() {
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($orderButton[0]).attr('href', baseHref);
+                        }
+
+                        if($teremButton.length){
+                            const bookingId = jQuery($teremButton[0]).data('id');
+                            const baseHref = `/booking-form/?booking=${bookingId}`;
+                            jQuery($teremButton[0]).attr('href', baseHref);
                         }
 
                     },
