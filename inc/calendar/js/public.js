@@ -42,17 +42,9 @@ function loadCalendar() {
     var $parentDate = jQuery(this).parent().parent().parent().find('.our-house__date');
     var $orderButton = jQuery(this).parent().parent().parent().find('.our-house__button[data-name]');
     var $teremButton = jQuery('.terem-button');
-    // var $houseHiddenName = jQuery('[name="house-name"]');
     var $orderBookingButton = jQuery(this).parent().parent().find('.our-house__button-hidden');
     var $textHelper;
     var events;
-
-    // $teremButton.on('click', function(){
-    //     var name = jQuery(this).data('name');
-    //     setTimeout(function () {
-    //         $houseHiddenName.val(name);
-    //     }, 500);
-    // });
 
     function setDate(){
         setTimeout(function(){
@@ -130,7 +122,7 @@ function loadCalendar() {
                             .removeClass('select-helper__text_success')
                             .html($textHelper.data('helper-start'));
 
-                        if(event && event.target != $orderButton[0]){
+                        if(event && (event.target != $orderButton[0] || event.target != $orderButton[1]){
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($orderButton[0]).attr('href', baseHref);
@@ -179,8 +171,6 @@ function loadCalendar() {
                                 baseHref += `&terem=${_title}`;
                             }
                             jQuery($teremButton[0]).attr('href', baseHref);
-                            // $houseHiddenName.val(_title);
-                            // $teremButton.attr('data-name', _title);
                         }
                     }
                 });
