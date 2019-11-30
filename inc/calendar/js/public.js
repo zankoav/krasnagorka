@@ -175,6 +175,8 @@ function loadCalendar() {
 
 function buttonAnimate($buttonView){
     $activeButton = $buttonView;
+    var link = $buttonView.attr('href');
+    $buttonView.attr('href', `${link}&from=${_startDate}&to=${_endDate}`);
     $buttonView.addClass('button-animation');
     setTimeout(function(){
         $buttonView.removeClass('button-animation');
