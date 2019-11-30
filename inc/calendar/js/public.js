@@ -59,6 +59,7 @@ function loadCalendar() {
             const bookingId = jQuery($orderButton[0]).data('id');
             const baseHref = `/booking-form/?booking=${bookingId}`;
             jQuery($orderButton[0]).attr('href', baseHref);
+            jQuery($orderButton[1]).attr('href', baseHref);
 
             if($teremButton.length){
                 const bookingId = jQuery($teremButton[0]).data('id');
@@ -133,6 +134,7 @@ function loadCalendar() {
                             const bookingId = jQuery($orderButton[0]).data('id');
                             const baseHref = `/booking-form/?booking=${bookingId}`;
                             jQuery($orderButton[0]).attr('href', baseHref);
+                            jQuery($orderButton[1]).attr('href', baseHref);
                         }
 
                         if($teremButton.length && event && !event.target.classList.contains('terem-button')){
@@ -165,6 +167,7 @@ function loadCalendar() {
                                 baseHref += `&terem=${titleTerem}`;
                             }
                             jQuery($orderButton[0]).attr('href', baseHref);
+                            jQuery($orderButton[1]).attr('href', baseHref);
                         }
 
                         if($teremButton.length){
@@ -173,7 +176,6 @@ function loadCalendar() {
                             const bookingId = jQuery($teremButton[0]).data('id');
                             let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
                             if(jQuery($teremButton[0]).hasClass('is-terem-js')){
-                                const titleTerem = jQuery($teremButton[0]).data('name');
                                 baseHref += `&terem=${_title}`;
                             }
                             jQuery($teremButton[0]).attr('href', baseHref);
