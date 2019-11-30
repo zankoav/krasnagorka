@@ -159,7 +159,11 @@ function loadCalendar() {
                             buttonAnimate($orderButton);
 
                             const bookingId = jQuery($orderButton[0]).data('id');
-                            const baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
+                            let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
+                            if(jQuery($orderButton[0]).hasClass('is-terem-js')){
+                                const titleTerem = jQuery($orderButton[0]).data('name');
+                                baseHref += `&terem=${titleTerem}`;
+                            }
                             jQuery($orderButton[0]).attr('href', baseHref);
                         }
 

@@ -153,6 +153,7 @@
             $bookingId = $_GET['booking'];
             $dateFrom = $_GET['from'];
             $dateTo = $_GET['to'];
+            $teremRoom = $_GET['terem'];
             $title     = null;
             $type      = null;
 
@@ -193,6 +194,10 @@
             if(!empty($dateFrom) and !empty($dateTo)){
                 $result['dateFrom'] = $dateFrom;
                 $result['dateTo'] = $dateTo;
+            }
+
+            if(!empty($teremRoom)){
+                $result['mainContent']['title'] = $teremRoom;
             }
 
             return json_encode($result);
