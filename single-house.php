@@ -401,7 +401,7 @@
                        data-name="<?=get_the_title();?>"
                        data-id="<?=get_the_ID();?>"
                        target="_blank"
-                       class="house-booking__button terem-button">забронировать
+                       class="<?= $isTerem? 'is-terem-js': ''?> house-booking__button terem-button">забронировать
                     </a>
                 </footer>
             </div>
