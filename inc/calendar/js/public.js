@@ -148,9 +148,9 @@ function loadCalendar() {
                                 .addClass('select-helper__text_success')
                                 .html($textHelper.data('helper'));
                             buttonAnimate($orderButton);
-                            var link = $($orderButton[0]).attr('href');
-                            $($orderButton[0]).attr('href', `${link}&from=${_startDate}&to=${_endDate}`);
-                            console.log($($orderButton[0]).attr('href'));
+                            var link = jQuery($orderButton[0]).attr('href');
+                            jQuery($orderButton[0]).attr('href', `${link}&from=${_startDate}&to=${_endDate}`);
+                            console.log(jQuery($orderButton[0]).attr('href'));
                             
                         }
 
