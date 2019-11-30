@@ -97,6 +97,7 @@
                     подробнее
                 </a>
                 <a href="/booking-form/?booking=<?= get_the_ID(); ?>"
+                   data-name="<?=get_the_title();?>"
                    class="our-house__button b-ml-2" target="_blank">
                     забронировать
                 </a>
