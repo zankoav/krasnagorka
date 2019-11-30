@@ -174,7 +174,7 @@ function loadCalendar() {
                             let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
                             if(jQuery($teremButton[0]).hasClass('is-terem-js')){
                                 const titleTerem = jQuery($teremButton[0]).data('name');
-                                baseHref += `&terem=${titleTerem}`;
+                                baseHref += `&terem=${_title}`;
                             }
                             jQuery($teremButton[0]).attr('href', baseHref);
                             // $houseHiddenName.val(_title);
