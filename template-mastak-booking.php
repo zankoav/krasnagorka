@@ -162,6 +162,8 @@
                                         </a>
                                     </div>
                                     <a href="/booking-form/?booking=<?= get_the_ID() ?>"
+                                       data-name="<?=get_the_title();?>"
+                                       data-id="<?=get_the_ID();?>"
                                        target="_blank"
                                        class="our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
                                         забронировать
