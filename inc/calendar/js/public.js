@@ -148,6 +148,10 @@ function loadCalendar() {
                                 .addClass('select-helper__text_success')
                                 .html($textHelper.data('helper'));
                             buttonAnimate($orderButton);
+                            var link = $orderButton.attr('href');
+                            $orderButton.attr('href', `${link}&from=${_startDate}&to=${_endDate}`);
+                            console.log($orderButton.attr('href'));
+                            
                         }
 
                         if($teremButton.length){
@@ -175,8 +179,6 @@ function loadCalendar() {
 
 function buttonAnimate($buttonView){
     $activeButton = $buttonView;
-    var link = $buttonView.attr('href');
-    $buttonView.attr('href', `${link}&from=${_startDate}&to=${_endDate}`);
     $buttonView.addClass('button-animation');
     setTimeout(function(){
         $buttonView.removeClass('button-animation');
