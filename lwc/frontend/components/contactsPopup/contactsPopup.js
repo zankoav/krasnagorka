@@ -1,6 +1,6 @@
 import {LightningElement, api, track} from 'lwc';
 import './contactsPopup.scss';
-import velcome from './../../icons/velcome.svg';
+import a1 from './../../icons/a1.png';
 import life from './../../icons/life.svg';
 import mts from './../../icons/mts.svg';
 import envelope from './../../icons/envelope.svg';
@@ -13,7 +13,7 @@ const DEFAULT_CSS_CLASS = 'contacts-popup';
 const ACTIVE_CSS_CLASS = 'contacts-popup contacts-popup_active';
 
 const ICONS = {
-    velcome: velcome,
+    a1: a1,
     viber: viber,
     whatsapp: whatsapp,
     telegram: telegram,
@@ -29,7 +29,7 @@ export default class ContactsPopup extends LightningElement {
 
     @track icons = ICONS;
     @track cssClass = DEFAULT_CSS_CLASS;
-    @track hrefVelcome;
+    @track hrefA1;
     @track hrefMts;
     @track hrefLife;
     @track hrefEmail;
@@ -47,7 +47,7 @@ export default class ContactsPopup extends LightningElement {
 
 
     connectedCallback() {
-        this.hrefVelcome = `tel: ${this.model.velcome}`;
+        this.hrefA1 = `tel: ${this.model.a1}`;
         this.hrefMts = `tel: ${this.model.mts}`;
         this.hrefLife = `tel: ${this.model.life}`;
         this.hrefEmail = `mailto: ${this.model.email}`;

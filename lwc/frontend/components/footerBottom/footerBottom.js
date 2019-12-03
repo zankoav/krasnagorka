@@ -41,7 +41,7 @@ export default class FooterBottom extends LightningElement {
 
     connectedCallback(){
         if(this.showMobilePhone){
-            this.phone = this.model.popupContacts.velcome;
+            this.phone = this.model.popupContacts.a1;
             this.hrefPhone = `tel: ${this.phone}`;
         }
     }

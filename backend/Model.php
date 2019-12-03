@@ -18,7 +18,7 @@
         public function getPopupContacts() {
             $options = $this->baseModel;
             return [
-                'velcome' => $options['mastak_theme_options_velcome'],
+                'a1' => $options['mastak_theme_options_a1'],
                 'mts'     => $options['mastak_theme_options_mts'],
                 'life'    => $options['mastak_theme_options_life'],
                 'email'   => $options['mastak_theme_options_email'],

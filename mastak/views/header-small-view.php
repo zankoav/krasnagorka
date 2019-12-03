@@ -3,7 +3,7 @@
     $options = get_option('mastak_theme_options');
     $email   = $options['mastak_theme_options_email'];
     $life    = $options['mastak_theme_options_life'];
-    $velcom  = $options['mastak_theme_options_velcome'];
+    $a1  = $options['mastak_theme_options_a1'];
     $mts     = $options['mastak_theme_options_mts'];
     $weekend = $options['mastak_theme_options_weekend'];
     $time    = $options['mastak_theme_options_time'];
@@ -280,10 +280,10 @@
                 <div class="contacts-popup__wrapper">
                     <div class="contacts-popup__phones phone-list phone-list--messanger">
                         <div class="phone-item ">
-                            <img src="<?= CORE_PATH; ?>assets/icons/velcome.svg" alt="icon-velcome"
+                            <img src="<?= CORE_PATH; ?>assets/icons/a1.png" alt="icon-a1"
                                  class="phone-item__icon phone-item__icon--velcome">
-                            <a href="tel: <?= $velcom; ?>"
-                               class="phone-item__phone-number phone-item__phone-number_velcom"><?= $velcom; ?></a>
+                            <a href="tel: <?= $a1; ?>"
+                               class="phone-item__phone-number phone-item__phone-number_velcom"><?= $a1; ?></a>
                             <img src="<?= CORE_PATH; ?>assets/icons/social/viber.svg" alt="icon-viber"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--viber">
                             <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg" alt="icon-whatsapp"

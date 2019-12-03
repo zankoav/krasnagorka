@@ -222,9 +222,9 @@
             'type' => 'title'
         ));
 
-        $velcome = $cmb_options->add_field(array(
-            'desc' => __('Велком', 'krasnagorka'),
-            'id'   => $prefix . 'velcome',
+        $a1 = $cmb_options->add_field(array(
+            'desc' => __('A1', 'krasnagorka'),
+            'id'   => $prefix . 'a1',
             'type' => 'text'
         ));
 
@@ -244,7 +244,7 @@
 
         $cmb2Grid = new \Cmb2Grid\Grid\Cmb2Grid($cmb_options);
         $rowPhones = $cmb2Grid->addRow();
-        $rowPhones->addColumns(array($velcome,$mts,$life));
+        $rowPhones->addColumns(array($a1,$mts,$life));
 
         $cmb_options->add_field(array(
             'name' => __('Социальные сети', 'krasnagorka'),

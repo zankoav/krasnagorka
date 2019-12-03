@@ -15,7 +15,7 @@
     $email         = $options['mastak_theme_options_email'];
 
     $life           = $options['mastak_theme_options_life'];
-    $velcom         = $options['mastak_theme_options_velcome'];
+    $a1         = $options['mastak_theme_options_a1'];
     $mts            = $options['mastak_theme_options_mts'];
     $footer_logo_id = $options['footer_logo_id'];
     
@@ -107,7 +107,7 @@
                                 <img src="<?= CORE_PATH ?>assets/icons/contacts-data/phone.svg" alt="phone"
                                      class="contacts-data__item-icon contacts-data__item-icon--top">
                                 <div class="contacts-data__item-text-wrapper">
-                                    <a href="tel: <?= $velcom; ?>" class="contacts-data__item-text contacts-data__item-text_velcom"><?= $velcom; ?></a>
+                                    <a href="tel: <?= $a1; ?>" class="contacts-data__item-text contacts-data__item-text_velcom"><?= $a1; ?></a>
                                     <a href="tel: <?= $mts; ?>" class="contacts-data__item-text contacts-data__item-text_mts"><?= $mts; ?></a>
                                     <a href="tel: <?= $life; ?>" class="contacts-data__item-text contacts-data__item-text_life"><?= $life; ?></a>
                                 </div>

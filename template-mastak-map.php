@@ -21,7 +21,7 @@
     $options            = get_option('mastak_theme_options');
     $email              = $options['mastak_theme_options_email'];
     $life               = $options['mastak_theme_options_life'];
-    $velcom             = $options['mastak_theme_options_velcome'];
+    $a1             = $options['mastak_theme_options_a1'];
     $mts                = $options['mastak_theme_options_mts'];
     $coordinate         = $options['mastak_theme_options_coordinate'];
     $address            = $options['mastak_theme_options_address'];
@@ -84,7 +84,7 @@
             </div>
             <div class="base-place__phones">
                 <div class="base-place__phones-block">
-                    <p class="base-place__phone"><?= $velcom; ?></p>
+                    <p class="base-place__phone"><?= $a1; ?></p>
                     <p class="base-place__phone"><?= $mts; ?></p>
                     <p class="base-place__phone"><?= $life; ?></p>
                 </div>
