@@ -27,6 +27,7 @@
 	require __DIR__ . "/core/cmb2/Type_6.php";
 	require __DIR__ . "/core/cmb2/Type_7.php";
 	require __DIR__ . "/core/cmb2/Type_8.php";
+	require __DIR__ . "/core/cmb2/Type_9.php";
 
 	$kgCooke = new KGCookie();
 
@@ -60,6 +61,9 @@
 			case 'type_8':
 				$tab = new Type_8( absint( $id ) );
 				break;
+            case 'type_9':
+                $tab = new Type_9( absint( $id ) );
+                break;
 			default:
 				break;
 		}

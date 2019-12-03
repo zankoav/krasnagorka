@@ -1818,6 +1818,22 @@
         return $house;
     }
 
+    function show_event_options() {
+
+        $query = new WP_Query(array(
+            'post_type'      => 'event',
+            'posts_per_page' => -1
+        ));
+
+        $events = [];
+        $posts = $query->get_posts();
+        foreach ($posts as $post) {
+            $events[$post->ID] = $post->post_title;
+        }
+
+        return $events;
+    }
+
     function show_seasons_options() {
 
         $query = new WP_Query(array(
