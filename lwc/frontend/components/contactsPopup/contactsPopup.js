@@ -47,10 +47,12 @@ export default class ContactsPopup extends LightningElement {
 
 
     connectedCallback() {
-        this.hrefA1 = `tel: ${this.model.a1}`;
-        this.hrefMts = `tel: ${this.model.mts}`;
-        this.hrefLife = `tel: ${this.model.life}`;
-        this.hrefEmail = `mailto: ${this.model.email}`;
+        if(this.model){
+            this.hrefA1 = `tel: ${this.model.a1}`;
+            this.hrefMts = `tel: ${this.model.mts}`;
+            this.hrefLife = `tel: ${this.model.life}`;
+            this.hrefEmail = `mailto: ${this.model.email}`;
+        }
     }
 
     hidePopup() {

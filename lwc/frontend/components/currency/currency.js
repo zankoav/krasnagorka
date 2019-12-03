@@ -43,18 +43,20 @@ export default class Currency extends LightningElement {
 
     connectedCallback(){
 
-        this.currencies.forEach(currency => {
-            currency.price = this.currenciesPrices[currency.value];
-        });
+        if( this.currenciesPrices){
+            this.currencies.forEach(currency => {
+                currency.price = this.currenciesPrices[currency.value];
+            });
 
-        const currencyCookieValue = getCookie(COOKIE_CURRENCY_SELECTED_KEY);
+            const currencyCookieValue = getCookie(COOKIE_CURRENCY_SELECTED_KEY);
 
-        if(currencyCookieValue){
-            this.currentCurrency = this.currencies.find(item => item.value === currencyCookieValue);
-        }else{
-            this.currentCurrency = this.currencies.find(item => item.value === 'byn');
-            setCookie(COOKIE_CURRENCY_SELECTED_KEY, this.currentCurrency.value, {'max-age': MAX_AGE});
-            setCookie(COOKIE_CURRENCY_VALUE_KEY, this.currentCurrency.price, {'max-age': MAX_AGE});
+            if(currencyCookieValue){
+                this.currentCurrency = this.currencies.find(item => item.value === currencyCookieValue);
+            }else{
+                this.currentCurrency = this.currencies.find(item => item.value === 'byn');
+                setCookie(COOKIE_CURRENCY_SELECTED_KEY, this.currentCurrency.value, {'max-age': MAX_AGE});
+                setCookie(COOKIE_CURRENCY_VALUE_KEY, this.currentCurrency.price, {'max-age': MAX_AGE});
+            }
         }
     }
 

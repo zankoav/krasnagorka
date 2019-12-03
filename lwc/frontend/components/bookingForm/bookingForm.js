@@ -47,7 +47,7 @@ export default class BookingForm extends LightningElement {
         this.fio = this.template.querySelector('[name="fio"]');
         Inputmask({regex: "^[a-zA-Zа-яА-Я\\s]*$"}).mask(this.fio);
         this.phone = this.template.querySelector('[name="phone"]');
-        Inputmask({regex: "^[0-9]*$"}).mask(this.phone);
+        Inputmask({regex: "^\\+[0-9]*$"}).mask(this.phone);
         this.email = this.template.querySelector('[name="email"]');
         this.dateStart = this.template.querySelector('[name="date-start"]');
         this.dateEnd = this.template.querySelector('[name="date-end"]');
