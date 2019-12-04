@@ -667,7 +667,7 @@
 
 <script>
     jQuery(document).ready(function(){
-        jQuery("#kg-loader").delay(2500).fadeOut(300,function(){
+        jQuery("#kg-loader").delay(1500).fadeOut(300,function(){
             jQuery("#kg-loader").remove();
         });
     });
