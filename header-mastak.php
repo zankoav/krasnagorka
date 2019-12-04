@@ -129,6 +129,24 @@
                 width : 1024px;
             }
         }
+
+        .kg-loader{
+            position: fixed;
+            z-index : 999999999999;
+            left : 0;
+            top : 0;
+            width : 100vw;
+            height : 100vh;
+            display : flex;
+            align-items : center;
+            justify-content : center;
+            background-color : #2a3959;
+        }
+
+        .kg-loader__img{
+            width: 100px;
+            display: inline-block;
+        }
     </style>
 </head>
 <?php $bg_gray =
@@ -141,6 +159,9 @@
 
 ?>
 <body <?php body_class($bg_gray); ?>>
+<div id="kg-loader" class="kg-loader">
+    <img src="/wp-content/themes/krasnagorka/assets/images/rings.svg" alt="spinner" class="kg-loader__img">
+</div>
 <noscript>
     <img height="1" width="1" style="display:none"
          src="https://www.facebook.com/tr?id=1020781118034010&ev=PageView&noscript=1"/>
