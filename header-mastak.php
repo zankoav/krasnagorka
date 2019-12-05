@@ -140,12 +140,17 @@
             display : flex;
             align-items : center;
             justify-content : center;
-            background-color : #2a3959;
+            background-color : #f7f7f7;
         }
 
         .kg-loader__img{
             width: 100px;
             display: inline-block;
+            animation: kgSpinner 2s ease-out infinite;
+        }
+        @keyframes kgSpinner {
+            0%.100%{transform:scale(1)}
+            50%{transform:scale(1.25)}
         }
     </style>
 </head>
@@ -160,7 +165,7 @@
 ?>
 <body <?php body_class($bg_gray); ?>>
 <div id="kg-loader" class="kg-loader">
-    <img src="/wp-content/themes/krasnagorka/assets/images/rings.svg" alt="spinner" class="kg-loader__img">
+    <img src="/wp-content/themes/krasnagorka/assets/images/logoKG.png" alt="spinner" class="kg-loader__img">
 </div>
 <noscript>
     <img height="1" width="1" style="display:none"

@@ -9,7 +9,7 @@
     class Model {
 
         private $baseModel;
-        private $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб' ];
+        private $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
         public function __construct() {
             $this->baseModel = get_option('mastak_theme_options');
@@ -18,7 +18,7 @@
         public function getPopupContacts() {
             $options = $this->baseModel;
             return [
-                'a1' => $options['mastak_theme_options_a1'],
+                'a1'      => $options['mastak_theme_options_a1'],
                 'mts'     => $options['mastak_theme_options_mts'],
                 'life'    => $options['mastak_theme_options_life'],
                 'email'   => $options['mastak_theme_options_email'],
@@ -27,41 +27,41 @@
             ];
         }
 
-        private function updateWeather(){
+        private function updateWeather() {
             $api     = "https://api.darksky.net/forecast/81b61e0936068afa7f3b5d5443c9f690/55.773202,27.072710?lang=ru&exclude=minutely,hourly,flags,alerts&units=auto";
             $weather = json_decode(file_get_contents($api), true);
             $result  = [];
             if (!empty($weather) and isset($weather["daily"]) and isset($weather["daily"]["data"])) {
 
-                $days  = $weather["daily"]["data"];
+                $days   = $weather["daily"]["data"];
                 $result = [
-                    'day' => date( 'w',$days[1]["time"]),
+                    'day'         => date('w', $days[1]["time"]),
                     'temperature' => round($days[1]["temperatureMax"]),
                     'icon'        => "https://darksky.net/images/weather-icons/" . $days[1]["icon"] . ".png",
                     'description' => $days[1]["summary"],
                     'firstDay'    => [
-                        'day'  => $this->DAYS[date( 'w',$days[2]["time"])],
+                        'day'  => $this->DAYS[date('w', $days[2]["time"])],
                         'icon' => "https://darksky.net/images/weather-icons/" . $days[2]["icon"] . ".png"
                     ],
                     'secondDay'   => [
-                        'day'  => $this->DAYS[date( 'w',$days[3]["time"])],
+                        'day'  => $this->DAYS[date('w', $days[3]["time"])],
                         'icon' => "https://darksky.net/images/weather-icons/" . $days[3]["icon"] . ".png"
                     ],
                     'thirdDay'    => [
-                        'day'  => $this->DAYS[date( 'w',$days[4]["time"])],
+                        'day'  => $this->DAYS[date('w', $days[4]["time"])],
                         'icon' => "https://darksky.net/images/weather-icons/" . $days[4]["icon"] . ".png"
                     ]
                 ];
             }
-            update_option( 'krasnagorka_weather', json_encode( $result ) );
+            update_option('krasnagorka_weather', json_encode($result));
             return $result;
         }
 
         public function getWeather() {
-            $weatherStr = get_option( 'krasnagorka_weather' );
-            if ( ! empty( $weatherStr ) ) {
-                $weatherArray = json_decode( $weatherStr, true );
-                if ( $weatherArray === null or ( $weatherArray['day'] < date( 'w' ) ) ) {
+            $weatherStr = get_option('krasnagorka_weather');
+            if (!empty($weatherStr)) {
+                $weatherArray = json_decode($weatherStr, true);
+                if ($weatherArray['day'] != date('w')) {
                     return $this->updateWeather();
                 } else {
                     return $weatherArray;
@@ -151,8 +151,8 @@
         public function getBookingModel() {
 
             $bookingId = $_GET['booking'];
-            $dateFrom = $_GET['from'];
-            $dateTo = $_GET['to'];
+            $dateFrom  = $_GET['from'];
+            $dateTo    = $_GET['to'];
             $teremRoom = $_GET['terem'];
             $title     = null;
             $type      = null;
@@ -175,12 +175,14 @@
             }
 
             $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
-
-            $result = [
+            $weather       = $this->getWeather();
+            $result        = [
+                'DAY'           => $weather['day'],
+                'WDAY'          => date('w'),
                 'mainMenu'      => $this->getMainMenu(),
-                'weather'       => $this->getWeather(),
+                'weather'       => $weather,
                 'currencies'    => $this->getCurrencies(),
-                'pageTitle' => get_the_title(),
+                'pageTitle'     => get_the_title(),
                 'pageBannerSrc' => $pageBannerSrc,
                 'popupContacts' => $this->getPopupContacts(),
                 'mainContent'   => [
@@ -191,12 +193,12 @@
                 "footerBottom"  => $this->getFooterBottom()
             ];
 
-            if(!empty($dateFrom) and !empty($dateTo)){
+            if (!empty($dateFrom) and !empty($dateTo)) {
                 $result['dateFrom'] = $dateFrom;
-                $result['dateTo'] = $dateTo;
+                $result['dateTo']   = $dateTo;
             }
 
-            if(!empty($teremRoom)){
+            if (!empty($teremRoom)) {
                 $result['mainContent']['title'] = $teremRoom;
             }
 
