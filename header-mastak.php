@@ -152,6 +152,10 @@
             0%.100%{transform:scale(1)}
             50%{transform:scale(1.25)}
         }
+
+        .main-slider__slide-content-button{
+            text-align: center;
+        }
     </style>
 </head>
 <?php $bg_gray =
