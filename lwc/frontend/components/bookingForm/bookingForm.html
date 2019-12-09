@@ -3,6 +3,10 @@
         <div class="container">
             <div class="booking-form__content">
                 <h2 class="booking-form__title mb-15" data-before={objectType}>{objectTitle}</h2>
+                <div if:false={objectType} class="booking-form__group">
+                    <label for="order" class="booking-form__label booking-form__label_required">Домик/Мероприятие</label>
+                    <input id="order" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="order">
+                </div>
                 <div class="booking-form__group">
                     <label for="fio" class="booking-form__label booking-form__label_required">ФИО</label>
                     <input id="fio" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="fio">

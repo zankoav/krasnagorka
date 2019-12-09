@@ -15,6 +15,7 @@ const ERROR_COUNT_EMPTY = 'Поле Количество человек не з�
 const ERROR_EMAIL_INVALID = 'Поле Email не валидно';
 const ERROR_CONTRACT_UNCHECKED = 'Вы не согласились с договором присоединения';
 const ERROR_DATE_END_INVALID = 'Дата выезда должны быть позже даты заезда';
+const ERROR_HOUSE_EMPTY = 'Поле Домик/Мероприятие не заполнено';
 
 export default class BookingForm extends LightningElement {
 
@@ -30,20 +31,24 @@ export default class BookingForm extends LightningElement {
 
     connectedCallback() {
         const cid = getCookie("_ga");
-        if(cid){
+        if (cid) {
             this.cid = cid.replace(/GA1.2./g, '');
         }
 
-        this.fioValue =  getCookie('kg_name');
-        this.phoneValue =  getCookie('kg_phone');
-        this.emailValue =  getCookie('kg_email');
+        this.fioValue = getCookie('kg_name');
+        this.phoneValue = getCookie('kg_phone');
+        this.emailValue = getCookie('kg_email');
 
-        if( this.fioValue && this.phoneValue && this.emailValue){
+        if (this.fioValue && this.phoneValue && this.emailValue) {
             this.isContactsExistsInCookies = true;
         }
     }
 
     renderedCallback() {
+        this.order = this.template.querySelector('[name="order"]');
+        if (this.order) {
+            Inputmask({regex: "^[a-zA-Zа-яА-Я0-9\\s]*$"}).mask(this.order);
+        }
         this.fio = this.template.querySelector('[name="fio"]');
         Inputmask({regex: "^[a-zA-Zа-яА-Я\\s]*$"}).mask(this.fio);
         this.phone = this.template.querySelector('[name="phone"]');
@@ -59,11 +64,11 @@ export default class BookingForm extends LightningElement {
         this.spam = this.template.querySelector('[name="message"]');
 
 
-        if(this.isContactsExistsInCookies){
+        if (this.isContactsExistsInCookies) {
             this.isContactsExistsInCookies = false;
-            this.fio.value =  this.fioValue;
-            this.phone.value =  this.phoneValue;
-            this.email.value =  this.emailValue;
+            this.fio.value = this.fioValue;
+            this.phone.value = this.phoneValue;
+            this.email.value = this.emailValue;
         }
     }
 
@@ -78,6 +83,18 @@ export default class BookingForm extends LightningElement {
 
         if (spam) {
             return;
+        }
+
+        let bookingOrder;
+
+        if (this.order) {
+            const order = this.order.value;
+            if (!order) {
+                this.showError(ERROR_HOUSE_EMPTY);
+                return;
+            } else {
+                bookingOrder = order;
+            }
         }
 
         const fio = this.fio.value;
@@ -143,13 +160,16 @@ export default class BookingForm extends LightningElement {
         this.formMessageError = null;
         this.isLoading = true;
 
+        let orderTitle = this.objectTitle ? this.objectTitle : bookingOrder;
+        let orderType = this.objectType ? this.objectType : 'Домик/Мероприятие';
+
         fetch('/wp-json/krasnagorka/v1/order/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8',
             },
             body: JSON.stringify({
-                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${this.objectTitle}&bookingType=${this.objectType}&cid=${this.cid}&passportId=${passport}`,
+                data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${orderTitle}&bookingType=${orderType}&cid=${this.cid}&passportId=${passport}`,
                 message: spam
             })
         })
@@ -164,6 +184,9 @@ export default class BookingForm extends LightningElement {
                 this.count.value = null;
                 this.passport.value = null;
                 this.comment.value = null;
+                if (this.order) {
+                    this.order.value = null;
+                }
                 setCookie('kg_name', fio, {'max-age': MAX_AGE});
                 setCookie('kg_phone', phone, {'max-age': MAX_AGE});
                 setCookie('kg_email', email, {'max-age': MAX_AGE});
