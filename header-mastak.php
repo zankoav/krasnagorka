@@ -156,7 +156,18 @@
         .main-slider__slide-content-button{
             text-align: center;
         }
+
+        .booking-dogovor{
+            color: #1498c6;
+            text-decoration: none;
+        }
+
+        .booking-dogovor:hover{
+            text-decoration: underline;
+        }
+
     </style>
+
 </head>
 <?php $bg_gray =
     (is_page_template("template-mastak-prices.php")
