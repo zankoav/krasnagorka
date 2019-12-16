@@ -19,10 +19,29 @@
                     'permission_callback' => array( $this, 'create_order_permissions_check' )
                 ),
             ]);
+
+            $amocrm_path = '/amocrm/';
+
+            register_rest_route( $namespace, $amocrm_path, [
+                array(
+                    'methods'             => 'POST',
+                    'callback'            => array( $this, 'booking_lead' ),
+                    'permission_callback' => array( $this, 'booking_lead_permissions_check' )
+                ),
+            ]);
         }
 
         public function create_order_permissions_check($request) {
             return true;
+        }
+
+        public function booking_lead_permissions_check($request) {
+            return true;
+        }
+
+        public function booking_lead($request) {
+            $spam = $request['fio'];
+            return new WP_REST_Response(['status'=> 'alzan', 'spam' => $spam], 200);
         }
 
         public function create_order($request) {
