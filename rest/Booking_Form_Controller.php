@@ -40,8 +40,7 @@
         }
 
         public function booking_lead($request) {
-            $spam = $request['fio'];
-            return new WP_REST_Response(['status'=> 'alzan', 'spam' => $spam], 200);
+            return new WP_REST_Response(['status'=> 'alzan'], 200);
         }
 
         public function create_order($request) {
