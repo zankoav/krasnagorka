@@ -40,7 +40,8 @@
         }
 
         public function booking_lead($request) {
-            return new WP_REST_Response(['status'=> 'alzan'], 200);
+            $comment = $request['comment'];
+            return new WP_REST_Response(['status'=> $comment], 200);
         }
 
         public function create_order($request) {
