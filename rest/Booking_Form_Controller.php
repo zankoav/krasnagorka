@@ -44,7 +44,7 @@
             $response = ['status' => 'error'];
             if ($type != 'remove') {
                 $objectIds    = $request['objectIds'];
-                $response['objectIds'] => $objectIds;
+                $response['objectIds'] = $objectIds;
                 $contactName = $request['contactName'];
                 $dateFrom    = $request['dateFrom'];
                 $dateTo      = $request['dateTo'];
