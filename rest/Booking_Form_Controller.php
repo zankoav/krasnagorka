@@ -43,7 +43,8 @@
             $type = $request['type'];
             $response = ['status' => 'error'];
             if ($type != 'remove') {
-                $objectId    = $request['objectId'];
+                $objectIds    = $request['objectIds'];
+                $response['objectIds'] => $objectIds;
                 $contactName = $request['contactName'];
                 $dateFrom    = $request['dateFrom'];
                 $dateTo      = $request['dateTo'];
@@ -57,6 +58,7 @@
                     'post_status'  => 'publish',
                     'post_author'  => 23,
                     'post_type'    => 'sbc_orders'
+//                    'tax_input' => array('sbc_calendars' => $objectIds)
                 );
 
 
@@ -69,7 +71,6 @@
                 else {
                     update_post_meta($post_id, 'sbc_order_client', $contactName);
                     update_post_meta($post_id, 'sbc_order_select', $type);
-                    update_post_meta($post_id, 'sbc_order_taxonomy_select', (int)$objectId);
                     update_post_meta($post_id, 'sbc_order_start', $dateFrom);
                     update_post_meta($post_id, 'sbc_order_end', $dateTo);
                     update_post_meta($post_id, 'sbc_order_price', $totalPrice);
