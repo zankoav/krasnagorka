@@ -44,7 +44,6 @@
             $response = ['status' => 'error'];
             if ($type != 'remove') {
                 $objectIds    = $request['objectIds'];
-                $response['objectIds'] = $objectIds;
                 $contactName = $request['contactName'];
                 $dateFrom    = $request['dateFrom'];
                 $dateTo      = $request['dateTo'];
@@ -57,8 +56,8 @@
                     'post_content' => '',
                     'post_status'  => 'publish',
                     'post_author'  => 23,
-                    'post_type'    => 'sbc_orders'
-//                    'tax_input' => array('sbc_calendars' => $objectIds)
+                    'post_type'    => 'sbc_orders',
+                    'tax_input' => array('sbc_calendars' => $objectIds)
                 );
 
 
