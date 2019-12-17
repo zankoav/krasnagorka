@@ -56,8 +56,7 @@
                     'post_content' => '',
                     'post_status'  => 'publish',
                     'post_author'  => 23,
-                    'post_type'    => 'sbc_orders',
-                    'tax_input' => array('sbc_calendars' => $objectIds)
+                    'post_type'    => 'sbc_orders'
                 );
 
 
@@ -75,6 +74,12 @@
                     update_post_meta($post_id, 'sbc_order_price', $totalPrice);
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                     update_post_meta($post_id, 'sbc_order_desc', $comment);
+
+                    $objectIds = array_map( 'intval', $objectIds );
+                    $objectIds = array_unique( $objectIds );
+
+                    wp_set_object_terms( $post_id, $objectIds, 'sbc_calendars' );
+
                     $response['status'] = 'success';
                     $response['orderId'] = $post_id;
                 }
