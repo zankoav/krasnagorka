@@ -40,10 +40,15 @@
         }
 
         public function booking_lead($request) {
-            $type = $request['type'];
+            $type     = $request['type'];
+            $orderId  = $request['orderId'];
             $response = ['status' => 'error'];
+
             if ($type != 'remove') {
-                $objectIds    = $request['objectIds'];
+
+                $this->removeOrder($orderId);
+
+                $objectIds   = $request['objectIds'];
                 $contactName = $request['contactName'];
                 $dateFrom    = $request['dateFrom'];
                 $dateTo      = $request['dateTo'];
@@ -63,29 +68,62 @@
                 // Вставляем данные в БД
                 $post_id = wp_insert_post(wp_slash($post_data));
 
-                if( is_wp_error($post_id) ){
+                if (is_wp_error($post_id)) {
                     $response['message'] = $post_id->get_error_message();
-                }
-                else {
-                    update_post_meta($post_id, 'sbc_order_client', $contactName);
-                    update_post_meta($post_id, 'sbc_order_select', $type);
-                    update_post_meta($post_id, 'sbc_order_start', $dateFrom);
-                    update_post_meta($post_id, 'sbc_order_end', $dateTo);
-                    update_post_meta($post_id, 'sbc_order_price', $totalPrice);
-                    update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
-                    update_post_meta($post_id, 'sbc_order_desc', $comment);
+                } else {
+                    if (!empty($contactName)) {
+                        update_post_meta($post_id, 'sbc_order_client', $contactName);
+                    }
+                    if (!empty($type)) {
+                        update_post_meta($post_id, 'sbc_order_select', $type);
+                    }
+                    if (!empty($dateFrom)) {
+                        update_post_meta($post_id, 'sbc_order_start', $dateFrom);
+                    }
+                    if (!empty($dateTo)) {
+                        update_post_meta($post_id, 'sbc_order_end', $dateTo);
+                    }
+                    if (!empty($totalPrice)) {
+                        update_post_meta($post_id, 'sbc_order_price', $totalPrice);
+                    }
+                    if (!empty($havePayed)) {
+                        update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
+                    }
+                    if (!empty($comment)) {
+                        update_post_meta($post_id, 'sbc_order_desc', $comment);
+                    }
 
-                    $objectIds = array_map( 'intval', $objectIds );
-                    $objectIds = array_unique( $objectIds );
+                    if (!empty($objectIds)) {
+                        $objectIds = array_map('intval', $objectIds);
+                        $objectIds = array_unique($objectIds);
+                        wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
+                    }
 
-                    wp_set_object_terms( $post_id, $objectIds, 'sbc_calendars' );
-
-                    $response['status'] = 'success';
+                    $response['status']  = 'success';
                     $response['orderId'] = $post_id;
+
                 }
+            }else {
+                $this->removeOrder($orderId);
+                $response['status']  = 'success';
             }
 
             return new WP_REST_Response($response, 200);
+        }
+
+        private function removeOrder($orderId){
+            if (!empty($orderId)) {
+                $orderId = (int)$orderId;
+                delete_post_meta( $orderId, 'sbc_order_client');
+                delete_post_meta( $orderId, 'sbc_order_select');
+                delete_post_meta( $orderId, 'sbc_order_start');
+                delete_post_meta( $orderId, 'sbc_order_end');
+                delete_post_meta( $orderId, 'sbc_order_price');
+                delete_post_meta( $orderId, 'sbc_order_prepaid');
+                delete_post_meta( $orderId, 'sbc_order_desc');
+
+                wp_delete_post($orderId, true);
+            }
         }
 
         public function create_order($request) {
