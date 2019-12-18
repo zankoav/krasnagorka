@@ -44,9 +44,9 @@
             $orderId  = $request['orderId'];
             $response = ['status' => 'error'];
 
-            if ($type != 'remove') {
+            $this->removeOrder($orderId);
 
-                $this->removeOrder($orderId);
+            if ($type != 'remove') {
 
                 $objectIds   = $request['objectIds'];
                 $contactName = $request['contactName'];
@@ -99,14 +99,12 @@
                         wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
                     }
 
-                    $response['status']  = 'success';
                     $response['orderId'] = $post_id;
 
                 }
-            }else {
-                $this->removeOrder($orderId);
-                $response['status']  = 'success';
             }
+            
+            $response['status']  = 'success';
 
             return new WP_REST_Response($response, 200);
         }
