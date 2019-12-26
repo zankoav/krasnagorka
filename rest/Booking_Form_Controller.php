@@ -78,7 +78,11 @@
                 }
 
                 if (!empty($contactEmail)) {
-                    update_post_meta($clientId, 'sbc_clients_email', $contactEmail);
+                    update_post_meta($clientId, 'sbc_client_email', $contactEmail);
+                }
+
+                if (!empty($contactPhone)) {
+                    update_post_meta($clientId, 'sbc_client_phone', $contactPhone);
                 }
 
                 if (!empty($contactStatus)) {
