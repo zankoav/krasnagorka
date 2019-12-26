@@ -106,7 +106,8 @@
                     $response['message'] = $post_id->get_error_message();
                 } else {
                     if (!empty($contactName)) {
-                        update_post_meta($post_id, 'sbc_order_client', $clientId);
+                        $contactTemplate = $clientId." ".$contactName." ".$contactPhone." ".$contactEmail." <a href='https://krasnagorka.by/wp-admin/post.php?post=".$clientId."&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+                        update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
                     }
                     if (!empty($type)) {
                         update_post_meta($post_id, 'sbc_order_select', $type);
