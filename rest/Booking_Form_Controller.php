@@ -62,8 +62,9 @@
 
                 $client   = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
                 $clientId = null;
+                $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
+
                 if (empty($client)) {
-                    $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
                     $client_data = array(
                         'post_title'   => $contactName . ' ' . $addedName,
                         'post_content' => '',
@@ -74,6 +75,12 @@
                     // Вставляем данные в БД
                     $clientId = wp_insert_post(wp_slash($client_data));
                 } else {
+                    $clientPostArr = array();
+                    $clientPostArr['ID'] = $client->ID;
+                    $clientPostArr['post_title'] = $contactName . ' ' . $addedName;
+
+                    // Обновляем данные в БД
+                    wp_update_post( wp_slash($clientPostArr) );
                     $clientId = $client->ID;
                 }
 
