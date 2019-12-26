@@ -106,7 +106,7 @@
                     $response['message'] = $post_id->get_error_message();
                 } else {
                     if (!empty($contactName)) {
-                        update_post_meta($post_id, 'sbc_order_client', $contactName);
+                        update_post_meta($post_id, 'sbc_order_client', $clientId);
                     }
                     if (!empty($type)) {
                         update_post_meta($post_id, 'sbc_order_select', $type);
