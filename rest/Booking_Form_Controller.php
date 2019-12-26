@@ -60,10 +60,10 @@
                 $contactEmail  = $request['contactEmail'];
                 $contactStatus = $request['contactStatus'];
 
-                $client = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
+                $client   = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
                 $clientId = null;
-                if(empty($client)){
-                    $addedName        = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
+                if (empty($client)) {
+                    $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
                     $client_data = array(
                         'post_title'   => $contactName . ' ' . $addedName,
                         'post_content' => '',
@@ -73,7 +73,7 @@
                     );
                     // Вставляем данные в БД
                     $clientId = wp_insert_post(wp_slash($client_data));
-                }else{
+                } else {
                     $clientId = $client->ID;
                 }
 
@@ -87,7 +87,7 @@
 
                 if (!empty($contactStatus)) {
                     $contactStatusIds = [$contactStatus];
-                    $contactStatusIds = array_map('intval', $contactStatusIds );
+                    $contactStatusIds = array_map('intval', $contactStatusIds);
                     wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
                 }
 
@@ -106,8 +106,10 @@
                     $response['message'] = $post_id->get_error_message();
                 } else {
                     if (!empty($contactName)) {
-                        $contactTemplate = $clientId." ".$contactName." ".$contactPhone." ".$contactEmail." <a href='https://krasnagorka.by/wp-admin/post.php?post=".$clientId."&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+                        $contactTemplate = $clientId . " " . $contactName . " " . $contactPhone . " " . $contactEmail . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+
                         update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
+                        $this->update_all_clients_orders($clientId, $contactTemplate);
                     }
                     if (!empty($type)) {
                         update_post_meta($post_id, 'sbc_order_select', $type);
@@ -142,6 +144,26 @@
             $response['status'] = 'success';
 
             return new WP_REST_Response($response, 200);
+        }
+
+        private function update_all_clients_orders($clientId, $contactTemplate) {
+            $args = array(
+                'meta_query'     => array(
+                    array(
+                        'key'   => 'sbc_order_client',
+                        'value' => "$clientId",
+                        'compare' => 'LIKE'
+                    )
+                ),
+                'post_type'      => 'sbc_orders',
+                'posts_per_page' => '-1'
+            );
+
+            $posts = get_posts($args);
+
+            foreach ($posts as $post){
+                update_post_meta($post->ID, 'sbc_order_client', $contactTemplate);
+            }
         }
 
         private function get_post_by_meta($args = array()) {
