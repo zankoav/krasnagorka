@@ -13,7 +13,6 @@
 				showNoSuggestionNotice: true,
 				transformResult: function(r) {
 					var suggestions = $.parseJSON(r);
-                    console.log('suggestion',suggestions);
 
 					if($('#'+fid+'_results li').length){
 						var selected_vals 	= Array();
@@ -42,7 +41,8 @@
 					$(this).next('img.cmb-post-search-ajax-spinner').hide();
 				},
 				onSelect: function (suggestion) {
-					$(this).autocomplete('clearCache');
+                    console.log('suggestion',suggestion);
+                    $(this).autocomplete('clearCache');
 					var lid 	 = $(this).attr('id') + '_results';
 					var limit 	 = $(this).attr('data-limit');
 					var sortable = $(this).attr('data-sortable');
