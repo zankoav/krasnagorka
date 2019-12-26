@@ -157,7 +157,7 @@
                         'value' => $args->meta_value
                     )
                 ),
-                'post_type'      => 'page',
+                'post_type'      => 'sbc_clients',
                 'posts_per_page' => '1'
             );
 
