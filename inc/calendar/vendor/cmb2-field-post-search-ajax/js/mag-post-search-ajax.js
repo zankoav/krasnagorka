@@ -13,6 +13,8 @@
 				showNoSuggestionNotice: true,
 				transformResult: function(r) {
 					var suggestions = $.parseJSON(r);
+                    console.log('suggestion',suggestions);
+
 					if($('#'+fid+'_results li').length){
 						var selected_vals 	= Array();
 						var d 				= 0;
@@ -56,7 +58,7 @@
 						}
 					}
 					else{
-						console.log('suggestion',suggestion);
+
 						$('textarea[name='+lid+']').html(suggestion.data+' '+suggestion.value+' '+
 							suggestion.phone+' '+
 							suggestion.email+' '+suggestion.desc+'<a href="'+suggestion.guid+'" target="_blank" class="edit-link">Редактировать</a>');
