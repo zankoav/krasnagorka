@@ -56,6 +56,7 @@
 						}
 					}
 					else{
+						console.log('suggestion',suggestion);
 						$('textarea[name='+lid+']').html(suggestion.data+' '+suggestion.value+' '+
 							suggestion.phone+' '+
 							suggestion.email+' '+suggestion.desc+'<a href="'+suggestion.guid+'" target="_blank" class="edit-link">Редактировать</a>');
