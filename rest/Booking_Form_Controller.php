@@ -48,22 +48,52 @@
 
             if ($type != 'remove') {
 
-                $objectIds   = $request['objectIds'];
-                $contactName = $request['contactName'];
-                $dateFrom    = $request['dateFrom'];
-                $dateTo      = $request['dateTo'];
-                $totalPrice  = $request['totalPrice'];
-                $havePayed   = $request['havePayed'];
-                $comment     = $request['comment'];
+                $objectIds  = $request['objectIds'];
+                $dateFrom   = $request['dateFrom'];
+                $dateTo     = $request['dateTo'];
+                $totalPrice = $request['totalPrice'];
+                $havePayed  = $request['havePayed'];
+                $comment    = $request['comment'];
+
+                $contactName   = $request['contactName'];
+                $contactPhone  = $request['contactPhone'];
+                $contactEmail  = $request['contactEmail'];
+                $contactStatus = $request['contactStatus'];
+
+                $client = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
+                $clientId = null;
+                if(empty($client)){
+                    $addedName        = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
+                    $client_data = array(
+                        'post_title'   => $contactName . ' ' . $addedName,
+                        'post_content' => '',
+                        'post_status'  => 'publish',
+                        'post_author'  => 23,
+                        'post_type'    => 'sbc_clients'
+                    );
+                    // Вставляем данные в БД
+                    $clientId = wp_insert_post(wp_slash($client_data));
+                }else{
+                    $clientId = $client->ID;
+                }
+
+                if (!empty($contactEmail)) {
+                    update_post_meta($clientId, 'sbc_clients_email', $contactEmail);
+                }
+
+                if (!empty($contactStatus)) {
+                    $contactStatusIds = [$contactStatus];
+                    $contactStatusIds = array_map('intval', $contactStatusIds );
+                    wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
+                }
 
                 $post_data = array(
-                    'post_title'   => $contactName . ' ' . date("Y-m-d H:i:s"),
+                    'post_title'   => date("Y-m-d H:i:s"),
                     'post_content' => '',
                     'post_status'  => 'publish',
                     'post_author'  => 23,
                     'post_type'    => 'sbc_orders'
                 );
-
 
                 // Вставляем данные в БД
                 $post_id = wp_insert_post(wp_slash($post_data));
@@ -103,22 +133,53 @@
 
                 }
             }
-            
-            $response['status']  = 'success';
+
+            $response['status'] = 'success';
 
             return new WP_REST_Response($response, 200);
         }
 
-        private function removeOrder($orderId){
+        private function get_post_by_meta($args = array()) {
+
+            // Parse incoming $args into an array and merge it with $defaults - caste to object ##
+            $args = ( object )wp_parse_args($args);
+
+            // grab page - polylang will take take or language selection ##
+            $args = array(
+                'meta_query'     => array(
+                    array(
+                        'key'   => $args->meta_key,
+                        'value' => $args->meta_value
+                    )
+                ),
+                'post_type'      => 'page',
+                'posts_per_page' => '1'
+            );
+
+            // run query ##
+            $posts = get_posts($args);
+
+            // check results ##
+            if (!$posts || is_wp_error($posts)) return false;
+
+            // test it ##
+            #pr( $posts[0] );
+
+            // kick back results ##
+            return $posts[0];
+
+        }
+
+        private function removeOrder($orderId) {
             if (!empty($orderId)) {
                 $orderId = (int)$orderId;
-                delete_post_meta( $orderId, 'sbc_order_client');
-                delete_post_meta( $orderId, 'sbc_order_select');
-                delete_post_meta( $orderId, 'sbc_order_start');
-                delete_post_meta( $orderId, 'sbc_order_end');
-                delete_post_meta( $orderId, 'sbc_order_price');
-                delete_post_meta( $orderId, 'sbc_order_prepaid');
-                delete_post_meta( $orderId, 'sbc_order_desc');
+                delete_post_meta($orderId, 'sbc_order_client');
+                delete_post_meta($orderId, 'sbc_order_select');
+                delete_post_meta($orderId, 'sbc_order_start');
+                delete_post_meta($orderId, 'sbc_order_end');
+                delete_post_meta($orderId, 'sbc_order_price');
+                delete_post_meta($orderId, 'sbc_order_prepaid');
+                delete_post_meta($orderId, 'sbc_order_desc');
 
                 wp_delete_post($orderId, true);
             }
