@@ -231,7 +231,7 @@
             $type = 'booking-form';
             $data = [
                 'fio'          => $request['fio'],
-                'phone'        => $request['phone'],
+                'phone'        => '+' . $request['phone'],
                 'email'        => $request['email'],
                 'dateStart'    => $request['dateStart'],
                 'dateEnd'      => $request['dateEnd'],

@@ -104,14 +104,12 @@ export default class BookingForm extends LightningElement {
             return;
         }
 
-        let phone = this.phone.value;
+        const phone = this.phone.value;
 
         if (!phone) {
             this.showError(ERROR_PHONE_EMPTY);
             return;
         }
-
-        phone = `+${phone}`;
 
         const email = this.email.value;
 
