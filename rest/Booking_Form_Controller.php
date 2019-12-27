@@ -231,7 +231,7 @@
             $type = 'booking-form';
             $data = [
                 'fio'          => $request['fio'],
-                'phone'        => '+' . $request['phone'],
+                'phone'        => '+'.$request['phone'],
                 'email'        => $request['email'],
                 'dateStart'    => $request['dateStart'],
                 'dateEnd'      => $request['dateEnd'],
@@ -243,8 +243,8 @@
             ];
 
             require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-            new AmoIntegration($type, $request['data'], $href);
-            return new WP_REST_Response(['status' => $request['data']], 200);
+            new AmoIntegration($type, $data, $href);
+            return new WP_REST_Response(['status' => 'ok'], 200);
         }
 
     }
