@@ -153,6 +153,7 @@ function loadCalendar() {
 							console.log("Ошибка загрузки данных");
 						}
 					},
+
 					// selectAllow: function(selectInfo) {
 					// 	var selectAllowStartDate = selectInfo.start.format(
 					// 		"YYYY-MM-DD"
@@ -245,7 +246,6 @@ function loadCalendar() {
 					// },
 					eventAfterAllRender: function() {
 						if (jsFromDate) {
-							console.log("from", jsFromDate.d);
 							var element = document.querySelector(
 								`.fc-widget-content[data-date="${jsFromDate.d}"]`
 							);
@@ -258,7 +258,6 @@ function loadCalendar() {
 						}
 
 						if (jsToDate) {
-							console.log("to", jsToDate.d);
 							var element = document.querySelector(
 								`.fc-widget-content[data-date="${jsToDate.d}"]`
 							);
@@ -317,9 +316,25 @@ function loadCalendar() {
 						}
 
 						if (jsFromDate && jsToDate) {
-							console.log("currentCalendarId", currentCalendarId);
-							console.log("from", jsFromDate.d);
-							console.log("to", jsToDate.d);
+							$textHelper
+								.addClass("select-helper__text_success")
+								.html($textHelper.data("helper"));
+							buttonAnimate($orderButton);
+
+							const bookingId = jQuery($orderButton[0]).data(
+								"id"
+							);
+							let baseHref = `/booking-form/?booking=${bookingId}&from=${jsFromDate.d}&to=${jsToDate.d}`;
+							if (
+								jQuery($orderButton[0]).hasClass("is-terem-js")
+							) {
+								const titleTerem = jQuery($orderButton[0]).data(
+									"name"
+								);
+								baseHref += `&terem=${titleTerem}`;
+							}
+							jQuery($orderButton[0]).attr("href", baseHref);
+							jQuery($orderButton[1]).attr("href", baseHref);
 						}
 					}
 				});
