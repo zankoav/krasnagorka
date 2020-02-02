@@ -244,9 +244,8 @@ function loadCalendar() {
 					// 	}
 					// },
 					eventAfterAllRender: function() {
-						console.log("from", jsFromDate.d);
-						console.log("to", jsToDate.d);
 						if (jsFromDate) {
+							console.log("from", jsFromDate.d);
 							var element = document.querySelector(
 								`.fc-widget-content[data-date="${jsFromDate.d}"]`
 							);
@@ -259,6 +258,7 @@ function loadCalendar() {
 						}
 
 						if (jsToDate) {
+							console.log("to", jsToDate.d);
 							var element = document.querySelector(
 								`.fc-widget-content[data-date="${jsToDate.d}"]`
 							);
