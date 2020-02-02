@@ -243,16 +243,37 @@ function loadCalendar() {
 					// 		jQuery($teremButton[0]).attr("href", baseHref);
 					// 	}
 					// },
-					viewRender: function() {
-						console.log("viewRender");
-					},
 					eventAfterAllRender: function() {
 						console.log("eventAfterAllRender");
-						if (jsFromDate && jsToDate) {
-							console.log("currentCalendarId", currentCalendarId);
-							console.log("from", jsFromDate.d);
-							console.log("to", jsToDate.d);
+						if (jsFromDate) {
+							var element = document.querySelector(
+								`.fc-widget-content[data-date="${jsFromDate.d}"]`
+							);
+							if (element) {
+								jsFromDate = { d: jsFromDate.d, el: element };
+								jQuery(jsFromDate.el)
+									.css("background-color", "#bce8f1")
+									.append(createButtonFrom(true));
+							}
 						}
+
+						if (jsToDate) {
+							var element = document.querySelector(
+								`.fc-widget-content[data-date="${jsToDate.d}"]`
+							);
+							if (element) {
+								jsToDate = { d: jsToDate.d, el: element };
+								jQuery(jsToDate.el)
+									.css("background-color", "#bce8f1")
+									.append(createButtonFrom());
+							}
+						}
+
+						// if (jsFromDate && jsToDate) {
+						// 	console.log("currentCalendarId", currentCalendarId);
+						// 	console.log("from", jsFromDate.d);
+						// 	console.log("to", jsToDate.d);
+						// }
 					},
 					dayClick: function(date, jsEvent, view) {
 						var d = date.format("YYYY-MM-DD");
