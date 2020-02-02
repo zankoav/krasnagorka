@@ -253,7 +253,7 @@ function loadCalendar() {
 							currentCalendarId = data.id;
 							initFrom(d, this);
 						} else {
-							if (!jsFromDate && checkStartDate(events, d)) {
+							if (!jsFromDate) {
 								initFrom(d, this);
 							} else if (jsFromDate && jsFromDate.d === d) {
 								clearAll();
@@ -390,7 +390,6 @@ function checkStartDate(events, startDate) {
 		var event = events[i];
 		var startEvent = jQuery.fullCalendar
 			.moment(event.start, "YYYY-MM-DD")
-			.add(1, "day")
 			.format("YYYY-MM-DD");
 		var endEvent = jQuery.fullCalendar
 			.moment(event.end, "YYYY-MM-DD")
@@ -419,7 +418,6 @@ function checkDateRange2(events, startDate, endDate) {
 		var event = events[i];
 		var startEvent = jQuery.fullCalendar
 			.moment(event.start, "YYYY-MM-DD")
-			.add(1, "day")
 			.format("YYYY-MM-DD");
 		var endEvent = jQuery.fullCalendar
 			.moment(event.end, "YYYY-MM-DD")
