@@ -244,7 +244,8 @@ function loadCalendar() {
 					// 	}
 					// },
 					eventAfterAllRender: function() {
-						console.log("eventAfterAllRender");
+						console.log("from", jsFromDate.d);
+						console.log("to", jsToDate.d);
 						if (jsFromDate) {
 							var element = document.querySelector(
 								`.fc-widget-content[data-date="${jsFromDate.d}"]`
@@ -268,12 +269,6 @@ function loadCalendar() {
 									.append(createButtonFrom());
 							}
 						}
-
-						// if (jsFromDate && jsToDate) {
-						// 	console.log("currentCalendarId", currentCalendarId);
-						// 	console.log("from", jsFromDate.d);
-						// 	console.log("to", jsToDate.d);
-						// }
 					},
 					dayClick: function(date, jsEvent, view) {
 						var d = date.format("YYYY-MM-DD");
@@ -330,7 +325,11 @@ function loadCalendar() {
 				});
 
 				function initFrom(d, el) {
-					if (checkStartDate(events, d)) {
+					var a = new moment(Date.now());
+					if (
+						d >= a.format("YYYY-MM-DD") &&
+						checkStartDate(events, d)
+					) {
 						jsFromDate = { d: d, el: el };
 						jQuery(jsFromDate.el)
 							.css("background-color", "#bce8f1")
