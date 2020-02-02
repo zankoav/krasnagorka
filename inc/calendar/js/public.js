@@ -335,6 +335,11 @@ function loadCalendar() {
 							}
 							jQuery($orderButton[0]).attr("href", baseHref);
 							jQuery($orderButton[1]).attr("href", baseHref);
+						} else {
+							$textHelper
+								.removeClass("select-helper__text_success")
+								.html($textHelper.data("helper-start"));
+							setDate();
 						}
 					}
 				});
