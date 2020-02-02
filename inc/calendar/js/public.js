@@ -195,6 +195,7 @@ function loadCalendar() {
 						}
 					},
 					select: function(startDate, endDate) {
+						console.log("hello", startDate);
 						var start = startDate.format();
 						var end = endDate.subtract(1, "days").format();
 
