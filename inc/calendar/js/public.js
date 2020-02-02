@@ -275,7 +275,7 @@ function loadCalendar() {
 								jQuery(jsToDate.el)
 									.css("background-color", "#bce8f1")
 									.append(createButtonFrom());
-							} else if (jsToDate.d === d) {
+							} else if (jsToDate && jsToDate.d === d) {
 								jQuery(jsToDate.el)
 									.css("background-color", "initial")
 									.empty();
