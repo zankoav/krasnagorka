@@ -258,7 +258,11 @@ function loadCalendar() {
 								initFrom(d, this);
 							} else if (jsFromDate.d === d) {
 								clearAll();
-							} else if (!jsToDate && jsFromDate.d < d) {
+							} else if (
+								!jsToDate &&
+								jsFromDate.d < d &&
+								checkDateRange(events, jsFromDate.d, d)
+							) {
 								jsToDate = { d: d, el: this };
 								jQuery(jsToDate.el)
 									.css("background-color", "#bce8f1")
@@ -266,7 +270,8 @@ function loadCalendar() {
 							} else if (
 								jsToDate &&
 								jsToDate.d !== d &&
-								jsFromDate.d < d
+								jsFromDate.d < d &&
+								checkDateRange(events, jsFromDate.d, d)
 							) {
 								jQuery(jsToDate.el)
 									.css("background-color", "initial")
@@ -283,9 +288,11 @@ function loadCalendar() {
 							}
 						}
 
-						console.log("from", jsFromDate);
-						console.log("to", jsToDate);
-						console.log("currentCalendarId", currentCalendarId);
+						if (jsFromDate && jsToDate) {
+							console.log("currentCalendarId", currentCalendarId);
+							console.log("from", jsFromDate.d);
+							console.log("to", jsToDate.d);
+						}
 					}
 				});
 
