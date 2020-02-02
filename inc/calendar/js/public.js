@@ -138,9 +138,9 @@ function loadCalendar() {
 							: $calendar.children("#cloader").hide();
 					},
 					locale: "ru",
-					selectable: true,
-					selectHelper: true,
-					selectLongPressDelay: 600,
+					// selectable: true,
+					// selectHelper: true,
+					// selectLongPressDelay: 600,
 					header: { left: "prev", center: "title", right: "next" },
 					events: {
 						url: cUrl,
@@ -151,97 +151,96 @@ function loadCalendar() {
 							console.log("Ошибка загрузки данных");
 						}
 					},
-					selectAllow: function(selectInfo) {
-						var selectAllowStartDate = selectInfo.start.format(
-							"YYYY-MM-DD"
-						);
-						var selectAllowEndDate = selectInfo.end.format(
-							"YYYY-MM-DD"
-						);
-						return checkDateRange(
-							events,
-							selectAllowStartDate,
-							selectAllowEndDate
-						);
-					},
-					unselect: function(event) {
-						$textHelper
-							.removeClass("select-helper__text_success")
-							.html($textHelper.data("helper-start"));
+					// selectAllow: function(selectInfo) {
+					// 	var selectAllowStartDate = selectInfo.start.format(
+					// 		"YYYY-MM-DD"
+					// 	);
+					// 	var selectAllowEndDate = selectInfo.end.format(
+					// 		"YYYY-MM-DD"
+					// 	);
+					// 	return checkDateRange(
+					// 		events,
+					// 		selectAllowStartDate,
+					// 		selectAllowEndDate
+					// 	);
+					// },
+					// unselect: function(event) {
+					// 	$textHelper
+					// 		.removeClass("select-helper__text_success")
+					// 		.html($textHelper.data("helper-start"));
 
-						if (
-							event &&
-							event.target != $orderButton[0] &&
-							event.target != $orderButton[1]
-						) {
-							const bookingId = jQuery($orderButton[0]).data(
-								"id"
-							);
-							const baseHref = `/booking-form/?booking=${bookingId}`;
-							jQuery($orderButton[0]).attr("href", baseHref);
-							jQuery($orderButton[1]).attr("href", baseHref);
-						}
+					// 	if (
+					// 		event &&
+					// 		event.target != $orderButton[0] &&
+					// 		event.target != $orderButton[1]
+					// 	) {
+					// 		const bookingId = jQuery($orderButton[0]).data(
+					// 			"id"
+					// 		);
+					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
+					// 		jQuery($orderButton[0]).attr("href", baseHref);
+					// 		jQuery($orderButton[1]).attr("href", baseHref);
+					// 	}
 
-						if (
-							$teremButton.length &&
-							event &&
-							!event.target.classList.contains("terem-button")
-						) {
-							const bookingId = jQuery($teremButton[0]).data(
-								"id"
-							);
-							const baseHref = `/booking-form/?booking=${bookingId}`;
-							jQuery($teremButton[0]).attr("href", baseHref);
-						}
-					},
-					select: function(startDate, endDate) {
-						console.log("hello", startDate);
-						var start = startDate.format();
-						var end = endDate.subtract(1, "days").format();
+					// 	if (
+					// 		$teremButton.length &&
+					// 		event &&
+					// 		!event.target.classList.contains("terem-button")
+					// 	) {
+					// 		const bookingId = jQuery($teremButton[0]).data(
+					// 			"id"
+					// 		);
+					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
+					// 		jQuery($teremButton[0]).attr("href", baseHref);
+					// 	}
+					// },
+					// select: function(startDate, endDate) {
+					// 	var start = startDate.format();
+					// 	var end = endDate.subtract(1, "days").format();
 
-						if (start === end) {
-							_startDate = null;
-							_endDate = null;
-							$calendar.fullCalendar("unselect");
-						} else {
-							_startDate = start;
-							_endDate = end;
-							$textHelper
-								.addClass("select-helper__text_success")
-								.html($textHelper.data("helper"));
-							buttonAnimate($orderButton);
+					// 	if (start === end) {
+					// 		_startDate = null;
+					// 		_endDate = null;
+					// 		$calendar.fullCalendar("unselect");
+					// 	} else {
+					// 		_startDate = start;
+					// 		_endDate = end;
+					// 		$textHelper
+					// 			.addClass("select-helper__text_success")
+					// 			.html($textHelper.data("helper"));
+					// 		buttonAnimate($orderButton);
 
-							const bookingId = jQuery($orderButton[0]).data(
-								"id"
-							);
-							let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-							if (
-								jQuery($orderButton[0]).hasClass("is-terem-js")
-							) {
-								const titleTerem = jQuery($orderButton[0]).data(
-									"name"
-								);
-								baseHref += `&terem=${titleTerem}`;
-							}
-							jQuery($orderButton[0]).attr("href", baseHref);
-							jQuery($orderButton[1]).attr("href", baseHref);
-						}
+					// 		const bookingId = jQuery($orderButton[0]).data(
+					// 			"id"
+					// 		);
+					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
+					// 		if (
+					// 			jQuery($orderButton[0]).hasClass("is-terem-js")
+					// 		) {
+					// 			const titleTerem = jQuery($orderButton[0]).data(
+					// 				"name"
+					// 			);
+					// 			baseHref += `&terem=${titleTerem}`;
+					// 		}
+					// 		jQuery($orderButton[0]).attr("href", baseHref);
+					// 		jQuery($orderButton[1]).attr("href", baseHref);
+					// 	}
 
-						if ($teremButton.length) {
-							_title = $title.html();
+					// 	if ($teremButton.length) {
+					// 		_title = $title.html();
 
-							const bookingId = jQuery($teremButton[0]).data(
-								"id"
-							);
-							let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-							if (
-								jQuery($teremButton[0]).hasClass("is-terem-js")
-							) {
-								baseHref += `&terem=${_title}`;
-							}
-							jQuery($teremButton[0]).attr("href", baseHref);
-						}
-					},
+					// 		const bookingId = jQuery($teremButton[0]).data(
+					// 			"id"
+					// 		);
+					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
+					// 		if (
+					// 			jQuery($teremButton[0]).hasClass("is-terem-js")
+					// 		) {
+					// 			baseHref += `&terem=${_title}`;
+					// 		}
+					// 		jQuery($teremButton[0]).attr("href", baseHref);
+					// 	}
+					// },
 					dateClick: function(info) {
 						console.log("info", info);
 					}
