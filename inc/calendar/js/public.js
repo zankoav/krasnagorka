@@ -303,7 +303,7 @@ function loadCalendar() {
 							.empty();
 					}
 					if (jsFromDate) {
-						jQuery(jsToDate.el)
+						jQuery(jsFromDate.el)
 							.css("background-color", "initial")
 							.empty();
 					}
