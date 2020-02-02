@@ -262,12 +262,12 @@ function loadCalendar() {
 							}
 							jsToDate = null;
 							jsFromDate = null;
-						} else if (!jsToDate) {
+						} else if (!jsToDate && jsFromDate.d < d) {
 							jsToDate = { d: d, el: this };
 							jQuery(jsToDate.el)
 								.css("background-color", "#bce8f1")
 								.append(createButtonFrom());
-						} else if (jsToDate.d !== d) {
+						} else if (jsToDate.d !== d && jsFromDate.d < d) {
 							jQuery(jsToDate.el)
 								.css("background-color", "initial")
 								.empty();
@@ -285,7 +285,7 @@ function loadCalendar() {
 						console.log("from", jsFromDate);
 						console.log("to", jsToDate);
 						// console.log("jsEvent", jsEvent);
-						// console.log("view", view);
+						console.log("view", view);
 					}
 				});
 
