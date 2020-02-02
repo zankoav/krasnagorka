@@ -243,6 +243,14 @@ function loadCalendar() {
 					// 		jQuery($teremButton[0]).attr("href", baseHref);
 					// 	}
 					// },
+					eventAfterAllRender: function() {
+						console.log("eventAfterAllRender");
+						if (jsFromDate && jsToDate) {
+							console.log("currentCalendarId", currentCalendarId);
+							console.log("from", jsFromDate.d);
+							console.log("to", jsToDate.d);
+						}
+					},
 					dayClick: function(date, jsEvent, view) {
 						var d = date.format("YYYY-MM-DD");
 						if (!currentCalendarId) {
