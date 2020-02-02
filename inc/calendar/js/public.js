@@ -319,7 +319,7 @@ function loadCalendar() {
 							$textHelper
 								.addClass("select-helper__text_success")
 								.html(
-									`Даты бронирования:\n${jsFromDate.d} - ${jsToDate.d}`
+									`Дата бронирования:<br>${jsFromDate.d} - ${jsToDate.d}`
 								);
 							buttonAnimate($orderButton);
 
