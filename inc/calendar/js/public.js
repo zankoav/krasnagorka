@@ -140,9 +140,9 @@ function loadCalendar() {
 							: $calendar.children("#cloader").hide();
 					},
 					locale: "ru",
-					// selectable: true,
-					// selectHelper: true,
-					// selectLongPressDelay: 600,
+					selectable: true,
+					selectHelper: true,
+					selectLongPressDelay: 600,
 					header: { left: "prev", center: "title", right: "next" },
 					events: {
 						url: cUrl,
@@ -154,179 +154,69 @@ function loadCalendar() {
 						}
 					},
 
-					// selectAllow: function(selectInfo) {
-					// 	var selectAllowStartDate = selectInfo.start.format(
-					// 		"YYYY-MM-DD"
-					// 	);
-					// 	var selectAllowEndDate = selectInfo.end.format(
-					// 		"YYYY-MM-DD"
-					// 	);
-					// 	return checkDateRange(
-					// 		events,
-					// 		selectAllowStartDate,
-					// 		selectAllowEndDate
-					// 	);
-					// },
-					// unselect: function(event) {
-					// 	$textHelper
-					// 		.removeClass("select-helper__text_success")
-					// 		.html($textHelper.data("helper-start"));
+					selectAllow: function(selectInfo) {
+						var selectAllowStartDate = selectInfo.start.format(
+							"YYYY-MM-DD"
+						);
+						var selectAllowEndDate = selectInfo.end.format(
+							"YYYY-MM-DD"
+						);
+						return checkDateRange(
+							events,
+							selectAllowStartDate,
+							selectAllowEndDate
+						);
+					},
+					unselect: function(event) {
+						$textHelper
+							.removeClass("select-helper__text_success")
+							.html($textHelper.data("helper-start"));
 
-					// 	if (
-					// 		event &&
-					// 		event.target != $orderButton[0] &&
-					// 		event.target != $orderButton[1]
-					// 	) {
-					// 		const bookingId = jQuery($orderButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
-					// 		jQuery($orderButton[0]).attr("href", baseHref);
-					// 		jQuery($orderButton[1]).attr("href", baseHref);
-					// 	}
-
-					// 	if (
-					// 		$teremButton.length &&
-					// 		event &&
-					// 		!event.target.classList.contains("terem-button")
-					// 	) {
-					// 		const bookingId = jQuery($teremButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
-					// 		jQuery($teremButton[0]).attr("href", baseHref);
-					// 	}
-					// },
-					// select: function(startDate, endDate) {
-					// 	var start = startDate.format();
-					// 	var end = endDate.subtract(1, "days").format();
-
-					// 	if (start === end) {
-					// 		_startDate = null;
-					// 		_endDate = null;
-					// 		$calendar.fullCalendar("unselect");
-					// 	} else {
-					// 		_startDate = start;
-					// 		_endDate = end;
-					// 		$textHelper
-					// 			.addClass("select-helper__text_success")
-					// 			.html($textHelper.data("helper"));
-					// 		buttonAnimate($orderButton);
-
-					// 		const bookingId = jQuery($orderButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-					// 		if (
-					// 			jQuery($orderButton[0]).hasClass("is-terem-js")
-					// 		) {
-					// 			const titleTerem = jQuery($orderButton[0]).data(
-					// 				"name"
-					// 			);
-					// 			baseHref += `&terem=${titleTerem}`;
-					// 		}
-					// 		jQuery($orderButton[0]).attr("href", baseHref);
-					// 		jQuery($orderButton[1]).attr("href", baseHref);
-					// 	}
-
-					// 	if ($teremButton.length) {
-					// 		_title = $title.html();
-
-					// 		const bookingId = jQuery($teremButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-					// 		if (
-					// 			jQuery($teremButton[0]).hasClass("is-terem-js")
-					// 		) {
-					// 			baseHref += `&terem=${_title}`;
-					// 		}
-					// 		jQuery($teremButton[0]).attr("href", baseHref);
-					// 	}
-					// },
-					eventAfterAllRender: function() {
-						if (jsFromDate) {
-							var element = document.querySelector(
-								`.fc-widget-content[data-date="${jsFromDate.d}"]`
+						if (
+							event &&
+							event.target != $orderButton[0] &&
+							event.target != $orderButton[1]
+						) {
+							const bookingId = jQuery($orderButton[0]).data(
+								"id"
 							);
-							if (element) {
-								jsFromDate = { d: jsFromDate.d, el: element };
-								jQuery(jsFromDate.el)
-									.css("background-color", "#bce8f1")
-									.append(createButtonFrom(true));
-							}
+							const baseHref = `/booking-form/?booking=${bookingId}`;
+							jQuery($orderButton[0]).attr("href", baseHref);
+							jQuery($orderButton[1]).attr("href", baseHref);
 						}
 
-						if (jsToDate) {
-							var element = document.querySelector(
-								`.fc-widget-content[data-date="${jsToDate.d}"]`
+						if (
+							$teremButton.length &&
+							event &&
+							!event.target.classList.contains("terem-button")
+						) {
+							const bookingId = jQuery($teremButton[0]).data(
+								"id"
 							);
-							if (element) {
-								jsToDate = { d: jsToDate.d, el: element };
-								jQuery(jsToDate.el)
-									.css("background-color", "#bce8f1")
-									.append(createButtonFrom());
-							}
+							const baseHref = `/booking-form/?booking=${bookingId}`;
+							jQuery($teremButton[0]).attr("href", baseHref);
 						}
 					},
-					dayClick: function(date, jsEvent, view) {
-						var d = date.format("YYYY-MM-DD");
-						if (!currentCalendarId) {
-							currentCalendarId = data.id;
-							initFrom(d, this);
-						} else if (currentCalendarId != data.id) {
-							clearAll();
-							currentCalendarId = data.id;
-							initFrom(d, this);
-						} else {
-							if (!jsFromDate) {
-								initFrom(d, this);
-							} else if (jsFromDate && jsFromDate.d === d) {
-								clearAll();
-							} else if (
-								jsFromDate &&
-								!jsToDate &&
-								jsFromDate.d < d &&
-								checkDateRange2(events, jsFromDate.d, d)
-							) {
-								jsToDate = { d: d, el: this };
-								jQuery(jsToDate.el)
-									.css("background-color", "#bce8f1")
-									.append(createButtonFrom());
-							} else if (
-								jsFromDate &&
-								jsToDate &&
-								jsToDate.d !== d &&
-								jsFromDate.d < d &&
-								checkDateRange2(events, jsFromDate.d, d)
-							) {
-								jQuery(jsToDate.el)
-									.css("background-color", "initial")
-									.empty();
-								jsToDate = { d: d, el: this };
-								jQuery(jsToDate.el)
-									.css("background-color", "#bce8f1")
-									.append(createButtonFrom());
-							} else if (jsToDate && jsToDate.d === d) {
-								jQuery(jsToDate.el)
-									.css("background-color", "initial")
-									.empty();
-								jsToDate = null;
-							}
-						}
+					select: function(startDate, endDate) {
+						var start = startDate.format();
+						var end = endDate.subtract(1, "days").format();
 
-						if (jsFromDate && jsToDate) {
+						if (start === end) {
+							_startDate = null;
+							_endDate = null;
+							$calendar.fullCalendar("unselect");
+						} else {
+							_startDate = start;
+							_endDate = end;
 							$textHelper
 								.addClass("select-helper__text_success")
-								.html(
-									`Дата бронирования:<br>${jsFromDate.d} &mdash; ${jsToDate.d}`
-								);
+								.html($textHelper.data("helper"));
 							buttonAnimate($orderButton);
 
 							const bookingId = jQuery($orderButton[0]).data(
 								"id"
 							);
-							let baseHref = `/booking-form/?booking=${bookingId}&from=${jsFromDate.d}&to=${jsToDate.d}`;
+							let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
 							if (
 								jQuery($orderButton[0]).hasClass("is-terem-js")
 							) {
@@ -337,13 +227,125 @@ function loadCalendar() {
 							}
 							jQuery($orderButton[0]).attr("href", baseHref);
 							jQuery($orderButton[1]).attr("href", baseHref);
-						} else {
-							$textHelper
-								.removeClass("select-helper__text_success")
-								.html($textHelper.data("helper-start"));
-							setDate();
+						}
+
+						if ($teremButton.length) {
+							_title = $title.html();
+
+							const bookingId = jQuery($teremButton[0]).data(
+								"id"
+							);
+							let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
+							if (
+								jQuery($teremButton[0]).hasClass("is-terem-js")
+							) {
+								baseHref += `&terem=${_title}`;
+							}
+							jQuery($teremButton[0]).attr("href", baseHref);
 						}
 					}
+
+					// To DO
+					// eventAfterAllRender: function() {
+					// 	if (jsFromDate) {
+					// 		var element = document.querySelector(
+					// 			`.fc-widget-content[data-date="${jsFromDate.d}"]`
+					// 		);
+					// 		if (element) {
+					// 			jsFromDate = { d: jsFromDate.d, el: element };
+					// 			jQuery(jsFromDate.el)
+					// 				.css("background-color", "#bce8f1")
+					// 				.append(createButtonFrom(true));
+					// 		}
+					// 	}
+
+					// 	if (jsToDate) {
+					// 		var element = document.querySelector(
+					// 			`.fc-widget-content[data-date="${jsToDate.d}"]`
+					// 		);
+					// 		if (element) {
+					// 			jsToDate = { d: jsToDate.d, el: element };
+					// 			jQuery(jsToDate.el)
+					// 				.css("background-color", "#bce8f1")
+					// 				.append(createButtonFrom());
+					// 		}
+					// 	}
+					// },
+					// dayClick: function(date, jsEvent, view) {
+					// 	var d = date.format("YYYY-MM-DD");
+					// 	if (!currentCalendarId) {
+					// 		currentCalendarId = data.id;
+					// 		initFrom(d, this);
+					// 	} else if (currentCalendarId != data.id) {
+					// 		clearAll();
+					// 		currentCalendarId = data.id;
+					// 		initFrom(d, this);
+					// 	} else {
+					// 		if (!jsFromDate) {
+					// 			initFrom(d, this);
+					// 		} else if (jsFromDate && jsFromDate.d === d) {
+					// 			clearAll();
+					// 		} else if (
+					// 			jsFromDate &&
+					// 			!jsToDate &&
+					// 			jsFromDate.d < d &&
+					// 			checkDateRange2(events, jsFromDate.d, d)
+					// 		) {
+					// 			jsToDate = { d: d, el: this };
+					// 			jQuery(jsToDate.el)
+					// 				.css("background-color", "#bce8f1")
+					// 				.append(createButtonFrom());
+					// 		} else if (
+					// 			jsFromDate &&
+					// 			jsToDate &&
+					// 			jsToDate.d !== d &&
+					// 			jsFromDate.d < d &&
+					// 			checkDateRange2(events, jsFromDate.d, d)
+					// 		) {
+					// 			jQuery(jsToDate.el)
+					// 				.css("background-color", "initial")
+					// 				.empty();
+					// 			jsToDate = { d: d, el: this };
+					// 			jQuery(jsToDate.el)
+					// 				.css("background-color", "#bce8f1")
+					// 				.append(createButtonFrom());
+					// 		} else if (jsToDate && jsToDate.d === d) {
+					// 			jQuery(jsToDate.el)
+					// 				.css("background-color", "initial")
+					// 				.empty();
+					// 			jsToDate = null;
+					// 		}
+					// 	}
+
+					// 	if (jsFromDate && jsToDate) {
+					// 		$textHelper
+					// 			.addClass("select-helper__text_success")
+					// 			.html(
+					// 				`Дата бронирования:<br>${jsFromDate.d} &mdash; ${jsToDate.d}`
+					// 			);
+					// 		buttonAnimate($orderButton);
+
+					// 		const bookingId = jQuery($orderButton[0]).data(
+					// 			"id"
+					// 		);
+					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${jsFromDate.d}&to=${jsToDate.d}`;
+					// 		if (
+					// 			jQuery($orderButton[0]).hasClass("is-terem-js")
+					// 		) {
+					// 			const titleTerem = jQuery($orderButton[0]).data(
+					// 				"name"
+					// 			);
+					// 			baseHref += `&terem=${titleTerem}`;
+					// 		}
+					// 		jQuery($orderButton[0]).attr("href", baseHref);
+					// 		jQuery($orderButton[1]).attr("href", baseHref);
+					// 	} else {
+					// 		$textHelper
+					// 			.removeClass("select-helper__text_success")
+					// 			.html($textHelper.data("helper-start"));
+					// 		setDate();
+					// 	}
+					// }
 				});
 
 				function initFrom(d, el) {
@@ -460,12 +462,6 @@ function checkStartDate(events, startDate) {
 
 function checkDateRange2(events, startDate, endDate) {
 	var result = true;
-
-	// if (startDate > endDate) {
-	// 	var tempDate = startDate;
-	// 	startDate = endDate;
-	// 	endDate = tempDate;
-	// }
 
 	for (var i = 0; i < events.length; i++) {
 		var event = events[i];
