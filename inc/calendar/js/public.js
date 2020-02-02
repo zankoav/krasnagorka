@@ -242,9 +242,8 @@ function loadCalendar() {
 					// 	}
 					// },
 					dayClick: function(date, jsEvent, view) {
-						console.log("date", date);
-						console.log("jsEvent", jsEvent);
-						console.log("view", view);
+						console.log("date", date.format("YYYY-MM-DD"));
+						$(this).css("background-color", "red");
 					}
 				});
 
