@@ -318,7 +318,9 @@ function loadCalendar() {
 						if (jsFromDate && jsToDate) {
 							$textHelper
 								.addClass("select-helper__text_success")
-								.html($textHelper.data("helper"));
+								.html(
+									`Даты бронирования:\n${jsFromDate.d} - ${jsToDate.d}`
+								);
 							buttonAnimate($orderButton);
 
 							const bookingId = jQuery($orderButton[0]).data(
