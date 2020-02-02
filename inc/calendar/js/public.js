@@ -243,6 +243,9 @@ function loadCalendar() {
 					// 		jQuery($teremButton[0]).attr("href", baseHref);
 					// 	}
 					// },
+					viewRender: function() {
+						console.log("viewRender");
+					},
 					eventAfterAllRender: function() {
 						console.log("eventAfterAllRender");
 						if (jsFromDate && jsToDate) {
