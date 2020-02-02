@@ -253,25 +253,26 @@ function loadCalendar() {
 							currentCalendarId = data.id;
 							initFrom(d, this);
 						} else {
-							// TODO: work with data
-							if (!jsFromDate) {
+							if (!jsFromDate && checkStartDate(events, d)) {
 								initFrom(d, this);
-							} else if (jsFromDate.d === d) {
+							} else if (jsFromDate && jsFromDate.d === d) {
 								clearAll();
 							} else if (
+								jsFromDate &&
 								!jsToDate &&
 								jsFromDate.d < d &&
-								checkDateRange(events, jsFromDate.d, d)
+								checkDateRange2(events, jsFromDate.d, d)
 							) {
 								jsToDate = { d: d, el: this };
 								jQuery(jsToDate.el)
 									.css("background-color", "#bce8f1")
 									.append(createButtonFrom());
 							} else if (
+								jsFromDate &&
 								jsToDate &&
 								jsToDate.d !== d &&
 								jsFromDate.d < d &&
-								checkDateRange(events, jsFromDate.d, d)
+								checkDateRange2(events, jsFromDate.d, d)
 							) {
 								jQuery(jsToDate.el)
 									.css("background-color", "initial")
@@ -297,10 +298,12 @@ function loadCalendar() {
 				});
 
 				function initFrom(d, el) {
-					jsFromDate = { d: d, el: el };
-					jQuery(jsFromDate.el)
-						.css("background-color", "#bce8f1")
-						.append(createButtonFrom(true));
+					if (checkStartDate(events, d)) {
+						jsFromDate = { d: d, el: el };
+						jQuery(jsFromDate.el)
+							.css("background-color", "#bce8f1")
+							.append(createButtonFrom(true));
+					}
 				}
 
 				function clearAll() {
@@ -359,6 +362,58 @@ function checkDateRange(events, startDate, endDate) {
 		startDate = endDate;
 		endDate = tempDate;
 	}
+
+	for (var i = 0; i < events.length; i++) {
+		var event = events[i];
+		var startEvent = jQuery.fullCalendar
+			.moment(event.start, "YYYY-MM-DD")
+			.add(1, "day")
+			.format("YYYY-MM-DD");
+		var endEvent = jQuery.fullCalendar
+			.moment(event.end, "YYYY-MM-DD")
+			.subtract(1, "days")
+			.format("YYYY-MM-DD");
+
+		if (startDate < endEvent && endDate > startEvent) {
+			result = false;
+			break;
+		}
+	}
+
+	return result;
+}
+
+function checkStartDate(events, startDate) {
+	var result = true;
+
+	for (var i = 0; i < events.length; i++) {
+		var event = events[i];
+		var startEvent = jQuery.fullCalendar
+			.moment(event.start, "YYYY-MM-DD")
+			.add(1, "day")
+			.format("YYYY-MM-DD");
+		var endEvent = jQuery.fullCalendar
+			.moment(event.end, "YYYY-MM-DD")
+			.subtract(1, "days")
+			.format("YYYY-MM-DD");
+
+		if (startDate < endEvent && startDate > startEvent) {
+			result = false;
+			break;
+		}
+	}
+
+	return result;
+}
+
+function checkDateRange2(events, startDate, endDate) {
+	var result = true;
+
+	// if (startDate > endDate) {
+	// 	var tempDate = startDate;
+	// 	startDate = endDate;
+	// 	endDate = tempDate;
+	// }
 
 	for (var i = 0; i < events.length; i++) {
 		var event = events[i];
