@@ -245,46 +245,42 @@ function loadCalendar() {
 					// },
 					dayClick: function(date, jsEvent, view) {
 						var d = date.format("YYYY-MM-DD");
-						currentCalendarId = data.id;
-
-						if (!jsFromDate) {
-							jsFromDate = { d: d, el: this };
-							jQuery(jsFromDate.el)
-								.css("background-color", "#bce8f1")
-								.append(createButtonFrom(true));
-						} else if (jsFromDate.d === d) {
-							jQuery(jsFromDate.el)
-								.css("background-color", "initial")
-								.empty();
-							if (jsToDate) {
+						if (!currentCalendarId) {
+							currentCalendarId = data.id;
+							initFrom(d, this);
+						} else if (currentCalendarId != data.id) {
+							clearAll();
+							currentCalendarId = data.id;
+							initFrom(d, this);
+						} else {
+							// TODO: work with data
+							if (!jsFromDate) {
+								initFrom(d, this);
+							} else if (jsFromDate.d === d) {
+								clearAll();
+							} else if (!jsToDate && jsFromDate.d < d) {
+								jsToDate = { d: d, el: this };
+								jQuery(jsToDate.el)
+									.css("background-color", "#bce8f1")
+									.append(createButtonFrom());
+							} else if (
+								jsToDate &&
+								jsToDate.d !== d &&
+								jsFromDate.d < d
+							) {
 								jQuery(jsToDate.el)
 									.css("background-color", "initial")
 									.empty();
+								jsToDate = { d: d, el: this };
+								jQuery(jsToDate.el)
+									.css("background-color", "#bce8f1")
+									.append(createButtonFrom());
+							} else if (jsToDate.d === d) {
+								jQuery(jsToDate.el)
+									.css("background-color", "initial")
+									.empty();
+								jsToDate = null;
 							}
-							jsToDate = null;
-							jsFromDate = null;
-						} else if (!jsToDate && jsFromDate.d < d) {
-							jsToDate = { d: d, el: this };
-							jQuery(jsToDate.el)
-								.css("background-color", "#bce8f1")
-								.append(createButtonFrom());
-						} else if (
-							jsToDate &&
-							jsToDate.d !== d &&
-							jsFromDate.d < d
-						) {
-							jQuery(jsToDate.el)
-								.css("background-color", "initial")
-								.empty();
-							jsToDate = { d: d, el: this };
-							jQuery(jsToDate.el)
-								.css("background-color", "#bce8f1")
-								.append(createButtonFrom());
-						} else if (jsToDate.d === d) {
-							jQuery(jsToDate.el)
-								.css("background-color", "initial")
-								.empty();
-							jsToDate = null;
 						}
 
 						console.log("from", jsFromDate);
@@ -292,6 +288,28 @@ function loadCalendar() {
 						console.log("currentCalendarId", currentCalendarId);
 					}
 				});
+
+				function initFrom(d, el) {
+					jsFromDate = { d: d, el: el };
+					jQuery(jsFromDate.el)
+						.css("background-color", "#bce8f1")
+						.append(createButtonFrom(true));
+				}
+
+				function clearAll() {
+					if (jsToDate) {
+						jQuery(jsToDate.el)
+							.css("background-color", "initial")
+							.empty();
+					}
+					if (jsFromDate) {
+						jQuery(jsToDate.el)
+							.css("background-color", "initial")
+							.empty();
+					}
+					jsToDate = null;
+					jsFromDate = null;
+				}
 
 				function createButtonFrom(isFrom) {
 					var wrapper = document.createElement("div");
