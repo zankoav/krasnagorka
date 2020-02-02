@@ -241,8 +241,10 @@ function loadCalendar() {
 					// 		jQuery($teremButton[0]).attr("href", baseHref);
 					// 	}
 					// },
-					dateClick: function(info) {
-						console.log("info", info);
+					dayClick: function(date, jsEvent, view) {
+						console.log("date", date);
+						console.log("jsEvent", jsEvent);
+						console.log("view", view);
 					}
 				});
 
