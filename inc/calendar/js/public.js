@@ -4,6 +4,8 @@ var _startDate = "";
 var _endDate = "";
 var _title = "Терем";
 
+var jsFromDate, jsToDate;
+
 jQuery(".booking-houses__calendars-button, .our-house__button-booking").on(
 	"click",
 	function(event) {
@@ -242,10 +244,53 @@ function loadCalendar() {
 					// 	}
 					// },
 					dayClick: function(date, jsEvent, view) {
-						console.log("date", date.format("YYYY-MM-DD"));
-						jQuery(this).css("background-color", "red");
+						var d = date.format("YYYY-MM-DD");
+
+						if (!jsFromDate) {
+							jsFromDate = { d: d, el: this };
+							jQuery(jsFromDate.el)
+								.css("background-color", "#bce8f1")
+								.append(createButtonFrom());
+						} else if (jsFromDate.d === d) {
+							jQuery(jsFromDate.el)
+								.css("background-color", "initial")
+								.empty();
+							if (jsToDate) {
+								jQuery(jsToDate.el)
+									.css("background-color", "initial")
+									.empty();
+							}
+							jsToDate = null;
+							jsFromDate = null;
+						} else if (!jsToDate || jsToDate.d !== d) {
+							jsToDate = { d: d, el: this };
+							jQuery(jsToDate.el)
+								.css("background-color", "#bce8f1")
+								.append(createButtonFrom(true));
+						} else if (jsToDate.d === d) {
+							jQuery(jsToDate.el)
+								.css("background-color", "initial")
+								.empty();
+							jsToDate = null;
+						}
+
+						console.log("from", jsFromDate);
+						console.log("to", jsToDate);
+						// console.log("jsEvent", jsEvent);
+						// console.log("view", view);
 					}
 				});
+
+				function createButtonFrom(isFrom) {
+					var wrapper = document.createElement("div");
+					wrapper.setAttribute("id", "date-from-js");
+					wrapper.setAttribute(
+						"style",
+						"transform: translateY(100%);"
+					);
+					wrapper.innerHTML = isFrom ? "Заезд" : "Выезд";
+					return wrapper;
+				}
 
 				var isAdmin = document.getElementById("wpadminbar");
 				if (isAdmin && month) {
