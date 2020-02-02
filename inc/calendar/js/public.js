@@ -250,7 +250,7 @@ function loadCalendar() {
 							jsFromDate = { d: d, el: this };
 							jQuery(jsFromDate.el)
 								.css("background-color", "#bce8f1")
-								.append(createButtonFrom());
+								.append(createButtonFrom(true));
 						} else if (jsFromDate.d === d) {
 							jQuery(jsFromDate.el)
 								.css("background-color", "initial")
@@ -262,11 +262,19 @@ function loadCalendar() {
 							}
 							jsToDate = null;
 							jsFromDate = null;
-						} else if (!jsToDate || jsToDate.d !== d) {
+						} else if (!jsToDate) {
 							jsToDate = { d: d, el: this };
 							jQuery(jsToDate.el)
 								.css("background-color", "#bce8f1")
-								.append(createButtonFrom(true));
+								.append(createButtonFrom());
+						} else if (jsToDate.d !== d) {
+							jQuery(jsToDate.el)
+								.css("background-color", "initial")
+								.empty();
+							jsToDate = { d: d, el: this };
+							jQuery(jsToDate.el)
+								.css("background-color", "#bce8f1")
+								.append(createButtonFrom());
 						} else if (jsToDate.d === d) {
 							jQuery(jsToDate.el)
 								.css("background-color", "initial")
@@ -283,10 +291,9 @@ function loadCalendar() {
 
 				function createButtonFrom(isFrom) {
 					var wrapper = document.createElement("div");
-					wrapper.setAttribute("id", "date-from-js");
 					wrapper.setAttribute(
 						"style",
-						"transform: translateY(100%);"
+						"transform: translateY(100%);color:#d0021b;"
 					);
 					wrapper.innerHTML = isFrom ? "Заезд" : "Выезд";
 					return wrapper;
