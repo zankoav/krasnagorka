@@ -4,7 +4,7 @@ var _startDate = "";
 var _endDate = "";
 var _title = "Терем";
 
-var jsFromDate, jsToDate;
+var jsFromDate, jsToDate, currentCalendarId;
 
 jQuery(".booking-houses__calendars-button, .our-house__button-booking").on(
 	"click",
@@ -245,6 +245,7 @@ function loadCalendar() {
 					// },
 					dayClick: function(date, jsEvent, view) {
 						var d = date.format("YYYY-MM-DD");
+						currentCalendarId = data.id;
 
 						if (!jsFromDate) {
 							jsFromDate = { d: d, el: this };
@@ -267,7 +268,11 @@ function loadCalendar() {
 							jQuery(jsToDate.el)
 								.css("background-color", "#bce8f1")
 								.append(createButtonFrom());
-						} else if (jsToDate.d !== d && jsFromDate.d < d) {
+						} else if (
+							jsToDate &&
+							jsToDate.d !== d &&
+							jsFromDate.d < d
+						) {
 							jQuery(jsToDate.el)
 								.css("background-color", "initial")
 								.empty();
@@ -284,8 +289,7 @@ function loadCalendar() {
 
 						console.log("from", jsFromDate);
 						console.log("to", jsToDate);
-						// console.log("jsEvent", jsEvent);
-						console.log("view", view);
+						console.log("currentCalendarId", currentCalendarId);
 					}
 				});
 
