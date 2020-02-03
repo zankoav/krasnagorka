@@ -75,18 +75,18 @@ function loadCalendar() {
 	var events;
 
 	function setDate() {
-		setTimeout(function() {
-			const bookingId = jQuery($orderButton[0]).data("id");
-			const baseHref = `/booking-form/?booking=${bookingId}`;
-			jQuery($orderButton[0]).attr("href", baseHref);
-			jQuery($orderButton[1]).attr("href", baseHref);
+		// setTimeout(function() {
+		const bookingId = jQuery($orderButton[0]).data("id");
+		const baseHref = `/booking-form/?booking=${bookingId}`;
+		jQuery($orderButton[0]).attr("href", baseHref);
+		jQuery($orderButton[1]).attr("href", baseHref);
 
-			if ($teremButton.length) {
-				const bookingId = jQuery($teremButton[0]).data("id");
-				const baseHref = `/booking-form/?booking=${bookingId}`;
-				jQuery($teremButton[0]).attr("href", baseHref);
-			}
-		}, 40);
+		if ($teremButton.length) {
+			const bookingId = jQuery($teremButton[0]).data("id");
+			const baseHref = `/booking-form/?booking=${bookingId}`;
+			jQuery($teremButton[0]).attr("href", baseHref);
+		}
+		// }, 40);
 	}
 
 	jQuery(".house-booking__button").on("click", setDate);
