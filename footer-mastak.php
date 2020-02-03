@@ -1,41 +1,41 @@
 <?php wp_footer();
-    if (is_page_template('reviews-page-template.php')):?>
-        <script>
-            var commentOffset = 20;
+if (is_page_template('reviews-page-template.php')) : ?>
+    <script>
+        var commentOffset = 20;
 
-            function sendQueryComments(callback) {
+        function sendQueryComments(callback) {
 
-                var data = {
-                    action: 'comments_action',
-                    range: commentOffset
-                };
+            var data = {
+                action: 'comments_action',
+                range: commentOffset
+            };
 
-                jQuery.ajax(kg_ajax.url, {
-                    data: data,
-                    method: 'post',
-                    success: function (response) {
-                        callback();
-                        commentOffset += 20;
-                        var response = JSON.parse(response);
-                        if(response.comments.length){
-                            var view = getCommentsView(response.comments);
-                            jQuery( ".js-comments" ).append( view );
-                        }else{
-                            jQuery(".show-more").remove();
-                        }
-                    },
-                    error: function (x, y, z) {
-                        callback();
+            jQuery.ajax(kg_ajax.url, {
+                data: data,
+                method: 'post',
+                success: function(response) {
+                    callback();
+                    commentOffset += 20;
+                    var response = JSON.parse(response);
+                    if (response.comments.length) {
+                        var view = getCommentsView(response.comments);
+                        jQuery(".js-comments").append(view);
+                    } else {
+                        jQuery(".show-more").remove();
                     }
-                });
+                },
+                error: function(x, y, z) {
+                    callback();
+                }
+            });
 
-            }
+        }
 
-            function getCommentsView(comments) {
-                var result = '';
-                for (var comment of comments) {
-                    var rating = getStars(comment.rating);
-                    result += `
+        function getCommentsView(comments) {
+            var result = '';
+            for (var comment of comments) {
+                var rating = getStars(comment.rating);
+                result += `
                         <div id="comment-${comment.id}" class="list-review__item">
                             <div class="review review--full_width">
                                  <div class="review__starts">${rating}</div>
@@ -47,8 +47,8 @@
                             </div>
                         </div>
                     `;
-                    if(comment.child){
-                        result += `
+                if (comment.child) {
+                    result += `
                             <div class="list-review__item list-review__item_answer">
                                 <div class="review review--full_width">
                                     <p class="review__answer">Ответ:</p>
@@ -60,213 +60,223 @@
                                 </div>
                             </div>
                         `;
-                    }
-
                 }
-                return result;
+
             }
+            return result;
+        }
 
-            function getStars( count ) {
-                if(!count){
-                    count = 5;
-                }
-                count = parseInt(count);
-                var result = '';
+        function getStars(count) {
+            if (!count) {
+                count = 5;
+            }
+            count = parseInt(count);
+            var result = '';
 
-                for ( var i = 1; i <= 5; i++ ){
-                    var title = i <= count ? '' : 'empty-';
-                    result += `<img src="/wp-content/themes/krasnagorka/mastak/assets/icons/${title}star.svg"
+            for (var i = 1; i <= 5; i++) {
+                var title = i <= count ? '' : 'empty-';
+                result += `<img src="/wp-content/themes/krasnagorka/mastak/assets/icons/${title}star.svg"
                          alt="star"
                          class="review__star">`
-                }
-                return result;
             }
-        </script>
-    <?php endif;
-    if (is_page_template("template-mastak-map.php")): ?>
+            return result;
+        }
+    </script>
+<?php endif;
+if (is_page_template("template-mastak-map.php")) : ?>
 
 
-        <!--ROUTE SCRIPT-->
-        <script>
-            function googleMapInit() {
+    <!--ROUTE SCRIPT-->
+    <script>
+        function googleMapInit() {
 
 
-                var map_route, routeDirectionsService, marker_route, autocomplete, geocoder;
+            var map_route, routeDirectionsService, marker_route, autocomplete, geocoder;
 
-                var directionsRenderers = [];
-                var infoWindows = [];
+            var directionsRenderers = [];
+            var infoWindows = [];
 
-                //pointsList
-                var mapCenter = new google.maps.LatLng(55.695710, 27.022041);
-                var mapDestination = new google.maps.LatLng(55.768488, 27.086631);
-                var mapStart = new google.maps.LatLng(53.902603, 27.544849);
-                var mapSlobodka = new google.maps.LatLng(55.684264, 27.179945);
-                var mapMinsk = new google.maps.LatLng(53.90453979999999, 27.561524400000053);
-                var mapBegoml = new google.maps.LatLng(54.729464, 28.063619);
-                var mapMyadel = new google.maps.LatLng(54.876854, 26.941103);
+            //pointsList
+            var mapCenter = new google.maps.LatLng(55.695710, 27.022041);
+            var mapDestination = new google.maps.LatLng(55.768488, 27.086631);
+            var mapStart = new google.maps.LatLng(53.902603, 27.544849);
+            var mapSlobodka = new google.maps.LatLng(55.684264, 27.179945);
+            var mapMinsk = new google.maps.LatLng(53.90453979999999, 27.561524400000053);
+            var mapBegoml = new google.maps.LatLng(54.729464, 28.063619);
+            var mapMyadel = new google.maps.LatLng(54.876854, 26.941103);
 
-                function initialize() {
+            function initialize() {
 
-                    map_route = new google.maps.Map(document.getElementById('map-route-canvas'), {
-                        scrollwheel: false,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    });
+                map_route = new google.maps.Map(document.getElementById('map-route-canvas'), {
+                    scrollwheel: false,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
 
-                    var input = (document.getElementById('pac-input'));
-                    var button = (document.getElementById('pac-input-button'));
+                var input = (document.getElementById('pac-input'));
+                var button = (document.getElementById('pac-input-button'));
 
-                    geocoder = new google.maps.Geocoder();
+                geocoder = new google.maps.Geocoder();
 
-                    map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-                    map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(button);
+                map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+                map_route.controls[google.maps.ControlPosition.TOP_LEFT].push(button);
 
-                    autocomplete = new google.maps.places.Autocomplete(input);
-                    autocomplete.bindTo('bounds', map_route);
+                autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.bindTo('bounds', map_route);
 
-                    requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
+                requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
 
-                    marker_route = new google.maps.Marker({
-                        map: map_route,
-                        anchorPoint: new google.maps.Point(0, -29)
-                    });
+                marker_route = new google.maps.Marker({
+                    map: map_route,
+                    anchorPoint: new google.maps.Point(0, -29)
+                });
 
-                    var infowindowDest = new google.maps.InfoWindow({
-                        map: map_route,
-                        position: mapDestination,
-                        content: '<div><strong>Красногорка</strong><br>'
-                    });
-                    infoWindows.push(infowindowDest);
+                var infowindowDest = new google.maps.InfoWindow({
+                    map: map_route,
+                    position: mapDestination,
+                    content: '<div><strong>Красногорка</strong><br>'
+                });
+                infoWindows.push(infowindowDest);
 
-                    var infowindowSlob = new google.maps.InfoWindow({
-                        map: map_route,
-                        position: mapSlobodka,
-                        content: '<div><strong>Слободка</strong><br>'
-                    });
-                    infoWindows.push(infowindowSlob);
+                var infowindowSlob = new google.maps.InfoWindow({
+                    map: map_route,
+                    position: mapSlobodka,
+                    content: '<div><strong>Слободка</strong><br>'
+                });
+                infoWindows.push(infowindowSlob);
 
-                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                        var place = autocomplete.getPlace();
-                        showRoute(place.geometry.location)
-                    });
-                }
+                google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                    var place = autocomplete.getPlace();
+                    showRoute(place.geometry.location)
+                });
+            }
 
-                //this function make route request
-                function requestDirections(start, end, provideRouteAlternatives, travelMode) {
-                    routeDirectionsService = new google.maps.DirectionsService();
+            //this function make route request
+            function requestDirections(start, end, provideRouteAlternatives, travelMode) {
+                routeDirectionsService = new google.maps.DirectionsService();
 
-                    var requestForRouteMap = {
-                        origin: start,
-                        destination: end,
-                        travelMode: travelMode,
-                        provideRouteAlternatives: provideRouteAlternatives
-                    };
+                var requestForRouteMap = {
+                    origin: start,
+                    destination: end,
+                    travelMode: travelMode,
+                    provideRouteAlternatives: provideRouteAlternatives
+                };
 
-                    routeDirectionsService.route(requestForRouteMap, function (response, status) {
-                        if (status == google.maps.DirectionsStatus.OK) {
+                routeDirectionsService.route(requestForRouteMap, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
 
-                            for (var i = 0, len = response.routes.length; i < len; i++) {
-                                var directionsRenderer = new google.maps.DirectionsRenderer({
-                                    map: map_route,
-                                    directions: response,
-                                    routeIndex: i,
-                                    suppressmarker: true, //route selectors delete (white points)
-                                    polylineOptions: {
-                                        strokeColor: "#c3242a"
-                                    }
-                                });
-                                directionsRenderers.push(directionsRenderer);
-                            }
-                        } else {
-                            $("#error").append("Unable to retrieve your route<br />");
+                        for (var i = 0, len = response.routes.length; i < len; i++) {
+                            var directionsRenderer = new google.maps.DirectionsRenderer({
+                                map: map_route,
+                                directions: response,
+                                routeIndex: i,
+                                suppressmarker: true, //route selectors delete (white points)
+                                polylineOptions: {
+                                    strokeColor: "#c3242a"
+                                }
+                            });
+                            directionsRenderers.push(directionsRenderer);
                         }
-                    });
-                }
-
-                //handel Enter key presses: request geotag for value from textbox, and call showRoute()
-                function codeAddress() {
-                    var address = document.getElementById('pac-input').value;
-                    geocoder.geocode({'address': address}, function (results, status) {
-                        if (status == google.maps.GeocoderStatus.OK) {
-                            showRoute(results[0].geometry.location);
-                        } else {
-                            alert('Такого места не найдено');
-                        }
-                    });
-                }
-
-                //show route from startPosition to mapSlobodka and from mapSlobodka to mapDestination.
-                //especially route for Minsk
-                function showRoute(startPosition) {
-                    clearMap();
-
-                    marker_route.setVisible(false);
-
-                    marker_route.setPosition(startPosition);
-                    marker_route.setVisible(true);
-
-                    requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
-
-                    //Minsk is especially city :)
-                    if (startPosition.lat() < 54.0 && startPosition.lat() > 53.7 && startPosition.lng() > 27.3 && startPosition.lng() < 27.7) {
-                        requestDirections(startPosition, mapBegoml, false, google.maps.DirectionsTravelMode.DRIVING);
-                        requestDirections(mapBegoml, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
-                        requestDirections(startPosition, mapMyadel, false, google.maps.DirectionsTravelMode.DRIVING);
-                        requestDirections(mapMyadel, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
                     } else {
-                        requestDirections(startPosition, mapSlobodka, true, google.maps.DirectionsTravelMode.DRIVING);
+                        $("#error").append("Unable to retrieve your route<br />");
                     }
-
-                    var infowindowDest = new google.maps.InfoWindow({
-                        map: map_route,
-                        position: mapDestination,
-                        content: '<div><strong>Красногорка</strong><br>'
-                    });
-                    infoWindows.push(infowindowDest);
-                }
-
-                function clearMap() {
-                    for (var i = 0; i < directionsRenderers.length; i++)
-                        directionsRenderers[i].setMap(null);
-                    for (var i = 0; i < infoWindows.length; i++)
-
-                        infoWindows[i].setMap(null);
-                }
-
-                //analise every transmittable event, and if "Enter" pressed start codeAddress().
-                function isEnterPressed(d, e) {
-                    if (d != "" && e.keyCode == 13)
-                        codeAddress();
-                }
-
-                setTimeout(function () {
-                    initialize();
-                }, 3000);
-
-                // google.maps.event.addDomListener(window, 'load', initialize);
+                });
             }
-        </script>
-        <script async
-                src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
+
+            //handel Enter key presses: request geotag for value from textbox, and call showRoute()
+            function codeAddress() {
+                var address = document.getElementById('pac-input').value;
+                geocoder.geocode({
+                    'address': address
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        showRoute(results[0].geometry.location);
+                    } else {
+                        alert('Такого места не найдено');
+                    }
+                });
+            }
+
+            //show route from startPosition to mapSlobodka and from mapSlobodka to mapDestination.
+            //especially route for Minsk
+            function showRoute(startPosition) {
+                clearMap();
+
+                marker_route.setVisible(false);
+
+                marker_route.setPosition(startPosition);
+                marker_route.setVisible(true);
+
+                requestDirections(mapSlobodka, mapDestination, false, google.maps.DirectionsTravelMode.WALKING);
+
+                //Minsk is especially city :)
+                if (startPosition.lat() < 54.0 && startPosition.lat() > 53.7 && startPosition.lng() > 27.3 && startPosition.lng() < 27.7) {
+                    requestDirections(startPosition, mapBegoml, false, google.maps.DirectionsTravelMode.DRIVING);
+                    requestDirections(mapBegoml, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
+                    requestDirections(startPosition, mapMyadel, false, google.maps.DirectionsTravelMode.DRIVING);
+                    requestDirections(mapMyadel, mapSlobodka, false, google.maps.DirectionsTravelMode.DRIVING);
+                } else {
+                    requestDirections(startPosition, mapSlobodka, true, google.maps.DirectionsTravelMode.DRIVING);
+                }
+
+                var infowindowDest = new google.maps.InfoWindow({
+                    map: map_route,
+                    position: mapDestination,
+                    content: '<div><strong>Красногорка</strong><br>'
+                });
+                infoWindows.push(infowindowDest);
+            }
+
+            function clearMap() {
+                for (var i = 0; i < directionsRenderers.length; i++)
+                    directionsRenderers[i].setMap(null);
+                for (var i = 0; i < infoWindows.length; i++)
+
+                    infoWindows[i].setMap(null);
+            }
+
+            //analise every transmittable event, and if "Enter" pressed start codeAddress().
+            function isEnterPressed(d, e) {
+                if (d != "" && e.keyCode == 13)
+                    codeAddress();
+            }
+
+            setTimeout(function() {
+                initialize();
+            }, 3000);
+
+            // google.maps.event.addDomListener(window, 'load', initialize);
+        }
+    </script>
+    <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
 
 
-    <?php endif; ?>
+<?php endif; ?>
 
 <script type="text/javascript">
-    (function ($) {
+    (function($) {
 
-        document.addEventListener('wpcf7mailsent', function (event) {
+        document.addEventListener('wpcf7mailsent', function(event) {
             if (event.detail.contactFormId == '2730') {
                 var year = 3600 * 24 * 365;
                 var $inputName = $('[name="your-name"]');
                 var $inputPhone = $('[name="tel"]');
                 var $inputEmail = $('[name="your-email"]');
-                setCookie('kg_name', $inputName.val(), {expires: year, path: '/'});
-                setCookie('kg_email', $inputEmail.val(), {expires: year, path: '/'});
-                setCookie('kg_phone', $inputPhone.val(), {expires: year, path: '/'});
+                setCookie('kg_name', $inputName.val(), {
+                    expires: year,
+                    path: '/'
+                });
+                setCookie('kg_email', $inputEmail.val(), {
+                    expires: year,
+                    path: '/'
+                });
+                setCookie('kg_phone', $inputPhone.val(), {
+                    expires: year,
+                    path: '/'
+                });
             }
         }, false);
 
-        $('.our-house__button, .house-booking__button').on('click', function () {
+        $('.our-house__button, .house-booking__button').on('click', function() {
 
             var name = getCookie('kg_name');
             var email = getCookie('kg_email');
@@ -333,8 +343,8 @@
 </script>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function () {
+    (function(d, w, c) {
+        (w[c] = w[c] || []).push(function() {
             try {
                 w.yaCounter37788340 = new Ya.Metrika({
                     id: 37788340,
@@ -343,13 +353,12 @@
                     accurateTrackBounce: true,
                     webvisor: true
                 });
-            } catch (e) {
-            }
+            } catch (e) {}
         });
 
         var n = d.getElementsByTagName("script")[0],
             s = d.createElement("script"),
-            f = function () {
+            f = function() {
                 n.parentNode.insertBefore(s, n);
             };
         s.type = "text/javascript";
@@ -365,16 +374,16 @@
 </script>
 <noscript>
     <div>
-        <img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt=""/>
+        <img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt="" />
     </div>
 </noscript>
 <!-- /Yandex.Metrika counter -->
 
 
 <script>
-    (function (i, s, o, g, r, a, m) {
+    (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
+        i[r] = i[r] || function() {
             (i[r].q = i[r].q || []).push(arguments)
         }, i[r].l = 1 * new Date();
         a = s.createElement(o),
@@ -392,14 +401,14 @@
     cid = cid.replace(/GA1.2./g, '');
     //console.log(cid);
     jQuery('[name="user-cid"]').val(cid);
-
 </script>
 
 <script type="text/javascript">
-    (function (w, d) {
-        setTimeout(function () {
+    (function(w, d) {
+        setTimeout(function() {
             w.amo_jivosite_id = 'vPugBTo6M7';
-            var s = document.createElement('script'), f = d.getElementsByTagName('script')[0];
+            var s = document.createElement('script'),
+                f = d.getElementsByTagName('script')[0];
             s.id = 'amo_jivosite_js';
             s.type = 'text/javascript';
             s.async = true;
@@ -431,7 +440,6 @@
             eventAction: 'First Message sent'
         });
     }
-
 </script>
 <!-- {/literal} END JIVOSITE CODE -->
 
@@ -447,14 +455,12 @@
 </script>
 <noscript>
     <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt=""
-             src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/859598761/?guid=ON&amp;script=0"/>
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/859598761/?guid=ON&amp;script=0" />
     </div>
 </noscript>
 <script>
-
     // Menu Contacts button
-    jQuery('.contacts-menu__button--phone').click(function () {
+    jQuery('.contacts-menu__button--phone').click(function() {
         if (!jQuery(this).hasClass('contacts-menu__button_active')) {
             ga('send', {
                 hitType: 'event',
@@ -465,7 +471,7 @@
     });
 
     // Email
-    jQuery('.contacts-popup__email-text, .contacts-data__item_email').click(function () {
+    jQuery('.contacts-popup__email-text, .contacts-data__item_email').click(function() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'email',
@@ -473,7 +479,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_velcom, .phone-item__phone-number_velcom').click(function () {
+    jQuery('.contacts-data__item-text_velcom, .phone-item__phone-number_velcom').click(function() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_velcom',
@@ -481,7 +487,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_mts, .phone-item__phone-number_mts').click(function () {
+    jQuery('.contacts-data__item-text_mts, .phone-item__phone-number_mts').click(function() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_mts',
@@ -489,7 +495,7 @@
         });
     });
 
-    jQuery('.contacts-data__item-text_life, .phone-item__phone-number_life').click(function () {
+    jQuery('.contacts-data__item-text_life, .phone-item__phone-number_life').click(function() {
         ga('send', {
             hitType: 'event',
             eventCategory: 'phone_life',
@@ -497,7 +503,7 @@
         });
     });
 
-    jQuery('[href="#booking-order"]').click(function () {
+    jQuery('[href="#booking-order"]').click(function() {
         let name = jQuery(this).data('name');
         let prefix = 'Home ';
         let category = 'house';
@@ -519,7 +525,7 @@
         });
     });
 
-    document.addEventListener('wpcf7mailsent', function (event) {
+    document.addEventListener('wpcf7mailsent', function(event) {
 
         if ('2730' == event.detail.contactFormId) {
             ga('send', {
@@ -547,11 +553,11 @@
 
     }, false);
 
-    jQuery('.online-video').on('click', function () {
-        jQuery('.modal-online-video').fadeIn(function () {
+    jQuery('.online-video').on('click', function() {
+        jQuery('.modal-online-video').fadeIn(function() {
             var img = new Image();
             img.src = 'http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32';
-            img.onload = function () {
+            img.onload = function() {
                 var closeButton = document.createElement('div');
                 closeButton.setAttribute('class', 'modal-online-video__close');
                 closeButton.addEventListener('click', modalClose);
@@ -563,19 +569,19 @@
     jQuery('.modal-online-video__container').on('click', modalClose);
 
     function modalClose() {
-        jQuery('.modal-online-video').fadeOut(function () {
+        jQuery('.modal-online-video').fadeOut(function() {
             jQuery('.modal-online-video__video').empty().html('<div class="modal-online-video__spinner"></div>');
         })
     }
 
 
     jQuery('.base-place__coordinate-inner')
-        .on('click', function () {
+        .on('click', function() {
             CopyToClipboard('coordinate');
             var tooltip = document.getElementById("coordinatsTooltip");
             tooltip.innerHTML = "Координаты скопированы";
         })
-        .on('mouseout', function () {
+        .on('mouseout', function() {
             var tooltip = document.getElementById("coordinatsTooltip");
             tooltip.innerHTML = "Копировать координаты?";
         });
@@ -589,88 +595,90 @@
         sel.addRange(range);
         document.execCommand('copy');
     }
-
-
 </script>
 <!-- Код CallTracking -->
 <script async src="//app.call-tracking.by/scripts/calltracking.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>
 <style>
     .button-animation {
-        animation : buttonShake .8s;
+        animation: buttonShake .8s;
     }
 
     @keyframes buttonShake {
         0% {
-            background-color : #d0021b
+            background-color: #d0021b
         }
+
         50% {
-            background-color : #04a89f
+            background-color: #04a89f
         }
+
         100% {
-            background-color : #d0021b
+            background-color: #d0021b
         }
     }
 
     .select-helper {
-        display     : flex;
-        align-items : center;
-        padding     : 15px 15px 0 15px;
+        display: flex;
+        align-items: center;
+        padding: 15px 15px 0 15px;
     }
 
     .select-helper_header {
-        font-size   : 14px;
-        padding     : 0 0 1rem;
-        align-items : flex-start;
+        font-size: 14px;
+        padding: 0 0 1rem;
+        align-items: flex-start;
     }
 
     .select-helper_header .select-helper__img {
-        max-width : 26px;
+        max-width: 26px;
     }
 
     @media (min-width : 1280px) {
         .select-helper_header {
-            align-items : center;
-            font-size   : 16px;
-            padding     : 0 0 2rem;
+            align-items: center;
+            font-size: 16px;
+            padding: 0 0 2rem;
         }
 
         .select-helper_header .select-helper__img {
-            max-width : 2.5rem;
+            max-width: 2.5rem;
         }
     }
 
     .select-helper__img {
-        flex-shrink  : 0;
-        max-width    : 2rem;
-        margin-right : 1rem;
+        flex-shrink: 0;
+        max-width: 2rem;
+        margin-right: 1rem;
     }
 
     .select-helper__img {
-        flex-shrink  : 0;
-        max-width    : 2.5rem;
-        margin-right : 1rem;
+        flex-shrink: 0;
+        max-width: 2.5rem;
+        margin-right: 1rem;
     }
 
     .select-helper__text {
-        flex : 1;
+        flex: 1;
+        font-size: 14px;
     }
 
     .select-helper__text_success {
-        color : #04a89f
+        color: #04a89f
     }
 
-    .our-house__calendar, .booking-houses__calendars-inner {
-        position : static;
+    .our-house__calendar,
+    .booking-houses__calendars-inner {
+        position: static;
     }
-
 </style>
 
 <script>
-    jQuery(document).ready(function(){
-        jQuery("#kg-loader").delay(1000).fadeOut(300,function(){
+    jQuery(document).ready(function() {
+        jQuery("#kg-loader").delay(1000).fadeOut(300, function() {
             jQuery("#kg-loader").remove();
         });
     });
 </script>
 </body>
+
 </html>
