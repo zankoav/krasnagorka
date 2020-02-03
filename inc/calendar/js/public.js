@@ -337,6 +337,11 @@ function loadCalendar() {
 							}
 							jQuery($orderButton[0]).attr("href", baseHref);
 							jQuery($orderButton[1]).attr("href", baseHref);
+						} else if (jsFromDate) {
+							$textHelper
+								.removeClass("select-helper__text_success")
+								.html(`Заезд: ${jsFromDate.d}`);
+							setDate();
 						} else {
 							$textHelper
 								.removeClass("select-helper__text_success")
@@ -356,10 +361,6 @@ function loadCalendar() {
 						jQuery(jsFromDate.el)
 							.css("background-color", "#bce8f1")
 							.append(createButtonFrom(true));
-						$textHelper
-							.removeClass("select-helper__text_success")
-							.html(`Заезд: ${jsFromDate.d}`);
-						setDate();
 					}
 				}
 
