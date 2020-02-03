@@ -247,7 +247,7 @@ function loadCalendar() {
 					eventAfterAllRender: function() {
 						if (jsFromDate) {
 							var element = document.querySelector(
-								`.fc-widget-content[data-date="${jsFromDate.d}"]`
+								`#calendar_${currentCalendarId} .fc-widget-content[data-date="${jsFromDate.d}"]`
 							);
 							if (element) {
 								jsFromDate = { d: jsFromDate.d, el: element };
@@ -259,7 +259,7 @@ function loadCalendar() {
 
 						if (jsToDate) {
 							var element = document.querySelector(
-								`.fc-widget-content[data-date="${jsToDate.d}"]`
+								`#calendar_${currentCalendarId}  .fc-widget-content[data-date="${jsToDate.d}"]`
 							);
 							if (element) {
 								jsToDate = { d: jsToDate.d, el: element };
@@ -356,6 +356,10 @@ function loadCalendar() {
 						jQuery(jsFromDate.el)
 							.css("background-color", "#bce8f1")
 							.append(createButtonFrom(true));
+						$textHelper
+							.removeClass("select-helper__text_success")
+							.html(`Заезд: ${jsFromDate.d}`);
+						setDate();
 					}
 				}
 
