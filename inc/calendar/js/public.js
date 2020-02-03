@@ -81,16 +81,11 @@ function loadCalendar() {
 			.removeClass("select-helper__text_success")
 			.html(msg);
 
-		jQuery(".our-house__button[data-name]").each($item => {
-			console.log($item.data("id"));
-			console.log(jQuery($item).data("id"));
-			
+		jQuery(".our-house__button[data-name]").each(item => {
+			const bookingId = jQuery(item).data("id");
+			const baseHref = `/booking-form/?booking=${bookingId}`;
+			jQuery(item).attr("href", baseHref);
 		});
-
-		const bookingId = jQuery($orderButton[0]).data("id");
-		const baseHref = `/booking-form/?booking=${bookingId}`;
-		jQuery($orderButton[0]).attr("href", baseHref);
-		jQuery($orderButton[1]).attr("href", baseHref);
 
 		if ($teremButton.length) {
 			const bookingId = jQuery($teremButton[0]).data("id");
