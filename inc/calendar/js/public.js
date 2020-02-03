@@ -244,8 +244,6 @@ function loadCalendar() {
 					// 		jQuery($teremButton[0]).attr("href", baseHref);
 					// 	}
 					// }
-
-					To DO
 					eventAfterAllRender: function() {
 						if (jsFromDate) {
 							var element = document.querySelector(
