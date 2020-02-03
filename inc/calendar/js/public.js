@@ -65,7 +65,7 @@ function loadCalendar() {
 		.parent()
 		.parent()
 		.parent()
-		.find(".our-house__button[data-name]");
+		.find(".our-house__button[data-name], .house-booking__button[data-name]");
 	var $teremButton = jQuery(".terem-button");
 	var $orderBookingButton = jQuery(this)
 		.parent()
