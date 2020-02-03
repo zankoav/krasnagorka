@@ -94,30 +94,30 @@ function loadCalendar() {
 		}
 	}
 
-	function setDateWithTimeOut() {
-		setTimeout(function() {
-			const msg = $textHelper.data("helper-start");
-			jQuery(".select-helper__text")
-				.removeClass("select-helper__text_success")
-				.html(msg);
+	// function setDateWithTimeOut() {
+	// 	setTimeout(function() {
+	// 		const msg = $textHelper.data("helper-start");
+	// 		jQuery(".select-helper__text")
+	// 			.removeClass("select-helper__text_success")
+	// 			.html(msg);
 
-			jQuery(".our-house__button[data-name]").each(function(index) {
-				const item = jQuery(this);
-				const bookingId = jQuery(item).data("id");
-				const baseHref = `/booking-form/?booking=${bookingId}`;
-				jQuery(item).attr("href", baseHref);
-			});
+	// 		jQuery(".our-house__button[data-name]").each(function(index) {
+	// 			const item = jQuery(this);
+	// 			const bookingId = jQuery(item).data("id");
+	// 			const baseHref = `/booking-form/?booking=${bookingId}`;
+	// 			jQuery(item).attr("href", baseHref);
+	// 		});
 
-			if ($teremButton.length) {
-				const bookingId = jQuery($teremButton[0]).data("id");
-				const baseHref = `/booking-form/?booking=${bookingId}`;
-				jQuery($teremButton[0]).attr("href", baseHref);
-			}
-		}, 40);
-	}
+	// 		if ($teremButton.length) {
+	// 			const bookingId = jQuery($teremButton[0]).data("id");
+	// 			const baseHref = `/booking-form/?booking=${bookingId}`;
+	// 			jQuery($teremButton[0]).attr("href", baseHref);
+	// 		}
+	// 	}, 40);
+	// }
 
-	jQuery(".house-booking__button").on("click", setDateWithTimeOut);
-	$orderButton.on("click", setDateWithTimeOut);
+	// jQuery(".house-booking__button").on("click", setDateWithTimeOut);
+	// $orderButton.on("click", setDateWithTimeOut);
 	jQuery(this).remove();
 
 	jQuery.ajax(kg_ajax.url, {
