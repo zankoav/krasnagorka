@@ -253,6 +253,7 @@ function loadCalendar() {
 								jsFromDate = { d: jsFromDate.d, el: element };
 								jQuery(jsFromDate.el)
 									.css("background-color", "#bce8f1")
+									.empty()
 									.append(createButtonFrom(true));
 							}
 						}
@@ -265,6 +266,7 @@ function loadCalendar() {
 								jsToDate = { d: jsToDate.d, el: element };
 								jQuery(jsToDate.el)
 									.css("background-color", "#bce8f1")
+									.empty()
 									.append(createButtonFrom());
 							}
 						}
