@@ -670,6 +670,14 @@ if (is_page_template("template-mastak-map.php")) : ?>
     .booking-houses__calendars-inner {
         position: static;
     }
+
+    .our-house__button-hidden {
+        display: none;
+    }
+
+    .our-house__button_mt_15 {
+        margin-top: 1.5rem;
+    }
 </style>
 
 <script>
