@@ -68,6 +68,9 @@ function loadCalendar() {
 		.find(
 			".our-house__button[data-name], .house-booking__button[data-name]"
 		);
+	if (!$orderButton.length) {
+		$orderButton = jQuery("[data-name]");
+	}
 	var $teremButton = jQuery(".terem-button");
 	var $orderBookingButton = jQuery(this)
 		.parent()
@@ -82,7 +85,7 @@ function loadCalendar() {
 			.removeClass("select-helper__text_success")
 			.html(msg);
 
-		jQuery(".our-house__button[data-name]").each(function(index) {
+		jQuery("[data-name]").each(function(index) {
 			const item = jQuery(this);
 			const bookingId = jQuery(item).data("id");
 			const baseHref = `/booking-form/?booking=${bookingId}`;
@@ -369,7 +372,9 @@ function loadCalendar() {
 								baseHref += `&terem=${titleTerem}`;
 							}
 							jQuery($orderButton[0]).attr("href", baseHref);
-							jQuery($orderButton[1]).attr("href", baseHref);
+							if ($orderButton[1]) {
+								jQuery($orderButton[1]).attr("href", baseHref);
+							}
 						} else if (jsFromDate) {
 							$textHelper
 								.removeClass("select-helper__text_success")
