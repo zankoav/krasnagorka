@@ -75,18 +75,23 @@ function loadCalendar() {
 	var events;
 
 	function setDate() {
-		// setTimeout(function() {
-		const bookingId = jQuery($orderButton[0]).data("id");
-		const baseHref = `/booking-form/?booking=${bookingId}`;
-		jQuery($orderButton[0]).attr("href", baseHref);
-		jQuery($orderButton[1]).attr("href", baseHref);
+		setTimeout(function() {
+			const msg = $textHelper.data("helper-start");
+			jQuery(".select-helper__text")
+				.removeClass("select-helper__text_success")
+				.html(msg);
 
-		if ($teremButton.length) {
-			const bookingId = jQuery($teremButton[0]).data("id");
+			const bookingId = jQuery($orderButton[0]).data("id");
 			const baseHref = `/booking-form/?booking=${bookingId}`;
-			jQuery($teremButton[0]).attr("href", baseHref);
-		}
-		// }, 40);
+			jQuery($orderButton[0]).attr("href", baseHref);
+			jQuery($orderButton[1]).attr("href", baseHref);
+
+			if ($teremButton.length) {
+				const bookingId = jQuery($teremButton[0]).data("id");
+				const baseHref = `/booking-form/?booking=${bookingId}`;
+				jQuery($teremButton[0]).attr("href", baseHref);
+			}
+		}, 40);
 	}
 
 	jQuery(".house-booking__button").on("click", setDate);
@@ -272,6 +277,7 @@ function loadCalendar() {
 						}
 					},
 					dayClick: function(date, jsEvent, view) {
+						setDate();
 						var d = date.format("YYYY-MM-DD");
 						if (!currentCalendarId) {
 							currentCalendarId = data.id;
@@ -343,12 +349,10 @@ function loadCalendar() {
 							$textHelper
 								.removeClass("select-helper__text_success")
 								.html(`Заезд: ${jsFromDate.d}`);
-							setDate();
 						} else {
 							$textHelper
 								.removeClass("select-helper__text_success")
 								.html($textHelper.data("helper-start"));
-							setDate();
 						}
 					}
 				});
