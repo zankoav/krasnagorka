@@ -351,7 +351,6 @@ function loadCalendar() {
 						}
 
 						if (jsFromDate && jsToDate) {
-							console.log("$orderButton", $orderButton);
 							$textHelper
 								.addClass("select-helper__text_success")
 								.html(
