@@ -81,9 +81,10 @@ function loadCalendar() {
 			.removeClass("select-helper__text_success")
 			.html(msg);
 
-		jQuery(".our-house__button[data-name]").each(item => {
+		jQuery(".our-house__button[data-name]").each(function(index) {
+			const item = jQuery(this);
 			const bookingId = jQuery(item).data("id");
-			console.log("item", item);
+			console.log("bookingId", bookingId);
 			const baseHref = `/booking-form/?booking=${bookingId}`;
 			jQuery(item).attr("href", baseHref);
 		});
