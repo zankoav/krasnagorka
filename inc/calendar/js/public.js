@@ -105,7 +105,6 @@ function loadCalendar() {
 			jQuery(".our-house__button[data-name]").each(function(index) {
 				const item = jQuery(this);
 				const bookingId = jQuery(item).data("id");
-				console.log("bookingId", bookingId);
 				const baseHref = `/booking-form/?booking=${bookingId}`;
 				jQuery(item).attr("href", baseHref);
 			});
