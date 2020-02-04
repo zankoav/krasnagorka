@@ -268,7 +268,11 @@ class Booking_Form_Controller extends WP_REST_Controller
         foreach ($orders  as $order) {
             $orderId = $order->ID;
             $start = get_post_meta($orderId, 'sbc_order_start', true);
+            $startTime = strtotime($start);
+            $start = date('Y-mm-dd', $startTime);
             $end = get_post_meta($orderId, 'sbc_order_end', true);
+            $endTime = strtotime($end);
+            $end = date('Y-mm-dd', $endTime);
             $result[] = [$start, $end];
         }
 
