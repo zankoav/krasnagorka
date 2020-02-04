@@ -298,6 +298,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         if (isset($data["error"])) {
             return new WP_REST_Response($data, 200);
         } else {
+            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+            $href = 'https://krasnagorka.by/booking-form';
+            $type = 'booking-form';
+            new AmoIntegration($type, $request['data'], $href);
 
             // TODO: create new order and send to AmoCRM
             // $data = [
@@ -313,11 +317,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             // 'comment'      => $request['comment'],
             // 'cid'          => $request['cid']
             // ];
-
-            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-            $href = 'https://krasnagorka.by/booking-form';
-            $type = 'booking-form';
-            new AmoIntegration($type, $request['data'], $href);
 
             return new WP_REST_Response($data, 200);
         }
