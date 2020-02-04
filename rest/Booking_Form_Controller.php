@@ -295,27 +295,31 @@ class Booking_Form_Controller extends WP_REST_Controller
             }
         }
 
-        // $data = [
-        //     'error' => true,
-        //     'result' => $result
-        // 'id'          => $request['id'],
-        // 'fio'          => $request['fio'],
-        // 'phone'        => $request['phone'],
-        // 'email'        => $request['email'],
-        // 'dateStart'    => $request['dateStart'],
-        // 'dateEnd'      => $request['dateEnd'],
-        // 'orderTitle' => $request['orderTitle'],
-        // 'orderType'  => $request['orderType'],
-        // 'passport'   => $request['passport'],
-        // 'comment'      => $request['comment'],
-        // 'cid'          => $request['cid']
-        // ];
+        if (isset($data["error"])) {
+            return new WP_REST_Response($data, 200);
+        } else {
 
-        // require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-        // $href = 'https://krasnagorka.by/booking-form';
-        // $type = 'booking-form';
-        // new AmoIntegration($type, $request['data'], $href);
+            // TODO: create new order and send to AmoCRM
+            // $data = [
+            // 'id'          => $request['id'],
+            // 'fio'          => $request['fio'],
+            // 'phone'        => $request['phone'],
+            // 'email'        => $request['email'],
+            // 'dateStart'    => $request['dateStart'],
+            // 'dateEnd'      => $request['dateEnd'],
+            // 'orderTitle' => $request['orderTitle'],
+            // 'orderType'  => $request['orderType'],
+            // 'passport'   => $request['passport'],
+            // 'comment'      => $request['comment'],
+            // 'cid'          => $request['cid']
+            // ];
 
-        return new WP_REST_Response([$calendarShortCodeArr[1], $data], 200);
+            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+            $href = 'https://krasnagorka.by/booking-form';
+            $type = 'booking-form';
+            new AmoIntegration($type, $request['data'], $href);
+
+            return new WP_REST_Response($data, 200);
+        }
     }
 }
