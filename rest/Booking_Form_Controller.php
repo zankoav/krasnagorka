@@ -269,10 +269,10 @@ class Booking_Form_Controller extends WP_REST_Controller
             $orderId = $order->ID;
             $start = get_post_meta($orderId, 'sbc_order_start', true);
             $startTime = strtotime($start);
-            $start = date('Y-mm-dd', $startTime);
+            $start = date('Y-m-d', $startTime);
             $end = get_post_meta($orderId, 'sbc_order_end', true);
             $endTime = strtotime($end);
-            $end = date('Y-mm-dd', $endTime);
+            $end = date('Y-m-d', $endTime);
             $result[] = [$start, $end];
         }
 
