@@ -238,6 +238,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $href = 'https://krasnagorka.by/booking-form';
         $type = 'booking-form';
         $data = [
+            'error'=> true,
             'fio'          => $request['fio'],
             'phone'        => $request['phone'],
             'email'        => $request['email'],
@@ -252,9 +253,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         // require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
         // new AmoIntegration($type, $request['data'], $href);
-        return new WP_REST_Response([
-            "data" => $request['data'],
-            'error'        => true,
-        ], 200);
+        return new WP_REST_Response($data, 200);
     }
 }
