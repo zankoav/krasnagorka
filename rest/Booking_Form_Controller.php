@@ -244,9 +244,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             'email'        => $request['email'],
             'dateStart'    => $request['dateStart'],
             'dateEnd'      => $request['dateEnd'],
-            'bookingTitle' => $request['bookingTitle'],
-            'bookingType'  => $request['bookingType'],
-            'passportId'   => $request['passportId'],
+            'orderTitle' => $request['orderTitle'],
+            'orderType'  => $request['orderType'],
+            'passport'   => $request['passport'],
             'comment'      => $request['comment'],
             'cid'          => $request['cid']
         ];
