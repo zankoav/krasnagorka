@@ -258,18 +258,20 @@ class Booking_Form_Controller extends WP_REST_Controller
             //         'terms' => ['post-format-quote']
             //     ]
             // ],
-            'meta_query' => array(
-                array(
-                    'key'     => 'sbc_order_end',
-                    'value'   => $dateStart,
-                    'compare' => '>=',
-                )
-            )
+            // 'meta_query' => array(
+            //     array(
+            //         'key'     => 'sbc_order_end',
+            //         'value'   => $dateStart,
+            //         'compare' => '>=',
+            //     )
+            // )
         ));
 
         // обрабатываем результат
 
-        $result = [];
+        $result = [
+            "length" => count($orders)
+        ];
 
         foreach ($orders  as $order) {
             $orderId = $order->ID;
