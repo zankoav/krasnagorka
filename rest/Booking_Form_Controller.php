@@ -244,7 +244,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $orders = $ordersQuery->query(array(
             'post_type' => 'sbc_orders',
             'posts_per_page' => -1,
-            'tag__in' => array(37),
+            // 'tag__in' => array(37),
             // 'tax_query' => [
             //     'relation' => 'OR',
             //     [
@@ -258,13 +258,13 @@ class Booking_Form_Controller extends WP_REST_Controller
             //         'terms' => ['post-format-quote']
             //     ]
             // ],
-            // 'meta_query' => array(
-            //     array(
-            //         'key'     => 'sbc_order_end',
-            //         'value'   => $dateStart,
-            //         'compare' => '>=',
-            //     )
-            // )
+            'meta_query' => array(
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '>=',
+                )
+            )
         ));
 
         // обрабатываем результат
