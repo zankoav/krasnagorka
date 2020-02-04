@@ -235,65 +235,65 @@ class Booking_Form_Controller extends WP_REST_Controller
             return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
         }
 
-        $houseId = $request['id'];
-        $calendarShortCode = get_post_meta($houseId, "mastak_house_calendar", 1);
-        $calendarShortCodeArr = explode("\"", $calendarShortCode);
-        $dateStart = $request['dateStart'];
-        $dateEnd = $request['dateEnd'];
-        $ordersQuery = new WP_Query;
+        // $houseId = $request['id'];
+        // $calendarShortCode = get_post_meta($houseId, "mastak_house_calendar", 1);
+        // $calendarShortCodeArr = explode("\"", $calendarShortCode);
+        // $dateStart = $request['dateStart'];
+        // $dateEnd = $request['dateEnd'];
+        // $ordersQuery = new WP_Query;
 
-        // делаем запрос
-        $orders = $ordersQuery->query(array(
-            'post_type' => 'sbc_orders',
-            'posts_per_page' => -1,
-            'tax_query' => [
-                [
-                    'taxonomy' => 'sbc_calendars',
-                    'terms' => [$calendarShortCodeArr[1]]
-                ]
-            ],
-            'meta_query' => array(
-                array(
-                    'key'     => 'sbc_order_end',
-                    'value'   => $dateStart,
-                    'compare' => '>=',
-                )
-            )
-        ));
+        // // делаем запрос
+        // $orders = $ordersQuery->query(array(
+        //     'post_type' => 'sbc_orders',
+        //     'posts_per_page' => -1,
+        //     'tax_query' => [
+        //         [
+        //             'taxonomy' => 'sbc_calendars',
+        //             'terms' => [$calendarShortCodeArr[1]]
+        //         ]
+        //     ],
+        //     'meta_query' => array(
+        //         array(
+        //             'key'     => 'sbc_order_end',
+        //             'value'   => $dateStart,
+        //             'compare' => '>=',
+        //         )
+        //     )
+        // ));
 
         // обрабатываем результат
 
-        $result = [];
+        // $result = [];
 
-        foreach ($orders  as $order) {
-            $orderId = $order->ID;
-            $start = get_post_meta($orderId, 'sbc_order_start', true);
-            $startTime = strtotime($start);
-            $start = date('Y-m-d', $startTime);
-            $end = get_post_meta($orderId, 'sbc_order_end', true);
-            $endTime = strtotime($end);
-            $end = date('Y-m-d', $endTime);
-            $result[] = [$start, $end];
-        }
+        // foreach ($orders  as $order) {
+        //     $orderId = $order->ID;
+        //     $start = get_post_meta($orderId, 'sbc_order_start', true);
+        //     $startTime = strtotime($start);
+        //     $start = date('Y-m-d', $startTime);
+        //     $end = get_post_meta($orderId, 'sbc_order_end', true);
+        //     $endTime = strtotime($end);
+        //     $end = date('Y-m-d', $endTime);
+        //     $result[] = [$start, $end];
+        // }
 
         $data = [];
 
-        foreach ($result as $result) {
-            $from = $result[0];
-            $to = $result[1];
+        // foreach ($result as $result) {
+        //     $from = $result[0];
+        //     $to = $result[1];
 
-            if ($dateStart >= $from and $dateStart < $to) {
-                $data["error"] = true;
-            }
+        //     if ($dateStart >= $from and $dateStart < $to) {
+        //         $data["error"] = true;
+        //     }
 
-            if ($dateEnd >= $from and $dateEnd < $to) {
-                $data["error"] = true;
-            }
+        //     if ($dateEnd >= $from and $dateEnd < $to) {
+        //         $data["error"] = true;
+        //     }
 
-            if ($dateStart < $from and $dateEnd > $to) {
-                $data["error"] = true;
-            }
-        }
+        //     if ($dateStart < $from and $dateEnd > $to) {
+        //         $data["error"] = true;
+        //     }
+        // }
 
         if (isset($data["error"])) {
             return new WP_REST_Response($data, 200);
