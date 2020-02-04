@@ -235,20 +235,49 @@ class Booking_Form_Controller extends WP_REST_Controller
             return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
         }
 
+        $houseId = $request['id'];
+        $dateStart = $request['dateStart'];
+
+        $ordersQuery = new WP_Query;
+
+        // делаем запрос
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '>=',
+                )
+            )
+        ));
+
+        // обрабатываем результат
+
+        $result = [];
+
+        foreach ($orders  as $order) {
+            $orderId = $order->ID;
+            $start = get_post_meta($orderId, 'sbc_order_start', true);
+            $end = get_post_meta($orderId, 'sbc_order_end', true);
+            $result[] = [$start, $end];
+        }
 
         $data = [
             'error' => true,
-            'id'          => $request['id'],
-            'fio'          => $request['fio'],
-            'phone'        => $request['phone'],
-            'email'        => $request['email'],
-            'dateStart'    => $request['dateStart'],
-            'dateEnd'      => $request['dateEnd'],
-            'orderTitle' => $request['orderTitle'],
-            'orderType'  => $request['orderType'],
-            'passport'   => $request['passport'],
-            'comment'      => $request['comment'],
-            'cid'          => $request['cid']
+            'result' => $result
+            // 'id'          => $request['id'],
+            // 'fio'          => $request['fio'],
+            // 'phone'        => $request['phone'],
+            // 'email'        => $request['email'],
+            // 'dateStart'    => $request['dateStart'],
+            // 'dateEnd'      => $request['dateEnd'],
+            // 'orderTitle' => $request['orderTitle'],
+            // 'orderType'  => $request['orderType'],
+            // 'passport'   => $request['passport'],
+            // 'comment'      => $request['comment'],
+            // 'cid'          => $request['cid']
         ];
 
         // require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
