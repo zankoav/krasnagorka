@@ -25,6 +25,7 @@ export default class BookingForm extends LightningElement {
 	@api contractOffer;
 	@api dateFrom;
 	@api dateTo;
+	@api objId;
 
 	@track formMessageSuccess;
 	@track formMessageError;
@@ -176,6 +177,7 @@ export default class BookingForm extends LightningElement {
 				"Content-Type": "application/json; charset=utf-8"
 			},
 			body: JSON.stringify({
+				id: this.objId,
 				fio: fio,
 				phone: phone,
 				email: email,

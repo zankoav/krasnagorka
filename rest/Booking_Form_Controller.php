@@ -235,10 +235,10 @@ class Booking_Form_Controller extends WP_REST_Controller
             return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
         }
 
-        $href = 'https://krasnagorka.by/booking-form';
-        $type = 'booking-form';
+
         $data = [
-            'error'=> true,
+            'error' => true,
+            'id'          => $request['id'],
             'fio'          => $request['fio'],
             'phone'        => $request['phone'],
             'email'        => $request['email'],
@@ -252,7 +252,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         ];
 
         // require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+        // $href = 'https://krasnagorka.by/booking-form';
+        // $type = 'booking-form';
         // new AmoIntegration($type, $request['data'], $href);
+
         return new WP_REST_Response($data, 200);
     }
 }
