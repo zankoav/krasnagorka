@@ -312,20 +312,20 @@ class Booking_Form_Controller extends WP_REST_Controller
             if ($this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
                 $result = $request['data'];
 
-                $response = $this->insertWPLead([
-                    "type" => "reserved",
-                    "objectIds" => [$calendarId],
-                    "dateFrom" => $dateStart,
-                    "dateTo" => $dateEnd,
-                    "comment" => $request['comment'],
-                    "contactName" => $request['fio'],
-                    "contactPhone" => $request['phone'],
-                    "contactEmail" => $request['email']
-                ]);
-                $result = $response['status'] === 'success';
-                if ($result) {
-                    $request['data'] .= '&orderId=' . $response['orderId'];
-                }
+                // $response = $this->insertWPLead([
+                //     "type" => "reserved",
+                //     "objectIds" => [$calendarId],
+                //     "dateFrom" => $dateStart,
+                //     "dateTo" => $dateEnd,
+                //     "comment" => $request['comment'],
+                //     "contactName" => $request['fio'],
+                //     "contactPhone" => $request['phone'],
+                //     "contactEmail" => $request['email']
+                // ]);
+                // $result = $response['status'] === 'success';
+                // if ($result) {
+                //     $request['data'] .= '&orderId=' . $response['orderId'];
+                // }
             } else {
                 $result = false;
             }
