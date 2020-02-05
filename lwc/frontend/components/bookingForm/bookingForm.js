@@ -200,10 +200,7 @@ export default class BookingForm extends LightningElement {
 			.then(result => {
 				console.log("result", result);
 				this.isLoading = false;
-				if (result && result.error) {
-					this.formMessageSuccess = null;
-					this.formMessageError = `Извините! Выбранные Вами даты заняты. Выберите свободный интервал.`;
-				} else {
+				if (result) {
 					this.formMessageSuccess =
 						"Поздравляем! Вы успешно выполнили бронь. Наш сотрудник скоро свяжется с вами для уточнения деталей";
 					this.dateStart.value = null;
@@ -217,6 +214,9 @@ export default class BookingForm extends LightningElement {
 					setCookie("kg_name", fio, { "max-age": MAX_AGE });
 					setCookie("kg_phone", phone, { "max-age": MAX_AGE });
 					setCookie("kg_email", email, { "max-age": MAX_AGE });
+				} else {
+					this.formMessageSuccess = null;
+					this.formMessageError = `Извините! Выбранные Вами даты заняты. Выберите свободный интервал.`;
 				}
 			})
 			.catch(() => {

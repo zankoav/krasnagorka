@@ -226,6 +226,65 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
+    private function isAvailableOrder($calendarId, $dateStart, $dateEnd)
+    {
+        $result = false;
+
+        if (isset($calendarId, $dateStart, $dateEnd)) {
+            $result = true;
+            $ordersQuery = new WP_Query;
+            $orders = $ordersQuery->query(array(
+                'post_type' => 'sbc_orders',
+                'posts_per_page' => -1,
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'sbc_calendars',
+                        'terms' => [$calendarId]
+                    ]
+                ],
+                'meta_query' => array(
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $dateStart,
+                        'compare' => '>=',
+                    )
+                )
+            ));
+
+            $parseResult = [];
+
+            foreach ($orders  as $order) {
+                $orderId = $order->ID;
+                $start = get_post_meta($orderId, 'sbc_order_start', true);
+                $startTime = strtotime($start);
+                $start = date('Y-m-d', $startTime);
+                $end = get_post_meta($orderId, 'sbc_order_end', true);
+                $endTime = strtotime($end);
+                $end = date('Y-m-d', $endTime);
+                $parseResult[] = [$start, $end];
+            }
+
+            foreach ($parseResult as $r) {
+                $from = $r[0];
+                $to = $r[1];
+
+                if ($dateStart >= $from and $dateStart < $to) {
+                    $result = false;
+                }
+
+                if ($dateEnd >= $from and $dateEnd < $to) {
+                    $result = false;
+                }
+
+                if ($dateStart < $from and $dateEnd > $to) {
+                    $result = false;
+                }
+            }
+        }
+
+        return $result;
+    }
+
     public function create_order($request)
     {
 
@@ -235,90 +294,43 @@ class Booking_Form_Controller extends WP_REST_Controller
             return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
         }
 
-        // $houseId = $request['id'];
-        // $calendarShortCode = get_post_meta($houseId, "mastak_house_calendar", 1);
-        // $calendarShortCodeArr = explode("\"", $calendarShortCode);
-        // $dateStart = $request['dateStart'];
-        // $dateEnd = $request['dateEnd'];
-        // $ordersQuery = new WP_Query;
+        $result = true;
+        $calendarId = $request['id'];
+        $dateStart = $request['dateStart'];
+        $dateEnd = $request['dateEnd'];
+        $isHouse = $request['orderType'] === 'Домик:';
 
-        // // делаем запрос
-        // $orders = $ordersQuery->query(array(
-        //     'post_type' => 'sbc_orders',
-        //     'posts_per_page' => -1,
-        //     'tax_query' => [
-        //         [
-        //             'taxonomy' => 'sbc_calendars',
-        //             'terms' => [$calendarShortCodeArr[1]]
-        //         ]
-        //     ],
-        //     'meta_query' => array(
-        //         array(
-        //             'key'     => 'sbc_order_end',
-        //             'value'   => $dateStart,
-        //             'compare' => '>=',
-        //         )
-        //     )
-        // ));
+        if ($isHouse) {
 
-        // обрабатываем результат
+            if ($this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
+                $result = $request['data'];
 
-        // $result = [];
-
-        // foreach ($orders  as $order) {
-        //     $orderId = $order->ID;
-        //     $start = get_post_meta($orderId, 'sbc_order_start', true);
-        //     $startTime = strtotime($start);
-        //     $start = date('Y-m-d', $startTime);
-        //     $end = get_post_meta($orderId, 'sbc_order_end', true);
-        //     $endTime = strtotime($end);
-        //     $end = date('Y-m-d', $endTime);
-        //     $result[] = [$start, $end];
-        // }
-
-        $data = [];
-
-        // foreach ($result as $result) {
-        //     $from = $result[0];
-        //     $to = $result[1];
-
-        //     if ($dateStart >= $from and $dateStart < $to) {
-        //         $data["error"] = true;
-        //     }
-
-        //     if ($dateEnd >= $from and $dateEnd < $to) {
-        //         $data["error"] = true;
-        //     }
-
-        //     if ($dateStart < $from and $dateEnd > $to) {
-        //         $data["error"] = true;
-        //     }
-        // }
-
-        if (isset($data["error"])) {
-            return new WP_REST_Response($data, 200);
-        } else {
-            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-            $href = 'https://krasnagorka.by/booking-form';
-            $type = 'booking-form';
-            new AmoIntegration($type, $request['data'], $href);
-
-            // TODO: create new order and send to AmoCRM
-            // $data = [
-            // 'id'          => $request['id'],
-            // 'fio'          => $request['fio'],
-            // 'phone'        => $request['phone'],
-            // 'email'        => $request['email'],
-            // 'dateStart'    => $request['dateStart'],
-            // 'dateEnd'      => $request['dateEnd'],
-            // 'orderTitle' => $request['orderTitle'],
-            // 'orderType'  => $request['orderType'],
-            // 'passport'   => $request['passport'],
-            // 'comment'      => $request['comment'],
-            // 'cid'          => $request['cid']
-            // ];
-
-            return new WP_REST_Response($data, 200);
+                // TODO: create new order
+                // $data = [
+                // 'id'          => $request['id'],
+                // 'fio'          => $request['fio'],
+                // 'phone'        => $request['phone'],
+                // 'email'        => $request['email'],
+                // 'dateStart'    => $request['dateStart'],
+                // 'dateEnd'      => $request['dateEnd'],
+                // 'orderTitle' => $request['orderTitle'],
+                // 'orderType'  => $request['orderType'],
+                // 'passport'   => $request['passport'],
+                // 'comment'      => $request['comment'],
+                // 'cid'          => $request['cid']
+                // ];
+            } else {
+                $result = false;
+            }
         }
+
+        // if ($result) {
+        //     require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+        //     $href = 'https://krasnagorka.by/booking-form';
+        //     $type = 'booking-form';
+        //     new AmoIntegration($type, $request['data'], $href);
+        // }
+
+        return new WP_REST_Response($result, 200);
     }
 }

@@ -1,35 +1,42 @@
 <?php
 
 
-    if (!defined('ABSPATH')) {
-        exit;
-    }
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-    require __DIR__ . '/backend/Assets.php';
-    require __DIR__ . '/backend/Model.php';
+require __DIR__ . '/backend/Assets.php';
+require __DIR__ . '/backend/Model.php';
 
-    $assets = new Assets();
-    $model  = new Model();
+$assets = new Assets();
+$model  = new Model();
 
-    add_action('admin_enqueue_scripts', 'load_admin_style');
-    function load_admin_style() {
-        wp_enqueue_style('admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0');
-    }
+add_action('admin_enqueue_scripts', 'load_admin_style');
+function load_admin_style()
+{
+    wp_enqueue_style('admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0');
+}
 
 
-    // for delete
+// for delete
 
-    if (!isset($content_width)) {
-        $content_width = 1200; /* pixels */
-    }
-    require __DIR__ . '/inc/calendar/init.php';
-    require __DIR__ . '/mastak/init.php';
-    require __DIR__ . '/rest/Booking_Form_Controller.php';
+if (!isset($content_width)) {
+    $content_width = 1200; /* pixels */
+}
+require __DIR__ . '/inc/calendar/init.php';
+require __DIR__ . '/mastak/init.php';
+require __DIR__ . '/rest/Booking_Form_Controller.php';
 
-    add_action('rest_api_init', function () {
-        $booking_form_controller = new Booking_Form_Controller();
-        $booking_form_controller->register_routes();
-    });
+add_action('rest_api_init', function () {
+    $booking_form_controller = new Booking_Form_Controller();
+    $booking_form_controller->register_routes();
+});
+
+function getCalendarId($calendarShortCode)
+{
+    $arr = explode("\"", $calendarShortCode);
+    return $arr[1];
+}
 
     //    add_filter('wpseo_schema_graph_pieces', function ($pieces, $context) {
     //
