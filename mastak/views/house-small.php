@@ -95,14 +95,18 @@ if (!$isTerem) {
                 <a href="<?= get_the_permalink(); ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray">
                     подробнее
                 </a>
-                <a href="/booking-form/?booking=<?= get_the_ID(); ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button b-ml-2" target="_blank">
-                    забронировать
-                </a>
+
                 <?php if ($isTerem) : ?>
+                    <a href="/booking-form/?booking=<?= get_the_ID(); ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button b-ml-2" target="_blank">
+                        забронировать
+                    </a>
                     <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray b-ml-2">
                         занятость номеров
                     </a>
                 <?php else : ?>
+                    <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" data-cd="<?= $calendarId; ?>" class="our-house__button b-ml-2" target="_blank">
+                        забронировать
+                    </a>
                     <a href="#" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>' class="our-house__button our-house__button--green booking-houses__calendars-button b-ml-2">
                         Показать календарь
                     </a>
@@ -117,7 +121,7 @@ if (!$isTerem) {
                 <div class="our-house__calendar">
                     <div class="booking-houses__calendars-inner"></div>
                 </div>
-                <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button our-house__button_media_xs" target="_blank">
+                <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button our-house__button_media_xs" target="_blank">
                     забронировать
                 </a>
             </div>

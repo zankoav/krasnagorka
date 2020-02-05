@@ -88,7 +88,8 @@ function loadCalendar() {
 		jQuery("[data-name]").each(function(index) {
 			const item = jQuery(this);
 			const bookingId = jQuery(item).data("id");
-			const baseHref = `/booking-form/?booking=${bookingId}`;
+			const calendarId = jQuery(item).data("cd");
+			const baseHref = `/booking-form/?booking=${bookingId}&calendarId=${calendarId}`;
 			jQuery(item).attr("href", baseHref);
 		});
 
@@ -361,7 +362,11 @@ function loadCalendar() {
 							const bookingId = jQuery($orderButton[0]).data(
 								"id"
 							);
-							let baseHref = `/booking-form/?booking=${bookingId}&from=${jsFromDate.d}&to=${jsToDate.d}`;
+							const calendarId = jQuery($orderButton[0]).data(
+								"cd"
+							);
+
+							let baseHref = `/booking-form/?booking=${bookingId}&calendarId=${calendarId}&from=${jsFromDate.d}&to=${jsToDate.d}`;
 							if (
 								jQuery($orderButton[0]).hasClass("is-terem-js")
 							) {
