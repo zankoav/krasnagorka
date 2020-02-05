@@ -154,6 +154,9 @@
                                             <?php endif; ?>
                                     </p>
                                 </div>
+                                <?php 
+                                    $calendarTeremId = getCalendarId($kalendar['calendar']);
+                                ?>
                                 <div class="booking-houses__calendars">
                                     <div class="booking-houses__calendars-inner">
                                         <a href="#" data-calendar='<?= $kalendar['calendar']; ?>'
@@ -161,9 +164,10 @@
                                             Показать календарь
                                         </a>
                                     </div>
-                                    <a href="/booking-form/?booking=<?= get_the_ID() ?>&terem=<?= $kalendar['title']; ?>"
+                                    <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?=$calendarTeremId;?>&terem=<?= $kalendar['title']; ?>"
                                        data-name="<?= $kalendar['title']; ?>"
                                        data-id="<?=get_the_ID();?>"
+                                       data-cd="<?= $calendarTeremId;?>"
                                        target="_blank"
                                        class="is-terem-js our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
                                         забронировать
