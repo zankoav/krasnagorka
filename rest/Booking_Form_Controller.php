@@ -324,7 +324,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 ]);
                 $result = $response['status'] === 'success';
                 if ($result) {
-                    $request['data'] .= '&orederId=' . $response['orederId'];
+                    $request['data'] .= '&orderId=' . $response['orderId'];
                 }
             } else {
                 $result = false;
