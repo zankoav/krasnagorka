@@ -272,7 +272,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $result = false;
                 }
 
-                if ($dateEnd >= $from and $dateEnd < $to) {
+                if ($dateEnd > $from and $dateEnd <= $to) {
                     $result = false;
                 }
 
