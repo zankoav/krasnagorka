@@ -46,6 +46,13 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function booking_lead($request)
     {
+        $response = $this->insertWPLead($request);
+        return new WP_REST_Response($response, 200);
+    }
+
+    private function insertWPLead($request)
+    {
+
         $type     = $request['type'];
         $orderId  = $request['orderId'];
         $response = ['status' => 'error'];
@@ -155,7 +162,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $response['status'] = 'success';
 
-        return new WP_REST_Response($response, 200);
+        return $response;
     }
 
     private function update_all_clients_orders($clientId, $contactTemplate)
@@ -305,31 +312,28 @@ class Booking_Form_Controller extends WP_REST_Controller
             if ($this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
                 $result = $request['data'];
 
-                // TODO: create new order
-                // $data = [
-                // 'id'          => $request['id'],
-                // 'fio'          => $request['fio'],
-                // 'phone'        => $request['phone'],
-                // 'email'        => $request['email'],
-                // 'dateStart'    => $request['dateStart'],
-                // 'dateEnd'      => $request['dateEnd'],
-                // 'orderTitle' => $request['orderTitle'],
-                // 'orderType'  => $request['orderType'],
-                // 'passport'   => $request['passport'],
-                // 'comment'      => $request['comment'],
-                // 'cid'          => $request['cid']
-                // ];
+                $response = $this->insertWPLead([
+                    "type" => "reserved",
+                    "objectIds" => [$calendarId],
+                    "dateFrom" => $dateStart,
+                    "dateTo" => $dateEnd,
+                    "comment" => $request['comment'],
+                    "contactName" => $request['fio'],
+                    "contactPhone" => $request['phone'],
+                    "contactEmail" => $request['email']
+                ]);
+                $result = $response['status'] === 'success';
             } else {
                 $result = false;
             }
         }
 
-        // if ($result) {
-        //     require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-        //     $href = 'https://krasnagorka.by/booking-form';
-        //     $type = 'booking-form';
-        //     new AmoIntegration($type, $request['data'], $href);
-        // }
+        if ($result) {
+            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+            $href = 'https://krasnagorka.by/booking-form';
+            $type = 'booking-form';
+            new AmoIntegration($type, $request['data'], $href);
+        }
 
         return new WP_REST_Response($result, 200);
     }
