@@ -323,6 +323,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                     "contactEmail" => $request['email']
                 ]);
                 $result = $response['status'] === 'success';
+                if ($result) {
+                    $request['data'] .= '&orederId=' . $response['orederId'];
+                }
             } else {
                 $result = false;
             }
