@@ -89,7 +89,11 @@ function loadCalendar() {
 			const item = jQuery(this);
 			const bookingId = jQuery(item).data("id");
 			const calendarId = jQuery(item).data("cd");
+			const title = jQuery(item).data("name");
 			const baseHref = `/booking-form/?booking=${bookingId}&calendarId=${calendarId}`;
+			if (jQuery(item).hasClass("is-terem-js")) {
+				baseHref += `&terem=${title}`;
+			}
 			jQuery(item).attr("href", baseHref);
 		});
 

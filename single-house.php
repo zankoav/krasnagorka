@@ -356,7 +356,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             <a href="/booking-form/?booking=<?= get_the_ID(); ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="is-terem-js house-booking__button terem-button">забронировать
                             </a>
                         <?php else : ?>
-                            <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="house-booking__button terem-button">забронировать
+                            <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="house-booking__button">забронировать
                             </a>
                         <?php endif; ?>
                     </footer>
