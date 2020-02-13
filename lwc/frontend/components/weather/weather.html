@@ -9,15 +9,15 @@
             </div>
         </div>
         <ul class="weather__future">
-            <li class="weather__future-item" data-week-day={weather.firstDay.day}>
+            <li if:true={weather.firstDay} class="weather__future-item" data-week-day={weather.firstDay.day}>
                 <img src={weather.firstDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
-            <li class="weather__future-item" data-week-day={weather.secondDay.day}>
+            <li if:true={weather.secondDay}  class="weather__future-item" data-week-day={weather.secondDay.day}>
                 <img src={weather.secondDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
-            <li class="weather__future-item" data-week-day={weather.thirdDay.day}>
+            <li if:true={weather.thirdDay}  class="weather__future-item" data-week-day={weather.thirdDay.day}>
                 <img src={weather.thirdDay.icon} alt="weather"
                      class="weather__future-icon">
             </li>
