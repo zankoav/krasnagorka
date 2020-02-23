@@ -1,3 +1,8 @@
+$.noConflict();
+jQuery(document).ready(function($) {
+	console.log("jquery is ready", $);
+});
+
 var targetMargin, scriptFullCalendar, scriptLocalCalendar, month, $activeButton;
 var year = new Date().getFullYear();
 var _startDate = "";
@@ -103,31 +108,6 @@ function loadCalendar() {
 			jQuery($teremButton[0]).attr("href", baseHref);
 		}
 	}
-
-	// function setDateWithTimeOut() {
-	// 	setTimeout(function() {
-	// 		const msg = $textHelper.data("helper-start");
-	// 		jQuery(".select-helper__text")
-	// 			.removeClass("select-helper__text_success")
-	// 			.html(msg);
-
-	// 		jQuery(".our-house__button[data-name]").each(function(index) {
-	// 			const item = jQuery(this);
-	// 			const bookingId = jQuery(item).data("id");
-	// 			const baseHref = `/booking-form/?booking=${bookingId}`;
-	// 			jQuery(item).attr("href", baseHref);
-	// 		});
-
-	// 		if ($teremButton.length) {
-	// 			const bookingId = jQuery($teremButton[0]).data("id");
-	// 			const baseHref = `/booking-form/?booking=${bookingId}`;
-	// 			jQuery($teremButton[0]).attr("href", baseHref);
-	// 		}
-	// 	}, 40);
-	// }
-
-	// jQuery(".house-booking__button").on("click", setDateWithTimeOut);
-	// $orderButton.on("click", setDateWithTimeOut);
 	jQuery(this).remove();
 
 	jQuery.ajax(kg_ajax.url, {
@@ -190,97 +170,6 @@ function loadCalendar() {
 							console.log("Ошибка загрузки данных");
 						}
 					},
-
-					// selectAllow: function(selectInfo) {
-					// 	var selectAllowStartDate = selectInfo.start.format(
-					// 		"YYYY-MM-DD"
-					// 	);
-					// 	var selectAllowEndDate = selectInfo.end.format(
-					// 		"YYYY-MM-DD"
-					// 	);
-					// 	return checkDateRange(
-					// 		events,
-					// 		selectAllowStartDate,
-					// 		selectAllowEndDate
-					// 	);
-					// },
-					// unselect: function(event) {
-					// 	$textHelper
-					// 		.removeClass("select-helper__text_success")
-					// 		.html($textHelper.data("helper-start"));
-
-					// 	if (
-					// 		event &&
-					// 		event.target != $orderButton[0] &&
-					// 		event.target != $orderButton[1]
-					// 	) {
-					// 		const bookingId = jQuery($orderButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
-					// 		jQuery($orderButton[0]).attr("href", baseHref);
-					// 		jQuery($orderButton[1]).attr("href", baseHref);
-					// 	}
-
-					// 	if (
-					// 		$teremButton.length &&
-					// 		event &&
-					// 		!event.target.classList.contains("terem-button")
-					// 	) {
-					// 		const bookingId = jQuery($teremButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		const baseHref = `/booking-form/?booking=${bookingId}`;
-					// 		jQuery($teremButton[0]).attr("href", baseHref);
-					// 	}
-					// },
-					// select: function(startDate, endDate) {
-					// 	var start = startDate.format();
-					// 	var end = endDate.subtract(1, "days").format();
-
-					// 	if (start === end) {
-					// 		_startDate = null;
-					// 		_endDate = null;
-					// 		$calendar.fullCalendar("unselect");
-					// 	} else {
-					// 		_startDate = start;
-					// 		_endDate = end;
-					// 		$textHelper
-					// 			.addClass("select-helper__text_success")
-					// 			.html($textHelper.data("helper"));
-					// 		buttonAnimate($orderButton);
-
-					// 		const bookingId = jQuery($orderButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-					// 		if (
-					// 			jQuery($orderButton[0]).hasClass("is-terem-js")
-					// 		) {
-					// 			const titleTerem = jQuery($orderButton[0]).data(
-					// 				"name"
-					// 			);
-					// 			baseHref += `&terem=${titleTerem}`;
-					// 		}
-					// 		jQuery($orderButton[0]).attr("href", baseHref);
-					// 		jQuery($orderButton[1]).attr("href", baseHref);
-					// 	}
-
-					// 	if ($teremButton.length) {
-					// 		_title = $title.html();
-
-					// 		const bookingId = jQuery($teremButton[0]).data(
-					// 			"id"
-					// 		);
-					// 		let baseHref = `/booking-form/?booking=${bookingId}&from=${_startDate}&to=${_endDate}`;
-					// 		if (
-					// 			jQuery($teremButton[0]).hasClass("is-terem-js")
-					// 		) {
-					// 			baseHref += `&terem=${_title}`;
-					// 		}
-					// 		jQuery($teremButton[0]).attr("href", baseHref);
-					// 	}
-					// }
 					eventAfterAllRender: function() {
 						if (jsFromDate) {
 							var element = document.querySelector(
