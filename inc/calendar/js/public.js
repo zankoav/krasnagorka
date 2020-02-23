@@ -259,10 +259,23 @@ jQuery(document).ready(function($) {
 							}
 
 							if (jsFromDate && jsToDate) {
+								const fromDateClearFormat = new moment(
+									jsFromDate.d,
+									"YYYY-MM-DD"
+								);
+
+								const toDateClearFormat = new moment(
+									jsToDate.d,
+									"YYYY-MM-DD"
+								);
 								$textHelper
 									.addClass("select-helper__text_success")
 									.html(
-										`Дата бронирования:<br>${jsFromDate.d} &mdash; ${jsToDate.d}`
+										`Дата бронирования:<br>${fromDateClearFormat.format(
+											"DD-MM-YYYY"
+										)}} &mdash; ${toDateClearFormat.format(
+											"DD-MM-YYYY"
+										)}}`
 									);
 								buttonAnimate($orderButton);
 
@@ -285,9 +298,18 @@ jQuery(document).ready(function($) {
 									$($orderButton[1]).attr("href", baseHref);
 								}
 							} else if (jsFromDate) {
+								const fromDateClearFormat = new moment(
+									jsFromDate.d,
+									"YYYY-MM-DD"
+								);
+
 								$textHelper
 									.removeClass("select-helper__text_success")
-									.html(`Заезд: ${jsFromDate.d}`);
+									.html(
+										`Заезд: ${fromDateClearFormat.format(
+											"DD-MM-YYYY"
+										)}`
+									);
 							} else {
 								$textHelper
 									.removeClass("select-helper__text_success")
