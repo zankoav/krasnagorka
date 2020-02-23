@@ -261,8 +261,8 @@ jQuery(document).ready(function($) {
 									$(jsToDate.el)
 										.css("background-color", "initial")
 										.empty();
-									fillSells();
 									jsToDate = null;
+									fillSells();
 								}
 							}
 
