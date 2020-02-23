@@ -221,6 +221,7 @@ jQuery(document).ready(function($) {
 								initFrom(d, this);
 							} else if (currentCalendarId != data.id) {
 								clearAll();
+								fillSells();
 								currentCalendarId = data.id;
 								initFrom(d, this);
 							} else {
@@ -228,6 +229,7 @@ jQuery(document).ready(function($) {
 									initFrom(d, this);
 								} else if (jsFromDate && jsFromDate.d === d) {
 									clearAll();
+									fillSells();
 								} else if (
 									jsFromDate &&
 									!jsToDate &&
@@ -238,6 +240,7 @@ jQuery(document).ready(function($) {
 									$(jsToDate.el)
 										.css("background-color", "#bce8f1")
 										.append(createButtonFrom());
+									fillSells();
 								} else if (
 									jsFromDate &&
 									jsToDate &&
@@ -252,10 +255,13 @@ jQuery(document).ready(function($) {
 									$(jsToDate.el)
 										.css("background-color", "#bce8f1")
 										.append(createButtonFrom());
+
+									fillSells();
 								} else if (jsToDate && jsToDate.d === d) {
 									$(jsToDate.el)
 										.css("background-color", "initial")
 										.empty();
+									fillSells();
 									jsToDate = null;
 								}
 							}
@@ -359,35 +365,6 @@ jQuery(document).ready(function($) {
 		}, 1200);
 	}
 
-	// function checkDateRange(events, startDate, endDate) {
-	// 	var result = true;
-
-	// 	if (startDate > endDate) {
-	// 		var tempDate = startDate;
-	// 		startDate = endDate;
-	// 		endDate = tempDate;
-	// 	}
-
-	// 	for (var i = 0; i < events.length; i++) {
-	// 		var event = events[i];
-	// 		var startEvent = jQuery.fullCalendar
-	// 			.moment(event.start, "YYYY-MM-DD")
-	// 			.add(1, "day")
-	// 			.format("YYYY-MM-DD");
-	// 		var endEvent = jQuery.fullCalendar
-	// 			.moment(event.end, "YYYY-MM-DD")
-	// 			.subtract(1, "days")
-	// 			.format("YYYY-MM-DD");
-
-	// 		if (startDate < endEvent && endDate > startEvent) {
-	// 			result = false;
-	// 			break;
-	// 		}
-	// 	}
-
-	// 	return result;
-	// }
-
 	function checkStartDate(events, startDate) {
 		var result = true;
 
@@ -430,5 +407,10 @@ jQuery(document).ready(function($) {
 		}
 
 		return result;
+	}
+
+	function fillSells() {
+		console.log("from", jsFromDate);
+		console.log("to", jsToDate);
 	}
 });
