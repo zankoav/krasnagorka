@@ -678,6 +678,10 @@ if (is_page_template("template-mastak-map.php")) : ?>
     .our-house__button_mt_15 {
         margin-top: 1.5rem;
     }
+
+    .cell-between {
+        background-color: rgb(188, 232, 241);
+    }
 </style>
 
 <script>

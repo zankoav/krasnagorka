@@ -213,7 +213,7 @@ jQuery(document).ready(function($) {
 								}
 							}
 
-							fillSells();
+							fillCells();
 						},
 						dayClick: function(date, jsEvent, view) {
 							setDate();
@@ -223,7 +223,7 @@ jQuery(document).ready(function($) {
 								initFrom(d, this);
 							} else if (currentCalendarId != data.id) {
 								clearAll();
-								fillSells();
+								fillCells();
 								currentCalendarId = data.id;
 								initFrom(d, this);
 							} else {
@@ -231,7 +231,7 @@ jQuery(document).ready(function($) {
 									initFrom(d, this);
 								} else if (jsFromDate && jsFromDate.d === d) {
 									clearAll();
-									fillSells();
+									fillCells();
 								} else if (
 									jsFromDate &&
 									!jsToDate &&
@@ -242,7 +242,7 @@ jQuery(document).ready(function($) {
 									$(jsToDate.el)
 										.css("background-color", "#bce8f1")
 										.append(createButtonFrom());
-									fillSells();
+									fillCells();
 								} else if (
 									jsFromDate &&
 									jsToDate &&
@@ -258,13 +258,13 @@ jQuery(document).ready(function($) {
 										.css("background-color", "#bce8f1")
 										.append(createButtonFrom());
 
-									fillSells();
+									fillCells();
 								} else if (jsToDate && jsToDate.d === d) {
 									$(jsToDate.el)
 										.css("background-color", "initial")
 										.empty();
 									jsToDate = null;
-									fillSells();
+									fillCells();
 								}
 							}
 
@@ -411,8 +411,22 @@ jQuery(document).ready(function($) {
 		return result;
 	}
 
-	function fillSells() {
-		console.log("from", jsFromDate);
-		console.log("to", jsToDate);
+	function fillCells() {
+		if (sells) {
+			$(`#calendar_${currentCalendarId} .cell-between`).removeClass(
+				"cell-between"
+			);
+		}
+		if (jsToDate) {
+			$(`#calendar_${currentCalendarId} .fc-day[data-date]`).each(
+				function() {
+					const $item = $(this);
+					const dateStr = $item.data("date");
+					if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
+						$item.addClass("cell-between");
+					}
+				}
+			);
+		}
 	}
 });
