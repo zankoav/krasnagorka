@@ -412,11 +412,9 @@ jQuery(document).ready(function($) {
 	}
 
 	function fillCells() {
-		if (sells) {
-			$(`#calendar_${currentCalendarId} .cell-between`).removeClass(
-				"cell-between"
-			);
-		}
+		$(`#calendar_${currentCalendarId} .cell-between`).removeClass(
+			"cell-between"
+		);
 		if (jsToDate) {
 			$(`#calendar_${currentCalendarId} .fc-day[data-date]`).each(
 				function() {
