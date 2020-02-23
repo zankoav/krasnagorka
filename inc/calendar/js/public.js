@@ -194,7 +194,7 @@ jQuery(document).ready(function($) {
 										el: element
 									};
 									$(jsFromDate.el)
-										.css("background-color", "#bce8f1")
+										.addClass("cell-between")
 										.empty()
 										.append(createButtonFrom(true));
 								}
@@ -207,7 +207,7 @@ jQuery(document).ready(function($) {
 								if (element) {
 									jsToDate = { d: jsToDate.d, el: element };
 									$(jsToDate.el)
-										.css("background-color", "#bce8f1")
+										.addClass("cell-between")
 										.empty()
 										.append(createButtonFrom());
 								}
@@ -240,7 +240,7 @@ jQuery(document).ready(function($) {
 								) {
 									jsToDate = { d: d, el: this };
 									$(jsToDate.el)
-										.css("background-color", "#bce8f1")
+										.addClass("cell-between")
 										.append(createButtonFrom());
 									fillCells();
 								} else if (
@@ -251,17 +251,17 @@ jQuery(document).ready(function($) {
 									checkDateRange2(events, jsFromDate.d, d)
 								) {
 									$(jsToDate.el)
-										.css("background-color", "initial")
+										.removeClass("cell-between")
 										.empty();
 									jsToDate = { d: d, el: this };
 									$(jsToDate.el)
-										.css("background-color", "#bce8f1")
+										.addClass("cell-between")
 										.append(createButtonFrom());
 
 									fillCells();
 								} else if (jsToDate && jsToDate.d === d) {
 									$(jsToDate.el)
-										.css("background-color", "initial")
+										.removeClass("cell-between")
 										.empty();
 									jsToDate = null;
 									fillCells();
@@ -314,7 +314,7 @@ jQuery(document).ready(function($) {
 						) {
 							jsFromDate = { d: d, el: el };
 							$(jsFromDate.el)
-								.css("background-color", "#bce8f1")
+								.addClass("cell-between")
 								.append(createButtonFrom(true));
 						}
 					}
@@ -322,12 +322,12 @@ jQuery(document).ready(function($) {
 					function clearAll() {
 						if (jsToDate) {
 							$(jsToDate.el)
-								.css("background-color", "initial")
+								.removeClass("cell-between")
 								.empty();
 						}
 						if (jsFromDate) {
 							$(jsFromDate.el)
-								.css("background-color", "initial")
+								.removeClass("cell-between")
 								.empty();
 						}
 						jsToDate = null;
