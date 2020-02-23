@@ -1,9 +1,7 @@
-console.log("jquery before");
-// $.noConflict();
+$.noConflict();
 jQuery(document).ready(function($) {
 	console.log("jquery is ready", $);
 });
-console.log("jquery after");
 
 var targetMargin, scriptFullCalendar, scriptLocalCalendar, month, $activeButton;
 var year = new Date().getFullYear();
