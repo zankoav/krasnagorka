@@ -309,14 +309,10 @@ jQuery(document).ready(function($) {
 
 					function clearAll() {
 						if (jsToDate) {
-							$(jsToDate.el)
-								.removeClass("cell-between")
-								.empty();
+							$(jsToDate.el).removeClass("cell-range");
 						}
 						if (jsFromDate) {
-							$(jsFromDate.el)
-								.removeClass("cell-between")
-								.empty();
+							$(jsFromDate.el).removeClass("cell-range");
 						}
 						jsToDate = null;
 						jsFromDate = null;
