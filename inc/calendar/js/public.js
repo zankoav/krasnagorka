@@ -193,10 +193,7 @@ jQuery(document).ready(function($) {
 										d: jsFromDate.d,
 										el: element
 									};
-									$(jsFromDate.el)
-										.addClass("cell-between")
-										.empty()
-										.append(createButtonFrom(true));
+									$(jsFromDate.el).addClass("cell-range");
 								}
 							}
 
@@ -206,10 +203,7 @@ jQuery(document).ready(function($) {
 								);
 								if (element) {
 									jsToDate = { d: jsToDate.d, el: element };
-									$(jsToDate.el)
-										.addClass("cell-between")
-										.empty()
-										.append(createButtonFrom());
+									$(jsToDate.el).addClass("cell-range");
 								}
 							}
 
@@ -239,9 +233,7 @@ jQuery(document).ready(function($) {
 									checkDateRange2(events, jsFromDate.d, d)
 								) {
 									jsToDate = { d: d, el: this };
-									$(jsToDate.el)
-										.addClass("cell-between")
-										.append(createButtonFrom());
+									$(jsToDate.el).addClass("cell-range");
 									fillCells();
 								} else if (
 									jsFromDate &&
@@ -251,17 +243,15 @@ jQuery(document).ready(function($) {
 									checkDateRange2(events, jsFromDate.d, d)
 								) {
 									$(jsToDate.el)
-										.removeClass("cell-between")
+										.removeClass("cell-range")
 										.empty();
 									jsToDate = { d: d, el: this };
-									$(jsToDate.el)
-										.addClass("cell-between")
-										.append(createButtonFrom());
+									$(jsToDate.el).addClass("cell-range");
 
 									fillCells();
 								} else if (jsToDate && jsToDate.d === d) {
 									$(jsToDate.el)
-										.removeClass("cell-between")
+										.removeClass("cell-range")
 										.empty();
 									jsToDate = null;
 									fillCells();
@@ -313,9 +303,7 @@ jQuery(document).ready(function($) {
 							checkStartDate(events, d)
 						) {
 							jsFromDate = { d: d, el: el };
-							$(jsFromDate.el)
-								.addClass("cell-between")
-								.append(createButtonFrom(true));
+							$(jsFromDate.el).addClass("cell-range");
 						}
 					}
 
@@ -332,16 +320,6 @@ jQuery(document).ready(function($) {
 						}
 						jsToDate = null;
 						jsFromDate = null;
-					}
-
-					function createButtonFrom(isFrom) {
-						var wrapper = document.createElement("div");
-						wrapper.setAttribute(
-							"style",
-							"transform: translateY(100%);color:#d0021b;"
-						);
-						wrapper.innerHTML = isFrom ? "Заезд" : "Выезд";
-						return wrapper;
 					}
 
 					var isAdmin = document.getElementById("wpadminbar");
