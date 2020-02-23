@@ -1,5 +1,5 @@
 console.log("jquery before");
-$.noConflict();
+// $.noConflict();
 jQuery(document).ready(function($) {
 	console.log("jquery is ready", $);
 });
