@@ -212,6 +212,8 @@ jQuery(document).ready(function($) {
 										.append(createButtonFrom());
 								}
 							}
+
+							fillSells();
 						},
 						dayClick: function(date, jsEvent, view) {
 							setDate();
