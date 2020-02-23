@@ -273,9 +273,9 @@ jQuery(document).ready(function($) {
 									.html(
 										`Дата бронирования:<br>${fromDateClearFormat.format(
 											"DD-MM-YYYY"
-										)}} &mdash; ${toDateClearFormat.format(
+										)} &mdash; ${toDateClearFormat.format(
 											"DD-MM-YYYY"
-										)}}`
+										)}`
 									);
 								buttonAnimate($orderButton);
 
