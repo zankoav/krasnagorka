@@ -679,7 +679,8 @@ if (is_page_template("template-mastak-map.php")) : ?>
         margin-top: 1.5rem;
     }
 
-    .cell-between {
+    .cell-between,
+    .cell-range {
         background-color: rgb(188, 232, 241);
     }
 </style>
