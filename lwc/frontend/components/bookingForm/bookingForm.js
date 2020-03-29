@@ -23,8 +23,8 @@ export default class BookingForm extends LightningElement {
 	@api objectType;
 	@api objectTitle;
 	@api contractOffer;
-	@api dateFrom = '';
-	@api dateTo = '';
+	@api dateFrom = "";
+	@api dateTo = "";
 	@api objId;
 
 	@track formMessageSuccess;
@@ -58,8 +58,9 @@ export default class BookingForm extends LightningElement {
 		this.email = this.template.querySelector('[name="email"]');
 		this.dateStart = this.template.querySelector('[name="date-start"]');
 		this.dateEnd = this.template.querySelector('[name="date-end"]');
-		$(this.dateStart).datepicker();
-		$(this.dateEnd).datepicker();
+		$('[name="date-start"]').datepicker();
+		$('[name="date-end"]').datepicker();
+		console.log('render');
 		this.count = this.template.querySelector('[name="count"]');
 		Inputmask({ regex: "^[1-9][0-9]*$", placeholder: "" }).mask(this.count);
 		this.comment = this.template.querySelector('[name="comment"]');
