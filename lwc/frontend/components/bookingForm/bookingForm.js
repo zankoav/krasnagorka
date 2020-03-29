@@ -50,8 +50,8 @@ export default class BookingForm extends LightningElement {
 
 		this.dateStart = this.template.querySelector('[name="date-start"]');
 		this.dateEnd = this.template.querySelector('[name="date-end"]');
-		$(this.dateStart).datepicker();
-		$(this.dateEnd).datepicker();
+		// $(this.dateStart).datepicker();
+		// $(this.dateEnd).datepicker();
 	}
 
 	renderedCallback() {
