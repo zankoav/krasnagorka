@@ -271,7 +271,7 @@ jQuery(document).ready(function($) {
 								$textHelper
 									.addClass("select-helper__text_success")
 									.html(
-										`Дата бронирования:<br>${fromDateClearFormat.format(
+										`Даты бронирования:<br>${fromDateClearFormat.format(
 											"DD-MM-YYYY"
 										)} &mdash; ${toDateClearFormat.format(
 											"DD-MM-YYYY"

@@ -3,6 +3,7 @@
 import { LightningElement, track, api } from "lwc";
 import { getCookie, setCookie } from "../utils/utils";
 import Inputmask from "inputmask";
+import Pikaday from "pikaday";
 import "./bookingForm.scss";
 
 const MAX_AGE = 3600 * 24 * 100;
@@ -19,19 +20,54 @@ const ERROR_HOUSE_EMPTY = "Поле Домик/Мероприятие не за�
 const ERROR_DATE_START_LATE =
 	"Поле Дата заезда должно быть позже сегоднешнего дня";
 
+const i118 = {
+	previousMonth: "Предыдущий",
+	nextMonth: "Следующий",
+	months: [
+		"Январь",
+		"Февраль",
+		"Март",
+		"Апрель",
+		"Май",
+		"Июнь",
+		"Июль",
+		"Август",
+		"Сентябрь",
+		"Октябрь",
+		"Ноябрь",
+		"Декабрь"
+	],
+	weekdays: [
+		"Воскресенье",
+		"Понедельник",
+		"Вторник",
+		"Среда",
+		"Четверг",
+		"Пятница",
+		"Суббота"
+	],
+	weekdaysShort: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"]
+};
+
 export default class BookingForm extends LightningElement {
 	@api objectType;
 	@api objectTitle;
 	@api contractOffer;
-	@api dateFrom = "";
-	@api dateTo = "";
+	@api dateFrom;
+	@api dateTo;
 	@api objId;
 
 	@track formMessageSuccess;
 	@track formMessageError;
 	@track isLoading;
 
+	async skip() {
+		await new Promise(resolve => setImmediate(resolve));
+	}
+
 	async connectedCallback() {
+		this.dateTo = this.dateTo || "";
+		this.dateFrom = this.dateFrom || "";
 		const cid = getCookie("_ga");
 		if (cid) {
 			this.cid = cid.replace(/GA1.2./g, "");
@@ -44,17 +80,36 @@ export default class BookingForm extends LightningElement {
 		if (this.fioValue && this.phoneValue && this.emailValue) {
 			this.isContactsExistsInCookies = true;
 		}
-		await new Promise((resolve, reject) => {
-			setTimeout(resolve, 0);
-		});
-
+		await this.skip();
 		this.dateStart = this.template.querySelector('[name="date-start"]');
 		this.dateEnd = this.template.querySelector('[name="date-end"]');
-		// $(this.dateStart).datepicker();
-		// $(this.dateEnd).datepicker();
-	}
+		this.pikStart = new Pikaday({
+			i18n: i118,
+			field: this.dateStart,
+			format: "YYYY-MM-DD",
+			onSelect: date => {
+				let day = date.getDate();
+				day = day > 9 ? day : `0${day}`;
+				let month = date.getMonth() + 1;
+				month = month > 9 ? month : `0${month}`;
+				const year = date.getFullYear();
+				this.dateFrom = `${year}-${month}-${day}`;
+			}
+		});
+		this.pikEnd = new Pikaday({
+			i18n: i118,
+			field: this.dateEnd,
+			format: "YYYY-MM-DD",
+			onSelect: date => {
+				let day = date.getDate();
+				day = day > 9 ? day : `0${day}`;
+				let month = date.getMonth() + 1;
+				month = month > 9 ? month : `0${month}`;
+				const year = date.getFullYear();
+				this.dateTo = `${year}-${month}-${day}`;
+			}
+		});
 
-	renderedCallback() {
 		this.order = this.template.querySelector('[name="order"]');
 		if (this.order) {
 			Inputmask({ regex: "^[a-zA-Zа-яА-Я0-9\\s]*$" }).mask(this.order);
@@ -82,6 +137,16 @@ export default class BookingForm extends LightningElement {
 	clearError() {
 		this.formMessageError = null;
 		this.formMessageSuccess = null;
+	}
+
+	async showFromPiker() {
+		await this.skip();
+		this.pikStart.show();
+	}
+
+	async showToPiker() {
+		await this.skip();
+		this.pikEnd.show();
 	}
 
 	sendOrder() {
@@ -204,11 +269,10 @@ export default class BookingForm extends LightningElement {
 				return response.json();
 			})
 			.then(result => {
-				console.log("result", result);
 				this.isLoading = false;
 				if (result) {
 					this.formMessageSuccess =
-						"Поздравляем! Вы успешно выполнили бронь. Наш сотрудник скоро свяжется с вами для уточнения деталей";
+						"Поздравляем! Бронирование выполнено успешно. Наш сотрудник скоро свяжется с вами для уточнения деталей";
 					this.dateStart.value = null;
 					this.dateEnd.value = null;
 					this.count.value = null;
@@ -222,7 +286,7 @@ export default class BookingForm extends LightningElement {
 					setCookie("kg_email", email, { "max-age": MAX_AGE });
 				} else {
 					this.formMessageSuccess = null;
-					this.formMessageError = `Извините! Выбранные Вами даты заняты. Выберите свободный интервал.`;
+					this.formMessageError = `Извините! Выбранные даты заняты. Выберите свободный интервал.`;
 				}
 			})
 			.catch(() => {
