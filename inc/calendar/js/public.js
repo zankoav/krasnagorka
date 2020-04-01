@@ -438,8 +438,10 @@ jQuery(document).ready(function($) {
 	}
 
 	function ErrorAlert(message) {
-		this.messageElement = $(`<div class="kg-error-message"><p>${message}</p></div>`);
-		$(body).append(this.messageElement);
+		this.messageElement = $(
+			`<div class="kg-error-message"><p>${message}</p></div>`
+		);
+		$(document).append(this.messageElement);
 		setTimeout(() => {
 			this.messageElement.fadeIn(function() {
 				$(this).remove();
