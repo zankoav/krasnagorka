@@ -441,7 +441,7 @@ jQuery(document).ready(function($) {
 		this.messageElement = $(
 			`<div class="kg-error-message"><p>${message}</p></div>`
 		);
-		$(document).append(this.messageElement);
+		$(document.body).append(this.messageElement);
 		setTimeout(() => {
 			this.messageElement.fadeIn(function() {
 				$(this).remove();
