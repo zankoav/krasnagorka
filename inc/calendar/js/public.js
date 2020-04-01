@@ -259,7 +259,7 @@ jQuery(document).ready(function($) {
 										.empty();
 									jsToDate = null;
 									fillCells();
-								}else if(jsFromDate && jsFromDate.d > d){
+								} else if (jsFromDate && jsFromDate.d > d) {
 									showMessage(message_2);
 								}
 							}
@@ -434,6 +434,16 @@ jQuery(document).ready(function($) {
 	}
 
 	function showMessage(message) {
-		console.log(message);
+		new ErrorAlert(message);
+	}
+
+	function ErrorAlert(message) {
+		this.messageElement = $(`<div class="kg-error-message"><p>${message}</p></div>`);
+		$(body).append(this.messageElement);
+		setTimeout(() => {
+			this.messageElement.fadeIn(function() {
+				$(this).remove();
+			});
+		}, 2000);
 	}
 });
