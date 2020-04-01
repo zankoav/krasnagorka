@@ -193,8 +193,9 @@ if (!defined('ABSPATH')) {
 			background-color: #d0021b;
 			color: #fff;
 			border-radius: 6px;
-			box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .5);
+			box-shadow: 0 0px 75px 0px rgba(0,0,0,.75);
 			font-size: 14px;
+			font-weight: bold;
 		}
 	</style>
 
