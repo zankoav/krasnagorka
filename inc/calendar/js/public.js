@@ -1,3 +1,7 @@
+const message_1 = "Нельзя пронировать прошлые даты",
+	message_2 = "Дата выезда должна быть позже даты заезда",
+	message_3 = "В интервале бронирования не должно быть занятых дат";
+
 jQuery(document).ready(function($) {
 	var targetMargin,
 		scriptFullCalendar,
@@ -326,6 +330,8 @@ jQuery(document).ready(function($) {
 						) {
 							jsFromDate = { d: d, el: el };
 							$(jsFromDate.el).addClass("cell-range");
+						} else if (d < a.format("YYYY-MM-DD")) {
+							showMessage(message_1);
 						}
 					}
 
@@ -378,6 +384,7 @@ jQuery(document).ready(function($) {
 
 			if (startDate < endEvent && startDate > startEvent) {
 				result = false;
+				showMessage(message_2);
 				break;
 			}
 		}
@@ -400,6 +407,7 @@ jQuery(document).ready(function($) {
 
 			if (startDate < endEvent && endDate > startEvent) {
 				result = false;
+				showMessage(message_3);
 				break;
 			}
 		}
@@ -422,5 +430,9 @@ jQuery(document).ready(function($) {
 				}
 			);
 		}
+	}
+
+	function showMessage(message) {
+		console.log(message);
 	}
 });
