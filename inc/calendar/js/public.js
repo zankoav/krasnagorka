@@ -1,4 +1,4 @@
-const message_1 = "Нельзя пронировать прошлые даты",
+const message_1 = "Нельзя бронировать прошлые даты",
 	message_2 = "Дата выезда должна быть позже даты заезда",
 	message_3 = "В интервале бронирования не должно быть занятых дат";
 
@@ -259,6 +259,8 @@ jQuery(document).ready(function($) {
 										.empty();
 									jsToDate = null;
 									fillCells();
+								}else if(jsFromDate && jsFromDate.d > d){
+									showMessage(message_2);
 								}
 							}
 
@@ -384,7 +386,6 @@ jQuery(document).ready(function($) {
 
 			if (startDate < endEvent && startDate > startEvent) {
 				result = false;
-				showMessage(message_2);
 				break;
 			}
 		}
