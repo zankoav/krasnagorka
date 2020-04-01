@@ -441,7 +441,7 @@ jQuery(document).ready(function($) {
 
 	function ErrorAlert(message) {
 		this.messageElement = $(
-			`<div class="kg-error-message"><p>${message}</p></div>`
+			`<div class="kg-error-message"><p>Ошибка! ${message}</p></div>`
 		);
 		$(document.body).append(this.messageElement);
 		setTimeout(() => {
