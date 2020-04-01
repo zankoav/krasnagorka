@@ -1,6 +1,7 @@
 const message_1 = "Нельзя бронировать прошлые даты",
 	message_2 = "Дата выезда должна быть позже даты заезда",
-	message_3 = "В интервале бронирования не должно быть занятых дат";
+	message_3 = "В интервале бронирования не должно быть занятых дат",
+	message_4 = "Выберите свободную дату";
 
 jQuery(document).ready(function($) {
 	var targetMargin,
@@ -386,6 +387,7 @@ jQuery(document).ready(function($) {
 
 			if (startDate < endEvent && startDate > startEvent) {
 				result = false;
+				showMessage(message_4);
 				break;
 			}
 		}
