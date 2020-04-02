@@ -61,7 +61,7 @@
         $sbc_client->add_field(array(
             'name'         => 'Стоимость мероприятия',
             'id'           => $prefix . 'price',
-            'type'         => 'text_money',
+            'type'         => 'text',
             'before_field' => 'BYN'
         ));
 
