@@ -56,14 +56,24 @@ class Booking_Form_Controller extends WP_REST_Controller
         $type     = $request['type'];
         $orderId  = $request['orderId'];
         $response = ['status' => 'error'];
+        $dateFrom   = $request['dateFrom'];
+        $dateTo     = $request['dateTo'];
+        $objectIds  = $request['objectIds'];
 
         $this->removeOrder($orderId);
 
+        if (empty($orderId) and !empty($objectIds)) {
+            $kalendars = array_map('intval', $objectIds);
+            $kalendars = array_unique($kalendars);
+            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo);
+            if (!$result) {
+                $response['status'] = 'busy';
+                return $response;
+            }
+        }
+
         if ($type != 'remove') {
 
-            $objectIds  = $request['objectIds'];
-            $dateFrom   = $request['dateFrom'];
-            $dateTo     = $request['dateTo'];
             $totalPrice = $request['totalPrice'];
             $havePayed  = $request['havePayed'];
             $comment    = $request['comment'];
