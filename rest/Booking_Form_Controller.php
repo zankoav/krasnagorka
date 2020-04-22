@@ -62,7 +62,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $this->removeOrder($orderId);
 
-        if (empty($orderId) and !empty($objectIds)) {
+        if ($type != 'remove' and empty($orderId) and !empty($objectIds)) {
             $kalendars = array_map('intval', $objectIds);
             $kalendars = array_unique($kalendars);
             $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo);
