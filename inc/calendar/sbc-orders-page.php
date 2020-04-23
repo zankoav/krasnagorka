@@ -27,6 +27,7 @@
 
 			//Convert 2012/05 into a datetime object get the first and last days of that month in yyyy/mm/dd format
 			$month = new DateTime( $month_str . '/01' );
+			echo $month->format( 'Y-m-d' )," : ", $month->format( 'Y-m-t' ), '<br>';
 			//Get posts with date between the first and last of given month
 			$meta_query[] = array(
 				'key'     => 'sbc_order_start',
