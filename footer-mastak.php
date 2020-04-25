@@ -503,37 +503,36 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 
-    jQuery('[href="#booking-order"]').click(function() {
-        let name = jQuery(this).data('name');
-        let prefix = 'Home ';
-        let category = 'house';
-        if (!name) {
-            name = jQuery(this).data('event');
-            prefix = 'Event ';
-            category = 'events';
-        }
-        if (!name) {
-            console.log('Error ga');
-            return;
-        }
+    
+    (function($) {
 
-        ga('send', {
-            hitType: 'event',
-            eventCategory: category,
-            eventAction: 'click',
-            eventLabel: prefix + name
+        $('.our-house__button, .house-booking__button').on('click', function() {
+            let name = $(this).data('name');
+            let prefix = 'Home ';
+            let category = 'house';
+            if (!name) {
+                name = $(this).data('event');
+                prefix = 'Event ';
+                category = 'events';
+            }
+            if (!name) {
+                console.log('Error ga');
+                return;
+            }
+
+            console.log('category', category);
+            console.log('name', prefix + name);
+
+            /*ga('send', {
+                hitType: 'event',
+                eventCategory: category,
+                eventAction: 'click',
+                eventLabel: prefix + name
+            });*/
         });
-    });
+    })(jQuery);
 
     document.addEventListener('wpcf7mailsent', function(event) {
-
-        if ('2730' == event.detail.contactFormId) {
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'form_bronirovanie',
-                eventAction: 'success_send'
-            });
-        }
 
         if ('9102' == event.detail.contactFormId) {
             ga('send', {

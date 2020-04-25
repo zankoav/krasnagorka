@@ -56,8 +56,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $type     = $request['type'];
         $orderId  = $request['orderId'];
         $response = ['status' => 'error'];
-        $dateFrom   = $request['dateFrom'];
-        $dateTo     = $request['dateTo'];
+        $dateFrom = date("Y-m-d", strtotime($request['dateFrom']));
+        $dateTo = date("Y-m-d", strtotime($request['dateTo']));
         $objectIds  = $request['objectIds'];
 
         $this->removeOrder($orderId);
@@ -313,8 +313,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $result = true;
         $calendarId = $request['id'];
-        $dateStart = $request['dateStart'];
-        $dateEnd = $request['dateEnd'];
+        $dateStart = date("Y-m-d", strtotime($request['dateStart']));
+        $dateEnd = date("Y-m-d", strtotime($request['dateEnd']));
         $isHouse = $request['orderType'] === 'Домик:';
 
         if ($isHouse) {
