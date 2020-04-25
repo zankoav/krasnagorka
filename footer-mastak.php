@@ -520,15 +520,12 @@ if (is_page_template("template-mastak-map.php")) : ?>
                 return;
             }
 
-            console.log('category', category);
-            console.log('name', prefix + name);
-
-            /*ga('send', {
+            ga('send', {
                 hitType: 'event',
                 eventCategory: category,
                 eventAction: 'click',
                 eventLabel: prefix + name
-            });*/
+            });
         });
     })(jQuery);
 
