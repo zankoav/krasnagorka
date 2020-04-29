@@ -283,7 +283,12 @@ export default class BookingForm extends LightningElement {
 					}
 					setCookie("kg_name", fio, { "max-age": MAX_AGE });
 					setCookie("kg_phone", phone, { "max-age": MAX_AGE });
-					setCookie("kg_email", email, { "max-age": MAX_AGE });
+                    setCookie("kg_email", email, { "max-age": MAX_AGE });
+                    ga('send', {
+                        hitType: 'event',
+                        eventCategory: 'form_bronirovanie',
+                        eventAction: 'success_send'
+                    });
 				} else {
 					this.formMessageSuccess = null;
 					this.formMessageError = `Извините! Выбранные даты заняты. Выберите свободный интервал.`;
