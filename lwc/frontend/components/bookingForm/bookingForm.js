@@ -35,7 +35,7 @@ const i118 = {
 		"Сентябрь",
 		"Октябрь",
 		"Ноябрь",
-		"Декабрь"
+		"Декабрь",
 	],
 	weekdays: [
 		"Воскресенье",
@@ -44,9 +44,9 @@ const i118 = {
 		"Среда",
 		"Четверг",
 		"Пятница",
-		"Суббота"
+		"Суббота",
 	],
-	weekdaysShort: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"]
+	weekdaysShort: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"],
 };
 
 export default class BookingForm extends LightningElement {
@@ -62,12 +62,13 @@ export default class BookingForm extends LightningElement {
 	@track isLoading;
 
 	async skip() {
-		await new Promise(resolve => setImmediate(resolve));
+		await new Promise((resolve) => setImmediate(resolve));
 	}
 
 	async connectedCallback() {
 		this.dateTo = this.dateTo || "";
 		this.dateFrom = this.dateFrom || "";
+		this.objId = this.objId === "undefined" ? null : this.objId;
 		const cid = getCookie("_ga");
 		if (cid) {
 			this.cid = cid.replace(/GA1.2./g, "");
@@ -87,27 +88,27 @@ export default class BookingForm extends LightningElement {
 			i18n: i118,
 			field: this.dateStart,
 			format: "YYYY-MM-DD",
-			onSelect: date => {
+			onSelect: (date) => {
 				let day = date.getDate();
 				day = day > 9 ? day : `0${day}`;
 				let month = date.getMonth() + 1;
 				month = month > 9 ? month : `0${month}`;
 				const year = date.getFullYear();
 				this.dateFrom = `${year}-${month}-${day}`;
-			}
+			},
 		});
 		this.pikEnd = new Pikaday({
 			i18n: i118,
 			field: this.dateEnd,
 			format: "YYYY-MM-DD",
-			onSelect: date => {
+			onSelect: (date) => {
 				let day = date.getDate();
 				day = day > 9 ? day : `0${day}`;
 				let month = date.getMonth() + 1;
 				month = month > 9 ? month : `0${month}`;
 				const year = date.getFullYear();
 				this.dateTo = `${year}-${month}-${day}`;
-			}
+			},
 		});
 
 		this.order = this.template.querySelector('[name="order"]');
@@ -245,7 +246,7 @@ export default class BookingForm extends LightningElement {
 		fetch("/wp-json/krasnagorka/v1/order/", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json; charset=utf-8"
+				"Content-Type": "application/json; charset=utf-8",
 			},
 			body: JSON.stringify({
 				id: this.objId,
@@ -262,13 +263,13 @@ export default class BookingForm extends LightningElement {
 				cid: this.cid,
 				passport: passport,
 				data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${orderTitle}&bookingType=${orderType}&cid=${this.cid}&passportId=${passport}&id=${this.objId}`,
-				message: spam
-			})
+				message: spam,
+			}),
 		})
-			.then(response => {
+			.then((response) => {
 				return response.json();
 			})
-			.then(result => {
+			.then((result) => {
 				this.isLoading = false;
 				if (result) {
 					this.formMessageSuccess =
@@ -283,12 +284,12 @@ export default class BookingForm extends LightningElement {
 					}
 					setCookie("kg_name", fio, { "max-age": MAX_AGE });
 					setCookie("kg_phone", phone, { "max-age": MAX_AGE });
-                    setCookie("kg_email", email, { "max-age": MAX_AGE });
-                    ga('send', {
-                        hitType: 'event',
-                        eventCategory: 'form_bronirovanie',
-                        eventAction: 'success_send'
-                    });
+					setCookie("kg_email", email, { "max-age": MAX_AGE });
+					ga("send", {
+						hitType: "event",
+						eventCategory: "form_bronirovanie",
+						eventAction: "success_send",
+					});
 				} else {
 					this.formMessageSuccess = null;
 					this.formMessageError = `Извините! Выбранные даты заняты. Выберите свободный интервал.`;
