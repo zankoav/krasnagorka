@@ -317,27 +317,35 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateEnd = date("Y-m-d", strtotime($request['dateEnd']));
         $isHouse = $request['orderType'] === 'Домик:';
 
-        if ($isHouse && !empty($calendarId) && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
-            $response = $this->insertWPLead([
-                "type" => "reserved",
-                "objectIds" => [$calendarId],
-                "dateFrom" => $dateStart,
-                "dateTo" => $dateEnd,
-                "comment" => $request['comment'],
-                "contactName" => $request['fio'],
-                "contactPhone" => $request['phone'],
-                "contactEmail" => $request['email']
-            ]);
-            $result = $response['status'] === 'success';
-            if ($result) {
-                $request['data'] .= '&orderId=' . $response['orderId'];
+        if (empty($calendarId)) {
+            require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+            $href = 'https://krasnagorka.by/booking-form';
+            $type = 'booking-form';
+            new AmoIntegration($type, $request['data'], $href);
+        } else {
+            $result = false;
+
+            if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
+                $response = $this->insertWPLead([
+                    "type" => "reserved",
+                    "objectIds" => [$calendarId],
+                    "dateFrom" => $dateStart,
+                    "dateTo" => $dateEnd,
+                    "comment" => $request['comment'],
+                    "contactName" => $request['fio'],
+                    "contactPhone" => $request['phone'],
+                    "contactEmail" => $request['email']
+                ]);
+                $result = $response['status'] === 'success';
+                if ($result) {
+                    $request['data'] .= '&orderId=' . $response['orderId'];
+                    require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+                    $href = 'https://krasnagorka.by/booking-form';
+                    $type = 'booking-form';
+                    new AmoIntegration($type, $request['data'], $href);
+                }
             }
         }
-
-        require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-        $href = 'https://krasnagorka.by/booking-form';
-        $type = 'booking-form';
-        new AmoIntegration($type, $request['data'], $href);
 
         return new WP_REST_Response($result, 200);
     }
