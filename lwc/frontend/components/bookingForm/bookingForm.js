@@ -18,7 +18,7 @@ const ERROR_CONTRACT_UNCHECKED = "Вы не согласились с догов
 const ERROR_DATE_END_INVALID = "Дата выезда должны быть позже даты заезда";
 const ERROR_HOUSE_EMPTY = "Поле Домик/Мероприятие не заполнено";
 const ERROR_DATE_START_LATE =
-	"Поле Дата заезда должно быть позже сегоднешнего дня";
+	"Поле Дата заезда должно быть не раньше сегоднешнего дня";
 
 const i118 = {
 	previousMonth: "Предыдущий",
@@ -203,7 +203,7 @@ export default class BookingForm extends LightningElement {
 
 		const today = getTodayDate();
 
-		if (dateStart <= today) {
+		if (dateStart < today) {
 			this.showError(ERROR_DATE_START_LATE);
 			return;
 		}
