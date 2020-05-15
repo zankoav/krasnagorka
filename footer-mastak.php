@@ -527,6 +527,16 @@ if (is_page_template("template-mastak-map.php")) : ?>
                 eventLabel: prefix + name
             });
         });
+
+        $('.accordion-mixed__tab').on('click', function(){
+            if($( window ).width() < 768){
+                setTimeout(()=>{
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $(this).offset().top
+                    }, 400);
+                },400);
+            }
+        });
     })(jQuery);
 
     document.addEventListener('wpcf7mailsent', function(event) {

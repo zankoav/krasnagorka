@@ -2,56 +2,131 @@
     <div class="booking-form">
         <div class="container">
             <div class="booking-form__content">
-                <h2 class="booking-form__title mb-15" data-before={objectType}>{objectTitle}</h2>
-                <div if:false={objectType} class="booking-form__group">
-                    <label for="order" class="booking-form__label booking-form__label_required">Домик/Мероприятие</label>
-                    <input id="order" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="order">
+                <h2 class="booking-form__title mb-15"
+                    data-before={objectType}>{objectTitle}</h2>
+                <div if:false={objectType}
+                     class="booking-form__group">
+                    <label for="order"
+                           class="booking-form__label booking-form__label_required">Домик/Мероприятие</label>
+                    <input id="order"
+                           onfocus={clearError}
+                           maxlength="60"
+                           type="text"
+                           class="booking-form__input"
+                           name="order">
                 </div>
                 <div class="booking-form__group">
-                    <label for="fio" class="booking-form__label booking-form__label_required">ФИО</label>
-                    <input id="fio" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="fio">
+                    <label for="fio"
+                           class="booking-form__label booking-form__label_required">ФИО</label>
+                    <input id="fio"
+                           onfocus={clearError}
+                           maxlength="60"
+                           type="text"
+                           class="booking-form__input"
+                           name="fio">
                 </div>
-                <input type="hidden" class="booking-form__input" name="message">
+                <input type="hidden"
+                       class="booking-form__input"
+                       name="message">
                 <div class="booking-form__group">
-                    <label for="phone" class="booking-form__label booking-form__label_required">Телефон</label>
-                    <input id="phone" onfocus={clearError} maxlength="20" type="tel" class="booking-form__input" name="phone">
-                </div>
-                <div class="booking-form__group">
-                    <label for="email" class="booking-form__label booking-form__label_required">E-mail</label>
-                    <input id="email" onfocus={clearError} maxlength="60" type="email" class="booking-form__input" name="email">
-                </div>
-                <div class="booking-form__group">
-                    <label for="date-start" class="booking-form__label booking-form__label_required">Дата заезда</label>
-                    <input id="date-start" onclick={showFromPiker} onfocus={clearError} type="text" value={dateFrom}  class="booking-form__input" name="date-start">
-                </div>
-                <div class="booking-form__group">
-                    <label for="date-end" class="booking-form__label booking-form__label_required">Дата выезда</label>
-                    <input id="date-end" onclick={showToPiker} onfocus={clearError} type="text" value={dateTo} class="booking-form__input" name="date-end">
-                </div>
-                <div class="booking-form__group">
-                    <label for="count" class="booking-form__label booking-form__label_required">Количество людей</label>
-                    <input id="count" onfocus={clearError} maxlength="2" type="text" class="booking-form__input" name="count">
+                    <label for="phone"
+                           class="booking-form__label booking-form__label_required">Телефон</label>
+                    <input id="phone"
+                           onfocus={clearError}
+                           maxlength="20"
+                           type="tel"
+                           class="booking-form__input"
+                           name="phone">
                 </div>
                 <div class="booking-form__group">
-                    <label for="passport" class="booking-form__label">Личный (идентификационный) номер паспорта</label>
-                    <input id="passport" onfocus={clearError} maxlength="60" type="text" class="booking-form__input" name="passport">
+                    <label for="email"
+                           class="booking-form__label booking-form__label_required">E-mail</label>
+                    <input id="email"
+                           onfocus={clearError}
+                           maxlength="60"
+                           type="email"
+                           class="booking-form__input"
+                           name="email">
                 </div>
                 <div class="booking-form__group">
-                    <label for="comment" class="booking-form__label">Комментарий</label>
-                    <textarea id="comment" onfocus={clearError} maxlength="500"  class="booking-form__input" rows="4" name="comment"></textarea>
+                    <label for="date-start"
+                           class="booking-form__label booking-form__label_required">Дата
+                        заезда</label>
+                    <input id="date-start"
+                           onclick={showFromPiker}
+                           onfocus={clearError}
+                           type="text"
+                           value={dateFrom}
+                           class="booking-form__input"
+                           name="date-start">
+                </div>
+                <div class="booking-form__group">
+                    <label for="date-end"
+                           class="booking-form__label booking-form__label_required">Дата
+                        выезда</label>
+                    <input id="date-end"
+                           onclick={showToPiker}
+                           onfocus={clearError}
+                           type="text"
+                           value={dateTo}
+                           class="booking-form__input"
+                           name="date-end">
+                </div>
+                <div class="booking-form__group">
+                    <label for="count"
+                           class="booking-form__label booking-form__label_required">Количество людей
+                        (Взрослых и детей; количество, возраст детей и необходимость дополнительной
+                        кровати указывайте в комментарии)</label>
+                    <input id="count"
+                           onfocus={clearError}
+                           maxlength="2"
+                           type="text"
+                           class="booking-form__input"
+                           name="count">
+                </div>
+                <div class="booking-form__group">
+                    <label for="passport"
+                           class="booking-form__label">Личный (идентификационный) номер
+                        паспорта</label>
+                    <input id="passport"
+                           onfocus={clearError}
+                           maxlength="60"
+                           type="text"
+                           class="booking-form__input"
+                           name="passport">
+                </div>
+                <div class="booking-form__group">
+                    <label for="comment"
+                           class="booking-form__label">Комментарий</label>
+                    <textarea id="comment"
+                              onfocus={clearError}
+                              maxlength="500"
+                              class="booking-form__input"
+                              rows="4"
+                              name="comment"></textarea>
                 </div>
                 <div class="booking-form__group booking-form__group_checkbox">
-                    <input id="contract" type="checkbox" class="booking-form__input booking-form__input_left" name="contract">
-                    <label for="contract" onfocus={clearError} class="booking-form__label booking-form__label_required">Согласен с&nbsp;
-                        <a href={contractOffer} target="_blank">договором присоединения</a></label>
+                    <input id="contract"
+                           type="checkbox"
+                           class="booking-form__input booking-form__input_left"
+                           name="contract">
+                    <label for="contract"
+                           onfocus={clearError}
+                           class="booking-form__label booking-form__label_required">Согласен с&nbsp;
+                        <a href={contractOffer}
+                           target="_blank">договором присоединения</a></label>
                 </div>
 
                 <div class="booking-form__send-button-wrapper">
                     <template if:false={isLoading}>
-                        <a href="javascript:void(0);" onclick={sendOrder} class="booking-form__send-button">Отправить</a>
+                        <a href="javascript:void(0);"
+                           onclick={sendOrder}
+                           class="booking-form__send-button">Отправить</a>
                     </template>
                     <template if:true={isLoading}>
-                        <a href="javascript:void(0);" class="booking-form__send-button booking-form__send-button_deprecated">Отправка ...</a>
+                        <a href="javascript:void(0);"
+                           class="booking-form__send-button booking-form__send-button_deprecated">Отправка
+                            ...</a>
                     </template>
                 </div>
 

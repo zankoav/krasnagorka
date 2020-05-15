@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 <div class="footer-top__form contacts-form">
-                    <p class="contacts-form__title">Оставить заявку на бронирование</p>
+                    <p class="contacts-form__title">Остались вопросы?</p>
                     <?= do_shortcode('[contact-form-7 id="8893" title="Mastak footer" html_class="contacts-form__forma"]'); ?>
                 </div>
             </div>
