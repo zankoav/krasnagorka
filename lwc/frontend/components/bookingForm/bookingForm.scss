@@ -128,7 +128,12 @@
 		&_error {
 			color: $RED;
 		}
-	}
+    }
+    
+    &__description{
+        font-size: 12px;
+        color: $GRAY_5;
+    }
 }
 
 /*!
