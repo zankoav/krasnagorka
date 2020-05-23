@@ -245,8 +245,8 @@
         Logger::log("weather: $weather", true);
 		if ( ! empty( $weather ) ) {
             $weatherArray = json_decode( $weather, true );
-            $dateNow = strtotime(date( 'Y-m-d' ))*1000;
-            $dateMeta = $weatherArray[1]['date'];
+            $dateNow = date( 'Y-m-d' );
+            $dateMeta = date('Y-m-d', ($weatherArray[1]['date'] / 1000) );
             Logger::log("weatherArray:  $dateMeta & $dateNow", true);
 			if (  $dateMeta != $dateNow ) {
 				return update_mastak_weather();
