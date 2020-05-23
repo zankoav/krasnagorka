@@ -245,8 +245,9 @@
         Logger::log("weather: $weather", true);
 		if ( ! empty( $weather ) ) {
             $weatherArray = json_decode( $weather, true );
-            Logger::log("weatherArray: $weatherArray", true);
-			if ( $weatherArray[1]["date"] != date( 'Y-m-d'  ) ) {
+            $dateNaw = date( 'Y-m-d' );
+            Logger::log("weatherArray: $weatherArray[1]['date'] & $dateNaw", true);
+			if ( $weatherArray[1]["date"] != $dateNaw ) {
 				return update_mastak_weather();
 			} else {
 				return $weatherArray;
