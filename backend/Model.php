@@ -64,7 +64,15 @@ class Model
 
     public function getWeather()
     {
+        $current_user = wp_get_current_user();
+        $isDeveloper = $current_user->exists() && $current_user->user_login == "zankoav";
+
         $weatherStr = get_option('krasnagorka_weather');
+
+        if($isDeveloper){
+            Logger::log($weatherStr);
+        }
+
         if (!empty($weatherStr)) {
             $weatherArray = json_decode($weatherStr, true);
             if ($weatherArray['day'] != date('w')) {
