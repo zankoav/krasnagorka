@@ -697,11 +697,6 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 </script>
-
-<?php 
-    Logger::log('Hello it is test');
-    Logger::vdump(['key'=>'wood']);
-?>
 </body>
 
 </html>
