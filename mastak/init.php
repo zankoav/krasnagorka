@@ -274,7 +274,7 @@
 		}
 
 		update_option( 'mastak_weather', json_encode( $result ) );
-
+        Logger::log('update_mastak_weather  updated');
 		return $result;
 	}
 
