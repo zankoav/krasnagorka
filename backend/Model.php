@@ -68,6 +68,8 @@ class Model
         $isDeveloper = $current_user->exists() && $current_user->user_login == "zankoav";
 
         $weatherStr = get_option('krasnagorka_weather');
+        Logger::log($isDeveloper);
+        Logger::log($current_user->user_login);
 
         if($isDeveloper){
             Logger::log($weatherStr);
