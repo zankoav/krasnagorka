@@ -59,7 +59,7 @@ class Model
             ];
         }
         update_option('krasnagorka_weather', json_encode($result));
-        Logger::log('updateWeather wether');
+        Logger::log('updateWeather wether', true);
         return $result;
     }
 
