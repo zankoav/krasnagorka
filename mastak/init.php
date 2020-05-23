@@ -242,12 +242,10 @@
 
 	function get_weather() {
         $weather = get_option( 'mastak_weather' );
-        Logger::log("weather: $weather", true);
 		if ( ! empty( $weather ) ) {
             $weatherArray = json_decode( $weather, true );
             $dateNow = date( 'Y-m-d' );
             $dateMeta = date('Y-m-d', ($weatherArray[1]['date'] / 1000) );
-            Logger::log("weatherArray:  $dateMeta & $dateNow", true);
 			if (  $dateMeta != $dateNow ) {
 				return update_mastak_weather();
 			} else {
@@ -278,7 +276,7 @@
 		}
 
 		update_option( 'mastak_weather', json_encode( $result ) );
-        Logger::log('update_mastak_weather  updated', true);
+        Logger::log('update_mastak_weather');
 		return $result;
 	}
 
