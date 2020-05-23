@@ -31,7 +31,7 @@ jQuery(document).ready(function ($) {
         let index = 1;
         let cButtons = document.querySelectorAll(".booking-houses__calendars-button");
         for await (let button of cButtons) {
-            if (index % 10 === 0) {
+            if (index % 6 === 0) {
                 await new Promise(resolve => { setTimeout(resolve, 5000) });
                 console.log('opened', index);
             }
