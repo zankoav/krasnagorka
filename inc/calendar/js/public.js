@@ -28,15 +28,12 @@ jQuery(document).ready(function ($) {
     });
 
     async function openCalendars() {
-        let index = 1;
+        // let index = 1;
         let cButtons = document.querySelectorAll(".booking-houses__calendars-button");
         for await (let button of cButtons) {
-            if (index % 10 === 0) {
-                await new Promise(resolve => { setTimeout(resolve, 10000) });
-                console.log('opened', index);
-            }
             $(button).trigger("click");
-            index++;
+            await new Promise(resolve => { setTimeout(resolve, 1000) });
+            // index++;
         }
     }
 
