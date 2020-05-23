@@ -690,7 +690,6 @@ if (is_page_template("template-mastak-map.php")) : ?>
         background-color: rgb(188, 232, 241);
     }
 </style>
-
 <script>
     jQuery(document).ready(function() {
         jQuery("#kg-loader").delay(1000).fadeOut(300, function() {
@@ -698,6 +697,11 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 </script>
+
+<?php 
+    Logger::log('Hello it is test');
+    Logger::vdump(['key'=>'wood']);
+?>
 </body>
 
 </html>

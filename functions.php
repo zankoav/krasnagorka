@@ -4,7 +4,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-
+require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/Model.php';
 
