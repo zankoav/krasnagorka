@@ -32,7 +32,7 @@ jQuery(document).ready(function ($) {
         let cButtons = document.querySelectorAll(".booking-houses__calendars-button");
         for await (let button of cButtons) {
             $(button).trigger("click");
-            await new Promise(resolve => { setTimeout(resolve, 1000) });
+            await new Promise(resolve => { setTimeout(resolve, 2000) });
             // index++;
         }
     }
