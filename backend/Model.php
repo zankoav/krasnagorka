@@ -59,18 +59,14 @@ class Model
             ];
         }
         update_option('krasnagorka_weather', json_encode($result));
+        Logger::log('Updated wether');
         return $result;
     }
 
     public function getWeather()
     {
-        $current_user = wp_get_current_user();
-        $isDeveloper = $current_user->exists() && $current_user->user_login == "Sasha";
-        $weatherStr = get_option('krasnagorka_weather');
 
-        if($isDeveloper){
-            Logger::log($weatherStr);
-        }
+        $weatherStr = get_option('krasnagorka_weather');
 
         if (!empty($weatherStr)) {
             $weatherArray = json_decode($weatherStr, true);
