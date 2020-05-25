@@ -233,6 +233,10 @@
             display: block;
             transform: rotate(180deg);
         }
+
+        .header-second .main-slide__slide-img-wrapper:after {
+            content: none;
+        }
     }
 </style>
 
@@ -422,25 +426,25 @@
         </div>
     </nav>
     <?php if(wp_is_mobile()):?>
-        <?php do_action("mastak_header_small_view_title"); ?>
+    <?php do_action("mastak_header_small_view_title"); ?>
     <?php endif;?>
     <div class="main-slide">
         <div class="main-slide__slide-img-wrapper">
             <?php if(!wp_is_mobile()):?>
-                <?php
+            <?php
                 $image_size     = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
                 $slide_image_id = apply_filters("mastak_header_small_view_image", null); ?>
-                <img class="object-fit-img"
-                    src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
-                    srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
-                    sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
+            <img class="object-fit-img"
+                 src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
+                 srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
+                 sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
             <?php else:?>
-                <canvas id="canvas"></canvas>
+            <canvas id="canvas"></canvas>
             <?php endif;?>
         </div>
         <div class="main-slide__slide-content">
             <?php if(!wp_is_mobile()):?>
-                <?php do_action("mastak_header_small_view_title"); ?>
+            <?php do_action("mastak_header_small_view_title"); ?>
             <?php endif;?>
         </div>
     </div>
@@ -627,46 +631,46 @@
 </div>
 
 <?php if(wp_is_mobile()):?>
-    <script>
-        (function(){
-            var canvas = document.getElementById('canvas');
-            var ctx = canvas.getContext('2d');
+<script>
+    (function () {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
 
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
 
-            window.addEventListener('resize', ()=>{
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            var date = Date.now();
-            function draw(delta) {
-                requestAnimationFrame(draw);
-                canvas.width = canvas.width;
-                var my_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
-                my_gradient.addColorStop(0, "rgb(21, 139, 194)");
-                my_gradient.addColorStop(1, "rgb(80, 157, 159)");
-                ctx.fillStyle = my_gradient;
-                
-                var randomLeft = Math.abs(Math.pow( Math.sin(delta/1000), 2 )) * 100;
-                var randomRight = Math.abs(Math.pow( Math.sin((delta/1000) + 10), 2 )) * 100;
-                var randomLeftConstraint = Math.abs(Math.pow( Math.sin((delta/1000)+2), 2 )) * 100;
-                var randomRightConstraint = Math.abs(Math.pow( Math.sin((delta/1000)+1), 2)) * 100;
-                
-                ctx.beginPath();
-                ctx.moveTo(0, randomLeft);
-                
-                // ctx.lineTo(canvas.width, randomRight);
-                ctx.bezierCurveTo(canvas.width / 3, randomLeftConstraint, canvas.width / 3 * 2, randomRightConstraint, canvas.width, randomRight);
-                ctx.lineTo(canvas.width , canvas.height);
-                ctx.lineTo(0, canvas.height);
-                ctx.lineTo(0, randomLeft);
-                
-                ctx.closePath();
-                ctx.fill();
-            }
+        var date = Date.now();
+        function draw(delta) {
             requestAnimationFrame(draw);
-        })();
-    </script>
+            canvas.width = canvas.width;
+            var my_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
+            my_gradient.addColorStop(0, "rgb(80, 157, 159)");
+            my_gradient.addColorStop(1, "rgb(21, 139, 194)");
+            ctx.fillStyle = my_gradient;
+
+            var randomLeft = Math.abs(Math.pow(Math.sin(delta / 1000), 2)) * 100;
+            var randomRight = Math.abs(Math.pow(Math.sin((delta / 1000) + 10), 2)) * 100;
+            var randomLeftConstraint = Math.abs(Math.pow(Math.sin((delta / 1000) + 2), 2)) * 100;
+            var randomRightConstraint = Math.abs(Math.pow(Math.sin((delta / 1000) + 1), 2)) * 100;
+
+            ctx.beginPath();
+            ctx.moveTo(0, randomLeft);
+
+            // ctx.lineTo(canvas.width, randomRight);
+            ctx.bezierCurveTo(canvas.width / 3, randomLeftConstraint, canvas.width / 3 * 2, randomRightConstraint, canvas.width, randomRight);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.lineTo(0, canvas.height);
+            ctx.lineTo(0, randomLeft);
+
+            ctx.closePath();
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    })();
+</script>
 <?php endif;?>
