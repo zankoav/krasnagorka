@@ -34,7 +34,7 @@
                 'type_9' => __('Таблица Мероприятий', 'cmb2'),
             ),
             'attributes'       => array(
-                'required' => 'required',
+                'data-validation' => 'required',
             ),
             'column'           => array(
                 'position' => 2,
@@ -243,7 +243,7 @@
                 'url' => false, // Hide the text input for the url
             ),
             'attributes'   => array(
-                'required' => 'required',
+                'data-validation' => 'required',
             ),
             'preview_size' => array(400, 200)
             // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
@@ -352,7 +352,7 @@
                 'url' => false, // Hide the text input for the url
             ),
             'attributes'   => array(
-                'required' => 'required',
+                'data-validation' => 'required',
             ),
             'preview_size' => array(100, 100)
             // 'repeatable' => true, // Repeatable fields are supported w/in repeatable groups (for most types)
