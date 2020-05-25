@@ -458,13 +458,19 @@
             'get_terms_args' => array(
                 'taxonomy'   => 'sbc_calendars',
                 'hide_empty' => false,
-            )
+            ),
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Дата с',
             'id'   => 'from',
             'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
             // 'timezone_meta_key' => 'wiki_test_timezone',
             // 'date_format' => 'l jS \of F Y',
         ) );
@@ -474,6 +480,9 @@
             'id'   => 'to',
             'desc' => 'Включительно',
             'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
             // 'timezone_meta_key' => 'wiki_test_timezone',
             // 'date_format' => 'l jS \of F Y',
         ) );
