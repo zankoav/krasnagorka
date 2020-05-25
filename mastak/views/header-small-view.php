@@ -237,6 +237,10 @@
         .header-second .main-slide__slide-img-wrapper:after {
             content: none;
         }
+
+        .header-second .header-title {
+            padding-top: 1.5rem;
+        }
     }
 </style>
 
