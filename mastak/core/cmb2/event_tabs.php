@@ -452,11 +452,11 @@
             'name'           => 'Календарь',
             'desc'           => 'Выберите к какому календарю соответствует Домик',
             'id'             => 'calendar',
-            'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
+            // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
             'type'           => 'select',
             'options_cb'     => 'cmb2_get_term_options',
             'get_terms_args' => array(
-                'taxonomy'   => 'category',
+                'taxonomy'   => 'sbc_calendars',
                 'hide_empty' => false,
             )
         ));

@@ -1818,6 +1818,29 @@
         return $house;
     }
 
+    function cmb2_get_term_options( $field ) {
+        $args = $field->args( 'get_terms_args' );
+        $args = is_array( $args ) ? $args : array();
+    
+        $args = wp_parse_args( $args, array( 'taxonomy' => 'category' ) );
+    
+        $taxonomy = $args['taxonomy'];
+    
+        $terms = (array) cmb2_utils()->wp_at_least( '4.5.0' )
+            ? get_terms( $args )
+            : get_terms( $taxonomy, $args );
+    
+        // Initate an empty array
+        $term_options = array();
+        if ( ! empty( $terms ) ) {
+            foreach ( $terms as $term ) {
+                $term_options[ $term->term_id ] = $term->name;
+            }
+        }
+    
+        return $term_options;
+    }
+
     function show_event_options() {
 
         $query = new WP_Query(array(
