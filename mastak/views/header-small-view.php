@@ -560,7 +560,7 @@
         </div>
     </div>
 </header>
-<div class="<?=wp_is_mobile() ? 'b-bgc-dark' : '';?> b-py-1">
+<div class="<?= wp_is_mobile() ? '' : 'b-bgc-dark';?> b-py-1">
     <div class="b-container">
         <div class="breadcrumbs-wrapper">
             <?php if (function_exists('yoast_breadcrumb')) {
