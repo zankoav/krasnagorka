@@ -210,7 +210,7 @@
         }
 
         .header-second .menu-bottom__details {
-            margin-bottom: 1rem;
+            margin-bottom: 0;
         }
 
         .header-second .menu-bottom__details-sunny {
@@ -348,7 +348,7 @@
                      alt="logo"
                      class="logo__icon">
             </a>
-            <?php if ($video): ?>
+            <?php if ($video && !wp_is_mobile()): ?>
             <a href="#"
                class="online-video">
                 <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg"
@@ -539,6 +539,7 @@
                             <span>&deg;C</span>
                         </p>
                     </div>
+                    <?php if(!wp_is_mobile()):?>
                     <ul class="menu-bottom__days">
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[2]["weekday"]; ?></p>
@@ -559,6 +560,7 @@
                                  class="menu-bottom__day-icon">
                         </li>
                     </ul>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
