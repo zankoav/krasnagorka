@@ -560,7 +560,7 @@
         </div>
     </div>
 </header>
-<div class="b-bgc-dark b-py-1">
+<div class="<?=wp_is_mobile() ? 'b-bgc-dark' : '';?> b-py-1">
     <div class="b-container">
         <div class="breadcrumbs-wrapper">
             <?php if (function_exists('yoast_breadcrumb')) {
@@ -649,8 +649,8 @@
             requestAnimationFrame(draw);
             canvas.width = canvas.width;
             var my_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height / 2);
-            my_gradient.addColorStop(0, "rgb(80, 157, 159)");
-            my_gradient.addColorStop(1, "rgb(21, 139, 194)");
+            my_gradient.addColorStop(0, "rgba(80, 157, 159, 0.75)");
+            my_gradient.addColorStop(1, "rgba(21, 139, 194, 0.75)");
             ctx.fillStyle = my_gradient;
 
             var randomLeft = Math.abs(Math.pow(Math.sin(delta / 1000), 2)) * 100;
