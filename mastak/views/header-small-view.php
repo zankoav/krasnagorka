@@ -238,7 +238,7 @@
             content: none;
         }
 
-        .header-second .header-title {
+        .header-title {
             padding-top: 1.5rem;
         }
     }
