@@ -449,6 +449,37 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'           => 'Календарь',
+            'desc'           => 'Выберите к какому календарю соответствует Домик',
+            'id'             => 'calendar',
+            'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
+            'type'           => 'taxonomy_select',
+            'remove_default' => 'true', // Removes the default metabox provided by WP core.
+            // Optionally override the args sent to the WordPress get_terms function.
+            'query_args' => array(
+                // 'orderby' => 'slug',
+                // 'hide_empty' => true,
+            ),
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата с',
+            'id'   => 'from',
+            'type' => 'text_date',
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата до',
+            'id'   => 'to',
+            'desc' => 'Включительно',
+            'type' => 'text_date',
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Описание цены',
             'id'   => 'sale_text',
             'type' => 'text'
