@@ -214,7 +214,7 @@
         }
 
         .header-second .menu-bottom__details-sunny {
-            margin: 0 1rem 0 auto;
+            margin: 0 .5rem 0 auto;
         }
 
         .header-second .menu-bottom__details-place {
@@ -226,7 +226,7 @@
             z-index: 1;
             padding: 2rem 1rem;
             color: #ffffff;
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .header-second #canvas {
@@ -248,6 +248,15 @@
 
         .header-second .menu-bottom__right--wrapper {
             width: 100%;
+        }
+
+        .header-second .menu-bottom__degrees {
+            margin-right: 0;
+            font-size: 24px;
+        }
+
+        .header-second .menu-bottom__sunny-icon {
+            width: 32px;
         }
     }
 </style>
