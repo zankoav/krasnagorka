@@ -258,6 +258,10 @@
         .header-second .menu-bottom__sunny-icon {
             width: 32px;
         }
+
+        .header-second .menu-bottom__wrapper {
+            padding-bottom: 3rem;
+        }
     }
 </style>
 
