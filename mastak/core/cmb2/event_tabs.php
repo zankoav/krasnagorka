@@ -453,9 +453,12 @@
             'desc'           => 'Выберите к какому календарю соответствует Домик',
             'id'             => 'calendar',
             'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
-            'type'           => 'taxonomy_select',
-            'remove_default' => 'true', // Removes the default metabox provided by WP core.
-            // Optionally override the args sent to the WordPress get_terms function.
+            'type'           => 'select',
+            'options_cb'     => 'cmb2_get_term_options',
+            'get_terms_args' => array(
+                'taxonomy'   => 'category',
+                'hide_empty' => false,
+            )
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
