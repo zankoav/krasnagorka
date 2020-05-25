@@ -214,7 +214,7 @@
         }
 
         .header-second .menu-bottom__details-sunny {
-            margin: 0 1rem;
+            margin: 0 1rem 0 auto;
         }
 
         .header-second .menu-bottom__details-place {
@@ -224,7 +224,7 @@
         .header-second .main-slide__slide-content-title {
             position: relative;
             z-index: 1;
-            padding: 0 1rem 2rem;
+            padding: 2rem 1rem;
             color: #ffffff;
             font-size: 20px;
         }
@@ -240,6 +240,14 @@
 
         .header-title {
             padding-top: 1.5rem;
+        }
+
+        .header-second .menu-bottom__right {
+            justify-content: initial;
+        }
+
+        .header-second .menu-bottom__right--wrapper {
+            width: 100%;
         }
     }
 </style>
