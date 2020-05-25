@@ -24,170 +24,229 @@
 
     switch ($breadcrumbsBannerAnimationType) :
         case 'fade' : ?>
-            <style>
+<style>
+    .breadcrumbs-wrapper__link {
+        opacity: 0;
+        animation-fill-mode: forwards;
+        animation-name: fadeBanner;
+        animation-duration: .6s;
+        animation-timing-function: ease-in;
+    }
 
-                .breadcrumbs-wrapper__link {
-                    opacity                   : 0;
-                    animation-fill-mode       : forwards;
-                    animation-name            : fadeBanner;
-                    animation-duration        : .6s;
-                    animation-timing-function : ease-in;
-                }
+    @keyframes fadeBanner {
+        0% {
+            opacity: 0;
+        }
 
-                @keyframes fadeBanner {
-                    0% {
-                        opacity : 0;
-                    }
-                    100% {
-                        opacity : 1;
-                    }
-                }
-
-            </style>
-            <?php break;
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+<?php break;
         case 'fade_blink_infinity' : ?>
-            <style>
-                .breadcrumbs-wrapper__link {
-                    opacity             : 0;
-                    animation           : fadeBanner 1s ease-in, blinkBanner 8s ease-in 4s infinite;
-                    animation-fill-mode : forwards;
-                }
+<style>
+    .breadcrumbs-wrapper__link {
+        opacity: 0;
+        animation: fadeBanner 1s ease-in, blinkBanner 8s ease-in 4s infinite;
+        animation-fill-mode: forwards;
+    }
 
-                @keyframes fadeBanner {
-                    0% {
-                        opacity : 0;
-                    }
-                    100% {
-                        opacity : 1;
-                    }
-                }
+    @keyframes fadeBanner {
+        0% {
+            opacity: 0;
+        }
 
-                @keyframes blinkBanner {
-                    0% {
-                        color : #999;
-                    }
-                    40% {
-                        color : #999;
-                    }
-                    50% {
-                        color : #7ed321;
-                    }
-                    60% {
-                        color : #999;
-                    }
-                    100% {
-                        color : #999;
-                    }
-                }
+        100% {
+            opacity: 1;
+        }
+    }
 
-            </style>
-            <?php break;
+    @keyframes blinkBanner {
+        0% {
+            color: #999;
+        }
+
+        40% {
+            color: #999;
+        }
+
+        50% {
+            color: #7ed321;
+        }
+
+        60% {
+            color: #999;
+        }
+
+        100% {
+            color: #999;
+        }
+    }
+</style>
+<?php break;
         case 'fade_puls_icon' : ?>
-            <style>
-                .breadcrumbs-wrapper__link {
-                    opacity                   : 0;
-                    animation-fill-mode       : forwards;
-                    animation-name            : fadeBanner;
-                    animation-duration        : .6s;
-                    animation-timing-function : ease-in;
-                }
+<style>
+    .breadcrumbs-wrapper__link {
+        opacity: 0;
+        animation-fill-mode: forwards;
+        animation-name: fadeBanner;
+        animation-duration: .6s;
+        animation-timing-function: ease-in;
+    }
 
-                .breadcrumbs-wrapper__link-img {
-                    animation-name            : pulsBanner;
-                    animation-duration        : 2s;
-                    animation-timing-function : ease-in;
-                    animation-iteration-count : infinite;
-                }
+    .breadcrumbs-wrapper__link-img {
+        animation-name: pulsBanner;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
+        animation-iteration-count: infinite;
+    }
 
-                @keyframes fadeBanner {
-                    0% {
-                        opacity : 0;
-                    }
-                    100% {
-                        opacity : 1;
-                    }
-                }
+    @keyframes fadeBanner {
+        0% {
+            opacity: 0;
+        }
 
-                @keyframes pulsBanner {
-                    0% {
-                        transform : scale(1) rotate(0);
-                    }
-                    25% {
-                        transform : scale(1.2) rotate(5deg);
-                    }
-                    50% {
-                        transform : scale(1) rotate(0);
-                    }
-                    75% {
-                        transform : scale(1.2) rotate(-5deg);
-                    }
-                    100% {
-                        transform : scale(1) rotate(0);
-                    }
-                }
+        100% {
+            opacity: 1;
+        }
+    }
 
-            </style>
-            <?php break;
+    @keyframes pulsBanner {
+        0% {
+            transform: scale(1) rotate(0);
+        }
+
+        25% {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        50% {
+            transform: scale(1) rotate(0);
+        }
+
+        75% {
+            transform: scale(1.2) rotate(-5deg);
+        }
+
+        100% {
+            transform: scale(1) rotate(0);
+        }
+    }
+</style>
+<?php break;
         case 'fade_puls_icon_only' : ?>
-            <style>
-                .breadcrumbs-wrapper__link {
-                    opacity                   : 0;
-                    animation-fill-mode       : forwards;
-                    animation-name            : fadeBanner;
-                    animation-duration        : .6s;
-                    animation-timing-function : ease-in;
-                }
+<style>
+    .breadcrumbs-wrapper__link {
+        opacity: 0;
+        animation-fill-mode: forwards;
+        animation-name: fadeBanner;
+        animation-duration: .6s;
+        animation-timing-function: ease-in;
+    }
 
-                .breadcrumbs-wrapper__link-img {
-                    animation-name            : pulsBanner;
-                    animation-duration        : 2s;
-                    animation-timing-function : ease-in;
-                    animation-iteration-count : infinite;
-                }
+    .breadcrumbs-wrapper__link-img {
+        animation-name: pulsBanner;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
+        animation-iteration-count: infinite;
+    }
 
-                @keyframes fadeBanner {
-                    0% {
-                        opacity : 0;
-                    }
-                    100% {
-                        opacity : 1;
-                    }
-                }
+    @keyframes fadeBanner {
+        0% {
+            opacity: 0;
+        }
 
-                @keyframes pulsBanner {
-                    0% {
-                        transform : scale(1);
-                    }
-                    25% {
-                        transform : scale(1.2);
-                    }
-                    50% {
-                        transform : scale(1);
-                    }
-                    75% {
-                        transform : scale(1.2);
-                    }
-                    100% {
-                        transform : scale(1);
-                    }
-                }
+        100% {
+            opacity: 1;
+        }
+    }
 
-            </style>
-            <?php break;
+    @keyframes pulsBanner {
+        0% {
+            transform: scale(1);
+        }
+
+        25% {
+            transform: scale(1.2);
+        }
+
+        50% {
+            transform: scale(1);
+        }
+
+        75% {
+            transform: scale(1.2);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+<?php break;
         default:
             break;
     endswitch;
 ?>
 
+<style>
+    @media(max-width:768px) {
+        header.header-second {
+            min-height: initial;
+            height: initial;
+        }
+
+        .header-second .menu-top {
+            padding-bottom: 0;
+        }
+
+        .header-second .menu-bottom {
+            position: relative;
+        }
+
+        .header-second .menu-bottom__sunny {
+            display: none;
+        }
+
+        .header-second .menu-bottom__details {
+            margin-bottom: 1rem;
+        }
+
+        .header-second .menu-bottom__details-sunny {
+            margin: 0 1rem;
+        }
+
+        .header-second .menu-bottom__details-place {
+            align-self: initial;
+        }
+
+        .header-second .main-slide__slide-content-title {
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem 2rem;
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .header-second #canvas {
+            display: block;
+            transform: rotate(180deg);
+        }
+    }
+</style>
+
 <header class="header-second">
     <nav class="menu-top b-container">
         <div class="menu-top__left menu-main">
-            <img src="<?= CORE_PATH; ?>assets/icons/menu-icon.svg" class="menu-main__button"
+            <img src="<?= CORE_PATH; ?>assets/icons/menu-icon.svg"
+                 class="menu-main__button"
                  alt="menu-button">
             <div class="menu-main__wrapper">
                 <div class="menu-main__header">
                     <p class="menu-main__title">Меню</p>
-                    <img src="<?= CORE_PATH; ?>assets/icons/menu-close.svg" alt="button-close"
+                    <img src="<?= CORE_PATH; ?>assets/icons/menu-close.svg"
+                         alt="button-close"
                          class="menu-main__button-close">
                 </div>
                 <div class="menu-main__scroll-content">
@@ -195,28 +254,37 @@
                         <?php mastak_nav_menu(); ?>
 
                         <?php if ($video): ?>
-                            <a href="#" class="online-video online-video--menu">
-                                <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg" alt="online-video"
-                                     class="online-video__icon">
-                                <span class="online-video__title">смотреть ONLINE</span>
-                            </a>
+                        <a href="#"
+                           class="online-video online-video--menu">
+                            <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg"
+                                 alt="online-video"
+                                 class="online-video__icon">
+                            <span class="online-video__title">смотреть ONLINE</span>
+                        </a>
                         <?php endif; ?>
                         <div class="menu-main__currency currency">
-                            <label class="currency__label currency__label--gray">Выберите <br> валюту</label>
-                            <select name="currency" class="currency__select--hidden">
+                            <label class="currency__label currency__label--gray">Выберите <br>
+                                валюту</label>
+                            <select name="currency"
+                                    class="currency__select--hidden">
                                 <option name="<?= KGCookie::BYN; ?>"
-                                        value="1" <?= $currency_name === KGCookie::BYN ? 'selected' : ''; ?>>BYN
+                                        value="1"
+                                        <?= $currency_name === KGCookie::BYN ? 'selected' : ''; ?>>
+                                    BYN
                                 </option>
                                 <option name="<?= KGCookie::RUS; ?>"
-                                        value="<?= get_option('rur_currency'); ?>" <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
+                                        value="<?= get_option('rur_currency'); ?>"
+                                        <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
                                     RUS
                                 </option>
                                 <option name="<?= KGCookie::USD; ?>"
-                                        value="<?= get_option('usd_currency'); ?>" <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
+                                        value="<?= get_option('usd_currency'); ?>"
+                                        <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
                                     USD
                                 </option>
                                 <option name="<?= KGCookie::EUR; ?>"
-                                        value="<?= get_option('eur_currency'); ?>" <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
+                                        value="<?= get_option('eur_currency'); ?>"
+                                        <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
                                     EUR
                                 </option>
                             </select>
@@ -224,32 +292,37 @@
                                 <div data-currency="<?= $currency_name; ?>"
                                      class="currency__item currency__item--gray currency__item--selected">
                                     <img src="<?= CORE_PATH; ?>assets/icons/currencies/<?= $currency_name; ?>.svg"
-                                         class="currency__item-flag" alt="flag">
+                                         class="currency__item-flag"
+                                         alt="flag">
                                     <span class="currency__item-type"><?= $currency_name; ?></span>
                                 </div>
                                 <ul class="currency__list">
                                     <li data-currency="<?= KGCookie::BYN; ?>"
                                         class="currency__item currency__item--gray currency__item--list">
                                         <img src="<?= CORE_PATH; ?>assets/icons/currencies/byn.svg"
-                                             class="currency__item-flag" alt="flag">
+                                             class="currency__item-flag"
+                                             alt="flag">
                                         <span class="currency__item-type">BYN</span>
                                     </li>
                                     <li data-currency="<?= KGCookie::RUS; ?>"
                                         class="currency__item currency__item--gray currency__item--list">
                                         <img src="<?= CORE_PATH; ?>assets/icons/currencies/rur.svg"
-                                             class="currency__item-flag" alt="flag">
+                                             class="currency__item-flag"
+                                             alt="flag">
                                         <span class="currency__item-type">RUS</span>
                                     </li>
                                     <li data-currency="<?= KGCookie::USD; ?>"
                                         class="currency__item currency__item--gray currency__item--list">
                                         <img src="<?= CORE_PATH; ?>assets/icons/currencies/usd.svg"
-                                             class="currency__item-flag" alt="flag">
+                                             class="currency__item-flag"
+                                             alt="flag">
                                         <span class="currency__item-type">USD</span>
                                     </li>
                                     <li data-currency="<?= KGCookie::EUR; ?>"
                                         class="currency__item currency__item--gray currency__item--list">
                                         <img src="<?= CORE_PATH; ?>assets/icons/currencies/eur.svg"
-                                             class="currency__item-flag" alt="flag">
+                                             class="currency__item-flag"
+                                             alt="flag">
                                         <span class="currency__item-type">EUR</span>
                                     </li>
                                 </ul>
@@ -261,58 +334,73 @@
             <div class="menu-main__glass"></div>
         </div>
         <div class="menu-top__center">
-            <a href="/" class="logo">
-                <img src="<?= CORE_PATH; ?>assets/icons/logo.png" alt="logo" class="logo__icon">
+            <a href="/"
+               class="logo">
+                <img src="<?= CORE_PATH; ?>assets/icons/logo.png"
+                     alt="logo"
+                     class="logo__icon">
             </a>
             <?php if ($video): ?>
-                <a href="#" class="online-video">
-                    <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg" alt="online-video"
-                         class="online-video__icon">
-                    <span class="online-video__title">смотреть ONLINE</span>
-                </a>
+            <a href="#"
+               class="online-video">
+                <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg"
+                     alt="online-video"
+                     class="online-video__icon">
+                <span class="online-video__title">смотреть ONLINE</span>
+            </a>
             <?php endif; ?>
         </div>
         <div class="menu-top__right contacts-menu">
-            <img src="<?= CORE_PATH; ?>assets/icons/contacts-icon.svg" alt="button-phone"
+            <img src="<?= CORE_PATH; ?>assets/icons/contacts-icon.svg"
+                 alt="button-phone"
                  class="contacts-menu__button contacts-menu__button--phone">
 
             <div class="contacts-popup">
                 <div class="contacts-popup__wrapper">
                     <div class="contacts-popup__phones phone-list phone-list--messanger">
                         <div class="phone-item ">
-                            <img src="<?= CORE_PATH; ?>assets/icons/a1.png" alt="icon-a1"
+                            <img src="<?= CORE_PATH; ?>assets/icons/a1.png"
+                                 alt="icon-a1"
                                  class="phone-item__icon phone-item__icon--velcome">
                             <a href="tel: <?= $a1; ?>"
                                class="phone-item__phone-number phone-item__phone-number_velcom"><?= $a1; ?></a>
-                            <img src="<?= CORE_PATH; ?>assets/icons/social/viber.svg" alt="icon-viber"
+                            <img src="<?= CORE_PATH; ?>assets/icons/social/viber.svg"
+                                 alt="icon-viber"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--viber">
-                            <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg" alt="icon-whatsapp"
+                            <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg"
+                                 alt="icon-whatsapp"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--whatsapp">
-                            <img src="<?= CORE_PATH; ?>assets/icons/social/telegram.svg" alt="icon-telegram"
+                            <img src="<?= CORE_PATH; ?>assets/icons/social/telegram.svg"
+                                 alt="icon-telegram"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--telegram">
                         </div>
                     </div>
                     <div class="contacts-popup__phones phone-list">
                         <div class="phone-item">
-                            <img src="<?= CORE_PATH; ?>assets/icons/mts.svg" alt="icon-mts"
+                            <img src="<?= CORE_PATH; ?>assets/icons/mts.svg"
+                                 alt="icon-mts"
                                  class="phone-item__icon phone-item__icon--mts">
                             <a href="tel: <?= $mts; ?>"
                                class="phone-item__phone-number phone-item__phone-number_mts"><?= $mts; ?></a>
                         </div>
                         <div class="phone-item">
-                            <img src="<?= CORE_PATH; ?>assets/icons/life.svg" alt="icon-life"
+                            <img src="<?= CORE_PATH; ?>assets/icons/life.svg"
+                                 alt="icon-life"
                                  class="phone-item__icon phone-item__icon--life">
                             <a href="tel: <?= $life; ?>"
                                class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
                         </div>
                     </div>
                     <div class="contacts-popup__email">
-                        <img src="<?= CORE_PATH; ?>assets/icons/envelope.svg" alt="icon-envelope"
+                        <img src="<?= CORE_PATH; ?>assets/icons/envelope.svg"
+                             alt="icon-envelope"
                              class="contacts-popup__icon contacts-popup__icon--envelope">
-                        <a href="mailto:<?= $email; ?>" class="contacts-popup__email-text"><?= $email; ?></a>
+                        <a href="mailto:<?= $email; ?>"
+                           class="contacts-popup__email-text"><?= $email; ?></a>
                     </div>
                     <div class="contacts-popup__working-time">
-                        <img src="<?= CORE_PATH; ?>assets/icons/clock.svg" alt="icon-clock"
+                        <img src="<?= CORE_PATH; ?>assets/icons/clock.svg"
+                             alt="icon-clock"
                              class="contacts-popup__icon contacts-popup__icon--clock">
                         <span class="contacts-popup__working-time-text"><?= $time; ?></span>
                     </div>
@@ -321,49 +409,66 @@
                             $weekend = 'без выходных';
                             ?>
                         <?php else: ?>
-                            <img src="<?= CORE_PATH; ?>assets/icons/clock.svg" alt="icon-clock"
-                                 class="contacts-popup__icon contacts-popup__icon--clock">
+                        <img src="<?= CORE_PATH; ?>assets/icons/clock.svg"
+                             alt="icon-clock"
+                             class="contacts-popup__icon contacts-popup__icon--clock">
                         <?php endif; ?>
-                        <span class="contacts-popup__working-time-after-text"><?= $weekend; ?></span>
+                        <span
+                              class="contacts-popup__working-time-after-text"><?= $weekend; ?></span>
                     </div>
                 </div>
             </div>
 
         </div>
     </nav>
+    <?php if(wp_is_mobile()):?>
+        <?php do_action("mastak_header_small_view_title"); ?>
+    <?php endif;?>
     <div class="main-slide">
         <div class="main-slide__slide-img-wrapper">
-            <?php
+            <?php if(!wp_is_mobile()):?>
+                <?php
                 $image_size     = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
                 $slide_image_id = apply_filters("mastak_header_small_view_image", null); ?>
-            <img class="object-fit-img"
-                 src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
-                 srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
-                 sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
+                <img class="object-fit-img"
+                    src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
+                    srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
+                    sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
+            <?php else:?>
+                <canvas id="canvas"></canvas>
+            <?php endif;?>
         </div>
         <div class="main-slide__slide-content">
-            <?php do_action("mastak_header_small_view_title"); ?>
+            <?php if(!wp_is_mobile()):?>
+                <?php do_action("mastak_header_small_view_title"); ?>
+            <?php endif;?>
         </div>
     </div>
     <div class="menu-bottom">
         <div class="b-container menu-bottom__wrapper">
             <div class="menu-bottom__left">
                 <div class="menu-bottom__currency currency">
-                    <label class="currency__label currency__label--white">Выберите <br> валюту</label>
-                    <select name="currency" class="currency__select--hidden">
+                    <label class="currency__label currency__label--white">Выберите <br>
+                        валюту</label>
+                    <select name="currency"
+                            class="currency__select--hidden">
                         <option name="<?= KGCookie::BYN; ?>"
-                                value="1" <?= $currency_name === KGCookie::BYN ? 'selected' : ''; ?>>BYN
+                                value="1"
+                                <?= $currency_name === KGCookie::BYN ? 'selected' : ''; ?>>BYN
                         </option>
                         <option name="<?= KGCookie::RUS; ?>"
-                                value="<?= get_option('rur_currency'); ?>" <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
+                                value="<?= get_option('rur_currency'); ?>"
+                                <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
                             RUS
                         </option>
                         <option name="<?= KGCookie::USD; ?>"
-                                value="<?= get_option('usd_currency'); ?>" <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
+                                value="<?= get_option('usd_currency'); ?>"
+                                <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
                             USD
                         </option>
                         <option name="<?= KGCookie::EUR; ?>"
-                                value="<?= get_option('eur_currency'); ?>" <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
+                                value="<?= get_option('eur_currency'); ?>"
+                                <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
                             EUR
                         </option>
                     </select>
@@ -417,7 +522,8 @@
                                 <span><?= date('j'); ?></span><?= get_current_month_rus(); ?></div>
                         </div>
                         <div class="menu-bottom__details-sunny">
-                            <img class="menu-bottom__sunny-icon" src="<?= $weather[1]["icon"]; ?>"
+                            <img class="menu-bottom__sunny-icon"
+                                 src="<?= $weather[1]["icon"]; ?>"
                                  alt="sunny">
                             <div class="menu-bottom__sunny"><?= $weather[1]["text"]; ?></div>
                         </div>
@@ -428,17 +534,20 @@
                     <ul class="menu-bottom__days">
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[2]["weekday"]; ?></p>
-                            <img src="<?= $weather[2]["icon"]; ?>" alt="weather"
+                            <img src="<?= $weather[2]["icon"]; ?>"
+                                 alt="weather"
                                  class="menu-bottom__day-icon">
                         </li>
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[3]["weekday"]; ?></p>
-                            <img src="<?= $weather[3]["icon"]; ?>" alt="weather"
+                            <img src="<?= $weather[3]["icon"]; ?>"
+                                 alt="weather"
                                  class="menu-bottom__day-icon">
                         </li>
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[4]["weekday"]; ?></p>
-                            <img src="<?= $weather[4]["icon"]; ?>" alt="weather"
+                            <img src="<?= $weather[4]["icon"]; ?>"
+                                 alt="weather"
                                  class="menu-bottom__day-icon">
                         </li>
                     </ul>
@@ -454,64 +563,110 @@
                 yoast_breadcrumb('<div class="breadcrumbs">', '</div>');
             } ?>
             <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
-                <style>
+            <style>
+                .breadcrumbs-wrapper {
+                    display: none;
+                }
+
+                @media (min-width : 1280px) {
+                    .breadcrumbs {
+                        max-width: 50%;
+                        flex: 1 0 50%;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+
                     .breadcrumbs-wrapper {
-                        display : none;
+                        justify-content: space-between;
+                        display: flex;
                     }
+                }
 
-                    @media (min-width : 1280px) {
-                        .breadcrumbs {
-                            max-width     : 50%;
-                            flex          : 1 0 50%;
-                            text-overflow : ellipsis;
-                            overflow      : hidden;
-                            white-space   : nowrap;
-                        }
+                .breadcrumbs-wrapper__link {
 
-                        .breadcrumbs-wrapper {
-                            justify-content : space-between;
-                            display         : flex;
-                        }
-                    }
+                    display: flex;
+                    align-items: center;
+                    padding-left: 2rem;
+                    max-width: 50%;
+                    flex: 1 0 50%;
+                    color: #999;
+                    transition: color .3s linear;
+                }
 
-                    .breadcrumbs-wrapper__link {
+                .breadcrumbs-wrapper__link:hover {
+                    color: #7ed321;
+                }
 
-                        display      : flex;
-                        align-items  : center;
-                        padding-left : 2rem;
-                        max-width    : 50%;
-                        flex         : 1 0 50%;
-                        color        : #999;
-                        transition   : color .3s linear;
-                    }
+                .breadcrumbs-wrapper__link-img {
+                    flex-shrink: 0;
+                    margin-left: auto;
+                    margin-right: 1rem;
+                    max-height: 1.5rem;
+                    display: inline-block;
+                }
 
-                    .breadcrumbs-wrapper__link:hover {
-                        color : #7ed321;
-                    }
-
-                    .breadcrumbs-wrapper__link-img {
-                        flex-shrink  : 0;
-                        margin-left  : auto;
-                        margin-right : 1rem;
-                        max-height   : 1.5rem;
-                        display      : inline-block;
-                    }
-
-                    .breadcrumbs-wrapper__link-title {
-                        text-overflow : ellipsis;
-                        overflow      : hidden;
-                        white-space   : nowrap;
-                    }
-                </style>
-                <a href="<?= $breadcrumbsBannerLink; ?>" target="<?= $isBreadcrumbsBannerTargetLink; ?>"
-                   class="breadcrumbs-wrapper__link"
-                   style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
-                    <img src="<?= empty($breadcrumbsBannerImg) ? "/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/$breadcrumbsBannerImgDefault.svg" : $breadcrumbsBannerImg; ?>"
-                         class="breadcrumbs-wrapper__link-img"
-                         alt="banner icon">
-                    <p class="breadcrumbs-wrapper__link-title"><?= $breadcrumbsBannerText; ?></p>
-                </a>
+                .breadcrumbs-wrapper__link-title {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+            </style>
+            <a href="<?= $breadcrumbsBannerLink; ?>"
+               target="<?= $isBreadcrumbsBannerTargetLink; ?>"
+               class="breadcrumbs-wrapper__link"
+               style="animation-delay: <?= $breadcrumbsBannerAnimationDelay; ?>ms;">
+                <img src="<?= empty($breadcrumbsBannerImg) ? "/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/$breadcrumbsBannerImgDefault.svg" : $breadcrumbsBannerImg; ?>"
+                     class="breadcrumbs-wrapper__link-img"
+                     alt="banner icon">
+                <p class="breadcrumbs-wrapper__link-title"><?= $breadcrumbsBannerText; ?></p>
+            </a>
             <?php endif; ?>
         </div>
     </div>
 </div>
+
+<?php if(wp_is_mobile()):?>
+    <script>
+        (function(){
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', ()=>{
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            var date = Date.now();
+            function draw(delta) {
+                requestAnimationFrame(draw);
+                canvas.width = canvas.width;
+                var my_gradient = ctx.createLinearGradient(0, 0, 0, canvas.height/2);
+                my_gradient.addColorStop(0, "rgb(21, 139, 194)");
+                my_gradient.addColorStop(1, "rgb(80, 157, 159)");
+                ctx.fillStyle = my_gradient;
+                
+                var randomLeft = Math.abs(Math.pow( Math.sin(delta/1000), 2 )) * 100;
+                var randomRight = Math.abs(Math.pow( Math.sin((delta/1000) + 10), 2 )) * 100;
+                var randomLeftConstraint = Math.abs(Math.pow( Math.sin((delta/1000)+2), 2 )) * 100;
+                var randomRightConstraint = Math.abs(Math.pow( Math.sin((delta/1000)+1), 2)) * 100;
+                
+                ctx.beginPath();
+                ctx.moveTo(0, randomLeft);
+                
+                // ctx.lineTo(canvas.width, randomRight);
+                ctx.bezierCurveTo(canvas.width / 3, randomLeftConstraint, canvas.width / 3 * 2, randomRightConstraint, canvas.width, randomRight);
+                ctx.lineTo(canvas.width , canvas.height);
+                ctx.lineTo(0, canvas.height);
+                ctx.lineTo(0, randomLeft);
+                
+                ctx.closePath();
+                ctx.fill();
+            }
+            requestAnimationFrame(draw);
+        })();
+    </script>
+<?php endif;?>
