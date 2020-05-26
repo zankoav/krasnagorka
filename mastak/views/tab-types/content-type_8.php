@@ -7,6 +7,7 @@
     .tab-house__button-wrapper{
         display: flex;
         justify-content: center;
+        margin-bottom: 1rem;
     }
 
 </style>
@@ -101,7 +102,7 @@
                         $teremName = in_array($item['calendar'], $teremItemsIds) ? "&terem=$term->name": ''; 
                     if(true):?>
                         <div class="tab-house__button-wrapper">
-                            <a href="/booking-form/?booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?>&from=<?= date("Y-m-d", strtotime($item['from']))?>&to=<?=date("Y-m-d", strtotime($item['to']))?><?= $teremName;?>" 
+                            <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?>&from=<?= date("Y-m-d", strtotime($item['from']))?>&to=<?=date("Y-m-d", strtotime($item['to']))?><?= $teremName;?>" 
                                 class="our-house__button" target="_blank">
                                 забронировать
                             </a>
