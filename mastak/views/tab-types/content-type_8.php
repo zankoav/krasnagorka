@@ -5,7 +5,7 @@
 
     global $currency_name;
     $current_season_id = get_option('mastak_theme_options')['current_season'];
-
+    $teremItemsIds = array(18,19,20,21,22,23,24,25,26,27,28,29);
 ?>
 <div class="accordion-mixed__content-inner">
     <?php foreach ($tab->getItems() as $item) :
@@ -80,6 +80,23 @@
                 <div class="table-tab-text big-text content-text">
                     <?= wpautop($item['description']); ?>
                 </div>
+                <?php if(is_user_logged_in()):?>
+                    <div class="tab-house__from-top">c <?=$item['from']?> до <?=$item['to']?></div>
+                   
+                    <?php 
+                        $term = get_term( $item['calendar'], 'sbc_calendars' );
+                        $teremName = in_array($item['calendar'], $teremItemsIds) ? "&terem=$term->name": ''; 
+                    if(true):?>
+                        <div class="tab-house__button-wrapper">
+                            <a href="/booking-form/?booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?><?= $teremName;?>" 
+                                class="our-house__button b-ml-2" target="_blank">
+                                забронировать
+                            </a>
+                        </div>
+                    <?php else:?>
+                        <div class="tab-house__reserved">Зарезервированно</div>
+                    <?php endif;?>
+                <?php endif;?>
             </div>
             <div class="table-tab-col">
                 <div class="table-tab-price">
