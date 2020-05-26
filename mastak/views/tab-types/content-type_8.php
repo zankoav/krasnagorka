@@ -94,7 +94,7 @@
                     <?= wpautop($item['description']); ?>
                 </div>
                 <?php if(is_user_logged_in()):?>
-                    <div class="tab-house__from-top">c <?=date("dd.mm", strtotime($item['from']))?> по <?=date("dd.mm", strtotime($item['to']))?></div>
+                    <div class="tab-house__from-top">c <?=date("d.m", strtotime($item['from']))?> по <?=date("d.m", strtotime($item['to']))?></div>
                    
                     <?php 
                         $term = get_term( $item['calendar'], 'sbc_calendars' );
