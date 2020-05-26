@@ -1,3 +1,16 @@
+<style>
+    .tab-house__from-top{
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .tab-house__button-wrapper{
+        display: flex;
+        justify-content: center;
+    }
+
+</style>
+
 <?php
     /**
      * @var Type_8 $tab
@@ -81,15 +94,15 @@
                     <?= wpautop($item['description']); ?>
                 </div>
                 <?php if(is_user_logged_in()):?>
-                    <div class="tab-house__from-top">c <?=$item['from']?> до <?=$item['to']?></div>
+                    <div class="tab-house__from-top">c <?=date("d-m-Y", strtotime($item['from']))?> до <?=date("d-m-Y", strtotime($item['to']))?></div>
                    
                     <?php 
                         $term = get_term( $item['calendar'], 'sbc_calendars' );
                         $teremName = in_array($item['calendar'], $teremItemsIds) ? "&terem=$term->name": ''; 
                     if(true):?>
                         <div class="tab-house__button-wrapper">
-                            <a href="/booking-form/?booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?><?= $teremName;?>" 
-                                class="our-house__button b-ml-2" target="_blank">
+                            <a href="/booking-form/?booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?>&from=<?= date("Y-m-d", strtotime($item['from']))?>&to=<?=date("Y-m-d", strtotime($item['to']))?><?= $teremName;?>" 
+                                class="our-house__button" target="_blank">
                                 забронировать
                             </a>
                         </div>
@@ -121,3 +134,4 @@
         </div>
     <?php endforeach; ?>
 </div>
+
