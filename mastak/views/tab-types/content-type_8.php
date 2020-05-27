@@ -23,6 +23,16 @@
 ?>
 <div class="accordion-mixed__content-inner">
     <?php foreach ($tab->getItems() as $item) :
+
+        $from = $item['from'];
+        $to = $item['to'];
+        $calendarId = $item['calendar'];
+
+        $orderStatus = getOrderStatus($calendarId, $from, $to);
+        if($orderStatus == 'prepaid' || $orderStatus == 'booked'){
+            continue;
+        }
+
         $house_title = get_the_title($item['house']);
         $house_link = get_the_permalink($item['house']);
         $house_img = get_the_post_thumbnail_url($item['house'], 'full');
@@ -77,6 +87,9 @@
 
         $price = get_current_price($price_byn);
 
+
+        
+
         ?>
         <div class="table-tab-row">
             <div class="table-tab-col">
@@ -95,15 +108,16 @@
                     <?= wpautop($item['description']); ?>
                 </div>
                 <?php if(is_user_logged_in()):?>
-                    <div class="tab-house__from-top">c <?=date("d.m", strtotime($item['from']))?> по <?=date("d.m", strtotime($item['to']))?></div>
+                    <div class="tab-house__from-top">c <?=date("d.m", strtotime($from))?> по <?=date("d.m", strtotime($to))?></div>
                    
                     <?php 
-                        $term = get_term( $item['calendar'], 'sbc_calendars' );
-                        $teremName = in_array($item['calendar'], $teremItemsIds) ? "&terem=$term->name": ''; 
-                    if(true):?>
+                        $term = get_term( $calendarId, 'sbc_calendars' );
+                        $teremName = in_array($calendarId, $teremItemsIds) ? "&terem=$term->name": ''; 
+                    if( $orderStatus === false):?>
                         <div class="tab-house__button-wrapper">
-                            <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $item['calendar']; ?>&from=<?= date("Y-m-d", strtotime($item['from']))?>&to=<?=date("Y-m-d", strtotime($item['to']))?><?= $teremName;?>" 
-                                class="our-house__button" target="_blank">
+                            <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from))?>&to=<?=date("Y-m-d", strtotime($to))?><?= $teremName;?>" 
+                                class="our-house__button" 
+                                target="_blank">
                                 забронировать
                             </a>
                         </div>

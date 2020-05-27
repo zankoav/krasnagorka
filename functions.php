@@ -18,6 +18,70 @@ function load_admin_style()
 }
 
 
+function getOrderStatus($calendarId, $dateStart, $dateEnd){
+    $result = false;
+    
+    $dateStart = date("Y-m-d", strtotime($dateStart));
+    $dateEnd = date("Y-m-d", strtotime($dateEnd));
+
+    if (isset($calendarId, $dateStart, $dateEnd)) {
+        
+        $ordersQuery = new WP_Query;
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'sbc_calendars',
+                    'terms' => [$calendarId]
+                ]
+            ],
+            'meta_query' => array(
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '>=',
+                )
+            )
+        ));
+
+        $parseResult = [];
+
+        foreach ($orders  as $order) {
+            $orderId = $order->ID;
+            $start = get_post_meta($orderId, 'sbc_order_start', true);
+            $startTime = strtotime($start);
+            $start = date('Y-m-d', $startTime);
+            $end = get_post_meta($orderId, 'sbc_order_end', true);
+            $endTime = strtotime($end);
+            $end = date('Y-m-d', $endTime);
+
+            $status = get_post_meta( $orderId, 'sbc_order_select', true );
+            $parseResult[] = [$start, $end, $status];
+        }
+
+        foreach ($parseResult as $r) {
+            $from = $r[0];
+            $to = $r[1];
+
+            if ($dateStart >= $from and $dateStart < $to) {
+                $result = $r[2];
+            }
+
+            if ($dateEnd > $from and $dateEnd <= $to) {
+                $result = $r[2];
+            }
+
+            if ($dateStart < $from and $dateEnd > $to) {
+                $result = $r[2];
+            }
+        }
+    }
+
+    return $result;
+}
+
+
 // for delete
 
 if (!isset($content_width)) {
