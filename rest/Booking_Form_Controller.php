@@ -359,7 +359,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
                     $request['data'] .= '&orderId=' . $response['orderId'];
-                    Logger:log($request['data'], true);
+                    Logger::log($request['data'], true);
                     require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                     $href = 'https://krasnagorka.by/booking-form';
                     $type = 'booking-form';
