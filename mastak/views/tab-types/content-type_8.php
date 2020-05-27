@@ -16,7 +16,7 @@
     }
 
     @media (min-width: 768px){
-        .house-booking__info_event{
+        div.table-tab-col .house-booking__info_event{
             align-items: flex-end;
             text-align: right;
         }
