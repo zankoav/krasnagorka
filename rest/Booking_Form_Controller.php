@@ -342,7 +342,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     if(!empty($eventTabId)){
 
                         $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
-                        Logger::log($tabHouses, true);
+                        Logger::log(json_encode($tabHouses), true);
                         $freshPrice = 0;//getFreshPrice( $eventTabId, );
 
                         if(!empty($freshPrice)){
