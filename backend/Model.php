@@ -163,6 +163,7 @@ class Model
     {
 
         $bookingId = $_GET['booking'];
+        $eventTabId = $_GET['eventTabId'];
         $dateFrom  = $_GET['from'];
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
@@ -204,6 +205,10 @@ class Model
         if (!empty($dateFrom) and !empty($dateTo)) {
             $result['dateFrom'] = $dateFrom;
             $result['dateTo']   = $dateTo;
+        }
+
+        if (!empty($eventTabId)) {
+            $result['eventTabId'] = $eventTabId;
         }
 
         if (!empty($teremRoom)) {
