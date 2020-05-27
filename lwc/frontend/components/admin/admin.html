@@ -3,7 +3,13 @@
         <z-header-primary model={model} slot="header"></z-header-primary>
         <z-booking-form 
         obj-id={model.id}
-        date-from={model.dateFrom} date-to={model.dateTo} contract-offer={model.mainContent.contractOffer} object-title={model.mainContent.title} object-type={model.mainContent.type} slot="main"></z-booking-form>
+        date-from={model.dateFrom} 
+        date-to={model.dateTo} 
+        contract-offer={model.mainContent.contractOffer} 
+        object-title={model.mainContent.title} 
+        object-type={model.mainContent.type} 
+        event-tab-id={model.eventTabId} 
+        slot="main"></z-booking-form>
         <z-footer model={model} slot="footer"></z-footer>
     </z-app>
 </template>
