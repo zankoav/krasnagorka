@@ -342,8 +342,15 @@ class Booking_Form_Controller extends WP_REST_Controller
                     if(!empty($eventTabId)){
 
                         $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
-                        Logger::log(json_encode($tabHouses), true);
-                        $freshPrice = 0;//getFreshPrice( $eventTabId, );
+                        $freshPrice = null;
+                        foreach($tabHouses as $tabHouse){
+                            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+                            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+                            if($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd){
+                                $freshPrice = $tabHouse['new_price'];
+                                break;
+                            }
+                        }
 
                         if(!empty($freshPrice)){
                             $request['data'] .= '&freshPrice=' . $freshPrice;
@@ -352,7 +359,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
                     $request['data'] .= '&orderId=' . $response['orderId'];
-                    
+                    Logger:log($request['data'], true);
                     require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                     $href = 'https://krasnagorka.by/booking-form';
                     $type = 'booking-form';
