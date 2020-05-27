@@ -70,7 +70,6 @@ export default class BookingForm extends LightningElement {
         this.dateTo = this.dateTo || "";
         this.dateFrom = this.dateFrom || "";
         this.eventTabId = this.eventTabId || "";
-        console.log('eventTabId', this.eventTabId);
         this.objId = this.objId === "undefined" ? null : this.objId;
         const cid = getCookie("_ga");
         if (cid) {
