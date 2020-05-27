@@ -15,6 +15,10 @@
         font-weight: bold;
     }
 
+    .table-tab-house__img{
+        border-radius: 6px;
+    }
+
     @media (min-width: 768px){
         div.table-tab-col .house-booking__info_event{
             align-items: flex-end;
@@ -50,7 +54,7 @@
 
         $house_title = get_the_title($item['house']);
         $house_link = get_the_permalink($item['house']);
-        $house_img = get_the_post_thumbnail_url($item['house'], 'full');
+        $house_img = get_the_post_thumbnail_url($item['house'], 'houses_last_iphone_5');
 
 
         /**
