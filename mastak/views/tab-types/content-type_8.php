@@ -106,9 +106,6 @@
 
         $price = get_current_price($price_byn);
 
-
-        
-
         ?>
         <div class="table-tab-row">
             <div class="table-tab-col">
@@ -126,23 +123,20 @@
                 <div class="table-tab-text big-text content-text">
                     <?= wpautop($item['description']); ?>
                 </div>
-                <?php if(is_user_logged_in()):?>
-                    <div class="tab-house__from-top">c <?=date("d.m", strtotime($from))?> по <?=date("d.m", strtotime($to))?></div>
-                   
-                    <?php 
-                        $term = get_term( $calendarId, 'sbc_calendars' );
-                        $teremName = in_array($calendarId, $teremItemsIds) ? "&terem=$term->name": ''; 
-                    if( $orderStatus === false):?>
-                        <div class="tab-house__button-wrapper">
-                            <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from))?>&to=<?=date("Y-m-d", strtotime($to))?><?= $teremName;?>" 
-                                class="our-house__button" 
-                                target="_blank">
-                                забронировать
-                            </a>
-                        </div>
-                    <?php else:?>
-                        <div class="tab-house__reserved">Зарезервированно</div>
-                    <?php endif;?>
+                <div class="tab-house__from-top">c <?=date("d.m", strtotime($from))?> по <?=date("d.m", strtotime($to))?></div>
+                <?php 
+                    $term = get_term( $calendarId, 'sbc_calendars' );
+                    $teremName = in_array($calendarId, $teremItemsIds) ? "&terem=$term->name": ''; 
+                if( $orderStatus === false):?>
+                    <div class="tab-house__button-wrapper">
+                        <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from))?>&to=<?=date("Y-m-d", strtotime($to))?><?= $teremName;?>" 
+                            class="our-house__button" 
+                            target="_blank">
+                            забронировать
+                        </a>
+                    </div>
+                <?php else:?>
+                    <div class="tab-house__reserved">Зарезервированно</div>
                 <?php endif;?>
             </div>
             <div class="table-tab-col">
