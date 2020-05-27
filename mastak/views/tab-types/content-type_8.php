@@ -10,6 +10,21 @@
         margin-bottom: 1rem;
     }
 
+    .tab-house__reserved{
+        text-align: center;
+        font-weight: bold;
+    }
+
+    @media (min-width: 768px){
+        .house-booking__info_event{
+            align-items: flex-end;
+            text-align: right;
+        }
+
+        .table-tab-price{
+            align-self: flex-start;
+        }
+    }
 </style>
 
 <?php
