@@ -97,7 +97,7 @@ if (!$isTerem) {
                 </a>
 
                 <?php if ($isTerem) : ?>
-                    <a href="/booking-form/?booking=<?= get_the_ID(); ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button b-ml-2" target="_blank">
+                    <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button b-ml-2">
                         забронировать
                     </a>
                     <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray b-ml-2">
