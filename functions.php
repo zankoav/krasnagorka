@@ -220,7 +220,7 @@ function getCalendarId($calendarShortCode)
                 }
             </style>
             <script type="text/javascript">
-                var orderedIds = JSON.parse(<?=$ids_json;?>);
+                var orderedIds = <?=$ids_json;?>;
                 console.log('orderedIds',orderedIds);
             </script>
         <?php   
