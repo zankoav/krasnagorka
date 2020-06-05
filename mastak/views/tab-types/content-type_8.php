@@ -45,7 +45,7 @@
     $items = $tab->getItems();
     
     function cmpItems($a, $b) {
-        return strcmp($a['to'], $b['to']);
+        return strcmp($a['from'], $b['from']);
     }
 
     usort($items, "cmpItems");
