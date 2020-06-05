@@ -226,5 +226,5 @@ function getCalendarId($calendarShortCode)
         <?php   
     }
 
-    do_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
+    add_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
     
