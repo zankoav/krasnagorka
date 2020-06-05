@@ -209,3 +209,22 @@ function getCalendarId($calendarShortCode)
     }
     
     add_action( 'cmb2_after_form', 'cmb2_after_form_do_js_validation', 10, 2 );
+
+    function change_ordered_color( $post_id, $cmb){
+        $ids = [10,2,3,4,5];
+        $ids_json = json_encode($ids);
+        ?>
+            <style>
+                .bgc-green{
+                    background-color:rgb(191, 250, 183);
+                }
+            </style>
+            <script type="text/javascript">
+                const orderedIds = JSON.parse(<?=$ids_json;?>);
+                console.log('orderedIds',orderedIds);
+            </script>
+        <?php   
+    }
+
+    do_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
+    
