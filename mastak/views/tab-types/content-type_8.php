@@ -41,7 +41,16 @@
     $teremItemsIds = array(18,19,20,21,22,23,24,25,26,27,28,29);
 ?>
 <div class="accordion-mixed__content-inner">
-    <?php foreach ($tab->getItems() as $item) :
+    <?php 
+    $items = $tab->getItems();
+    
+    function cmpItems($a, $b) {
+        return strcmp($a['from'], $b['from']);
+    }
+
+    usort($items, "cmpItems");
+
+    foreach ($items as $item) :
 
         $from = $item['from'];
         $to = $item['to'];
@@ -136,7 +145,7 @@
                         </a>
                     </div>
                 <?php else:?>
-                    <div class="tab-house__reserved">Зарезервированно</div>
+                    <div class="tab-house__reserved">Зарезервировано</div>
                 <?php endif;?>
             </div>
             <div class="table-tab-col">
