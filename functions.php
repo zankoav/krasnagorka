@@ -211,6 +211,12 @@ function getCalendarId($calendarShortCode)
     add_action( 'cmb2_after_form', 'cmb2_after_form_do_js_validation', 10, 2 );
 
     function change_ordered_color( $post_id, $cmb){
+        $post_type = get_post_type( $post_id );
+
+        if($post_type != 'event_tab')
+            return;
+
+     
         $ids = [10,2,3,4,5];
         $ids_json = json_encode($ids);
         ?>
@@ -222,6 +228,13 @@ function getCalendarId($calendarShortCode)
             <script type="text/javascript">
                 var orderedIds = JSON.parse("<?=$ids_json;?>");
                 console.log('orderedIds',orderedIds);
+                jQuery(document).ready(function($) {
+                    $('#cmb2-metabox-mastak_event_tab_type_8').find('[data-iterator]').each(function(index, item){
+                        const value = $(this).find(`#mastak_event_tab_type_8_items_${index}_calendar`).value;
+                        console.log('value',value);
+                    });
+                });
+                //mastak_event_tab_type_8_items_0_calendar
             </script>
         <?php   
     }
