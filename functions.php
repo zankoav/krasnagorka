@@ -212,10 +212,10 @@ function getCalendarId($calendarShortCode)
 
     function change_ordered_color( $post_id, $cmb){
         $post_type = get_post_type( $post_id );
-
-        if($post_type != 'event_tab')
+        var_dump($post_type);
+        if($post_type != 'event_tab'){
             return;
-
+        }
      
         $ids = [10,2,3,4,5];
         $ids_json = json_encode($ids);
@@ -234,7 +234,6 @@ function getCalendarId($calendarShortCode)
                         console.log('value',value);
                     });
                 });
-                //mastak_event_tab_type_8_items_0_calendar
             </script>
         <?php   
     }
