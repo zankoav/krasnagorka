@@ -101,6 +101,14 @@
                                     <span class="contacts-data__item-text">Популярные вопросы (FAQ)</span>
                                 </div>
                             </a>
+                            <a href="https://krasnagorka.by/dogovor-prisoedineniya/" class="contacts-data__item">
+                                <img src="<?= CORE_PATH ?>assets/icons/contacts-data/contract.svg"
+                                     alt="support"
+                                     class="contacts-data__item-icon">
+                                <div class="contacts-data__item-text-wrapper">
+                                    <span class="contacts-data__item-text">Договор присоединения</span>
+                                </div>
+                            </a>
                         </div>
                         <div class="contacts-data__second">
                             <div class="contacts-data__item">
