@@ -230,8 +230,7 @@ function getCalendarId($calendarShortCode)
                 jQuery(document).ready(function($) {
                     $('#cmb2-metabox-mastak_event_tab_type_8').find('[data-iterator]').each(function(index, item){
                         const $calendar = $(this).find(`#mastak_event_tab_type_8_items_${index}_calendar`);
-                        console.log($calendar);
-                        const value = $calendar.val();
+                        const value = $calendar[0].value;
                         console.log('value',value);
                     });
                 });
