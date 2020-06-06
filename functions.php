@@ -214,6 +214,7 @@ function getCalendarId($calendarShortCode)
         $post_type = get_post_type( $post_id );
         var_dump($post_type);
         var_dump("GGG");
+        var_dump($post_id);
         if($post_type != 'event_tab'){
             return;
         }
