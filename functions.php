@@ -230,8 +230,14 @@ function getCalendarId($calendarShortCode)
         $ids_json = json_encode($ids);
         ?>
             <style>
-                .bgc-green{
-                    background-color:rgb(191, 250, 183);
+                .bgc-reserved{
+                    background-color:#c7dff1 !important;
+                }
+                .bgc-prepaid{
+                    background-color:#ffecb5 !important;
+                }
+                .bgc-booked{
+                    background-color:#fdb7ce !important;
                 }
             </style>
             <script type="text/javascript">
@@ -243,7 +249,11 @@ function getCalendarId($calendarShortCode)
                         const $calendar = $(this).find(id);
                         if($calendar[0]){
                             const value = $calendar[0].value;
-                            console.log('value',value);
+                            if(orderedIds[value]){
+                                $(this).addClass(`bgc-${orderedIds[value]}`);
+                                $(this).find('.cmb-group-title').addClass(`bgc-${orderedIds[value]}`);
+                            }
+                        
                         }
                     });
                 });
