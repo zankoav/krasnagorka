@@ -247,18 +247,12 @@ function getCalendarId($calendarShortCode)
                 console.log('orderedIds',orderedIds);
                 jQuery(document).ready(function($) {
                     $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item){
-                        if(orderedIds[index]){
-                            const state = orderedIds[index];
-                            const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
-                            const $calendar = $(this).find(id);
-                            if($calendar[0]){
-                                const value = $calendar[0].value;
-                                if(value == state.calendar){
-                                    $(this).addClass(`bgc-${state.status}`);
-                                    $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
-                                }
-                            
-                            }
+                        const state = orderedIds[index];
+                        const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
+                        const $calendar = $(this).find(id);
+                        if(state && $calendar[0] && $calendar[0].value ==state.calendar){
+                            $(this).addClass(`bgc-${state.status}`);
+                            $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
                         }
                     });
                 });
