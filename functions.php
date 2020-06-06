@@ -212,6 +212,7 @@ function getCalendarId($calendarShortCode)
 
     function change_ordered_color( $box_id, $cmb){
         $post_id = $_GET['post'];
+        var_dump($post_id);
         if(empty($post_id) || $box_id != 'mastak_event_tab_type_8'){
             return;
         }
