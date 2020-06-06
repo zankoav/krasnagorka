@@ -216,6 +216,8 @@ function getCalendarId($calendarShortCode)
             return;
         }
      
+        $postItems = get_post_meta($post_id, 'mastak_event_tab_type_8_items', 1);
+        var_dump($postItems);
         $ids = [10,2,3,4,5];
         $ids_json = json_encode($ids);
         ?>
