@@ -210,12 +210,9 @@ function getCalendarId($calendarShortCode)
     
     add_action( 'cmb2_after_form', 'cmb2_after_form_do_js_validation', 10, 2 );
 
-    function change_ordered_color( $post_id, $cmb){
-        $post_type = get_post_type( $post_id );
-        var_dump($post_type);
-        var_dump("GGG");
-        var_dump($post_id);
-        if($post_type != 'event_tab'){
+    function change_ordered_color( $box_id, $cmb){
+        $post_id = $_GET['post'];
+        if(empty($post_id) || $box_id != 'mastak_event_tab_type_8'){
             return;
         }
      
