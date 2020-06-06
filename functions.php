@@ -228,7 +228,7 @@ function getCalendarId($calendarShortCode)
                 var orderedIds = JSON.parse("<?=$ids_json;?>");
                 console.log('orderedIds',orderedIds);
                 jQuery(document).ready(function($) {
-                    $('#cmb2-metabox-mastak_event_tab_type_8').find('[data-iterator]').each(function(index, item){
+                    $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item){
                         const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
                         console.log(index, id);
                         const $calendar = $(this).find(id);
