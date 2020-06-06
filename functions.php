@@ -218,13 +218,15 @@ function getCalendarId($calendarShortCode)
         
         $postItems = get_post_meta($post_id, 'mastak_event_tab_type_8_items', 1);
         $ids = [];
+        $index = 0;
         foreach($postItems as $postItem){
             $from = $postItem['from'];
             $to = $postItem['to'];
             $calendarId = $postItem['calendar'];
             if($status = getOrderStatus($calendarId, $from, $to)){
-                $ids[$calendarId] = $status;
+                $ids[$index] = ['calendar'=>$calendarId ,'status'=>$status];
             }
+            $index ++;
         }
         
         $ids_json = json_encode($ids);
@@ -245,16 +247,18 @@ function getCalendarId($calendarShortCode)
                 console.log('orderedIds',orderedIds);
                 jQuery(document).ready(function($) {
                     $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item){
-                        const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
-                        const $calendar = $(this).find(id);
-                        if($calendar[0]){
-                            const value = $calendar[0].value;
-                            console.log('value',value);
-                            if(orderedIds[value]){
-                                $(this).addClass(`bgc-${orderedIds[value]}`);
-                                $(this).find('.cmb-group-title').addClass(`bgc-${orderedIds[value]}`);
+                        if(orderedIds[index]){
+                            const state = orderedIds[index];
+                            const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
+                            const $calendar = $(this).find(id);
+                            if($calendar[0]){
+                                const value = $calendar[0].value;
+                                if(value == state.calendar){
+                                    $(this).addClass(`bgc-${state.status}`);
+                                    $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
+                                }
+                            
                             }
-                        
                         }
                     });
                 });
