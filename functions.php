@@ -215,10 +215,18 @@ function getCalendarId($calendarShortCode)
         if(empty($post_id) || $box_id != 'mastak_event_tab_type_8'){
             return;
         }
-     
+        
         $postItems = get_post_meta($post_id, 'mastak_event_tab_type_8_items', 1);
-        var_dump($postItems);
-        $ids = [10,2,3,4,5];
+        $ids = [];
+        foreach($postItems as $postItem){
+            $from = $postItem['from'];
+            $to = $postItem['to'];
+            $calendarId = $postItem['calendar'];
+            if($status = getOrderStatus($calendarId, $from, $to)){
+                $ids[$calendarId] = $status;
+            }
+        }
+        
         $ids_json = json_encode($ids);
         ?>
             <style>
@@ -232,9 +240,7 @@ function getCalendarId($calendarShortCode)
                 jQuery(document).ready(function($) {
                     $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item){
                         const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
-                        console.log(index, id);
                         const $calendar = $(this).find(id);
-                        console.log($calendar[0]);
                         if($calendar[0]){
                             const value = $calendar[0].value;
                             console.log('value',value);
