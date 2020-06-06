@@ -249,6 +249,7 @@ function getCalendarId($calendarShortCode)
                         const $calendar = $(this).find(id);
                         if($calendar[0]){
                             const value = $calendar[0].value;
+                            console.log('value',value);
                             if(orderedIds[value]){
                                 $(this).addClass(`bgc-${orderedIds[value]}`);
                                 $(this).find('.cmb-group-title').addClass(`bgc-${orderedIds[value]}`);
