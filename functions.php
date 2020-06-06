@@ -213,6 +213,7 @@ function getCalendarId($calendarShortCode)
     function change_ordered_color( $post_id, $cmb){
         $post_type = get_post_type( $post_id );
         var_dump($post_type);
+        var_dump("GGG");
         if($post_type != 'event_tab'){
             return;
         }
