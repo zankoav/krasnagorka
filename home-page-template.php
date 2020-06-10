@@ -13,19 +13,25 @@
     get_header('mastak');
     get_template_part("mastak/views/header", "main-view");
 
-    $portfolio_slider       = get_option('mastak_home_appearance_options')['portfolio_slider'];
-    $portfolio_slider_delay = get_option('mastak_home_appearance_options')['portfolio_slider_delay'];
+    $options = get_option('mastak_home_appearance_options');
+    $portfolio_slider       = $options['portfolio_slider'];
+    $portfolio_slider_delay = $options['portfolio_slider_delay'];
 
-    $test_title        = get_option('mastak_home_appearance_options')['mastak_home_get_test_title'];
-    $test_description  = get_option('mastak_home_appearance_options')['mastak_home_get_test_description'];
-    $test_button_title = get_option('mastak_home_appearance_options')['mastak_home_get_test_button_name'];
-    $test_button_url   = get_option('mastak_home_appearance_options')['mastak_home_get_test_button_url'];
-    $test_image        = get_option('mastak_home_appearance_options')['mastak_home_parallax_image'];
+    $test_title        = $options['mastak_home_get_test_title'];
+    $test_description  = $options['mastak_home_get_test_description'];
+    $test_button_title = $options['mastak_home_get_test_button_name'];
+    $test_button_url   = $options['mastak_home_get_test_button_url'];
+    $test_image        = $options['mastak_home_parallax_image'];
 
-    $subtitle_1 = get_option('mastak_home_appearance_options')['mastak_home_subtitle_1'];
-    $subtitle_2 = get_option('mastak_home_appearance_options')['mastak_home_subtitle_2'];
+    $subtitle_1 = $options['mastak_home_subtitle_1'];
+    $subtitle_2 = $options['mastak_home_subtitle_2'];
 
-    $opportunities_ids   = get_option('mastak_home_appearance_options')['opportunity_home'];
+    $need_more_title = $options['mastak_home_need_more_title'];
+    $need_more_description = $options['mastak_home_need_more_description'];
+    $need_more_link_title = $options['mastak_home_need_more_link_title'];
+    $need_more_link = $options['mastak_home_need_more_link'];
+
+    $opportunities_ids   = $options['opportunity_home'];
     $opportunities_array = [];
     foreach ((array)$opportunities_ids as $key => $entry) {
 
@@ -76,10 +82,10 @@
     <div class="b-container more-questions b-mt-2">
         <div class="more-questions__wrapper">
             <div class="more-questions__inner">
-                <p class="more-questions__title">Хотите забронировать?</p>
-                <p class="more-questions__description ta-c">Выберите понравившийся домик и забронируйте</p>
+                <p class="more-questions__title"><?=$need_more_title?></p>
+                <p class="more-questions__description ta-c"><?=$need_more_description?></p>
                 <div class="ta-c">
-                    <a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/" target="_blank" class="more-questions__submit">Выбрать домик</a>
+                    <a href="<?=$need_more_link?>" target="_blank" class="more-questions__submit"><?=$need_more_link_title?></a>
                 </div>
             </div>
         </div>
