@@ -62,7 +62,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $this->removeOrder($orderId);
 
-        if ($type != 'remove' and empty($orderId) and !empty($objectIds)) {
+        if ($type != 'remove') {
+
             $kalendars = array_map('intval', $objectIds);
             $kalendars = array_unique($kalendars);
             $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo);
@@ -70,9 +71,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $response['status'] = 'busy';
                 return $response;
             }
-        }
-
-        if ($type != 'remove') {
 
             $totalPrice = $request['totalPrice'];
             $havePayed  = $request['havePayed'];
