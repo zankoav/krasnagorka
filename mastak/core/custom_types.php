@@ -1625,6 +1625,36 @@
             'type' => 'file',
         ));
 
+        $cmb_options->add_field(array(
+            'name' => 'Секция "Хотите забронировать?"',
+            'id'   => 'need_more_t',
+            'type' => 'title'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => __('Заголовок', 'krasnagorka'),
+            'id'   => $prefix . 'need_more_title',
+            'type' => 'text',
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => __('Описание', 'krasnagorka'),
+            'id'   => $prefix . 'need_more_description',
+            'type' => 'textarea',
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => __('Название кнопки', 'krasnagorka'),
+            'id'   => $prefix . 'need_more_link_title',
+            'type' => 'text',
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => __('Ссылка кнопки', 'krasnagorka'),
+            'id'   => $prefix . 'need_more_link',
+            'type' => 'text',
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'mastak_home_page');
