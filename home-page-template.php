@@ -77,7 +77,7 @@
         <div class="more-questions__wrapper">
             <div class="more-questions__inner">
                 <p class="more-questions__title">Хотите забронировать?</p>
-                <p class="more-questions__description">Выберите понравившийся домик и забронируйте</p>
+                <p class="more-questions__description ta-c">Выберите понравившийся домик и забронируйте</p>
                 <div class="ta-c">
                     <a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/" target="_blank" class="more-questions__submit">Выбрать домик</a>
                 </div>
