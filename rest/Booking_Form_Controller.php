@@ -60,7 +60,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateTo = date("Y-m-d", strtotime($request['dateTo']));
         $objectIds  = $request['objectIds'];
 
-        $this->removeOrder($orderId);
+        
 
         if ($type != 'remove') {
 
@@ -70,6 +70,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             if (!$result) {
                 $response['status'] = 'busy';
                 return $response;
+            }else{
+                $this->removeOrder($orderId);
             }
 
             $totalPrice = $request['totalPrice'];
@@ -166,6 +168,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 $response['orderId'] = $post_id;
             }
+        }else{
+            $this->removeOrder($orderId);
         }
 
         $response['status'] = 'success';
