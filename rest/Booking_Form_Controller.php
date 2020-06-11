@@ -66,7 +66,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $kalendars = array_map('intval', $objectIds);
             $kalendars = array_unique($kalendars);
-            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo);
+            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, true);
             if (!$result) {
                 $response['status'] = 'busy';
                 return $response;
@@ -245,9 +245,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
-    private function isAvailableOrder($calendarId, $dateStart, $dateEnd)
+    private function isAvailableOrder($calendarId, $dateStart, $dateEnd, $isExistsCurrent)
     {
         $result = false;
+        $times = 0;
 
         if (isset($calendarId, $dateStart, $dateEnd)) {
             $result = true;
@@ -298,6 +299,14 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if ($dateStart < $from and $dateEnd > $to) {
                     $result = false;
                 }
+
+                if($dateStart == $from and $dateEnd == $to){
+                    $times  ++; 
+                }
+            }
+
+            if($isExistsCurrent and $times == 1){
+                $result = true;
             }
         }
 
@@ -327,7 +336,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         } else {
             $result = false;
 
-            if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd)) {
+            if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
                 $response = $this->insertWPLead([
                     "type" => "reserved",
                     "objectIds" => [$calendarId],
