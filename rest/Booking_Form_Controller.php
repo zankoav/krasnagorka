@@ -66,7 +66,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $kalendars = array_map('intval', $objectIds);
             $kalendars = array_unique($kalendars);
-            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, true);
+            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
             if (!$result) {
                 $response['status'] = 'busy';
                 return $response;
@@ -245,10 +245,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
-    private function isAvailableOrder($calendarId, $dateStart, $dateEnd, $isExistsCurrent)
+    private function isAvailableOrder($calendarId, $dateStart, $dateEnd, $orderIdFromCrm)
     {
         $result = false;
-        $times = 0;
 
         if (isset($calendarId, $dateStart, $dateEnd)) {
             $result = true;
@@ -281,32 +280,43 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $end = get_post_meta($orderId, 'sbc_order_end', true);
                 $endTime = strtotime($end);
                 $end = date('Y-m-d', $endTime);
-                $parseResult[] = [$start, $end];
+                $parseResult[] = [$start, $end, $orderId];
             }
 
             foreach ($parseResult as $r) {
                 $from = $r[0];
                 $to = $r[1];
+                $orId = $r[2];
 
                 if ($dateStart >= $from and $dateStart < $to) {
-                    $result = false;
+                    if($orderIdFromCrm != false){
+                        if($orderIdFromCrm != $orId){
+                            $result = false;
+                        }
+                    }else{
+                        $result = false;
+                    }
                 }
 
                 if ($dateEnd > $from and $dateEnd <= $to) {
-                    $result = false;
+                    if($orderIdFromCrm != false){
+                        if($orderIdFromCrm != $orId){
+                            $result = false;
+                        }
+                    }else{
+                        $result = false;
+                    }
                 }
 
                 if ($dateStart < $from and $dateEnd > $to) {
-                    $result = false;
+                    if($orderIdFromCrm != false){
+                        if($orderIdFromCrm != $orId){
+                            $result = false;
+                        }
+                    }else{
+                        $result = false;
+                    }
                 }
-
-                if($dateStart == $from and $dateEnd == $to){
-                    $times  ++; 
-                }
-            }
-
-            if($isExistsCurrent and $times == 1){
-                $result = true;
             }
         }
 
