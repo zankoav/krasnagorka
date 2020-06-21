@@ -324,7 +324,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_order($request)
     {
-        Logger::log('create_order:'.json_encode($request));
+        Logger::log('create_order:'.json_encode($request->get_json_params()));
         $result = true;
         try{
             $spam = $request['message'];
