@@ -52,128 +52,134 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     private function insertWPLead($request)
     {
-
-        $type     = $request['type'];
-        $orderId  = $request['orderId'];
+        Logger::log(json_encode($request));
         $response = ['status' => 'error'];
-        $dateFrom = date("Y-m-d", strtotime($request['dateFrom']));
-        $dateTo = date("Y-m-d", strtotime($request['dateTo']));
-        $objectIds  = $request['objectIds'];
+        try{
+            $type     = $request['type'];
+            $orderId  = $request['orderId'];
+            
+            $dateFrom = date("Y-m-d", strtotime($request['dateFrom']));
+            $dateTo = date("Y-m-d", strtotime($request['dateTo']));
+            $objectIds  = $request['objectIds'];
 
-        
+            
 
-        if ($type != 'remove') {
+            if ($type != 'remove') {
 
-            $kalendars = array_map('intval', $objectIds);
-            $kalendars = array_unique($kalendars);
-            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
-            if (!$result) {
-                $response['status'] = 'busy';
-                return $response;
+                $kalendars = array_map('intval', $objectIds);
+                $kalendars = array_unique($kalendars);
+                $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
+                if (!$result) {
+                    $response['status'] = 'busy';
+                    return $response;
+                }else{
+                    $this->removeOrder($orderId);
+                }
+
+                $totalPrice = $request['totalPrice'];
+                $havePayed  = $request['havePayed'];
+                $comment    = $request['comment'];
+
+                $contactName   = $request['contactName'];
+                $contactPhone  = $request['contactPhone'];
+                $contactEmail  = $request['contactEmail'];
+                $contactStatus = $request['contactStatus'];
+
+                $client   = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
+                $clientId = null;
+                $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
+
+                if (empty($client)) {
+                    $client_data = array(
+                        'post_title'   => $contactName . ' ' . $addedName,
+                        'post_content' => '',
+                        'post_status'  => 'publish',
+                        'post_author'  => 23,
+                        'post_type'    => 'sbc_clients'
+                    );
+                    // Вставляем данные в БД
+                    $clientId = wp_insert_post(wp_slash($client_data));
+                } else {
+                    $clientPostArr = array();
+                    $clientPostArr['ID'] = $client->ID;
+                    $clientPostArr['post_title'] = $contactName . ' ' . $addedName;
+
+                    // Обновляем данные в БД
+                    wp_update_post(wp_slash($clientPostArr));
+                    $clientId = $client->ID;
+                }
+
+                if (!empty($contactEmail)) {
+                    update_post_meta($clientId, 'sbc_client_email', $contactEmail);
+                }
+
+                if (!empty($contactPhone)) {
+                    update_post_meta($clientId, 'sbc_client_phone', $contactPhone);
+                }
+
+                if (!empty($contactStatus)) {
+                    $contactStatusIds = [$contactStatus];
+                    $contactStatusIds = array_map('intval', $contactStatusIds);
+                    wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
+                }
+
+                $post_data = array(
+                    'post_title'   => date("Y-m-d H:i:s"),
+                    'post_content' => '',
+                    'post_status'  => 'publish',
+                    'post_author'  => 23,
+                    'post_type'    => 'sbc_orders'
+                );
+
+                // Вставляем данные в БД
+                $post_id = wp_insert_post(wp_slash($post_data));
+
+                if (is_wp_error($post_id)) {
+                    $response['message'] = $post_id->get_error_message();
+                } else {
+                    if (!empty($contactName)) {
+                        $contactTemplate = $clientId . " " . $contactName . " " . $contactPhone . " " . $contactEmail . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+
+                        update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
+                        $this->update_all_clients_orders($clientId, $contactTemplate);
+                    }
+                    if (!empty($type)) {
+                        update_post_meta($post_id, 'sbc_order_select', $type);
+                    }
+                    if (!empty($dateFrom)) {
+                        update_post_meta($post_id, 'sbc_order_start', $dateFrom);
+                    }
+                    if (!empty($dateTo)) {
+                        update_post_meta($post_id, 'sbc_order_end', $dateTo);
+                    }
+                    if (!empty($totalPrice)) {
+                        update_post_meta($post_id, 'sbc_order_price', $totalPrice);
+                    }
+                    if (!empty($havePayed)) {
+                        update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
+                    }
+                    if (!empty($comment)) {
+                        update_post_meta($post_id, 'sbc_order_desc', $comment);
+                    }
+
+                    if (!empty($objectIds)) {
+                        $objectIds = array_map('intval', $objectIds);
+                        $objectIds = array_unique($objectIds);
+                        wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
+                    }
+
+                    $response['orderId'] = $post_id;
+                }
             }else{
                 $this->removeOrder($orderId);
             }
 
-            $totalPrice = $request['totalPrice'];
-            $havePayed  = $request['havePayed'];
-            $comment    = $request['comment'];
+            $response['status'] = 'success';
 
-            $contactName   = $request['contactName'];
-            $contactPhone  = $request['contactPhone'];
-            $contactEmail  = $request['contactEmail'];
-            $contactStatus = $request['contactStatus'];
-
-            $client   = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
-            $clientId = null;
-            $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
-
-            if (empty($client)) {
-                $client_data = array(
-                    'post_title'   => $contactName . ' ' . $addedName,
-                    'post_content' => '',
-                    'post_status'  => 'publish',
-                    'post_author'  => 23,
-                    'post_type'    => 'sbc_clients'
-                );
-                // Вставляем данные в БД
-                $clientId = wp_insert_post(wp_slash($client_data));
-            } else {
-                $clientPostArr = array();
-                $clientPostArr['ID'] = $client->ID;
-                $clientPostArr['post_title'] = $contactName . ' ' . $addedName;
-
-                // Обновляем данные в БД
-                wp_update_post(wp_slash($clientPostArr));
-                $clientId = $client->ID;
-            }
-
-            if (!empty($contactEmail)) {
-                update_post_meta($clientId, 'sbc_client_email', $contactEmail);
-            }
-
-            if (!empty($contactPhone)) {
-                update_post_meta($clientId, 'sbc_client_phone', $contactPhone);
-            }
-
-            if (!empty($contactStatus)) {
-                $contactStatusIds = [$contactStatus];
-                $contactStatusIds = array_map('intval', $contactStatusIds);
-                wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
-            }
-
-            $post_data = array(
-                'post_title'   => date("Y-m-d H:i:s"),
-                'post_content' => '',
-                'post_status'  => 'publish',
-                'post_author'  => 23,
-                'post_type'    => 'sbc_orders'
-            );
-
-            // Вставляем данные в БД
-            $post_id = wp_insert_post(wp_slash($post_data));
-
-            if (is_wp_error($post_id)) {
-                $response['message'] = $post_id->get_error_message();
-            } else {
-                if (!empty($contactName)) {
-                    $contactTemplate = $clientId . " " . $contactName . " " . $contactPhone . " " . $contactEmail . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
-
-                    update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
-                    $this->update_all_clients_orders($clientId, $contactTemplate);
-                }
-                if (!empty($type)) {
-                    update_post_meta($post_id, 'sbc_order_select', $type);
-                }
-                if (!empty($dateFrom)) {
-                    update_post_meta($post_id, 'sbc_order_start', $dateFrom);
-                }
-                if (!empty($dateTo)) {
-                    update_post_meta($post_id, 'sbc_order_end', $dateTo);
-                }
-                if (!empty($totalPrice)) {
-                    update_post_meta($post_id, 'sbc_order_price', $totalPrice);
-                }
-                if (!empty($havePayed)) {
-                    update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
-                }
-                if (!empty($comment)) {
-                    update_post_meta($post_id, 'sbc_order_desc', $comment);
-                }
-
-                if (!empty($objectIds)) {
-                    $objectIds = array_map('intval', $objectIds);
-                    $objectIds = array_unique($objectIds);
-                    wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
-                }
-
-                $response['orderId'] = $post_id;
-            }
-        }else{
-            $this->removeOrder($orderId);
+        }catch(Exception $e){
+            Logger::log($e->getMessage());
+            return ['status' => 'error'];
         }
-
-        $response['status'] = 'success';
-
         return $response;
     }
 
