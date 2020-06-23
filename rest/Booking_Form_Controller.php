@@ -35,7 +35,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $amocrm_lead_path      = '/create-amocrm-lead/';
 
-        register_rest_route($namespace, $path, [
+        register_rest_route($namespace, $amocrm_lead_path, [
             array(
                 'methods'             => 'POST',
                 'callback'            => array($this, 'create_amocrm_lead'),
