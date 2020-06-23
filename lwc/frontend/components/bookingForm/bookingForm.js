@@ -295,14 +295,12 @@ export default class BookingForm extends LightningElement {
                         eventAction: "success_send",
                     });
 
-                    console.log('data', result.data);
-
                     fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json; charset=utf-8",
                         }, body: JSON.stringify({
-                            data: result.data
+                            data: result
                         }),
                     })
                         .then((response) => {
