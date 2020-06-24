@@ -28,9 +28,11 @@
             ]));
 
 
+        $leadsService = $apiClient->leads();
+
         try {
             $leadsCollection = $leadsService->get();
-            var_dump("FIRST",$leadsCollection);
+            var_dump("FIRST", $leadsCollection);
             $leadsCollection = $leadsService->nextPage($leadsCollection);
             var_dump("SECOND",$leadsCollection);
         } catch (AmoCRMApiException $e) {
