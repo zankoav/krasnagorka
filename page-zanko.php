@@ -11,8 +11,11 @@
         $clientId = 'ivan.6113446@gmail.com';
         $clientSecret = '20b87286dec1a72badab4db93cfef117fb9fedf6';
         $redirectUri = 'krasnogorka';
-        $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
 
+        if ( ! class_exists( '\AmoCRM\Client\AmoCRMApiClient' ) ) 
+            return;
+
+        $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         var_dump($apiClient);
 
     
