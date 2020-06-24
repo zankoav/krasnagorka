@@ -31,10 +31,12 @@
         $leadsService = $apiClient->leads();
 
         try {
-            $leadsCollection = $leadsService->get();
-            var_dump("FIRST", $leadsCollection);
-            $leadsCollection = $leadsService->nextPage($leadsCollection);
-            var_dump("SECOND",$leadsCollection);
+
+            var_dump($leadsService);
+            // $leadsCollection = $leadsService->get();
+            // var_dump("FIRST", $leadsCollection);
+            // $leadsCollection = $leadsService->nextPage($leadsCollection);
+            // var_dump("SECOND",$leadsCollection);
         } catch (AmoCRMApiException $e) {
             printError($e);
             die;
