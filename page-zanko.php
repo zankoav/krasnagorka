@@ -14,7 +14,7 @@
     <?php
         $clientId = 'ivan.6113446@gmail.com';
         $clientSecret = '20b87286dec1a72badab4db93cfef117fb9fedf6';
-        $redirectUri = 'krasnogorka.amocrm.ru';
+        $redirectUri = null;
 
         if ( ! class_exists( '\AmoCRM\Client\AmoCRMApiClient' ) ) 
             return;
@@ -24,7 +24,7 @@
                 'access_token' => '123456',
                 'refresh_token' => '123456',
                 'expires' => 1893456000,
-                'baseDomain' => 'krasnogorka.amocrm.ru',
+                'baseDomain' => 'krasnogorka',
             ]));
 
         $leadsService = $apiClient->leads();
