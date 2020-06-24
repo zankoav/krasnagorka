@@ -14,15 +14,15 @@
     <?php
         $clientId = 'ivan.6113446@gmail.com';
         $clientSecret = '20b87286dec1a72badab4db93cfef117fb9fedf6';
-        $redirectUri = 'krasnogorka';
+        $redirectUri = 'krasnogorka.amocrm.ru';
 
         if ( ! class_exists( '\AmoCRM\Client\AmoCRMApiClient' ) ) 
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $apiClient->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
-                'access_token' => '20b87286dec1a72badab4db93cfef117fb9fedf6',
-                'refresh_token' => '20b87286dec1a72badab4db93cfef117fb9fedf6',
+                'access_token' => '123456',
+                'refresh_token' => '123456',
                 'expires' => 1893456000,
                 'baseDomain' => 'krasnogorka.amocrm.ru',
             ]));
@@ -31,10 +31,8 @@
         $leadsService = $apiClient->leads();
 
         try {
-
-            var_dump($leadsService);
             $leadsCollection = $leadsService->get();
-            // var_dump("FIRST", $leadsCollection);
+            var_dump("FIRST", $leadsCollection);
             // $leadsCollection = $leadsService->nextPage($leadsCollection);
             // var_dump("SECOND",$leadsCollection);
         } catch (AmoCRMApiException $e) {
