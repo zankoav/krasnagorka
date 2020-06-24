@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/Model.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $assets = new Assets();
 $model  = new Model();
@@ -132,80 +133,80 @@ function getCalendarId($calendarShortCode)
     
         $added = true;
         ?>
-        <script type="text/javascript">
-        jQuery(document).ready(function($) {
-    
-            $form = $( document.getElementById( 'post' ) );
-            $htmlbody = $( 'html, body' );
-            $toValidate = $( '[data-validation]' );
-    
-            if ( ! $toValidate.length ) {
-                return;
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+
+        $form = $(document.getElementById('post'));
+        $htmlbody = $('html, body');
+        $toValidate = $('[data-validation]');
+
+        if (!$toValidate.length) {
+            return;
+        }
+
+        function checkValidation(evt) {
+            var labels = [];
+            var $first_error_row = null;
+            var $row = null;
+
+            function add_required($row) {
+                $row.css({ 'background-color': 'rgb(255, 170, 170)' });
+                $first_error_row = $first_error_row ? $first_error_row : $row;
+                labels.push($row.find('.cmb-th label').text());
             }
-    
-            function checkValidation( evt ) {
-                var labels = [];
-                var $first_error_row = null;
-                var $row = null;
-    
-                function add_required( $row ) {
-                    $row.css({ 'background-color': 'rgb(255, 170, 170)' });
-                    $first_error_row = $first_error_row ? $first_error_row : $row;
-                    labels.push( $row.find( '.cmb-th label' ).text() );
+
+            function remove_required($row) {
+                $row.css({ background: '' });
+            }
+
+            $toValidate.each(function () {
+                var $this = $(this);
+                var val = $this.val();
+                $row = $this.parents('.cmb-row');
+
+                if ($this.is('[type="button"]') || $this.is('.cmb2-upload-file-id')) {
+                    return true;
                 }
-    
-                function remove_required( $row ) {
-                    $row.css({ background: '' });
-                }
-    
-                $toValidate.each( function() {
-                    var $this = $(this);
-                    var val = $this.val();
-                    $row = $this.parents( '.cmb-row' );
-    
-                    if ( $this.is( '[type="button"]' ) || $this.is( '.cmb2-upload-file-id' ) ) {
-                        return true;
-                    }
-    
-                    if ( 'required' === $this.data( 'validation' ) ) {
-                        if ( $row.is( '.cmb-type-file-list' ) ) {
-    
-                            var has_LIs = $row.find( 'ul.cmb-attach-list li' ).length > 0;
-    
-                            if ( ! has_LIs ) {
-                                add_required( $row );
-                            } else {
-                                remove_required( $row );
-                            }
-    
+
+                if ('required' === $this.data('validation')) {
+                    if ($row.is('.cmb-type-file-list')) {
+
+                        var has_LIs = $row.find('ul.cmb-attach-list li').length > 0;
+
+                        if (!has_LIs) {
+                            add_required($row);
                         } else {
-                            if ( ! val ) {
-                                add_required( $row );
-                            } else {
-                                remove_required( $row );
-                            }
+                            remove_required($row);
+                        }
+
+                    } else {
+                        if (!val) {
+                            add_required($row);
+                        } else {
+                            remove_required($row);
                         }
                     }
-    
-                });
-    
-                if ( $first_error_row ) {
-                    evt.preventDefault();
-                    alert( '<?php _e( 'The following fields are required and highlighted below:', 'cmb2' ); ?> ' + labels.join( ', ' ) );
-                    $htmlbody.animate({
-                        scrollTop: ( $first_error_row.offset().top - 200 )
-                    }, 1000);
-                } else {
-                    // Feel free to comment this out or remove
-                    alert( 'submission is good!' );
                 }
-    
+
+            });
+
+            if ($first_error_row) {
+                evt.preventDefault();
+                alert('<?php _e( 'The following fields are required and highlighted below: ', 'cmb2' ); ?> ' + labels.join(', '));
+                $htmlbody.animate({
+                    scrollTop: ($first_error_row.offset().top - 200)
+                }, 1000);
+            } else {
+                // Feel free to comment this out or remove
+                alert('submission is good!');
             }
-    
-            $form.on( 'submit', checkValidation );
-        });
-        </script>
-        <?php
+
+        }
+
+        $form.on('submit', checkValidation);
+    });
+</script>
+<?php
     }
     
     add_action( 'cmb2_after_form', 'cmb2_after_form_do_js_validation', 10, 2 );
@@ -231,33 +232,35 @@ function getCalendarId($calendarShortCode)
         
         $ids_json = json_encode($ids);
         ?>
-            <style>
-                .bgc-reserved{
-                    background-color:#c7dff1 !important;
-                }
-                .bgc-prepaid{
-                    background-color:#ffecb5 !important;
-                }
-                .bgc-booked{
-                    background-color:#fdb7ce !important;
-                }
-            </style>
-            <script type="text/javascript">
-                var orderedIds = JSON.parse('<?=$ids_json;?>');
-                console.log('orderedIds',orderedIds);
-                jQuery(document).ready(function($) {
-                    $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item){
-                        const state = orderedIds[index];
-                        const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
-                        const $calendar = $(this).find(id);
-                        if(state && $calendar[0] && $calendar[0].value ==state.calendar){
-                            $(this).addClass(`bgc-${state.status}`);
-                            $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
-                        }
-                    });
-                });
-            </script>
-        <?php   
+<style>
+    .bgc-reserved {
+        background-color: #c7dff1 !important;
+    }
+
+    .bgc-prepaid {
+        background-color: #ffecb5 !important;
+    }
+
+    .bgc-booked {
+        background-color: #fdb7ce !important;
+    }
+</style>
+<script type="text/javascript">
+    var orderedIds = JSON.parse('<?=$ids_json;?>');
+    console.log('orderedIds', orderedIds);
+    jQuery(document).ready(function ($) {
+        $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function (index, item) {
+            const state = orderedIds[index];
+            const id = `#mastak_event_tab_type_8_items_${index}_calendar`;
+            const $calendar = $(this).find(id);
+            if (state && $calendar[0] && $calendar[0].value == state.calendar) {
+                $(this).addClass(`bgc-${state.status}`);
+                $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
+            }
+        });
+    });
+</script>
+<?php   
     }
 
     add_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
