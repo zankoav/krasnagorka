@@ -1,4 +1,8 @@
 <?php
+    ini_set('error_reporting', E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+
     if (!defined('ABSPATH')) {
         exit;
     }?>
@@ -16,8 +20,7 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $apiClient
-            ->setAccessToken(new AccessToken([
+        $apiClient->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
                 'access_token' => 'zankoav',
                 'refresh_token' => 'zankoav',
                 'expires' => 1893456000,
