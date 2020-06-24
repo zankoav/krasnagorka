@@ -20,14 +20,7 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $apiClient
-            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
-            ->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
-                'access_token' => '123456',
-                'refresh_token' => '123456',
-                'expires' => 1893456000,
-                'baseDomain' => 'krasnogorka.amocrm.ru'
-            ]));
+        $apiClient->setAccountBaseDomain('krasnogorka.amocrm.ru');
 
         $leadsService = $apiClient->leads();
 
