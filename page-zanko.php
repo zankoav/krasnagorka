@@ -27,7 +27,6 @@
                 'baseDomain' => 'krasnogorka.amocrm.ru',
             ]));
 
-
         $leadsService = $apiClient->leads();
 
         try {
