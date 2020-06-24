@@ -21,8 +21,8 @@
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $apiClient->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
-                'access_token' => 'zankoav',
-                'refresh_token' => 'zankoav',
+                'access_token' => '20b87286dec1a72badab4db93cfef117fb9fedf6',
+                'refresh_token' => '20b87286dec1a72badab4db93cfef117fb9fedf6',
                 'expires' => 1893456000,
                 'baseDomain' => 'krasnogorka.amocrm.ru',
             ]));
@@ -33,7 +33,7 @@
         try {
 
             var_dump($leadsService);
-            // $leadsCollection = $leadsService->get();
+            $leadsCollection = $leadsService->get();
             // var_dump("FIRST", $leadsCollection);
             // $leadsCollection = $leadsService->nextPage($leadsCollection);
             // var_dump("SECOND",$leadsCollection);
