@@ -16,8 +16,18 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+        $apiClient
+            ->setAccessToken(new AccessToken([
+                'access_token' => 'zankoav',
+                'refresh_token' => 'zankoav',
+                'expires' => 1893456000,
+                'baseDomain' => 'krasnogorka.amocrm.ru',
+            ]));
+
+
         $leadsService = $apiClient->leads();
-        var_dump($leadsService);
+        $leadsCollection = $leadsService->get();
+        var_dump($leadsCollection);
 
     
     ?>
