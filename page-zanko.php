@@ -16,7 +16,8 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        var_dump($apiClient);
+        $leadsService = $apiClient->leads();
+        var_dump($leadsService);
 
     
     ?>
