@@ -8,6 +8,7 @@ require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/Model.php';
 require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/token_actions.php';
 
 $assets = new Assets();
 $model  = new Model();
