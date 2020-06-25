@@ -50,15 +50,41 @@
 
         $leadsService = $apiClient->leads();
 
+        $lead = new LeadModel();
+        // $leadCustomFieldsValues = new CustomFieldsValuesCollection();
+        // $textCustomFieldValueModel = new TextCustomFieldValuesModel();
+        // $textCustomFieldValueModel->setFieldId(269303);
+        // $textCustomFieldValueModel->setValues(
+        //     (new TextCustomFieldValueCollection())
+        //         ->add((new TextCustomFieldValueModel())->setValue('Текст'))
+        // );
+        // $leadCustomFieldsValues->add($textCustomFieldValueModel);
+        // $lead->setCustomFieldsValues($leadCustomFieldsValues);
+        $lead->setName('ZANKO ALEXANDR FROM V4');
+
+        $leadsCollection = new LeadsCollection();
+        $leadsCollection->add($lead);
+
         try {
-            $leadsCollection = $leadsService->get();
-            var_dump("FIRST", $leadsCollection);
-            // $leadsCollection = $leadsService->nextPage($leadsCollection);
-            // var_dump("SECOND",$leadsCollection);
+            $lead = $leadsService->addOne($lead);
+             var_dump($lead);
         } catch (AmoCRMApiException $e) {
             printError($e);
             die;
         }
+
+        // try {
+        //     $leadsCollection = $leadsService->get();
+        //     var_dump("FIRST", $leadsCollection);
+        //     // $leadsCollection = $leadsService->nextPage($leadsCollection);
+        //     // var_dump("SECOND",$leadsCollection);
+
+        //     //Создадим сделку с заполненым полем типа текст
+
+        // } catch (AmoCRMApiException $e) {
+        //     printError($e);
+        //     die;
+        // }
 
 
 
