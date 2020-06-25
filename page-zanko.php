@@ -12,8 +12,8 @@
     <p>Testing ...</p>
 
     <?php
-        $clientId = 'o63UxjypFwePtB00nsIxeNNzvcVvXks90jOPQHuduVZ5Usfp7GkMToPUlIV8uxpe';
-        $clientSecret = '79aac717-18fc-4495-8a5f-7124a70de05d';
+        $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
+        $clientSecret = 'o63UxjypFwePtB00nsIxeNNzvcVvXks90jOPQHuduVZ5Usfp7GkMToPUlIV8uxpe';
         $redirectUri = 'https://krasnogorka.by';
 
         if ( ! class_exists( '\AmoCRM\Client\AmoCRMApiClient' ) ) 
