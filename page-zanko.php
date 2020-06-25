@@ -70,7 +70,7 @@
         'client_secret' =>  $clientSecret,
         'grant_type' => 'authorization_code',
         'code' => 'def50200bf6c4d47543506c05a25caa8672c89400d4769947b1a72b1e03c8869574ce2dc1ae747e4487ef1d2a9f9d339a75c7262751f26c090b2b1f83f8921a1d41ff4e92f23f8f1e35b8d711a490ea837ede22dbd6d86eef1e012d021db25582b8491d0c2bd21edfbfa4a6646391d4724db282947c899582ce9b6775156455ad5fcde80c6b4b5e47be0f7ff402519615f985e48bd2d23cf501b5fcf54981b50aad1f8f311b7751a5a0c766ef9ebf2725fbc00b6c12b5c3ca7c6b6e1e3e281acaa7b77776f55488df5038bdb90d18f1ba8637a29b1051f3eebbb3189621132816546dc608b4fa22ce56830494bd07d4a46449f19022dbeabf915af1d187c0cdb4fd6fe97adf89d5a0523b1e238a55e26e00748ef29f25521041b2ed514a8a4e1c8d041a3e2241c4111edfddb57fa526a654612833c72f3038b20344832b420eae3228b9929d1b84efafe5d0e3ab64050e6b68180be2eb0ca05088311200cf3d8ac3ee1299acc1af6671270f56ee069ce9169450e0fd095a151c92d1401f1992b1899b664f095af3823b6bb8aa39fcb646fd1e3c1fafadbc29e94146dd9b15e4517921d2e7c83247f742ba0a80a222853dced2986faffe1917525a23612c1e36e',
-        'redirect_uri' => 'https://krasnagorka.by/',
+        'redirect_uri' => 'https://krasnagorka.by',
     ];
 
     /**
@@ -128,5 +128,5 @@
     $expires_in = $response['expires_in']; //Через сколько действие токена истекает
 
     var_dump($response);
-    
+    die;
     ?>
