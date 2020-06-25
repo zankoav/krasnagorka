@@ -61,7 +61,7 @@
 
 
 
-        $subdomain = 'krasnagorka'; //Поддомен нужного аккаунта
+        $subdomain = 'krasnogorka'; //Поддомен нужного аккаунта
     $link = 'https://' . $subdomain . '.amocrm.ru/oauth2/access_token'; //Формируем URL для запроса
 
     /** Соберем данные для запроса */
