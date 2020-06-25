@@ -20,14 +20,24 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        // $apiClient
-        //     ->setAccountBaseDomain('krasnogorka.amocrm.ru');
+        $apiClient
+            ->setAccountBaseDomain('krasnogorka.amocrm.ru');
         //     ->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
         //         'access_token' => '123456',
         //         'refresh_token' => '123456',
         //         'expires' => 1893456000,
         //         'baseDomain' => 'krasnogorka.amocrm.ru'
         //     ]));
+
+
+        try {
+            $request = $apiClient->getRequest();
+            $queryResult = $request->get('/api/v4/leads/');
+            var_dump($queryResult); die;
+
+        } catch( AmoCRMApiException $e ) {
+            var_dump($request->getLastRequestInfo()); die;
+        }
 
         // $leadsService = $apiClient->leads();
 
@@ -40,56 +50,5 @@
         //     printError($e);
         //     die;
         // }
-
-
-        if (!isset($_GET['code'])) {
-            $state = bin2hex(random_bytes(16));
-            $_SESSION['oauth2state'] = $state;
-            if (isset($_GET['button'])) {
-                echo $apiClient->getOAuthClient()->getOAuthButton(
-                    [
-                        'title' => 'Установить интеграцию',
-                        'compact' => true,
-                        'class_name' => 'className',
-                        'color' => 'default',
-                        'error_callback' => 'handleOauthError',
-                        'state' => $state,
-                    ]
-                );
-                die;
-            } else {
-                $authorizationUrl = $apiClient->getOAuthClient()->getAuthorizeUrl([
-                    'state' => $state,
-                    'mode' => 'post_message',
-                ]);
-                header('Location: ' . $authorizationUrl);
-                die;
-            }
-        } elseif (empty($_GET['state']) || empty($_SESSION['oauth2state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
-            unset($_SESSION['oauth2state']);
-            exit('Invalid state');
-        }
-        
-        /**
-         * Ловим обратный код
-         */
-        try {
-            $accessToken = $apiClient->getOAuthClient()->getAccessTokenByCode($_GET['code']);
-        
-            if (!$accessToken->hasExpired()) {
-                saveToken([
-                    'accessToken' => $accessToken->getToken(),
-                    'refreshToken' => $accessToken->getRefreshToken(),
-                    'expires' => $accessToken->getExpires(),
-                    'baseDomain' => $apiClient->getAccountBaseDomain(),
-                ]);
-            }
-        } catch (Exception $e) {
-            die((string)$e);
-        }
-        
-        $ownerDetails = $apiClient->getOAuthClient()->getResourceOwner($accessToken);
-        
-        printf('Hello, %s!', $ownerDetails->getName());
     
     ?>
