@@ -20,26 +20,26 @@
             return;
 
         $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $apiClient
-            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
-            ->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
-                'access_token' => '123456',
-                'refresh_token' => '123456',
-                'expires' => 1893456000,
-                'baseDomain' => 'krasnogorka.amocrm.ru'
-            ]));
+        // $apiClient
+        //     ->setAccountBaseDomain('krasnogorka.amocrm.ru')
+        //     ->setAccessToken(new \League\OAuth2\Client\Token\AccessToken([
+        //         'access_token' => '123456',
+        //         'refresh_token' => '123456',
+        //         'expires' => 1893456000,
+        //         'baseDomain' => 'krasnogorka.amocrm.ru'
+        //     ]));
 
-        $leadsService = $apiClient->leads();
+        // $leadsService = $apiClient->leads();
 
-        try {
-            $leadsCollection = $leadsService->get();
-            var_dump("FIRST", $leadsCollection);
-            // $leadsCollection = $leadsService->nextPage($leadsCollection);
-            // var_dump("SECOND",$leadsCollection);
-        } catch (AmoCRMApiException $e) {
-            printError($e);
-            die;
-        }
+        // try {
+        //     $leadsCollection = $leadsService->get();
+        //     var_dump("FIRST", $leadsCollection);
+        //     // $leadsCollection = $leadsService->nextPage($leadsCollection);
+        //     // var_dump("SECOND",$leadsCollection);
+        // } catch (AmoCRMApiException $e) {
+        //     printError($e);
+        //     die;
+        // }
 
     
     ?>
