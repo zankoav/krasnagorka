@@ -32,7 +32,7 @@
 
         try {
             $request = $apiClient->getRequest();
-            $queryResult = $request->get('/api/v4/leads/');
+            $queryResult = $request->get('api/v4/leads');
             var_dump($queryResult); die;
 
         } catch( AmoCRMApiException $e ) {
