@@ -1,7 +1,15 @@
 <?php
+
     ini_set('error_reporting', E_ALL);
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
+    
+    use AmoCRM\Models\LeadModel;
+    use AmoCRM\Collections\Leads\LeadsCollection;
+    use AmoCRM\Client\AmoCRMApiClient;
+    use League\OAuth2\Client\Token\AccessTokenInterface;
+    use AmoCRM\Exceptions\AmoCRMApiException;
+
 
     if (!defined('ABSPATH')) {
         exit;
@@ -21,13 +29,13 @@
         if ( ! class_exists( '\AmoCRM\Client\AmoCRMApiClient' ) ) 
             return;
 
-        $apiClient = new \AmoCRM\Client\AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+        $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $accessToken = getToken();
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
             ->onAccessTokenRefresh(
-                function (\League\OAuth2\Client\Token\AccessTokenInterface $accessToken, string $baseDomain) {
+                function (AccessTokenInterface $accessToken, string $baseDomain) {
                     saveToken(
                         [
                             'access_token' => $accessToken->getToken(),
@@ -69,7 +77,7 @@
             $lead = $leadsService->addOne($lead);
              var_dump($lead);
         } catch (AmoCRMApiException $e) {
-            printError($e);
+            var_dump($e);
             die;
         }
 
