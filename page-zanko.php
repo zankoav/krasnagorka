@@ -107,8 +107,7 @@
         );
         
         try {
-            // $lead = $leadsService->addOne($lead);
-            //  var_dump($lead);
+            $lead = $leadsService->addOne($lead);
         } catch (AmoCRMApiException $e) {
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
@@ -211,17 +210,16 @@
             }
         }
         Logger::log('zanko page');
-        die;
-        // $links = new LinksCollection();
-        // $links->add($contact);
+        $links = new LinksCollection();
+        $links->add($contact);
 
-        // try {
-        //     echo '<pre>', 'OK 6', '</pre>';
-        //     $apiClient->leads()->link($lead, $links);
-        //     echo '<pre>', 'OK 7', '</pre>';
-        // } catch (AmoCRMApiException $e) {
-        //     echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
-        // }
+        try {
+            echo '<pre>', 'OK 6', '</pre>';
+            $apiClient->leads()->link($lead, $links);
+            echo '<pre>', 'OK 7', '</pre>';
+        } catch (AmoCRMApiException $e) {
+            echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
+        }
 
         // $links = new LinksCollection();
         // $links->add($contact);
