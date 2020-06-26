@@ -95,7 +95,7 @@
             die;
         }
 
-        $contactPhone = '+375292228338';
+        $contactPhone = '+375291010101';
         $contactEmail = 'zankoav@gmail.com';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
@@ -110,6 +110,16 @@
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
                 if($contactsCollection->count() > 0 ){
                     $contact = $contactsCollection->first();
+                    $customFields = $contact->getCustomFieldsValues();
+                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                    $phoneField->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setValue($contactPhone)
+                            )
+                    );
+                    $apiClient->contacts()->updateOne($contact);
                 }else{
                     $contact = new ContactModel();
                     $contact->setName('TEST V4');
