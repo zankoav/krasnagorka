@@ -10,7 +10,8 @@
     use League\OAuth2\Client\Token\AccessTokenInterface;
     use AmoCRM\Exceptions\AmoCRMApiException;
     use AmoCRM\Collections\TagsCollection;
-    use AmoCRM\Helpers\EntityTypesInterface;
+    use AmoCRM\Models\TagModel;
+
 
     if (!defined('ABSPATH')) {
         exit;
@@ -71,15 +72,12 @@
         // $lead->setCustomFieldsValues($leadCustomFieldsValues);
         $lead->setName('ZANKO ALEXANDR FROM V4');
         $lead->setStatusId(19518940);
-
-
-        $tagsService = $apiClient->tags(EntityTypesInterface::LEADS);
-        $tag = $tagsService->getOne(500);
-        var_dump($tag);
-        $tagsCollection = new TagsCollection();
-        $tagsCollection->add($tag);
-
-        $lead->setTags($tagsCollection);
+        $lead->setTags((new TagsCollection())
+           ->add(
+                (new TagModel())
+                    ->setId(500) // Страница Бронирования
+            )
+        );
         
         try {
             $lead = $leadsService->addOne($lead);
