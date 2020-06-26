@@ -182,6 +182,7 @@
                 try {
 
                     echo '<pre>', 'OK 4', '</pre>';
+                    var_dump($contact);
                     $contact = $apiClient->contacts()->addOne($contact);
                     echo '<pre>', 'OK 5', '</pre>';
 
@@ -196,8 +197,9 @@
         $links->add($contact);
 
         try {
-            $apiClient->leads()->link($lead, $links);
             echo '<pre>', 'OK 6', '</pre>';
+            $apiClient->leads()->link($lead, $links);
+            echo '<pre>', 'OK 7', '</pre>';
         } catch (AmoCRMApiException $e) {
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
