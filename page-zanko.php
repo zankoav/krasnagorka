@@ -75,7 +75,8 @@
         $lead->setTags((new TagsCollection())
            ->add(
                 (new TagModel())
-                    ->setId(500) // Страница Бронирования
+                    ->setId(500)
+                    ->setName('Страница Бронирования')
             )
         );
         
