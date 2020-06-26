@@ -125,9 +125,7 @@
             }
 
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
-                echo '<pre>';
-                var_dump( 'ok');
-                echo '</pre>';
+                echo '<pre>', 'OK', '</pre>';
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
                 $phoneField = $customFields->getBy('fieldId', 135479);
@@ -140,7 +138,7 @@
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
+                                ->setEnum('WORK')
                                 ->setValue($contactPhone)
                         )
                 );
@@ -159,7 +157,7 @@
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
+                                ->setEnum('WORK')
                                 ->setValue($contactPhone)
                         )
                 );
