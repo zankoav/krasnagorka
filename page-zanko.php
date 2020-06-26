@@ -91,7 +91,9 @@
             $lead = $leadsService->addOne($lead);
             //  var_dump($lead);
         } catch (AmoCRMApiException $e) {
+            echo '<pre>';
             var_dump($e);
+            echo '</pre>';
             die;
         }
 
@@ -108,7 +110,13 @@
             }else{
                 $contactsFilter->setQuery($contactEmail);
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+                echo '<pre>';
+                var_dump( $contactsCollection);
+                echo '</pre>';
                 if($contactsCollection->count() > 0 ){
+                    echo '<pre>';
+                    var_dump( 'ok');
+                    echo '</pre>';
                     $contact = $contactsCollection->first();
                     $customFields = $contact->getCustomFieldsValues();
                     $phoneField = $customFields->getBy('fieldId', 135479);
@@ -160,9 +168,13 @@
             $links = new LinksCollection();
             $links->add($contact);
             $apiClient->leads()->link($lead, $links);
+            echo '<pre>';
             var_dump($contact);
+            echo '</pre>';
         } catch (AmoCRMApiException $e) {
+            echo '<pre>';
             var_dump($e);
+            echo '</pre>';
             die;
         }
 
