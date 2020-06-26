@@ -87,7 +87,7 @@
         );
         
         try {
-            $lead = $leadsService->addOne($lead);
+            // $lead = $leadsService->addOne($lead);
             //  var_dump($lead);
         } catch (AmoCRMApiException $e) {
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
@@ -119,11 +119,10 @@
             }
 
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
-                echo '<pre>', 'OK', '</pre>';
+                echo '<pre>', 'OK 21', '</pre>';
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
                 $phoneField = $customFields->getBy('fieldCode', 'PHONE');
-                var_dump('PhoneField_Value',$phoneField);
                 if(empty($phoneField)){
                     $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
                     $customFields->add($phoneField);
@@ -157,7 +156,7 @@
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
+                                ->setEnum('WORK')
                                 ->setValue($contactPhone)
                         )
                 );
@@ -176,7 +175,7 @@
                 $contactCustomFields->add($phoneFieldValueModel);
                 $contactCustomFields->add($emailFieldValueModel);
 
-                // $contact->setCustomFieldsValues($contactCustomFields);
+                $contact->setCustomFieldsValues($contactCustomFields);
 
                 try {
 
@@ -191,17 +190,18 @@
                 
             }
         }
+        Logger::log('zanko page');
+        die;
+        // $links = new LinksCollection();
+        // $links->add($contact);
 
-        $links = new LinksCollection();
-        $links->add($contact);
-
-        try {
-            echo '<pre>', 'OK 6', '</pre>';
-            $apiClient->leads()->link($lead, $links);
-            echo '<pre>', 'OK 7', '</pre>';
-        } catch (AmoCRMApiException $e) {
-            echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
-        }
+        // try {
+        //     echo '<pre>', 'OK 6', '</pre>';
+        //     $apiClient->leads()->link($lead, $links);
+        //     echo '<pre>', 'OK 7', '</pre>';
+        // } catch (AmoCRMApiException $e) {
+        //     echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
+        // }
 
         // $links = new LinksCollection();
         // $links->add($contact);
