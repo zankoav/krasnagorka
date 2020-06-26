@@ -91,10 +91,7 @@
             $lead = $leadsService->addOne($lead);
             //  var_dump($lead);
         } catch (AmoCRMApiException $e) {
-            echo '<pre>';
-            var_dump($e);
-            echo '</pre>';
-            die;
+            echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
 
         $contactPhone = '+375291010101';
@@ -106,9 +103,7 @@
             $contactsFilter->setQuery($contactPhone);
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
         } catch (AmoCRMApiException $e) {
-            echo '<pre>';
-            var_dump('Get Contact Exception', $e);
-            echo '</pre>';
+            echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
 
         if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
@@ -119,9 +114,7 @@
                 $contactsFilter->setQuery($contactEmail);
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
             } catch (AmoCRMApiException $e) {
-                echo '<pre>';
-                var_dump($e);
-                echo '</pre>';
+                echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
             }
 
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
@@ -194,10 +187,7 @@
             $apiClient->leads()->link($lead, $links);
             echo '<pre>', 'OK 2', '</pre>';
         } catch (AmoCRMApiException $e) {
-            echo '<pre>';
-            var_dump($contact);
-            echo '</pre>';
-            die;
+            echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
 
         // $links = new LinksCollection();
