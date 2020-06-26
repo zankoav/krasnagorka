@@ -168,7 +168,7 @@
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
+                                ->setEnum('WORKDD')
                                 ->setValue($contactEmail)
                         )
                 );
