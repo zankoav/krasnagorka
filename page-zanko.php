@@ -17,6 +17,8 @@
     use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
     use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
     use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
+    use AmoCRM\Collections\CustomFieldsValuesCollection;
+
 
 
 
@@ -148,13 +150,11 @@
             }else{
                 $contact = new ContactModel();
                 $contact->setName('ZANKO V4');
-                $contact = $apiClient->contacts()->addOne($contact);
-                $customFields = $contact->getCustomFieldsValues();
-                $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
-                $emailField = (new MultitextCustomFieldValuesModel())->setFieldId(135491);
                 
-                //Установим значение поля phone
-                $phoneField->setValues(
+                $contactCustomFields = new CustomFieldsValuesCollection();
+                $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
+                $phoneFieldValueModel->setFieldId(135479);
+                $phoneFieldValueModel->setValues(
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
@@ -162,19 +162,22 @@
                                 ->setValue($contactPhone)
                         )
                 );
-
-                //Установим значение поля email
-                $emailField->setValues(
+                
+                $emailFieldValueModel = new MultitextCustomFieldValuesModel();
+                $emailFieldValueModel->setFieldId(135491);
+                $emailFieldValueModel->setValues(
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
+                                ->setEnum('WORK')
                                 ->setValue($contactEmail)
                         )
                 );
 
-                $customFields->add($phoneField);
-                $customFields->add($emailField);
+                $contactCustomFields->add($phoneFieldValueModel);
+                $contactCustomFields->add($emailFieldValueModel);
+
+                $contact->setCustomFieldsValues($contactCustomFields);
 
                 $contact = $apiClient->contacts()->addOne($contact);
             }
