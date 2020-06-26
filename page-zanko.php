@@ -25,7 +25,7 @@
 
     <h1>Hello Alexandr</h1>
     <p>Testing ...</p>
-    <button onclick="sendData">Test</button>
+    <button onclick="sendData()">Test</button>
 
     <script>
         function sendData(){
