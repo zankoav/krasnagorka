@@ -105,78 +105,91 @@
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+        } catch (AmoCRMApiException $e) {
             echo '<pre>';
-            var_dump('ZANKO 1', $contactsCollection);
+            var_dump('Get Contact Exception', $e);
             echo '</pre>';
-            if($contactsCollection->count() > 0 ){
-               $contact = $contactsCollection->first();
-            }else{
+        }
+
+        if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+            $contact = $contactsCollection->first();
+        }else{
+
+            try {
                 $contactsFilter->setQuery($contactEmail);
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            } catch (AmoCRMApiException $e) {
                 echo '<pre>';
-                var_dump('ZANKO 2', $contactsCollection);
+                var_dump($e);
                 echo '</pre>';
-                if($contactsCollection->count() > 0 ){
-                    echo '<pre>';
-                    var_dump( 'ok');
-                    echo '</pre>';
-                    $contact = $contactsCollection->first();
-                    $customFields = $contact->getCustomFieldsValues();
-                    $phoneField = $customFields->getBy('fieldId', 135479);
-                    if(empty($phoneField)){
-                        $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
-                        $customFields->add($phoneField);
-                    }
-                    $phoneField->setValues(
-                        (new MultitextCustomFieldValueCollection())
-                            ->add(
-                                (new MultitextCustomFieldValueModel())
-                                    ->setValue($contactPhone)
-                            )
-                    );
-                    $apiClient->contacts()->updateOne($contact);
-                }else{
-                    $contact = new ContactModel();
-                    $contact->setName('TEST V4');
-                    $contact = $apiClient->contacts()->addOne($contact);
-                    $customFields = $contact->getCustomFieldsValues();
-                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
-                    $emailField = (new MultitextCustomFieldValuesModel())->setFieldId(135491);
-                    
-                    //Установим значение поля phone
-                    $phoneField->setValues(
-                        (new MultitextCustomFieldValueCollection())
-                            ->add(
-                                (new MultitextCustomFieldValueModel())
-                                    ->setValue($contactPhone)
-                            )
-                    );
-
-                    //Установим значение поля email
-                    $emailField->setValues(
-                        (new MultitextCustomFieldValueCollection())
-                            ->add(
-                                (new MultitextCustomFieldValueModel())
-                                    ->setValue($contactEmail)
-                            )
-                    );
-
-                    $customFields->add($phoneField);
-                    $customFields->add($emailField);
-
-                    $contact = $apiClient->contacts()->addOne($contact);
-                }
             }
 
-            $links = new LinksCollection();
-            $links->add($contact);
+            if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+                echo '<pre>';
+                var_dump( 'ok');
+                echo '</pre>';
+                $contact = $contactsCollection->first();
+                $customFields = $contact->getCustomFieldsValues();
+                $phoneField = $customFields->getBy('fieldId', 135479);
+                
+                if(empty($phoneField)){
+                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                    $customFields->add($phoneField);
+                }
+                $phoneField->setValues(
+                    (new MultitextCustomFieldValueCollection())
+                        ->add(
+                            (new MultitextCustomFieldValueModel())
+                                ->setValue($contactPhone)
+                        )
+                );
+                $apiClient->contacts()->updateOne($contact);
+
+            }else{
+                $contact = new ContactModel();
+                $contact->setName('TEST V4');
+                $contact = $apiClient->contacts()->addOne($contact);
+                $customFields = $contact->getCustomFieldsValues();
+                $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                $emailField = (new MultitextCustomFieldValuesModel())->setFieldId(135491);
+                
+                //Установим значение поля phone
+                $phoneField->setValues(
+                    (new MultitextCustomFieldValueCollection())
+                        ->add(
+                            (new MultitextCustomFieldValueModel())
+                                ->setValue($contactPhone)
+                        )
+                );
+
+                //Установим значение поля email
+                $emailField->setValues(
+                    (new MultitextCustomFieldValueCollection())
+                        ->add(
+                            (new MultitextCustomFieldValueModel())
+                                ->setValue($contactEmail)
+                        )
+                );
+
+                $customFields->add($phoneField);
+                $customFields->add($emailField);
+
+                $contact = $apiClient->contacts()->addOne($contact);
+            }
+        }
+
+        $links = new LinksCollection();
+        $links->add($contact);
+
+        try {
             $apiClient->leads()->link($lead, $links);
             echo '<pre>';
             var_dump($contact);
             echo '</pre>';
+
         } catch (AmoCRMApiException $e) {
             echo '<pre>';
-            var_dump($e);
+            var_dump($contact);
             echo '</pre>';
             die;
         }
