@@ -11,6 +11,7 @@
     use AmoCRM\Exceptions\AmoCRMApiException;
     use AmoCRM\Collections\TagsCollection;
     use AmoCRM\Models\TagModel;
+    use AmoCRM\Filters\ContactsFilter;
 
 
     if (!defined('ABSPATH')) {
