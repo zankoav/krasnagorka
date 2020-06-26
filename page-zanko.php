@@ -111,7 +111,7 @@
                 $contactsFilter->setQuery($contactEmail);
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
                 echo '<pre>';
-                var_dump( $contactsCollection);
+                var_dump('ZANKO', $contactsCollection);
                 echo '</pre>';
                 if($contactsCollection->count() > 0 ){
                     echo '<pre>';
