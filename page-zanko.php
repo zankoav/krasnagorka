@@ -82,7 +82,7 @@
         );
         
         try {
-            $lead = $leadsService->addOne($lead);
+            // $lead = $leadsService->addOne($lead);
              var_dump($lead);
         } catch (AmoCRMApiException $e) {
             var_dump($e);
