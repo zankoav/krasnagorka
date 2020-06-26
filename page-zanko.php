@@ -105,13 +105,16 @@
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            echo '<pre>';
+            var_dump('ZANKO 1', $contactsCollection);
+            echo '</pre>';
             if($contactsCollection->count() > 0 ){
                $contact = $contactsCollection->first();
             }else{
                 $contactsFilter->setQuery($contactEmail);
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
                 echo '<pre>';
-                var_dump('ZANKO', $contactsCollection);
+                var_dump('ZANKO 2', $contactsCollection);
                 echo '</pre>';
                 if($contactsCollection->count() > 0 ){
                     echo '<pre>';
