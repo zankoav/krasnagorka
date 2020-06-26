@@ -82,19 +82,65 @@
         );
         
         try {
-            // $lead = $leadsService->addOne($lead);
-             var_dump($lead);
+            $lead = $leadsService->addOne($lead);
+            //  var_dump($lead);
         } catch (AmoCRMApiException $e) {
             var_dump($e);
             die;
         }
 
+        $contactPhone = '+375292228338';
+        $contactEmail = 'zankoav@gmail.com';
+
         //Получим контакт по ID, сделку и привяжем контакт к сделке
         try {
             $contactsFilter = new ContactsFilter();
-            $contactsFilter->setQuery('+375292228338');
+            $contactsFilter->setQuery($contactPhone);
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-            var_dump($contactsCollection);
+            if($contactsCollection->count() > 0 ){
+               $contact = $contactsCollection->first();
+            }else{
+                $contactsFilter->setQuery($contactEmail);
+                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+                if($contactsCollection->count() > 0 ){
+                    $contact = $contactsCollection->first();
+                }else{
+                    $contact = new ContactModel();
+                    $contact->setName('TEST V4');
+                    $contact = $apiClient->contacts()->addOne($contact);
+                    $customFields = $contact->getCustomFieldsValues();
+                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                    $emailField = (new MultitextCustomFieldValuesModel())->setFieldId(135491);
+                    
+                    //Установим значение поля phone
+                    $phoneField->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setValue($contactPhone)
+                            )
+                    );
+
+                    //Установим значение поля email
+                    $emailField->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setValue($contactEmail)
+                            )
+                    );
+
+                    $customFields->add($phoneField);
+                    $customFields->add($emailField);
+
+                    $contact = $apiClient->contacts()->addOne($contact);
+                }
+            }
+
+            $links = new LinksCollection();
+            $links->add($contact);
+            $apiClient->leads()->link($lead, $links);
+            var_dump($contact);
         } catch (AmoCRMApiException $e) {
             printError($e);
             die;
