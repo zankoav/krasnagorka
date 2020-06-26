@@ -94,8 +94,8 @@
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
 
-        $contactPhone = '+375292228338';
-        $contactEmail = 'zankoav@gmail.com';
+        $contactPhone = '+375291111111';
+        $contactEmail = '5656071@tut.by';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
         try {
