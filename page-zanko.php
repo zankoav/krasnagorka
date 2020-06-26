@@ -9,7 +9,7 @@
     use AmoCRM\Client\AmoCRMApiClient;
     use League\OAuth2\Client\Token\AccessTokenInterface;
     use AmoCRM\Exceptions\AmoCRMApiException;
-
+    use AmoCRM\Collections\TagsCollection;
 
     if (!defined('ABSPATH')) {
         exit;
@@ -69,10 +69,15 @@
         // $leadCustomFieldsValues->add($textCustomFieldValueModel);
         // $lead->setCustomFieldsValues($leadCustomFieldsValues);
         $lead->setName('ZANKO ALEXANDR FROM V4');
-
-        $leadsCollection = new LeadsCollection();
-        $leadsCollection->add($lead);
-
+        $lead->setStatusId(19518940);
+        $lead->setTags(
+            TagsCollection::fromArray([
+                [
+                    'id' => 500, // Страница Бронирования
+                ]
+            ])
+        );
+        
         try {
             $lead = $leadsService->addOne($lead);
              var_dump($lead);
@@ -80,6 +85,26 @@
             var_dump($e);
             die;
         }
+
+        //Получим контакт по ID, сделку и привяжем контакт к сделке
+        try {
+            $contactsFilter = new ContactsFilter();
+            $contactsFilter->setQuery('+375292228338');
+            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            var_dump($contactsCollection);
+        } catch (AmoCRMApiException $e) {
+            printError($e);
+            die;
+        }
+
+        // $links = new LinksCollection();
+        // $links->add($contact);
+        // try {
+        //     $apiClient->leads()->link($lead, $links);
+        // } catch (AmoCRMApiException $e) {
+        //     printError($e);
+        //     die;
+        // }
 
         // try {
         //     $leadsCollection = $leadsService->get();
