@@ -158,22 +158,24 @@
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
+                                ->setEnum('WORKDD')
                                 ->setValue($contactPhone)
                         )
                 );
                 
-                $emailFieldValueModel = new MultitextCustomFieldValuesModel();
-                $emailFieldValueModel->setFieldId(135491);
-                $emailFieldValueModel->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setValue($contactEmail)
-                        )
-                );
+                // $emailFieldValueModel = new MultitextCustomFieldValuesModel();
+                // $emailFieldValueModel->setFieldId(135491);
+                // $emailFieldValueModel->setValues(
+                //     (new MultitextCustomFieldValueCollection())
+                //         ->add(
+                //             (new MultitextCustomFieldValueModel())
+                //                 ->setEnum('WORK')
+                //                 ->setValue($contactEmail)
+                //         )
+                // );
 
                 $contactCustomFields->add($phoneFieldValueModel);
-                $contactCustomFields->add($emailFieldValueModel);
+                // $contactCustomFields->add($emailFieldValueModel);
 
                 $contact->setCustomFieldsValues($contactCustomFields);
 
