@@ -90,7 +90,7 @@
         );
         
         try {
-            $lead = $leadsService->addOne($lead);
+            // $lead = $leadsService->addOne($lead);
             //  var_dump($lead);
         } catch (AmoCRMApiException $e) {
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
@@ -182,7 +182,7 @@
                 try {
 
                     echo '<pre>', 'OK 4', '</pre>';
-                    var_dump($contact);
+                    // var_dump($contact);
                     // $contact = $apiClient->contacts()->addOne($contact);
                     echo '<pre>', 'OK 5', '</pre>';
 
