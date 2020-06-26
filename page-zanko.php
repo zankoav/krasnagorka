@@ -147,7 +147,7 @@
                 }
             }else{
                 $contact = new ContactModel();
-                $contact->setName('TEST V4');
+                $contact->setName('ZANKO V4');
                 $contact = $apiClient->contacts()->addOne($contact);
                 $customFields = $contact->getCustomFieldsValues();
                 $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
