@@ -129,7 +129,7 @@
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
                 $phoneField = $customFields->getBy('fieldId', 135479);
-                
+                var_dump('PhoneField_Value',$phoneField);
                 if(empty($phoneField)){
                     $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
                     $customFields->add($phoneField);
@@ -142,8 +142,16 @@
                                 ->setValue($contactPhone)
                         )
                 );
-                $apiClient->contacts()->updateOne($contact);
 
+                try {
+
+                    echo '<pre>', 'OK 2', '</pre>';
+                    $contact->$apiClient->contacts()->updateOne($contact);
+                    echo '<pre>', 'OK 3', '</pre>';
+
+                } catch (AmoCRMApiException $e) {
+                    echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
+                }
             }else{
                 $contact = new ContactModel();
                 $contact->setName('TEST V4');
@@ -184,10 +192,7 @@
 
         try {
             $apiClient->leads()->link($lead, $links);
-            echo '<pre>';
-            var_dump($contact);
-            echo '</pre>';
-
+            echo '<pre>', 'OK 2', '</pre>';
         } catch (AmoCRMApiException $e) {
             echo '<pre>';
             var_dump($contact);
