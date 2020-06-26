@@ -96,8 +96,8 @@
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
 
-        $contactPhone = '+375290000000';
-        $contactEmail = '5656071@tut.by';
+        $contactPhone = '+375298888888';
+        $contactEmail = 'zankoav@gmail.com';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
         try {
@@ -149,7 +149,7 @@
                 }
             }else{
                 $contact = new ContactModel();
-                $contact->setName('ZANKO V4');
+                $contact->setName('ZANKO_AV');
                 
                 $contactCustomFields = new CustomFieldsValuesCollection();
                 $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
@@ -179,7 +179,16 @@
 
                 $contact->setCustomFieldsValues($contactCustomFields);
 
-                $contact = $apiClient->contacts()->addOne($contact);
+                try {
+
+                    echo '<pre>', 'OK 4', '</pre>';
+                    $contact = $apiClient->contacts()->addOne($contact);
+                    echo '<pre>', 'OK 5', '</pre>';
+
+                } catch (AmoCRMApiException $e) {
+                    echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
+                }
+                
             }
         }
 
@@ -188,7 +197,7 @@
 
         try {
             $apiClient->leads()->link($lead, $links);
-            echo '<pre>', 'OK 2', '</pre>';
+            echo '<pre>', 'OK 6', '</pre>';
         } catch (AmoCRMApiException $e) {
             echo '<pre>',$e->getTitle(),$e->getDescription(),'</pre>';
         }
