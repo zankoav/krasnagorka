@@ -12,6 +12,12 @@
     use AmoCRM\Collections\TagsCollection;
     use AmoCRM\Models\TagModel;
     use AmoCRM\Filters\ContactsFilter;
+    use AmoCRM\Models\ContactModel;
+    use AmoCRM\Collections\LinksCollection;
+    use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
+    use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
+    use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
+
 
 
     if (!defined('ABSPATH')) {
