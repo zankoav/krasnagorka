@@ -42,9 +42,25 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'create_amocrm_lead_permissions_check')
             ),
         ]);
+
+
+        $amocrm_v4_path      = '/amo-v4/';
+
+        register_rest_route($namespace, $amocrm_v4_path, [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'amocrm_v4'),
+                'permission_callback' => array($this, 'amocrm_v4_permissions_check')
+            ),
+        ]);
     }
 
     public function create_order_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function amocrm_v4_permissions_check($request)
     {
         return true;
     }
@@ -62,6 +78,12 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function booking_lead($request)
     {
         $response = $this->insertWPLead($request);
+        return new WP_REST_Response($response, 200);
+    }
+
+    public function amocrm_v4($request)
+    {
+        $response = ['message' => 'Hello world'];
         return new WP_REST_Response($response, 200);
     }
 

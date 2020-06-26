@@ -1,9 +1,5 @@
 <?php
 
-    ini_set('error_reporting', E_ALL);
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    
     use AmoCRM\Models\LeadModel;
     use AmoCRM\Collections\Leads\LeadsCollection;
     use AmoCRM\Client\AmoCRMApiClient;
@@ -29,6 +25,30 @@
 
     <h1>Hello Alexandr</h1>
     <p>Testing ...</p>
+    <button onclick="sendData">Test</button>
+
+    <script>
+        function sendData(){
+            console.log('send data to server');
+            fetch("/wp-json/krasnagorka/v1/amo-v4/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json; charset=utf-8",
+                        }, body: JSON.stringify({
+                            data: 'Hello'
+                        }),
+                    })
+                        .then((response) => {
+                            return response.json();
+                        })
+                        .then((response) => {
+                            console.log('amo v4 response', response);
+                        })
+                        .catch((error) => {
+                            console.log('amo v4 response error', error);
+                        });
+        }
+    </script>
 
     <?php
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
