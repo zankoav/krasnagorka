@@ -111,7 +111,11 @@
                 if($contactsCollection->count() > 0 ){
                     $contact = $contactsCollection->first();
                     $customFields = $contact->getCustomFieldsValues();
-                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                    $phoneField = $customFields->getBy('fieldId', 135479);
+                    if(empty($phoneField)){
+                        $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                        $customFields->add($phoneField);
+                    }
                     $phoneField->setValues(
                         (new MultitextCustomFieldValueCollection())
                             ->add(
@@ -158,7 +162,7 @@
             $apiClient->leads()->link($lead, $links);
             var_dump($contact);
         } catch (AmoCRMApiException $e) {
-            printError($e);
+            var_dump($e);
             die;
         }
 
