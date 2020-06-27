@@ -201,10 +201,15 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         if(!empty($calendarId) and !empty($calendarObjects[$calendarId])){
             try{
-                $catalogElementsService = $apiClient->catalogElements(1321);
                 $catalogElementsFilter = new CatalogElementsFilter();
                 $catalogElementsFilter->setIds([$calendarObjects[$calendarId]]);
+                Logger::log('Init  houseElementink start: 1');
+                $response['step'][] = 'Init  houseElementink start 1:';
+                $catalogElementsService = $apiClient->catalogElements(1321);
+                $response['step'][] = 'Init  houseElementink start 2:';
+                Logger::log('Init  houseElementink start: 2');
                 $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
+                Logger::log('Init  houseElementink start: 3');
                 if( $catalogElementsCollection->count() > 0){
                     $houseElement = $catalogElementsCollection->first();
                     $houseElement->setQuantity(1);
