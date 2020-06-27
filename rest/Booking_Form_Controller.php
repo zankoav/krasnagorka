@@ -23,6 +23,10 @@ use AmoCRM\Models\CustomFieldsValues\TextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\TextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\TextCustomFieldValueModel;
 
+use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
+
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 /**
@@ -163,17 +167,17 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         $leadCustomFields = new CustomFieldsValuesCollection();
 
-        // if(!empty($orderId)){
-        //     $dateFromFieldValueModel = new DateCustomFieldValuesModel();
-        //     $dateFromFieldValueModel->setFieldId(639191);
-        //     $dateFromFieldValueModel->setValues(
-        //         (new DateCustomFieldValueCollection())
-        //             ->add((new DateCustomFieldValueModel())
-        //                 ->setValue($orderId)
-        //         )
-        //     );
-        //     $leadCustomFields->add($dateFromFieldValueModel);
-        // }
+        if(!empty($orderId)){
+            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            $orderIdFieldValueModel->setFieldId(639191);
+            $orderIdFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                        ->setValue($orderId)
+                )
+            );
+            $leadCustomFields->add($orderIdFieldValueModel);
+        }
 
         if(!empty($type)){
             $typeFieldValueModel = new TextCustomFieldValuesModel();
