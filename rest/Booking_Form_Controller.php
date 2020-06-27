@@ -19,6 +19,10 @@ use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateCustomFieldValueCollec
 use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValueModel;
 use AmoCRM\Models\CustomFieldsValues\DateCustomFieldValuesModel;
 
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateTimeCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\DateTimeCustomFieldValueModel;
+use AmoCRM\Models\CustomFieldsValues\DateTimeCustomFieldValuesModel;
+
 use AmoCRM\Models\CustomFieldsValues\TextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\TextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\TextCustomFieldValueModel;
@@ -256,11 +260,11 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         if(!empty($dateFrom)){
-            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            $dateFromFieldValueModel = new DateTimeCustomFieldValuesModel();
             $dateFromFieldValueModel->setFieldId(66211);
             $dateFromFieldValueModel->setValues(
-                (new DateCustomFieldValueCollection())
-                    ->add((new DateCustomFieldValueModel())
+                (new DateTimeCustomFieldValueCollection())
+                    ->add((new DateTimeCustomFieldValueModel())
                         ->setValue($dateFrom)
                 )
             );
