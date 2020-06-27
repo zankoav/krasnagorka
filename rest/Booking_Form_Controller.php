@@ -44,7 +44,7 @@ use AmoCRM\Models\CatalogModel;
 
 use AmoCRM\Helpers\EntityTypesInterface;
 use AmoCRM\Collections\NotesCollection;
-use AmoCRM\Models\NoteType\ServiceMessageNote;
+use AmoCRM\Models\NoteType\CommonNote;
 
 
 /**
@@ -338,12 +338,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         $notesCollection = new NotesCollection();
-        $serviceMessageNote = new ServiceMessageNote();
-        $serviceMessageNote->setEntityId($lead->getId())
-            ->setText($commentNote)
-            ->setService('Api Library')
-            ->setCreatedBy(0);
-        $notesCollection->add($serviceMessageNote);
+        $messageNote = new CommonNote();
+        $messageNote->setEntityId($lead->getId())
+            ->setText($commentNote);
+        $notesCollection->add($messageNote);
 
         try {
             $leadNotesService = $apiClient->notes(EntityTypesInterface::LEADS);
