@@ -130,7 +130,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateTo = '2020-08-23';
         $contactPeople = 11;
         $contactComment = 'Test comment';//+
-        $calendarId = 43; 
+        $calendarId = 43; //+
         $type = 'reserved'; //+
         $freshPrice = 109; //+
         $orderId = 987; //+
@@ -207,25 +207,16 @@ class Booking_Form_Controller extends WP_REST_Controller
             try{
                 $catalogElementsFilter = new CatalogElementsFilter();
                 $catalogElementsFilter->setIds([$calendarObjects[$calendarId]]);
-                Logger::log('Init  houseElementink start: 1');
-                $response['step'][] = 'Init  houseElementink start 1:';
                 $catalogElementsService = $apiClient->catalogElements(1321);
-                $response['step'][] = 'Init  houseElementink start 2:';
-                Logger::log('Init  houseElementink start: 2');
                 $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
-                Logger::log('Init  houseElementink start: 3');
                 if( $catalogElementsCollection->count() > 0){
                     $houseElement = $catalogElementsCollection->first();
                     $houseElement->setQuantity(1);
                 }
-                Logger::log('Init  houseElementink:');
-                $response['step'][] = 'Init  houseElementink:';
             }catch(AmoCRMApiException $e){
                 $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
             }
-        }else{
-            Logger::log('Init  houseElementink else:');
         }
 
         if(!empty($orderId)){
@@ -264,17 +255,18 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadCustomFields->add($commentFieldValueModel);
         }
 
-        // if(!empty($dateFrom)){
-        //     $dateFromFieldValueModel = new DateCustomFieldValuesModel();
-        //     $dateFromFieldValueModel->setFieldId(66211);
-        //     $dateFromFieldValueModel->setValues(
-        //         (new DateCustomFieldValueCollection())
-        //             ->add((new DateCustomFieldValueModel())
-        //                 ->setValue($dateFrom)
-        //         )
-        //     );
-        //     $leadCustomFields->add($dateFromFieldValueModel);
-        // }
+        if(!empty($dateFrom)){
+            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            $dateFromFieldValueModel->setFieldId(66211);
+            $dateFromFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValueModel())
+                        ->setValue($dateFrom)
+                )
+            );
+            $leadCustomFields->add($dateFromFieldValueModel);
+            Logger::log('TIME:'.strtotime($dateFrom));
+        }
 
         // if(!empty($dateTo)){
         //     $dateToFieldValueModel = new DateCustomFieldValuesModel();
@@ -289,7 +281,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         // }
 
         if($leadCustomFields->count() > 0){
-            $lead->setCustomFieldsValues($leadCustomFields);
+            // $lead->setCustomFieldsValues($leadCustomFields);
         }
         
         try {
@@ -300,14 +292,11 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         if(isset($lead, $houseElement)){
-            Logger::log('Start Link:');
-
             //Привяжем к сделке наш элемент
             $links = new LinksCollection();
             $links->add($houseElement);
             try {
                 $apiClient->leads()->link($lead, $links);
-                $response['steps'][] = ' <<< link lead and houseElement >>> ';
             } catch (AmoCRMApiException $e) {
                 $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
