@@ -302,17 +302,17 @@ class Booking_Form_Controller extends WP_REST_Controller
         //     Logger::log('TIME:'.$dateFrom);
         // }
 
-        // if(!empty($dateTo)){
-        //     $dateToFieldValueModel = new DateCustomFieldValuesModel();
-        //     $dateToFieldValueModel->setFieldId(66213);
-        //     $dateToFieldValueModel->setValues(
-        //         (new DateCustomFieldValueCollection())
-        //             ->add((new DateCustomFieldValueModel())
-        //                 ->setValue($dateTo)
-        //         )
-        //     );
-        //     $leadCustomFields->add($dateToFieldValueModel);
-        // }
+        if(!empty($dateTo)){
+            $dateToFieldValueModel = new DateCustomFieldValuesModel();
+            $dateToFieldValueModel->setFieldId(66213);
+            $dateToFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValueModel())
+                        ->setValue($dateTo)
+                )
+            );
+            $leadCustomFields->add($dateToFieldValueModel);
+        }
 
         if($leadCustomFields->count() > 0){
             $lead->setCustomFieldsValues($leadCustomFields);
