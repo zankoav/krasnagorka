@@ -36,16 +36,17 @@
                             "Content-Type": "application/json; charset=utf-8",
                         }, body: JSON.stringify({
                             data: 'Hello'
-                        }),
+                        })
                     })
                         .then((response) => {
+                            console.log(response);
                             return response.json();
                         })
-                        .then((response) => {
-                            console.log('amo v4 response', response);
+                        .then((result) => {
+                            console.log('Success amo v4: ', result);
                         })
                         .catch((error) => {
-                            console.log('amo v4 response error', error);
+                            console.log('Error amo v4: ', error);
                         });
         }
     </script>

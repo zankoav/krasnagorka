@@ -99,6 +99,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function amocrm_v4($request)
     {
         $response = [
+            'steps'=>[],
             'exceptions' => []
         ];
 
@@ -138,7 +139,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         
         try {
+            $response['steps'][] = 'before lead addOne';
             $lead = $leadsService->addOne($lead);
+            $response['steps'][] = 'after lead addOne';
         } catch (AmoCRMApiException $e) {
             $response['exceptions'][] = $e->getTitle().'---addOne lead---'.$e->getDescription();
         }
@@ -150,7 +153,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
+            $response['steps'][] = 'before contacts get';
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            $response['steps'][] = 'after contacts get';
         } catch (AmoCRMApiException $e) {
             $response['exceptions'][] = $e->getTitle().'---get contacts---'.$e->getDescription();
         }
@@ -158,12 +163,14 @@ class Booking_Form_Controller extends WP_REST_Controller
         if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
             $contact = $contactsCollection->first();
         }else{
-
             try {
                 $contactsFilter->setQuery($contactEmail);
+                $response['steps'][] = 'before contacts get';
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+                $response['steps'][] = 'after contacts get';
             } catch (AmoCRMApiException $e) {
-                $response['exceptions'][] = $e->getTitle().'---get contacts---'.$e->getDescription();            }
+                $response['exceptions'][] = $e->getTitle().'---get contacts---'.$e->getDescription();            
+            }
 
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
                 $contact = $contactsCollection->first();
@@ -183,7 +190,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 );
 
                 try {
+                    $response['steps'][] = 'before contacts updateOne';
                     $contact = $apiClient->contacts()->updateOne($contact);
+                    $response['steps'][] = 'after contacts updateOne';
                 } catch (AmoCRMApiException $e) {
                     $response['exceptions'][] = $e->getTitle().'---updateOne contacts---'.$e->getDescription();                }
             }else{
@@ -219,7 +228,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 // $contact->setCustomFieldsValues($contactCustomFields);
 
                 try {
+                    $response['steps'][] = 'before contacts addOne';
                     $contact = $apiClient->contacts()->addOne($contact);
+                    $response['steps'][] = 'after contacts addOne';
                 } catch (AmoCRMApiException $e) {
                     $response['exceptions'][] = $e->getTitle().'---addOne contacts---'.$e->getDescription();
                 }
@@ -230,12 +241,14 @@ class Booking_Form_Controller extends WP_REST_Controller
         $links->add($contact);
 
         try {
+            $response['steps'][] = 'before link lead';
             $apiClient->leads()->link($lead, $links);
+            $response['steps'][] = 'after link lead';
         } catch (AmoCRMApiException $e) {
             $response['exceptions'][] = $e->getTitle().'---link---'.$e->getDescription();
         }
 
-        Logger::log('zanko page');
+        Logger::log('zanko page:'.json_encode($response));
         return new WP_REST_Response($response, 200);
     }
 
