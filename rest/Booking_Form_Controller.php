@@ -214,10 +214,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $catalogElementsFilter = new CatalogElementsFilter();
                 $catalogElementsFilter->setIds([$calendarObjects[$calendarId]]);
                 $catalogElementsService = $apiClient->catalogElements(1321);
-                $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
-                if( !empty($catalogElementsCollection) and $catalogElementsCollection->count() > 0){
-                    $houseElement = $catalogElementsCollection->first();
-                    $houseElement->setQuantity(1);
+                if(!empty($catalogElementsService)){
+                    $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
+                    if( !empty($catalogElementsCollection) and $catalogElementsCollection->count() > 0){
+                        $houseElement = $catalogElementsCollection->first();
+                        $houseElement->setQuantity(1);
+                    }
                 }
             }catch(AmoCRMApiException $e){
                 $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
