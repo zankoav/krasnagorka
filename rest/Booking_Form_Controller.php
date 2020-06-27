@@ -159,29 +159,29 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         $leadCustomFields = new CustomFieldsValuesCollection();
 
-        // if(!empty($dateFrom)){
-        //     $dateFromFieldValueModel = new DateCustomFieldValuesModel();
-        //     $dateFromFieldValueModel->setFieldId(66211);
-        //     $dateFromFieldValueModel->setValues(
-        //         (new DateCustomFieldValueCollection())
-        //             ->add((new DateCustomFieldValueModel())
-        //                 ->setValue($dateFrom)
-        //         )
-        //     );
-        //     $leadCustomFields->add($dateFromFieldValueModel);
-        // }
+        if(!empty($dateFrom)){
+            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            $dateFromFieldValueModel->setFieldId(66211);
+            $dateFromFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValueModel())
+                        ->setValue($dateFrom)
+                )
+            );
+            $leadCustomFields->add($dateFromFieldValueModel);
+        }
 
-        // if(!empty($dateTo)){
-        //     $dateToFieldValueModel = new DateCustomFieldValuesModel();
-        //     $dateToFieldValueModel->setFieldId(66213);
-        //     $dateToFieldValueModel->setValues(
-        //         (new DateCustomFieldValueCollection())
-        //             ->add((new DateCustomFieldValueModel())
-        //                 ->setValue($dateTo)
-        //         )
-        //     );
-        //     $leadCustomFields->add($dateToFieldValueModel);
-        // }
+        if(!empty($dateTo)){
+            $dateToFieldValueModel = new DateCustomFieldValuesModel();
+            $dateToFieldValueModel->setFieldId(66213);
+            $dateToFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValueModel())
+                        ->setValue($dateTo)
+                )
+            );
+            $leadCustomFields->add($dateToFieldValueModel);
+        }
 
         if($leadCustomFields->count() > 0){
             $lead->setCustomFieldsValues($leadCustomFields);
