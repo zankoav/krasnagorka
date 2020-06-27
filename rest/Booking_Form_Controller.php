@@ -125,7 +125,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateFrom = '2020-08-20';
         $dateTo = '2020-08-23';
         $contactPeople = 11;
-        $contactComment = 'Test comment';
+        $contactComment = 'Test comment';//+
         $calendarId = 43; 
         $type = 'reserved'; //+
         $freshPrice = 109; //+
@@ -174,6 +174,16 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         if(!empty($freshPrice)){
             $lead->setPrice($freshPrice);
+        }
+
+        if(!empty($calendarId)){
+            try{
+                $calendarCatalogModel = $apiClient->catalogs()->getOne($calendarId);
+                $response['step'][] = $calendarCatalogModel->getName();
+            }catch(AmoCRMApiException $e){
+                $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
+                Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
+            }
         }
 
         if(!empty($orderId)){
