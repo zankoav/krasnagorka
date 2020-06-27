@@ -148,6 +148,7 @@ class Booking_Form_Controller extends WP_REST_Controller
            ->add(
                 (new TagModel())
                     ->setId(501)
+                    ->setName('Страница Бронирования')
             )
         );
         
