@@ -13,6 +13,7 @@ use AmoCRM\Collections\LinksCollection;
 use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValuesModel;
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 /**
@@ -102,8 +103,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $contactName = 'Александр Занько';
         $contactPhone = '+375292228338';
         $contactEmail = 'zankoav@gmail.com';
-        $contactFrom = '2020-08-20';
-        $contactTo = '2020-08-23';
+        $dateFrom = '2020-08-20';
+        $dateTo = '2020-08-23';
         $contactPeople = 11;
         $contactPassport = 'GGFFTTOOPPRRTT';
         $contactComment = 'Test comment';
@@ -151,6 +152,35 @@ class Booking_Form_Controller extends WP_REST_Controller
                     ->setName('Страница Бронирования')
             )
         );
+        $leadCustomFields = new CustomFieldsValuesCollection();
+
+        if(!empty($dateFrom)){
+            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            $dateFromFieldValueModel->setFieldId(66211);
+            $dateFromFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValuesModel())
+                        ->setValue($dateFrom)
+                )
+            );
+            $leadCustomFields->add($dateFromFieldValueModel);
+        }
+
+        if(!empty($dateTo)){
+            $dateToFieldValueModel = new DateCustomFieldValuesModel();
+            $dateToFieldValueModel->setFieldId(66213);
+            $dateToFieldValueModel->setValues(
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValuesModel())
+                        ->setValue($dateTo)
+                )
+            );
+            $leadCustomFields->add($dateToFieldValueModel);
+        }
+
+        if($leadCustomFields->count() > 0){
+            $lead->setCustomFieldsValues($leadCustomFields);
+        }
         
         try {
             $lead = $leadsService->addOne($lead);
