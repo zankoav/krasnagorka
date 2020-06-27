@@ -12,6 +12,7 @@ use AmoCRM\Models\ContactModel;
 use AmoCRM\Collections\LinksCollection;
 use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValuesModel;
 use AmoCRM\Collections\CustomFieldsValuesCollection;
