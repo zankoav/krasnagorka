@@ -27,6 +27,10 @@ use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 
+use AmoCRM\Models\CustomFieldsValues\PriceCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\PriceCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\PriceCustomFieldValueModel;
+
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 /**
@@ -168,11 +172,12 @@ class Booking_Form_Controller extends WP_REST_Controller
         $leadCustomFields = new CustomFieldsValuesCollection();
 
         if(!empty($freshPrice)){
-            $freshPriceFieldValueModel = new NumericCustomFieldValuesModel();
+            $freshPriceFieldValueModel = new PriceCustomFieldValuesModel();
+            $freshPriceFieldValueModel->setFieldCode('PRICE');
             $freshPriceFieldValueModel->setFieldCode('PRICE');
             $freshPriceFieldValueModel->setValues(
-                (new NumericCustomFieldValueCollection())
-                    ->add((new NumericCustomFieldValueModel())
+                (new PriceCustomFieldValueCollection())
+                    ->add((new PriceCustomFieldValueModel())
                         ->setValue($freshPrice)
                 )
             );
