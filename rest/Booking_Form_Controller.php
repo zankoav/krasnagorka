@@ -203,6 +203,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         $leadCustomFields = new CustomFieldsValuesCollection();
 
+        $houseElement = null;
+        
         if(!empty($freshPrice)){
             $lead->setPrice($freshPrice);
         }
