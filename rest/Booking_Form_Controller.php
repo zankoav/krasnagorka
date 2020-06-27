@@ -139,26 +139,24 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         
         try {
-            $response['steps'][] = 'before lead addOne';
             $lead = $leadsService->addOne($lead);
-            $response['steps'][] = 'after lead addOne';
         } catch (AmoCRMApiException $e) {
-            $response['exceptions'][] = $e->getTitle().'---addOne lead---'.$e->getDescription();
+            $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
         }
 
-        // $contactPhone = '+375298888888';
-        // $contactEmail = 'zankoav@gmail.com';
+        $contactPhone = '+375298888888';
+        $contactEmail = 'zankoav@gmail.com';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
-        // try {
-        //     $contactsFilter = new ContactsFilter();
-        //     $contactsFilter->setQuery($contactPhone);
-        //     $response['steps'][] = 'before contacts get';
-        //     $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-        //     $response['steps'][] = 'after contacts get';
-        // } catch (AmoCRMApiException $e) {
-        //     $response['exceptions'][] = $e->getTitle().'---get contacts---'.$e->getDescription();
-        // }
+        try {
+            $contactsFilter = new ContactsFilter();
+            $contactsFilter->setQuery($contactPhone);
+            $response['steps'][] = 'before contacts get';
+            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            $response['steps'][] = 'after contacts get';
+        } catch (AmoCRMApiException $e) {
+            $response['exceptions'][] = $e->getTitle().' <<< get contacts >>> '.$e->getDescription();
+        }
 
         // if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
         //     $contact = $contactsCollection->first();
