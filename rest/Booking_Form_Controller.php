@@ -281,7 +281,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         // }
 
         if($leadCustomFields->count() > 0){
-            // $lead->setCustomFieldsValues($leadCustomFields);
+            $lead->setCustomFieldsValues($leadCustomFields);
         }
         
         try {
