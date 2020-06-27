@@ -108,8 +108,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $contactName = 'Александр Занько';
         $contactPhone = '+375292228338';
         $contactEmail = 'zankoav@gmail.com';
-        $dateFrom = '2020-08-20';
-        $dateTo = '2020-08-23';
+        $dateFrom = '20.08.2020';
+        $dateTo = '23.08.2020';
         $contactPeople = 11;
         $contactPassport = 'GGFFTTOOPPRRTT';
         $contactComment = 'Test comment';
