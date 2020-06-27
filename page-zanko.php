@@ -31,23 +31,22 @@
         function sendData(){
             console.log('send data to server');
             fetch("/wp-json/krasnagorka/v1/amo-v4/", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json; charset=utf-8",
-                        }, body: JSON.stringify({
-                            data: 'Hello'
-                        })
-                    })
-                        .then((response) => {
-                            console.log(response);
-                            return response.json();
-                        })
-                        .then((result) => {
-                            console.log('Success amo v4: ', result);
-                        })
-                        .catch((error) => {
-                            console.log('Error amo v4: ', error);
-                        });
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                }, body: JSON.stringify({
+                    data: 'Hello'
+                })
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((result) => {
+                    console.log('Success amo v4: ', result);
+                })
+                .catch((error) => {
+                    console.log('Error amo v4: ', error);
+                });
         }
     </script>
 

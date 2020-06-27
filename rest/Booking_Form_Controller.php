@@ -226,9 +226,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 );
 
                 $contactCustomFields->add($phoneFieldValueModel);
-                // $contactCustomFields->add($emailFieldValueModel);
+                $contactCustomFields->add($emailFieldValueModel);
 
-                $contact->setCustomFieldsValues($contactCustomFields);
+                // $contact->setCustomFieldsValues($contactCustomFields);
 
                 try {
                     $response['steps'][] = ' <<< before contacts addOne >>> ';
