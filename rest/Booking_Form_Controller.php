@@ -178,10 +178,10 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         if(!empty($calendarId)){
             try{
-                $calendarCatalogModel = $apiClient->catalogs()->getOne($calendarId);
+                $calendarCatalogModel = $apiClient->catalogs()->getOne(1321);
                 $response['step'][] = $calendarCatalogModel->getName();
             }catch(AmoCRMApiException $e){
-                $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
+                $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
             }
         }
