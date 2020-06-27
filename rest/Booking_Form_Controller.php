@@ -204,31 +204,31 @@ class Booking_Form_Controller extends WP_REST_Controller
                 
                 $contactCustomFields = new CustomFieldsValuesCollection();
                 $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
-                $phoneFieldValueModel->setFieldId(135479);
+                $phoneFieldValueModel->setFieldCode('PHONE');
                 $phoneFieldValueModel->setValues(
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
+                                ->setEnum('WORKDD')
                                 ->setValue($contactPhone)
                         )
                 );
                 
-                $emailFieldValueModel = new MultitextCustomFieldValuesModel();
-                $emailFieldValueModel->setFieldId(135491);
-                $emailFieldValueModel->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
-                                ->setValue($contactEmail)
-                        )
-                );
+                // $emailFieldValueModel = new MultitextCustomFieldValuesModel();
+                // $emailFieldValueModel->setFieldId(135491);
+                // $emailFieldValueModel->setValues(
+                //     (new MultitextCustomFieldValueCollection())
+                //         ->add(
+                //             (new MultitextCustomFieldValueModel())
+                //                 ->setEnum('WORK')
+                //                 ->setValue($contactEmail)
+                //         )
+                // );
 
                 $contactCustomFields->add($phoneFieldValueModel);
-                $contactCustomFields->add($emailFieldValueModel);
+                // $contactCustomFields->add($emailFieldValueModel);
 
-                // $contact->setCustomFieldsValues($contactCustomFields);
+                $contact->setCustomFieldsValues($contactCustomFields);
 
                 try {
                     $response['steps'][] = ' <<< before contacts addOne >>> ';
