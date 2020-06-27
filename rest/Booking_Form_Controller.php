@@ -120,15 +120,16 @@ class Booking_Form_Controller extends WP_REST_Controller
         $contactName = 'Александр Занько';
         $contactPhone = '+375292228338';
         $contactEmail = 'zankoav@gmail.com';
+        $contactPassport = 'GGFFTTOOPPRRTT';
+
         $dateFrom = '2020-08-20';
         $dateTo = '2020-08-23';
         $contactPeople = 11;
-        $contactPassport = 'GGFFTTOOPPRRTT';
         $contactComment = 'Test comment';
-        $calendarId = 43;
-        $type = 'reserved';
-        $freshPrice = 109;
-        $orderId = 987;
+        $calendarId = 43; 
+        $type = 'reserved'; //+
+        $freshPrice = 109; //+
+        $orderId = 987; //+
 
         $response = [
             'exceptions' => [],
@@ -197,6 +198,18 @@ class Booking_Form_Controller extends WP_REST_Controller
                 )
             );
             $leadCustomFields->add($typeFieldValueModel);
+        }
+
+        if(!empty($contactComment)){
+            $commentFieldValueModel = new TextCustomFieldValuesModel();
+            $commentFieldValueModel->setFieldId(357377);
+            $commentFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue($contactComment)
+                )
+            );
+            $leadCustomFields->add($commentFieldValueModel);
         }
 
         // if(!empty($dateFrom)){
