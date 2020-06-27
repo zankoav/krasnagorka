@@ -36,6 +36,7 @@ use AmoCRM\Models\CustomFieldsValues\ValueCollections\PriceCustomFieldValueColle
 use AmoCRM\Models\CustomFieldsValues\ValueModels\PriceCustomFieldValueModel;
 
 use AmoCRM\Collections\CustomFieldsValuesCollection;
+
 use AmoCRM\Collections\CatalogElementsCollection;
 use AmoCRM\Filters\CatalogElementsFilter;
 use AmoCRM\Models\CatalogElementModel;
@@ -222,7 +223,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     }
                 }
             }catch(AmoCRMApiException $e){
-                $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
+                $response['exceptions'][] = $e->getTitle().' <<< getOne catalog >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
             }
         }
@@ -263,19 +264,19 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadCustomFields->add($commentFieldValueModel);
         }
 
-        if(!empty($dateFrom)){
-            $dateFromFieldValueModel = new TextCustomFieldValueModel();
-            $dateFromFieldValueModel->setFieldId(66211);
-            // $dateFrom = DateTime::createFromFormat('Y-m-d', $dateFrom)->getTimestamp();
-            $dateFromFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                        ->setValue($dateFrom)
-                )
-            );
-            $leadCustomFields->add($dateFromFieldValueModel);
-            Logger::log('TIME:'.$dateFrom);
-        }
+        // if(!empty($dateFrom)){
+        //     $dateFromFieldValueModel = new TextCustomFieldValueModel();
+        //     $dateFromFieldValueModel->setFieldId(66211);
+        //     // $dateFrom = DateTime::createFromFormat('Y-m-d', $dateFrom)->getTimestamp();
+        //     $dateFromFieldValueModel->setValues(
+        //         (new TextCustomFieldValueCollection())
+        //             ->add((new TextCustomFieldValueModel())
+        //                 ->setValue($dateFrom)
+        //         )
+        //     );
+        //     $leadCustomFields->add($dateFromFieldValueModel);
+        //     Logger::log('TIME:'.$dateFrom);
+        // }
 
         // if(!empty($dateTo)){
         //     $dateToFieldValueModel = new DateCustomFieldValuesModel();
