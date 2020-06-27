@@ -161,6 +161,30 @@ class Booking_Form_Controller extends WP_REST_Controller
         if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
             $contact = $contactsCollection->first();
             $response['steps'][] = ' <<< get first(1) contact >>> ';
+
+            $customFields = $contact->getCustomFieldsValues();
+                $emailField = $customFields->getBy('fieldCode', 'EMAIL');
+                if(empty($emailField)){
+                    $emailField = (new MultitextCustomFieldValuesModel())->setFieldCode('EMAIL');
+                    $customFields->add($emailField);
+                }
+                $emailField->setValues(
+                    (new MultitextCustomFieldValueCollection())
+                        ->add(
+                            (new MultitextCustomFieldValueModel())
+                                ->setEnum('WORK')
+                                ->setValue($contactEmail)
+                        )
+                );
+
+                try {
+                    $response['steps'][] = ' <<< get before contacts updateOne >>> ';
+                    $contact = $apiClient->contacts()->updateOne($contact);
+                    $response['steps'][] = ' <<< get after contacts updateOne >>> ';
+                } catch (AmoCRMApiException $e) {
+                    $response['exceptions'][] = $e->getTitle().' <<< updateOne contacts >>> '.$e->getDescription();                
+                }
+
         }else{
             try {
                 $contactsFilter->setQuery($contactEmail);
@@ -178,14 +202,14 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $customFields = $contact->getCustomFieldsValues();
                 $phoneField = $customFields->getBy('fieldCode', 'PHONE');
                 if(empty($phoneField)){
-                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldId(135479);
+                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldCode('PHONE');
                     $customFields->add($phoneField);
                 }
                 $phoneField->setValues(
                     (new MultitextCustomFieldValueCollection())
                         ->add(
                             (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
+                                ->setEnum('WORKDD')
                                 ->setValue($contactPhone)
                         )
                 );
