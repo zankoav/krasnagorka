@@ -144,7 +144,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
         }
 
-        $contactPhone = '+375298888888';
+        $contactPhone = '+375294444444';
         $contactEmail = 'zankoav@gmail.com';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
