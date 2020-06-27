@@ -10,11 +10,15 @@ use AmoCRM\Models\TagModel;
 use AmoCRM\Filters\ContactsFilter;
 use AmoCRM\Models\ContactModel;
 use AmoCRM\Collections\LinksCollection;
-use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
+
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
-use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
-use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
+
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValueModel;
+use AmoCRM\Models\CustomFieldsValues\DateCustomFieldValuesModel;
+
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 /**
@@ -160,7 +164,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $dateFromFieldValueModel->setFieldId(66211);
             $dateFromFieldValueModel->setValues(
                 (new DateCustomFieldValueCollection())
-                    ->add((new DateCustomFieldValuesModel())
+                    ->add((new DateCustomFieldValueModel())
                         ->setValue($dateFrom)
                 )
             );
@@ -172,7 +176,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $dateToFieldValueModel->setFieldId(66213);
             $dateToFieldValueModel->setValues(
                 (new DateCustomFieldValueCollection())
-                    ->add((new DateCustomFieldValuesModel())
+                    ->add((new DateCustomFieldValueModel())
                         ->setValue($dateTo)
                 )
             );
