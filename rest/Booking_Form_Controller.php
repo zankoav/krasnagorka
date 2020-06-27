@@ -191,139 +191,140 @@ class Booking_Form_Controller extends WP_REST_Controller
             $lead = $leadsService->addOne($lead);
         } catch (AmoCRMApiException $e) {
             $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
+            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
 
         
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
-        try {
-            $contactsFilter = new ContactsFilter();
-            $contactsFilter->setQuery($contactPhone);
-            $response['steps'][] = ' <<< before contacts(1) get >>> ';
-            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-            $response['steps'][] = ' <<< after contacts(1) get >>> ';
-        } catch (AmoCRMApiException $e) {
-            $response['exceptions'][] = $e->getTitle().' <<< get contacts >>> '.$e->getDescription();
-        }
+        // try {
+        //     $contactsFilter = new ContactsFilter();
+        //     $contactsFilter->setQuery($contactPhone);
+        //     $response['steps'][] = ' <<< before contacts(1) get >>> ';
+        //     $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+        //     $response['steps'][] = ' <<< after contacts(1) get >>> ';
+        // } catch (AmoCRMApiException $e) {
+        //     $response['exceptions'][] = $e->getTitle().' <<< get contacts >>> '.$e->getDescription();
+        // }
 
-        if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
-            $contact = $contactsCollection->first();
-            $response['steps'][] = ' <<< get first(1) contact >>> ';
+        // if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+        //     $contact = $contactsCollection->first();
+        //     $response['steps'][] = ' <<< get first(1) contact >>> ';
 
-            $customFields = $contact->getCustomFieldsValues();
-                $emailField = $customFields->getBy('fieldCode', 'EMAIL');
-                if(empty($emailField)){
-                    $emailField = (new MultitextCustomFieldValuesModel())->setFieldCode('EMAIL');
-                    $customFields->add($emailField);
-                }
-                $emailField->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
-                                ->setValue($contactEmail)
-                        )
-                );
+        //     $customFields = $contact->getCustomFieldsValues();
+        //         $emailField = $customFields->getBy('fieldCode', 'EMAIL');
+        //         if(empty($emailField)){
+        //             $emailField = (new MultitextCustomFieldValuesModel())->setFieldCode('EMAIL');
+        //             $customFields->add($emailField);
+        //         }
+        //         $emailField->setValues(
+        //             (new MultitextCustomFieldValueCollection())
+        //                 ->add(
+        //                     (new MultitextCustomFieldValueModel())
+        //                         ->setEnum('WORK')
+        //                         ->setValue($contactEmail)
+        //                 )
+        //         );
 
-                try {
-                    $response['steps'][] = ' <<< get before contacts updateOne >>> ';
-                    $contact = $apiClient->contacts()->updateOne($contact);
-                    $response['steps'][] = ' <<< get after contacts updateOne >>> ';
-                } catch (AmoCRMApiException $e) {
-                    $response['exceptions'][] = $e->getTitle().' <<< updateOne contacts >>> '.$e->getDescription();                
-                }
+        //         try {
+        //             $response['steps'][] = ' <<< get before contacts updateOne >>> ';
+        //             $contact = $apiClient->contacts()->updateOne($contact);
+        //             $response['steps'][] = ' <<< get after contacts updateOne >>> ';
+        //         } catch (AmoCRMApiException $e) {
+        //             $response['exceptions'][] = $e->getTitle().' <<< updateOne contacts >>> '.$e->getDescription();                
+        //         }
 
-        }else{
-            try {
-                $contactsFilter->setQuery($contactEmail);
-                $response['steps'][] = ' <<< before contacts(2) get >>> ';
-                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-                $response['steps'][] = ' <<< after contacts(2) get >>> ';
-            } catch (AmoCRMApiException $e) {
-                $response['exceptions'][] = $e->getTitle().' <<< get contacts >>> '.$e->getDescription();            
-            }
+        // }else{
+        //     try {
+        //         $contactsFilter->setQuery($contactEmail);
+        //         $response['steps'][] = ' <<< before contacts(2) get >>> ';
+        //         $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+        //         $response['steps'][] = ' <<< after contacts(2) get >>> ';
+        //     } catch (AmoCRMApiException $e) {
+        //         $response['exceptions'][] = $e->getTitle().' <<< get contacts >>> '.$e->getDescription();            
+        //     }
 
-            if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
-                $contact = $contactsCollection->first();
-                $response['steps'][] = ' <<< get first(2) contact >>> ';
+        //     if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+        //         $contact = $contactsCollection->first();
+        //         $response['steps'][] = ' <<< get first(2) contact >>> ';
                 
-                $customFields = $contact->getCustomFieldsValues();
-                $phoneField = $customFields->getBy('fieldCode', 'PHONE');
-                if(empty($phoneField)){
-                    $phoneField = (new MultitextCustomFieldValuesModel())->setFieldCode('PHONE');
-                    $customFields->add($phoneField);
-                }
-                $phoneField->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
-                                ->setValue($contactPhone)
-                        )
-                );
+        //         $customFields = $contact->getCustomFieldsValues();
+        //         $phoneField = $customFields->getBy('fieldCode', 'PHONE');
+        //         if(empty($phoneField)){
+        //             $phoneField = (new MultitextCustomFieldValuesModel())->setFieldCode('PHONE');
+        //             $customFields->add($phoneField);
+        //         }
+        //         $phoneField->setValues(
+        //             (new MultitextCustomFieldValueCollection())
+        //                 ->add(
+        //                     (new MultitextCustomFieldValueModel())
+        //                         ->setEnum('WORKDD')
+        //                         ->setValue($contactPhone)
+        //                 )
+        //         );
 
-                try {
-                    $response['steps'][] = ' <<< get before contacts updateOne >>> ';
-                    $contact = $apiClient->contacts()->updateOne($contact);
-                    $response['steps'][] = ' <<< get after contacts updateOne >>> ';
-                } catch (AmoCRMApiException $e) {
-                    $response['exceptions'][] = $e->getTitle().' <<< updateOne contacts >>> '.$e->getDescription();                
-                }
+        //         try {
+        //             $response['steps'][] = ' <<< get before contacts updateOne >>> ';
+        //             $contact = $apiClient->contacts()->updateOne($contact);
+        //             $response['steps'][] = ' <<< get after contacts updateOne >>> ';
+        //         } catch (AmoCRMApiException $e) {
+        //             $response['exceptions'][] = $e->getTitle().' <<< updateOne contacts >>> '.$e->getDescription();                
+        //         }
 
-            }else{
-                $contact = new ContactModel();
-                $contact->setName('ZANKO_AV');
+        //     }else{
+        //         $contact = new ContactModel();
+        //         $contact->setName('ZANKO_AV');
                 
-                $contactCustomFields = new CustomFieldsValuesCollection();
-                $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
-                $phoneFieldValueModel->setFieldCode('PHONE');
-                $phoneFieldValueModel->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORKDD')
-                                ->setValue($contactPhone)
-                        )
-                );
+        //         $contactCustomFields = new CustomFieldsValuesCollection();
+        //         $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
+        //         $phoneFieldValueModel->setFieldCode('PHONE');
+        //         $phoneFieldValueModel->setValues(
+        //             (new MultitextCustomFieldValueCollection())
+        //                 ->add(
+        //                     (new MultitextCustomFieldValueModel())
+        //                         ->setEnum('WORKDD')
+        //                         ->setValue($contactPhone)
+        //                 )
+        //         );
                 
-                $emailFieldValueModel = new MultitextCustomFieldValuesModel();
-                $emailFieldValueModel->setFieldCode('EMAIL');
-                $emailFieldValueModel->setValues(
-                    (new MultitextCustomFieldValueCollection())
-                        ->add(
-                            (new MultitextCustomFieldValueModel())
-                                ->setEnum('WORK')
-                                ->setValue($contactEmail)
-                        )
-                );
+        //         $emailFieldValueModel = new MultitextCustomFieldValuesModel();
+        //         $emailFieldValueModel->setFieldCode('EMAIL');
+        //         $emailFieldValueModel->setValues(
+        //             (new MultitextCustomFieldValueCollection())
+        //                 ->add(
+        //                     (new MultitextCustomFieldValueModel())
+        //                         ->setEnum('WORK')
+        //                         ->setValue($contactEmail)
+        //                 )
+        //         );
 
-                $contactCustomFields->add($phoneFieldValueModel);
-                $contactCustomFields->add($emailFieldValueModel);
+        //         $contactCustomFields->add($phoneFieldValueModel);
+        //         $contactCustomFields->add($emailFieldValueModel);
 
-                $contact->setCustomFieldsValues($contactCustomFields);
+        //         $contact->setCustomFieldsValues($contactCustomFields);
 
-                try {
-                    $response['steps'][] = ' <<< before contacts addOne >>> ';
-                    $contact = $apiClient->contacts()->addOne($contact);
-                    $response['steps'][] = ' <<< after contacts addOne >>> ';
-                } catch (AmoCRMApiException $e) {
-                    $response['exceptions'][] = $e->getTitle().' <<< addOne contacts >>> '.$e->getDescription();
-                }
+        //         try {
+        //             $response['steps'][] = ' <<< before contacts addOne >>> ';
+        //             $contact = $apiClient->contacts()->addOne($contact);
+        //             $response['steps'][] = ' <<< after contacts addOne >>> ';
+        //         } catch (AmoCRMApiException $e) {
+        //             $response['exceptions'][] = $e->getTitle().' <<< addOne contacts >>> '.$e->getDescription();
+        //         }
                 
-            }
-        }
-        $links = new LinksCollection();
-        $links->add($contact);
+        //     }
+        // }
+        // $links = new LinksCollection();
+        // $links->add($contact);
 
-        try {
-            $response['steps'][] = ' <<< before link lead >>> ';
-            $apiClient->leads()->link($lead, $links);
-            $response['steps'][] = ' <<< after link lead >>> ';
-        } catch (AmoCRMApiException $e) {
-            $response['exceptions'][] = $e->getTitle().' <<< link >>> '.$e->getDescription();
-        }
+        // try {
+        //     $response['steps'][] = ' <<< before link lead >>> ';
+        //     $apiClient->leads()->link($lead, $links);
+        //     $response['steps'][] = ' <<< after link lead >>> ';
+        // } catch (AmoCRMApiException $e) {
+        //     $response['exceptions'][] = $e->getTitle().' <<< link >>> '.$e->getDescription();
+        // }
 
-        Logger::log('zanko page:'.json_encode($response));
+        // Logger::log('zanko page:'.json_encode($response));
         return new WP_REST_Response($response, 200);
     }
 
