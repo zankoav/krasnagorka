@@ -32,6 +32,10 @@ use AmoCRM\Models\CustomFieldsValues\ValueCollections\PriceCustomFieldValueColle
 use AmoCRM\Models\CustomFieldsValues\ValueModels\PriceCustomFieldValueModel;
 
 use AmoCRM\Collections\CustomFieldsValuesCollection;
+use AmoCRM\Collections\CatalogElementsCollection;
+use AmoCRM\Filters\CatalogElementsFilter;
+use AmoCRM\Models\CatalogElementModel;
+use AmoCRM\Models\CatalogModel;
 
 /**
  * Created by PhpStorm.
@@ -220,6 +224,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
             }
+        }else{
+            Logger::log('Init  houseElementink else:');
         }
 
         if(!empty($orderId)){
