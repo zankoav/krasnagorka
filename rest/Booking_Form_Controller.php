@@ -136,6 +136,29 @@ class Booking_Form_Controller extends WP_REST_Controller
             'steps'=>[]
         ];
 
+        $calendarObjects = [
+            '17' => 1036665,
+            '37' => 1036663,
+            '18' => 1036661,
+            '19' => 1036659,
+            '20' => 1036657,
+            '21' => 1036655,
+            '22' => 1036653,
+            '23' => 1036651,
+            '24' => 1036649,
+            '25' => 1036647,
+            '26' => 1036645,
+            '27' => 1036643,
+            '28' => 1036641,
+            '29' => 1036639,
+            '14' => 1036585,
+            '13' => 1036583,
+            '15' => 10393,
+            '9' => 10391,
+            '43'=> 1663367,
+            '16' => 10389
+        ];
+
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
         $redirectUri = 'https://krasnagorka.by';
@@ -176,10 +199,17 @@ class Booking_Form_Controller extends WP_REST_Controller
             $lead->setPrice($freshPrice);
         }
 
-        if(!empty($calendarId)){
+        if(!empty($calendarId) and !empty($calendarObjects[$calendarId])){
             try{
-                $calendarCatalogModel = $apiClient->catalogs()->getOne(1321);
-                $response['step'][] = $calendarCatalogModel->getName();
+                $catalogElementsService = $apiClient->catalogElements(1321);
+                $catalogElementsFilter = new CatalogElementsFilter();
+                $catalogElementsFilter->setIds([$calendarObjects[$calendarId]]);
+                $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
+                if( $catalogElementsCollection->count() > 0){
+                    $houseElement = $catalogElementsCollection->first();
+                    $houseElement->setQuantity(1);
+                }
+                // $response['step'][] = $calendarCatalogModel->getName();
             }catch(AmoCRMApiException $e){
                 $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
@@ -257,6 +287,18 @@ class Booking_Form_Controller extends WP_REST_Controller
             Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
 
+        if(isset($lead, $houseElement)){
+            //Привяжем к сделке наш элемент
+            $links = new LinksCollection();
+            $links->add($houseElement);
+            try {
+                $apiClient->leads()->link($lead, $links);
+                $response['steps'][] = ' <<< link lead and houseElement >>> ';
+            } catch (AmoCRMApiException $e) {
+                $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
+                Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+            }
+        }
         
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
