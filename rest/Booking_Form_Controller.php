@@ -19,6 +19,10 @@ use AmoCRM\Models\CustomFieldsValues\ValueCollections\DateCustomFieldValueCollec
 use AmoCRM\Models\CustomFieldsValues\ValueModels\DateCustomFieldValueModel;
 use AmoCRM\Models\CustomFieldsValues\DateCustomFieldValuesModel;
 
+use AmoCRM\Models\CustomFieldsValues\TextCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\TextCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\TextCustomFieldValueModel;
+
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 /**
@@ -108,8 +112,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $contactName = 'Александр Занько';
         $contactPhone = '+375292228338';
         $contactEmail = 'zankoav@gmail.com';
-        $dateFrom = '20.08.2020';
-        $dateTo = '23.08.2020';
+        $dateFrom = '2020-08-20';
+        $dateTo = '2020-08-23';
         $contactPeople = 11;
         $contactPassport = 'GGFFTTOOPPRRTT';
         $contactComment = 'Test comment';
@@ -148,7 +152,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $leadsService = $apiClient->leads();
         $lead = new LeadModel();
-        $lead->setName('ZANKO ALEXANDR FROM V4');
+        $lead->setName('Сделка с сайта test');
         $lead->setStatusId(19518940);
         $lead->setTags((new TagsCollection())
            ->add(
@@ -159,29 +163,53 @@ class Booking_Form_Controller extends WP_REST_Controller
         );
         $leadCustomFields = new CustomFieldsValuesCollection();
 
-        if(!empty($dateFrom)){
-            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
-            $dateFromFieldValueModel->setFieldId(66211);
-            $dateFromFieldValueModel->setValues(
-                (new DateCustomFieldValueCollection())
-                    ->add((new DateCustomFieldValueModel())
-                        ->setValue($dateFrom)
+        // if(!empty($orderId)){
+        //     $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+        //     $dateFromFieldValueModel->setFieldId(639191);
+        //     $dateFromFieldValueModel->setValues(
+        //         (new DateCustomFieldValueCollection())
+        //             ->add((new DateCustomFieldValueModel())
+        //                 ->setValue($orderId)
+        //         )
+        //     );
+        //     $leadCustomFields->add($dateFromFieldValueModel);
+        // }
+
+        if(!empty($type)){
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue($type)
                 )
             );
-            $leadCustomFields->add($dateFromFieldValueModel);
+            $leadCustomFields->add($typeFieldValueModel);
         }
 
-        if(!empty($dateTo)){
-            $dateToFieldValueModel = new DateCustomFieldValuesModel();
-            $dateToFieldValueModel->setFieldId(66213);
-            $dateToFieldValueModel->setValues(
-                (new DateCustomFieldValueCollection())
-                    ->add((new DateCustomFieldValueModel())
-                        ->setValue($dateTo)
-                )
-            );
-            $leadCustomFields->add($dateToFieldValueModel);
-        }
+        // if(!empty($dateFrom)){
+        //     $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+        //     $dateFromFieldValueModel->setFieldId(66211);
+        //     $dateFromFieldValueModel->setValues(
+        //         (new DateCustomFieldValueCollection())
+        //             ->add((new DateCustomFieldValueModel())
+        //                 ->setValue($dateFrom)
+        //         )
+        //     );
+        //     $leadCustomFields->add($dateFromFieldValueModel);
+        // }
+
+        // if(!empty($dateTo)){
+        //     $dateToFieldValueModel = new DateCustomFieldValuesModel();
+        //     $dateToFieldValueModel->setFieldId(66213);
+        //     $dateToFieldValueModel->setValues(
+        //         (new DateCustomFieldValueCollection())
+        //             ->add((new DateCustomFieldValueModel())
+        //                 ->setValue($dateTo)
+        //         )
+        //     );
+        //     $leadCustomFields->add($dateToFieldValueModel);
+        // }
 
         if($leadCustomFields->count() > 0){
             $lead->setCustomFieldsValues($leadCustomFields);
