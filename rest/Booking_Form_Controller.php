@@ -98,6 +98,20 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function amocrm_v4($request)
     {
+
+        $contactName = 'Александр Занько';
+        $contactPhone = '+375292228338';
+        $contactEmail = 'zankoav@gmail.com';
+        $contactFrom = '2020-08-20';
+        $contactTo = '2020-08-23';
+        $contactPeople = 11;
+        $contactPassport = 'GGFFTTOOPPRRTT';
+        $contactComment = 'Test comment';
+        $calendarId = 43;
+        $type = 'reserved';
+        $freshPrice = 109;
+        $orderId = 987;
+
         $response = [
             'exceptions' => [],
             'steps'=>[]
@@ -133,8 +147,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $lead->setTags((new TagsCollection())
            ->add(
                 (new TagModel())
-                    ->setId(500)
-                    ->setName('Страница Бронирования')
+                    ->setId(501)
             )
         );
         
@@ -144,8 +157,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
         }
 
-        $contactPhone = '+375291112222';
-        $contactEmail = 'za@tut.by';
+        
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
         try {
