@@ -42,6 +42,11 @@ use AmoCRM\Filters\CatalogElementsFilter;
 use AmoCRM\Models\CatalogElementModel;
 use AmoCRM\Models\CatalogModel;
 
+use AmoCRM\Helpers\EntityTypesInterface;
+use AmoCRM\Collections\NotesCollection;
+use AmoCRM\Models\NoteType\ServiceMessageNote;
+
+
 /**
  * Created by PhpStorm.
  * User: alexandrzanko
@@ -139,6 +144,25 @@ class Booking_Form_Controller extends WP_REST_Controller
         $type = 'reserved'; //+
         $freshPrice = 109; //+
         $orderId = 987; //+
+
+        $commentNote = '';
+
+        if (!empty($freshPrice)) {
+            $commentNote .= 'Горящее предложение: '.$freshPrice." руб.\n";
+        }
+
+        if (!empty($contactPeople)) {
+            $commentNote .= 'Количество человек: '.$contactPeople."\n";
+        }
+
+        if (!empty($contactPassport)) {
+            $commentNote .= 'Паспорт №: '.$contactPassport."\n";
+        }
+
+        if (!empty($contactComment)) {
+            $commentNote .= 'Комментарий: '.$contactComment;
+        }
+        
 
         $response = [
             'exceptions' => [],
@@ -311,6 +335,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
             }
+        }
+
+        $notesCollection = new NotesCollection();
+        $serviceMessageNote = new ServiceMessageNote();
+        $serviceMessageNote->setEntityId($lead->getId())
+            ->setText($commentNote)
+            ->setService('Api Library')
+            ->setCreatedBy(0);
+        $notesCollection->add($serviceMessageNote);
+
+        try {
+            $leadNotesService = $apiClient->notes(EntityTypesInterface::LEADS);
+            $notesCollection = $leadNotesService->add($notesCollection);
+        } catch (AmoCRMApiException $e) {
+            $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
+            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
         
 
