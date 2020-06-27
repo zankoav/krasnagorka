@@ -209,7 +209,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $houseElement = $catalogElementsCollection->first();
                     $houseElement->setQuantity(1);
                 }
-                // $response['step'][] = $calendarCatalogModel->getName();
+                Logger::log('Init  houseElementink:');
+                $response['step'][] = 'Init  houseElementink:';
             }catch(AmoCRMApiException $e){
                 $response['exceptions'][] = $e->getTitle().' <<< getOne lead >>> '.$e->getDescription();
                 Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
@@ -288,6 +289,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         if(isset($lead, $houseElement)){
+            Logger::log('Start Link:');
+
             //Привяжем к сделке наш элемент
             $links = new LinksCollection();
             $links->add($houseElement);
