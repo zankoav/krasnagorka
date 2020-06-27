@@ -172,15 +172,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $leadCustomFields = new CustomFieldsValuesCollection();
 
         if(!empty($freshPrice)){
-            $freshPriceFieldValueModel = new PriceCustomFieldValuesModel();
-            $freshPriceFieldValueModel->setFieldId(282777);
-            $freshPriceFieldValueModel->setValues(
-                (new PriceCustomFieldValueCollection())
-                    ->add((new PriceCustomFieldValueModel())
-                        ->setValue($freshPrice)
-                )
-            );
-            $leadCustomFields->add($freshPriceFieldValueModel);
+            $lead->setPrice($freshPrice);
         }
 
         if(!empty($orderId)){
