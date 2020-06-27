@@ -260,11 +260,12 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         if(!empty($dateFrom)){
-            $dateFromFieldValueModel = new DateTimeCustomFieldValuesModel();
+            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
             $dateFromFieldValueModel->setFieldId(66211);
+            $dateFrom = DateTime::createFromFormat('Y-m-d', $dateFrom)->getTimestamp();
             $dateFromFieldValueModel->setValues(
-                (new DateTimeCustomFieldValueCollection())
-                    ->add((new DateTimeCustomFieldValueModel())
+                (new DateCustomFieldValueCollection())
+                    ->add((new DateCustomFieldValueModel())
                         ->setValue($dateFrom)
                 )
             );
