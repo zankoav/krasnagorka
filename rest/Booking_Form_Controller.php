@@ -270,7 +270,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 )
             );
             $leadCustomFields->add($dateFromFieldValueModel);
-            Logger::log('TIME:'.strtotime($dateFrom));
+            Logger::log('TIME:'.$dateFrom);
         }
 
         // if(!empty($dateTo)){
