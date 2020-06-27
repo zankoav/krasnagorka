@@ -145,7 +145,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         $contactPhone = '+375294444444';
-        $contactEmail = 'zankoav@gmail.com';
+        $contactEmail = 'za@tut.by';
 
         //Получим контакт по ID, сделку и привяжем контакт к сделке
         try {
