@@ -614,6 +614,7 @@ class Booking_Form_Controller extends WP_REST_Controller
        
             $dateFrom = date("Y-m-d", $request['dateFrom']);
             $dateTo = date("Y-m-d", $request['dateTo']);
+            
             $objectIds  = $request['objectIds'];
 
 
@@ -705,6 +706,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                     if (!empty($dateTo)) {
                         update_post_meta($post_id, 'sbc_order_end', $dateTo);
                     }
+
+                    Logger::log('dateFrom '.$dateFrom);
+                    Logger::log('dateTo '.$dateTo);
+
                     if (!empty($totalPrice)) {
                         update_post_meta($post_id, 'sbc_order_price', $totalPrice);
                     }
