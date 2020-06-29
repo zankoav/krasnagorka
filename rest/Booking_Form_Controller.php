@@ -611,7 +611,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $orderId  = $request['orderId'];
             $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
             $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
-       
+            Logger::log('request dateFrom '. $request['dateFrom']);
+            Logger::log('request dateTo '. $request['dateFrom']);
             $dateFrom = date("Y-m-d", $request['dateFrom']);
             $dateTo = date("Y-m-d", $request['dateTo']);
             
