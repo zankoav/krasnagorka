@@ -125,9 +125,11 @@ export default class BookingForm extends LightningElement {
         Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
         this.email = this.template.querySelector('[name="email"]');
         this.count = this.template.querySelector('[name="count"]');
-        Inputmask("decimal", {
+        Inputmask("numeric", {
             min: 1,
             max: this.maxCount,
+            SetMaxOnOverflow: true,
+            allowMinus: false,
             // regex: "^[1-9][0-9]*$", 
             placeholder: ""
         }).mask(this.count);
