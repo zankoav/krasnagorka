@@ -59,7 +59,6 @@ class Model
             ];
         }
         update_option('krasnagorka_weather', json_encode($result));
-        Logger::log('updateWeather');
         return $result;
     }
 
@@ -184,10 +183,18 @@ class Model
             }
         }
 
+        $maxCount = 99;
+        if(!empty($calendarId)){
+            $maxCount = (int) get_term_meta( $calendarId, 'kg_calendars_persons_count', 1 );
+        }
+
+        Logger::log('max_count: ' . $maxCount);
+
         $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
         $weather       = $this->getWeather();
         $result        = [
-            'id' => $calendarId,
+            'id'            => $calendarId,
+            'maxCount'      => $maxCount,
             'mainMenu'      => $this->getMainMenu(),
             'weather'       => $weather,
             'currencies'    => $this->getCurrencies(),
