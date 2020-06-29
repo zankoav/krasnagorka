@@ -122,8 +122,13 @@ class Booking_Form_Controller extends WP_REST_Controller
         return true;
     }
 
+    /**
+     * Create/Remove Lead form AmoCRM 
+     */
     public function booking_lead($request)
     {
+        $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
+        $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $response = $this->insertWPLead($request);
         return new WP_REST_Response($response, 200);
     }
@@ -504,7 +509,6 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function create_order($request)
     {
         $result = true;
-        
         try{
             $spam = $request['message'];
 
@@ -512,8 +516,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                 return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
             }
             $calendarId = $request['id'];
-            $dateStart = date("Y-m-d", strtotime($request['dateStart']));
-            $dateEnd = date("Y-m-d", strtotime($request['dateEnd']));
+            $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
+            $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
+       
+            $dateStart = date("Y-m-d", $request['dateFrom']);
+            $dateEnd = date("Y-m-d", $request['dateTo']);
             $isHouse = $request['orderType'] === 'Домик:';
 
             if (!empty($calendarId)) {
@@ -565,17 +572,50 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         return new WP_REST_Response($result, 200);
     }
+    
+    private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids){
+        $calendars = [];
+        $calendarObjectsReverse = [
+            1036665 => 17,
+            1036663 => 37,
+            1036661 => 18,
+            1036659 => 19,
+            1036657 => 20,
+            1036655 => 21,
+            1036653 => 22,
+            1036651 => 23,
+            1036649 => 24,
+            1036647 => 25,
+            1036645 => 26,
+            1036643 => 27,
+            1036641 => 28,
+            1036639 => 29,
+            1036585 => 14,
+            1036583 => 13,
+            10393 => 15,
+            10391 => 9,
+            1663367=> 43,
+            10389 => 16
+        ];
+
+        
+        foreach($amocrm_catalogs_ids as $value){
+            $calendars[] = $calendarObjectsReverse[$value];
+        }
+        return $calendars;
+    }
 
     private function insertWPLead($request)
     {
             $type     = $request['type'];
             $orderId  = $request['orderId'];
-            
-            $dateFrom = date("Y-m-d", strtotime($request['dateFrom']));
-            $dateTo = date("Y-m-d", strtotime($request['dateTo']));
+            $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
+            $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
+       
+            $dateFrom = date("Y-m-d", $request['dateFrom']);
+            $dateTo = date("Y-m-d", $request['dateTo']);
             $objectIds  = $request['objectIds'];
 
-            
 
             if ($type != 'remove') {
 
