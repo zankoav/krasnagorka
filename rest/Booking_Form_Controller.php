@@ -516,11 +516,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                 return new WP_Error('Fail', 'Please call you administrator', array('status' => 404));
             }
             $calendarId = $request['id'];
-            $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
-            $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
+            $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
+            $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
        
-            $dateStart = date("Y-m-d", $request['dateFrom']);
-            $dateEnd = date("Y-m-d", $request['dateTo']);
+            $dateStart = date("Y-m-d", $request['dateStart']);
+            $dateEnd = date("Y-m-d", $request['dateEnd']);
             $isHouse = $request['orderType'] === 'Домик:';
 
             if (!empty($calendarId)) {
