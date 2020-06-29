@@ -128,8 +128,11 @@ export default class BookingForm extends LightningElement {
         Inputmask("numeric", {
             min: 1,
             max: this.maxCount,
-            SetMaxOnOverflow: true,
+            setMaxOnOverflow: true,
             allowMinus: false,
+            radixpoint: '',
+            rightAlign: false,
+
             // regex: "^[1-9][0-9]*$", 
             placeholder: ""
         }).mask(this.count);
