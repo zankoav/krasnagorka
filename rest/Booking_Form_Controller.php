@@ -609,12 +609,8 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
             $type     = $request['type'];
             $orderId  = $request['orderId'];
-            Logger::log('request dateFrom 1:'. $request['dateFrom']);
-            Logger::log('request dateTo 1:'. $request['dateFrom']);
             $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
             $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
-            Logger::log('request dateFrom 2:'. $request['dateFrom']);
-            Logger::log('request dateTo 2:'. $request['dateFrom']);
             $dateFrom = date("Y-m-d", $request['dateFrom']);
             $dateTo = date("Y-m-d", $request['dateTo']);
             
@@ -709,9 +705,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                     if (!empty($dateTo)) {
                         update_post_meta($post_id, 'sbc_order_end', $dateTo);
                     }
-
-                    Logger::log('dateFrom 3: '.$dateFrom);
-                    Logger::log('dateTo 3: '.$dateTo);
 
                     if (!empty($totalPrice)) {
                         update_post_meta($post_id, 'sbc_order_price', $totalPrice);
