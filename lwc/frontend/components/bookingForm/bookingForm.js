@@ -132,8 +132,6 @@ export default class BookingForm extends LightningElement {
             allowMinus: false,
             radixpoint: '',
             rightAlign: false,
-
-            // regex: "^[1-9][0-9]*$", 
             placeholder: ""
         }).mask(this.count);
         this.comment = this.template.querySelector('[name="comment"]');
