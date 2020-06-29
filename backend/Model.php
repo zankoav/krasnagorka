@@ -188,6 +188,10 @@ class Model
             $maxCount = (int) get_term_meta( $calendarId, 'kg_calendars_persons_count', 1 );
         }
 
+        if($maxCount == 0 ){
+            $maxCount = 99;
+        }
+
         Logger::log('max_count: ' . $maxCount);
 
         $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');

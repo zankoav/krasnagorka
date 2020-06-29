@@ -56,6 +56,7 @@ export default class BookingForm extends LightningElement {
     @api dateFrom;
     @api dateTo;
     @api objId;
+    @api maxCount;
     @api eventTabId;
 
     @track formMessageSuccess;
@@ -67,6 +68,7 @@ export default class BookingForm extends LightningElement {
     }
 
     async connectedCallback() {
+        console.log("maxCount", this.maxCount);
         this.dateTo = this.dateTo || "";
         this.dateFrom = this.dateFrom || "";
         this.eventTabId = this.eventTabId || "";
@@ -123,7 +125,12 @@ export default class BookingForm extends LightningElement {
         Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
         this.email = this.template.querySelector('[name="email"]');
         this.count = this.template.querySelector('[name="count"]');
-        Inputmask({ regex: "^[1-9][0-9]*$", placeholder: "" }).mask(this.count);
+        Inputmask("decimal", {
+            min: 1,
+            max: this.maxCount,
+            // regex: "^[1-9][0-9]*$", 
+            placeholder: ""
+        }).mask(this.count);
         this.comment = this.template.querySelector('[name="comment"]');
         this.contract = this.template.querySelector('[name="contract"]');
         this.passport = this.template.querySelector('[name="passport"]');

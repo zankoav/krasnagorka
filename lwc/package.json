@@ -23,6 +23,7 @@
         "http-errors": "~1.6.3",
         "https-proxy-agent": "^2.2.4",
         "iconv-lite": "^0.5.1",
+        "imask": "^6.0.5",
         "inputmask": "^4.0.9",
         "load-external-scripts": "^1.4.0",
         "load-google-maps-api": "^2.0.2",
