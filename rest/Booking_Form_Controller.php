@@ -91,15 +91,15 @@ class Booking_Form_Controller extends WP_REST_Controller
         ]);
 
 
-        $amocrm_v4_path      = '/amo-v4/';
+        // $amocrm_v4_path      = '/amo-v4/';
 
-        register_rest_route($namespace, $amocrm_v4_path, [
-            array(
-                'methods'             => 'POST',
-                'callback'            => array($this, 'amocrm_v4'),
-                'permission_callback' => array($this, 'amocrm_v4_permissions_check')
-            ),
-        ]);
+        // register_rest_route($namespace, $amocrm_v4_path, [
+        //     array(
+        //         'methods'             => 'POST',
+        //         'callback'            => array($this, 'amocrm_v4'),
+        //         'permission_callback' => array($this, 'amocrm_v4_permissions_check')
+        //     ),
+        // ]);
     }
 
     public function create_order_permissions_check($request)
@@ -127,6 +127,7 @@ class Booking_Form_Controller extends WP_REST_Controller
      */
     public function booking_lead($request)
     {
+        Logger::log($request['dateFrom'] .' and '. $request['dateTo'] );
         $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
         $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $response = $this->insertWPLead($request);
@@ -613,7 +614,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
             $dateFrom = date("Y-m-d", $request['dateFrom']);
             $dateTo = date("Y-m-d", $request['dateTo']);
-            
+            Logger::log($dateFrom .' and '. $dateTo );
+
             $objectIds  = $request['objectIds'];
 
 
