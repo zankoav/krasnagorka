@@ -68,7 +68,7 @@ export default class BookingForm extends LightningElement {
     }
 
     async connectedCallback() {
-        console.log("maxCount", this.maxCount);
+        this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
         this.dateTo = this.dateTo || "";
         this.dateFrom = this.dateFrom || "";
         this.eventTabId = this.eventTabId || "";
@@ -125,15 +125,6 @@ export default class BookingForm extends LightningElement {
         Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
         this.email = this.template.querySelector('[name="email"]');
         this.count = this.template.querySelector('[name="count"]');
-        Inputmask("numeric", {
-            min: 1,
-            max: this.maxCount,
-            setMaxOnOverflow: true,
-            allowMinus: false,
-            radixpoint: '',
-            rightAlign: false,
-            placeholder: ""
-        }).mask(this.count);
         this.comment = this.template.querySelector('[name="comment"]');
         this.contract = this.template.querySelector('[name="contract"]');
         this.passport = this.template.querySelector('[name="passport"]');
@@ -233,13 +224,7 @@ export default class BookingForm extends LightningElement {
             return;
         }
 
-        const count = this.count.value;
-
-        if (!count) {
-            this.showError(ERROR_COUNT_EMPTY);
-            return;
-        }
-
+        const count = this.count.options[this.count.selectedIndex].value;
         const passport = this.passport.value;
         const comment = this.comment.value;
         const contract = this.contract.checked;
@@ -289,7 +274,6 @@ export default class BookingForm extends LightningElement {
                         "Поздравляем! Бронирование выполнено успешно. Наш сотрудник скоро свяжется с вами для уточнения деталей";
                     this.dateStart.value = null;
                     this.dateEnd.value = null;
-                    this.count.value = null;
                     this.passport.value = null;
                     this.comment.value = null;
                     if (this.order) {

@@ -77,12 +77,14 @@
                            class="booking-form__label booking-form__label_required">Количество людей
                         до {maxCount} человек
                         (взрослых и детей)</label>
-                    <input id="count"
-                           onfocus={clearError}
-                           maxlength="2"
-                           type="text"
-                           class="booking-form__input"
-                           name="count">
+                    <select id="count"
+                            class="booking-form__input"
+                            name="count">
+                        <template for:each={countItems}
+                                  for:item="it">
+                            <option key={it}> value={it}>{it}</option>
+                        </template>
+                    </select>
                     <p class="booking-form__description">Возраст детей и необходимость доп.
                         спального места для них указывайте в комментарии</p>
                 </div>
