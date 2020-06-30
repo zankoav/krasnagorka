@@ -7,11 +7,15 @@ if (!defined('ABSPATH')) {
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/Model.php';
-require __DIR__ . '/vendor/autoload.php';
-require __DIR__ . '/token_actions.php';
 
 $assets = new Assets();
 $model  = new Model();
+
+require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/token_actions.php';
+require __DIR__ . '/inc/calendar/init.php';
+require __DIR__ . '/mastak/init.php';
+require __DIR__ . '/rest/rest.php';
 
 add_action('admin_enqueue_scripts', 'load_admin_style');
 function load_admin_style()
@@ -89,14 +93,9 @@ function getOrderStatus($calendarId, $dateStart, $dateEnd){
 if (!isset($content_width)) {
     $content_width = 1200; /* pixels */
 }
-require __DIR__ . '/inc/calendar/init.php';
-require __DIR__ . '/mastak/init.php';
-require __DIR__ . '/rest/Booking_Form_Controller.php';
 
-add_action('rest_api_init', function () {
-    $booking_form_controller = new Booking_Form_Controller();
-    $booking_form_controller->register_routes();
-});
+
+
 
 function getCalendarId($calendarShortCode)
 {
