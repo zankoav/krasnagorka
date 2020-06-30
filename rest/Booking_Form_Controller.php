@@ -127,10 +127,8 @@ class Booking_Form_Controller extends WP_REST_Controller
      */
     public function booking_lead($request)
     {
-        Logger::log($request['dateFrom'] .' before '. $request['dateTo'] );
         $request['dateFrom'] = (int)$request['dateFrom'] + 3*3600;
         $request['dateTo'] = (int)$request['dateTo'] + 3*3600;
-        Logger::log($request['dateFrom'] .' after '. $request['dateTo'] );
         $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
         $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $response = $this->insertWPLead($request);
