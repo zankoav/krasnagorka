@@ -184,11 +184,11 @@ class Model
         }
 
         $maxCount = 99;
-        if(!empty($calendarId)){
-            $maxCount = (int) get_term_meta( $calendarId, 'kg_calendars_persons_count', 1 );
+        if (!empty($calendarId)) {
+            $maxCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
         }
 
-        if($maxCount == 0 ){
+        if ($maxCount == 0) {
             $maxCount = 99;
         }
 
@@ -224,6 +224,17 @@ class Model
             $result['mainContent']['title'] = $teremRoom;
         }
 
+        if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
+            $result['price'] = $this->getPriceFromEvent(
+                $result['eventTabId'],
+                $calendarId,
+                $result['dateFrom'],
+                $result['dateTo']
+            );
+        }
+
+        $result['pay'] = $_GET['pay'] === "yes";
+
         return json_encode($result);
     }
 
@@ -234,5 +245,20 @@ class Model
         status_header(404);
         get_template_part(404);
         exit();
+    }
+
+    private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd)
+    {
+        $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
+        $freshPrice = null;
+        foreach ($tabHouses as $tabHouse) {
+            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+            if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
+                $freshPrice = $tabHouse['new_price'];
+                break;
+            }
+        }
+        return $freshPrice;
     }
 }
