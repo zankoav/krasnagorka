@@ -29,7 +29,7 @@ jQuery(document).ready(function ($) {
 
     async function openCalendars() {
         let cButtons = document.querySelectorAll(".booking-houses__calendars-button");
-        for await (let button of cButtons) {
+        for (let button of cButtons) {
             $(button).trigger("click");
             await new Promise(resolve => { setTimeout(resolve, 2000) });
         }
