@@ -87,7 +87,8 @@
 
 		&_left {
 			width: initial;
-			flex: initial;
+            flex: initial;
+            appearance: checkbox;
 		}
 
 		&:focus {
