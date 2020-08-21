@@ -697,7 +697,6 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 </script>
-<h3>Hello world</h3>
 </body>
 
 </html>
