@@ -121,16 +121,20 @@
                            target="_blank">договором присоединения</a></label>
                 </div>
 
+                
+
                 <div class="booking-form__send-button-wrapper">
+                    <div if:true={pay} class="booking-form__checkout">
+                        <span class="booking-form__price">{price}</span>
+                    </div>
                     <template if:false={isLoading}>
                         <a href="javascript:void(0);"
                            onclick={sendOrder}
-                           class="booking-form__send-button">Отправить</a>
+                           class="booking-form__send-button">{sendButtonTitle}</a>
                     </template>
                     <template if:true={isLoading}>
                         <a href="javascript:void(0);"
-                           class="booking-form__send-button booking-form__send-button_deprecated">Отправка
-                            ...</a>
+                           class="booking-form__send-button booking-form__send-button_deprecated">{sendButtonTitleProcess}</a>
                     </template>
                 </div>
 

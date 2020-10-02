@@ -70,7 +70,7 @@ export default class BookingForm extends LightningElement {
 
 	async connectedCallback() {
 		console.log("pay", this.pay);
-		console.log("price", this.price);
+        console.log("price", this.price);
 		this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
 		this.dateTo = this.dateTo || "";
 		this.dateFrom = this.dateFrom || "";
@@ -139,7 +139,24 @@ export default class BookingForm extends LightningElement {
 			this.phone.value = this.phoneValue;
 			this.email.value = this.emailValue;
 		}
-	}
+    }
+
+    renderedCallback(){
+        if(!this.pay){
+            const actionsWrapper = this.template.querySelector('.booking-form__send-button-wrapper');
+            if(actionsWrapper){
+                actionsWrapper.classList.add('booking-form__send-button-wrapper_single');
+            }
+        }
+    }
+    
+    get sendButtonTitle(){
+        return this.pay ? 'Оплатить' : 'Отправить';
+    }
+
+    get sendButtonTitleProcess(){
+        return this.pay ? 'Перенаправление...' : 'Отправка...';
+    }
 
 	clearError() {
 		this.formMessageError = null;
