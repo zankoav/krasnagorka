@@ -63,14 +63,14 @@ export default class BookingForm extends LightningElement {
 	@track formMessageSuccess;
 	@track formMessageError;
 	@track isLoading;
+	@track deprecateEditableDates;
 
 	async skip() {
 		await new Promise((resolve) => setImmediate(resolve));
 	}
 
 	async connectedCallback() {
-		console.log("pay", this.pay);
-        console.log("price", this.price);
+        this.deprecateEditableDates = !!this.dateFrom;
 		this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
 		this.dateTo = this.dateTo || "";
 		this.dateFrom = this.dateFrom || "";
@@ -90,33 +90,39 @@ export default class BookingForm extends LightningElement {
 		}
 		await this.skip();
 		this.dateStart = this.template.querySelector('[name="date-start"]');
-		this.dateEnd = this.template.querySelector('[name="date-end"]');
-		this.pikStart = new Pikaday({
-			i18n: i118,
-			field: this.dateStart,
-			format: "YYYY-MM-DD",
-			onSelect: (date) => {
-				let day = date.getDate();
-				day = day > 9 ? day : `0${day}`;
-				let month = date.getMonth() + 1;
-				month = month > 9 ? month : `0${month}`;
-				const year = date.getFullYear();
-				this.dateFrom = `${year}-${month}-${day}`;
-			},
-		});
-		this.pikEnd = new Pikaday({
-			i18n: i118,
-			field: this.dateEnd,
-			format: "YYYY-MM-DD",
-			onSelect: (date) => {
-				let day = date.getDate();
-				day = day > 9 ? day : `0${day}`;
-				let month = date.getMonth() + 1;
-				month = month > 9 ? month : `0${month}`;
-				const year = date.getFullYear();
-				this.dateTo = `${year}-${month}-${day}`;
-			},
-		});
+        this.dateEnd = this.template.querySelector('[name="date-end"]');
+        if(this.deprecateEditableDates){
+            this.dateStart.setAttribute('disabled', 'disabled');
+            this.dateEnd.setAttribute('disabled', 'disabled');
+        }else{
+            this.pikStart = new Pikaday({
+                i18n: i118,
+                field: this.dateStart,
+                format: "YYYY-MM-DD",
+                onSelect: (date) => {
+                    let day = date.getDate();
+                    day = day > 9 ? day : `0${day}`;
+                    let month = date.getMonth() + 1;
+                    month = month > 9 ? month : `0${month}`;
+                    const year = date.getFullYear();
+                    this.dateFrom = `${year}-${month}-${day}`;
+                },
+            });
+            this.pikEnd = new Pikaday({
+                i18n: i118,
+                field: this.dateEnd,
+                format: "YYYY-MM-DD",
+                onSelect: (date) => {
+                    let day = date.getDate();
+                    day = day > 9 ? day : `0${day}`;
+                    let month = date.getMonth() + 1;
+                    month = month > 9 ? month : `0${month}`;
+                    const year = date.getFullYear();
+                    this.dateTo = `${year}-${month}-${day}`;
+                },
+            });
+        }
+		
 
 		this.order = this.template.querySelector('[name="order"]');
 		if (this.order) {
