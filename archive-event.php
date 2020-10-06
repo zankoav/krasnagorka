@@ -61,7 +61,7 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 <section class="b-container header-title">
 	<h2 class="header-title__subtitle"><?= $subtitle_2; ?></h2>
 </section>
-
+<?php if(false):?>
 <div class="b-container last-events">
 	<div class="swiper-container last-events__swiper">
 		<div class="swiper-wrapper last-events__wrapper">
@@ -93,7 +93,7 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 <div class="b-container">
 	<div class="b-light-line b-mt-3"></div>
 </div>
-
+<?php endif;?>
 <?php
 
 if (is_active_sidebar('events-content')) {
