@@ -57,11 +57,11 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 </div>
 
 <?php get_template_part("mastak/views/events", "slider"); ?>
-
+<?php if(false):?>
 <section class="b-container header-title">
 	<h2 class="header-title__subtitle"><?= $subtitle_2; ?></h2>
 </section>
-<?php if(false):?>
+
 <div class="b-container last-events">
 	<div class="swiper-container last-events__swiper">
 		<div class="swiper-wrapper last-events__wrapper">
