@@ -241,7 +241,7 @@ class Model
 
             if($result['pay']){
                 $SecretKey = '02091988';
-                $wsb_seed = microtime();
+                $wsb_seed = strtotime("now");
                 $wsb_storeid = '515854557';
                 $wsb_order_num = "$calendarId;$_eventTabId;$_dateFrom;$_dateTo";
                 $wsb_test = '1';
