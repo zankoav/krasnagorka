@@ -224,16 +224,54 @@ class Model
             $result['mainContent']['title'] = $teremRoom;
         }
 
-        if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
-            $result['price'] = $this->getPriceFromEvent(
-                $result['eventTabId'],
-                $calendarId,
-                $result['dateFrom'],
-                $result['dateTo']
-            );
-        }
-
         $result['pay'] = $_GET['pay'] === "yes";
+
+        if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
+
+            $_eventTabId = $result['eventTabId'];
+            $_dateFrom = $result['dateFrom'];
+            $_dateTo = $result['dateTo'];
+
+            $result['price'] = $this->getPriceFromEvent(
+                $_eventTabId,
+                $calendarId,
+                $_dateFrom,
+                $_dateTo
+            );
+
+            if($result['pay']){
+                $SecretKey = '02091988';
+                $wsb_seed = microtime();
+                $wsb_storeid = '515854557';
+                $wsb_order_num = "$calendarId;$_eventTabId;$_dateFrom;$_dateTo";
+                $wsb_test = '1';
+                $wsb_currency_id = 'BYN';
+                $wsb_total = $result['price'];
+                $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$SecretKey);
+
+                $result['webpay'] = [
+                    "names" => [
+                        '*scart'
+                    ],
+                    "values" => [
+                        'wsb_storeid' => $wsb_storeid,
+                        'wsb_store' => 'OOO Краснагорка',
+                        'wsb_order_num' => $wsb_order_num,
+                        'wsb_currency_id' => $wsb_currency_id,
+                        'wsb_version' => "2",
+                        'wsb_language_id' => "russian",
+                        'wsb_seed' => $wsb_seed,
+                        'wsb_test' => $wsb_test,
+                        'wsb_signature' => $wsb_signature,
+                        'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
+                        'wsb_invoice_item_quantity[0]' => '1',
+                        'wsb_invoice_item_price[0]' => $wsb_total,
+                        'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
+                        'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
+                    ]
+                ];
+            }
+        }
 
         return json_encode($result);
     }

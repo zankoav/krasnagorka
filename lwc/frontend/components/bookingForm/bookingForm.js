@@ -59,6 +59,7 @@ export default class BookingForm extends LightningElement {
 	@api eventTabId;
 	@api pay;
 	@api price;
+	@api webpay;
 
 	@track formMessageSuccess;
 	@track formMessageError;
@@ -263,86 +264,96 @@ export default class BookingForm extends LightningElement {
 		this.isLoading = true;
 
 		let orderTitle = this.objectTitle ? this.objectTitle : bookingOrder;
-		let orderType = this.objectType ? this.objectType : "Домик/Мероприятие";
+        let orderType = this.objectType ? this.objectType : "Домик/Мероприятие";
+        
 
-		fetch("/wp-json/krasnagorka/v1/order/", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8",
-			},
-			body: JSON.stringify({
-				id: this.objId,
-				fio: fio,
-				phone: phone,
-				email: email,
-				dateStart: dateStart,
-				dateEnd: dateEnd,
-				count: count,
-				contract: contract,
-				comment: comment,
-				orderTitle: orderTitle,
-				orderType: orderType,
-				cid: this.cid,
-				eventTabId: this.eventTabId,
-				passport: passport,
-				data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${orderTitle}&bookingType=${orderType}&cid=${this.cid}&passportId=${passport}&id=${this.objId}&eventTabId=${this.eventTabId}`,
-				message: spam,
-			}),
-		})
-			.then((response) => {
-				return response.json();
-			})
-			.then((result) => {
-				this.isLoading = false;
-				if (result) {
-					this.formMessageSuccess =
-						"Поздравляем! Бронирование выполнено успешно. Наш сотрудник скоро свяжется с вами для уточнения деталей";
-					this.dateStart.value = null;
-					this.dateEnd.value = null;
-					this.passport.value = null;
-					this.comment.value = null;
-					if (this.order) {
-						this.order.value = null;
-					}
-					setCookie("kg_name", fio, { "max-age": MAX_AGE });
-					setCookie("kg_phone", phone, { "max-age": MAX_AGE });
-					setCookie("kg_email", email, { "max-age": MAX_AGE });
+        if(this.pay){
+            generateAndSubmitForm(
+                'https://securesandbox.webpay.by/',
+                this.webpay.values,
+                this.webpay.names,
+            );
+        }else{
 
-					ga("send", {
-						hitType: "event",
-						eventCategory: "form_bronirovanie",
-						eventAction: "success_send",
-					});
+            fetch("/wp-json/krasnagorka/v1/order/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    id: this.objId,
+                    fio: fio,
+                    phone: phone,
+                    email: email,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd,
+                    count: count,
+                    contract: contract,
+                    comment: comment,
+                    orderTitle: orderTitle,
+                    orderType: orderType,
+                    cid: this.cid,
+                    eventTabId: this.eventTabId,
+                    passport: passport,
+                    data: `fio=${fio}&phone=${phone}&email=${email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${count}&contract=${contract}&comment=${comment}&bookingTitle=${orderTitle}&bookingType=${orderType}&cid=${this.cid}&passportId=${passport}&id=${this.objId}&eventTabId=${this.eventTabId}`,
+                    message: spam,
+                }),
+            })
+                .then((response) => {
+                    return response.json();
+                })
+                .then((result) => {
+                    this.isLoading = false;
+                    if (result) {
+                        this.formMessageSuccess =
+                            "Поздравляем! Бронирование выполнено успешно. Наш сотрудник скоро свяжется с вами для уточнения деталей";
+                        this.dateStart.value = null;
+                        this.dateEnd.value = null;
+                        this.passport.value = null;
+                        this.comment.value = null;
+                        if (this.order) {
+                            this.order.value = null;
+                        }
+                        setCookie("kg_name", fio, { "max-age": MAX_AGE });
+                        setCookie("kg_phone", phone, { "max-age": MAX_AGE });
+                        setCookie("kg_email", email, { "max-age": MAX_AGE });
 
-					fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json; charset=utf-8",
-						},
-						body: JSON.stringify({
-							data: result,
-						}),
-					})
-						.then((response) => {
-							return response.json();
-						})
-						.then((response) => {
-							console.log("amo response", response);
-						})
-						.catch((error) => {
-							console.log("amo response error", error);
-						});
-				} else {
-					this.formMessageSuccess = null;
-					this.formMessageError = `Извините! Выбранные даты заняты. Выберите свободный интервал.`;
-				}
-			})
-			.catch(() => {
-				this.isLoading = false;
-				this.showError(
-					"Соединение с сервером прервано, попробуйте позже"
-				);
-			});
+                        ga("send", {
+                            hitType: "event",
+                            eventCategory: "form_bronirovanie",
+                            eventAction: "success_send",
+                        });
+
+                        fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json; charset=utf-8",
+                            },
+                            body: JSON.stringify({
+                                data: result,
+                            }),
+                        })
+                            .then((response) => {
+                                return response.json();
+                            })
+                            .then((response) => {
+                                console.log("amo response", response);
+                            })
+                            .catch((error) => {
+                                console.log("amo response error", error);
+                            });
+                    } else {
+                        this.formMessageSuccess = null;
+                        this.formMessageError = `Извините! Выбранные даты заняты. Выберите свободный интервал.`;
+                    }
+                })
+                .catch(() => {
+                    this.isLoading = false;
+                    this.showError(
+                        "Соединение с сервером прервано, попробуйте позже"
+                    );
+                });
+        }
 	}
 
 	showError(message) {
@@ -370,4 +381,33 @@ function getTodayDate() {
 		mm = `0${mm}`;
 	}
 	return `${yyyy}-${mm}-${dd}`;
+}
+
+function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method = 'POST') {
+    const form = document.createElement("form");
+    form.action = action;
+    form.method = method;
+
+    // eslint-disable-next-line guard-for-in
+    for (const key in paramsWithValue) {
+        const element = document.createElement("input");
+        element.type = "hidden";
+        element.name = key;
+        element.value = paramsWithValue[key];
+        form.appendChild(element);
+    }
+
+    for (const key of paramsWithNames) {
+        const element = document.createElement("input");
+        element.type = "hidden";
+        element.name = key;
+        form.appendChild(element);
+    }
+
+    document.body.appendChild(form);
+
+    setTimeout(()=>{
+        form.submit();
+    }, 20000);
+    
 }
