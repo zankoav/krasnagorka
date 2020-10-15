@@ -266,6 +266,7 @@ class Model
                         'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
                         'wsb_invoice_item_quantity[0]' => '1',
                         'wsb_invoice_item_price[0]' => $wsb_total,
+                        'wsb_total' => $wsb_total,
                         'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
                         'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
                     ]
