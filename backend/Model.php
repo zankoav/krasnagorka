@@ -240,10 +240,10 @@ class Model
             );
 
             if($result['pay']){
-                $SecretKey = '02091988';
+                $SecretKey = '2091988';
                 $wsb_seed = strtotime("now");
                 $wsb_storeid = '515854557';
-                $wsb_order_num = "$calendarId;$_eventTabId;$_dateFrom;$_dateTo";
+                $wsb_order_num = "gg-1";
                 $wsb_test = '1';
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $result['price'];
