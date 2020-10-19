@@ -90,6 +90,26 @@ class Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
+        $pay_path      = '/pay/';
+
+        register_rest_route($namespace, $pay_path, [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'pay'),
+                'permission_callback' => array($this, 'pay_permissions_check')
+            ),
+        ]);
+
+        $success_notify_path      = '/pay-success/';
+
+        register_rest_route($namespace, $pay_path, [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'pay_success'),
+                'permission_callback' => array($this, 'pay_success_permissions_check')
+            ),
+        ]);
+
 
         // $amocrm_v4_path      = '/amo-v4/';
 
@@ -118,6 +138,16 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function create_amocrm_lead_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function pay_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function pay_success_permissions_check($request)
     {
         return true;
     }
@@ -573,6 +603,53 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         return new WP_REST_Response($result, 200);
+    }
+
+    public function pay($request)
+    {
+        // 1. Create order and get order ID
+        // 2. Create At Amocrm Lead Id
+        // 3. Generate result;
+
+            // $result = [];
+            // $SecretKey = '2091988';
+            // $wsb_seed = strtotime("now");
+            // $wsb_storeid = '515854557';
+            // $wsb_order_num = "gg-1";
+            // $wsb_test = '1';
+            // $wsb_currency_id = 'BYN';
+            // $wsb_total = $result['price'];
+            // $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$SecretKey);
+
+            // $result['webpay'] = [
+            //     "names" => [
+            //         '*scart'
+            //     ],
+            //     "values" => [
+            //         'wsb_storeid' => $wsb_storeid,
+            //         'wsb_store' => 'OOO Краснагорка',
+            //         'wsb_order_num' => $wsb_order_num,
+            //         'wsb_currency_id' => $wsb_currency_id,
+            //         'wsb_version' => "2",
+            //         'wsb_language_id' => "russian",
+            //         'wsb_seed' => $wsb_seed,
+            //         'wsb_test' => $wsb_test,
+            //         'wsb_signature' => $wsb_signature,
+            //         'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
+            //         'wsb_invoice_item_quantity[0]' => '1',
+            //         'wsb_invoice_item_price[0]' => $wsb_total,
+            //         'wsb_total' => $wsb_total,
+            //         'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
+            //         'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
+            //     ]
+            // ];
+            Logger::log('pay:'.json_encode($response));
+        return new WP_REST_Response(['pay'=> 'OK'], 200);
+    }
+
+    public function pay_success($request){
+        Logger::log('pay_success:'.json_encode($response));
+        return new WP_REST_Response(['pay_success'=> 'OK'], 200);
     }
     
     private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids){
