@@ -102,7 +102,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $success_notify_path      = '/pay-success/';
 
-        register_rest_route($namespace, $pay_path, [
+        register_rest_route($namespace, $success_notify_path, [
             array(
                 'methods'             => 'POST',
                 'callback'            => array($this, 'pay_success'),
