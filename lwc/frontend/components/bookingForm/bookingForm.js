@@ -267,7 +267,7 @@ export default class BookingForm extends LightningElement {
         
 
         if(this.pay){
-            const orderRequest = await fetch("/wp-json/krasnagorka/v1/pay/",{
+            fetch("/wp-json/krasnagorka/v1/pay/",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
@@ -287,6 +287,19 @@ export default class BookingForm extends LightningElement {
                     message: spam
                 })
             })
+            .then(response => {
+                return response.json();
+            })
+            .then(result => {
+                if(result){
+                    console.log('result', result);
+                    generateAndSubmitForm(
+                        'https://securesandbox.webpay.by/',
+                        result.values,
+                        result.names
+                    );
+                }
+            })
             .catch(e => {
                 this.isLoading = false;
                 this.showError(
@@ -295,15 +308,7 @@ export default class BookingForm extends LightningElement {
                 console.log('Error:', e);
             });
 
-            if(orderRequest){
-                const response = orderRequest.json();
-                console.log('response', response);
-                generateAndSubmitForm(
-                    'https://securesandbox.webpay.by/',
-                    response.values,
-                    response.names
-                );
-            }
+            
         }else{
 
             fetch("/wp-json/krasnagorka/v1/order/", {
