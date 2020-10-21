@@ -179,7 +179,7 @@
 
 		}
 
-		if ( is_page_template( 'template-mastak-map.php' ) ) {
+		if ( is_page_template( 'template-mastak-map.php' ) or is_page_template( 'template-payed-success.php' )) {
 
 			$scriptsData = get_assets_json( "booking" );
             $scriptsHouseData = get_assets_json( "house" );
