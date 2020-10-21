@@ -650,9 +650,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                         'wsb_invoice_item_quantity[0]' => '1',
                         'wsb_invoice_item_price[0]' => $wsb_total,
                         'wsb_total' => $wsb_total,
-                        'wsb_notify_url' => 'https://krasnagorka.by/krasnagorka/v1/pay-success/',
+                        'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success/',
                         'wsb_cancel_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
-                        'wsb_return_url' => "https://krasnagorka.by/payed-success?order=$wsb_order_num",
+                        'wsb_return_url' => "https://krasnagorka.by/payed-success",
                     ]
                 ];
                 $resultStatus = 200;
