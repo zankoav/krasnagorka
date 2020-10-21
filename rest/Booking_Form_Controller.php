@@ -662,8 +662,8 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function pay_success($request){
-        Logger::log('pay_success:'.$_POST['order_id']);
-        $order = $this->getOrderById($_POST['order_id']);
+        Logger::log('pay_success:'.$_POST['site_order_id']);
+        $order = $this->getOrderById($_POST['site_order_id']);
         $checkOutList = $this->generateMailCheckOut($order);
         wp_mail( 
             [
