@@ -267,7 +267,7 @@ export default class BookingForm extends LightningElement {
         
 
         if(this.pay){
-            const orderRequest = await fetch("/wp-json/krasnagorka/v1/order/",{
+            const orderRequest = await fetch("/wp-json/krasnagorka/v1/pay/",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
