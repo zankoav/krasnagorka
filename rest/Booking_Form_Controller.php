@@ -606,6 +606,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay($request)
     {
+        Logger::log("Pay " . json_encode($result));
         $resultStatus = 501;
         $result = [];
 

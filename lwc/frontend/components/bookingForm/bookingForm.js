@@ -286,7 +286,9 @@ export default class BookingForm extends LightningElement {
                     orderTitle: orderTitle,
                     message: spam
                 })
-            }).catch(e => {
+            })
+            .then(result => result.json())
+            .catch(e => {
                 this.isLoading = false;
                 this.showError(
                     "Соединение с сервером прервано, попробуйте позже"
