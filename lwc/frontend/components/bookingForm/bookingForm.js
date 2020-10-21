@@ -270,7 +270,7 @@ export default class BookingForm extends LightningElement {
             fetch("/wp-json/krasnagorka/v1/pay/",{
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "application/json; charset=utf-8",
                 },
                 body: JSON.stringify({
                     eventTabId: this.eventTabId,
@@ -294,6 +294,7 @@ export default class BookingForm extends LightningElement {
             .then(result => {
                 console.log('result', result);
                 if(result){
+
                     generateAndSubmitForm(
                         'https://securesandbox.webpay.by/',
                         result.values,

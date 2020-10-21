@@ -768,8 +768,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         }catch(Exception $e){
             Logger::log("createOrderForPay Exception:".$e->getMessage());
         }
-
-        Logger::log("createOrderForPay result:".var_dump($result));
         return $result;
     }
 
