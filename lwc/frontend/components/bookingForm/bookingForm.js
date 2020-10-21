@@ -296,11 +296,12 @@ export default class BookingForm extends LightningElement {
             });
 
             if(orderRequest){
-                console.log('orderRequest', orderRequest);
+                const response = orderRequest.json();
+                console.log('response', response);
                 generateAndSubmitForm(
                     'https://securesandbox.webpay.by/',
-                    orderRequest.values,
-                    orderRequest.names
+                    response.values,
+                    response.names
                 );
             }
         }else{
