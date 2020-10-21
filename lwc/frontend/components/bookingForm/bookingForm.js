@@ -59,7 +59,6 @@ export default class BookingForm extends LightningElement {
 	@api eventTabId;
 	@api pay;
 	@api price;
-	@api webpay;
 
 	@track formMessageSuccess;
 	@track formMessageError;
@@ -180,7 +179,7 @@ export default class BookingForm extends LightningElement {
 		this.pikEnd.show();
 	}
 
-	sendOrder() {
+	async sendOrder() {
 		const spam = this.spam.value;
 
 		if (spam) {
@@ -268,11 +267,41 @@ export default class BookingForm extends LightningElement {
         
 
         if(this.pay){
-            generateAndSubmitForm(
-                'https://securesandbox.webpay.by/',
-                this.webpay.values,
-                this.webpay.names,
-            );
+            const orderRequest = await fetch("/wp-json/krasnagorka/v1/order/",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({
+                    eventTabId: this.eventTabId,
+                    id: this.objId,
+                    fio: fio,
+                    phone: phone,
+                    email: email,
+                    dateStart: dateStart,
+                    dateEnd: dateEnd,
+                    count: count,
+                    passport: passport,
+                    comment: comment,
+                    orderTitle: orderTitle,
+                    message: spam
+                })
+            }).catch(e => {
+                this.isLoading = false;
+                this.showError(
+                    "Соединение с сервером прервано, попробуйте позже"
+                );
+                console.log('Error:', e);
+            });
+
+            if(orderRequest){
+                console.log('orderRequest', orderRequest);
+                generateAndSubmitForm(
+                    'https://securesandbox.webpay.by/',
+                    orderRequest.values,
+                    orderRequest.names
+                );
+            }
         }else{
 
             fetch("/wp-json/krasnagorka/v1/order/", {

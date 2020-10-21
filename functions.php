@@ -17,6 +17,18 @@ require __DIR__ . '/inc/calendar/init.php';
 require __DIR__ . '/mastak/init.php';
 require __DIR__ . '/rest/rest.php';
 
+add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+
+function set_html_content_type() {
+	return 'text/html';
+}
+
+add_filter( 'wp_mail_from_name', 'vortal_wp_mail_from_name' );
+
+function vortal_wp_mail_from_name( $email_from ){
+	return 'info@krasnagorka.by';
+}
+
 add_action('admin_enqueue_scripts', 'load_admin_style');
 function load_admin_style()
 {

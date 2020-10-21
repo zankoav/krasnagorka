@@ -90,7 +90,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
-        $pay_path      = '/pay/';
+        $pay_path  = '/pay/';
 
         register_rest_route($namespace, $pay_path, [
             array(
@@ -100,7 +100,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
-        $success_notify_path      = '/pay-success/';
+        $success_notify_path = '/pay-success/';
 
         register_rest_route($namespace, $success_notify_path, [
             array(
@@ -109,7 +109,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'pay_success_permissions_check')
             ),
         ]);
-
 
         // $amocrm_v4_path      = '/amo-v4/';
 
@@ -607,49 +606,206 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay($request)
     {
+        $resultStatus = 501;
+        $result = [];
+
+        $spam = $request['message'];
+
+        if (!empty($spam)) {
+            return new WP_Error('Fail', 'Please call you administrator', array('status' => 500));
+        }
+
         // 1. Create order and get order ID
-        // 2. Create At Amocrm Lead Id
-        // 3. Generate result;
+        $order = $this->createOrderForPay($request);
+        if($order['status'] === 2 and isset($order['orderId'])){
+            $resultStatus = 502;
+            // 2. Create At Amocrm Lead Id
+            // $leadId = $this->createLeadForPay($request, $order);
 
-            // $result = [];
-            // $SecretKey = '2091988';
-            // $wsb_seed = strtotime("now");
-            // $wsb_storeid = '515854557';
-            // $wsb_order_num = "gg-1";
-            // $wsb_test = '1';
-            // $wsb_currency_id = 'BYN';
-            // $wsb_total = $result['price'];
-            // $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$SecretKey);
+            // if(isset($leadId)){
+                $secret_key = '2091988';
+                $wsb_seed = strtotime("now");
+                $wsb_storeid = '515854557';
+                $wsb_order_num = $order['orderId'];
+                $wsb_test = '1';
+                $wsb_currency_id = 'BYN';
+                $wsb_total = $order['price'];
+                $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$secret_key);
 
-            // $result['webpay'] = [
-            //     "names" => [
-            //         '*scart'
-            //     ],
-            //     "values" => [
-            //         'wsb_storeid' => $wsb_storeid,
-            //         'wsb_store' => 'OOO Краснагорка',
-            //         'wsb_order_num' => $wsb_order_num,
-            //         'wsb_currency_id' => $wsb_currency_id,
-            //         'wsb_version' => "2",
-            //         'wsb_language_id' => "russian",
-            //         'wsb_seed' => $wsb_seed,
-            //         'wsb_test' => $wsb_test,
-            //         'wsb_signature' => $wsb_signature,
-            //         'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
-            //         'wsb_invoice_item_quantity[0]' => '1',
-            //         'wsb_invoice_item_price[0]' => $wsb_total,
-            //         'wsb_total' => $wsb_total,
-            //         'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
-            //         'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
-            //     ]
-            // ];
-            Logger::log('pay:'.json_encode($response));
-        return new WP_REST_Response(['pay'=> 'OK'], 200);
+                $result = [
+                    "names" => [
+                        '*scart'
+                    ],
+                    "values" => [
+                        'wsb_storeid' => $wsb_storeid,
+                        'wsb_store' => 'OOO Краснагорка',
+                        'wsb_order_num' => $wsb_order_num,
+                        'wsb_currency_id' => $wsb_currency_id,
+                        'wsb_version' => "2",
+                        'wsb_language_id' => "russian",
+                        'wsb_seed' => $wsb_seed,
+                        'wsb_test' => $wsb_test,
+                        'wsb_signature' => $wsb_signature,
+                        'wsb_invoice_item_name[0]' => $request['orderTitle'],
+                        'wsb_invoice_item_quantity[0]' => '1',
+                        'wsb_invoice_item_price[0]' => $wsb_total,
+                        'wsb_total' => $wsb_total,
+                        'wsb_notify_url' => 'https://krasnagorka.by/krasnagorka/v1/pay-success/',
+                        'wsb_cancel_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
+                        'wsb_return_url' => "https://krasnagorka.by/payed-success?order=$wsb_order_num",
+                    ]
+                ];
+                $resultStatus = 200;
+            // }
+        }
+
+        Logger::log("Pay status: $resultStatus" . json_encode($result));
+        return new WP_REST_Response($result, $resultStatus);
     }
 
     public function pay_success($request){
-        Logger::log('pay_success:'.json_encode($response));
-        return new WP_REST_Response(['pay_success'=> 'OK'], 200);
+        Logger::log('pay_success:'.json_encode($request));
+        $order = $this->getOrderById($request['wsb_order_num']);
+        $checkOutList = $this->generateMailCheckOut($order);
+        wp_mail( 
+            [
+                $order['email']
+            ], 
+            'Успешная оплата в Красногорке', 
+            $checkOutList 
+        );
+    }
+
+    private function generateMailCheckOut($order){
+        $message = 'Error message :(';
+        try{
+            $price =  $order['price'];
+            $start =  $order['start'];
+            $end =  $order['end'];
+            $message = "<h2>Успешная оплата от Краснагорки Krasnagorka</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
+        }catch(Exception $e){
+            Logger::log("getOrderById Exception:".$e->getMessage());
+        }
+        return $message ;
+    }
+
+    private function getOrderById($orderID){
+        $order = [];
+        try{
+            $order['start'] = get_post_meta($orderID, 'sbc_order_start', 1);
+            $order['end'] = get_post_meta($orderID, 'sbc_order_end', 1);
+            $order['price'] = get_post_meta($orderID, 'sbc_order_price', 1);
+            $order['email'] = 'zankoav@gmail.com';
+        }catch(Exception $e){
+            Logger::log("getOrderById Exception:".$e->getMessage());
+        }
+        return $order;
+    }
+
+    private function createOrderForPay($request){
+        $result = ['status' => 0];
+        try{
+            $calendarId = $request['id'];
+            $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
+            $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
+       
+            $dateStart = date("Y-m-d", $request['dateStart']);
+            $dateEnd = date("Y-m-d", $request['dateEnd']);
+
+            if ($this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
+
+                $clientId = $this->initClient($request);
+
+                $order_data = array(
+                    'post_title'   => date("Y-m-d H:i:s"),
+                    'post_content' => '',
+                    'post_status'  => 'publish',
+                    'post_author'  => 23,
+                    'post_type'    => 'sbc_orders'
+                );
+
+                // Вставляем данные в БД
+                $order_id = wp_insert_post(wp_slash($order_data));
+
+                if (is_wp_error($order_id)) {
+                    $result['message'] = $order_id->get_error_message();
+                } else {
+
+                    $eventTabId = $request['eventTabId'];
+                    $price = null;
+                    if(!empty($eventTabId)){
+                        $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
+                        foreach($tabHouses as $tabHouse){
+                            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+                            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+                            if($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd){
+                                $price = $tabHouse['new_price'];
+                                break;
+                            }
+                        }
+                    }
+
+                    $contactTemplate = $clientId . " " . $request['fio'] . " " . $request['phone'] . " " . $request['email'] . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+                    update_post_meta($order_id, 'sbc_order_client', $contactTemplate);
+                    $this->update_all_clients_orders($clientId, $contactTemplate);
+                    update_post_meta($order_id, 'sbc_order_select', 'reserved');
+                    update_post_meta($order_id, 'sbc_order_start', $dateStart);
+                    update_post_meta($order_id, 'sbc_order_end', $dateEnd);
+                    if(isset($price)){
+                        update_post_meta($order_id, 'sbc_order_price', $order['orderId']);
+                    }
+                    update_post_meta($order_id, 'sbc_order_prepaid', '0');
+                    update_post_meta($order_id, 'sbc_order_desc', $request['comment']);
+
+                    $objectIds = array_map('intval', [$calendarId]);
+                    $objectIds = array_unique($objectIds);
+                    wp_set_object_terms($order_id, $objectIds, 'sbc_calendars');
+                    $result['status'] = 2;
+                    $result['orderId'] = $order_id;
+                    $result['price'] = $order['orderId'];
+                }
+            }else{
+                $result['status'] = 1;
+            }
+        }catch(Exception $e){
+            Logger::log("createOrderForPay Exception:".$e->getMessage());
+        }
+
+        Logger::log("createOrderForPay result:".var_dump($result));
+        return $result;
+    }
+
+    private function initClient($request)
+    {
+        $clientId = null;
+        $client = $this->get_client_by_meta(['meta_key' => 'sbc_client_email', 'meta_value' => $request['email']]);
+        if($client === false){
+            $client_data = array(
+                'post_title'   => $request['fio'] . ' ' . $request['phone'],
+                'post_content' => '',
+                'post_status'  => 'publish',
+                'post_author'  => 23,
+                'post_type'    => 'sbc_clients'
+            );
+            $clientId = wp_insert_post(wp_slash($client_data));
+            update_post_meta($clientId, 'sbc_client_email', $request['email']);
+            update_post_meta($clientId, 'sbc_client_phone', $request['phone']);
+        }else{
+            $clientId = $client->ID;
+            update_post_meta($clientId, 'sbc_client_phone', $request['phone']);
+        }
+
+        return $clientId;
+    }
+
+    private function createLeadForPay($orderData, $orderId){
+        $leadId = null;
+        try{
+
+        }catch(Exception $e){
+            Logger::log("createLeadForPay Exception:".$e->getMessage());
+        }
+        return $leadId;
     }
     
     private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids){
@@ -716,7 +872,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $contactEmail  = $request['contactEmail'];
                 $contactStatus = $request['contactStatus'];
 
-                $client   = $this->get_post_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
+                $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
                 $clientId = null;
                 $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
 
@@ -832,7 +988,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
-    private function get_post_by_meta($args = array())
+    private function get_client_by_meta($args = array())
     {
 
         // Parse incoming $args into an array and merge it with $defaults - caste to object ##
