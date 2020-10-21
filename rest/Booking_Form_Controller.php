@@ -606,7 +606,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay($request)
     {
-        Logger::log("Pay " . json_encode($request));
         $resultStatus = 501;
         $result = [];
 
@@ -659,9 +658,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $resultStatus = 200;
             // }
         }
-
-        Logger::log("Pay status: $resultStatus" . json_encode($result));
-        return new WP_REST_Response(json_encode($result), $resultStatus);
+        return new WP_REST_Response($result, $resultStatus);
     }
 
     public function pay_success($request){
