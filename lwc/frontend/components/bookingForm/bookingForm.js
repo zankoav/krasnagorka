@@ -270,7 +270,7 @@ export default class BookingForm extends LightningElement {
             fetch("/wp-json/krasnagorka/v1/pay/",{
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json; charset=utf-8",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     eventTabId: this.eventTabId,
