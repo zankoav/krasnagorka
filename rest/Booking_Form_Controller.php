@@ -606,7 +606,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay($request)
     {
-        Logger::log("Pay " . json_encode($result));
+        Logger::log("Pay " . json_encode($request));
         $resultStatus = 501;
         $result = [];
 
@@ -763,7 +763,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     wp_set_object_terms($order_id, $objectIds, 'sbc_calendars');
                     $result['status'] = 2;
                     $result['orderId'] = $order_id;
-                    $result['price'] = $order['orderId'];
+                    $result['price'] = $price;
                 }
             }else{
                 $result['status'] = 1;

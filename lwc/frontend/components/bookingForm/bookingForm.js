@@ -287,7 +287,6 @@ export default class BookingForm extends LightningElement {
                     message: spam
                 })
             })
-            .then(result => result.json())
             .catch(e => {
                 this.isLoading = false;
                 this.showError(
