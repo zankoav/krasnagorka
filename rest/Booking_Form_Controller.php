@@ -662,8 +662,8 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function pay_success($request){
-        Logger::log('pay_success:'.json_encode($request));
-        $order = $this->getOrderById($request['wsb_order_num']);
+        Logger::log('pay_success:'.$_POST['order_id']);
+        $order = $this->getOrderById($_POST['order_id']);
         $checkOutList = $this->generateMailCheckOut($order);
         wp_mail( 
             [
@@ -680,7 +680,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $price =  $order['price'];
             $start =  $order['start'];
             $end =  $order['end'];
-            $message = "<h2>Успешная оплата от Краснагорки Krasnagorka</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
+            $message = "<h2>Успешная оплата от Краснагорки</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
         }catch(Exception $e){
             Logger::log("getOrderById Exception:".$e->getMessage());
         }
@@ -749,9 +749,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_select', 'reserved');
                     update_post_meta($order_id, 'sbc_order_start', $dateStart);
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
-                    if(isset($price)){
-                        update_post_meta($order_id, 'sbc_order_price', $order['orderId']);
-                    }
+                    update_post_meta($order_id, 'sbc_order_price', $price);
                     update_post_meta($order_id, 'sbc_order_prepaid', '0');
                     update_post_meta($order_id, 'sbc_order_desc', $request['comment']);
 

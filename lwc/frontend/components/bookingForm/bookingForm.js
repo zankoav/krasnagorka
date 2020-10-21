@@ -443,9 +443,5 @@ function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method 
     }
 
     document.body.appendChild(form);
-
-    setTimeout(()=>{
-        form.submit();
-    }, 20000);
-    
+    form.submit();
 }
