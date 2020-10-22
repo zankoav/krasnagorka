@@ -44,14 +44,12 @@ function getToken()
         isset($accessToken)
         && isset($accessToken['access_token'])
         && isset($accessToken['refresh_token'])
-        && isset($accessToken['expires'])
-        && isset($accessToken['baseDomain'])
+        && isset($accessToken['expires_in'])
     ) {
         return new AccessToken([
             'access_token' => $accessToken['access_token'],
             'refresh_token' => $accessToken['refresh_token'],
-            'expires' => $accessToken['expires'],
-            'baseDomain' => $accessToken['baseDomain'],
+            'expires_in' => $accessToken['expires_in'],
         ]);
     } else {
         exit('Invalid access token ' . var_export($accessToken, true));
