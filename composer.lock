@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "amocrm/amocrm-api-library",
-            "version": "0.2.5",
+            "version": "0.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amocrm/amocrm-api-php.git",
-                "reference": "d6eb2ce4a7617070cfe9fae0631427e74d54c3bb"
+                "reference": "37f819e14bd3ad1f700d75e8a06779dc66a26a26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amocrm/amocrm-api-php/zipball/d6eb2ce4a7617070cfe9fae0631427e74d54c3bb",
-                "reference": "d6eb2ce4a7617070cfe9fae0631427e74d54c3bb",
+                "url": "https://api.github.com/repos/amocrm/amocrm-api-php/zipball/37f819e14bd3ad1f700d75e8a06779dc66a26a26",
+                "reference": "37f819e14bd3ad1f700d75e8a06779dc66a26a26",
                 "shasum": ""
             },
             "require": {
@@ -69,7 +69,7 @@
                 "client",
                 "oauth2"
             ],
-            "time": "2020-06-16T15:59:02+00:00"
+            "time": "2020-06-26T17:13:52+00:00"
         },
         {
             "name": "amocrm/oauth2-amocrm",

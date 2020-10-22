@@ -110,15 +110,15 @@ class Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
-        // $amocrm_v4_path      = '/amo-v4/';
+        $amocrm_v4_path      = '/amo-v4/';
 
-        // register_rest_route($namespace, $amocrm_v4_path, [
-        //     array(
-        //         'methods'             => 'POST',
-        //         'callback'            => array($this, 'amocrm_v4'),
-        //         'permission_callback' => array($this, 'amocrm_v4_permissions_check')
-        //     ),
-        // ]);
+        register_rest_route($namespace, $amocrm_v4_path, [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'amocrm_v4_test'),
+                'permission_callback' => array($this, 'amocrm_v4_permissions_check')
+            ),
+        ]);
     }
 
     public function create_order_permissions_check($request)
@@ -231,6 +231,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
         $redirectUri = 'https://krasnagorka.by';
+        
         $code = 'def502000fbd47b384ca66f1c806a90c0255d176b3c774243eeb100a7858487c3adfbb5e1725fe2ac5a779ec5df93953672838939dd5dafcf89e87cdce028d68eae1760655eceb4a020e3c42020e654fe5fd50f59e0102a07098677a661c81ca3ad30e28b63c88075a06158fb074b0e93d7cc0b4801943c43afcf3059acef227bec274b75c7757ddee960384eaee4502c12f7717bb9d3ac583466564044e9c5976d4ee42a741a449266475f6086ea0ff3dfd9adc2f1c2f5dd750661d69d15b343898bad73e9fcfb2e484e2a0fcab0f4616988a5d192cd44de662154ea62ed486ee7f6fea0bf30114a358e21452a7a8f3cf2f35718e1607075634fe55a3ae2b85961583b698eec38a24173d398b665a6c23e7a91a0adb5e8705b926119c8218fee68647020f2e40e8382eff50fbf35a29748c73593c23a0793bebca23f80cb8108adbda27b7dcbe61ce47020bf811d3c58dc371906fc9ccf124d400bc91642ae58ece09c82ac1f337a5f95ceb16db9b6dc29baca9ff4753a577349917b155e123a2be6fe1d01693bfc9a616e71948e23a47c1eb31c3c9dac1e89b4515dc30cb5aa2b988368a3a2f31513b6a14612fae888db801ddb5b07a2a622cb9b87b28196c';
         $link = 'https://krasnogorka.amocrm.ru/oauth2/access_token';
 
@@ -1105,6 +1106,57 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         return $result;
+    }
+
+
+    public function amocrm_v4_test(){
+        $apiClient = $this->getAmoCrmApiClient();
+        $leadsService = $apiClient->leads();
+        $lead = new LeadModel();
+        $lead->setName('Сделка с сайта test');
+        $lead->setStatusId(19518940);
+        $lead->setTags((new TagsCollection())
+           ->add(
+                (new TagModel())
+                    ->setId(1181317)
+                    ->setName('Страница Бронирования')
+            )
+        );
+
+        try {
+            $lead = $leadsService->addOne($lead);
+            Logger::log('lead:'.json_encode($lead));
+        } catch (AmoCRMApiException $e) {
+            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+        }
+    }
+
+    private function getAmoCrmApiClient(){
+
+        $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
+        $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
+        $redirectUri = 'https://krasnagorka.by';
+        // $code = 'def502000fbd47b384ca66f1c806a90c0255d176b3c774243eeb100a7858487c3adfbb5e1725fe2ac5a779ec5df93953672838939dd5dafcf89e87cdce028d68eae1760655eceb4a020e3c42020e654fe5fd50f59e0102a07098677a661c81ca3ad30e28b63c88075a06158fb074b0e93d7cc0b4801943c43afcf3059acef227bec274b75c7757ddee960384eaee4502c12f7717bb9d3ac583466564044e9c5976d4ee42a741a449266475f6086ea0ff3dfd9adc2f1c2f5dd750661d69d15b343898bad73e9fcfb2e484e2a0fcab0f4616988a5d192cd44de662154ea62ed486ee7f6fea0bf30114a358e21452a7a8f3cf2f35718e1607075634fe55a3ae2b85961583b698eec38a24173d398b665a6c23e7a91a0adb5e8705b926119c8218fee68647020f2e40e8382eff50fbf35a29748c73593c23a0793bebca23f80cb8108adbda27b7dcbe61ce47020bf811d3c58dc371906fc9ccf124d400bc91642ae58ece09c82ac1f337a5f95ceb16db9b6dc29baca9ff4753a577349917b155e123a2be6fe1d01693bfc9a616e71948e23a47c1eb31c3c9dac1e89b4515dc30cb5aa2b988368a3a2f31513b6a14612fae888db801ddb5b07a2a622cb9b87b28196c';
+        // $link = 'https://krasnogorka.amocrm.ru/oauth2/access_token';
+
+        $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+        $accessToken = getToken();
+        $apiClient
+            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
+            ->setAccessToken($accessToken)
+            ->onAccessTokenRefresh(
+                function (AccessTokenInterface $accessToken, string $baseDomain) {
+                    saveToken(
+                        [
+                            'access_token' => $accessToken->getToken(),
+                            'refresh_token' => $accessToken->getRefreshToken(),
+                            'expires_in' => $accessToken->getExpires(),
+                            'baseDomain' => $baseDomain,
+                        ]
+                    );
+                });
+
+        return $apiClient;
     }
 
 }
