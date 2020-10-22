@@ -1125,7 +1125,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         try {
             $lead = $leadsService->addOne($lead);
-            Logger::log('lead:'.json_encode($lead));
+            Logger::log('lead:'.$lead->getName());
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
@@ -1137,12 +1137,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
         $redirectUri = 'https://krasnagorka.by';
-        // $code = 'def50200a079c8601d3bce3d9f3975fa272816af44153f65eb913debdc0ce992b175854ba213138a578796079929e230daa2dacf2953f58c903df42793ad09f69ab19be7774e811d15531a1ae017837e5123d0a2ca120c3bf06ba70d648a9dd3534831988c8ac69930bfe65dab807f12e306d1e2efd77839d683f0f8733652d91dc1c553f47c870df00b33aeb740dd912f3ba5397f780bfde4151efe9af009bfd6e457056667c0a8f685c47cc4855c54cedb1cb3705eb280ca66d2d6a4c98771385783a482336f21480dc3fff599b4df39c1d2b82fc7db962f49b88a5194c617cc58dc533671dda0cf561283c10f911ae3549b6fe5b2d3c2bf49c6c9e40688844af64c6de47b4af52e40db2e76d2434c516f4511f0bc0b22a0e8f85579da2a95fa6cc3e153e03315a03e97e8bba52c5d768963735a53b1b0c2dceb31f0d2f6508035f59df1c9a0cec89b88c43cee9e88e1b24d73f526ef309c8d6bc48b57b96d290ff7cca5376b70088b0cd9c296de82f0167fbb85d603a3b20c637a60dd133008b93c2f27e182d706f293e932872c38bdcf2de978618a802a204c308435526c0dc514945b6ac3d8294acd220c8d684cad19816ec584ad882a3bd756f855ad48';
-        // $link = 'https://krasnogorka.amocrm.ru/oauth2/access_token';
 
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $accessToken = getToken();
-        Logger::log('$accessToken:'.$accessToken);
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
