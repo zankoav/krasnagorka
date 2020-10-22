@@ -1129,6 +1129,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
+        return new WP_REST_Response(['status' => 1], 200);
     }
 
     private function getAmoCrmApiClient(){
