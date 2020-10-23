@@ -56,6 +56,28 @@ use AmoCRM\Models\NoteType\CommonNote;
 
 class Booking_Form_Controller extends WP_REST_Controller
 {
+    public const CALENDAR_OBJECTS_MAPPING = [
+        17 => 1036665,
+        37 => 1036663,
+        18 => 1036661,
+        19 => 1036659,
+        20 => 1036657,
+        21 => 1036655,
+        22 => 1036653,
+        23 => 1036651,
+        24 => 1036649,
+        25 => 1036647,
+        26 => 1036645,
+        27 => 1036643,
+        28 => 1036641,
+        29 => 1036639,
+        14 => 1036585,
+        13 => 1036583,
+        15 => 10393,
+        9 => 10391,
+        43=> 1663367,
+        16 => 10389
+    ];
 
     public function register_routes()
     {
@@ -1110,22 +1132,119 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
     public function amocrm_v4_test(){
-        $apiClient = $this->getAmoCrmApiClient();
-        $leadsService = $apiClient->leads();
-        $lead = new LeadModel();
-        $lead->setName('Сделка с сайта test');
-        $lead->setStatusId(19518940);
-        $lead->setTags((new TagsCollection())
-           ->add(
-                (new TagModel())
-                    ->setId(1181317)
-                    ->setName('Страница Бронирования')
-            )
-        );
-
         try {
+            $apiClient = $this->getAmoCrmApiClient();
+
+            $price = 112;
+            $peopleCount = 9;
+            $passport = 9;
+            $dateFrom = '2020-08-20';
+            $dateTo = '2020-08-23';
+            $orderId = 192;
+            $calendarId = 43;
+            $comment = 'Комментарий тестовый';
+
+            $orderType = 'reserved';
+            $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $passport\nКомментарий: $comment";
+            $leadName = 'Сделка через WEBPAY';
+            $statusId = 35452366; // id воронки
+
+            $leadsService = $apiClient->leads();
+            $lead = new LeadModel();
+            $lead->setName($leadName);
+            $lead->setStatusId($statusId);
+            $lead->setPrice($price);
+            $lead->setTags((new TagsCollection())
+            ->add(
+                    (new TagModel())
+                        ->setId(1181317)
+                        ->setName('Страница Бронирования')
+                )
+            );
+
+            $leadCustomFields = new CustomFieldsValuesCollection();
+
+            // Order ID
+            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            $orderIdFieldValueModel->setFieldId(639191);
+            $orderIdFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                        ->setValue($orderId)
+                )
+            );
+            $leadCustomFields->add($orderIdFieldValueModel);
+            
+            // Order Type
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue($orderType)
+                )
+            );
+            $leadCustomFields->add($typeFieldValueModel);
+
+            // Comment
+            $commentFieldValueModel = new TextCustomFieldValuesModel();
+            $commentFieldValueModel->setFieldId(357377);
+            $commentFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue($comment )
+                )
+            );
+            $leadCustomFields->add($commentFieldValueModel);
+
+            // Date From
+            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            $dateFromFieldValueModel->setFieldId(66211);
+            $dateFromModel = new DateCustomFieldValueModel();
+            $dateFromModel->setValue($dateFrom);
+            $dateFromModelCollection = new DateCustomFieldValueCollection();
+            $dateFromModelCollection->add($dateFromModel);
+            $dateFromFieldValueModel->setValues($dateFromModelCollection);
+            $leadCustomFields->add($dateFromFieldValueModel);
+
+            // Date To 
+            $dateToFieldValueModel = new DateCustomFieldValuesModel();
+            $dateToFieldValueModel->setFieldId(66213);
+            $dateToModel = new DateCustomFieldValueModel();
+            $dateToModel->setValue($dateTo);
+            $dateToModelCollection = new DateCustomFieldValueCollection();
+            $dateToModelCollection->add($dateToModel);
+            $dateToFieldValueModel->setValues($dateToModelCollection);
+            $leadCustomFields->add($dateToFieldValueModel);
+
+            $lead->setCustomFieldsValues($leadCustomFields);
+
+            $houseElement = null;
+            $catalogElementsFilter = new CatalogElementsFilter();
+            $catalogElementsFilter->setIds([self::CALENDAR_OBJECTS_MAPPING[$calendarId]]);
+            $catalogElementsService = $apiClient->catalogElements(1321);
+            $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
+            $houseElement = $catalogElementsCollection->first();
+            $houseElement->setQuantity(1);
+
             $lead = $leadsService->addOne($lead);
-            Logger::log('lead:'.$lead->getName());
+
+            $links = new LinksCollection();
+            $links->add($houseElement);
+            $apiClient
+                ->leads()
+                ->link($lead, $links);
+
+            $notesCollection = new NotesCollection();
+            $messageNote = new CommonNote();
+            $messageNote
+                ->setEntityId($lead->getId())
+                ->setText($commentNote);
+            $notesCollection->add($messageNote);
+            $apiClient
+                ->notes(EntityTypesInterface::LEADS)
+                ->add($notesCollection);
+
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
