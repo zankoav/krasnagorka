@@ -1132,17 +1132,19 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
     public function amocrm_v4_test(){
-        try {
-            $apiClient = $this->getAmoCrmApiClient();
 
-            $price = 112;
-            $peopleCount = 9;
-            $passport = 9;
-            $dateFrom = '2020-08-20';
-            $dateTo = '2020-08-23';
-            $orderId = 192;
-            $calendarId = 43;
-            $comment = 'Комментарий тестовый';
+        $price = 112; 
+        $peopleCount = 9;
+        $passport = 9;
+        $dateFrom = '2020-08-20';
+        $dateTo = '2020-08-23';
+        $orderId = 192;
+        $calendarId = 43;
+        $comment = 'Комментарий тестовый';
+
+        try {
+
+            $apiClient = $this->getAmoCrmApiClient();
 
             $orderType = 'reserved';
             $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $passport\nКомментарий: $comment";
