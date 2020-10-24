@@ -1143,8 +1143,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $contactName = 'Александр Занько';
         $contactPhone = '+375295558386';
-        $contactEmail = 'zankoav@gmail.com';
-        $contactPassport = 'GGFFTTOOPPRRTT';
+        $contactEmail = 'zankoav@yandex.ru';
+        $contactPassport = 'GG Gl HF';
 
         try {
 
