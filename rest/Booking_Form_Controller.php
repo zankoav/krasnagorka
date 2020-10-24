@@ -1135,19 +1135,23 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $price = 112; 
         $peopleCount = 9;
-        $passport = 9;
         $dateFrom = '2020-08-20';
         $dateTo = '2020-08-23';
         $orderId = 192;
         $calendarId = 43;
         $comment = 'Комментарий тестовый';
 
+        $contactName = 'Александр Занько';
+        $contactPhone = '+375295558386';
+        $contactEmail = 'zankoav@gmail.com';
+        $contactPassport = 'GGFFTTOOPPRRTT';
+
         try {
 
             $apiClient = $this->getAmoCrmApiClient();
 
             $orderType = 'reserved';
-            $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $passport\nКомментарий: $comment";
+            $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
             $leadName = 'Сделка через WEBPAY';
             $statusId = 35452366; // id воронки
 
@@ -1246,6 +1250,126 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient
                 ->notes(EntityTypesInterface::LEADS)
                 ->add($notesCollection);
+
+
+            $contact = null;
+
+            $contactsFilter = new ContactsFilter();
+            $contactsFilter->setQuery($contactPhone);
+            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+
+            if($contactsCollection->count() > 0 ){
+                $contact = $contactsCollection->first();
+                $customFields = $contact->getCustomFieldsValues();
+                
+                $emailField = $customFields->getBy('fieldCode', 'EMAIL');
+                if(empty($emailField)){
+                    $emailField = (new MultitextCustomFieldValuesModel())->setFieldCode('EMAIL');
+                    $customFields->add($emailField);
+                }
+                $emailField->setValues(
+                    (new MultitextCustomFieldValueCollection())
+                        ->add(
+                            (new MultitextCustomFieldValueModel())
+                                ->setEnum('WORK')
+                                ->setValue($contactEmail)
+                        )
+                );
+
+                if(!empty($contactPassport)){
+                    $passportFieldValueModel = new TextCustomFieldValuesModel();
+                    $passportFieldValueModel->setFieldId(638673);
+                    $passportFieldValueModel->setValues(
+                        (new TextCustomFieldValueCollection())
+                            ->add((new TextCustomFieldValueModel())
+                            ->setValue($contactPassport)));
+                    $customFields->add($passportFieldValueModel);
+                }
+                
+                $contact = $apiClient->contacts()->updateOne($contact);
+
+            }else{
+                $contactsFilter->setQuery($contactEmail);
+                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+
+                if($contactsCollection->count() > 0 ){
+                    $contact = $contactsCollection->first();
+                    $customFields = $contact->getCustomFieldsValues();
+                    $phoneField = $customFields->getBy('fieldCode', 'PHONE');
+                    if(empty($phoneField)){
+                        $phoneField = (new MultitextCustomFieldValuesModel())->setFieldCode('PHONE');
+                        $customFields->add($phoneField);
+                    }
+                    $phoneField->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setEnum('WORKDD')
+                                    ->setValue($contactPhone)
+                            )
+                    );
+
+                    if(!empty($contactPassport)){
+                        $passportFieldValueModel = new TextCustomFieldValuesModel();
+                        $passportFieldValueModel->setFieldId(638673);
+                        $passportFieldValueModel->setValues(
+                            (new TextCustomFieldValueCollection())
+                                ->add((new TextCustomFieldValueModel())
+                                ->setValue($contactPassport)));
+                        $customFields->add($passportFieldValueModel);
+                    }
+
+                    $contact = $apiClient->contacts()->updateOne($contact);
+
+                }else{
+                    $contact = new ContactModel();
+                    $contact->setName($contactName);
+                    
+                    $contactCustomFields = new CustomFieldsValuesCollection();
+                    $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
+                    $phoneFieldValueModel->setFieldCode('PHONE');
+                    $phoneFieldValueModel->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setEnum('WORKDD')
+                                    ->setValue($contactPhone)
+                            )
+                    );
+                    
+                    $emailFieldValueModel = new MultitextCustomFieldValuesModel();
+                    $emailFieldValueModel->setFieldCode('EMAIL');
+                    $emailFieldValueModel->setValues(
+                        (new MultitextCustomFieldValueCollection())
+                            ->add(
+                                (new MultitextCustomFieldValueModel())
+                                    ->setEnum('WORK')
+                                    ->setValue($contactEmail)
+                            )
+                    );
+
+                    $contactCustomFields->add($phoneFieldValueModel);
+                    $contactCustomFields->add($emailFieldValueModel);
+                    $contact->setCustomFieldsValues($contactCustomFields);
+
+                    if(!empty($contactPassport)){
+                        $passportFieldValueModel = new TextCustomFieldValuesModel();
+                        $passportFieldValueModel->setFieldId(638673);
+                        $passportFieldValueModel->setValues(
+                            (new TextCustomFieldValueCollection())
+                                ->add((new TextCustomFieldValueModel())
+                                ->setValue($contactPassport)));
+                        $contactCustomFields->add($passportFieldValueModel);
+                    }
+
+                    $contact = $apiClient->contacts()->addOne($contact);      
+                }
+            }
+            
+            $links = new LinksCollection();
+            $links->add($contact);
+
+            $apiClient->leads()->link($lead, $links);
 
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
