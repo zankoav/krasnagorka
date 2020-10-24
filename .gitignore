@@ -3,3 +3,4 @@
 node_modules
 lwc/node_modules
 vendor
+token_info.json
