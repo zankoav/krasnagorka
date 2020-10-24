@@ -1332,7 +1332,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 }else{
                     $contact = new ContactModel();
-                    $contact->setName($contactName);
+                    $contact->setFirstName($contactName);
                     
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
