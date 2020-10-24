@@ -1366,6 +1366,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
             }
             
+            Logger::log('$contact :'.$contact->getId());
+
             $links = new LinksCollection();
             $links->add($contact);
 
