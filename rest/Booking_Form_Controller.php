@@ -1322,6 +1322,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $contact = $apiClient->contacts()->updateOne($contact);
 
                 }else{
+                    Logger::log('$contact view');    
                     $contact = new ContactModel();
                     $contact->setName($contactName);
                     
@@ -1362,12 +1363,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                         $contactCustomFields->add($passportFieldValueModel);
                     }
 
-                    $contact = $apiClient->contacts()->addOne($contact);      
+                    $contact = $apiClient->contacts()->addOne($contact);  
+                    Logger::log('$contact :'.$contact->getId());    
                 }
             }
             
-            Logger::log('$contact :'.$contact->getId());
-
             $links = new LinksCollection();
             $links->add($contact);
 
