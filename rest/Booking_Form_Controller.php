@@ -1253,12 +1253,15 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
             $contact = null;
-            Logger::log('$contact 1');    
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
-            Logger::log('$contact 2');  
-            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-            Logger::log('$contact 3');    
+
+            try{
+                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            }catch (AmoCRMApiException $e) {
+                Logger::log('Exceptions: contact phone' . $e->getTitle());
+            }
+           
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
@@ -1291,8 +1294,13 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             }else{
                 $contactsFilter->setQuery($contactEmail);
-                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
 
+                try{
+                    $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+                }catch (AmoCRMApiException $e) {
+                    Logger::log('Exceptions: contact email' . $e->getTitle());
+                }
+                
                 if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
                     $contact = $contactsCollection->first();
                     $customFields = $contact->getCustomFieldsValues();
