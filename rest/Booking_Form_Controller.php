@@ -1259,7 +1259,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             try{
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
             }catch (AmoCRMApiException $e) {
-                Logger::log('Exceptions: contact phone' . $e->getTitle());
+                Logger::log('Exceptions: contact phone ' . $e->getTitle());
             }
            
             if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
@@ -1298,7 +1298,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 try{
                     $contactsCollection = $apiClient->contacts()->get($contactsFilter);
                 }catch (AmoCRMApiException $e) {
-                    Logger::log('Exceptions: contact email' . $e->getTitle());
+                    Logger::log('Exceptions: contact email ' . $e->getTitle());
                 }
                 
                 if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
@@ -1331,7 +1331,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $contact = $apiClient->contacts()->updateOne($contact);
 
                 }else{
-                    Logger::log('$contact view');    
                     $contact = new ContactModel();
                     $contact->setName($contactName);
                     
@@ -1373,7 +1372,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                     }
 
                     $contact = $apiClient->contacts()->addOne($contact);  
-                    Logger::log('$contact :'.$contact->getId());    
                 }
             }
             
@@ -1383,7 +1381,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient->leads()->link($lead, $links);
 
         } catch (AmoCRMApiException $e) {
-            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+            Logger::log('Exceptions: '.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
         return new WP_REST_Response(['status' => 1], 200);
     }
