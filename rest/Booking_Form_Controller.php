@@ -1257,7 +1257,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
             $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-
+            Logger::log('$contact view'.$contactsCollection);    
             if($contactsCollection->count() > 0 ){
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
