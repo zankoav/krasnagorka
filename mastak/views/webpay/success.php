@@ -27,6 +27,7 @@
                 font-size:18px;
                 background:#1498c6;
                 color:#fff;
+                padding: 16px;
                 font-weight:600;
                 border-top-left-radius:8px;
                 border-top-right-radius:8px;">Информация о бронировании</td>
@@ -67,7 +68,8 @@
                 padding: 12px;
                 text-align: left;
                 color: #555;
-                font-weight:600;"><?=$order['to']?></td>
+                font-weight:600;
+                border-bottom: 1px solid #ddd;"><?=$order['to']?></td>
         </tr>
         <tr>
             <td style="
