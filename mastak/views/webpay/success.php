@@ -11,7 +11,7 @@
         border: 1px solid #ddd;
         border-radius: 16px;
         border-spacing: 0;
-        background-color: #fefefe;
+        background-color: #fafafa;
     }
 
     @media (max-width:768px){
@@ -20,11 +20,15 @@
         }
     }
 
-
     #check tr:first-child td{
         background: #04a89f;
         color: #fff;
         font-weight: bold;
+        border-radius: 12px;
+    }
+
+    #check td:first-child{
+        color: #555;
     }
 
     #check td {
@@ -32,6 +36,7 @@
         padding: 12px;
         text-align: left;
     }
+
     #check tr:last-child td {
         border-bottom: none;
     }
