@@ -707,7 +707,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay_success($request){
         $order = $this->getOrderById($_POST['site_order_id']);
-        $checkOutList = $this->generateMailCheckOut($order);
+        $checkOutList = generateCheck($order);
         wp_mail( 
             [
                 $order['email']
@@ -749,19 +749,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             $lead->setCustomFieldsValues($leadCustomFields);
             $apiClient->leads()->updateOne($lead);
         }
-    }
-
-    private function generateMailCheckOut($order){
-        $message = 'Error message :(';
-        try{
-            $price =  $order['price'];
-            $start =  $order['start'];
-            $end =  $order['end'];
-            $message = "<h2>Успешная оплата от Краснагорки</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
-        }catch(Exception $e){
-            Logger::log("getOrderById Exception:".$e->getMessage());
-        }
-        return $message ;
     }
 
     private function getOrderById($orderID){

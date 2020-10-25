@@ -37,7 +37,6 @@
 
 
 ?>
-
     <section class="b-container">
         <?= generateCheck($_GET['wsb_order_num']);?>
     </section>

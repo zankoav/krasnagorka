@@ -1,7 +1,27 @@
 <?php 
     $order = $args['order'];
+    $order['house'] = 'Рыбацкий';
 ?>
-<h2>Успешная оплата от Краснагорки</h2>
-<p>Цена: <?=$order['price']?> руб.</p>
-<p>Дата заезда: <?=$order['from']?></p>
-<p>Дата выезда: <?=$order['to']?></p>
+<table>
+    <tbody>
+        <tr>
+            <td colspan="2">Информация о бронировании</td>
+        </tr>
+        <tr>
+            <td>Домик</td>
+            <td><?=$order['house']?></td>
+        </tr>
+        <tr>
+            <td>Дата заезда</td>
+            <td><?=$order['from']?></td>
+        </tr>
+        <tr>
+            <td>Дата выезда</td>
+            <td><?=$order['to']?></td>
+        </tr>
+        <tr>
+            <td>Оплачено</td>
+            <td><?=$order['price']?> руб.</td>
+        </tr>
+    </tbody>
+</table>
