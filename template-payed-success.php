@@ -40,7 +40,7 @@
 
     <section class="b-container">
         <?php //generateCheck($_GET['wsb_order_num']);?>
-        <?php get_template_part("mastak/views/webpay", "success");?>
+        <?php get_template_part("mastak/views/webpay/success");?>
     </section>
 
 <?php
