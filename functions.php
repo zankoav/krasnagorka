@@ -282,14 +282,13 @@ function getCalendarId($calendarShortCode)
         $start = get_post_meta($orderId, 'sbc_order_start', 1);
         $end = get_post_meta($orderId, 'sbc_order_end', 1);
         $price = get_post_meta($orderId, 'sbc_order_price', 1);
-        $calendar = get_post_meta($orderId, 'sbc_order_taxonomy_select', 1);
+        $calendars  = get_the_terms( $orderId, 'sbc_calendars' );
         $message = get_template_part("mastak/views/webpay/success", null, [
             'order' => [
                 'from' => date("d.m.Y", strtotime($start)),
                 'to' => date("d.m.Y", strtotime($end)),
                 'price' => $price,
-                'calendar' => $calendar
-                
+                'calendar' => $calendars[0]
             ]
         ]);
         return $message; 
