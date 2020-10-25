@@ -709,7 +709,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         Logger::log("site_order_id: ".$_POST['site_order_id']);
         $order = $this->getOrderById($_POST['site_order_id']);
         Logger::log("email: ".$order['email']);
-        $checkOutList = generateCheck($_POST['site_order_id']);
+        ob_start();
+        generateCheck($_POST['site_order_id']);
+        $checkOutList = ob_get_contents();
+        ob_end_clean();
         Logger::log("checkOutList \n".$checkOutList);
         wp_mail( 
             [
