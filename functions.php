@@ -288,5 +288,8 @@ function getCalendarId($calendarShortCode)
 
     function getEmailFromOrder($orderId){
         $client = get_post_meta($orderId, 'sbc_order_client', 1);
-        return $client;
+        $pieces = explode(" ", $client);
+        $clientId = $pieces[0];
+        $email = get_post_meta($clientId, 'sbc_client_email', 1);
+        return $email;
     }
