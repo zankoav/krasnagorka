@@ -716,6 +716,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $checkOutList 
         );
         if($_POST['transaction_id']){
+            update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
+            update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
         }
         try{
@@ -730,9 +732,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     private function updateAmoCrmLead($leadId){
         if(!empty($leadId)){
             $apiClient = $this->getAmoCrmApiClient();
-            Logger::log("apiClient OK");
             $lead = $apiClient->leads()->getOne($leadId);
-            Logger::log("lead OK");
             $lead->setStatusId(35452474);
             $payedFieldValueModel = new NumericCustomFieldValuesModel();
             $payedFieldValueModel->setFieldId(282777);
@@ -743,9 +743,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                     )
                 )
             );
+            Logger::log("lead 1");
             $lead->getCustomFieldsValues()->add($orderIdFieldValueModel);
-
+            Logger::log("lead 2");
             $apiClient->leads()->updateOne($lead);
+            Logger::log("lead 3");
         }
     }
 
@@ -823,10 +825,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_client', $contactTemplate);
                     $this->update_all_clients_orders($clientId, $contactTemplate);
                     update_post_meta($order_id, 'sbc_order_select', 'reserved');
+                    update_post_meta($order_id, 'sbc_order_prepaid', '0');
                     update_post_meta($order_id, 'sbc_order_start', $dateStart);
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
-                    update_post_meta($order_id, 'sbc_order_prepaid', '0');
                     update_post_meta($order_id, 'sbc_order_desc', $request['comment']);
 
                     $objectIds = array_map('intval', [$calendarId]);
