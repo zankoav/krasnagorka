@@ -37,7 +37,7 @@
 
 
 ?>
-    <section class="b-container">
+    <section class="b-container b-py-2">
         <?= generateCheck($_GET['wsb_order_num']);?>
     </section>
 

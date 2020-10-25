@@ -10,8 +10,23 @@
         font-size: 16px;
         border: 1px solid #ddd;
         border-radius: 16px;
-        border-collapse: collapse;
+        border-spacing: 0;
+        background-color: #fefefe;
     }
+
+    @media (max-width:768px){
+        #check{
+            width: 100%;
+        }
+    }
+
+
+    #check tr:first-child td{
+        background: #04a89f;
+        color: #fff;
+        font-weight: bold;
+    }
+
     #check td {
         border-bottom: 1px solid #ddd;
         padding: 12px;
