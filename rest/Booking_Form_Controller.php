@@ -734,6 +734,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient = $this->getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
             $lead->setStatusId(35452474);
+
+            $leadCustomFields = new CustomFieldsValuesCollection();
+
             $payedFieldValueModel = new NumericCustomFieldValuesModel();
             $payedFieldValueModel->setFieldId(282777);
             $payedFieldValueModel->setValues(
@@ -744,10 +747,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 )
             );
             Logger::log("lead 1");
-            $lead->getCustomFieldsValues()->add($orderIdFieldValueModel);
+            $leadCustomFields->add($orderIdFieldValueModel);
             Logger::log("lead 2");
-            $apiClient->leads()->updateOne($lead);
+            $lead->setCustomFieldsValues($leadCustomFields);
             Logger::log("lead 3");
+            $apiClient->leads()->updateOne($lead);
+            Logger::log("lead 4");
         }
     }
 
