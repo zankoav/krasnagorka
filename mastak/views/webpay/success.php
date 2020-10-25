@@ -6,16 +6,29 @@
         margin-left: auto; 
         margin-right: auto;
         color:  #333;
-        width: 400px;
+        width: 500px;
         font-size: 16px;
         border: 1px solid #ddd;
         border-radius: 16px;
+        border-collapse: collapse;
     }
-    #check th, #check td {
-        border: 1px solid #ddd;
+    #check td {
+        border-bottom: 1px solid #ddd;
         padding: 12px;
         text-align: left;
     }
+    #check tr:last-child td {
+        border-bottom: none;
+    }
+
+    #check tr:last-child td:first-child {
+        border-bottom-left-radius: 12px;
+    }
+    
+    #check tr:last-child td:last-child {
+        border-bottom-right-radius: 12px;
+    }
+
 </style>
 <table id="check">
     <tbody>
