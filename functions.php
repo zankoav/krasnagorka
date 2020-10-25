@@ -282,7 +282,7 @@ function getCalendarId($calendarShortCode)
         $start = get_post_meta($orderId, 'sbc_order_start', 1);
         $end = get_post_meta($orderId, 'sbc_order_end', 1);
         $price = get_post_meta($orderId, 'sbc_order_price', 1);
-        $message = "<h2>Успешная оплата от Краснагорки</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
+        $message = get_template_part("mastak/views/webpay", "success");
         return $message; 
     }
 
