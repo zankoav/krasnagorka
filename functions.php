@@ -288,7 +288,7 @@ function getCalendarId($calendarShortCode)
                 'from' => date("d.m.Y", strtotime($start)),
                 'to' => date("d.m.Y", strtotime($end)),
                 'price' => $price,
-                'calendar' => $calendars[0]
+                'calendar' => $calendars[0]->name
             ]
         ]);
         return $message; 
