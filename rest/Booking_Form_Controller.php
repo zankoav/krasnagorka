@@ -747,7 +747,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 )
             );
             Logger::log("lead 1");
-            $leadCustomFields->add($orderIdFieldValueModel);
+            $leadCustomFields->add($payedFieldValueModel);
             Logger::log("lead 2");
             $lead->setCustomFieldsValues($leadCustomFields);
             Logger::log("lead 3");
