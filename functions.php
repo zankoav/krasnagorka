@@ -23,14 +23,6 @@ function set_html_content_type() {
 	return 'text/html';
 }
 
-function generateCheck($orderId){
-    $start = get_post_meta($orderId, 'sbc_order_start', 1);
-    $end = get_post_meta($orderId, 'sbc_order_end', 1);
-    $price = get_post_meta($orderId, 'sbc_order_price', 1);
-    $message = "<h2>Успешная оплата от Краснагорки</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
-    return $message; 
-}
-
 add_filter( 'wp_mail_from_name', 'vortal_wp_mail_from_name' );
 
 function vortal_wp_mail_from_name( $email_from ){
@@ -285,3 +277,16 @@ function getCalendarId($calendarShortCode)
 
     add_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
     
+
+    function generateCheck($orderId){
+        $start = get_post_meta($orderId, 'sbc_order_start', 1);
+        $end = get_post_meta($orderId, 'sbc_order_end', 1);
+        $price = get_post_meta($orderId, 'sbc_order_price', 1);
+        $message = "<h2>Успешная оплата от Краснагорки</h2><p>Цена: $price</p><p>Дата заезда: $start</p><p>Дата выезда: $end</p>";
+        return $message; 
+    }
+
+    function getEmailFromOrder($orderId = '15618'){
+        $client = get_post_meta($orderId, ' sbc_order_client', 1);
+        return $client;
+    }

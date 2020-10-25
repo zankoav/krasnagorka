@@ -721,7 +721,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
         }
         try{
-            Logger::log("Lead id:".$order['leadId']);
             $this->updateAmoCrmLead($order['leadId']);
         }catch(AmoCRMApiException $e){
             Logger::log("AmoCRMApiException Exception:".$e->getTitle());
@@ -746,13 +745,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                     )
                 )
             );
-            Logger::log("lead 1");
             $leadCustomFields->add($payedFieldValueModel);
-            Logger::log("lead 2");
             $lead->setCustomFieldsValues($leadCustomFields);
-            Logger::log("lead 3");
             $apiClient->leads()->updateOne($lead);
-            Logger::log("lead 4");
         }
     }
 
@@ -1466,8 +1461,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
     public function amocrm_v4_test(){
-
-        return new WP_REST_Response(['status' => 1], 200);
+        $email = getEmailFromOrder();
+        return new WP_REST_Response(['status' => 1, 'email' => $email], 200);
     }
 
 
