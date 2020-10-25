@@ -1,5 +1,6 @@
 <?php 
     $order = $args['order'];
+    var_dump($order['calendar']);
 ?>
 <table>
     <tbody>
