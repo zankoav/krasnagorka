@@ -286,7 +286,7 @@ function getCalendarId($calendarShortCode)
         return $message; 
     }
 
-    function getEmailFromOrder($orderId = '15618'){
-        $client = get_post_meta($orderId, ' sbc_order_client', 1);
+    function getEmailFromOrder($orderId){
+        $client = get_post_meta($orderId, 'sbc_order_client', 1);
         return $client;
     }

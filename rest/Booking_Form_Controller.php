@@ -1461,7 +1461,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
     public function amocrm_v4_test(){
-        $email = getEmailFromOrder();
+        $email = getEmailFromOrder('15618');
         return new WP_REST_Response(['status' => 1, 'email' => $email], 200);
     }
 
