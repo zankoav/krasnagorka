@@ -643,9 +643,30 @@ class Booking_Form_Controller extends WP_REST_Controller
         if($order['status'] === 2 and isset($order['orderId'])){
             $resultStatus = 502;
             // 2. Create At Amocrm Lead Id
-            // $leadId = $this->createLeadForPay($request, $order);
 
-            // if(isset($leadId)){
+            $leadData = [
+                'price' => $order['price'],
+                'peopleCount' => $request['count'],
+                'dateFrom' => $request['dateStart'],
+                'dateTo' => $request['dateEnd'],
+                'orderId' => $order['orderId'],
+                'calendarId' => $request['id'],
+                'comment' => $request['comment']
+            ];
+
+            $contactData = [
+                'contactName' => $request['fio'],
+                'contactPhone' => $request['phone'],
+                'contactEmail' => $request['email'],
+                'contactPassport' => $request['passport']
+            ];
+
+            $leadId = $this->initAmoCrmLead($leadData, $contactData);
+
+            if(isset($leadId)){
+
+                update_post_meta($order['orderId'], 'sbc_lead_id', $leadId);
+
                 $secret_key = '2091988';
                 $wsb_seed = strtotime("now");
                 $wsb_storeid = '515854557';
@@ -679,7 +700,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     ]
                 ];
                 $resultStatus = 200;
-            // }
+            }
         }
         return new WP_REST_Response($result, $resultStatus);
     }
@@ -815,16 +836,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         return $clientId;
     }
 
-    private function createLeadForPay($orderData, $orderId){
-        $leadId = null;
-        try{
-
-        }catch(Exception $e){
-            Logger::log("createLeadForPay Exception:".$e->getMessage());
-        }
-        return $leadId;
-    }
-    
     private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids){
         $calendars = [];
         $calendarObjectsReverse = [
@@ -1130,22 +1141,24 @@ class Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
+    private function initAmoCrmLead($leadData, $contactData){
+        $price = $leadData['price'];
+        $peopleCount = $leadData['peopleCount'];
+        $dateFrom = $leadData['dateFrom'];
+        $dateTo = $leadData['dateTo'];
+        $orderId = $leadData['orderId'];
+        $calendarId = $leadData['calendarId'];
+        $comment = $leadData['comment'];
 
-    public function amocrm_v4_test(){
+        $contactName =  $contactData['contactName'];
+        $contactPhone = $contactData['contactPhone'];
+        $contactEmail = $contactData['contactEmail'];
+        $contactPassport = $contactData['contactPassport'];
 
-        $price = 112; 
-        $peopleCount = 9;
-        $dateFrom = '2020-08-20';
-        $dateTo = '2020-08-23';
-        $orderId = 192;
-        $calendarId = 43;
-        $comment = 'Комментарий тестовый';
-
-        $contactName = 'Александр Занько';
-        $contactPhone = '+375295558386';
-        $contactEmail = 'zankoav@yandex.ru';
-        $contactPassport = 'GG Gl HF';
-
+        /**
+         * @var LeadModel $lead
+         */
+        $lead = null;
         try {
 
             $apiClient = $this->getAmoCrmApiClient();
@@ -1383,7 +1396,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions: '.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
         }
-        return new WP_REST_Response(['status' => 1], 200);
+        return $lead->getId();
     }
 
     private function getAmoCrmApiClient(){
@@ -1411,5 +1424,12 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         return $apiClient;
     }
+
+
+    public function amocrm_v4_test(){
+
+        return new WP_REST_Response(['status' => 1], 200);
+    }
+
 
 }

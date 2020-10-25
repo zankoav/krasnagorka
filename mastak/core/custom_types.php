@@ -1831,6 +1831,34 @@
 
     add_action('cmb2_admin_init', 'mastak_map_page');
 
+    function order_metabox() {
+        $prefix = 'order_';
+
+        /**
+         * Sample metabox to demonstrate each field type included
+         */
+        $sbc_client = new_cmb2_box(array(
+            'id'           => $prefix . 'data',
+            'title'        => esc_html__('AmoCRM Info', 'krasnagorka'),
+            'object_types' => array('sbc_orders'), // Post type
+            'context'      => 'normal',
+            'priority'     => 'high',
+            'show_names'   => true, // Show field names on the left
+        ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Lead ID',
+            'id'   => 'sbc_lead_id',
+            'type' => 'text_small',
+            'attributes' => array(
+				'readonly' => 'readonly'
+			)
+        ));
+
+    }
+
+    add_action('cmb2_admin_init', 'order_metabox');
+
 
     function show_house_options() {
 
