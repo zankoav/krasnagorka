@@ -718,14 +718,21 @@ class Booking_Form_Controller extends WP_REST_Controller
         if($_POST['transaction_id']){
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
         }
+        try{
+            Logger::log("Lead id:".$order['leadId']);
+            $this->updateAmoCrmLead($order['leadId']);
+        }catch(AmoCRMApiException $e){
+            Logger::log("AmoCRMApiException Exception:".$e->getTitle());
+        }
         
-        $this->updateAmoCrmLead($order['leadId']);
     }
 
     private function updateAmoCrmLead($leadId){
         if(!empty($leadId)){
             $apiClient = $this->getAmoCrmApiClient();
+            Logger::log("apiClient OK");
             $lead = $apiClient->leads()->getOne($leadId);
+            Logger::log("lead OK");
             $lead->setStatusId(35452474);
             $payedFieldValueModel = new NumericCustomFieldValuesModel();
             $payedFieldValueModel->setFieldId(282777);
