@@ -9,7 +9,7 @@
         width: 500px;
         font-size: 16px;
         border: 1px solid #ddd;
-        border-radius: 16px;
+        border-radius: 8px;
         border-spacing: 0;
         background-color: #fafafa;
     }
@@ -22,14 +22,11 @@
     }
 
     #check tr:first-child td{
-        background: #04a89f;
+        background: #1498c6;
         color: #fff;
         font-weight: 600;
-        border-radius: 12px;
-    }
-
-    #check td:first-child{
-        color: #555;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
 
     #check td:last-child{
@@ -40,6 +37,7 @@
         border-bottom: 1px solid #ddd;
         padding: 12px;
         text-align: left;
+        color: #555;
     }
 
     #check tr:last-child td {
