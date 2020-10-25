@@ -1855,6 +1855,15 @@
 			)
         ));
 
+        $sbc_client->add_field(array(
+            'name' => 'Webpay transaction ID',
+            'id'   => 'sbc_webpay_transaction_id',
+            'type' => 'text_small',
+            'attributes' => array(
+				'readonly' => 'readonly'
+			)
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'order_metabox');

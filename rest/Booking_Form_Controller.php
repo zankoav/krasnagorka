@@ -706,7 +706,6 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function pay_success($request){
-        Logger::log('pay_success:'.$_POST['site_order_id']);
         $order = $this->getOrderById($_POST['site_order_id']);
         $checkOutList = $this->generateMailCheckOut($order);
         wp_mail( 
@@ -716,6 +715,31 @@ class Booking_Form_Controller extends WP_REST_Controller
             'Успешная оплата в Красногорке', 
             $checkOutList 
         );
+        if($_POST['transaction_id']){
+            update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
+        }
+        
+        $this->updateAmoCrmLead($order['leadId']);
+    }
+
+    private function updateAmoCrmLead($leadId){
+        if(!empty($leadId)){
+            $apiClient = $this->getAmoCrmApiClient();
+            $lead = $apiClient->leads()->getOne($leadId);
+            $lead->setStatusId(35452474);
+            $payedFieldValueModel = new NumericCustomFieldValuesModel();
+            $payedFieldValueModel->setFieldId(282777);
+            $payedFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())->setValue(
+                        $lead->getPrice()
+                    )
+                )
+            );
+            $lead->getCustomFieldsValues()->add($orderIdFieldValueModel);
+
+            $apiClient->leads()->updateOne($lead);
+        }
     }
 
     private function generateMailCheckOut($order){
@@ -737,6 +761,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $order['start'] = get_post_meta($orderID, 'sbc_order_start', 1);
             $order['end'] = get_post_meta($orderID, 'sbc_order_end', 1);
             $order['price'] = get_post_meta($orderID, 'sbc_order_price', 1);
+            $order['leadId'] = get_post_meta($orderID, 'sbc_lead_id', 1);
             $order['email'] = 'zankoav@gmail.com';
         }catch(Exception $e){
             Logger::log("getOrderById Exception:".$e->getMessage());
