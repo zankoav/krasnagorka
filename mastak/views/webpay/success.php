@@ -1,6 +1,5 @@
 <?php 
     $order = $args['order'];
-    $order['house'] = 'Рыбацкий';
 ?>
 <table>
     <tbody>
@@ -9,7 +8,7 @@
         </tr>
         <tr>
             <td>Домик</td>
-            <td><?=$order['house']?></td>
+            <td><?=$order['calendar']?></td>
         </tr>
         <tr>
             <td>Дата заезда</td>
