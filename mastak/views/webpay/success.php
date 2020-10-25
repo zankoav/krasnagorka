@@ -17,18 +17,23 @@
     @media (max-width:768px){
         #check{
             width: 100%;
+            font-size: 14px;
         }
     }
 
     #check tr:first-child td{
         background: #04a89f;
         color: #fff;
-        font-weight: bold;
+        font-weight: 600;
         border-radius: 12px;
     }
 
     #check td:first-child{
         color: #555;
+    }
+
+    #check td:last-child{
+        font-weight: 600;
     }
 
     #check td {
