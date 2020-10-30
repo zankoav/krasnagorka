@@ -608,7 +608,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     private function updateAmoCrmLead($leadId, $orderId){
         if(!empty($leadId)){
-            $apiClient = $this->getAmoCrmApiClient();
+            $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
             $lead->setStatusId(35452474);
 
@@ -1090,7 +1090,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $lead = null;
         try {
 
-            $apiClient = $this->getAmoCrmApiClient();
+            $apiClient = self::getAmoCrmApiClient();
 
             $orderType = 'reserved';
             $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
@@ -1349,7 +1349,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         return $lead->getId();
     }
 
-    private function getAmoCrmApiClient(){
+    public static function getAmoCrmApiClient(){
 
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';

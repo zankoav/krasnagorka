@@ -308,9 +308,54 @@ class Model
     private function clearBookingAtAmoCRM($orderId){
         $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
+        if (class_exists('Booking_Form_Controller')){
+            $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
 
-        
+            try {
+                $task = $apiClient->tasks()->getOne($taskId);
+                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+                ->setText('Попытайтеся вернуть клиента на оплату')
+                ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($leadId)
+                ->setDuration(1 * 60 * 60) // 1 час
+                ->setResponsibleUserId(2373844);
 
+                $task = $apiClient->tasks()->updateOne($task);
+
+                $lead = $apiClient->leads()->getOne($leadId);
+                $leadCustomFields = new CustomFieldsValuesCollection();
+    
+                $typeFieldValueModel = new TextCustomFieldValuesModel();
+                $typeFieldValueModel->setFieldId(640633);
+                $typeFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                            ->setValue(null)
+                    )
+                );
+                $leadCustomFields->add($typeFieldValueModel);
+
+                $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+                $orderIdFieldValueModel->setFieldId(639191);
+                $orderIdFieldValueModel->setValues(
+                    (new NumericCustomFieldValueCollection())
+                        ->add((new NumericCustomFieldValueModel())
+                            ->setValue(null)
+                    )
+                );
+                $leadCustomFields->add($orderIdFieldValueModel);
+    
+    
+                $lead->setCustomFieldsValues($leadCustomFields);
+                $apiClient->leads()->updateOne($lead);
+
+            } catch (AmoCRMApiException $e) {
+                Logger::log("tasks exception:".$e->getMessage());
+            }
+        }else{
+            Logger::log("You are Here __DIR__" . __DIR__);
+        }
     }
 
     private function redirect_to_404()
