@@ -315,44 +315,44 @@ class Model
 
             try {
                 $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
+                Logger::log("You are Here __DIR__ rrr" . __DIR__);
+                // $task = $apiClient->tasks()->getOne($taskId);
+                // $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+                // ->setText('Попытайтеся вернуть клиента на оплату')
+                // ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                // ->setEntityType(EntityTypesInterface::LEADS)
+                // ->setEntityId($leadId)
+                // ->setDuration(1 * 60 * 60) // 1 час
+                // ->setResponsibleUserId(2373844);
 
-                $task = $apiClient->tasks()->getOne($taskId);
-                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-                ->setText('Попытайтеся вернуть клиента на оплату')
-                ->setCompleteTill(mktime(date("H"), date("i") + 30))
-                ->setEntityType(EntityTypesInterface::LEADS)
-                ->setEntityId($leadId)
-                ->setDuration(1 * 60 * 60) // 1 час
-                ->setResponsibleUserId(2373844);
+                // $task = $apiClient->tasks()->updateOne($task);
 
-                $task = $apiClient->tasks()->updateOne($task);
-
-                $lead = $apiClient->leads()->getOne($leadId);
-                $leadCustomFields = new CustomFieldsValuesCollection();
+                // $lead = $apiClient->leads()->getOne($leadId);
+                // $leadCustomFields = new CustomFieldsValuesCollection();
     
-                $typeFieldValueModel = new TextCustomFieldValuesModel();
-                $typeFieldValueModel->setFieldId(640633);
-                $typeFieldValueModel->setValues(
-                    (new TextCustomFieldValueCollection())
-                        ->add((new TextCustomFieldValueModel())
-                            ->setValue(null)
-                    )
-                );
-                $leadCustomFields->add($typeFieldValueModel);
+                // $typeFieldValueModel = new TextCustomFieldValuesModel();
+                // $typeFieldValueModel->setFieldId(640633);
+                // $typeFieldValueModel->setValues(
+                //     (new TextCustomFieldValueCollection())
+                //         ->add((new TextCustomFieldValueModel())
+                //             ->setValue(null)
+                //     )
+                // );
+                // $leadCustomFields->add($typeFieldValueModel);
 
-                $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
-                $orderIdFieldValueModel->setFieldId(639191);
-                $orderIdFieldValueModel->setValues(
-                    (new NumericCustomFieldValueCollection())
-                        ->add((new NumericCustomFieldValueModel())
-                            ->setValue(null)
-                    )
-                );
-                $leadCustomFields->add($orderIdFieldValueModel);
+                // $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+                // $orderIdFieldValueModel->setFieldId(639191);
+                // $orderIdFieldValueModel->setValues(
+                //     (new NumericCustomFieldValueCollection())
+                //         ->add((new NumericCustomFieldValueModel())
+                //             ->setValue(null)
+                //     )
+                // );
+                // $leadCustomFields->add($orderIdFieldValueModel);
     
     
-                $lead->setCustomFieldsValues($leadCustomFields);
-                $apiClient->leads()->updateOne($lead);
+                // $lead->setCustomFieldsValues($leadCustomFields);
+                // $apiClient->leads()->updateOne($lead);
 
             } catch (Exception $e) {
                 Logger::log("Exception:".$e->getMessage());
