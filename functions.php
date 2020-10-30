@@ -5,13 +5,13 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// use Backend\Assets;
-// use Backend\Model;
+use Backend\Assets;
+use Backend\Model;
 
 require __DIR__ . '/vendor/autoload.php';
 
 
-// require __DIR__ . '/backend/Logger.php';
+require __DIR__ . '/backend/Logger.php';
 // require __DIR__ . '/backend/Assets.php';
 // require __DIR__ . '/backend/Model.php';
 
