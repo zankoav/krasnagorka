@@ -299,7 +299,6 @@ class Model
         }catch(Exception $e){
             Logger::log("Exception: tryToClearOrder" .$orderId);
         }
-        Logger::log("tryToClearOrder: successfull" .$orderId);
     }
 
     private function redirect_to_404()

@@ -121,6 +121,7 @@ export default class BookingForm extends LightningElement {
                     this.dateTo = `${year}-${month}-${day}`;
                 },
             });
+            
         }
 		
 
@@ -144,7 +145,16 @@ export default class BookingForm extends LightningElement {
 			this.fio.value = this.fioValue;
 			this.phone.value = this.phoneValue;
 			this.email.value = this.emailValue;
-		}
+        }
+        
+        const url =  window.location.href
+            .split('&')
+            .filter(it => it.indexOf('clear=') === -1)
+            .join('&');
+
+        window.history.pushState({
+            id: this.objId
+        }, document.title, url);
     }
 
     renderedCallback(){
