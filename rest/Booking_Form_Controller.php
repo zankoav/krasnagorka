@@ -706,14 +706,11 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function pay_success($request){
-        Logger::log("site_order_id: ".$_POST['site_order_id']);
         $order = $this->getOrderById($_POST['site_order_id']);
-        Logger::log("email: ".$order['email']);
         ob_start();
         generateCheck($_POST['site_order_id']);
         $checkOutList = ob_get_contents();
         ob_end_clean();
-        Logger::log("checkOutList \n".$checkOutList);
         wp_mail( 
             [
                 $order['email']
@@ -752,6 +749,18 @@ class Booking_Form_Controller extends WP_REST_Controller
                 )
             );
             $leadCustomFields->add($payedFieldValueModel);
+
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue('booked')
+                )
+            );
+            $leadCustomFields->add($typeFieldValueModel);
+
+
             $lead->setCustomFieldsValues($leadCustomFields);
             $apiClient->leads()->updateOne($lead);
         }
@@ -1419,6 +1428,26 @@ class Booking_Form_Controller extends WP_REST_Controller
             $links->add($contact);
 
             $apiClient->leads()->link($lead, $links);
+
+            
+            //Создадим задачу
+            $tasksCollection = new TasksCollection();
+            $task = new TaskModel();
+            $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+                ->setText('Новая задач')
+                ->setCompleteTill(mktime(10, 0, 0, 10, 3, 2020))
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($lead->getId())
+                ->setDuration(30 * 60 * 60) //30 минут
+                ->setResponsibleUserId($contact->getId());
+            $tasksCollection->add($task);
+
+            try {
+                $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+                Logger::log('$tasksCollection : '.$tasksCollection->get(0)->getId());
+            } catch (AmoCRMApiException $e) {
+                Logger::log('Exceptions: '.$e->getTitle().' <<< tasksCollection >>> '.$e->getDescription());
+            }
 
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions: '.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
