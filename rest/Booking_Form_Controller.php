@@ -1442,7 +1442,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 ->setEntityType(EntityTypesInterface::LEADS)
                 ->setEntityId($lead->getId())
                 ->setDuration(30 * 60 * 60) //30 минут
-                ->setResponsibleUserId($contact->getId()); // 2373844
+                ->setResponsibleUserId(2373844);
             $tasksCollection->add($task);
 
             try {
