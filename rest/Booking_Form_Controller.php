@@ -1446,6 +1446,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $tasksCollection->add($task);
 
             try {
+                Logger::log('tasksCollection before OK!');
                 $tasksCollection = $apiClient->tasks()->add($tasksCollection);
                 Logger::log('tasksCollection OK!');
                 $taskToClose = $tasksCollection->first();
