@@ -727,14 +727,14 @@ class Booking_Form_Controller extends WP_REST_Controller
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
         }
         try{
-            $this->updateAmoCrmLead($order['leadId']);
+            $this->updateAmoCrmLead($order['leadId'], $_POST['site_order_id']);
         }catch(AmoCRMApiException $e){
             Logger::log("AmoCRMApiException Exception:".$e->getTitle());
         }
         
     }
 
-    private function updateAmoCrmLead($leadId){
+    private function updateAmoCrmLead($leadId, $orderId){
         if(!empty($leadId)){
             $apiClient = $this->getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
@@ -766,6 +766,24 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $lead->setCustomFieldsValues($leadCustomFields);
             $apiClient->leads()->updateOne($lead);
+
+
+            $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
+            try {
+                $task = $apiClient->tasks()->getOne($taskId);
+                $task->setTaskTypeId(925198)
+                ->setText('Клиент оплатил 100%')
+                ->setCompleteTill(mktime())
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($lead->getId())
+                ->setDuration(1 * 60 * 60) // 1 час
+                ->setResponsibleUserId(2373844);
+
+                $task = $apiClient->tasks()->updateOne($task);
+            } catch (AmoCRMApiException $e) {
+                Logger::log("tasks exception:".$e->getMessage());
+            }
+
         }
     }
 
@@ -1437,20 +1455,18 @@ class Booking_Form_Controller extends WP_REST_Controller
             $tasksCollection = new TasksCollection();
             $task = new TaskModel();
             $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-                ->setText('Новая задач')
+                ->setText('Помочь клиенту определиться с заказом')
                 ->setCompleteTill(mktime())
                 ->setEntityType(EntityTypesInterface::LEADS)
                 ->setEntityId($lead->getId())
-                ->setDuration(1 * 60 * 60) //30 * 60 * 60 --- 30 минут
+                ->setDuration(1 * 60 * 60) // 1 час
                 ->setResponsibleUserId(2373844);
             $tasksCollection->add($task);
 
             try {
-                Logger::log('tasksCollection before OK!');
                 $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-                Logger::log('tasksCollection OK!');
-                $taskToClose = $tasksCollection->first();
-                Logger::log('$tasksCollection : '.json_encode($taskToClose));
+                $taskToStore = $tasksCollection->first();
+                update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
             } catch (AmoCRMApiException $e) {
                 Logger::log('Exceptions: '.$e->getTitle().' <<< tasksCollection >>> '.$e->getDescription());
             }
