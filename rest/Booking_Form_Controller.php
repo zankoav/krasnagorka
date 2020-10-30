@@ -1447,7 +1447,9 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             try {
                 $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-                Logger::log('$tasksCollection : '.$tasksCollection->get(0)->getId());
+                Logger::log('tasksCollection OK!');
+                $taskToClose = $tasksCollection->first();
+                Logger::log('$tasksCollection : '.json_encode($taskToClose));
             } catch (AmoCRMApiException $e) {
                 Logger::log('Exceptions: '.$e->getTitle().' <<< tasksCollection >>> '.$e->getDescription());
             }
