@@ -572,7 +572,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                     ]
                 ];
                 $resultStatus = 200;
+                $result['status'] = 2;
             }
+        }else if($order['status'] === 1){
+            $resultStatus = 200;
+            $result['status'] = 1;
         }
         return new WP_REST_Response($result, $resultStatus);
     }

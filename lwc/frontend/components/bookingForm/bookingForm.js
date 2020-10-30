@@ -288,7 +288,6 @@ export default class BookingForm extends LightningElement {
                 })
             })
             .then(response => {
-                console.log('response', response);
                 return response.json();
             })
             .then(result => {
