@@ -293,13 +293,20 @@ export default class BookingForm extends LightningElement {
             })
             .then(result => {
                 console.log('result', result);
-                if(result){
-
+                if(result.status === 2){
                     generateAndSubmitForm(
                         'https://securesandbox.webpay.by/',
                         result.values,
                         result.names
                     );
+                }else if(result.status === 1){
+                    this.formMessageSuccess = null;
+                    this.formMessageError = `Извините! Данное предложение уже забронировано.`;
+                    this.isLoading = false;
+                }else{
+                    this.isLoading = false;
+                    this.formMessageSuccess = null;
+                    this.formMessageError = `Произошла системная ошибка, попробуйте позже`;
                 }
             })
             .catch(e => {
