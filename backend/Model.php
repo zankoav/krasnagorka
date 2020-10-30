@@ -272,9 +272,34 @@ class Model
                     ]
                 ];
             }
+
+            if(isset($_GET['clear'])){
+                $this->tryToClearOrder($_GET['clear']);
+            }
         }
 
         return json_encode($result);
+    }
+
+    private function tryToClearOrder($orderId){
+
+        try{
+            if (!empty($orderId)) {
+                $orderId = (int) $orderId;
+                delete_post_meta($orderId, 'sbc_order_client');
+                delete_post_meta($orderId, 'sbc_order_select');
+                delete_post_meta($orderId, 'sbc_order_start');
+                delete_post_meta($orderId, 'sbc_order_end');
+                delete_post_meta($orderId, 'sbc_order_price');
+                delete_post_meta($orderId, 'sbc_order_prepaid');
+                delete_post_meta($orderId, 'sbc_order_desc');
+    
+                wp_delete_post($orderId, true);
+            }
+        }catch(Exception $e){
+            Logger::log("Exception: tryToClearOrder" .$orderId);
+        }
+        Logger::log("tryToClearOrder: successfull" .$orderId);
     }
 
     private function redirect_to_404()

@@ -567,7 +567,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                         'wsb_invoice_item_price[0]' => $wsb_total,
                         'wsb_total' => $wsb_total,
                         'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success/',
-                        'wsb_cancel_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
                         'wsb_return_url' => "https://krasnagorka.by/payed-success",
                     ]
                 ];
