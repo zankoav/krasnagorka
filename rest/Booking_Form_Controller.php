@@ -46,7 +46,6 @@ use AmoCRM\Filters\CatalogElementsFilter;
 use AmoCRM\Models\CatalogElementModel;
 use AmoCRM\Models\CatalogModel;
 
-use AmoCRM\Helpers\EntityTypesInterface;
 use AmoCRM\Collections\NotesCollection;
 use AmoCRM\Models\NoteType\CommonNote;
 
