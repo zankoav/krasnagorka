@@ -7,6 +7,8 @@
  * Time: 9:27 AM
  */
 
+// require __DIR__ . '/../rest/Booking_Form_Controller.php';
+
 class Model
 {
 
@@ -308,11 +310,12 @@ class Model
     private function clearBookingAtAmoCRM($orderId){
         $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
-        Logger::log("You are Here __DIR__" . __DIR__);
-        if (class_exists('Booking_Form_Controller')){
-            $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
+        // Logger::log("You are Here __DIR__" . __DIR__);
+        // if (class_exists('Booking_Form_Controller')){
 
             try {
+                $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
+
                 $task = $apiClient->tasks()->getOne($taskId);
                 $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
                 ->setText('Попытайтеся вернуть клиента на оплату')
@@ -351,12 +354,12 @@ class Model
                 $lead->setCustomFieldsValues($leadCustomFields);
                 $apiClient->leads()->updateOne($lead);
 
-            } catch (AmoCRMApiException $e) {
-                Logger::log("tasks exception:".$e->getMessage());
+            } catch (Exception $e) {
+                Logger::log("Exception:".$e->getMessage());
             }
-        }else{
-            Logger::log("You are Here __DIR__" . __DIR__);
-        }
+        // }else{
+        //     Logger::log("You are Here __DIR__" . __DIR__);
+        // }
     }
 
     private function redirect_to_404()
