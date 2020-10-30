@@ -4,14 +4,20 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-require __DIR__ . '/backend/Logger.php';
-require __DIR__ . '/backend/Assets.php';
-require __DIR__ . '/backend/Model.php';
+
+// use Backend\Assets;
+// use Backend\Model;
+
+require __DIR__ . '/vendor/autoload.php';
+
+
+// require __DIR__ . '/backend/Logger.php';
+// require __DIR__ . '/backend/Assets.php';
+// require __DIR__ . '/backend/Model.php';
 
 $assets = new Assets();
 $model  = new Model();
 
-require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/token_actions.php';
 require __DIR__ . '/inc/calendar/init.php';
 require __DIR__ . '/mastak/init.php';

@@ -284,8 +284,9 @@ class Model
     private function tryToClearOrder($orderId){
 
         try{
-            if (!empty($orderId)) {
-                $orderId = (int) $orderId;
+            $orderId = (int) $orderId;
+            if (is_int($orderId) and $orderId != 0) {
+                
                 delete_post_meta($orderId, 'sbc_order_client');
                 delete_post_meta($orderId, 'sbc_order_select');
                 delete_post_meta($orderId, 'sbc_order_start');
@@ -293,12 +294,23 @@ class Model
                 delete_post_meta($orderId, 'sbc_order_price');
                 delete_post_meta($orderId, 'sbc_order_prepaid');
                 delete_post_meta($orderId, 'sbc_order_desc');
-    
+
+
+                $this->clearBookingAtAmoCRM($orderId);
+
                 wp_delete_post($orderId, true);
             }
         }catch(Exception $e){
             Logger::log("Exception: tryToClearOrder" .$orderId);
         }
+    }
+
+    private function clearBookingAtAmoCRM($orderId){
+        $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
+        $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
+
+        
+
     }
 
     private function redirect_to_404()

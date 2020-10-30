@@ -1,4 +1,9 @@
 {
+    "autoload":{
+        "psr-4":{
+            "Backend\\": "backend/"
+        }
+    },
     "require": {
         "amocrm/amocrm-api-library": "^0.2.7"
     }
