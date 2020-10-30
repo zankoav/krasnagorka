@@ -1438,11 +1438,11 @@ class Booking_Form_Controller extends WP_REST_Controller
             $task = new TaskModel();
             $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
                 ->setText('Новая задач')
-                ->setCompleteTill(mktime(10, 0, 0, 10, 3, 2020))
+                ->setCompleteTill(mktime(10, 0, 0, 10, 31, 2020))
                 ->setEntityType(EntityTypesInterface::LEADS)
                 ->setEntityId($lead->getId())
                 ->setDuration(30 * 60 * 60) //30 минут
-                ->setResponsibleUserId($contact->getId());
+                ->setResponsibleUserId($contact->getId()); // 2373844
             $tasksCollection->add($task);
 
             try {
