@@ -308,6 +308,7 @@ class Model
     private function clearBookingAtAmoCRM($orderId){
         $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
+        Logger::log("You are Here __DIR__" . __DIR__);
         if (class_exists('Booking_Form_Controller')){
             $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
 
