@@ -7,7 +7,21 @@
  * Time: 9:27 AM
  */
 
-// require __DIR__ . '/../rest/Booking_Form_Controller.php';
+use AmoCRM\Helpers\EntityTypesInterface;
+use AmoCRM\Collections\TasksCollection;
+use AmoCRM\Models\TaskModel;
+use AmoCRM\Exceptions\AmoCRMApiException;
+
+use AmoCRM\Collections\CustomFieldsValuesCollection;
+
+use AmoCRM\Models\CustomFieldsValues\TextCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\TextCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\TextCustomFieldValueModel;
+
+use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
+
 
 class Model
 {
@@ -310,56 +324,50 @@ class Model
     private function clearBookingAtAmoCRM($orderId){
         $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
-        // Logger::log("You are Here __DIR__" . __DIR__);
-        // if (class_exists('Booking_Form_Controller')){
 
-            try {
-                $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
-                Logger::log("You are Here __DIR__ rrr" . __DIR__);
-                // $task = $apiClient->tasks()->getOne($taskId);
-                // $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-                // ->setText('Попытайтеся вернуть клиента на оплату')
-                // ->setCompleteTill(mktime(date("H"), date("i") + 30))
-                // ->setEntityType(EntityTypesInterface::LEADS)
-                // ->setEntityId($leadId)
-                // ->setDuration(1 * 60 * 60) // 1 час
-                // ->setResponsibleUserId(2373844);
+        try {
+            $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
+            $task = $apiClient->tasks()->getOne($taskId);
+            $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+            ->setText('Попытайтеся вернуть клиента на оплату')
+            ->setCompleteTill(mktime(date("H"), date("i") + 30))
+            ->setEntityType(EntityTypesInterface::LEADS)
+            ->setEntityId($leadId)
+            ->setDuration(1 * 60 * 60) // 1 час
+            ->setResponsibleUserId(2373844);
 
-                // $task = $apiClient->tasks()->updateOne($task);
+            $task = $apiClient->tasks()->updateOne($task);
 
-                // $lead = $apiClient->leads()->getOne($leadId);
-                // $leadCustomFields = new CustomFieldsValuesCollection();
-    
-                // $typeFieldValueModel = new TextCustomFieldValuesModel();
-                // $typeFieldValueModel->setFieldId(640633);
-                // $typeFieldValueModel->setValues(
-                //     (new TextCustomFieldValueCollection())
-                //         ->add((new TextCustomFieldValueModel())
-                //             ->setValue(null)
-                //     )
-                // );
-                // $leadCustomFields->add($typeFieldValueModel);
+            $lead = $apiClient->leads()->getOne($leadId);
+            $leadCustomFields = new CustomFieldsValuesCollection();
 
-                // $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
-                // $orderIdFieldValueModel->setFieldId(639191);
-                // $orderIdFieldValueModel->setValues(
-                //     (new NumericCustomFieldValueCollection())
-                //         ->add((new NumericCustomFieldValueModel())
-                //             ->setValue(null)
-                //     )
-                // );
-                // $leadCustomFields->add($orderIdFieldValueModel);
-    
-    
-                // $lead->setCustomFieldsValues($leadCustomFields);
-                // $apiClient->leads()->updateOne($lead);
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                        ->setValue(null)
+                )
+            );
+            $leadCustomFields->add($typeFieldValueModel);
 
-            } catch (Exception $e) {
-                Logger::log("Exception:".$e->getMessage());
-            }
-        // }else{
-        //     Logger::log("You are Here __DIR__" . __DIR__);
-        // }
+            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            $orderIdFieldValueModel->setFieldId(639191);
+            $orderIdFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                        ->setValue(null)
+                )
+            );
+            $leadCustomFields->add($orderIdFieldValueModel);
+
+
+            $lead->setCustomFieldsValues($leadCustomFields);
+            $apiClient->leads()->updateOne($lead);
+
+        } catch (AmoCRMApiException $e) {
+            Logger::log("AmoCRMApiException:".$e->getMessage());
+        }
     }
 
     private function redirect_to_404()
