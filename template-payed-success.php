@@ -51,6 +51,11 @@
     
 
 ?>
+<style>
+strong {
+    font-weight: 700 !important;
+}
+</style>
 <div style="background:#f8f8f8;">
     <section class="b-container">
         <?= generateCheck($orderId, true);?>
