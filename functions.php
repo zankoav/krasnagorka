@@ -281,16 +281,19 @@ function getCalendarId($calendarShortCode)
     add_action( 'cmb2_after_form', 'change_ordered_color', 10, 2 );
     
 
-    function generateCheck($orderId){
+    function generateCheck($orderId, $isWebSite = false){
         $start = get_post_meta($orderId, 'sbc_order_start', 1);
         $end = get_post_meta($orderId, 'sbc_order_end', 1);
         $price = get_post_meta($orderId, 'sbc_order_price', 1);
+        $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
         $calendars  = get_the_terms( $orderId, 'sbc_calendars' );
+        $viewPath = $isWebSite ? "mastak/views/webpay/success" : "mastak/views/webpay/mail";
         $message = get_template_part("mastak/views/webpay/success", null, [
             'order' => [
                 'from' => date("d.m.Y", strtotime($start)),
                 'to' => date("d.m.Y", strtotime($end)),
                 'price' => $price,
+                'leadId' => $leadId,
                 'calendar' => $calendars[0]->name
             ]
         ]);

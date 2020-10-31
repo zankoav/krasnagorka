@@ -52,7 +52,7 @@
 
 ?>
     <section class="b-container b-py-2">
-        <?= generateCheck($_GET['wsb_order_num']);?>
+        <?= generateCheck($orderId, true);?>
     </section>
 
 <?php

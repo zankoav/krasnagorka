@@ -1,7 +1,6 @@
 <?php 
     $order = $args['order'];
 ?>
-
 <table 
  bgcolor="#f8f8f8"
  border="0"
