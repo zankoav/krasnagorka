@@ -35,6 +35,18 @@
     $youtobe           = $options['mastak_theme_options_youtube'];
     $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
 
+    $wsbId = $_GET['wsb_tid'];
+    $orderId = $_GET['wsb_order_num'];
+
+    $wsbIdStore = get_post_meta($orderId, 'sbc_webpay_transaction_id', 1);
+
+    if($wsbId != $wsbIdStore){
+        global $wp_query;
+        $wp_query->set_404();
+        status_header( 404 );
+        get_template_part( 404 ); 
+        exit();
+    }
 
 ?>
     <section class="b-container b-py-2">
