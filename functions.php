@@ -296,6 +296,8 @@ function getCalendarId($calendarShortCode)
         $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
         $fio = get_the_title($clientId);
 
+        $fio = explode("+", $fio);
+
         $message = get_template_part("mastak/views/webpay/success", null, [
             'order' => [
                 'created' => $created,
@@ -303,7 +305,7 @@ function getCalendarId($calendarShortCode)
                 'to' => date("d.m.Y", strtotime($end)),
                 'price' => $price,
                 'passport' => 'xxxxxxxxxxxxx',
-                'fio' => $fio,
+                'fio' => $fio[0],
                 'leadId' => $leadId,
                 'phone' => $phone,
                 'calendarName' => $calendars[0]->name,
