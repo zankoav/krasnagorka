@@ -36,7 +36,7 @@
                         <tr>
                             <td colspan="6" style="padding: 0 30px 20px; color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">Ваше бронирование:</div>
-                                <div>Номер бронирования: <strong>25831367</strong> от <strong>02.07.2020</strong></div>  
+                                <div>Номер бронирования: <strong><?=$order['leadId']?></strong> от <strong><?=$order['created']?></strong></div>  
                             </td>
                             
                         </tr>
@@ -54,22 +54,22 @@
                         <tr>
                             <td colspan="6" style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">Ваши даты:</div>
-                                <div>Заселение: <strong>18.07.2020</strong> 14:00 – 22:00</div> 
-                                <div>Выселение: <strong>22.07.2020</strong> 07:00 – 12:00</div> 
+                                <div>Заселение: <strong><?=$order['from']?></strong> 14:00 – 22:00</div> 
+                                <div>Выселение: <strong><?=$order['to']?></strong> 07:00 – 12:00</div> 
                             </td>
                         </tr>
                         <tr>
                             <td colspan="6" style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">Информация об объектах размещения:</div>
-                                <div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;" href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/terem/">Терем</a></div> 
+                                <div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;" href="<?=$order['calendarLink']?>"><?=$order['calendarName']?></a></div> 
                             </td>
                         </tr>
                         <tr>
                             <td colspan="6" style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">Персональные данные  клиента:</div>
-                                <div>ФИО: <strong>Ненартович Алеся Ивановна</strong></div>
-                                <div>Паспорт ID: <strong>4250486К019РВ7</strong></div>
-                                <div>Контактный номер телефона: <strong>+375 29 289-24-52</strong></div>
+                                <div>ФИО: <strong><?=$order['fio']?></strong></div>
+                                <div>Паспорт ID: <strong><?=$order['passport']?></strong></div>
+                                <div>Контактный номер телефона: <strong><?=$order['phone']?></strong></div>
                                 <div>Число гостей: <strong>3</strong></div>
                                 <div>Взрослых: <strong>3</strong></div>
                                 <div>Ребенок до 10 лет с предоставлением спального места: <strong>0</strong></div>
@@ -79,9 +79,9 @@
                         <tr>
                             <td colspan="6" style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">Оплата:</div>
-                                <div>Общая стоимость: <strong>480</strong> белорусских рублей.</div>
+                                <div>Общая стоимость: <strong><?=$order['price']?></strong> белорусских рублей.</div>
                                 <div>В стоимость не включаются комиссии платежных систем, туристический сбор не требуется
-                                <div>Предоплата вносится в размере 480  белорусских рублей</div>
+                                <div>Предоплата вносится в размере <?=$order['price']?>  белорусских рублей</div>
                                 <div><small style="color:#999;"><span style="color:#f00;">*</span> Оставшаяся часть стоимости (если таковая имеется) вносится в полном объеме перед заселением наличными денежными средствами в белорусских рублях.</small></div>
                             </td>
                         </tr>

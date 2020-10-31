@@ -282,19 +282,32 @@ function getCalendarId($calendarShortCode)
     
 
     function generateCheck($orderId, $isWebSite = false){
+        $created = get_the_date("d.m.Y", $orderId);
         $start = get_post_meta($orderId, 'sbc_order_start', 1);
         $end = get_post_meta($orderId, 'sbc_order_end', 1);
         $price = get_post_meta($orderId, 'sbc_order_price', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
         $calendars  = get_the_terms( $orderId, 'sbc_calendars' );
         $viewPath = $isWebSite ? "mastak/views/webpay/success" : "mastak/views/webpay/mail";
+
+        $client = get_post_meta($orderId, 'sbc_order_client', 1);
+        $pieces = explode(" ", $client);
+        $clientId = $pieces[0];
+        $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
+        $fio = get_the_title($clientId);
+
         $message = get_template_part("mastak/views/webpay/success", null, [
             'order' => [
+                'created' => $created,
                 'from' => date("d.m.Y", strtotime($start)),
                 'to' => date("d.m.Y", strtotime($end)),
                 'price' => $price,
+                'passport' => 'xxxxxxxxxxxxx',
+                'fio' => $fio,
                 'leadId' => $leadId,
-                'calendar' => $calendars[0]->name
+                'phone' => $phone,
+                'calendarName' => $calendars[0]->name,
+                'calendarLink' => 'https://krasnagorka.by/dom-na-braslavskih-ozyorah/'
             ]
         ]);
         return $message; 
