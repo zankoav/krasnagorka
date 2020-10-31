@@ -51,10 +51,11 @@
     
 
 ?>
+<div style="background:#f8f8f8;">
     <section class="b-container b-py-2">
         <?= generateCheck($orderId, true);?>
     </section>
-
+</div>
 <?php
 
     get_template_part("mastak/views/reviews", "view");
