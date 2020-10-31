@@ -446,7 +446,7 @@
 		}else if ( is_404() ) {
             return get_option( 'mastak_theme_options' )['bgimage_404_id'];
 		} else if ( is_page_template('template-payed-success.php') ) {
-			get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
+			return get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
 		}  else {
             return null;
 		}
