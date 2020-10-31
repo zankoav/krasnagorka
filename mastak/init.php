@@ -445,7 +445,9 @@
             return get_post_thumbnail_id();
 		}else if ( is_404() ) {
             return get_option( 'mastak_theme_options' )['bgimage_404_id'];
-		} else {
+		} else if ( is_page_template('template-payed-success.php') ) {
+			get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
+		}  else {
             return null;
 		}
 	}
@@ -496,6 +498,10 @@
 		} else if ( is_404() ) {
 			echo '<h1 class="main-slide__slide-content-title">',
             get_option( 'mastak_theme_options' )['title_404'],
+			'</h1>';
+		} else if ( is_page_template('template-payed-success.php') ) {
+			echo '<h1 class="main-slide__slide-content-title">',
+            'Ваше бронирование',
 			'</h1>';
 		} else {
 			echo '<h2 class="main-slide__slide-content-title">',
