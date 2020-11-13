@@ -70,6 +70,11 @@
     foreach ($items as $item) :
 
         $from = $item['from'];
+
+        if(date("Ymd", strtotime($from)) <  date("Ymd")){
+            continue;
+        }
+
         $to = $item['to'];
         $calendarId = $item['calendar'];
 
