@@ -67,13 +67,6 @@
     
     $items = sort_nested_arrays($items);
 
-    var_dump($items);
-    // function cmpItems($a, $b) {
-    //     return strcmp($a['from'], $b['from']);
-    // }
-
-    // usort($items, "cmpItems");
-
     foreach ($items as $item) :
 
         $from = $item['from'];
