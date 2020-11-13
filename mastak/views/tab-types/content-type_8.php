@@ -43,12 +43,36 @@
 <div class="accordion-mixed__content-inner">
     <?php 
     $items = $tab->getItems();
-    
-    function cmpItems($a, $b) {
-        return strcmp($a['from'], $b['from']);
-    }
 
-    usort($items, "cmpItems");
+    function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc') ){
+        usort( $array, function( $a, $b ) use ( $args ){
+            $res = 0;
+    
+            $a = (object) $a;
+            $b = (object) $b;
+    
+            foreach( $args as $k => $v ){
+                if( $a->$k == $b->$k ) continue;
+    
+                $res = ( $a->$k < $b->$k ) ? -1 : 1;
+                if( $v=='desc' ) $res= -$res;
+                break;
+            }
+    
+            return $res;
+        } );
+    
+        return $array;
+    }
+    
+    $items = sort_nested_arrays($items);
+
+    var_dump($items);
+    // function cmpItems($a, $b) {
+    //     return strcmp($a['from'], $b['from']);
+    // }
+
+    // usort($items, "cmpItems");
 
     foreach ($items as $item) :
 
