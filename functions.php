@@ -241,6 +241,8 @@ function getCalendarId($calendarShortCode)
             $calendarId = $postItem['calendar'];
             if($status = getOrderStatus($calendarId, $from, $to)){
                 $ids[$index] = ['calendar'=>$calendarId ,'status'=>$status];
+            }else if(date("Ymd", strtotime($from)) <  date("Ymd")){
+                $ids[$index] = ['calendar'=>$calendarId ,'status'=>'expired'];
             }
             $index ++;
         }
@@ -258,6 +260,10 @@ function getCalendarId($calendarShortCode)
 
     .bgc-booked {
         background-color: #fdb7ce !important;
+    }
+
+    .bgc-expired {
+        background-color: #72777c !important;
     }
 </style>
 <script type="text/javascript">
