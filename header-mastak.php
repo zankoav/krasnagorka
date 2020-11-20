@@ -199,6 +199,20 @@ if (!defined('ABSPATH')) {
 		}
 	</style>
 
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(37788340, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true,
+                ecommerce:"dataLayer"
+        });
+    </script>
 </head>
 <?php $bg_gray =
 	(is_page_template("template-mastak-prices.php")
@@ -211,6 +225,8 @@ if (!defined('ABSPATH')) {
 ?>
 
 <body <?php body_class($bg_gray); ?>>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 	<div id="kg-loader" class="kg-loader">
 		<img src="/wp-content/themes/krasnagorka/assets/images/logoKG.png" alt="spinner" class="kg-loader__img">
 	</div>
