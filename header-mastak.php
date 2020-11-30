@@ -13,6 +13,8 @@ if (!defined('ABSPATH')) {
 	<title><?= presscore_blog_title(); ?></title>
 	<meta name="keywords" content="<?= mastak_seo_meta_title(); ?>" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="preload" as="font" type="font/woff" crossorigin href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Regular.a81229.woff" />
+	<link rel="preload" as="font" type="font/woff" crossorigin href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Bold.2dcf23.woff" />
 	<link rel="preload" as="font" type="font/ttf" crossorigin href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Bold.cb5f2e.ttf" />
 	<link rel="preload" as="font" type="font/ttf" crossorigin href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Regular.97b615.ttf" />
 	<link rel="preload" as="font" type="font/woff" crossorigin href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-UltraLight.decf85.woff" />
