@@ -231,7 +231,7 @@ if (!defined('ABSPATH')) {
     <noscript><div><img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
 	<div id="kg-loader" class="kg-loader">
-		<img src="/wp-content/themes/krasnagorka/assets/images/logoKG.png" alt="spinner" class="kg-loader__img">
+		<img src="/wp-content/themes/krasnagorka/assets/images/<?= wp_is_mobile() ? "logoKG-xs.png" : "logoKG.png"; ?>" alt="spinner" class="kg-loader__img">
 	</div>
 	<noscript>
 		<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1020781118034010&ev=PageView&noscript=1" />

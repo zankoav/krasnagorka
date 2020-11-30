@@ -361,7 +361,6 @@ if (is_page_template("template-mastak-map.php")) : ?>
 
     var cid = getCookie("_ga");
     cid = cid.replace(/GA1.2./g, '');
-    //console.log(cid);
     jQuery('[name="user-cid"]').val(cid);
 </script>
 
