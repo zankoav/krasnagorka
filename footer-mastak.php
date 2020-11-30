@@ -242,7 +242,7 @@ if (is_page_template("template-mastak-map.php")) : ?>
 
             setTimeout(function() {
                 initialize();
-            }, 3000);
+            }, 5000);
 
             // google.maps.event.addDomListener(window, 'load', initialize);
         }
