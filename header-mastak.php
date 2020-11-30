@@ -13,9 +13,9 @@ if (!defined('ABSPATH')) {
 	<title><?= presscore_blog_title(); ?></title>
 	<meta name="keywords" content="<?= mastak_seo_meta_title(); ?>" />
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
-	<link rel="preload" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Bold.cb5f2e.ttf" />
-	<link rel="preload" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Regular.97b615.ttf" />
-	<link rel="preload" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-UltraLight.decf85.woff" />
+	<link rel="preload" as="font" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Bold.cb5f2e.ttf" />
+	<link rel="preload" as="font" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-Regular.97b615.ttf" />
+	<link rel="preload" as="font" href="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/src/fonts/AvenirNextCyr-UltraLight.decf85.woff" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<?php wp_head(); ?>
