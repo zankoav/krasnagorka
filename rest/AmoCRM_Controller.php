@@ -86,6 +86,8 @@ class AmoCRM_Controller extends WP_REST_Controller
     public function change_contact($request)
     {
         LS_WP_Logger::info('request: ' . json_encoded($request));
+
+        return new WP_REST_Response(['status' => 1], 200);
     }
 
 }
