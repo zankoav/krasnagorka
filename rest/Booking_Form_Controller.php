@@ -150,8 +150,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         register_rest_route($namespace, $webhook_path, [
             array(
                 'methods'             => 'GET',
-                'callback'            => array($this, 'change_contact'),
-                'permission_callback' => array($this, 'change_contact_permissions_check')
+                'callback'            => array($this, 'change_contact')
             ),
         ]);
     }
@@ -186,16 +185,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         return true;
     }
 
-    public function change_contact_permissions_check($request)
-    {
-        return true;
-    }
-
     public function change_contact($request)
     {
-        LS_WP_Logger::info('request: ' . json_encoded($request));
-
-        return new WP_REST_Response(['status' => 1], 200);
+        LS_WP_Logger::info('request:');
     }
 
     /**
