@@ -187,7 +187,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function change_contact($request)
     {
-        LS_WP_Logger::info('request: ' . json_encode($_GET) . ' , ' . json_encode($request));
+        LS_WP_Logger::info('request: ' . json_encode($request));
     }
 
     /**
