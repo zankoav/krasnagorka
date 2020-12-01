@@ -144,6 +144,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'amocrm_v4_permissions_check')
             ),
         ]);
+
+        $webhook_path      = '/amocrm-webhook/';
+
+        register_rest_route($namespace, $webhook_path, [
+            array(
+                'methods'             => 'GET',
+                'callback'            => array($this, 'change_contact'),
+                'permission_callback' => array($this, 'change_contact_permissions_check')
+            ),
+        ]);
     }
 
     public function create_order_permissions_check($request)
@@ -174,6 +184,18 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function pay_success_permissions_check($request)
     {
         return true;
+    }
+
+    public function change_contact_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function change_contact($request)
+    {
+        LS_WP_Logger::info('request: ' . json_encoded($request));
+
+        return new WP_REST_Response(['status' => 1], 200);
     }
 
     /**
