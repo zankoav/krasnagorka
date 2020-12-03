@@ -10,6 +10,7 @@ use AmoCRM\Models\TagModel;
 use AmoCRM\Filters\ContactsFilter;
 use AmoCRM\Models\ContactModel;
 use AmoCRM\Collections\LinksCollection;
+use AmoCRM\Collections\ContactsCollection;
 
 use AmoCRM\Helpers\EntityTypesInterface;
 use AmoCRM\Collections\TasksCollection;
