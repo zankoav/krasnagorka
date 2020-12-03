@@ -120,4 +120,4 @@ function refreshToken(){
     var_dump($response);
 }
 
-refreshToken();
+// refreshToken();
