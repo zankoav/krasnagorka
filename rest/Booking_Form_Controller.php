@@ -225,7 +225,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 LS_WP_Logger::info('leads: '. json_encode($leads));    
                 $counter = 0;
                 foreach ($leads as $l) {
-                    if($l['status_id'] == 142){
+                    if($l['status_id'] == 143){
                         $counter ++;
                     }
                 }
