@@ -245,8 +245,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                     LS_WP_Logger::info('OK 1 !!! '); 
                     $contact = $apiClient->contacts()->updateOne($contact);
                     LS_WP_Logger::info('OK 2 !!! ');   
-                }else{
-                    LS_WP_Logger::error('counter: ' . $counter);   
                 }
                 
             }
