@@ -225,13 +225,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                 LS_WP_Logger::info('leads: '. json_encode($leads));    
                 $counter = 0;
                 foreach ($leads as $l) {
-                    if($l['status_id'] == 143){
+                    if($l['status_id'] == 142){
                         $counter ++;
                     }
                 }
                 if($counter > 2){
-                    LS_WP_Logger::info('OK 1 !!! ');                    
                     $contactCustomFields = new CustomFieldsValuesCollection();
+
                     $typeFieldValueContact = new SelectCustomFieldValuesModel();
                     $typeFieldValueContact->setFieldId(72295);
                     $typeFieldValueContact->setValues(
@@ -242,9 +242,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                     );
                     $contactCustomFields->add($typeFieldValueContact);
                     $contact->setCustomFieldsValues($contactCustomFields);
-                    LS_WP_Logger::info('OK 2 !!! '); 
-                    $apiClient->contacts()->updateOne($contact);
-                    LS_WP_Logger::info('OK 3 !!! ');   
+                    LS_WP_Logger::info('OK 1 !!! '); 
+                    $contact = $apiClient->contacts()->updateOne($contact);
+                    LS_WP_Logger::info('OK 2 !!! ');   
                 }else{
                     LS_WP_Logger::error('counter: ' . $counter);   
                 }
