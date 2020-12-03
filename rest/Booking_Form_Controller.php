@@ -198,19 +198,21 @@ class Booking_Form_Controller extends WP_REST_Controller
         //Получим сделку
         try {
             $apiClient = self::getAmoCrmApiClient();
-            LS_WP_Logger::info('AmoCRMApiException: ' . $e);
-            LS_WP_Logger::info('Id: ' . $_POST['leads']['status'][0]['id']);
-            //$lead = $apiClient->leads()->getOne(1, [LeadModel::CONTACTS, LeadModel::CATALOG_ELEMENTS]);
+            LS_WP_Logger::info('leadId: ' . $_POST['leads']['status'][0]['id']);
+            $lead = $apiClient->leads()->getOne($_POST['leads']['status'][0]['id'], [LeadModel::CONTACTS, LeadModel::CATALOG_ELEMENTS]);
+
+            //Получим основной контакт сделки
+            /** @var ContactsCollection $leadContacts */
+            $leadContacts = $lead->getContacts();
+            if ($leadContacts) {
+                $leadMainContact = $leadContacts->getBy('isMain', true);
+                LS_WP_Logger::info('leadMainContact: ' . $leadMainContact->getName());
+            }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
         }
 
-        //Получим основной контакт сделки
-        /** @var ContactsCollection $leadContacts */
-        // $leadContacts = $lead->getContacts();
-        // if ($leadContacts) {
-        //     $leadMainContact = $leadContacts->getBy('isMain', true);
-        // }
+        
 
         
     }
