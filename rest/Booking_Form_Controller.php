@@ -1400,9 +1400,9 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public static function getAmoCrmApiClient(){
 
-        $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
-        $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
-        $redirectUri = 'https://krasnagorka.by';
+        $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
+        $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
+        $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
     
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $accessToken = getToken();
