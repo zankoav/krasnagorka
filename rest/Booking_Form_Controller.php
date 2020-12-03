@@ -231,11 +231,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if($counter > 2){
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $typeFieldValueContact = new SelectCustomFieldValuesModel();
-                    $typeFieldValueContact->setEnumId(72295);
+                    $typeFieldValueContact->setFieldId(72295);
                     
                     $tCollection = new SelectCustomFieldValueCollection();
                     $tModel = new SelectCustomFieldValueModel();
-                    $tModel->setValue(149825);
+                    $tModel->setEnumId(149825);
+                    // $tModel->setValue(149825);
                     $tCollection->add($tModel);
                     $typeFieldValueContact->setValues($tCollection);
                     // $typeFieldValueContact->setValues(
