@@ -1,19 +1,938 @@
-21.10.2020 09:05:13 pay_success:176933
-21.10.2020 09:20:00 pay_success:15608
-21.10.2020 16:54:22 pay_success:15611
-22.10.2020 11:34:07 before auth:
-22.10.2020 11:34:08 after auth:
-22.10.2020 11:34:08 before lead add:
-22.10.2020 11:34:08 lead add:27272039
-22.10.2020 11:34:08 calendarId = 17
-22.10.2020 11:34:08 catalog link:1036665
-22.10.2020 11:34:08 Before get contact by phone:+375 29 608-72-52
-22.10.2020 11:34:09 Finded contact:pracuchok@gmail.com
-22.10.2020 11:34:09 Update contact:pracuchok@gmail.com
-22.10.2020 11:34:09 comment text = Домик: Приозерный
-Количество человек: 6
+30.10.2020 18:02:01 tasksCollection before OK!
+30.10.2020 18:02:01 tasksCollection OK!
+30.10.2020 18:02:01 $tasksCollection : {}
+30.10.2020 18:16:27 tasksCollection before OK!
+30.10.2020 18:16:27 tasksCollection OK!
+30.10.2020 18:16:27 $tasksCollection : {}
+30.10.2020 19:31:45 tryToClearOrder: successfull15673
+30.10.2020 19:32:18 tryToClearOrder: successfull15673
+30.10.2020 20:18:07 You are Here __DIR__/home/krasnago/public_html/wp-content/themes/krasnagorka/backend
+30.10.2020 20:23:40 You are Here __DIR__ rrr/home/krasnago/public_html/wp-content/themes/krasnagorka/backend
+30.10.2020 20:27:03 AmoCRMApiException:Invalid http status
+01.11.2020 07:21:06 before auth:
+01.11.2020 07:21:06 after auth:
+01.11.2020 07:21:06 before lead add:
+01.11.2020 07:21:06 lead add:27393683
+01.11.2020 07:21:06 calendarId = null
+01.11.2020 07:21:06 Before get contact by phone:+375 29 569-99-14
+01.11.2020 07:21:07 Not find contact:dasha_r-08@mail.ru
+01.11.2020 07:21:07 Added new contact:dasha_r-08@mail.ru
+01.11.2020 07:21:07 comment text = Мероприятие: Новый год в Красногорке
+Количество человек: 3
+Паспорт №: 4090291B017PB2
+Комментарий: 2 взрослых 1 ребёнок 9лет
+01.11.2020 07:21:07 Note instance:Мероприятие: Новый год в Красногорке
+Количество человек: 3
+Паспорт №: 4090291B017PB2
+Комментарий: 2 взрослых 1 ребёнок 9лет
+01.11.2020 13:18:16 before auth:
+01.11.2020 13:18:17 after auth:
+01.11.2020 13:18:17 before lead add:
+01.11.2020 13:18:17 lead add:27396519
+01.11.2020 13:18:17 calendarId = 20
+01.11.2020 13:18:17 catalog link:1036657
+01.11.2020 13:18:17 Before get contact by phone:+375 29 569-99-14
+01.11.2020 13:18:19 Finded contact:dasha_r-08@mail.ru
+01.11.2020 13:18:20 Update contact:dasha_r-08@mail.ru
+01.11.2020 13:18:20 comment text = Домик: Терем 3
+Количество человек: 3
+Паспорт №: 4090291B017PB2
+Комментарий: 2взрослых 1 ребёнок 9лет
+01.11.2020 13:18:21 Note instance:Домик: Терем 3
+Количество человек: 3
+Паспорт №: 4090291B017PB2
+Комментарий: 2взрослых 1 ребёнок 9лет
+02.11.2020 11:29:21 before auth:
+02.11.2020 11:29:21 after auth:
+02.11.2020 11:29:21 before lead add:
+02.11.2020 11:29:22 lead add:27408713
+02.11.2020 11:29:22 calendarId = 18
+02.11.2020 11:29:22 catalog link:1036661
+02.11.2020 11:29:22 Before get contact by phone:+375 44 538-19-11
+02.11.2020 11:29:22 Finded contact:zelenko.o@yandex.ru
+02.11.2020 11:29:23 Update contact:zelenko.o@yandex.ru
+02.11.2020 11:29:23 comment text = Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3240771A073PB6
 
-22.10.2020 11:34:09 Note instance:Домик: Приозерный
-Количество человек: 6
+02.11.2020 11:29:23 Note instance:Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3240771A073PB6
 
-22.10.2020 17:55:25 Exceptions:{"hint":"Token has expired","title":"Некорректный запрос","type":"https://developers.amocrm.ru/v3/errors/OAuthProblemJson","status":401,"detail":"В запросе отсутствует ряд параметров или параметры невалидны"} <<< addOne lead >>> 
+02.11.2020 11:50:19 before auth:
+02.11.2020 11:50:19 after auth:
+02.11.2020 11:50:19 before lead add:
+02.11.2020 11:50:19 lead add:27408939
+02.11.2020 11:50:19 calendarId = 13
+02.11.2020 11:50:20 catalog link:1036583
+02.11.2020 11:50:20 Before get contact by phone:+375 29 331-70-34
+02.11.2020 11:50:20 Finded contact:3963111@gmail.com
+02.11.2020 11:50:20 Update contact:3963111@gmail.com
+02.11.2020 11:50:20 comment text = Домик: Рыбацкий
+Количество человек: 4
+Комментарий: Забронируйте для нас на эти дни лодку казанку
+02.11.2020 11:50:20 Note instance:Домик: Рыбацкий
+Количество человек: 4
+Комментарий: Забронируйте для нас на эти дни лодку казанку
+03.11.2020 08:13:26 before auth:
+03.11.2020 08:13:26 after auth:
+03.11.2020 08:13:26 before lead add:
+03.11.2020 08:13:27 lead add:27416921
+03.11.2020 08:13:27 calendarId = 20
+03.11.2020 08:13:27 catalog link:1036657
+03.11.2020 08:13:27 Before get contact by phone:+375 44 749-97-77
+03.11.2020 08:13:27 Finded contact:eugene.kunda@gmail.com
+03.11.2020 08:13:28 Update contact:eugene.kunda@gmail.com
+03.11.2020 08:13:28 comment text = Домик: Терем 3
+Количество человек: 2
+Паспорт №: 3291086A070PB4
+
+03.11.2020 08:13:28 Note instance:Домик: Терем 3
+Количество человек: 2
+Паспорт №: 3291086A070PB4
+
+04.11.2020 11:01:40 before auth:
+04.11.2020 11:01:41 after auth:
+04.11.2020 11:01:41 before lead add:
+04.11.2020 11:01:41 lead add:27430629
+04.11.2020 11:01:41 calendarId = 21
+04.11.2020 11:01:42 catalog link:1036655
+04.11.2020 11:01:42 Before get contact by phone:+375 29 328-20-54
+04.11.2020 11:01:42 Finded contact:artsiom.rysiuk@gmail.com
+04.11.2020 11:01:43 Update contact:artsiom.rysiuk@gmail.com
+04.11.2020 11:01:43 comment text = Домик: Терем 4
+Количество человек: 2
+Паспорт №: 3160191A033PB1
+
+04.11.2020 11:01:43 Note instance:Домик: Терем 4
+Количество человек: 2
+Паспорт №: 3160191A033PB1
+
+04.11.2020 12:14:55 before auth:
+04.11.2020 12:14:56 after auth:
+04.11.2020 12:14:56 before lead add:
+04.11.2020 12:14:56 lead add:27431871
+04.11.2020 12:14:56 calendarId = 18
+04.11.2020 12:14:56 catalog link:1036661
+04.11.2020 12:14:56 Before get contact by phone:+375 33 645-24-35
+04.11.2020 12:14:56 Finded contact:evaeva3000@mail.ru
+04.11.2020 12:14:57 Update contact:evaeva3000@mail.ru
+04.11.2020 12:14:57 comment text = Домик: Терем 1
+Количество человек: 2
+Паспорт №: 4200589B035PB1
+
+04.11.2020 12:14:57 Note instance:Домик: Терем 1
+Количество человек: 2
+Паспорт №: 4200589B035PB1
+
+05.11.2020 06:28:14 before auth:
+05.11.2020 06:28:15 after auth:
+05.11.2020 06:28:15 before lead add:
+05.11.2020 06:28:15 lead add:27437179
+05.11.2020 06:28:15 calendarId = 
+05.11.2020 06:28:15 Before get contact by phone:+375 29 210-14-53
+05.11.2020 06:28:16 Finded contact:pretty.lesenka@mail.ru
+05.11.2020 06:28:16 Update contact:pretty.lesenka@mail.ru
+05.11.2020 06:28:16 comment text = Комментарий: Терем 2 
+заезд с 06.11.2020 по 08.11.2020 
+3 человека
+05.11.2020 06:28:16 Note instance:Комментарий: Терем 2 
+заезд с 06.11.2020 по 08.11.2020 
+3 человека
+05.11.2020 07:52:50 before auth:
+05.11.2020 07:52:51 after auth:
+05.11.2020 07:52:51 before lead add:
+05.11.2020 07:52:51 lead add:27438335
+05.11.2020 07:52:51 calendarId = 22
+05.11.2020 07:52:52 catalog link:1036653
+05.11.2020 07:52:52 Before get contact by phone:+375 29 667-27-23
+05.11.2020 07:52:52 Finded contact:akavalchuk@gmail.com
+05.11.2020 07:52:52 Update contact:akavalchuk@gmail.com
+05.11.2020 07:52:52 comment text = Домик: Терем 5
+Количество человек: 2
+
+05.11.2020 07:52:52 Note instance:Домик: Терем 5
+Количество человек: 2
+
+05.11.2020 09:47:12 before auth:
+05.11.2020 09:47:12 after auth:
+05.11.2020 09:47:12 before lead add:
+05.11.2020 09:47:13 lead add:27440159
+05.11.2020 09:47:13 calendarId = 18
+05.11.2020 09:47:13 catalog link:1036661
+05.11.2020 09:47:13 Before get contact by phone:+375 29 690-65-42
+05.11.2020 09:47:13 Finded contact:commerce@mazut.by
+05.11.2020 09:47:13 Update contact:commerce@mazut.by
+05.11.2020 09:47:13 comment text = Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3160377Н004РВ0
+
+05.11.2020 09:47:14 Note instance:Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3160377Н004РВ0
+
+05.11.2020 14:50:05 before auth:
+05.11.2020 14:50:06 after auth:
+05.11.2020 14:50:06 before lead add:
+05.11.2020 14:50:07 lead add:27444697
+05.11.2020 14:50:07 calendarId = 17
+05.11.2020 14:50:07 catalog link:1036665
+05.11.2020 14:50:07 Before get contact by phone:+375 29 787-90-71
+05.11.2020 14:50:08 Finded contact:jkockaja@gmail.com
+05.11.2020 14:50:08 Update contact:jkockaja@gmail.com
+05.11.2020 14:50:08 comment text = Домик: Приозерный
+Количество человек: 5
+
+05.11.2020 14:50:08 Note instance:Домик: Приозерный
+Количество человек: 5
+
+06.11.2020 08:38:59 before auth:
+06.11.2020 08:39:00 after auth:
+06.11.2020 08:39:00 before lead add:
+06.11.2020 08:39:00 lead add:27450737
+06.11.2020 08:39:00 calendarId = 22
+06.11.2020 08:39:00 catalog link:1036653
+06.11.2020 08:39:00 Before get contact by phone:+375 29 382-65-57
+06.11.2020 08:39:01 Finded contact:pochtamarii@mail.ru
+06.11.2020 08:39:01 Update contact:pochtamarii@mail.ru
+06.11.2020 08:39:01 comment text = Домик: Терем 5
+Количество человек: 3
+Паспорт №: 4030385А055РВ5
+Комментарий: Добрый день!
+1 взрослый, 2 детей (9 и 10 лет)
+2 комплекта питания
+06.11.2020 08:39:01 Note instance:Домик: Терем 5
+Количество человек: 3
+Паспорт №: 4030385А055РВ5
+Комментарий: Добрый день!
+1 взрослый, 2 детей (9 и 10 лет)
+2 комплекта питания
+06.11.2020 10:06:10 before auth:
+06.11.2020 10:06:10 after auth:
+06.11.2020 10:06:10 before lead add:
+06.11.2020 10:06:11 lead add:27452009
+06.11.2020 10:06:11 calendarId = 13
+06.11.2020 10:06:11 catalog link:1036583
+06.11.2020 10:06:11 Before get contact by phone:+375 29 327-13-32
+06.11.2020 10:06:11 Finded contact:tm-marka@mail.ru
+06.11.2020 10:06:12 Update contact:tm-marka@mail.ru
+06.11.2020 10:06:12 comment text = Горящее предложение: 319 руб.
+Домик: Рыбацкий
+Количество человек: 7
+Паспорт №: 4161079А020РВ0
+
+06.11.2020 10:06:12 Note instance:Горящее предложение: 319 руб.
+Домик: Рыбацкий
+Количество человек: 7
+Паспорт №: 4161079А020РВ0
+
+07.11.2020 16:03:51 before auth:
+07.11.2020 16:03:52 after auth:
+07.11.2020 16:03:52 before lead add:
+07.11.2020 16:03:52 lead add:27463519
+07.11.2020 16:03:52 calendarId = 14
+07.11.2020 16:03:52 catalog link:1036585
+07.11.2020 16:03:52 Before get contact by phone:+375 44 538-19-11
+07.11.2020 16:03:52 Finded contact:zelenko.o@yandex.ru
+07.11.2020 16:03:53 Update contact:zelenko.o@yandex.ru
+07.11.2020 16:03:53 comment text = Домик: Бабочка
+Количество человек: 2
+Паспорт №: 3240771A073PB6
+
+07.11.2020 16:03:54 Note instance:Домик: Бабочка
+Количество человек: 2
+Паспорт №: 3240771A073PB6
+
+07.11.2020 16:29:32 before auth:
+07.11.2020 16:29:33 after auth:
+07.11.2020 16:29:33 before lead add:
+07.11.2020 16:29:33 lead add:27463625
+07.11.2020 16:29:33 calendarId = 9
+07.11.2020 16:29:33 catalog link:10391
+07.11.2020 16:29:33 Before get contact by phone: 79161020261
+07.11.2020 16:29:33 Finded contact:b1234i@yandex.ru
+07.11.2020 16:29:34 Update contact:b1234i@yandex.ru
+07.11.2020 16:29:34 comment text = Домик: Датский
+Количество человек: 8
+Паспорт №: 4607036244
+
+07.11.2020 16:29:34 Note instance:Домик: Датский
+Количество человек: 8
+Паспорт №: 4607036244
+
+08.11.2020 08:14:29 before auth:
+08.11.2020 08:14:29 after auth:
+08.11.2020 08:14:29 before lead add:
+08.11.2020 08:14:29 lead add:27465581
+08.11.2020 08:14:29 calendarId = 16
+08.11.2020 08:14:29 catalog link:10389
+08.11.2020 08:14:29 Before get contact by phone:+375 29 555-83-86
+08.11.2020 08:14:30 Finded contact:zankoav@gmail.com
+08.11.2020 08:14:30 Update contact:zankoav@gmail.com
+08.11.2020 08:14:30 comment text = Горящее предложение: 249 руб.
+Домик: Божья  коровка
+Количество человек: 5
+Паспорт №: sfdgxfhgjhj
+Комментарий: Fgehrejt
+08.11.2020 08:14:30 Note instance:Горящее предложение: 249 руб.
+Домик: Божья  коровка
+Количество человек: 5
+Паспорт №: sfdgxfhgjhj
+Комментарий: Fgehrejt
+08.11.2020 15:16:58 before auth:
+08.11.2020 15:16:59 after auth:
+08.11.2020 15:16:59 before lead add:
+08.11.2020 15:17:01 lead add:27468181
+08.11.2020 15:17:01 calendarId = 23
+08.11.2020 15:17:01 catalog link:1036651
+08.11.2020 15:17:01 Before get contact by phone:+375 29 569-99-14
+08.11.2020 15:17:01 Finded contact:dasha_r-08@mail.ru
+08.11.2020 15:17:01 Update contact:dasha_r-08@mail.ru
+08.11.2020 15:17:01 comment text = Домик: Терем 6
+Количество человек: 2
+Паспорт №: 4090291B017PB2
+Комментарий: 1 взрослый,1 ребёнок 9 лет
+08.11.2020 15:17:01 Note instance:Домик: Терем 6
+Количество человек: 2
+Паспорт №: 4090291B017PB2
+Комментарий: 1 взрослый,1 ребёнок 9 лет
+08.11.2020 16:44:30 before auth:
+08.11.2020 16:44:31 after auth:
+08.11.2020 16:44:31 before lead add:
+08.11.2020 16:44:31 lead add:27468543
+08.11.2020 16:44:31 calendarId = 24
+08.11.2020 16:44:31 catalog link:1036649
+08.11.2020 16:44:31 Before get contact by phone:+375 29 618-60-70
+08.11.2020 16:44:31 Finded contact:marijasitnik@gmail.com
+08.11.2020 16:44:32 Update contact:marijasitnik@gmail.com
+08.11.2020 16:44:32 comment text = Домик: Терем 7
+Количество человек: 3
+Паспорт №: 4190488A056PB1
+Комментарий: Номер на троих , двое взрослых и один ребёнок. Предложение мама тоже хочет отдохнуть. 
+08.11.2020 16:44:32 Note instance:Домик: Терем 7
+Количество человек: 3
+Паспорт №: 4190488A056PB1
+Комментарий: Номер на троих , двое взрослых и один ребёнок. Предложение мама тоже хочет отдохнуть. 
+09.11.2020 08:49:29 before auth:
+09.11.2020 08:49:30 after auth:
+09.11.2020 08:49:30 before lead add:
+09.11.2020 08:49:30 lead add:27476787
+09.11.2020 08:49:30 calendarId = 9
+09.11.2020 08:49:30 catalog link:10391
+09.11.2020 08:49:30 Before get contact by phone:+375 29 382-79-35
+09.11.2020 08:49:30 Finded contact:ihordimov@gmail.com
+09.11.2020 08:49:31 Update contact:ihordimov@gmail.com
+09.11.2020 08:49:31 comment text = Домик: Датский
+Количество человек: 6
+Паспорт №: Мр 1948794
+Комментарий: Договор
+24229299 от 14 февраля 2020
+09.11.2020 08:49:31 Note instance:Домик: Датский
+Количество человек: 6
+Паспорт №: Мр 1948794
+Комментарий: Договор
+24229299 от 14 февраля 2020
+09.11.2020 16:22:54 before auth:
+09.11.2020 16:22:54 after auth:
+09.11.2020 16:22:54 before lead add:
+09.11.2020 16:22:55 lead add:27484169
+09.11.2020 16:22:55 calendarId = 29
+09.11.2020 16:22:55 catalog link:1036639
+09.11.2020 16:22:55 Before get contact by phone:+375 33 651-63-66
+09.11.2020 16:22:55 Finded contact:lenka_88_88@mail.ru
+09.11.2020 16:22:55 Update contact:lenka_88_88@mail.ru
+09.11.2020 16:22:55 comment text = Домик: Терем 12
+Количество человек: 2
+
+09.11.2020 16:22:56 Note instance:Домик: Терем 12
+Количество человек: 2
+
+09.11.2020 18:01:38 before auth:
+09.11.2020 18:01:38 after auth:
+09.11.2020 18:01:38 before lead add:
+09.11.2020 18:01:39 lead add:27484695
+09.11.2020 18:01:39 calendarId = 13
+09.11.2020 18:01:39 catalog link:1036583
+09.11.2020 18:01:39 Before get contact by phone:+375 29 895-24-25
+09.11.2020 18:01:39 Finded contact:6920514@mail.ru
+09.11.2020 18:01:39 Update contact:6920514@mail.ru
+09.11.2020 18:01:39 comment text = Домик: Рыбацкий
+Количество человек: 7
+Паспорт №: 4221085E035PB6
+Комментарий: Рассчитайте пожалуйста стоимость дома на 2 суток, 4 Взр 3 реб (12, 6 и 6 лет) Спасибо 
+09.11.2020 18:01:40 Note instance:Домик: Рыбацкий
+Количество человек: 7
+Паспорт №: 4221085E035PB6
+Комментарий: Рассчитайте пожалуйста стоимость дома на 2 суток, 4 Взр 3 реб (12, 6 и 6 лет) Спасибо 
+10.11.2020 12:53:23 before auth:
+10.11.2020 12:53:24 after auth:
+10.11.2020 12:53:24 before lead add:
+10.11.2020 12:53:25 lead add:27492675
+10.11.2020 12:53:25 calendarId = 14
+10.11.2020 12:53:25 catalog link:1036585
+10.11.2020 12:53:25 Before get contact by phone:+375 29 118-34-12
+10.11.2020 12:53:26 Not find contact:tasya.konoshonok@gmail.com
+10.11.2020 12:53:26 Added new contact:tasya.konoshonok@gmail.com
+10.11.2020 12:53:26 comment text = Домик: Бабочка
+Количество человек: 4
+Комментарий: Собака мелкой породы.
+10.11.2020 12:53:26 Note instance:Домик: Бабочка
+Количество человек: 4
+Комментарий: Собака мелкой породы.
+10.11.2020 13:07:24 before auth:
+10.11.2020 13:07:24 after auth:
+10.11.2020 13:07:24 before lead add:
+10.11.2020 13:07:25 lead add:27492813
+10.11.2020 13:07:25 calendarId = 28
+10.11.2020 13:07:25 catalog link:1036641
+10.11.2020 13:07:25 Before get contact by phone:+375 29 163-81-16
+10.11.2020 13:07:25 Not find contact:nkolos@novacom.by
+10.11.2020 13:07:26 Added new contact:nkolos@novacom.by
+10.11.2020 13:07:26 comment text = Домик: Терем 11
+Количество человек: 2
+Паспорт №: 3050478A089PB6
+
+10.11.2020 13:07:26 Note instance:Домик: Терем 11
+Количество человек: 2
+Паспорт №: 3050478A089PB6
+
+10.11.2020 13:07:28 before auth:
+10.11.2020 13:07:28 after auth:
+10.11.2020 13:07:28 before lead add:
+10.11.2020 13:07:29 lead add:27492817
+10.11.2020 13:07:29 calendarId = 13
+10.11.2020 13:07:29 catalog link:1036583
+10.11.2020 13:07:29 Before get contact by phone:+375 29 163-81-16
+10.11.2020 13:07:30 Finded contact:nkolos@novacom.by
+10.11.2020 13:07:30 Update contact:nkolos@novacom.by
+10.11.2020 13:07:30 comment text = Домик: Рыбацкий
+Количество человек: 9
+Паспорт №: 3050478A089PB6
+
+10.11.2020 13:07:30 Note instance:Домик: Рыбацкий
+Количество человек: 9
+Паспорт №: 3050478A089PB6
+
+10.11.2020 13:07:32 before auth:
+10.11.2020 13:07:32 after auth:
+10.11.2020 13:07:32 before lead add:
+10.11.2020 13:07:33 lead add:27492821
+10.11.2020 13:07:33 calendarId = 29
+10.11.2020 13:07:33 catalog link:1036639
+10.11.2020 13:07:33 Before get contact by phone:+375 29 163-81-16
+10.11.2020 13:07:33 Finded contact:nkolos@novacom.by
+10.11.2020 13:07:34 Update contact:nkolos@novacom.by
+10.11.2020 13:07:34 comment text = Домик: Терем 12
+Количество человек: 2
+Паспорт №: 3050478A089PB6
+
+10.11.2020 13:07:34 Note instance:Домик: Терем 12
+Количество человек: 2
+Паспорт №: 3050478A089PB6
+
+10.11.2020 14:35:34 before auth:
+10.11.2020 14:35:35 after auth:
+10.11.2020 14:35:35 before lead add:
+10.11.2020 14:35:35 lead add:27493821
+10.11.2020 14:35:35 calendarId = 16
+10.11.2020 14:35:35 catalog link:10389
+10.11.2020 14:35:35 Before get contact by phone:+375 29 625-99-83
+10.11.2020 14:35:36 Finded contact:info@krasnagorka.by
+10.11.2020 14:35:36 Update contact:info@krasnagorka.by
+10.11.2020 14:35:36 comment text = Домик: Божья  коровка
+Количество человек: 1
+Комментарий: кмд
+10.11.2020 14:35:36 Note instance:Домик: Божья  коровка
+Количество человек: 1
+Комментарий: кмд
+10.11.2020 14:36:03 before auth:
+10.11.2020 14:36:03 after auth:
+10.11.2020 14:36:03 before lead add:
+10.11.2020 14:36:04 lead add:27493825
+10.11.2020 14:36:04 calendarId = 18
+10.11.2020 14:36:04 catalog link:1036661
+10.11.2020 14:36:04 Before get contact by phone:+375 29 625-99-83
+10.11.2020 14:36:04 Finded contact:info@krasnagorka.by
+10.11.2020 14:36:05 Update contact:info@krasnagorka.by
+10.11.2020 14:36:05 comment text = Домик: Терем 1
+Количество человек: 1
+Комментарий: 2
+10.11.2020 14:36:05 Note instance:Домик: Терем 1
+Количество человек: 1
+Комментарий: 2
+10.11.2020 14:42:13 before auth:
+10.11.2020 14:42:13 after auth:
+10.11.2020 14:42:13 before lead add:
+10.11.2020 14:42:14 lead add:27493885
+10.11.2020 14:42:14 calendarId = 22
+10.11.2020 14:42:14 catalog link:1036653
+10.11.2020 14:42:14 Before get contact by phone:+375 29 625-99-83
+10.11.2020 14:42:14 Finded contact:info@krasnagorka.by
+10.11.2020 14:42:14 Update contact:info@krasnagorka.by
+10.11.2020 14:42:14 comment text = Домик: Терем 5
+Количество человек: 1
+
+10.11.2020 14:42:15 Note instance:Домик: Терем 5
+Количество человек: 1
+
+11.11.2020 20:05:34 before auth:
+11.11.2020 20:05:34 after auth:
+11.11.2020 20:05:34 before lead add:
+11.11.2020 20:05:34 lead add:27506005
+11.11.2020 20:05:34 calendarId = 25
+11.11.2020 20:05:35 catalog link:1036647
+11.11.2020 20:05:35 Before get contact by phone:+375 29 625-99-83
+11.11.2020 20:05:35 Finded contact:katia.menkova@gmail.com
+11.11.2020 20:05:35 Update contact:katia.menkova@gmail.com
+11.11.2020 20:05:35 comment text = Домик: Терем 8
+Количество человек: 1
+
+11.11.2020 20:05:36 Note instance:Домик: Терем 8
+Количество человек: 1
+
+11.11.2020 20:05:53 before auth:
+11.11.2020 20:05:53 after auth:
+11.11.2020 20:05:53 before lead add:
+11.11.2020 20:05:53 lead add:27506009
+11.11.2020 20:05:53 calendarId = 26
+11.11.2020 20:05:54 catalog link:1036645
+11.11.2020 20:05:54 Before get contact by phone:+375 29 625-99-83
+11.11.2020 20:05:54 Finded contact:katia.menkova@gmail.com
+11.11.2020 20:05:54 Update contact:katia.menkova@gmail.com
+11.11.2020 20:05:54 comment text = Домик: Терем 9
+Количество человек: 1
+
+11.11.2020 20:05:54 Note instance:Домик: Терем 9
+Количество человек: 1
+
+13.11.2020 07:55:15 before auth:
+13.11.2020 07:55:15 after auth:
+13.11.2020 07:55:15 before lead add:
+13.11.2020 07:55:16 lead add:27521005
+13.11.2020 07:55:16 calendarId = 16
+13.11.2020 07:55:16 catalog link:10389
+13.11.2020 07:55:16 Before get contact by phone:+375 29 676-97-98
+13.11.2020 07:55:16 Finded contact:katia.menkova@gmail.com
+13.11.2020 07:55:17 Update contact:katia.menkova@gmail.com
+13.11.2020 07:55:17 comment text = Домик: Божья  коровка
+Количество человек: 2
+Комментарий: Рабочие 
+13.11.2020 07:55:17 Note instance:Домик: Божья  коровка
+Количество человек: 2
+Комментарий: Рабочие 
+13.11.2020 12:38:51 before auth:
+13.11.2020 12:38:51 after auth:
+13.11.2020 12:38:51 before lead add:
+13.11.2020 12:38:52 lead add:27525293
+13.11.2020 12:38:52 calendarId = 26
+13.11.2020 12:38:52 catalog link:1036645
+13.11.2020 12:38:52 Before get contact by phone:+375 29 610-06-06
+13.11.2020 12:38:52 Finded contact:starway.minsk@gmail.com
+13.11.2020 12:38:53 Update contact:starway.minsk@gmail.com
+13.11.2020 12:38:53 comment text = Домик: Терем 9
+Количество человек: 2
+Паспорт №: MP3713413
+Комментарий: Ребёнок 1 год 
+13.11.2020 12:38:53 Note instance:Домик: Терем 9
+Количество человек: 2
+Паспорт №: MP3713413
+Комментарий: Ребёнок 1 год 
+14.11.2020 08:36:31 before auth:
+14.11.2020 08:36:31 after auth:
+14.11.2020 08:36:31 before lead add:
+14.11.2020 08:36:32 lead add:27529439
+14.11.2020 08:36:32 calendarId = null
+14.11.2020 08:36:32 Before get contact by phone: 79107262327
+14.11.2020 08:36:32 Not find contact:cover-smolensk@yandex.ru
+14.11.2020 08:36:32 Added new contact:cover-smolensk@yandex.ru
+14.11.2020 08:36:32 comment text = Мероприятие: Новый год в Красногорке
+Количество человек: 14
+
+14.11.2020 08:36:33 Note instance:Мероприятие: Новый год в Красногорке
+Количество человек: 14
+
+17.11.2020 11:27:47 before auth:
+17.11.2020 11:27:47 after auth:
+17.11.2020 11:27:47 before lead add:
+17.11.2020 11:27:48 lead add:27558039
+17.11.2020 11:27:48 calendarId = 14
+17.11.2020 11:27:49 catalog link:1036585
+17.11.2020 11:27:49 Before get contact by phone:+375 29 625-99-83
+17.11.2020 11:27:49 Finded contact:info@krasnagorka.by
+17.11.2020 11:27:49 Update contact:info@krasnagorka.by
+17.11.2020 11:27:49 comment text = Домик: Бабочка
+Количество человек: 1
+
+17.11.2020 11:27:50 Note instance:Домик: Бабочка
+Количество человек: 1
+
+17.11.2020 11:28:04 before auth:
+17.11.2020 11:28:04 after auth:
+17.11.2020 11:28:04 before lead add:
+17.11.2020 11:28:05 lead add:27558047
+17.11.2020 11:28:05 calendarId = 17
+17.11.2020 11:28:05 catalog link:1036665
+17.11.2020 11:28:05 Before get contact by phone:+375 29 625-99-83
+17.11.2020 11:28:06 Finded contact:info@krasnagorka.by
+17.11.2020 11:28:06 Update contact:info@krasnagorka.by
+17.11.2020 11:28:06 comment text = Домик: Приозерный
+Количество человек: 1
+
+17.11.2020 11:28:06 Note instance:Домик: Приозерный
+Количество человек: 1
+
+18.11.2020 12:38:29 before auth:
+18.11.2020 12:38:30 after auth:
+18.11.2020 12:38:30 before lead add:
+18.11.2020 12:38:31 lead add:27570459
+18.11.2020 12:38:31 calendarId = 9
+18.11.2020 12:38:31 catalog link:10391
+18.11.2020 12:38:31 Before get contact by phone:+375 29 718-84-89
+18.11.2020 12:38:32 Not find contact:Hach_tade@mail.ru
+18.11.2020 12:38:32 Added new contact:Hach_tade@mail.ru
+18.11.2020 12:38:32 comment text = Домик: Датский
+Количество человек: 7
+Паспорт №: 3240485E018PB1
+Комментарий: Счёт просьба выставить через ЕРИП
+18.11.2020 12:38:32 Note instance:Домик: Датский
+Количество человек: 7
+Паспорт №: 3240485E018PB1
+Комментарий: Счёт просьба выставить через ЕРИП
+20.11.2020 20:48:06 before auth:
+20.11.2020 20:48:07 after auth:
+20.11.2020 20:48:07 before lead add:
+20.11.2020 20:48:07 lead add:27597205
+20.11.2020 20:48:07 calendarId = null
+20.11.2020 20:48:07 Before get contact by phone: 79213431483
+20.11.2020 20:48:08 Not find contact:bellefame@yandex.ru
+20.11.2020 20:48:08 Added new contact:bellefame@yandex.ru
+20.11.2020 20:48:08 comment text = Мероприятие: Новый год в Красногорке
+Количество человек: 6
+Комментарий: Добрый день. Из пакета Новый год не понятно, где будет проживание. Мы у вас уже были. 
+20.11.2020 20:48:08 Note instance:Мероприятие: Новый год в Красногорке
+Количество человек: 6
+Комментарий: Добрый день. Из пакета Новый год не понятно, где будет проживание. Мы у вас уже были. 
+21.11.2020 10:59:11 before auth:
+21.11.2020 10:59:11 after auth:
+21.11.2020 10:59:11 before lead add:
+21.11.2020 10:59:11 lead add:27600443
+21.11.2020 10:59:11 calendarId = 15
+21.11.2020 10:59:11 catalog link:10393
+21.11.2020 10:59:11 Before get contact by phone:+375 29 178-36-46
+21.11.2020 10:59:12 Finded contact:evgeniatslnk@gmail.com
+21.11.2020 10:59:12 Update contact:evgeniatslnk@gmail.com
+21.11.2020 10:59:12 comment text = Домик: Домик у причала
+Количество человек: 7
+Паспорт №: 3280484A068PB1
+
+21.11.2020 10:59:12 Note instance:Домик: Домик у причала
+Количество человек: 7
+Паспорт №: 3280484A068PB1
+
+21.11.2020 12:24:06 before auth:
+21.11.2020 12:24:07 after auth:
+21.11.2020 12:24:07 before lead add:
+21.11.2020 12:24:07 lead add:27601417
+21.11.2020 12:24:07 calendarId = 14
+21.11.2020 12:24:07 catalog link:1036585
+21.11.2020 12:24:07 Before get contact by phone:+375 29 308-75-72
+21.11.2020 12:24:08 Finded contact:relax25@mail.ru
+21.11.2020 12:24:08 Update contact:relax25@mail.ru
+21.11.2020 12:24:08 comment text = Домик: Бабочка
+Количество человек: 2
+Паспорт №: 3020782E017PB8
+
+21.11.2020 12:24:08 Note instance:Домик: Бабочка
+Количество человек: 2
+Паспорт №: 3020782E017PB8
+
+23.11.2020 13:52:14 before auth:
+23.11.2020 13:52:14 after auth:
+23.11.2020 13:52:14 before lead add:
+23.11.2020 13:52:15 lead add:27618987
+23.11.2020 13:52:15 calendarId = 19
+23.11.2020 13:52:15 catalog link:1036659
+23.11.2020 13:52:15 Before get contact by phone:+375 29 569-99-14
+23.11.2020 13:52:16 Finded contact:dasha_r-08@mail.ru
+23.11.2020 13:52:16 Update contact:dasha_r-08@mail.ru
+23.11.2020 13:52:16 comment text = Домик: Терем 2
+Количество человек: 5
+Паспорт №: 4090291B017PB2
+Комментарий: 3 взрослых 2 ребёнка 3 и 5 лет
+23.11.2020 13:52:16 Note instance:Домик: Терем 2
+Количество человек: 5
+Паспорт №: 4090291B017PB2
+Комментарий: 3 взрослых 2 ребёнка 3 и 5 лет
+23.11.2020 16:14:56 before auth:
+23.11.2020 16:14:57 after auth:
+23.11.2020 16:14:57 before lead add:
+23.11.2020 16:14:57 lead add:27620189
+23.11.2020 16:14:57 calendarId = null
+23.11.2020 16:14:57 Before get contact by phone:+375 29 341-46-90
+23.11.2020 16:14:57 Not find contact:ya_nata84@mail.ru
+23.11.2020 16:14:58 Added new contact:ya_nata84@mail.ru
+23.11.2020 16:14:58 comment text = Мероприятие: Новый год в Красногорке
+Количество человек: 3
+Комментарий: 2 взрослых   1 ребенок 5ти лет
+23.11.2020 16:14:58 Note instance:Мероприятие: Новый год в Красногорке
+Количество человек: 3
+Комментарий: 2 взрослых   1 ребенок 5ти лет
+23.11.2020 18:44:32 before auth:
+23.11.2020 18:44:33 after auth:
+23.11.2020 18:44:33 before lead add:
+23.11.2020 18:44:33 lead add:27621117
+23.11.2020 18:44:33 calendarId = 28
+23.11.2020 18:44:33 catalog link:1036641
+23.11.2020 18:44:33 Before get contact by phone:+375 29 818-88-14
+23.11.2020 18:44:33 Finded contact:Sagittarius_2017@mail.ru
+23.11.2020 18:44:34 Update contact:Sagittarius_2017@mail.ru
+23.11.2020 18:44:34 comment text = Домик: Терем 11
+Количество человек: 1
+
+23.11.2020 18:44:34 Note instance:Домик: Терем 11
+Количество человек: 1
+
+24.11.2020 13:14:57 before auth:
+24.11.2020 13:14:57 after auth:
+24.11.2020 13:14:57 before lead add:
+24.11.2020 13:14:58 lead add:27630225
+24.11.2020 13:14:58 calendarId = 13
+24.11.2020 13:14:58 catalog link:1036583
+24.11.2020 13:14:58 Before get contact by phone:+375 29 878-00-94
+24.11.2020 13:14:58 Not find contact:nadyalazovskaya@mail.ru
+24.11.2020 13:14:58 Added new contact:nadyalazovskaya@mail.ru
+24.11.2020 13:14:58 comment text = Домик: Рыбацкий
+Количество человек: 9
+Паспорт №: 4241089A062PB6
+Комментарий: 6 взрослых, 3 детей, возраст один 10 месяцев, и двое по 4 года. Нужна одна детская кроватка.
+24.11.2020 13:14:59 Note instance:Домик: Рыбацкий
+Количество человек: 9
+Паспорт №: 4241089A062PB6
+Комментарий: 6 взрослых, 3 детей, возраст один 10 месяцев, и двое по 4 года. Нужна одна детская кроватка.
+25.11.2020 07:11:58 before auth:
+25.11.2020 07:11:58 after auth:
+25.11.2020 07:11:58 before lead add:
+25.11.2020 07:11:59 lead add:27635339
+25.11.2020 07:11:59 calendarId = 28
+25.11.2020 07:12:00 catalog link:1036641
+25.11.2020 07:12:00 Before get contact by phone: 79602792776
+25.11.2020 07:12:00 Not find contact:mwinegrape@mail.ru
+25.11.2020 07:12:00 Added new contact:mwinegrape@mail.ru
+25.11.2020 07:12:00 comment text = Домик: Терем 11
+Количество человек: 2
+
+25.11.2020 07:12:02 Note instance:Домик: Терем 11
+Количество человек: 2
+
+25.11.2020 08:42:35 before auth:
+25.11.2020 08:42:35 after auth:
+25.11.2020 08:42:35 before lead add:
+25.11.2020 08:42:36 lead add:27637857
+25.11.2020 08:42:36 calendarId = 14
+25.11.2020 08:42:36 catalog link:1036585
+25.11.2020 08:42:36 Before get contact by phone:+375 29 111-15-69
+25.11.2020 08:42:36 Not find contact:tvinograd89@gmail.com
+25.11.2020 08:42:37 Added new contact:tvinograd89@gmail.com
+25.11.2020 08:42:37 comment text = Домик: Бабочка
+Количество человек: 4
+Паспорт №: 4250589А044РВ7
+Комментарий: 2 взрослых 2 детей (4 и 7 лет) по туру 
+25.11.2020 08:42:37 Note instance:Домик: Бабочка
+Количество человек: 4
+Паспорт №: 4250589А044РВ7
+Комментарий: 2 взрослых 2 детей (4 и 7 лет) по туру 
+25.11.2020 11:56:53 before auth:
+25.11.2020 11:56:53 after auth:
+25.11.2020 11:56:53 before lead add:
+25.11.2020 11:56:54 lead add:27641333
+25.11.2020 11:56:54 calendarId = 27
+25.11.2020 11:56:54 catalog link:1036643
+25.11.2020 11:56:54 Before get contact by phone:+375 29 625-99-83
+25.11.2020 11:56:54 Finded contact:info@krasnagorka.by
+25.11.2020 11:56:55 Update contact:info@krasnagorka.by
+25.11.2020 11:56:55 comment text = Домик: Терем 10
+Количество человек: 1
+
+25.11.2020 11:56:55 Note instance:Домик: Терем 10
+Количество человек: 1
+
+26.11.2020 15:32:12 before auth:
+26.11.2020 15:32:12 after auth:
+26.11.2020 15:32:12 before lead add:
+26.11.2020 15:32:13 lead add:27656695
+26.11.2020 15:32:13 calendarId = 27
+26.11.2020 15:32:13 catalog link:1036643
+26.11.2020 15:32:13 Before get contact by phone:+375 29 377-00-28
+26.11.2020 15:32:13 Finded contact:liryna89@gmail.com
+26.11.2020 15:32:13 Update contact:liryna89@gmail.com
+26.11.2020 15:32:13 comment text = Домик: Терем 10
+Количество человек: 2
+Паспорт №: 4150889М091РВ5
+Комментарий: Тур Все включено для двоих
+26.11.2020 15:32:14 Note instance:Домик: Терем 10
+Количество человек: 2
+Паспорт №: 4150889М091РВ5
+Комментарий: Тур Все включено для двоих
+26.11.2020 17:52:57 before auth:
+26.11.2020 17:52:58 after auth:
+26.11.2020 17:52:58 before lead add:
+26.11.2020 17:52:58 lead add:27657541
+26.11.2020 17:52:58 calendarId = 29
+26.11.2020 17:52:58 catalog link:1036639
+26.11.2020 17:52:58 Before get contact by phone:+375 33 364-25-97
+26.11.2020 17:52:59 Not find contact:m.a.bandaryk@gmail.com
+26.11.2020 17:52:59 Added new contact:m.a.bandaryk@gmail.com
+26.11.2020 17:52:59 comment text = Домик: Терем 12
+Количество человек: 2
+Паспорт №: 4240495C002PB8
+
+26.11.2020 17:52:59 Note instance:Домик: Терем 12
+Количество человек: 2
+Паспорт №: 4240495C002PB8
+
+27.11.2020 10:44:51 before auth:
+27.11.2020 10:44:51 after auth:
+27.11.2020 10:44:51 before lead add:
+27.11.2020 10:44:51 lead add:27663987
+27.11.2020 10:44:51 calendarId = 26
+27.11.2020 10:44:52 catalog link:1036645
+27.11.2020 10:44:52 Before get contact by phone:+375 29 556-34-85
+27.11.2020 10:44:52 Finded contact:Olga.sobol@tut.by
+27.11.2020 10:44:52 Update contact:Olga.sobol@tut.by
+27.11.2020 10:44:52 comment text = Домик: Терем 9
+Количество человек: 2
+Паспорт №: 4121283А062РВ5
+
+27.11.2020 10:44:53 Note instance:Домик: Терем 9
+Количество человек: 2
+Паспорт №: 4121283А062РВ5
+
+27.11.2020 10:52:17 before auth:
+27.11.2020 10:52:18 after auth:
+27.11.2020 10:52:18 before lead add:
+27.11.2020 10:52:19 lead add:27664071
+27.11.2020 10:52:19 calendarId = 28
+27.11.2020 10:52:19 catalog link:1036641
+27.11.2020 10:52:19 Before get contact by phone:+375 29 530-90-21
+27.11.2020 10:52:20 Not find contact:ilyaliferea@gmail.com
+27.11.2020 10:52:20 Added new contact:ilyaliferea@gmail.com
+27.11.2020 10:52:20 comment text = Домик: Терем 11
+Количество человек: 2
+Комментарий: Тур Все включено для двоих =)
+27.11.2020 10:52:21 Note instance:Домик: Терем 11
+Количество человек: 2
+Комментарий: Тур Все включено для двоих =)
+27.11.2020 10:53:29 before auth:
+27.11.2020 10:53:29 after auth:
+27.11.2020 10:53:29 before lead add:
+27.11.2020 10:53:30 lead add:27664083
+27.11.2020 10:53:30 calendarId = 22
+27.11.2020 10:53:30 catalog link:1036653
+27.11.2020 10:53:30 Before get contact by phone:+375 29 755-44-80
+27.11.2020 10:53:31 Not find contact:avs@ixsa.net
+27.11.2020 10:53:31 Added new contact:avs@ixsa.net
+27.11.2020 10:53:31 comment text = Домик: Терем 5
+Количество человек: 2
+
+27.11.2020 10:53:31 Note instance:Домик: Терем 5
+Количество человек: 2
+
+27.11.2020 15:53:10 before auth:
+27.11.2020 15:53:10 after auth:
+27.11.2020 15:53:10 before lead add:
+27.11.2020 15:53:10 lead add:27668203
+27.11.2020 15:53:10 calendarId = 24
+27.11.2020 15:53:10 catalog link:1036649
+27.11.2020 15:53:10 Before get contact by phone:+375 29 758-20-30
+27.11.2020 15:53:11 Finded contact:olga.sobol@tut.by
+27.11.2020 15:53:11 Update contact:olga.sobol@tut.by
+27.11.2020 15:53:11 comment text = Домик: Терем 7
+Количество человек: 2
+Паспорт №: 4121283А062РВ5
+
+27.11.2020 15:53:11 Note instance:Домик: Терем 7
+Количество человек: 2
+Паспорт №: 4121283А062РВ5
+
+27.11.2020 16:17:20 before auth:
+27.11.2020 16:17:20 after auth:
+27.11.2020 16:17:20 before lead add:
+27.11.2020 16:17:20 lead add:27668495
+27.11.2020 16:17:20 calendarId = 16
+27.11.2020 16:17:21 catalog link:10389
+27.11.2020 16:17:21 Before get contact by phone:+375 29 604-57-79
+27.11.2020 16:17:21 Not find contact:profsergey@gmail.com
+27.11.2020 16:17:21 Added new contact:profsergey@gmail.com
+27.11.2020 16:17:21 comment text = Домик: Божья  коровка
+Количество человек: 4
+Паспорт №: 3211286M000PB9
+
+27.11.2020 16:17:21 Note instance:Домик: Божья  коровка
+Количество человек: 4
+Паспорт №: 3211286M000PB9
+
+30.11.2020 10:36:25 before auth:
+30.11.2020 10:36:25 after auth:
+30.11.2020 10:36:25 before lead add:
+30.11.2020 10:36:25 lead add:27688857
+30.11.2020 10:36:25 calendarId = 18
+30.11.2020 10:36:26 catalog link:1036661
+30.11.2020 10:36:26 Before get contact by phone:+375 29 621-14-59
+30.11.2020 10:36:26 Not find contact:190890577@mail.ru
+30.11.2020 10:36:26 Added new contact:190890577@mail.ru
+30.11.2020 10:36:26 comment text = Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3220378А088РВ3
+
+30.11.2020 10:36:27 Note instance:Домик: Терем 1
+Количество человек: 4
+Паспорт №: 3220378А088РВ3
+
+30.11.2020 11:28:33 before auth:
+30.11.2020 11:28:33 after auth:
+30.11.2020 11:28:33 before lead add:
+30.11.2020 11:28:34 lead add:27689639
+30.11.2020 11:28:34 calendarId = null
+30.11.2020 11:28:34 Before get contact by phone:+375 29 338-55-15
+30.11.2020 11:28:34 Finded contact:i_love_alicee@mail.ru
+30.11.2020 11:28:34 Update contact:i_love_alicee@mail.ru
+30.11.2020 11:28:34 comment text = Мероприятие: Новый год в Красногорке
+Количество человек: 4
+Комментарий: Нам необходимо 2 двухместных номера: в одном 2 взрослых, в другом 2 взрослых и ребёнок 3 года без дополнительного спального места и питания. Пакет на взрослого за 479 рублей с трёхразовым питанием
+30.11.2020 11:28:34 Note instance:Мероприятие: Новый год в Красногорке
+Количество человек: 4
+Комментарий: Нам необходимо 2 двухместных номера: в одном 2 взрослых, в другом 2 взрослых и ребёнок 3 года без дополнительного спального места и питания. Пакет на взрослого за 479 рублей с трёхразовым питанием
+30.11.2020 17:55:09 before auth:
+30.11.2020 17:55:09 after auth:
+30.11.2020 17:55:09 before lead add:
+30.11.2020 17:55:09 lead add:27694415
+30.11.2020 17:55:09 calendarId = 13
+30.11.2020 17:55:10 catalog link:1036583
+30.11.2020 17:55:10 Before get contact by phone:+375 29 908-36-30
+30.11.2020 17:55:10 Not find contact:sti4_11@mail.ru
+30.11.2020 17:55:10 Added new contact:sti4_11@mail.ru
+30.11.2020 17:55:10 comment text = Домик: Рыбацкий
+Количество человек: 6
+Паспорт №: МС3195804
+
+30.11.2020 17:55:11 Note instance:Домик: Рыбацкий
+Количество человек: 6
+Паспорт №: МС3195804
+
+03.12.2020 07:50:56 before auth:
+03.12.2020 07:50:57 after auth:
+03.12.2020 07:50:57 before lead add:
+03.12.2020 07:50:57 lead add:27720475
+03.12.2020 07:50:57 calendarId = 9
+03.12.2020 07:50:58 catalog link:10391
+03.12.2020 07:50:58 Before get contact by phone:+375 29 634-04-27
+03.12.2020 07:50:58 Finded contact:olgakolechenok@mail.ru
+03.12.2020 07:50:58 Update contact:olgakolechenok@mail.ru
+03.12.2020 07:50:58 comment text = Домик: Датский
+Количество человек: 6
+Паспорт №: 4301092А041РВ0
+Комментарий: С питанием и баней, пакет за 239 руб. с пары. У нас будет поздний заезд - около 23:00 4.12., пожалуйста, ужин оставьте в доме.
+03.12.2020 07:50:58 Note instance:Домик: Датский
+Количество человек: 6
+Паспорт №: 4301092А041РВ0
+Комментарий: С питанием и баней, пакет за 239 руб. с пары. У нас будет поздний заезд - около 23:00 4.12., пожалуйста, ужин оставьте в доме.
