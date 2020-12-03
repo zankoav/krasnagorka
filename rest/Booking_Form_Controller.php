@@ -229,19 +229,25 @@ class Booking_Form_Controller extends WP_REST_Controller
                     }
                 }
                 if($counter > 2){
-                    // $contactCustomFields = new CustomFieldsValuesCollection();
-                    // $typeFieldValueContact = new SelectCustomFieldValuesModel();
-                    // $typeFieldValueContact->setFieldId(72295);
+                    $contactCustomFields = new CustomFieldsValuesCollection();
+                    $typeFieldValueContact = new SelectCustomFieldValuesModel();
+                    $typeFieldValueContact->setEnumId(72295);
+                    
+                    $tCollection = new SelectCustomFieldValueCollection();
+                    $tModel = new SelectCustomFieldValueModel();
+                    $tModel->setValue(149825);
+                    $tCollection->add($tModel);
+                    $typeFieldValueContact->setValues($tCollection);
                     // $typeFieldValueContact->setValues(
                     //     (new SelectCustomFieldValueCollection())
                     //     ->add(
                     //         (new SelectCustomFieldValueModel())->setValue(149825)
                     //     )
                     // );
-                    // $contactCustomFields->add($typeFieldValueContact);
-                    // $contact->setCustomFieldsValues($contactCustomFields);
+                    $contactCustomFields->add($typeFieldValueContact);
+                    $contact->setCustomFieldsValues($contactCustomFields);
                     LS_WP_Logger::info('OK 1 !!! '); 
-                    $contact->setLastName('GGG');
+                    
                     $contact = $apiClient->contacts()->updateOne($contact);
                     LS_WP_Logger::info('OK 2 !!! ');   
                 }
