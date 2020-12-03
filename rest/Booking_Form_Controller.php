@@ -17,6 +17,10 @@ use AmoCRM\Helpers\EntityTypesInterface;
 use AmoCRM\Collections\TasksCollection;
 use AmoCRM\Models\TaskModel;
 
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\SelectCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\SelectCustomFieldValueModel;
+use AmoCRM\Models\CustomFieldsValues\SelectCustomFieldValuesModel;
+
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel;
 use AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel;
@@ -217,8 +221,31 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 $filter = new LeadsFilter();
                 $filter->setIds($ids);
-                $leads = $apiClient->leads()->get($filter);
-                LS_WP_Logger::info('leads new: ' .  json_encode($leads->toArray()));
+                $leads = $apiClient->leads()->get($filter)->toArray();
+                $counter = 0;
+                foreach ($l as $leads) {
+                    if($l['status_id'] == 142){
+                        $counter ++;
+                    }
+                }
+                if($counter > 2){
+                    LS_WP_Logger::info('OK 1 !!! ');                    
+                    $contactCustomFields = new CustomFieldsValuesCollection();
+                    $typeFieldValueContact = new SelectCustomFieldValuesModel();
+                    $typeFieldValueContact->setFieldId(638673);
+                    $typeFieldValueContact->setValues(
+                        (new SelectCustomFieldValueCollection())
+                        ->add(
+                            (new SelectCustomFieldValueModel())
+                            ->setValue(149825)
+                        )
+                    );
+                    $contactCustomFields->add($typeFieldValueContact);
+                    $contact->setCustomFieldsValues($contactCustomFields);
+                    $apiClient->contacts()->updateOne($contact);
+                    LS_WP_Logger::info('OK 2 !!! ');   
+                }
+                
             }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
