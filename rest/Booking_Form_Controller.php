@@ -1439,6 +1439,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ->setAccessToken($accessToken)
             ->onAccessTokenRefresh(
                 function (AccessTokenInterface $accessToken, string $baseDomain) {
+                    LS_WP_Logger::info('Refresh Token: ' . $accessToken->getRefreshToken());
                     saveToken(
                         [
                             'access_token' => $accessToken->getToken(),
@@ -1458,4 +1459,14 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 }
 
-Booking_Form_Controller::getAmoCrmApiClient();
+add_action( 'wp', 'refresh_amo_crm_api_client' );
+function refresh_amo_crm_api_client() {
+	if( ! wp_next_scheduled( 'refresh_amo_crm' ) ) {
+		wp_schedule_event( time(), 'twicedaily', 'refresh_amo_crm');
+	}
+}
+
+add_action( 'refresh_amo_crm', 'refresh_amo' );
+function refresh_amo() {
+	Booking_Form_Controller::getAmoCrmApiClient();
+}
