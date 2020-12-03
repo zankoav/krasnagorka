@@ -119,3 +119,5 @@ function refreshToken(){
     $response = json_decode($out, true);
     var_dump($response);
 }
+
+refreshToken();
