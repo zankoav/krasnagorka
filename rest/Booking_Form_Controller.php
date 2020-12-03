@@ -8,6 +8,7 @@ use AmoCRM\Exceptions\AmoCRMApiException;
 use AmoCRM\Collections\TagsCollection;
 use AmoCRM\Models\TagModel;
 use AmoCRM\Filters\ContactsFilter;
+use AmoCRM\Filters\LeadsFilter;
 use AmoCRM\Models\ContactModel;
 use AmoCRM\Collections\LinksCollection;
 use AmoCRM\Collections\ContactsCollection;
@@ -207,12 +208,17 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadContacts = $lead->getContacts();
             if ($leadContacts) {
                 $leadMainContact = $leadContacts->getBy('isMain', true);
-                LS_WP_Logger::info('leadMainContact ID: ' .  $leadMainContact->getId());
                 $contact =  $apiClient->contacts()->getOne($leadMainContact->getId(), [ContactModel::LEADS]);
-                LS_WP_Logger::info('getOne ID: ' .  $contact->toArray());
-                $leads =  $contact->getLeads();
-                LS_WP_Logger::info('leads count: ' .  $leads->count());
-                LS_WP_Logger::info('leads: ' .  json_encode($leads->toArray()));
+                $leads =  $contact->getLeads()->toArray();
+                $ids = [];
+                foreach ($item as $leads) {
+                    $ids[] = $item['id'];
+                }
+
+                $filter = new LeadsFilter();
+                $filter->setIds($ids);
+                $leads = $apiClient->leads()->get($filter);
+                LS_WP_Logger::info('leads new: ' .  json_encode($leads->toArray()));
             }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
