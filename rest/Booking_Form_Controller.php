@@ -1406,6 +1406,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $accessToken = getToken();
+        LS_WP_Logger::info('accessToken: ' . json_encode($accessToken));
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
