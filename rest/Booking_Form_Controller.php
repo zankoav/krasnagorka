@@ -1468,5 +1468,6 @@ function refresh_amo_crm_api_client() {
 
 add_action( 'refresh_amo_crm', 'refresh_amo' );
 function refresh_amo() {
+    LS_WP_Logger::info('Try to refresh token');
 	Booking_Form_Controller::getAmoCrmApiClient();
 }
