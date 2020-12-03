@@ -1403,10 +1403,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
         $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
         $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
-    
+        LS_WP_Logger::info('AmoCRMApiClient: ok');
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
         $accessToken = getToken();
-        LS_WP_Logger::info('accessToken: ' . json_encode($accessToken));
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
