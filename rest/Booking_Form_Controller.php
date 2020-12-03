@@ -215,7 +215,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $contact =  $apiClient->contacts()->getOne($leadMainContact->getId(), [ContactModel::LEADS]);
                 $leads =  $contact->getLeads()->toArray();
                 $ids = [];
-                foreach ($item as $leads) {
+                foreach ($leads as $item) {
                     $ids[] = $item['id'];
                 }
                 LS_WP_Logger::info('IDs count:'. count($ids));       
@@ -224,7 +224,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $leads = $apiClient->leads()->get($filter)->toArray();
                 LS_WP_Logger::info('leads: '. json_encode($leads));    
                 $counter = 0;
-                foreach ($l as $leads) {
+                foreach ($leads as $l) {
                     if($l['status_id'] == 142){
                         $counter ++;
                     }
