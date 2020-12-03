@@ -221,28 +221,27 @@ class Booking_Form_Controller extends WP_REST_Controller
                 LS_WP_Logger::info('IDs count:'. count($ids));       
                 $filter = new LeadsFilter();
                 $filter->setIds($ids);
-                $leads = $apiClient->leads()->get($filter)->toArray();
-                LS_WP_Logger::info('leads: '. json_encode($leads));    
+                $leads = $apiClient->leads()->get($filter)->toArray();  
                 $counter = 0;
                 foreach ($leads as $l) {
-                    if($l['status_id'] == 142){
+                    if($l['status_id'] == 143){
                         $counter ++;
                     }
                 }
                 if($counter > 2){
-                    $contactCustomFields = new CustomFieldsValuesCollection();
-
-                    $typeFieldValueContact = new SelectCustomFieldValuesModel();
-                    $typeFieldValueContact->setFieldId(72295);
-                    $typeFieldValueContact->setValues(
-                        (new SelectCustomFieldValueCollection())
-                        ->add(
-                            (new SelectCustomFieldValueModel())->setValue(149825)
-                        )
-                    );
-                    $contactCustomFields->add($typeFieldValueContact);
-                    $contact->setCustomFieldsValues($contactCustomFields);
+                    // $contactCustomFields = new CustomFieldsValuesCollection();
+                    // $typeFieldValueContact = new SelectCustomFieldValuesModel();
+                    // $typeFieldValueContact->setFieldId(72295);
+                    // $typeFieldValueContact->setValues(
+                    //     (new SelectCustomFieldValueCollection())
+                    //     ->add(
+                    //         (new SelectCustomFieldValueModel())->setValue(149825)
+                    //     )
+                    // );
+                    // $contactCustomFields->add($typeFieldValueContact);
+                    // $contact->setCustomFieldsValues($contactCustomFields);
                     LS_WP_Logger::info('OK 1 !!! '); 
+                    $contact->setFirstName('Test');
                     $contact = $apiClient->contacts()->updateOne($contact);
                     LS_WP_Logger::info('OK 2 !!! ');   
                 }
