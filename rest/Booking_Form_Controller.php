@@ -202,6 +202,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadId = (int)$_POST['leads']['status'][0]['id'];
             LS_WP_Logger::info('leadId: ' . $leadId);
             $apiClient = self::getAmoCrmApiClient();
+            LS_WP_Logger::info('apiClient: ' . json_encode($apiClient));
             $lead = $apiClient->leads()->getOne($leadId);
             // $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
             LS_WP_Logger::info('lead' . json_encode($lead));
