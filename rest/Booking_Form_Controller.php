@@ -206,10 +206,11 @@ class Booking_Form_Controller extends WP_REST_Controller
             /** @var ContactsCollection $leadContacts */
             $leadContacts = $lead->getContacts();
             if ($leadContacts) {
-                $leadMainContact = $leadContacts->first();
-                LS_WP_Logger::info('leadMainContact: ' .  json_encode($leadMainContact->toArray()));
-                $leads = $leadMainContact->getLeads();
-                LS_WP_Logger::info('leads: ' .  $leads->count());
+                $leadMainContact = $leadContacts->getBy('isMain', true);
+                $contacts =  $apiClient->contacts()->getOne($leadMainContact->getId(), [ContactModel::LEADS]);
+                $leads =  $contacts->first()->getLeads();
+                LS_WP_Logger::info('leads count: ' .  $leads->count());
+                LS_WP_Logger::info('leads: ' .  json_encode($leads->toArray()));
             }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
