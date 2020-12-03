@@ -1403,9 +1403,11 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
         $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
         $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
-        LS_WP_Logger::info('AmoCRMApiClient: ok');
+        LS_WP_Logger::info('AmoCRMApiClient: 1');
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+        LS_WP_Logger::info('AmoCRMApiClient: 2');
         $accessToken = getToken();
+        LS_WP_Logger::info('AmoCRMApiClient: 3');
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
@@ -1420,7 +1422,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         ]
                     );
                 });
-        
+        LS_WP_Logger::info('AmoCRMApiClient: 4');
         return $apiClient;
     }
 
