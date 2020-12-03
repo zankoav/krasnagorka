@@ -193,7 +193,26 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function change_contact($request)
     {
-        LS_WP_Logger::info('request: ' . json_encode($request) . ' , ' . json_encode($_POST));
+        
+
+        //Получим сделку
+        try {
+            $apiClient = self::getAmoCrmApiClient();
+            LS_WP_Logger::info('AmoCRMApiException: ' . $e);
+            LS_WP_Logger::info('Id: ' . $_POST['leads']['status'][0]['id']);
+            //$lead = $apiClient->leads()->getOne(1, [LeadModel::CONTACTS, LeadModel::CATALOG_ELEMENTS]);
+        } catch (AmoCRMApiException $e) {
+            LS_WP_Logger::info('AmoCRMApiException: ' . $e);
+        }
+
+        //Получим основной контакт сделки
+        /** @var ContactsCollection $leadContacts */
+        // $leadContacts = $lead->getContacts();
+        // if ($leadContacts) {
+        //     $leadMainContact = $leadContacts->getBy('isMain', true);
+        // }
+
+        
     }
 
     /**
