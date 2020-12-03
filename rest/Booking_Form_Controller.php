@@ -201,7 +201,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient = self::getAmoCrmApiClient();
             LS_WP_Logger::info('leadId: ' . $_POST['leads']['status'][0]['id']);
             $lead = $apiClient->leads()->getOne($_POST['leads']['status'][0]['id'], [LeadModel::CONTACTS, LeadModel::CATALOG_ELEMENTS]);
-
+            LS_WP_Logger::info('lead Name: ' . $lead->getName());
             //Получим основной контакт сделки
             /** @var ContactsCollection $leadContacts */
             $leadContacts = $lead->getContacts();
