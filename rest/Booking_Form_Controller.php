@@ -233,7 +233,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     LS_WP_Logger::info('OK 1 !!! ');                    
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $typeFieldValueContact = new SelectCustomFieldValuesModel();
-                    $typeFieldValueContact->setFieldId(638673);
+                    $typeFieldValueContact->setFieldId(72295);
                     $typeFieldValueContact->setValues(
                         (new SelectCustomFieldValueCollection())
                         ->add(
@@ -242,8 +242,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                     );
                     $contactCustomFields->add($typeFieldValueContact);
                     $contact->setCustomFieldsValues($contactCustomFields);
+                    LS_WP_Logger::info('OK 2 !!! '); 
                     $apiClient->contacts()->updateOne($contact);
-                    LS_WP_Logger::info('OK 2 !!! ');   
+                    LS_WP_Logger::info('OK 3 !!! ');   
                 }else{
                     LS_WP_Logger::error('counter: ' . $counter);   
                 }
