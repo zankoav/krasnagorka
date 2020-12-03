@@ -200,20 +200,15 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             
             $leadId = (int)$_POST['leads']['status'][0]['id'];
-            LS_WP_Logger::info('leadId: ' . $leadId);
             $apiClient = self::getAmoCrmApiClient();
-            LS_WP_Logger::info('apiClient: ' . json_encode($apiClient));
-            $lead = $apiClient->leads()->getOne($leadId);
-            // $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
-            LS_WP_Logger::info('lead' . json_encode($lead));
-            LS_WP_Logger::info('lead Name: ' . $lead->getName());
+            $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
             //Получим основной контакт сделки
             /** @var ContactsCollection $leadContacts */
-            // $leadContacts = $lead->getContacts();
-            // if ($leadContacts) {
-            //     $leadMainContact = $leadContacts->getBy('isMain', true);
-            //     LS_WP_Logger::info('leadMainContact: ' . $leadMainContact->getName());
-            // }
+            $leadContacts = $lead->getContacts();
+            if ($leadContacts) {
+                $leadMainContact = $leadContacts->getBy('isMain', true);
+                LS_WP_Logger::info('leadMainContact: ' . $leadMainContact->getName());
+            }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
         } catch (Exception $e) {
@@ -1403,11 +1398,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
         $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
         $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
-        LS_WP_Logger::info('AmoCRMApiClient: 1');
         $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        LS_WP_Logger::info('AmoCRMApiClient: 2');
         $accessToken = getToken();
-        LS_WP_Logger::info('AmoCRMApiClient: 3');
         $apiClient
             ->setAccountBaseDomain('krasnogorka.amocrm.ru')
             ->setAccessToken($accessToken)
@@ -1422,7 +1414,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                         ]
                     );
                 });
-        LS_WP_Logger::info('AmoCRMApiClient: 4');
         return $apiClient;
     }
 
