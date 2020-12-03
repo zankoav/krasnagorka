@@ -206,7 +206,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             /** @var ContactsCollection $leadContacts */
             $leadContacts = $lead->getContacts();
             if ($leadContacts) {
-                $leadMainContact = $leadContacts->getBy('isMain', true);
+                $leadMainContact = $leadContacts->first();
                 LS_WP_Logger::info('leadMainContact: ' .  json_encode($leadMainContact->toArray()));
                 $leads = $leadMainContact->getLeads();
                 LS_WP_Logger::info('leads: ' .  $leads->count());
