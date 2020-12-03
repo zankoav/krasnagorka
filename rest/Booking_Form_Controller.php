@@ -241,7 +241,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     // $contactCustomFields->add($typeFieldValueContact);
                     // $contact->setCustomFieldsValues($contactCustomFields);
                     LS_WP_Logger::info('OK 1 !!! '); 
-                    $contact->setFirstName('Test');
+                    $contact->setLastName('GGG');
                     $contact = $apiClient->contacts()->updateOne($contact);
                     LS_WP_Logger::info('OK 2 !!! ');   
                 }
