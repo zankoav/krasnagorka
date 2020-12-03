@@ -198,9 +198,11 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         //Получим сделку
         try {
+            
+            $leadId = (int)$_POST['leads']['status'][0]['id'];
+            LS_WP_Logger::info('leadId: ' . $leadId);
             $apiClient = self::getAmoCrmApiClient();
-            LS_WP_Logger::info('leadId: ' . $_POST['leads']['status'][0]['id']);
-            $lead = $apiClient->leads()->getOne($_POST['leads']['status'][0]['id'], [LeadModel::CONTACTS, LeadModel::CATALOG_ELEMENTS]);
+            $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
             LS_WP_Logger::info('lead Name: ' . $lead->getName());
             //Получим основной контакт сделки
             /** @var ContactsCollection $leadContacts */
@@ -1398,24 +1400,29 @@ class Booking_Form_Controller extends WP_REST_Controller
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
         $redirectUri = 'https://krasnagorka.by';
-
-        $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $accessToken = getToken();
-        $apiClient
-            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
-            ->setAccessToken($accessToken)
-            ->onAccessTokenRefresh(
-                function (AccessTokenInterface $accessToken, string $baseDomain) {
-                    saveToken(
-                        [
-                            'access_token' => $accessToken->getToken(),
-                            'refresh_token' => $accessToken->getRefreshToken(),
-                            'expires_in' => $accessToken->getExpires(),
-                            'baseDomain' => $baseDomain,
-                        ]
-                    );
-                });
-
+        try{
+            $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+            $accessToken = getToken();
+            $apiClient
+                ->setAccountBaseDomain('krasnogorka.amocrm.ru')
+                ->setAccessToken($accessToken)
+                ->onAccessTokenRefresh(
+                    function (AccessTokenInterface $accessToken, string $baseDomain) {
+                        saveToken(
+                            [
+                                'access_token' => $accessToken->getToken(),
+                                'refresh_token' => $accessToken->getRefreshToken(),
+                                'expires_in' => $accessToken->getExpires(),
+                                'baseDomain' => $baseDomain,
+                            ]
+                        );
+                    });
+        } catch (AmoCRMApiException $e) {
+            LS_WP_Logger::info('AmoCRMApiException: ' . $e);
+        } catch (Exception $e) {
+            LS_WP_Logger::info('Exception: ' . $e->getMessage());
+        }
+        LS_WP_Logger::info('apiClient: ');
         return $apiClient;
     }
 
