@@ -211,6 +211,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
+        } catch (Exception $e) {
+            LS_WP_Logger::info('Exception: ' . $e->getMessage());
         }
 
         
