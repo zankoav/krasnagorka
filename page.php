@@ -13,7 +13,7 @@
     get_header('mastak');
     get_template_part("mastak/views/header", "small-view"); ?>
     <div class="b-bgc-wrapper b-py-3">
-        <div class="b-container big-text">
+        <div class="b-container big-text js-zankoav">
             <?php the_content(); ?>
         </div>
     </div>
