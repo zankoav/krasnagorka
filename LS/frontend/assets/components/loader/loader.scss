@@ -1,0 +1,58 @@
+.loader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $WHITE;
+    min-height: 240px;
+    height: 100%;
+    width: 100%;
+
+    &_inverse{
+        background-color: transparent;
+
+        .loader__spinner{
+            border-color: $WHITE transparent $WHITE $WHITE;
+        }
+
+        .loader__message{
+            color: $WHITE;
+        }
+    }
+
+    &__spinner{
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        opacity: 0;
+        border-radius: 50%;
+        border-width: 3px;
+        border-style: solid;
+        border-color: $GRAY_3 transparent $GRAY_3 $GRAY_3;
+        animation: rotate .8s linear infinite, fadeSpinner .3s .3s linear forwards;
+    
+        @include sm {
+            width: 48px;
+            height: 48px;
+            border-width: 4px;
+        }
+    }
+
+    &__message{
+        margin-top: 1rem;
+        font-size: 16px;
+        text-align: center;
+        color: $GRAY_3;
+    }
+    
+}
+
+@keyframes rotate{
+    0%{transform: rotate(0);}
+    100%{transform: rotate(360deg);}
+}
+
+@keyframes fadeSpinner{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}

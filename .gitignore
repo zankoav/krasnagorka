@@ -2,5 +2,8 @@
 .idea
 node_modules
 lwc/node_modules
+LS/frontend/node_modules
+.DS_Store
+package-lock.json
 vendor
 token_info.json
