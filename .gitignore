@@ -3,6 +3,7 @@
 node_modules
 lwc/node_modules
 LS/frontend/node_modules
+LS/frontend/src
 .DS_Store
 package-lock.json
 vendor
