@@ -162,6 +162,24 @@ if (!defined('ABSPATH')) {
 			font-size: 14px;
 			font-weight: bold;
 		}
+
+		.menu-bottom__sunny{
+			display: none;
+		}
+
+		.menu-bottom__sunny-icon{
+			margin-left: 1rem;
+		}
+
+		@media (min-width : 768px) {
+			.menu-bottom__sunny{
+				display: block;
+			}
+
+			.menu-bottom__sunny-icon{
+				margin-left: 0;
+			}
+		}
 	</style>
 
     <script type="text/javascript" >
