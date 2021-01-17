@@ -213,6 +213,16 @@ if (!defined('ABSPATH')) {
 				-webkit-appearance: none !important;
 				-moz-appearance: none !important;
 				appearance: none !important;
+				border-radius: 6px;
+				border: 1px solid #aaaaaa;
+			}
+
+			#footer-submit-form {
+				flex: 1 0 100%;
+			}
+
+			.contacts-form__item:last-child {
+				flex-wrap: wrap;
 			}
 		</style>
 
