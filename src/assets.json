@@ -1,1 +1,61 @@
-{"booking":{"js":"/wp-content/themes/krasnagorka/src/javascript/booking.1d168038ffa88074949e.min.js","css":"/wp-content/themes/krasnagorka/src/stylesheets/booking.1d168038ffa88074949e.min.css"},"":{"png":["/wp-content/themes/krasnagorka/src//icons/a1.93791f.png","/wp-content/themes/krasnagorka/src//icons/big-fuel-marker.fd95ab.png"],"svg":["/wp-content/themes/krasnagorka/src//icons/byn.8ed77d.svg","/wp-content/themes/krasnagorka/src//icons/clock.1fa375.svg","/wp-content/themes/krasnagorka/src//icons/contacts-icon.d9f04b.svg","/wp-content/themes/krasnagorka/src//icons/envelope.af497d.svg","/wp-content/themes/krasnagorka/src//icons/eur.7b4534.svg","/wp-content/themes/krasnagorka/src//icons/fb.b2b78c.svg","/wp-content/themes/krasnagorka/src//icons/insta.ac723f.svg","/wp-content/themes/krasnagorka/src//icons/life.4c7b3c.svg","/wp-content/themes/krasnagorka/src//icons/menu-close.084d73.svg","/wp-content/themes/krasnagorka/src//icons/menu-icon.f789cd.svg","/wp-content/themes/krasnagorka/src//icons/mts.0ba57a.svg","/wp-content/themes/krasnagorka/src//icons/ok.0db595.svg","/wp-content/themes/krasnagorka/src//icons/online-video.2386e3.svg","/wp-content/themes/krasnagorka/src//icons/rur.7a8b3a.svg","/wp-content/themes/krasnagorka/src//icons/telegram.867f4f.svg","/wp-content/themes/krasnagorka/src//icons/usd.aefba3.svg","/wp-content/themes/krasnagorka/src//icons/viber.71338d.svg","/wp-content/themes/krasnagorka/src//icons/vk.fef787.svg","/wp-content/themes/krasnagorka/src//icons/whatsapp.4df22a.svg","/wp-content/themes/krasnagorka/src//icons/youtube.a935fc.svg"],"woff":["/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.2dcf23.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.348ecb.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.3e31fb.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.2bda12.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.0ebbb0.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.a81229.woff","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.decf85.woff"],"ttf":["/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.cb5f2e.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.6f558b.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.51972d.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.c91f45.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.64954f.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.97b615.ttf","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.1a4468.ttf"],"eot":["/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.cd1b4c.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.cdbdf3.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.5de772.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.e343ba.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.95939d.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.4171ed.eot","/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.2b9960.eot"]}}
+{
+    "booking": {
+        "js": "/wp-content/themes/krasnagorka/src/javascript/booking.1d168038ffa88074949e.min.js",
+        "css": "/wp-content/themes/krasnagorka/src/stylesheets/booking.1d168038ffa88074949e.min.css"
+    },
+    "": {
+        "png": [
+            "/wp-content/themes/krasnagorka/src//icons/a1.93791f.png",
+            "/wp-content/themes/krasnagorka/src//icons/big-fuel-marker.fd95ab.png"
+        ],
+        "svg": [
+            "/wp-content/themes/krasnagorka/src//icons/byn.8ed77d.svg",
+            "/wp-content/themes/krasnagorka/src//icons/clock.1fa375.svg",
+            "/wp-content/themes/krasnagorka/src//icons/contacts-icon.d9f04b.svg",
+            "/wp-content/themes/krasnagorka/src//icons/envelope.af497d.svg",
+            "/wp-content/themes/krasnagorka/src//icons/eur.7b4534.svg",
+            "/wp-content/themes/krasnagorka/src//icons/fb.b2b78c.svg",
+            "/wp-content/themes/krasnagorka/src//icons/insta.ac723f.svg",
+            "/wp-content/themes/krasnagorka/src//icons/life.4c7b3c.svg",
+            "/wp-content/themes/krasnagorka/src//icons/menu-close.084d73.svg",
+            "/wp-content/themes/krasnagorka/src//icons/menu-icon.f789cd.svg",
+            "/wp-content/themes/krasnagorka/src//icons/mts.0ba57a.svg",
+            "/wp-content/themes/krasnagorka/src//icons/ok.0db595.svg",
+            "/wp-content/themes/krasnagorka/src//icons/online-video.2386e3.svg",
+            "/wp-content/themes/krasnagorka/src//icons/rur.7a8b3a.svg",
+            "/wp-content/themes/krasnagorka/src//icons/telegram.867f4f.svg",
+            "/wp-content/themes/krasnagorka/src//icons/usd.aefba3.svg",
+            "/wp-content/themes/krasnagorka/src//icons/viber.71338d.svg",
+            "/wp-content/themes/krasnagorka/src//icons/vk.fef787.svg",
+            "/wp-content/themes/krasnagorka/src//icons/whatsapp.4df22a.svg",
+            "/wp-content/themes/krasnagorka/src//icons/youtube.a935fc.svg"
+        ],
+        "woff": [
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.2dcf23.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.348ecb.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.3e31fb.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.2bda12.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.0ebbb0.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.a81229.woff",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.decf85.woff"
+        ],
+        "ttf": [
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.cb5f2e.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.6f558b.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.51972d.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.c91f45.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.64954f.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.97b615.ttf",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.1a4468.ttf"
+        ],
+        "eot": [
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Bold.cd1b4c.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-BoldItalic.cdbdf3.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Italic.5de772.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Light.e343ba.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-LightItalic.95939d.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-Regular.4171ed.eot",
+            "/wp-content/themes/krasnagorka/src/fonts/AvenirNextCyr-UltraLight.2b9960.eot"
+        ]
+    }
+}
