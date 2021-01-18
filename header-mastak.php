@@ -246,6 +246,10 @@ if (!defined('ABSPATH')) {
 					padding-right: 36px;
 				}
 			}
+
+			.prices__name{
+				text-align:initial !important;
+			}
 		</style>
 
 		<script type="text/javascript">
