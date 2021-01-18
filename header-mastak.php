@@ -240,6 +240,9 @@ if (!defined('ABSPATH')) {
 			.footer-top div.wpcf7-mail-sent-ok{
 				color: #039e24;
 			}
+			.flag{
+				right:0;
+			}
 		</style>
 
 		<script type="text/javascript">
