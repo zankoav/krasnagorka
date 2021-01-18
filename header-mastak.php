@@ -224,6 +224,9 @@ if (!defined('ABSPATH')) {
 			.contacts-form__item:last-child {
 				flex-wrap: wrap;
 			}
+			.contacts-form__item > p {
+				width:100%;
+			}
 		</style>
 
 		<script type="text/javascript">
