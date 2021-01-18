@@ -247,8 +247,9 @@ if (!defined('ABSPATH')) {
 				}
 			}
 
-			.prices__name{
-				text-align:initial !important;
+			.prices__name,
+			.prices__table {
+				text-align: initial !important;
 			}
 		</style>
 
