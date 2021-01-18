@@ -224,8 +224,21 @@ if (!defined('ABSPATH')) {
 			.contacts-form__item:last-child {
 				flex-wrap: wrap;
 			}
-			.contacts-form__item > p {
-				width:100%;
+
+			.contacts-form__item>p {
+				width: 100%;
+			}
+
+			.footer-top span.wpcf7-not-valid-tip {
+				color: #d0021b;
+			}
+
+			.footer-top div.wpcf7-response-output{
+				color: #d0021b;
+			}
+
+			.footer-top div.wpcf7-mail-sent-ok{
+				color: #039e24;
 			}
 		</style>
 
