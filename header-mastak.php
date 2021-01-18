@@ -243,7 +243,7 @@ if (!defined('ABSPATH')) {
 
 			@media (max-width: 568px) {
 				.opportunity__title {
-					padding-right: 40px;
+					padding-right: 36px;
 				}
 			}
 		</style>
