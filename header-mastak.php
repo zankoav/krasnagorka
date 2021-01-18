@@ -233,15 +233,18 @@ if (!defined('ABSPATH')) {
 				color: #d0021b;
 			}
 
-			.footer-top div.wpcf7-response-output{
+			.footer-top div.wpcf7-response-output {
 				color: #d0021b;
 			}
 
-			.footer-top div.wpcf7-mail-sent-ok{
+			.footer-top div.wpcf7-mail-sent-ok {
 				color: #039e24;
 			}
-			.flag{
-				right:0;
+
+			@media (max-width: 568px) {
+				.opportunity__title {
+					padding-right: 40px;
+				}
 			}
 		</style>
 
