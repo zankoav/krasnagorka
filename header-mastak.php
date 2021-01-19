@@ -251,6 +251,10 @@ if (!defined('ABSPATH')) {
 			.prices__table {
 				text-align: initial !important;
 			}
+
+			.gm-style-iw-d {
+				-webkit-overflow-scrolling: touch;
+			}
 		</style>
 
 		<script type="text/javascript">
