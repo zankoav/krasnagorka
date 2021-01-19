@@ -253,7 +253,7 @@ if (!defined('ABSPATH')) {
 			}
 
 			.gm-style-iw-d {
-				-webkit-overflow-scrolling: touch;
+				padding: 0 8px 8px 0;
 			}
 		</style>
 
