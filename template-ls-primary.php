@@ -11,7 +11,7 @@
 <html>
     <head>   
         <title> LS главная </title>
-        <link rel="stylesheet" href="<?=Assets::css()?>">
+        <style><?=Assets::cssContent()?></style>
     </head>
     <body>      
         <div style="color: rgb(0, 0, 255); font-size: 2em">
@@ -23,6 +23,6 @@
         <div style="color: rgb(0, 0, 150); font-size: 2em">
             Подвал
         </div>
-        <script type="text/javascript"  src="<?=Assets::js()?>"></script>
+        <script ><?=Assets::jsContent()?></script>
     </body>
 </html>

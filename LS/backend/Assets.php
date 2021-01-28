@@ -19,14 +19,24 @@
             self::$assets = json_decode($content, true);
             }
         }
-        public function css() {
+        public static function css() {
             self::checkDevice();
             self::setAssets();
             return self::$assets[self::$name]['css'];
         }
-        public function js() {
+        public static function js() {
             self::checkDevice();
             self::setAssets();
             return self::$assets[self::$name]['js'];
         }
+        public static function cssContent(){
+            $patch="http://wordpress/".self::css();
+            $cssContent=file_get_contents($patch);
+            return $cssContent;
+        }
+        public static function jsContent(){
+            $patch="http://wordpress/".self::js();
+            $jsContent=file_get_contents($patch);
+            return $jsContent;
+       }
     }
