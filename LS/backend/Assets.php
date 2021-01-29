@@ -30,12 +30,12 @@
             return self::$assets[self::$name]['js'];
         }
         public static function cssContent(){
-            $patch="http://wordpress/".self::css();
+            $patch=get_site_url().self::css();
             $cssContent=file_get_contents($patch);
             return $cssContent;
         }
         public static function jsContent(){
-            $patch="http://wordpress/".self::js();
+            $patch=get_site_url().self::js();
             $jsContent=file_get_contents($patch);
             return $jsContent;
        }
