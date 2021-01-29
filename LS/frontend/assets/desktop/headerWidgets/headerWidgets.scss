@@ -1,0 +1,64 @@
+.header-widgets {
+	height: 100%;
+	display: grid;
+	grid-template-areas:
+		"header-widgets__logo header-widgets__video header-widgets__menu header-widgets__contacts"
+		"header-widgets__view header-widgets__view header-widgets__view header-widgets__view"
+		"header-widgets__currencies header-widgets__currencies header-widgets__weather header-widgets__weather";
+	grid-template-rows: 100px 1fr 110px;
+	grid-template-columns: 74px 176px 1fr 26px;
+	grid-gap: 1rem;
+
+	&__logo {
+		grid-area: header-widgets__logo;
+		position: relative;
+		z-index: 1;
+		align-self: center;
+	}
+
+	&__video {
+		grid-area: header-widgets__video;
+		position: relative;
+		z-index: 1;
+		align-self: center;
+	}
+
+	&__menu {
+		grid-area: header-widgets__menu;
+		position: relative;
+		z-index: 1;
+		align-self: center;
+	}
+
+	&__contacts {
+		grid-area: header-widgets__contacts;
+		position: relative;
+		z-index: 2;
+		align-self: center;
+	}
+
+	&__currencies {
+		grid-area: header-widgets__currencies;
+		position: relative;
+		z-index: 1;
+		align-self: center;
+	}
+
+	&__weather {
+		grid-area: header-widgets__weather;
+		z-index: 1;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-self: end;
+		align-self: center;
+	}
+
+	&__view {
+		grid-area: header-widgets__view;
+	}
+
+	&__weather-block {
+		margin-left: 1rem;
+	}
+}

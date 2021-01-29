@@ -1,0 +1,17 @@
+.video {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding: 0.5rem 0;
+
+	&__icon {
+		width: 1rem;
+		object-fit: contain;
+	}
+
+	&__title {
+		color: $WHITE;
+		font-size: 13px;
+		margin-left: 0.5rem;
+	}
+}

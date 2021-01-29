@@ -1,0 +1,112 @@
+.contacts {
+	position: relative;
+
+	&__link {
+		display: flex;
+		width: 26px;
+		height: 26px;
+		animation: contact-button 2s linear infinite;
+		transition: all 0.4s;
+		border-radius: 50%;
+		cursor: pointer;
+
+		&:hover {
+			background-color: rgba($RED, 0.5);
+			animation-play-state: paused;
+		}
+	}
+
+	&__popup {
+		position: absolute;
+		max-width: initial;
+		width: 270px;
+		top: calc(100% + 0.5rem);
+		right: 0;
+		padding: 2rem 2rem 1rem;
+		background-color: $WHITE;
+		color: $GRAY_2;
+		border-radius: 4px;
+		box-shadow: 0 4px 8px $GRAY_2;
+		line-height: 1;
+		font-size: 18px;
+		animation: fade-in 0.3s ease-in;
+		display: none;
+
+		&_active {
+			display: block;
+		}
+	}
+
+	&__item {
+		padding: 0.5rem 0;
+
+		&_messangers {
+			border-bottom: 1px solid $GRAY_4;
+		}
+		&_email {
+			border-bottom: 1px solid $GRAY_4;
+			border-top: 1px solid $GRAY_4;
+			padding: 0.75rem 0;
+		}
+	}
+
+	&__action-item {
+		display: flex;
+	}
+
+	&__item-img {
+		display: flex;
+		width: 20px;
+		height: 20px;
+		object-fit: contain;
+		margin-right: 0.5rem;
+	}
+
+	&__messanger {
+		position: absolute;
+		right: 32px;
+		top: 16px;
+		width: 20px;
+		height: 20px;
+
+		&:nth-child(1) {
+			right: 32px + 40px + 16px;
+		}
+		&:nth-child(2) {
+			right: 32px + 20px + 8px;
+		}
+	}
+
+	&__email {
+		color: $GRAY_2;
+	}
+
+	&__phone {
+		color: $BLUE_1;
+	}
+}
+
+@keyframes contact-button {
+	0%,
+	40%,
+	50%,
+	60%,
+	100% {
+		transform: scale(1) rotate(0);
+	}
+	45% {
+		transform: scale(1.1) rotate(-20deg);
+	}
+	55% {
+		transform: scale(1.1) rotate(-20deg);
+	}
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

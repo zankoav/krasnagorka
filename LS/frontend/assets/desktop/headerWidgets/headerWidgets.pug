@@ -1,0 +1,17 @@
+mixin header_widgets_desktop
+	.header-widgets.container
+		a.header-widgets__logo(href='/')
+			img.header-widgets__logo-icon(src=require('./../img/logo.png').default)
+		.header-widgets__video
+			+video()
+		nav.header-widgets__menu
+			+menu()
+		.header-widgets__contacts 
+			+contacts()
+		.header-widgets__view
+		.header-widgets__currencies
+			+currencies()
+		.header-widgets__weather
+			+today()
+			.header-widgets__weather-block
+				+weather()

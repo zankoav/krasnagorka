@@ -1,0 +1,32 @@
+mixin contacts
+	.contacts
+		.contacts__link
+			img.contacts__icon(src=require('./../img/contacts-icon.svg').default)
+		.contacts__popup
+			.contacts__item.contacts__item_messangers
+				img.contacts__messanger(src=require('./../img/messangers/viber.svg').default)
+				img.contacts__messanger(src=require('./../img/messangers/whatsapp.svg').default)
+				img.contacts__messanger(src=require('./../img/messangers/telegram.svg').default)
+				a.contacts__action-item(href="tel:+375 29 320 19 19")
+					img.contacts__item-img(src=require('./../img/mobile/a1.png').default)
+					span.contacts__phone +375 29 320 19 19
+			.contacts__item
+				a.contacts__action-item(href="tel:+375 29 701 19 19") 
+					img.contacts__item-img(src=require('./../img/mobile/mts.svg').default)
+					span.contacts__phone +375 29 701 19 19
+			.contacts__item
+				a.contacts__action-item(href="tel:+375 25 920 19 19") 
+					img.contacts__item-img(src=require('./../img/mobile/life.svg').default)
+					span.contacts__phone +375 25 920 19 19
+			.contacts__item.contacts__item_email
+				a.contacts__action-item(href="mailto:info@krasnagorka.by") 
+					img.contacts__item-img(src=require('./../img/envelope.svg').default)
+					span.contacts__email info@krasnagorka.by
+			.contacts__item
+				.contacts__action-item
+					img.contacts__item-img(src=require('./../img/clock.svg').default)
+					span.contacts__time 9:00 - 20:00 пн-пт
+			.contacts__item
+				.contacts__action-item
+					img.contacts__item-img(src=require('./../img/clock.svg').default)
+					span.contacts__time 11:00 - 20:00 сб,вс

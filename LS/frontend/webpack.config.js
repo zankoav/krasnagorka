@@ -14,7 +14,7 @@ module.exports = env => {
     const IS_DEV = env.mode === 'development';
     const DEBUG_MODE = env.debug == '1';
     const publicPath = IS_DEV ? '/' : `./src`;
-    const productionPrefix = IS_DEV ? '/' : '/wp-content/themes/krasnagorka/LS/frontend/src';
+    const productionPrefix = IS_DEV ? '/' : 'https://krasnagorka.by/wp-content/themes/krasnagorka/LS/frontend/src';
 
     const plugins = [
         new CleanWebpackPlugin(),
