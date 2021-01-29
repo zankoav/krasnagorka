@@ -1,5 +1,5 @@
 <?php
-    class Assets {
+    class LS_Assets {
 
         private static $assets=null;
         private static $name=null;
