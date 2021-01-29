@@ -1,11 +1,12 @@
+include ./../common/mixins
 doctype html
 html
     head
         meta(charset = 'utf-8')
         title=htmlWebpackPlugin.options.title
-        <link rel="preconnect" href="https://fonts.gstatic.com"/>
-        <link rel="stylesheet" href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     body
-        include ./header/header.pug
+        +header_desktop(true)
         include ./main/main.pug
         include ./footer/footer.pug

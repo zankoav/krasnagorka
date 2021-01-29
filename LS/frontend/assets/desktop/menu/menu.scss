@@ -1,0 +1,64 @@
+.menu {
+	display: flex;
+	justify-content: flex-end;
+
+	&__sub-menu {
+		position: absolute;
+		padding: 0.5rem 0;
+		background-color: $WHITE;
+		color: $GRAY_2;
+		border-radius: 4px;
+		box-shadow: 0 4px 8px $GRAY_2;
+		line-height: 1;
+		font-size: 18px;
+		animation: fade-in 0.3s ease-in;
+		display: none;
+		top: 1.5rem;
+		left: 0;
+		max-width: initial;
+	}
+
+	&__item {
+		position: relative;
+		white-space: nowrap;
+		a {
+			padding: 0.5rem;
+			color: $WHITE;
+			font-size: 13px;
+			transition: color 0.3s ease-in;
+
+			&:hover {
+				color: $BLUE_1;
+			}
+		}
+
+		&_active {
+			a {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	&__item-sub-menu:hover > .menu__sub-menu {
+		display: block;
+
+		.menu__item {
+			a {
+				display: block;
+				padding: 0.5rem 1rem;
+				color: $GRAY_3;
+
+				&:hover {
+					color: $BLUE_1;
+				}
+			}
+
+			&_active {
+				a {
+					text-decoration: none;
+					color: $BLUE_1;
+				}
+			}
+		}
+	}
+}

@@ -224,6 +224,37 @@ if (!defined('ABSPATH')) {
 			.contacts-form__item:last-child {
 				flex-wrap: wrap;
 			}
+
+			.contacts-form__item>p {
+				width: 100%;
+			}
+
+			.footer-top span.wpcf7-not-valid-tip {
+				color: #d0021b;
+			}
+
+			.footer-top div.wpcf7-response-output {
+				color: #d0021b;
+			}
+
+			.footer-top div.wpcf7-mail-sent-ok {
+				color: #039e24;
+			}
+
+			@media (max-width: 568px) {
+				.opportunity__title {
+					padding-right: 36px;
+				}
+			}
+
+			.prices__name,
+			.prices__table {
+				text-align: initial !important;
+			}
+
+			.gm-style-iw-d {
+				padding: 0 8px 8px 0;
+			}
 		</style>
 
 		<script type="text/javascript">

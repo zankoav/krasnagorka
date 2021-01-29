@@ -1,0 +1,14 @@
+mixin currencies
+	.currencies(data-title="Выберите валюту")
+		.currencies__wrapper
+			.currencies__current(data-currency="byn")
+				img.currencies__flag(src=require('./../img/flags/byn.svg').default)
+			ul.currencies__list
+				li.currencies__item(data-currency="byn")
+					img.currencies__flag(src=require('./../img/flags/byn.svg').default)
+				li.currencies__item(data-currency="rub")
+					img.currencies__flag(src=require('./../img/flags/rub.svg').default)
+				li.currencies__item(data-currency="usd")
+					img.currencies__flag(src=require('./../img/flags/usd.svg').default)
+				li.currencies__item(data-currency="eur")
+					img.currencies__flag(src=require('./../img/flags/eur.svg').default)

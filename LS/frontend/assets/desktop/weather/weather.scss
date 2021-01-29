@@ -1,0 +1,45 @@
+.weather {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: $WHITE;
+
+	&__today {
+		text-align: center;
+		max-width: 150px;
+
+		&:after {
+			content: attr(data-description);
+			display: block;
+			line-height: 1;
+		}
+	}
+
+	&__today-img {
+		width: 3rem;
+	}
+
+	&__today-degree {
+		font-size: 36px;
+		font-weight: 300;
+		margin-left: 1rem;
+
+		&:after {
+			content: "°C";
+			margin-left: 0.125rem;
+		}
+	}
+
+	&__day {
+		text-align: center;
+		margin-left: 1rem;
+		&:after {
+			content: attr(data-day);
+			display: block;
+		}
+	}
+
+	&__day-img {
+		width: 28px;
+	}
+}

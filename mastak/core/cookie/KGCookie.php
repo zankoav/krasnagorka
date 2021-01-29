@@ -8,7 +8,7 @@
 
 	class KGCookie extends BaseCookie {
 
-		const RUS = 'rur';
+		const RUS = 'rus';
 		const EUR = 'eur';
 		const USD = 'usd';
 		const BYN = 'byn';

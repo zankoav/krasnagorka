@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="20px" viewBox="0 0 10 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main-Mobile-Portrait" transform="translate(-76.000000, -157.000000)" fill="#4A4A4A" fill-rule="nonzero">
+            <g id="contacts-popup">
+                <g id="contacts" transform="translate(30.000000, 89.000000)">
+                    <g id="Group-2" transform="translate(46.000000, 68.000000)">
+                        <g id="life-01">
+                            <path d="M3.94181818,19.9284553 C5.52181818,17.3479675 6.72,14.6406504 7.03272727,11.6943089 C7.45090909,7.66829268 7.34909091,3.69105691 5.04727273,0.0243902439 L7.24545455,0.0243902439 C11.7454545,5.13333333 9.79090909,15.8390244 6.42181818,19.9300813 L3.94181818,19.9284553 Z" id="Shape"></path>
+                            <polygon id="Shape" points="0.0236363636 15.8373984 0.0236363636 13.0910569 3.79090909 13.0910569 3.79090909 15.8373984"></polygon>
+                            <polygon id="Shape" points="4.20545455 4.99186992 4.20545455 7.75609756 0.467272727 7.75609756 0.467272727 4.99186992"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

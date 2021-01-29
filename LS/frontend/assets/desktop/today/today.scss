@@ -1,0 +1,15 @@
+.today {
+	color: $WHITE;
+	font-size: 14px;
+	line-height: 1;
+
+	&:before {
+		content: "КРАСНОГОРКА";
+		display: block;
+	}
+
+	&:after {
+		content: attr(data-mounth);
+		margin-left: 0.25rem;
+	}
+}

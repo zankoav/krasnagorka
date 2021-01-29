@@ -1,1 +1,9 @@
-header.header Header Desktop
+mixin header_desktop(isSliderExists)
+	header.header
+		.header__layer
+			+header_widgets_desktop()
+		.header__layer
+			if isSliderExists
+				+slider_desktop()
+			else 
+				+slide()

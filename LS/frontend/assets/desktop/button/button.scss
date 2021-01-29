@@ -1,0 +1,14 @@
+.button {
+	padding: 0.5rem 2rem;
+	background-color: $RED;
+	color: $WHITE;
+	font-weight: 600;
+	font-size: 20px;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+	transition: all 0.4s;
+
+	&:hover {
+		background-color: $BLUE_1;
+	}
+}
