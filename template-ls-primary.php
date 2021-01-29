@@ -17,7 +17,7 @@
 <html>
     <head>   
         <title> LS главная </title>
-        <style><?=Assets::cssContent()?></style>
+        <style><?=LS_Assets::cssContent()?></style>
     </head>
     <body>  
     <header class="header">
@@ -165,6 +165,6 @@
     </header>
     <main class="main">Main</main>
     <footer class="footer">Footer</footer>
-        <script ><?=Assets::jsContent()?></script>
+        <script ><?=LS_Assets::jsContent()?></script>
     </body>
 </html>
