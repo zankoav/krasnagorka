@@ -1,24 +1,18 @@
 <?php
-/**
+    /**
      *
      * Template Name: LS Главная
      *
      */
-    
-     require_once __DIR__ . '/LS/backend/LS_Assets.php';
-     $model=(object)[
-        $monthList=["0","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"],
-        "contact"=>(object)[
-            "a1"=>"+375 29 320 19 19",
-            "mts"=>"+375 29 701 19 19",
-            "life"=>"+375 25 920 19 19",
-            "email"=>"info@krasnagorka.by"
-        ],
-        "today"=>(object)[
-            "day"=>date("j"),
-            "month"=>$monthList[date("n")]
-        ]
-    ];
+    require_once __DIR__ . '/LS/backend/index.php';
+    $weather=ls_get_weather();
+    $today=LS_Today::today();
+    $contact=(object)[
+    "a1"=>"+375 29 320 19 19",
+    "mts"=>"+375 29 701 19 19",
+    "life"=>"+375 25 920 19 19",
+    "email"=>"info@krasnagorka.by"
+    ];  
 ?>
 <!DOCTYPE html>
 <html>
@@ -69,22 +63,22 @@
                                     src="/wp-content/themes/krasnagorka/LS/frontend/src/img/whatsapp.4df22a.svg"><img
                                     class="contacts__messanger"
                                     src="/wp-content/themes/krasnagorka/LS/frontend/src/img/telegram.867f4f.svg"><a
-                                    class="contacts__action-item" href="tel:<?=$model->contact->a1?>"><img
+                                    class="contacts__action-item" href="tel:<?=$contact->a1?>"><img
                                         class="contacts__item-img"
                                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/a1.93791f.png"><span
-                                        class="contacts__phone"><?=$model->contact->a1?></span></a></div>
-                            <div class="contacts__item"><a class="contacts__action-item" href="tel:<?=$model->contact->mts?>">
+                                        class="contacts__phone"><?=$contact->a1?></span></a></div>
+                            <div class="contacts__item"><a class="contacts__action-item" href="tel:<?=$contact->mts?>">
                                     <img class="contacts__item-img"
                                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/mts.0ba57a.svg"><span
-                                        class="contacts__phone"><?=$model->contact->mts?></span></a></div>
-                            <div class="contacts__item"><a class="contacts__action-item" href="tel:<?=$model->contact->life?>">
+                                        class="contacts__phone"><?=$contact->mts?></span></a></div>
+                            <div class="contacts__item"><a class="contacts__action-item" href="tel:<?=$contact->life?>">
                                     <img class="contacts__item-img"
                                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/life.4c7b3c.svg"><span
-                                        class="contacts__phone"><?=$model->contact->life?></span></a></div>
+                                        class="contacts__phone"><?=$contact->life?></span></a></div>
                             <div class="contacts__item contacts__item_email"><a class="contacts__action-item"
-                                    href="mailto:<?=$model->contact->email?>"> <img class="contacts__item-img"
+                                    href="mailto:<?=$contact->email?>"> <img class="contacts__item-img"
                                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/envelope.af497d.svg"><span
-                                        class="contacts__email"><?=$model->contact->email?></span></a></div>
+                                        class="contacts__email"><?=$contact->email?></span></a></div>
                             <div class="contacts__item">
                                 <div class="contacts__action-item"><img class="contacts__item-img"
                                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/clock.1fa375.svg"><span
@@ -118,19 +112,19 @@
                     </div>
                 </div>
                 <div class="header-widgets__weather">
-                    <div class="today" data-mounth="<?=$model->today->month ?>"><?=$model->today->day ?></div>
+                    <div class="today" data-mounth="<?=$today["month"] ?>"><?=$today["day"] ?></div>
                     <div class="header-widgets__weather-block">
                         <div class="weather">
-                            <div class="weather__today" data-description="<?=ls_get_weather()["description"]?>"><img
-                                    class="weather__today-img" src="<?=ls_get_weather()["icon"]?>"
-                                    alt="<?=ls_get_weather()["icon"]?>"></div>
-                            <div class="weather__today-degree"><?=ls_get_weather()['temperature']?></div>
-                            <div class="weather__day" data-day="<?=ls_get_weather()['firstDay']['day']?>"><img class="weather__day-img"
-                                    src="<?=ls_get_weather()['firstDay']['icon']?>" alt="<?=ls_get_weather()['firstDay']['icon']?>"></div>
-                            <div class="weather__day" data-day="<?=ls_get_weather()['secondDay']['day']?>"><img class="weather__day-img"
-                                    src="<?=ls_get_weather()['secondDay']['icon']?>" alt="<?=ls_get_weather()['secondDay']['icon']?>"></div>
-                            <div class="weather__day" data-day="<?=ls_get_weather()['thirdDay']['day']?>"><img class="weather__day-img"
-                                    src="<?=ls_get_weather()['thirdDay']['icon']?>" alt="<?=ls_get_weather()['thirdDay']['icon']?>"></div>
+                            <div class="weather__today" data-description="<?= $weather["description"]?>"><img
+                                    class="weather__today-img" src="<?= $weather["icon"]?>"
+                                    alt="<?= $weather["icon"]?>"></div>
+                            <div class="weather__today-degree"><?= $weather['temperature']?></div>
+                            <div class="weather__day" data-day="<?= $weather['firstDay']['day']?>"><img class="weather__day-img"
+                                    src="<?= $weather['firstDay']['icon']?>" alt="<?= $weather['firstDay']['icon']?>"></div>
+                            <div class="weather__day" data-day="<?= $weather['secondDay']['day']?>"><img class="weather__day-img"
+                                    src="<?= $weather['secondDay']['icon']?>" alt="<?= $weather['secondDay']['icon']?>"></div>
+                            <div class="weather__day" data-day="<?= $weather['thirdDay']['day']?>"><img class="weather__day-img"
+                                    src="<?= $weather['thirdDay']['icon']?>" alt="<?= $weather['thirdDay']['icon']?>"></div>
                         </div>
                     </div>
                 </div>
