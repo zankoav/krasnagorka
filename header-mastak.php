@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 	<head>
 		<meta charset="<?php bloginfo('charset'); ?>" />
 		<title>
-			<?= presscore_blog_title(); ?>
+			<?= wp_title(); ?>
 		</title>
 		<meta name="keywords"
 			  content="<?= mastak_seo_meta_title(); ?>" />
