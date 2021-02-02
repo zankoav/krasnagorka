@@ -263,11 +263,11 @@ if (!defined('ABSPATH')) {
 				padding-right: 2rem;
 				height: 42px;
 				color: #d0021b;
-				font-family: Avenir_Next_Bold,sans-serif;
 				font-size: 16px;
 				text-transform: uppercase;
 				display:flex;
 				align-items:center;
+				font-weight: 700;
 				justify-content:flex-end;
 			}
 
