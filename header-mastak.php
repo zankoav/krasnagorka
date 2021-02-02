@@ -359,8 +359,7 @@ if (!defined('ABSPATH')) {
 
 		<div id="kg-loader"
 			 class="kg-loader">
-			<img src="/wp-content/themes/krasnagorka/assets/images/<?= wp_is_mobile() ? "
-				 logoKG-xs.png"
+			<img src="/wp-content/themes/krasnagorka/assets/images/<?= wp_is_mobile() ? "logoKG-xs.png"
 				 : "logoKG.png"
 				 ;
 				 ?>" alt="spinner" class="kg-loader__img">
