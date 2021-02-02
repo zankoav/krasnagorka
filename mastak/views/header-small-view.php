@@ -231,6 +231,7 @@
 
         .header-second #canvas {
             display: block;
+            width:100%;
             transform: rotate(180deg);
         }
 
