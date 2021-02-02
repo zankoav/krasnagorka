@@ -39,42 +39,40 @@
 ?>
 
     <section class="b-container">
-        <?php if(false):?>
-            <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта домов</h2>
-            <div class="base-place b-mb-2">
-                <a rel="group" href="<?= wp_get_attachment_image_url($schema_houses_id, 'full'); ?>"
-                class="base-place__image fancybox image">
-                    <img class="base-place__image-inner" alt="Карта домов"
-                        src="<?= wp_get_attachment_image_url($schema_houses_id, $image_size_schema) ?>"
-                        srcset="<?= wp_get_attachment_image_srcset($schema_houses_id, $image_size_schema) ?>"
-                        sizes="<?= wp_get_attachment_image_sizes($schema_houses_id, $image_size_schema) ?>">
-                </a>
-                <div class="base-place__content">
-                    <?php
-                        if (is_active_sidebar('map-content')) {
-                            dynamic_sidebar('map-content');
-                        };
-                    ?>
-                </div>
+        <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта домов</h2>
+        <div class="base-place b-mb-2">
+            <a rel="group" href="<?= wp_get_attachment_image_url($schema_houses_id, 'full'); ?>"
+            class="base-place__image fancybox image">
+                <img class="base-place__image-inner" alt="Карта домов"
+                    src="<?= wp_get_attachment_image_url($schema_houses_id, $image_size_schema) ?>"
+                    srcset="<?= wp_get_attachment_image_srcset($schema_houses_id, $image_size_schema) ?>"
+                    sizes="<?= wp_get_attachment_image_sizes($schema_houses_id, $image_size_schema) ?>">
+            </a>
+            <div class="base-place__content">
+                <?php
+                    if (is_active_sidebar('map-content')) {
+                        dynamic_sidebar('map-content');
+                    };
+                ?>
             </div>
-            <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта услуг</h2>
-            <div class="base-place b-mb-2">
-                <a rel="group" href="<?= wp_get_attachment_image_url($schema_services_id, 'full'); ?>"
-                class="base-place__image fancybox image">
-                    <img class="base-place__image-inner" alt="Карта услуг"
-                        src="<?= wp_get_attachment_image_url($schema_services_id, $image_size_schema) ?>"
-                        srcset="<?= wp_get_attachment_image_srcset($schema_services_id, $image_size_schema) ?>"
-                        sizes="<?= wp_get_attachment_image_sizes($schema_services_id, $image_size_schema) ?>">
-                </a>
-                <div class="base-place__content">
-                    <?php
-                        if (is_active_sidebar('map-2-content')) {
-                            dynamic_sidebar('map-2-content');
-                        };
-                    ?>
-                </div>
+        </div>
+        <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта услуг</h2>
+        <div class="base-place b-mb-2">
+            <a rel="group" href="<?= wp_get_attachment_image_url($schema_services_id, 'full'); ?>"
+            class="base-place__image fancybox image">
+                <img class="base-place__image-inner" alt="Карта услуг"
+                    src="<?= wp_get_attachment_image_url($schema_services_id, $image_size_schema) ?>"
+                    srcset="<?= wp_get_attachment_image_srcset($schema_services_id, $image_size_schema) ?>"
+                    sizes="<?= wp_get_attachment_image_sizes($schema_services_id, $image_size_schema) ?>">
+            </a>
+            <div class="base-place__content">
+                <?php
+                    if (is_active_sidebar('map-2-content')) {
+                        dynamic_sidebar('map-2-content');
+                    };
+                ?>
             </div>
-        <?php endif;?>
+        </div>
         <h2 class="header-title__subtitle b-mb-2 b-mt-2">Контакты</h2>
         <div class="base-place__contacts">
             <p class="base-place__address"><?= $address; ?></p>
@@ -136,8 +134,6 @@
             </div>
         </div>
         <div class="b-light-line b-my-3 b-d-block-sm"></div>
-
-
     </section>
 
     <section class="b-container header-title">
