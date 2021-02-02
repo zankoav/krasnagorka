@@ -260,22 +260,20 @@ if (!defined('ABSPATH')) {
 				background: linear-gradient(-45deg, #fff, transparent);
     			bottom: 0;
 				width:100%;
-				margin-bottom: 28px;
 				padding-right: 2rem;
 				height: 42px;
 				color: #d0021b;
 				font-family: Avenir_Next_Bold,sans-serif;
 				font-size: 16px;
 				text-transform: uppercase;
-				font-weight: 700;
 				display:flex;
 				align-items:center;
-				justify-content:center;
+				justify-content:flex-end;
 			}
 
 			@media(min-width:768px){
 				.our-house__price{
-					margin-bottom: 0;
+					margin-bottom: 28px;
 				}
 			}
 
