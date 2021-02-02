@@ -256,10 +256,15 @@ if (!defined('ABSPATH')) {
 				padding: 0 8px 8px 0;
 			}
 			.our-house__price{
+				position: absolute;
+				background: linear-gradient(-45deg, #fff, transparent);
+    			bottom: 0;
 				width:100%;
-				margin-bottom:2rem;
-				height:34px;
-				color:#d0021b;
+				margin-bottom: 28px;
+				padding-right: 2rem;
+				height: 42px;
+				color: #d0021b;
+				font-family: Avenir_Next_Bold,sans-serif;
 				font-size: 16px;
 				text-transform: uppercase;
 				font-weight: 700;
@@ -268,9 +273,14 @@ if (!defined('ABSPATH')) {
 				justify-content:center;
 			}
 
+			@media(min-width:768px){
+				.our-house__price{
+					margin-bottom: 0;
+				}
+			}
+
 			.our-house__price::after{
 				content:attr(data-currency);
-				color:#d0021b;
 				text-transform: uppercase;
 				margin-left:.25rem;
 				font-weight: 700;
