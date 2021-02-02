@@ -255,6 +255,26 @@ if (!defined('ABSPATH')) {
 			.gm-style-iw-d {
 				padding: 0 8px 8px 0;
 			}
+			.our-house__price{
+				width:100%;
+				margin-bottom:2rem;
+				height:34px;
+				color:#d0021b;
+				font-size: 16px;
+				text-transform: uppercase;
+				font-weight: 700;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+			}
+
+			.our-house__price::after{
+				content:attr(data-currency);
+				color:#d0021b;
+				text-transform: uppercase;
+				margin-left:.25rem;
+				font-weight: 700;
+			}
 		</style>
 
 		<script type="text/javascript">
