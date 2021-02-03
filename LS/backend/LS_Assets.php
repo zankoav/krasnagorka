@@ -39,4 +39,11 @@
             $jsContent=file_get_contents($patch);
             return $jsContent;
        }
+       public static function objContent(){
+            $objContent = (object)[
+                "cssContent"=>self::cssContent(),
+                "jsContent"=>self::jsContent()
+            ];
+            return $objContent;
+       }
     }

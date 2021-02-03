@@ -1,10 +1,24 @@
 <?php 
     class LS_Today{
-        private static $monthList=["0","Января","Февраля","Марта","Апреля","Мая","Июня","Июля","Августа","Сентября","Октября","Ноября","Декабря"];
+        private static $monthList=[
+            "Января",
+            "Февраля",
+            "Марта",
+            "Апреля",
+            "Мая",
+            "Июня",
+            "Июля",
+            "Августа",
+            "Сентября",
+            "Октября",
+            "Ноября",
+            "Декабря"
+        ];
+
         public static function today(){
-            $dateMonth=[
+            $dateMonth=(object)[
                 'day'=>date("j"),
-                'month'=>self::$monthList[date("n")]
+                'month'=>self::$monthList[date("n")-1]
             ];
             return $dateMonth;
         }
