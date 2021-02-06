@@ -4,8 +4,8 @@
      * Template Name: LS Главная
      *
      */
+    $model=(new LS_Model())->initModel();
     
-    require_once __DIR__ . '/LS/backend/index.php';
 
     get_template_part('/LS/backend/templates/header',$model->devise,$model);
 ?>
