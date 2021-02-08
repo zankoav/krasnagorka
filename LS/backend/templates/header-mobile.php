@@ -16,6 +16,7 @@
                             src="/wp-content/themes/krasnagorka/LS/frontend/src/img/online-video.2386e3.svg"><span
                             class="video__title">смотреть ONLINE</span></a></div>
                 <nav class="header-widgets__menu">
+                            <?php ls_nav_menu() ?>  
                     <ul class="menu">
                         <li class="menu__item"><a href="https://krasnagorka.by/">Главная </a></li>
                         <li class="menu__item menu__item-sub-menu"><a
