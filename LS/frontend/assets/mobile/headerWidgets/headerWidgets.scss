@@ -1,0 +1,75 @@
+.header-widgets {
+	height: 100%;
+	position: relative;
+	display: grid;
+	padding: 1rem;
+	grid-template-areas:
+		"menu-button logo logo contacts-button"
+		"body body body body"
+		"today today weather weather"
+		"bottom-space bottom-space bottom-space bottom-space";
+	grid-template-rows: 80px 1fr 3rem 2rem;
+	grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+	grid-gap: 1rem;
+
+	&__menu-button {
+		position: relative;
+		z-index: 1;
+		grid-area: menu-button;
+	}
+
+	&__logo {
+		position: relative;
+		z-index: 1;
+		grid-area: logo;
+		text-align: center;
+	}
+
+	&__contacts-button {
+		position: relative;
+		z-index: 1;
+		grid-area: contacts-button;
+		text-align: right;
+	}
+
+	&__body {
+		grid-area: body;
+	}
+
+	&__bottom-space {
+		grid-area: bottom-space;
+	}
+
+	&__today {
+		position: relative;
+		z-index: 1;
+		grid-area: today;
+		align-self: center;
+	}
+
+	&__weather {
+		position: relative;
+		z-index: 1;
+		grid-area: weather;
+		align-self: center;
+	}
+
+	&__menu-button-icon {
+		width: 3rem;
+		padding: 1rem 0.5rem 1rem 0;
+	}
+
+	&__logo-icon {
+		height: 100%;
+		object-fit: contain;
+	}
+
+	&__contacts-button-icon {
+		display: inline-block;
+		margin-top: 0.5rem;
+		width: 2.75rem;
+		animation: contact-button 2s linear infinite;
+	}
+}
+
+@include animation-contact-button;

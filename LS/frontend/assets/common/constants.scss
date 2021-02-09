@@ -8,7 +8,6 @@ $GRAY_2: #4a4a4a;
 $GRAY_3: #101010;
 $GRAY_4: #eeeeee;
 
-
 $GRAY_5: #f7f7f7;
 $GRAY_6: #eeeeee;
 $GRAY_7: #414b50;
@@ -324,3 +323,21 @@ $MEDIA: (
 	}
 }
 // TEXT ALIGN END;
+
+@mixin animation-contact-button {
+	@keyframes contact-button {
+		0%,
+		40%,
+		50%,
+		60%,
+		100% {
+			transform: scale(1) rotate(0);
+		}
+		45% {
+			transform: scale(1.1) rotate(-20deg);
+		}
+		55% {
+			transform: scale(1.1) rotate(-20deg);
+		}
+	}
+}
