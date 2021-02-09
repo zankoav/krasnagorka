@@ -61,4 +61,3 @@ export function getMonthTodayRu(){
 export function getDayNumberToday(){
     return new Date().getUTCDate();
 }
-

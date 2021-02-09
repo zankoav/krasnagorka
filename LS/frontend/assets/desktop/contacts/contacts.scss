@@ -86,21 +86,7 @@
 	}
 }
 
-@keyframes contact-button {
-	0%,
-	40%,
-	50%,
-	60%,
-	100% {
-		transform: scale(1) rotate(0);
-	}
-	45% {
-		transform: scale(1.1) rotate(-20deg);
-	}
-	55% {
-		transform: scale(1.1) rotate(-20deg);
-	}
-}
+@include animation-contact-button;
 
 @keyframes fade-in {
 	0% {

@@ -1,18 +1,3 @@
-// @include container();
-// @include editor();
-// @include fonts-size();
-// @include margin();
-// @include keyframes();
-// @include display();
-// @include text-align();
-
 body {
 	font-family: "Open Sans", sans-serif;
-}
-
-.container {
-	position: relative;
-	max-width: 1240px;
-	margin-left: auto;
-	margin-right: auto;
 }

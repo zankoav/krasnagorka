@@ -1,2 +1,4 @@
 import './header.scss';
-console.log('header mobile');
+import './../headerWidgets/headerWidgets';
+import './../weather/weather';
+import './../../desktop/today/today';

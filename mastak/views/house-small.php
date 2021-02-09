@@ -10,12 +10,23 @@ if (!$isTerem) {
     $calendarId = getCalendarId($calendarShortCode);
 }
 
+$current_season_id = get_option('mastak_theme_options')['current_season'];
+
+$price_byn = (int) get_post_meta($current_season_id, "house_price_" . get_the_ID(), true);
+$price     = get_current_price($price_byn);
+
+global $kgCooke;
+$currency_name = $kgCooke->getCurrnecy()["currency_selected"];
+
 ?>
 
 <div class="our-house">
     <div class="our-house__header-image">
         <a href="<?= get_the_permalink(); ?>" target="_blank" class="our-house__header-image-wrap">
             <img class="object-fit-img" src="<?= wp_get_attachment_image_url($icon_id, $size); ?>" srcset="<?= wp_get_attachment_image_srcset($icon_id, $size); ?>" sizes="<?= wp_get_attachment_image_sizes($icon_id, $size); ?>">
+            <?php if (!$isTerem) : ?>
+                <div class="our-house__price js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $price_byn; ?>"><?= $price; ?></div>
+            <?php endif; ?>
         </a>
     </div>
     <div class="our-house__content <?= $isTerem ? 'our-house__content_terem' : ''; ?>">

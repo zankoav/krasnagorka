@@ -1122,13 +1122,13 @@
          * Display blog title.
          *
          */
-        function presscore_blog_title() {
-            $wp_title = wp_title('', false);
-            $title = get_bloginfo('name') . ' | ';
-            $title .= (is_front_page()) ? get_bloginfo('description') : $wp_title;
+        // function presscore_blog_title() {
+        //     $wp_title = wp_title('', false);
+        //     $title = get_bloginfo('name') . ' | ';
+        //     $title .= (is_front_page()) ? get_bloginfo('description') : $wp_title;
 
-            return apply_filters( 'presscore_blog_title', $title, $wp_title );
-        }
+        //     return apply_filters( 'presscore_blog_title', $title, $wp_title );
+        // }
 
     endif;
 

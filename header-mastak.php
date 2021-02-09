@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 	<head>
 		<meta charset="<?php bloginfo('charset'); ?>" />
 		<title>
-			<?= presscore_blog_title(); ?>
+			<?= wp_title(); ?>
 		</title>
 		<meta name="keywords"
 			  content="<?= mastak_seo_meta_title(); ?>" />
@@ -255,6 +255,34 @@ if (!defined('ABSPATH')) {
 			.gm-style-iw-d {
 				padding: 0 8px 8px 0;
 			}
+			.our-house__price{
+				position: absolute;
+				background: linear-gradient(-45deg, #fff, transparent);
+    			bottom: 0;
+				width:100%;
+				padding-right: 2rem;
+				height: 42px;
+				color: #d0021b;
+				font-size: 16px;
+				text-transform: uppercase;
+				display:flex;
+				align-items:center;
+				font-weight: 700;
+				justify-content:flex-end;
+			}
+
+			@media(min-width:768px){
+				.our-house__price{
+					margin-bottom: 28px;
+				}
+			}
+
+			.our-house__price::after{
+				content:attr(data-currency);
+				text-transform: uppercase;
+				margin-left:.25rem;
+				font-weight: 700;
+			}
 		</style>
 
 		<script type="text/javascript">
@@ -331,8 +359,7 @@ if (!defined('ABSPATH')) {
 
 		<div id="kg-loader"
 			 class="kg-loader">
-			<img src="/wp-content/themes/krasnagorka/assets/images/<?= wp_is_mobile() ? "
-				 logoKG-xs.png"
+			<img src="/wp-content/themes/krasnagorka/assets/images/<?= wp_is_mobile() ? "logoKG-xs.png"
 				 : "logoKG.png"
 				 ;
 				 ?>" alt="spinner" class="kg-loader__img">
