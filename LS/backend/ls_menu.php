@@ -1,21 +1,18 @@
 <?php
-add_action( 'after_setup_theme', 'mastak_register_nav_menu' );
-	function mastak_register_nav_menu() {
-		register_nav_menu( 'ls', 'ls меню в шапке' );
-	}
-	// И там, где нужно выводим меню так:
-	function ls_nav_menu() {
-		// main navigation menu
-		$args = array(
-			'theme_location'    => 'ls',
-		);
+	add_action( 'after_setup_theme', 'ls_register_nav_menu' );
 
-		// print menu
-		wp_nav_menu( $args );
+	function ls_register_nav_menu() {
+		register_nav_menu( 'ls', 'LS меню в шапке' );
+	}
+	function ls_nav_menu() {
+		wp_nav_menu([
+			'theme_location'    => 'ls'
+		]);
 	}
 
 	// Изменяет основные параметры меню
 	add_filter( 'wp_nav_menu_args', 'filter_wp_menu_args' );
+
 	function filter_wp_menu_args( $args ) {
 		if ( $args['theme_location'] === 'ls' ) {
 			$args['container']  = false;
@@ -45,10 +42,10 @@ add_action( 'after_setup_theme', 'mastak_register_nav_menu' );
 			$atts['class'] = 'menu-list__item-href';
 
 			if (in_array('menu-item-has-children', $item->classes)) {
-				$atts['class'] = ' menu__item menu__item-sub-menu';
+				$atts['class'] = 'menu__item menu__item-sub-menu';
 			}
 			if ( $item->current ) {
-				$atts['class']= ' menu__item menu__item_active';
+				$atts['class']= 'menu__item menu__item_active';
 			}
 		}
 		return $atts;
@@ -57,9 +54,9 @@ add_action( 'after_setup_theme', 'mastak_register_nav_menu' );
 
 
 	//Изменяем CSS вложенного ul
-	
-add_filter( 'nav_menu_submenu_css_class', 'change_wp_nav_menu', 10, 3 );
-function change_wp_nav_menu( $classes, $args, $depth ) {
-$classes[] = 'menu__sub-menu';
-	return $classes;
-}
+	add_filter( 'nav_menu_submenu_css_class', 'change_wp_nav_menu', 10, 3 );
+
+	function change_wp_nav_menu( $classes, $args, $depth ) {
+		$classes[] = 'menu__sub-menu';
+		return $classes;
+	}
