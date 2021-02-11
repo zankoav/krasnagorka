@@ -12,15 +12,6 @@ module.exports = env => {
     const publicPath = IS_DEV ? '' :'/wp-content/themes/krasnagorka/src/';
     const settins = {
         devtool: IS_DEV ? 'inline-source-map' : 'none',
-        // devServer: {
-        //     contentBase: path.resolve(__dirname, './../src'),
-        //     proxy: {
-        //         '/': {
-        //             target: 'http://localhost:3000',
-        //             changeOrigin: true
-        //         }
-        //     }
-        // },
         entry: {
             booking: './frontend/booking.js'
         },

@@ -59,6 +59,7 @@ export default class BookingForm extends LightningElement {
 	@api eventTabId;
 	@api pay;
 	@api price;
+	@api model;
 
 	@track formMessageSuccess;
 	@track formMessageError;
@@ -70,6 +71,8 @@ export default class BookingForm extends LightningElement {
 	}
 
 	async connectedCallback() {
+
+        console.log('model', this.model);
         this.deprecateEditableDates = !!this.dateFrom;
 		this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
 		this.dateTo = this.dateTo || "";
@@ -172,6 +175,10 @@ export default class BookingForm extends LightningElement {
 
     get sendButtonTitleProcess(){
         return this.pay ? 'Перенаправление...' : 'Отправка...';
+    }
+
+    calendarChange(event){
+        console.log('event', event.value);
     }
 
 	clearError() {

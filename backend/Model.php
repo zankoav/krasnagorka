@@ -213,6 +213,8 @@ class Model
         $result        = [
             'id'            => $calendarId,
             'maxCount'      => $maxCount,
+            'houses'        => $this->getHouses(),
+            'calendars'     => $this->getCalendars($calendarId),
             'mainMenu'      => $this->getMainMenu(),
             'weather'       => $weather,
             'currencies'    => $this->getCurrencies(),
@@ -295,6 +297,33 @@ class Model
         }
 
         return json_encode($result);
+    }
+
+    private function getHouses(){
+        $result = [];
+        $posts = get_posts(['post_type'   => 'house', 'numberposts' => -1]);
+        
+        foreach( $posts as $post ){
+            $result[] = [
+                'id' => $post->ID,
+                'name' => $post->post_title
+            ];
+        }
+        return $result;
+    }
+
+    private function getCalendars($calendarId){
+        $terms = get_terms(['taxonomy' => 'sbc_calendars' ]);
+        $result = [];
+        foreach ($terms as $term) {
+            $selected = $calendarId == $term->term_id;
+            $result[] = [
+                'id' => $term->term_id,
+                'name' => $term->name,
+                'selected' => $selected
+            ];
+        }
+        return $result;
     }
 
     private function tryToClearOrder($orderId){
