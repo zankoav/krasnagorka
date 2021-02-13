@@ -30,29 +30,14 @@
 			];
 
 			if (in_array('menu-item-has-children', $item->classes)) {
-				$classes[] = 'menu__item-sub-menu';
+				$classes[] = ' menu__item-sub-menu';
+			}
+			if ( $item->current ) {
+				$classes[] .= ' menu__item_active';
 			}
 		}
 		return $classes;
 	}
-	// Добавляем классы ссылкам
-	add_filter( 'nav_menu_link_attributes', 'filter_nav_menu_link_attributes', 10, 4 );
-	function filter_nav_menu_link_attributes( $atts, $item, $args, $depth ) {
-		if ( $args->theme_location === 'ls' ) {
-			$atts['class'] = 'menu-list__item-href';
-
-			if (in_array('menu-item-has-children', $item->classes)) {
-				$atts['class'] = 'menu__item menu__item-sub-menu';
-			}
-			if ( $item->current ) {
-				$atts['class']= 'menu__item menu__item_active';
-			}
-		}
-		return $atts;
-	}
-
-
-
 	//Изменяем CSS вложенного ul
 	add_filter( 'nav_menu_submenu_css_class', 'change_wp_nav_menu', 10, 3 );
 
