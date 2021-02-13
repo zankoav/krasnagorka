@@ -7,4 +7,6 @@
     require_once __DIR__ . '/core/LS_Model.php';
     require_once __DIR__ . '/core/LS_setDevice.php';
     require_once __DIR__ . '/ls_menu.php';
+    require_once __DIR__ . '/core/GetCookie.php';
+    require_once __DIR__ . '/core/LS_Currency.php';
     
