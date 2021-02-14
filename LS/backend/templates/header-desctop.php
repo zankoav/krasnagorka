@@ -1,7 +1,6 @@
 <?php
-    $model=$args ;
-    $currency=((new LS_Currency)->getCurrency()); 
-    ?>
+    $model=$args;
+?>
 <!DOCTYPE html>
 <html>
     <head>   
@@ -21,7 +20,7 @@
                 <nav class="header-widgets__menu">
                     <?php ls_nav_menu(); ?>
                 </nav>
-                <div class="header-widgets__contacts">
+                <div class="header-widgets__contacts">                    
                     <div class="contacts">
                         <div class="contacts__link"><img class="contacts__icon"
                                 src="/wp-content/themes/krasnagorka/LS/frontend/src/img/contacts-icon.d9f04b.svg"></div>
@@ -65,17 +64,25 @@
                 <div class="header-widgets__currencies">
                     <div class="currencies" data-title="Выберите валюту">
                         <div class="currencies__wrapper">
-                            <div class="currencies__current" data-currency=<?=$currency->abbreviation;?>><img class="currencies__flag"
-                                    src="<?=$currency->image;?>"></div>
+                            <div class="currencies__current" data-currency=<?=$model->currency->abbreviation;?>><img class="currencies__flag"
+                                    src="<?=$model->currency->image;?>"></div>
                             <ul class="currencies__list">
-                                <li class="currencies__item" data-currency="<?=LS_Currency::BYN;?>"><img class="currencies__flag"
-                                        src="<?=LS_Currency::getImage('byn');?>"></li>
-                                <li class="currencies__item" data-currency="<?=LS_Currency::RUB;?>"><img class="currencies__flag"
-                                        src="<?=LS_Currency::getImage('rub');?>"></li>
-                                <li class="currencies__item" data-currency="<?=LS_Currency::USD;?>"><img class="currencies__flag"
-                                        src="<?=LS_Currency::getImage('usd');?>"></li>
-                                <li class="currencies__item" data-currency="<?=LS_Currency::EUR;?>"><img class="currencies__flag"
-                                        src="<?=LS_Currency::getImage('eur');?>"></li>
+                                <li class="currencies__item" data-currency="<?=LS_Currency::BYN;?>">
+                                    <img class="currencies__flag"
+                                        src="<?=LS_Currency::getImage(LS_Currency::BYN);?>">
+                                </li>
+                                <li class="currencies__item" data-currency="<?=LS_Currency::RUB;?>">
+                                    <img class="currencies__flag"
+                                        src="<?=LS_Currency::getImage(LS_Currency::RUB);?>">
+                                </li>
+                                <li class="currencies__item" data-currency="<?=LS_Currency::USD;?>">
+                                    <img class="currencies__flag"
+                                        src="<?=LS_Currency::getImage(LS_Currency::USD);?>">
+                                </li>
+                                <li class="currencies__item" data-currency="<?=LS_Currency::EUR;?>">
+                                    <img class="currencies__flag"
+                                        src="<?=LS_Currency::getImage(LS_Currency::EUR);?>">
+                                </li>
                             </ul>
                         </div>
                     </div>

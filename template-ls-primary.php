@@ -4,12 +4,11 @@
      * Template Name: LS Главная
      *
      */
-    $model=(new LS_Model())->initModel();
-    $currency=new LS_Currency;
 
+    $model=(new LS_Model())->initModel();
     get_template_part('/LS/backend/templates/header',$model->devise,$model);
 ?>
-    <main class="main"><?=$currency->changePrice(100)?></main>
+    <main class="main"></main>
     <footer class="footer">Footer</footer>
         <script ><?=$model->objContent->jsContent?></script>
     </body>
