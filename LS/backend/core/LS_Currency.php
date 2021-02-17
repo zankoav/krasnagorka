@@ -23,7 +23,7 @@ class LS_Currency extends CookieHelper {
                 $result = self::BYN;  
                 break;
         }
-        return get_template_directory_uri() . "/LS/frontend/assets/img/$result.svg";
+        return get_template_directory_uri() . "/LS/frontend/assets/img/flags/$result.svg";
     }
     public function getCurrency() {
         $currency= $this->getCookieValue( self::CURRENCY ) ?? self::BYN;
