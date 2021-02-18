@@ -2,7 +2,10 @@
     <z-app if:true={model}>
         <z-header-primary model={model} slot="header"></z-header-primary>
         <template if:true={model.v2}>
-            Hello World
+            <z-booking 
+                model={model} 
+                slot="main">
+            </z-booking>
         </template>
         <template if:false={model.v2}>
             <z-booking-form 
