@@ -9,4 +9,6 @@
     require_once __DIR__ . '/ls_menu.php';
     require_once __DIR__ . '/core/CookieHelper.php';
     require_once __DIR__ . '/core/LS_Currency.php';
-    
+    require_once __DIR__ . '/rest/rest.php';
+    require_once __DIR__ . '/rest/LS_Booking_Form_Controller.php';
+  
