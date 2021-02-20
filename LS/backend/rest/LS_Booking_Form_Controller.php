@@ -27,11 +27,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller{
             $metaId=get_post_meta(get_the_ID(), "mastak_house_calendar", true);
             $metaId=preg_replace ('/[^0-9]/','',$metaId);
             if  ($metaId==$calendarId){
+                $imageId = get_post_thumbnail_id();
+                $picture=wp_get_attachment_image_url($imageId, 'header_iphone_5');
                 $houseInfo=[
                     'id'=>get_the_ID(),
                     'description'=>get_post_meta(get_the_ID(), "mastak_house_small_description", true),
                     'peopleMaxCount'=>get_post_meta(get_the_ID(), "max_people", true),
-                    'picture'=>get_post_meta(get_the_ID(), "mastak_house_header_image", true),
+                    'picture'=>$picture,
                     'title'=>get_the_title()
                 ];
                 break;
