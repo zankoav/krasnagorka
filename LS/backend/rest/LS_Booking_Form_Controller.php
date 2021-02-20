@@ -28,11 +28,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller{
             $metaId=preg_replace ('/[^0-9]/','',$metaId);
             if  ($metaId==$calendarId){
                 $houseInfo=[
-                    'houseId'=>get_the_ID(),
+                    'id'=>get_the_ID(),
                     'description'=>get_post_meta(get_the_ID(), "mastak_house_small_description", true),
-                    'Human'=>get_post_meta(get_the_ID(), "max_people", true),
-                    'housePicture'=>get_post_meta(get_the_ID(), "mastak_house_header_image", true),
-                    'houseTitle'=>get_the_title()
+                    'peopleMaxCount'=>get_post_meta(get_the_ID(), "max_people", true),
+                    'picture'=>get_post_meta(get_the_ID(), "mastak_house_header_image", true),
+                    'title'=>get_the_title()
                 ];
                 break;
             }  else{$houseInfo='this house not found';} 
