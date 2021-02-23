@@ -1,3 +1,7 @@
+export async function skip() {
+    await new Promise((resolve) => setImmediate(resolve));
+}
+
 export function getCookie(name) {
     let matches = document.cookie.match(new RegExp(
         "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"

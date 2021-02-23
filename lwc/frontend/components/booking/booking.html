@@ -1,7 +1,25 @@
 <template>
-    <div class="booking">
+    <div class="booking"
+         onnext={nextStep}
+         onback={backStep}>
         <div class="container">
-            Hello World
+            <div class="booking__card">
+                <z-steps-navigator settings={settings}></z-steps-navigator>
+                <div class="booking__body">
+                    <z-step-house if:true={isHouseStep}
+                                  settings={settings}>
+                    </z-step-house>
+                    <z-step-date if:true={isDateStep}
+                                 settings={settings}>
+                    </z-step-date>
+                    <z-step-contact if:true={isContactStep}
+                                    settings={settings}>
+                    </z-step-contact>
+                    <z-step-checkout if:true={isCheckoutStep}
+                                     settings={settings}>
+                    </z-step-checkout>
+                </div>
+            </div>
         </div>
     </div>
 </template>

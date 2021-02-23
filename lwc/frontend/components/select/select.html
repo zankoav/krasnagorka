@@ -1,0 +1,20 @@
+<template>
+    <div class="select">
+        <select class={css}
+                onchange={changeOption}>
+            <option disabled
+                    value
+                    selected>{disabledLabel}</option>
+            <template for:each={values}
+                      for:item="option">
+                <option if:true={option.selected}
+                        selected
+                        key={option.id}
+                        value={option.id}>{option.name}</option>
+                <option if:false={option.selected}
+                        key={option.id}
+                        value={option.id}>{option.name}</option>
+            </template>
+        </select>
+    </div>
+</template>

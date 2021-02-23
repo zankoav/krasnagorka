@@ -1,0 +1,17 @@
+<template>
+    <div class="step-button-navigation">
+        <div class="step-button-navigation__button-back-wrapper">
+            <a if:true={isBackButtonNeed}
+               href="javascript:void(0)"
+               onclick={backButtonPressed}
+               class="step-button-navigation__button step-button-navigation__button_back">{backTitle}</a>
+        </div>
+        <div class="step-button-navigation__button-next-wrapper">
+            <a href="javascript:void(0)"
+               onclick={nextButtonPressed}
+               class="step-button-navigation__button step-button-navigation__button_available">{nextTitle}</a>
+            <p if:true={error}
+               class="step-button-navigation__error">{error}</p>
+        </div>
+    </div>
+</template>

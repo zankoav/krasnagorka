@@ -168,16 +168,16 @@ module.exports = env => {
                 }
             ]
         }, 
-        // devServer: {
-        //     overlay: true,
-        //     contentBase: publicPath,
-        //     proxy: {
-        //         '/': {
-        //             target: https://test.com,
-        //             changeOrigin: true
-        //         }
-        //     }
-        // },
+        devServer: {
+            overlay: true,
+            contentBase: publicPath,
+            proxy: {
+                '/': {
+                    target: 'https://krasnagorka.by/',
+                    changeOrigin: true
+                }
+            }
+        },
         plugins: plugins,
         resolve: {
             alias: {

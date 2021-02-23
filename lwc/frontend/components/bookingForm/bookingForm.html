@@ -4,17 +4,6 @@
             <div class="booking-form__content">
                 <h2 class="booking-form__title mb-15"
                     data-before={objectType}>{objectTitle}</h2>
-                <select if:true={pay} id="calendars"
-                    class="booking-form__input"
-                    name="calendars"
-                    onchange={calendarChange}
-                    >
-                    <template for:each={model.calendars}
-                            for:item="calendar">
-                        <option if:true={calendar.selected} selected key={calendar.id} value={calendar.id}>{calendar.name}</option>
-                        <option if:false={calendar.selected} key={calendar.id} value={calendar.id}>{calendar.name}</option>
-                    </template>
-                </select>
                 <div if:false={objectType}
                      class="booking-form__group">
                     <label for="order"

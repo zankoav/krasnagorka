@@ -1,0 +1,35 @@
+<template>
+    <div class="step-house">
+        <div class="step-house__body">
+            <z-loader if:true={loading}></z-loader>
+            <template if:false={loading}>
+                <z-select class="step-house__calendars"
+                          onchange={calendarChange}
+                          disabled-label=" -- Выберите Домик -- "
+                          options={settings.calendars}></z-select>
+                <template if:true={settings.house}>
+                    <div class="step-house__wrapper">
+                        <img src={settings.house.picture}
+                             alt={settings.house.title}
+                             class="step-house__img">
+                        <div class="step-house__content">
+                            <h3 class="step-house__title">{settings.house.title}</h3>
+                            <div class="step-house__group">
+                                <img class="step-house__max-people"
+                                     src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/teamwork.svg"
+                                     alt="team">
+                                <z-select class="step-house__counts"
+                                          onchange={countChange}
+                                          disabled-label=" -- Количество человек -- "
+                                          options={settings.counts}></z-select>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+        </div>
+        <z-step-button-navigation error={error}
+                                  onnext={nextButtonHandler}></z-step-button-navigation>
+    </div>
+</template>

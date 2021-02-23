@@ -1,0 +1,36 @@
+@import "./../../common/mixins";
+
+.select {
+	position: relative;
+
+	&:after {
+		content: "";
+		position: absolute;
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background-color: $RED;
+		top: 8px;
+		left: 8px;
+	}
+
+	&__options {
+		display: block;
+		width: 100%;
+		padding: 8px;
+		font-size: 14px;
+		border: 2px solid $GRAY_6;
+		border-radius: 8px;
+		color: $GRAY_1;
+		background-color: $WHITE;
+		outline: none;
+
+		&_selected {
+			border-color: $PRIMARY_2;
+		}
+
+		&_error {
+			border-color: $RED;
+		}
+	}
+}

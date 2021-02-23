@@ -1,0 +1,12 @@
+<template>
+    <div class="step-date">
+        <div class="step-date__body">
+            <z-loader if:true={loading}></z-loader>
+            <div class="step-date__calendar" lwc:dom="manual"></div>
+        </div>
+        <z-step-button-navigation onback={backButtonHandler}
+                                  onnext={nextButtonHandler}
+                                  error={error}
+                                  is-back-button-need></z-step-button-navigation>
+    </div>
+</template>

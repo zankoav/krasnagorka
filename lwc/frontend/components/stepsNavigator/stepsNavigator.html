@@ -1,0 +1,14 @@
+<template>
+    <div class="steps-navigator">
+        <div class="steps-navigator__wrapper">
+            <template for:each={settings.menu} for:item="item">
+                <div if:true={item.active} class="steps-navigator__item steps-navigator__item_active" key={item.value} data-value={item.value}>{item.label}</div>
+                <template if:false={item.active}>
+                    <div if:true={item.available} class="steps-navigator__item steps-navigator__item_available" key={item.value} data-value={item.value}>{item.label}</div>
+                    <div if:false={item.available} class="steps-navigator__item" key={item.value} data-value={item.value}>{item.label}</div>
+                </template>
+            </template>
+        </div>
+        <div class="steps-navigator__line"></div>
+    </div>
+</template>

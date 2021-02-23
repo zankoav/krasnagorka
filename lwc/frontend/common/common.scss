@@ -1,23 +1,23 @@
-@import 'fonts';
-@import 'reset';
-@import 'mixins';
+@import "fonts";
+@import "reset";
+@import "mixins";
 
 @include container();
 @include padding();
 @include margin();
 
 body {
-    font-family : AvenirNextCyr-Regular, sans-serif;
+	font-family: AvenirNextCyr-Regular, sans-serif;
 }
 
-.h-100{
-    height: 100%;
+.h-100 {
+	height: 100%;
 }
-.d-none{
-    display : none;
+.d-none {
+	display: none;
 }
 
-.input-none{
-    height : 0;
-    opacity: 0;
+.input-none {
+	height: 0;
+	opacity: 0;
 }

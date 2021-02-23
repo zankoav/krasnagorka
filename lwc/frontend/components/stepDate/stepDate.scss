@@ -1,0 +1,35 @@
+@import "./../../common/mixins";
+
+.step-date {
+	padding: 20px 12px 32px;
+
+	@include md {
+		padding: 24px 32px 32px;
+	}
+}
+
+.cell-between,
+.cell-range {
+	background-color: rgb(188, 232, 241);
+}
+
+.error-message {
+	position: fixed;
+	top: 100px;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	z-index: 9999999;
+
+	&__inner {
+		padding: 0.5rem 1rem;
+		max-width: calc(100% - 50px);
+		background-color: $RED;
+		color: $WHITE;
+		border-radius: 6px;
+		box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.75);
+		font-size: 14px;
+		font-weight: bold;
+	}
+}

@@ -34,7 +34,7 @@ module.exports = env => {
                     }
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.(css|sass|scss)$/,
                     exclude: /(node_modules)/,
                     use: ExtractTextPlugin.extract({
                         fallback: 'style-loader',

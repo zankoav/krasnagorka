@@ -1,0 +1,73 @@
+@import "./../../common/mixins";
+
+.step-house {
+	padding: 20px 12px 32px;
+
+	@include md {
+		padding: 24px 32px 32px;
+	}
+
+	&__body {
+		padding-bottom: 1rem;
+		min-height: 100px;
+
+		@include sm {
+			padding-bottom: 1.5rem;
+		}
+	}
+
+	&__wrapper {
+		display: flex;
+		margin: 1rem 0 0 0;
+
+		@include sm {
+			margin: 1.5rem 0 0 0;
+		}
+	}
+
+	&__title {
+		font-size: 16px;
+		color: $PRIMARY_10;
+		font-weight: 700;
+		letter-spacing: 4px;
+		text-transform: uppercase;
+	}
+
+	&__img {
+		display: block;
+		width: 100%;
+		object-fit: contain;
+		align-self: flex-start;
+		border-radius: 4px;
+		max-width: 100px;
+
+		@include sm {
+			max-width: 140px;
+		}
+	}
+
+	&__content {
+		color: $GRAY_2;
+		font-size: 14px;
+		padding-left: 1rem;
+		flex-grow: 1;
+
+		a {
+			color: $PRIMARY_3;
+		}
+	}
+
+	&__max-people {
+		width: 24px;
+		margin-right: 1rem;
+	}
+
+	&__group {
+		margin: 1rem 0;
+		display: flex;
+	}
+
+	&__counts {
+		flex-grow: 1;
+	}
+}
