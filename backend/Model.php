@@ -262,9 +262,17 @@ class Model
             if($result['pay']){
                 $SecretKey = '2091988';
                 $wsb_seed = strtotime("now");
-                $wsb_storeid = '515854557';
+                /**
+                 *  production: '320460709'
+                 *  sandbox: '515854557'
+                 */
+                $wsb_storeid = '320460709';
                 $wsb_order_num = "gg-1";
-                $wsb_test = '1';
+                /**
+                 * production: '0'
+                 * sandbox: '1'
+                 */
+                $wsb_test = '0'; 
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $result['price'];
                 $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$SecretKey);

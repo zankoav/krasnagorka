@@ -310,8 +310,12 @@ export default class BookingForm extends LightningElement {
             .then(result => {
                 console.log('result', result);
                 if(result.status === 2){
+                    /**
+                     * https://payment.webpay.by/
+                     * https://securesandbox.webpay.by/
+                     */
                     generateAndSubmitForm(
-                        'https://securesandbox.webpay.by/',
+                        'https://payment.webpay.by/',  
                         result.values,
                         result.names
                     );

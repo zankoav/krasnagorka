@@ -2,7 +2,19 @@
     <div class="step-date">
         <div class="step-date__body">
             <z-loader if:true={loading}></z-loader>
-            <div class="step-date__calendar" lwc:dom="manual"></div>
+            <div class="step-date__calendar"
+                 lwc:dom="manual"></div>
+            <div class="step-date__booking">
+                <img src={bookingImg}
+                     alt="booking img"
+                     class="step-date__booking-icon">
+                <div class="step-date__booking-dates">
+                    <div class="step-date__booking-from"
+                         data-date="Дата заезда:">{dateStart}</div>
+                    <div class="step-date__booking-from"
+                         data-date="Дата выезда:">{dateEnd}</div>
+                </div>
+            </div>
         </div>
         <z-step-button-navigation onback={backButtonHandler}
                                   onnext={nextButtonHandler}

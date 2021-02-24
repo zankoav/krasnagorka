@@ -9,11 +9,23 @@ const message_1 = "Нельзя бронировать прошлые даты",
 let $ = jQuery;
 let events, jsFromDate, jsToDate, $calendar;
 
+const IMG_BOOKING = require('./../../icons/date-clicking-selecting.png');
+
+
 export default class StepDate extends LightningElement {
 
     @api settings;
     @track loading;
+    @track bookingImg = IMG_BOOKING;
     @track error;
+
+    get dateStart(){
+        return this.settings.dateStart || ' - ';
+    }
+
+    get dateEnd(){
+        return this.settings.dateEnd || ' - ';
+    }
 
     backButtonHandler(){
         const newMenu = this.settings.menu.map(it => {
@@ -51,10 +63,22 @@ export default class StepDate extends LightningElement {
         }
     }
 
+    initDate(date){
+        let result;
+        if(date){
+            result = {
+                d: (new moment(date, "DD-MM-YYYY")).format("YYYY-MM-DD")
+            };
+        }
+        return result;
+    }
+
     async connectedCallback(){
         events = null;
-        jsFromDate = null;
-        jsToDate = null;
+        jsFromDate = this.initDate(this.settings.dateStart);
+        console.log('jsFromDate', jsFromDate);
+        jsToDate = this.initDate(this.settings.dateEnd);
+        console.log('jsToDate', jsToDate);
         $calendar = null;
         this.loading = true;
         const culendarSlug = this.settings.calendars.find(c => c.selected).slug;
@@ -152,16 +176,43 @@ export default class StepDate extends LightningElement {
                         jsToDate.d,
                         "YYYY-MM-DD"
                     );
-                    console.log('fromDateClearFormat', fromDateClearFormat);
-                    console.log('toDateClearFormat', toDateClearFormat);
+
+                    step.dispatchEvent(
+                        new CustomEvent('update', {
+                             detail: {
+                                dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
+                                dateEnd: toDateClearFormat.format("DD-MM-YYYY")
+                             }, 
+                             bubbles:true, 
+                             composed:true
+                         })
+                    );
                 } else if (jsFromDate) {
                     const fromDateClearFormat = new moment(
                         jsFromDate.d,
                         "YYYY-MM-DD"
                     );
-                    console.log('fromDateClearFormat', fromDateClearFormat);
+                    step.dispatchEvent(
+                        new CustomEvent('update', {
+                             detail: {
+                                dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
+                                dateEnd: null
+                             }, 
+                             bubbles:true, 
+                             composed:true
+                         })
+                    );
                 } else {
-                    console.log('empty');
+                    step.dispatchEvent(
+                        new CustomEvent('update', {
+                             detail: {
+                                dateStart: null,
+                                dateEnd: null
+                             }, 
+                             bubbles:true, 
+                             composed:true
+                         })
+                    );
                 }
             }
         });
