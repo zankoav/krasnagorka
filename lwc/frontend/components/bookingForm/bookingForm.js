@@ -311,11 +311,11 @@ export default class BookingForm extends LightningElement {
                 console.log('result', result);
                 if(result.status === 2){
                     /**
-                     * https://billing.webpay.by
-                     * https://securesandbox.webpay.by/
+                     * https://payment.webpay.by
+                     * https://securesandbox.webpay.by
                      */
                     generateAndSubmitForm(
-                        'https://billing.webpay.by',  
+                        'https://payment.webpay.by',  
                         result.values,
                         result.names
                     );
