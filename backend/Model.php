@@ -244,10 +244,9 @@ class Model
             $result['mainContent']['title'] = $teremRoom;
         }
 
-        $result['pay'] = $_GET['pay'] === "yes";
-
         if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
 
+            $result['pay'] = true;
             $_eventTabId = $result['eventTabId'];
             $_dateFrom = $result['dateFrom'];
             $_dateTo = $result['dateTo'];
