@@ -282,7 +282,6 @@ class Model
                         '*scart'
                     ],
                     "values" => [
-                        'hh' => 'sdgs',
                         'wsb_storeid' => $wsb_storeid,
                         'wsb_store' => 'OOO Краснагорка',
                         'wsb_order_num' => $wsb_order_num,

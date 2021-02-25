@@ -84,7 +84,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         13 => 1036583,
         15 => 10393,
         9 => 10391,
-        43=> 1663367,
+        43 => 1663367,
         16 => 10389
     ];
 
@@ -199,11 +199,11 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function change_contact($request)
     {
-        
+
 
         //Получим сделку
         try {
-            
+
             $leadId = (int)$_POST['leads']['status'][0]['id'];
             $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
@@ -220,18 +220,18 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 $filter = new LeadsFilter();
                 $filter->setIds($ids);
-                $leads = $apiClient->leads()->get($filter)->toArray();  
+                $leads = $apiClient->leads()->get($filter)->toArray();
                 $counter = 0;
                 foreach ($leads as $l) {
-                    if($l['status_id'] == 142){
-                        $counter ++;
+                    if ($l['status_id'] == 142) {
+                        $counter++;
                     }
                 }
-                if($counter > 2){
+                if ($counter > 2) {
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $typeFieldValueContact = new SelectCustomFieldValuesModel();
                     $typeFieldValueContact->setFieldId(72295);
-                    
+
                     $tCollection = new SelectCustomFieldValueCollection();
                     $tModel = new SelectCustomFieldValueModel();
                     $tModel->setEnumId(149825);
@@ -241,17 +241,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $contact->setCustomFieldsValues($contactCustomFields);
                     $contact = $apiClient->contacts()->updateOne($contact);
                 }
-                
             }
         } catch (AmoCRMApiException $e) {
             LS_WP_Logger::info('AmoCRMApiException: ' . $e);
         } catch (Exception $e) {
             LS_WP_Logger::info('Exception: ' . $e->getMessage());
         }
-
-        
-
-        
     }
 
     /**
@@ -259,8 +254,8 @@ class Booking_Form_Controller extends WP_REST_Controller
      */
     public function booking_lead($request)
     {
-        $request['dateFrom'] = (int)$request['dateFrom'] + 3*3600;
-        $request['dateTo'] = (int)$request['dateTo'] + 3*3600;
+        $request['dateFrom'] = (int)$request['dateFrom'] + 3 * 3600;
+        $request['dateTo'] = (int)$request['dateTo'] + 3 * 3600;
         $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
         $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $response = $this->insertWPLead($request);
@@ -278,7 +273,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateFrom = '2020-08-20';
         $dateTo = '2020-08-23';
         $contactPeople = 11;
-        $contactComment = 'Test comment';//+
+        $contactComment = 'Test comment'; //+
         $calendarId = 43; //+
         $type = 'reserved'; //+
         $freshPrice = 109; //+
@@ -287,25 +282,25 @@ class Booking_Form_Controller extends WP_REST_Controller
         $commentNote = '';
 
         if (!empty($freshPrice)) {
-            $commentNote .= 'Горящее предложение: '.$freshPrice." руб.\n";
+            $commentNote .= 'Горящее предложение: ' . $freshPrice . " руб.\n";
         }
 
         if (!empty($contactPeople)) {
-            $commentNote .= 'Количество человек: '.$contactPeople."\n";
+            $commentNote .= 'Количество человек: ' . $contactPeople . "\n";
         }
 
         if (!empty($contactPassport)) {
-            $commentNote .= 'Паспорт №: '.$contactPassport."\n";
+            $commentNote .= 'Паспорт №: ' . $contactPassport . "\n";
         }
 
         if (!empty($contactComment)) {
-            $commentNote .= 'Комментарий: '.$contactComment;
+            $commentNote .= 'Комментарий: ' . $contactComment;
         }
-        
+
 
         $response = [
             'exceptions' => [],
-            'steps'=>[]
+            'steps' => []
         ];
 
         $calendarObjects = [
@@ -327,14 +322,14 @@ class Booking_Form_Controller extends WP_REST_Controller
             '13' => 1036583,
             '15' => 10393,
             '9' => 10391,
-            '43'=> 1663367,
+            '43' => 1663367,
             '16' => 10389
         ];
 
         $clientId = '79aac717-18fc-4495-8a5f-7124a70de05d';
         $clientSecret = 'h1MPktXuLLrCPrEneoFP7kh2rlVllzaxkzfivOK2xWzOTxFHqtIu26VDUIaEyOpG';
         $redirectUri = 'https://krasnagorka.by';
-        
+
         $code = 'def502000fbd47b384ca66f1c806a90c0255d176b3c774243eeb100a7858487c3adfbb5e1725fe2ac5a779ec5df93953672838939dd5dafcf89e87cdce028d68eae1760655eceb4a020e3c42020e654fe5fd50f59e0102a07098677a661c81ca3ad30e28b63c88075a06158fb074b0e93d7cc0b4801943c43afcf3059acef227bec274b75c7757ddee960384eaee4502c12f7717bb9d3ac583466564044e9c5976d4ee42a741a449266475f6086ea0ff3dfd9adc2f1c2f5dd750661d69d15b343898bad73e9fcfb2e484e2a0fcab0f4616988a5d192cd44de662154ea62ed486ee7f6fea0bf30114a358e21452a7a8f3cf2f35718e1607075634fe55a3ae2b85961583b698eec38a24173d398b665a6c23e7a91a0adb5e8705b926119c8218fee68647020f2e40e8382eff50fbf35a29748c73593c23a0793bebca23f80cb8108adbda27b7dcbe61ce47020bf811d3c58dc371906fc9ccf124d400bc91642ae58ece09c82ac1f337a5f95ceb16db9b6dc29baca9ff4753a577349917b155e123a2be6fe1d01693bfc9a616e71948e23a47c1eb31c3c9dac1e89b4515dc30cb5aa2b988368a3a2f31513b6a14612fae888db801ddb5b07a2a622cb9b87b28196c';
         $link = 'https://krasnogorka.amocrm.ru/oauth2/access_token';
 
@@ -353,77 +348,78 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'baseDomain' => $baseDomain,
                         ]
                     );
-                });
+                }
+            );
 
         $leadsService = $apiClient->leads();
         $lead = new LeadModel();
         $lead->setName('Сделка с сайта test');
         $lead->setStatusId(19518940);
         $lead->setTags((new TagsCollection())
-           ->add(
-                (new TagModel())
-                    ->setId(1181317)
-                    ->setName('Страница Бронирования')
-            )
+                ->add(
+                    (new TagModel())
+                        ->setId(1181317)
+                        ->setName('Страница Бронирования')
+                )
         );
         $leadCustomFields = new CustomFieldsValuesCollection();
 
         $houseElement = null;
-        
-        if(!empty($freshPrice)){
+
+        if (!empty($freshPrice)) {
             $lead->setPrice($freshPrice);
         }
 
-        if(!empty($calendarId) and !empty($calendarObjects[$calendarId])){
-            try{
+        if (!empty($calendarId) and !empty($calendarObjects[$calendarId])) {
+            try {
                 $catalogElementsFilter = new CatalogElementsFilter();
                 $catalogElementsFilter->setIds([$calendarObjects[$calendarId]]);
                 $catalogElementsService = $apiClient->catalogElements(1321);
-                if(!empty($catalogElementsService)){
+                if (!empty($catalogElementsService)) {
                     $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
-                    if( !empty($catalogElementsCollection) and $catalogElementsCollection->count() > 0){
+                    if (!empty($catalogElementsCollection) and $catalogElementsCollection->count() > 0) {
                         $houseElement = $catalogElementsCollection->first();
                         $houseElement->setQuantity(1);
                     }
                 }
-            }catch(AmoCRMApiException $e){
-                $response['exceptions'][] = $e->getTitle().' <<< getOne catalog >>> '.$e->getDescription();
-                Logger::log('Exceptions:'.$e->getTitle().' <<< getOne catalog >>> '.$e->getDescription());
+            } catch (AmoCRMApiException $e) {
+                $response['exceptions'][] = $e->getTitle() . ' <<< getOne catalog >>> ' . $e->getDescription();
+                Logger::log('Exceptions:' . $e->getTitle() . ' <<< getOne catalog >>> ' . $e->getDescription());
             }
         }
 
-        if(!empty($orderId)){
+        if (!empty($orderId)) {
             $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
             $orderIdFieldValueModel->setFieldId(639191);
             $orderIdFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())
-                        ->setValue($orderId)
-                )
+                            ->setValue($orderId)
+                    )
             );
             $leadCustomFields->add($orderIdFieldValueModel);
         }
 
-        if(!empty($type)){
+        if (!empty($type)) {
             $typeFieldValueModel = new TextCustomFieldValuesModel();
             $typeFieldValueModel->setFieldId(640633);
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue($type)
-                )
+                            ->setValue($type)
+                    )
             );
             $leadCustomFields->add($typeFieldValueModel);
         }
 
-        if(!empty($contactComment)){
+        if (!empty($contactComment)) {
             $commentFieldValueModel = new TextCustomFieldValuesModel();
             $commentFieldValueModel->setFieldId(357377);
             $commentFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue($contactComment)
-                )
+                            ->setValue($contactComment)
+                    )
             );
             $leadCustomFields->add($commentFieldValueModel);
         }
@@ -454,26 +450,26 @@ class Booking_Form_Controller extends WP_REST_Controller
         //     $leadCustomFields->add($dateToFieldValueModel);
         // }
 
-        if($leadCustomFields->count() > 0){
+        if ($leadCustomFields->count() > 0) {
             $lead->setCustomFieldsValues($leadCustomFields);
         }
-        
+
         try {
             $lead = $leadsService->addOne($lead);
         } catch (AmoCRMApiException $e) {
-            $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
-            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+            $response['exceptions'][] = $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription();
+            Logger::log('Exceptions:' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
         }
 
-        if(isset($lead, $houseElement)){
+        if (isset($lead, $houseElement)) {
             //Привяжем к сделке наш элемент
             $links = new LinksCollection();
             $links->add($houseElement);
             try {
                 $apiClient->leads()->link($lead, $links);
             } catch (AmoCRMApiException $e) {
-                $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
-                Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+                $response['exceptions'][] = $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription();
+                Logger::log('Exceptions:' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
             }
         }
 
@@ -487,24 +483,24 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadNotesService = $apiClient->notes(EntityTypesInterface::LEADS);
             $notesCollection = $leadNotesService->add($notesCollection);
         } catch (AmoCRMApiException $e) {
-            $response['exceptions'][] = $e->getTitle().' <<< addOne lead >>> '.$e->getDescription();
-            Logger::log('Exceptions:'.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+            $response['exceptions'][] = $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription();
+            Logger::log('Exceptions:' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
         }
         return new WP_REST_Response($response, 200);
     }
 
     public function create_amocrm_lead($request)
     {
-        $result = ['status'=>'error'];
-        try{
-            if(isset($request['data'])){
+        $result = ['status' => 'error'];
+        try {
+            if (isset($request['data'])) {
                 require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                 $href = 'https://krasnagorka.by/booking-form';
                 $type = 'booking-form';
                 $amo = new AmoIntegration($type, $request['data'], $href);
                 $result['status'] = 'success';
             }
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $result['message'] = $e->getMessage();
         }
         return new WP_REST_Response($result, 200);
@@ -513,7 +509,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function create_order($request)
     {
         $result = true;
-        try{
+        try {
             $spam = $request['message'];
 
             if (!empty($spam)) {
@@ -522,7 +518,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $calendarId = $request['id'];
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
-       
+
             $dateStart = date("Y-m-d", $request['dateStart']);
             $dateEnd = date("Y-m-d", $request['dateEnd']);
             $isHouse = $request['orderType'] === 'Домик:';
@@ -544,20 +540,20 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $result = $response['status'] === 'success';
                     if ($result) {
                         $eventTabId = $request['eventTabId'];
-                        if(!empty($eventTabId)){
+                        if (!empty($eventTabId)) {
 
                             $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
                             $freshPrice = null;
-                            foreach($tabHouses as $tabHouse){
+                            foreach ($tabHouses as $tabHouse) {
                                 $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
                                 $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-                                if($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd){
+                                if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
                                     $freshPrice = $tabHouse['new_price'];
                                     break;
                                 }
                             }
 
-                            if(!empty($freshPrice)){
+                            if (!empty($freshPrice)) {
                                 $request['data'] .= '&freshPrice=' . $freshPrice;
                             }
                         }
@@ -566,11 +562,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                     }
                 }
             }
-            if($result){
+            if ($result) {
                 $result = $request['data'];
             }
-        }catch(Exception $e){
-            Logger::log("Exception:".$e->getMessage());
+        } catch (Exception $e) {
+            Logger::log("Exception:" . $e->getMessage());
             return false;
         }
 
@@ -590,7 +586,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         // 1. Create order and get order ID
         $order = $this->createOrderForPay($request);
-        if($order['status'] === 2 and isset($order['orderId'])){
+        if ($order['status'] === 2 and isset($order['orderId'])) {
             $resultStatus = 502;
             // 2. Create At Amocrm Lead Id
 
@@ -613,18 +609,28 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $leadId = $this->initAmoCrmLead($leadData, $contactData);
 
-            if(isset($leadId)){
+            if (isset($leadId)) {
 
                 update_post_meta($order['orderId'], 'sbc_lead_id', $leadId);
 
                 $secret_key = '2091988';
                 $wsb_seed = strtotime("now");
-                $wsb_storeid = '515854557';
+
+                /**
+                 *  production: '320460709'
+                 *  sandbox: '515854557'
+                 */
+                $wsb_storeid = '320460709';
                 $wsb_order_num = $order['orderId'];
-                $wsb_test = '1';
+
+                /**
+                 * production: '0'
+                 * sandbox: '1'
+                 */
+                $wsb_test = '0';
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $order['price'];
-                $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$secret_key);
+                $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
 
                 $result = [
                     "names" => [
@@ -651,41 +657,42 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $resultStatus = 200;
                 $result['status'] = 2;
             }
-        }else if($order['status'] === 1){
+        } else if ($order['status'] === 1) {
             $resultStatus = 200;
             $result['status'] = 1;
         }
         return new WP_REST_Response($result, $resultStatus);
     }
 
-    public function pay_success($request){
+    public function pay_success($request)
+    {
         $order = $this->getOrderById($_POST['site_order_id']);
         ob_start();
         generateCheck($_POST['site_order_id']);
         $checkOutList = ob_get_contents();
         ob_end_clean();
-        wp_mail( 
+        wp_mail(
             [
                 $order['email']
-            ], 
-            'Успешная оплата в Красногорке', 
-            $checkOutList 
+            ],
+            'Успешная оплата в Красногорке',
+            $checkOutList
         );
-        if($_POST['transaction_id']){
+        if ($_POST['transaction_id']) {
             update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
             update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
         }
-        try{
+        try {
             $this->updateAmoCrmLead($order['leadId'], $_POST['site_order_id']);
-        }catch(AmoCRMApiException $e){
-            Logger::log("AmoCRMApiException Exception:".$e->getTitle());
+        } catch (AmoCRMApiException $e) {
+            Logger::log("AmoCRMApiException Exception:" . $e->getTitle());
         }
-        
     }
 
-    private function updateAmoCrmLead($leadId, $orderId){
-        if(!empty($leadId)){
+    private function updateAmoCrmLead($leadId, $orderId)
+    {
+        if (!empty($leadId)) {
             $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
             $lead->setStatusId(35452474);
@@ -697,9 +704,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             $payedFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())->setValue(
-                        $lead->getPrice()
+                            $lead->getPrice()
+                        )
                     )
-                )
             );
             $leadCustomFields->add($payedFieldValueModel);
 
@@ -708,8 +715,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue('booked')
-                )
+                            ->setValue('booked')
+                    )
             );
             $leadCustomFields->add($typeFieldValueModel);
 
@@ -722,42 +729,43 @@ class Booking_Form_Controller extends WP_REST_Controller
             try {
                 $task = $apiClient->tasks()->getOne($taskId);
                 $task->setTaskTypeId(925198)
-                ->setText('Клиент оплатил 100%')
-                ->setCompleteTill(mktime(date("H"), date("i") + 30))
-                ->setEntityType(EntityTypesInterface::LEADS)
-                ->setEntityId($lead->getId())
-                ->setDuration(1 * 60 * 60) // 1 час
-                ->setResponsibleUserId(2373844);
+                    ->setText('Клиент оплатил 100%')
+                    ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                    ->setEntityType(EntityTypesInterface::LEADS)
+                    ->setEntityId($lead->getId())
+                    ->setDuration(1 * 60 * 60) // 1 час
+                    ->setResponsibleUserId(2373844);
 
                 $task = $apiClient->tasks()->updateOne($task);
             } catch (AmoCRMApiException $e) {
-                Logger::log("tasks exception:".$e->getMessage());
+                Logger::log("tasks exception:" . $e->getMessage());
             }
-
         }
     }
 
-    private function getOrderById($orderID){
+    private function getOrderById($orderID)
+    {
         $order = [];
-        try{
+        try {
             $order['start'] = get_post_meta($orderID, 'sbc_order_start', 1);
             $order['end'] = get_post_meta($orderID, 'sbc_order_end', 1);
             $order['price'] = get_post_meta($orderID, 'sbc_order_price', 1);
             $order['leadId'] = get_post_meta($orderID, 'sbc_lead_id', 1);
             $order['email'] = getEmailFromOrder($orderID);
-        }catch(Exception $e){
-            Logger::log("getOrderById Exception:".$e->getMessage());
+        } catch (Exception $e) {
+            Logger::log("getOrderById Exception:" . $e->getMessage());
         }
         return $order;
     }
 
-    private function createOrderForPay($request){
+    private function createOrderForPay($request)
+    {
         $result = ['status' => 0];
-        try{
+        try {
             $calendarId = $request['id'];
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
-       
+
             $dateStart = date("Y-m-d", $request['dateStart']);
             $dateEnd = date("Y-m-d", $request['dateEnd']);
 
@@ -782,12 +790,12 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                     $eventTabId = $request['eventTabId'];
                     $price = null;
-                    if(!empty($eventTabId)){
+                    if (!empty($eventTabId)) {
                         $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
-                        foreach($tabHouses as $tabHouse){
+                        foreach ($tabHouses as $tabHouse) {
                             $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
                             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-                            if($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd){
+                            if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
                                 $price = $tabHouse['new_price'];
                                 break;
                             }
@@ -811,11 +819,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $result['orderId'] = $order_id;
                     $result['price'] = $price;
                 }
-            }else{
+            } else {
                 $result['status'] = 1;
             }
-        }catch(Exception $e){
-            Logger::log("createOrderForPay Exception:".$e->getMessage());
+        } catch (Exception $e) {
+            Logger::log("createOrderForPay Exception:" . $e->getMessage());
         }
         return $result;
     }
@@ -824,7 +832,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
         $clientId = null;
         $client = $this->get_client_by_meta(['meta_key' => 'sbc_client_email', 'meta_value' => $request['email']]);
-        if($client === false){
+        if ($client === false) {
             $client_data = array(
                 'post_title'   => $request['fio'] . ' ' . $request['phone'],
                 'post_content' => '',
@@ -835,7 +843,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $clientId = wp_insert_post(wp_slash($client_data));
             update_post_meta($clientId, 'sbc_client_email', $request['email']);
             update_post_meta($clientId, 'sbc_client_phone', $request['phone']);
-        }else{
+        } else {
             $clientId = $client->ID;
             update_post_meta($clientId, 'sbc_client_phone', $request['phone']);
         }
@@ -843,7 +851,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         return $clientId;
     }
 
-    private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids){
+    private function getAmoCrmCatalogByCalendars($amocrm_catalogs_ids)
+    {
         $calendars = [];
         $calendarObjectsReverse = [
             1036665 => 17,
@@ -864,12 +873,12 @@ class Booking_Form_Controller extends WP_REST_Controller
             1036583 => 13,
             10393 => 15,
             10391 => 9,
-            1663367=> 43,
+            1663367 => 43,
             10389 => 16
         ];
 
-        
-        foreach($amocrm_catalogs_ids as $value){
+
+        foreach ($amocrm_catalogs_ids as $value) {
             $calendars[] = $calendarObjectsReverse[$value];
         }
         return $calendars;
@@ -877,127 +886,127 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     private function insertWPLead($request)
     {
-            $type     = $request['type'];
-            $orderId  = $request['orderId'];
-            $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
-            $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
-            $dateFrom = date("Y-m-d", $request['dateFrom']);
-            $dateTo = date("Y-m-d", $request['dateTo']);
-            $objectIds  = $request['objectIds'];
+        $type     = $request['type'];
+        $orderId  = $request['orderId'];
+        $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
+        $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
+        $dateFrom = date("Y-m-d", $request['dateFrom']);
+        $dateTo = date("Y-m-d", $request['dateTo']);
+        $objectIds  = $request['objectIds'];
 
 
-            if ($type != 'remove') {
+        if ($type != 'remove') {
 
-                $kalendars = array_map('intval', $objectIds);
-                $kalendars = array_unique($kalendars);
-                $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
-                if (!$result) {
-                    $response['status'] = 'busy';
-                    return $response;
-                }else{
-                    $this->removeOrder($orderId);
-                }
-
-                $totalPrice = $request['totalPrice'];
-                $havePayed  = $request['havePayed'];
-                $comment    = $request['comment'];
-
-                $contactName   = $request['contactName'];
-                $contactPhone  = $request['contactPhone'];
-                $contactEmail  = $request['contactEmail'];
-                $contactStatus = $request['contactStatus'];
-
-                $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
-                $clientId = null;
-                $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
-
-                if (empty($client)) {
-                    $client_data = array(
-                        'post_title'   => $contactName . ' ' . $addedName,
-                        'post_content' => '',
-                        'post_status'  => 'publish',
-                        'post_author'  => 23,
-                        'post_type'    => 'sbc_clients'
-                    );
-                    // Вставляем данные в БД
-                    $clientId = wp_insert_post(wp_slash($client_data));
-                } else {
-                    $clientPostArr = array();
-                    $clientPostArr['ID'] = $client->ID;
-                    $clientPostArr['post_title'] = $contactName . ' ' . $addedName;
-
-                    // Обновляем данные в БД
-                    wp_update_post(wp_slash($clientPostArr));
-                    $clientId = $client->ID;
-                }
-
-                if (!empty($contactEmail)) {
-                    update_post_meta($clientId, 'sbc_client_email', $contactEmail);
-                }
-
-                if (!empty($contactPhone)) {
-                    update_post_meta($clientId, 'sbc_client_phone', $contactPhone);
-                }
-
-                if (!empty($contactStatus)) {
-                    $contactStatusIds = [$contactStatus];
-                    $contactStatusIds = array_map('intval', $contactStatusIds);
-                    wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
-                }
-
-                $post_data = array(
-                    'post_title'   => date("Y-m-d H:i:s"),
-                    'post_content' => '',
-                    'post_status'  => 'publish',
-                    'post_author'  => 23,
-                    'post_type'    => 'sbc_orders'
-                );
-
-                // Вставляем данные в БД
-                $post_id = wp_insert_post(wp_slash($post_data));
-
-                if (is_wp_error($post_id)) {
-                    $response['message'] = $post_id->get_error_message();
-                } else {
-                    if (!empty($contactName)) {
-                        $contactTemplate = $clientId . " " . $contactName . " " . $contactPhone . " " . $contactEmail . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
-
-                        update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
-                        $this->update_all_clients_orders($clientId, $contactTemplate);
-                    }
-                    if (!empty($type)) {
-                        update_post_meta($post_id, 'sbc_order_select', $type);
-                    }
-                    if (!empty($dateFrom)) {
-                        update_post_meta($post_id, 'sbc_order_start', $dateFrom);
-                    }
-                    if (!empty($dateTo)) {
-                        update_post_meta($post_id, 'sbc_order_end', $dateTo);
-                    }
-
-                    if (!empty($totalPrice)) {
-                        update_post_meta($post_id, 'sbc_order_price', $totalPrice);
-                    }
-                    if (!empty($havePayed)) {
-                        update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
-                    }
-                    if (!empty($comment)) {
-                        update_post_meta($post_id, 'sbc_order_desc', $comment);
-                    }
-
-                    if (!empty($objectIds)) {
-                        $objectIds = array_map('intval', $objectIds);
-                        $objectIds = array_unique($objectIds);
-                        wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
-                    }
-
-                    $response['orderId'] = $post_id;
-                }
-            }else{
+            $kalendars = array_map('intval', $objectIds);
+            $kalendars = array_unique($kalendars);
+            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
+            if (!$result) {
+                $response['status'] = 'busy';
+                return $response;
+            } else {
                 $this->removeOrder($orderId);
             }
 
-            $response['status'] = 'success';
+            $totalPrice = $request['totalPrice'];
+            $havePayed  = $request['havePayed'];
+            $comment    = $request['comment'];
+
+            $contactName   = $request['contactName'];
+            $contactPhone  = $request['contactPhone'];
+            $contactEmail  = $request['contactEmail'];
+            $contactStatus = $request['contactStatus'];
+
+            $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
+            $clientId = null;
+            $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
+
+            if (empty($client)) {
+                $client_data = array(
+                    'post_title'   => $contactName . ' ' . $addedName,
+                    'post_content' => '',
+                    'post_status'  => 'publish',
+                    'post_author'  => 23,
+                    'post_type'    => 'sbc_clients'
+                );
+                // Вставляем данные в БД
+                $clientId = wp_insert_post(wp_slash($client_data));
+            } else {
+                $clientPostArr = array();
+                $clientPostArr['ID'] = $client->ID;
+                $clientPostArr['post_title'] = $contactName . ' ' . $addedName;
+
+                // Обновляем данные в БД
+                wp_update_post(wp_slash($clientPostArr));
+                $clientId = $client->ID;
+            }
+
+            if (!empty($contactEmail)) {
+                update_post_meta($clientId, 'sbc_client_email', $contactEmail);
+            }
+
+            if (!empty($contactPhone)) {
+                update_post_meta($clientId, 'sbc_client_phone', $contactPhone);
+            }
+
+            if (!empty($contactStatus)) {
+                $contactStatusIds = [$contactStatus];
+                $contactStatusIds = array_map('intval', $contactStatusIds);
+                wp_set_object_terms($clientId, $contactStatusIds, 'sbc_clients_type');
+            }
+
+            $post_data = array(
+                'post_title'   => date("Y-m-d H:i:s"),
+                'post_content' => '',
+                'post_status'  => 'publish',
+                'post_author'  => 23,
+                'post_type'    => 'sbc_orders'
+            );
+
+            // Вставляем данные в БД
+            $post_id = wp_insert_post(wp_slash($post_data));
+
+            if (is_wp_error($post_id)) {
+                $response['message'] = $post_id->get_error_message();
+            } else {
+                if (!empty($contactName)) {
+                    $contactTemplate = $clientId . " " . $contactName . " " . $contactPhone . " " . $contactEmail . " <a href='https://krasnagorka.by/wp-admin/post.php?post=" . $clientId . "&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+
+                    update_post_meta($post_id, 'sbc_order_client', $contactTemplate);
+                    $this->update_all_clients_orders($clientId, $contactTemplate);
+                }
+                if (!empty($type)) {
+                    update_post_meta($post_id, 'sbc_order_select', $type);
+                }
+                if (!empty($dateFrom)) {
+                    update_post_meta($post_id, 'sbc_order_start', $dateFrom);
+                }
+                if (!empty($dateTo)) {
+                    update_post_meta($post_id, 'sbc_order_end', $dateTo);
+                }
+
+                if (!empty($totalPrice)) {
+                    update_post_meta($post_id, 'sbc_order_price', $totalPrice);
+                }
+                if (!empty($havePayed)) {
+                    update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
+                }
+                if (!empty($comment)) {
+                    update_post_meta($post_id, 'sbc_order_desc', $comment);
+                }
+
+                if (!empty($objectIds)) {
+                    $objectIds = array_map('intval', $objectIds);
+                    $objectIds = array_unique($objectIds);
+                    wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
+                }
+
+                $response['orderId'] = $post_id;
+            }
+        } else {
+            $this->removeOrder($orderId);
+        }
+
+        $response['status'] = 'success';
 
         return $response;
     }
@@ -1114,31 +1123,31 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $orId = $r[2];
 
                 if ($dateStart >= $from and $dateStart < $to) {
-                    if($orderIdFromCrm != false){
-                        if($orderIdFromCrm != $orId){
+                    if ($orderIdFromCrm != false) {
+                        if ($orderIdFromCrm != $orId) {
                             $result = false;
                         }
-                    }else{
+                    } else {
                         $result = false;
                     }
                 }
 
                 if ($dateEnd > $from and $dateEnd <= $to) {
-                    if($orderIdFromCrm != false){
-                        if($orderIdFromCrm != $orId){
+                    if ($orderIdFromCrm != false) {
+                        if ($orderIdFromCrm != $orId) {
                             $result = false;
                         }
-                    }else{
+                    } else {
                         $result = false;
                     }
                 }
 
                 if ($dateStart < $from and $dateEnd > $to) {
-                    if($orderIdFromCrm != false){
-                        if($orderIdFromCrm != $orId){
+                    if ($orderIdFromCrm != false) {
+                        if ($orderIdFromCrm != $orId) {
                             $result = false;
                         }
-                    }else{
+                    } else {
                         $result = false;
                     }
                 }
@@ -1148,7 +1157,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    private function initAmoCrmLead($leadData, $contactData){
+    private function initAmoCrmLead($leadData, $contactData)
+    {
         $price = $leadData['price'];
         $peopleCount = $leadData['peopleCount'];
         $dateFrom = $leadData['dateFrom'];
@@ -1181,11 +1191,11 @@ class Booking_Form_Controller extends WP_REST_Controller
             $lead->setStatusId($statusId);
             $lead->setPrice($price);
             $lead->setTags((new TagsCollection())
-            ->add(
-                    (new TagModel())
-                        ->setId(1181317)
-                        ->setName('Страница Бронирования')
-                )
+                    ->add(
+                        (new TagModel())
+                            ->setId(1181317)
+                            ->setName('Страница Бронирования')
+                    )
             );
 
             $leadCustomFields = new CustomFieldsValuesCollection();
@@ -1196,19 +1206,19 @@ class Booking_Form_Controller extends WP_REST_Controller
             $orderIdFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())
-                        ->setValue($orderId)
-                )
+                            ->setValue($orderId)
+                    )
             );
             $leadCustomFields->add($orderIdFieldValueModel);
-            
+
             // Order Type
             $typeFieldValueModel = new TextCustomFieldValuesModel();
             $typeFieldValueModel->setFieldId(640633);
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue($orderType)
-                )
+                            ->setValue($orderType)
+                    )
             );
             $leadCustomFields->add($typeFieldValueModel);
 
@@ -1218,8 +1228,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $commentFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue($comment )
-                )
+                            ->setValue($comment)
+                    )
             );
             $leadCustomFields->add($commentFieldValueModel);
 
@@ -1276,18 +1286,18 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($contactPhone);
 
-            try{
+            try {
                 $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-            }catch (AmoCRMApiException $e) {
+            } catch (AmoCRMApiException $e) {
                 Logger::log('Exceptions: contact phone ' . $e->getTitle());
             }
-           
-            if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+
+            if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                 $contact = $contactsCollection->first();
                 $customFields = $contact->getCustomFieldsValues();
-                
+
                 $emailField = $customFields->getBy('fieldCode', 'EMAIL');
-                if(empty($emailField)){
+                if (empty($emailField)) {
                     $emailField = (new MultitextCustomFieldValuesModel())->setFieldCode('EMAIL');
                     $customFields->add($emailField);
                 }
@@ -1300,32 +1310,32 @@ class Booking_Form_Controller extends WP_REST_Controller
                         )
                 );
 
-                if(!empty($contactPassport)){
+                if (!empty($contactPassport)) {
                     $passportFieldValueModel = new TextCustomFieldValuesModel();
                     $passportFieldValueModel->setFieldId(638673);
                     $passportFieldValueModel->setValues(
                         (new TextCustomFieldValueCollection())
                             ->add((new TextCustomFieldValueModel())
-                            ->setValue($contactPassport)));
+                                ->setValue($contactPassport))
+                    );
                     $customFields->add($passportFieldValueModel);
                 }
-                
-                $contact = $apiClient->contacts()->updateOne($contact);
 
-            }else{
+                $contact = $apiClient->contacts()->updateOne($contact);
+            } else {
                 $contactsFilter->setQuery($contactEmail);
 
-                try{
+                try {
                     $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-                }catch (AmoCRMApiException $e) {
+                } catch (AmoCRMApiException $e) {
                     Logger::log('Exceptions: contact email ' . $e->getTitle());
                 }
-                
-                if(!empty($contactsCollection) and $contactsCollection->count() > 0 ){
+
+                if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                     $contact = $contactsCollection->first();
                     $customFields = $contact->getCustomFieldsValues();
                     $phoneField = $customFields->getBy('fieldCode', 'PHONE');
-                    if(empty($phoneField)){
+                    if (empty($phoneField)) {
                         $phoneField = (new MultitextCustomFieldValuesModel())->setFieldCode('PHONE');
                         $customFields->add($phoneField);
                     }
@@ -1338,22 +1348,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                             )
                     );
 
-                    if(!empty($contactPassport)){
+                    if (!empty($contactPassport)) {
                         $passportFieldValueModel = new TextCustomFieldValuesModel();
                         $passportFieldValueModel->setFieldId(638673);
                         $passportFieldValueModel->setValues(
                             (new TextCustomFieldValueCollection())
                                 ->add((new TextCustomFieldValueModel())
-                                ->setValue($contactPassport)));
+                                    ->setValue($contactPassport))
+                        );
                         $customFields->add($passportFieldValueModel);
                     }
 
                     $contact = $apiClient->contacts()->updateOne($contact);
-
-                }else{
+                } else {
                     $contact = new ContactModel();
                     $contact->setFirstName($contactName);
-                    
+
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
                     $phoneFieldValueModel->setFieldCode('PHONE');
@@ -1365,7 +1375,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                                     ->setValue($contactPhone)
                             )
                     );
-                    
+
                     $emailFieldValueModel = new MultitextCustomFieldValuesModel();
                     $emailFieldValueModel->setFieldCode('EMAIL');
                     $emailFieldValueModel->setValues(
@@ -1381,26 +1391,27 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $contactCustomFields->add($emailFieldValueModel);
                     $contact->setCustomFieldsValues($contactCustomFields);
 
-                    if(!empty($contactPassport)){
+                    if (!empty($contactPassport)) {
                         $passportFieldValueModel = new TextCustomFieldValuesModel();
                         $passportFieldValueModel->setFieldId(638673);
                         $passportFieldValueModel->setValues(
                             (new TextCustomFieldValueCollection())
                                 ->add((new TextCustomFieldValueModel())
-                                ->setValue($contactPassport)));
+                                    ->setValue($contactPassport))
+                        );
                         $contactCustomFields->add($passportFieldValueModel);
                     }
 
-                    $contact = $apiClient->contacts()->addOne($contact);  
+                    $contact = $apiClient->contacts()->addOne($contact);
                 }
             }
-            
+
             $links = new LinksCollection();
             $links->add($contact);
 
             $apiClient->leads()->link($lead, $links);
 
-            
+
             //Создадим задачу
             $tasksCollection = new TasksCollection();
             $task = new TaskModel();
@@ -1418,16 +1429,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $taskToStore = $tasksCollection->first();
                 update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
             } catch (AmoCRMApiException $e) {
-                Logger::log('Exceptions: '.$e->getTitle().' <<< tasksCollection >>> '.$e->getDescription());
+                Logger::log('Exceptions: ' . $e->getTitle() . ' <<< tasksCollection >>> ' . $e->getDescription());
             }
-
         } catch (AmoCRMApiException $e) {
-            Logger::log('Exceptions: '.$e->getTitle().' <<< addOne lead >>> '.$e->getDescription());
+            Logger::log('Exceptions: ' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
         }
         return $lead->getId();
     }
 
-    public static function getAmoCrmApiClient(){
+    public static function getAmoCrmApiClient()
+    {
 
         $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
         $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
@@ -1448,26 +1459,29 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'baseDomain' => $baseDomain,
                         ]
                     );
-                });
+                }
+            );
         return $apiClient;
     }
 
-    public function amocrm_v4_test(){
+    public function amocrm_v4_test()
+    {
         $email = getEmailFromOrder('15618');
         return new WP_REST_Response(['status' => 1, 'email' => $email], 200);
     }
-
 }
 
-add_action( 'wp', 'refresh_amo_crm_api_client' );
-function refresh_amo_crm_api_client() {
-	if( ! wp_next_scheduled( 'refresh_amo_crm' ) ) {
-		wp_schedule_event( time(), 'twicedaily', 'refresh_amo_crm');
-	}
+add_action('wp', 'refresh_amo_crm_api_client');
+function refresh_amo_crm_api_client()
+{
+    if (!wp_next_scheduled('refresh_amo_crm')) {
+        wp_schedule_event(time(), 'twicedaily', 'refresh_amo_crm');
+    }
 }
 
-add_action( 'refresh_amo_crm', 'refresh_amo' );
-function refresh_amo() {
+add_action('refresh_amo_crm', 'refresh_amo');
+function refresh_amo()
+{
     LS_WP_Logger::info('Try to refresh token');
-	Booking_Form_Controller::getAmoCrmApiClient();
+    Booking_Form_Controller::getAmoCrmApiClient();
 }
