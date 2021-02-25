@@ -259,7 +259,7 @@ class Model
                 $_dateTo
             );
 
-            if($result['pay']){
+            if ($result['pay']) {
                 $SecretKey = '2091988';
                 $wsb_seed = strtotime("now");
                 /**
@@ -272,16 +272,17 @@ class Model
                  * production: '0'
                  * sandbox: '1'
                  */
-                $wsb_test = '0'; 
+                $wsb_test = '0';
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $result['price'];
-                $wsb_signature = sha1($wsb_seed.$wsb_storeid.$wsb_order_num.$wsb_test.$wsb_currency_id.$wsb_total.$SecretKey);
+                $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $SecretKey);
 
                 $result['webpay'] = [
                     "names" => [
                         '*scart'
                     ],
                     "values" => [
+                        'hh' => 'sdgs',
                         'wsb_storeid' => $wsb_storeid,
                         'wsb_store' => 'OOO Краснагорка',
                         'wsb_order_num' => $wsb_order_num,
@@ -301,7 +302,7 @@ class Model
                 ];
             }
 
-            if(isset($_GET['clear'])){
+            if (isset($_GET['clear'])) {
                 $this->tryToClearOrder($_GET['clear']);
             }
         }
@@ -309,11 +310,12 @@ class Model
         return json_encode($result);
     }
 
-    private function getHouses(){
+    private function getHouses()
+    {
         $result = [];
         $posts = get_posts(['post_type'   => 'house', 'numberposts' => -1]);
-        
-        foreach( $posts as $post ){
+
+        foreach ($posts as $post) {
             $result[] = [
                 'id' => $post->ID,
                 'name' => $post->post_title
@@ -322,8 +324,9 @@ class Model
         return $result;
     }
 
-    private function getCalendars($calendarId){
-        $terms = get_terms(['taxonomy' => 'sbc_calendars' ]);
+    private function getCalendars($calendarId)
+    {
+        $terms = get_terms(['taxonomy' => 'sbc_calendars']);
         $result = [];
         foreach ($terms as $term) {
             $selected = $calendarId == $term->term_id;
@@ -336,12 +339,13 @@ class Model
         return $result;
     }
 
-    private function tryToClearOrder($orderId){
+    private function tryToClearOrder($orderId)
+    {
 
-        try{
+        try {
             $orderId = (int) $orderId;
             if (is_int($orderId) and $orderId != 0) {
-                
+
                 delete_post_meta($orderId, 'sbc_order_client');
                 delete_post_meta($orderId, 'sbc_order_select');
                 delete_post_meta($orderId, 'sbc_order_start');
@@ -355,12 +359,13 @@ class Model
 
                 wp_delete_post($orderId, true);
             }
-        }catch(Exception $e){
-            Logger::log("Exception: tryToClearOrder" .$orderId);
+        } catch (Exception $e) {
+            Logger::log("Exception: tryToClearOrder" . $orderId);
         }
     }
 
-    private function clearBookingAtAmoCRM($orderId){
+    private function clearBookingAtAmoCRM($orderId)
+    {
         $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
         $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
 
@@ -368,12 +373,12 @@ class Model
             $apiClient = Booking_Form_Controller::getAmoCrmApiClient();
             $task = $apiClient->tasks()->getOne($taskId);
             $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-            ->setText('Попытайтеся вернуть клиента на оплату')
-            ->setCompleteTill(mktime(date("H"), date("i") + 30))
-            ->setEntityType(EntityTypesInterface::LEADS)
-            ->setEntityId($leadId)
-            ->setDuration(1 * 60 * 60) // 1 час
-            ->setResponsibleUserId(2373844);
+                ->setText('Попытайтеся вернуть клиента на оплату')
+                ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($leadId)
+                ->setDuration(1 * 60 * 60) // 1 час
+                ->setResponsibleUserId(2373844);
 
             $task = $apiClient->tasks()->updateOne($task);
 
@@ -385,8 +390,8 @@ class Model
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                        ->setValue(null)
-                )
+                            ->setValue(null)
+                    )
             );
             $leadCustomFields->add($typeFieldValueModel);
 
@@ -395,17 +400,16 @@ class Model
             $orderIdFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())
-                        ->setValue(null)
-                )
+                            ->setValue(null)
+                    )
             );
             $leadCustomFields->add($orderIdFieldValueModel);
 
 
             $lead->setCustomFieldsValues($leadCustomFields);
             $apiClient->leads()->updateOne($lead);
-
         } catch (AmoCRMApiException $e) {
-            Logger::log("AmoCRMApiException:".$e->getMessage());
+            Logger::log("AmoCRMApiException:" . $e->getMessage());
         }
     }
 
