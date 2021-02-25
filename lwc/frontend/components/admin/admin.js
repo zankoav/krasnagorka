@@ -7,7 +7,6 @@ export default class Admin extends LightningElement {
 
     connectedCallback(){
         this.settings = {
-            calendars: [...this.model.calendars],
             house: null,
             fio: null,
             phone: null,
@@ -17,6 +16,9 @@ export default class Admin extends LightningElement {
             dateEnd: null,
             comment: null,
             passport: null,
+            agreement: null,
+            linkAgreement: 'http://tut.by',
+            calendars: [...this.model.calendars],
             menu:[
                 {
                     label: 'Выбор Домика',
@@ -43,7 +45,7 @@ export default class Admin extends LightningElement {
                     active: false
                 }
             ]
-        }
+        };
     }
 
     updateSettings(event){

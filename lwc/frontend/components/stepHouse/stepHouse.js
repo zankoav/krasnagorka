@@ -44,7 +44,9 @@ export default class StepHouse extends LightningElement {
                      calendars: newCalendars,
                      house: house,
                      menu: newMenu,
-                     counts: counts
+                     counts: counts,
+                     dateStart: null,
+                     dateEnd: null
                 }, 
                  bubbles:true, 
                  composed:true

@@ -314,11 +314,11 @@ export default class BookingForm extends LightningElement {
                      * https://payment.webpay.by
                      * https://securesandbox.webpay.by
                      */
-                    generateAndSubmitForm(
-                        'https://payment.webpay.by',  
-                        result.values,
-                        result.names
-                    );
+                    // generateAndSubmitForm(
+                    //     'https://payment.webpay.by',  
+                    //     result.values,
+                    //     result.names
+                    // );
                 }else if(result.status === 1){
                     this.formMessageSuccess = null;
                     this.formMessageError = `Извините! Данное предложение уже забронировано.`;
