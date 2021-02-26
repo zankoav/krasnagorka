@@ -50,8 +50,12 @@
 
 		&_left {
 			width: initial;
-            flex: initial;
-            appearance: checkbox;
+			flex: initial;
+			appearance: checkbox;
+		}
+
+		&_pass {
+			text-transform: uppercase;
 		}
 
 		&:focus {

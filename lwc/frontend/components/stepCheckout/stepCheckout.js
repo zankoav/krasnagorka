@@ -4,6 +4,22 @@ import './stepCheckout.scss';
 export default class StepCheckout extends LightningElement {
     @api settings;
 
+    get calendarName(){
+        return this.settings.calendars.find(c => c.selected).name;
+    }
+
+    get peopleCount(){
+        return this.settings.counts.find(c => c.selected).name;
+    }
+
+    get dateStart(){
+        return this.settings.dateStart.replaceAll('-', '.');
+    }
+
+    get dateEnd(){
+        return this.settings.dateEnd.replaceAll('-', '.');
+    }
+
     bookingHandler(){
         console.log('booking');
     }

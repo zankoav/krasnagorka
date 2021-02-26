@@ -8,15 +8,15 @@ export default class Admin extends LightningElement {
     connectedCallback(){
         this.settings = {
             house: null,
-            fio: null,
-            phone: null,
-            email: null,
+            fio: "Занько",
+            phone: "+375295558386",
+            email: "zankoav@gmail.com",
             counts: null,
             dateStart: null,
             dateEnd: null,
             comment: null,
             passport: null,
-            agreement: null,
+            agreement: true,
             linkAgreement: 'http://tut.by',
             calendars: [...this.model.calendars],
             menu:[
