@@ -1,11 +1,22 @@
 import {LightningElement, track , api } from 'lwc';
+import Inputmask from "inputmask";
+import {skip} from "z/utils";
+
 import './stepContact.scss';
 
 export default class StepContact extends LightningElement {
 
     @api settings;
     @track error;
-    
+
+    async connectedCallback() {
+        await skip();
+        this.fio = this.template.querySelector('[name="fio"]');
+		Inputmask({ regex: "^[a-zA-Zа-яА-Я\\s]*$" }).mask(this.fio);
+		this.phone = this.template.querySelector('[name="phone"]');
+		Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
+    }
+
     backButtonHandler(){
         const newMenu = this.settings.menu.map(it => {
             return {...it, active:it.value === 'date'};
@@ -52,21 +63,6 @@ export default class StepContact extends LightningElement {
         if(name === 'agreement'){
             value = event.target.checked;
         }
-
-        // let newMenu = this.settings.menu.map(it => {
-        //     let result;
-        //     if(it.value === 'contacts' || it.value === 'checkout'){
-        //         result = {
-        //             ...it, 
-        //             available: false
-        //         };
-        //     }else{
-        //         result = {...it};
-        //     }
-        //     return result;
-        // });
-
-
         this.dispatchEvent(
             new CustomEvent('update', {
                  detail: {

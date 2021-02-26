@@ -77,46 +77,6 @@ export default class StepDate extends LightningElement {
         events = null;
         jsFromDate = this.initDate(this.settings.dateStart);
         jsToDate = this.initDate(this.settings.dateEnd);
-
-        let newMenu;
-
-        if(jsFromDate && jsToDate){
-            newMenu = this.settings.menu.map(it => {
-                let result;
-                if(it.value === 'contacts'){
-                    result = {
-                        ...it, 
-                        available: true
-                    };
-                }else{
-                    result = {...it};
-                }
-                return result;
-            });
-        }else{
-            newMenu = this.settings.menu.map(it => {
-                let result;
-                if(it.value === 'contacts' || it.value === 'checkout'){
-                    result = {
-                        ...it, 
-                        available: false
-                    };
-                }else{
-                    result = {...it};
-                }
-                return result;
-            });
-        }
-        this.dispatchEvent(
-            new CustomEvent('update', {
-                 detail: {
-                    menu: newMenu
-                 }, 
-                 bubbles:true, 
-                 composed:true
-             })
-        );
-
         $calendar = null;
         this.loading = true;
         const culendarSlug = this.settings.calendars.find(c => c.selected).slug;
@@ -215,23 +175,9 @@ export default class StepDate extends LightningElement {
                         "YYYY-MM-DD"
                     );
 
-                    newMenu = step.settings.menu.map(it => {
-                        let result;
-                        if(it.value === 'contacts'){
-                            result = {
-                                ...it, 
-                                available: true
-                            };
-                        }else{
-                            result = {...it};
-                        }
-                        return result;
-                    });
-
                     step.dispatchEvent(
                         new CustomEvent('update', {
                              detail: {
-                                menu: newMenu,
                                 dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
                                 dateEnd: toDateClearFormat.format("DD-MM-YYYY")
                              }, 
@@ -245,23 +191,10 @@ export default class StepDate extends LightningElement {
                         "YYYY-MM-DD"
                     );
 
-                    newMenu = step.settings.menu.map(it => {
-                        let result;
-                        if(it.value === 'contacts' || it.value === 'checkout'){
-                            result = {
-                                ...it, 
-                                available: false
-                            };
-                        }else{
-                            result = {...it};
-                        }
-                        return result;
-                    });
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
                              detail: {
-                                menu: newMenu,
                                 dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
                                 dateEnd: null
                              }, 
@@ -271,23 +204,9 @@ export default class StepDate extends LightningElement {
                     );
                 } else {
 
-                    newMenu = step.settings.menu.map(it => {
-                        let result;
-                        if(it.value === 'contacts' || it.value === 'checkout'){
-                            result = {
-                                ...it, 
-                                available: false
-                            };
-                        }else{
-                            result = {...it};
-                        }
-                        return result;
-                    });
-
                     step.dispatchEvent(
                         new CustomEvent('update', {
                              detail: {
-                                menu: newMenu,
                                 dateStart: null,
                                 dateEnd: null
                              }, 

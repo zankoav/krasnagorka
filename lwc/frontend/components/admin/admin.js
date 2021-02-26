@@ -23,7 +23,7 @@ export default class Admin extends LightningElement {
                 {
                     label: 'Выбор Домика',
                     value: 'house',
-                    available: true,
+                    available: false,
                     active: true
                 },
                 {
@@ -46,10 +46,49 @@ export default class Admin extends LightningElement {
                 }
             ]
         };
+
+        this.updateSettings();
     }
 
     updateSettings(event){
-        this.settings = {...this.settings, ...event.detail};
+        if(event){
+            this.settings = {...this.settings, ...event.detail};
+        }
+        this.updateAvailableSteps();
         console.log('settings', this.settings);
+    }
+
+    updateAvailableSteps(){
+
+        const availableSteps = ['house'];
+
+        if(
+            this.settings.house && 
+            this.settings.counts.find(c=>c.selected)
+        ){
+            availableSteps.push('date');
+        }
+
+        if(
+            availableSteps.includes('date') && 
+            this.settings.dateStart && 
+            this.settings.dateEnd
+        ){
+            availableSteps.push('contacts');
+        }
+
+        if(
+            availableSteps.includes('contacts') && 
+            this.settings.fio && 
+            this.settings.phone &&
+            this.settings.email &&
+            this.settings.agreement
+        ){
+            availableSteps.push('checkout');
+        }
+
+        this.settings.menu = this.settings.menu.map(item => {
+            return {...item, available: availableSteps.includes(item.value)};
+        });
     }
 }

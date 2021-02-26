@@ -21,13 +21,6 @@ export default class StepHouse extends LightningElement {
         const newCalendars = this.settings.calendars.map(c => {
             return {...c, selected: c.id === id};
         });
-        
-        const newMenu = this.settings.menu.map(it => {
-            return {
-                ...it, 
-                available: it.value === 'house'
-            };
-        });
 
         const count = parseInt(house.peopleMaxCount);
         const counts = Array.from(Array(count), (_, i) => i + 1).map(it => {
@@ -43,7 +36,6 @@ export default class StepHouse extends LightningElement {
                  detail: {
                      calendars: newCalendars,
                      house: house,
-                     menu: newMenu,
                      counts: counts,
                      dateStart: null,
                      dateEnd: null
@@ -60,18 +52,10 @@ export default class StepHouse extends LightningElement {
             return {...c, selected: c.id === id};
         });
 
-        const newMenu = this.settings.menu.map(it => {
-            return {
-                ...it, 
-                available: it.value === 'date' ? true : it.available
-            };
-        });
-
         this.dispatchEvent(
             new CustomEvent('update', {
                  detail: {
                     counts: newCounts,
-                    menu: newMenu
                  }, 
                  bubbles:true, 
                  composed:true
