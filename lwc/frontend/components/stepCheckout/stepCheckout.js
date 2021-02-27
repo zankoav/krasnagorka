@@ -33,14 +33,15 @@ export default class StepCheckout extends LightningElement {
     async bookingHandler(){
 
         const cid = getCookie("_ga") ? getCookie("_ga").replace(/GA1.2./g, "") : null;
-
+        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
         const requestData = {
             id: this.calendar.id,
             fio: this.settings.fio,
             phone: this.settings.phone,
             email: this.settings.email,
-            dateStart: this.settings.dateStart,
-            dateEnd: this.settings.dateEnd,
+            dateStart: dateStart,
+            dateEnd: dateEnd,
             count: this.peopleCount,
             contract: true,
             comment: this.settings.comment,
@@ -48,7 +49,7 @@ export default class StepCheckout extends LightningElement {
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
-            data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${this.settings.dateStart}&dateEnd=${this.settings.dateEnd}&count=${this.peopleCount}&contract=${true}&comment=${this.settings.comment}&bookingTitle=${this.calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport}&id=${this.calendar.id}`
+            data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${this.peopleCount}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${this.calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${this.calendar.id}`
         }
         console.log('booking', requestData);
 
