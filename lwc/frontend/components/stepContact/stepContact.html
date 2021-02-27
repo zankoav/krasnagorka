@@ -1,82 +1,79 @@
 <template>
-    <div class="step-contact">
-        <div class="step-contact__body">
-            <div class="step-contact__group">
-                <label for="fio"
-                       class="step-contact__label step-contact__label_required">ФИО</label>
-                <input id="fio"
-                       onchange={changeHandler}
-                       maxlength="60"
-                       type="text"
-                       value={settings.fio}
-                       class="step-contact__input"
-                       name="fio">
-            </div>
-            <input type="hidden"
-                   class="step-contact__input"
-                   name="message">
-            <div class="step-contact__group">
-                <label for="phone"
-                       class="step-contact__label step-contact__label_required">Телефон</label>
-                <input id="phone"
-                       onchange={changeHandler}
-                       value={settings.phone}
-                       maxlength="20"
-                       type="tel"
-                       class="step-contact__input"
-                       name="phone">
-            </div>
-            <div class="step-contact__group">
-                <label for="email"
-                       class="step-contact__label step-contact__label_required">E-mail</label>
-                <input id="email"
-                       onchange={changeHandler}
-                       value={settings.email}
-                       maxlength="60"
-                       type="email"
-                       class="step-contact__input"
-                       name="email">
-            </div>
-            <div class="step-contact__group">
-                <label for="passport"
-                       class="step-contact__label">Личный (идентификационный) номер
-                    паспорта</label>
-                <input id="passport"
-                       onchange={changeHandler}
-                       value={settings.passport}
-                       maxlength="60"
-                       type="text"
-                       class="step-contact__input step-contact__input_pass"
-                       name="passport">
-            </div>
-            <div class="step-contact__group">
-                <label for="comment"
-                       class="step-contact__label">Комментарий</label>
-                <textarea id="comment"
-                          onchange={changeHandler}
-                          maxlength="500"
-                          class="step-contact__input"
-                          rows="4"
-                          name="comment">
+       <div class="step-contact">
+              <div class="step-contact__body">
+                     <div class="step-contact__group">
+                            <label for="fio"
+                                   class="step-contact__label step-contact__label_required">ФИО</label>
+                            <input id="fio"
+                                   oninput={changeHandler}
+                                   maxlength="60"
+                                   type="text"
+                                   value={settings.fio}
+                                   class="step-contact__input"
+                                   name="fio">
+                     </div>
+                     <div class="step-contact__group">
+                            <label for="phone"
+                                   class="step-contact__label step-contact__label_required">Телефон</label>
+                            <input id="phone"
+                                   oninput={changeHandler}
+                                   value={settings.phone}
+                                   maxlength="20"
+                                   type="tel"
+                                   class="step-contact__input"
+                                   name="phone">
+                     </div>
+                     <div class="step-contact__group">
+                            <label for="email"
+                                   class="step-contact__label step-contact__label_required">E-mail</label>
+                            <input id="email"
+                                   oninput={changeHandler}
+                                   value={settings.email}
+                                   maxlength="60"
+                                   type="email"
+                                   class="step-contact__input"
+                                   name="email">
+                     </div>
+                     <div class="step-contact__group">
+                            <label for="passport"
+                                   class="step-contact__label">Личный (идентификационный) номер
+                                   паспорта</label>
+                            <input id="passport"
+                                   oninput={changeHandler}
+                                   value={settings.passport}
+                                   maxlength="60"
+                                   type="text"
+                                   class="step-contact__input step-contact__input_pass"
+                                   name="passport">
+                     </div>
+                     <div class="step-contact__group">
+                            <label for="comment"
+                                   class="step-contact__label">Комментарий</label>
+                            <textarea id="comment"
+                                      oninput={changeHandler}
+                                      maxlength="500"
+                                      class="step-contact__input"
+                                      rows="4"
+                                      name="comment">
                           {settings.comment}
                 </textarea>
-            </div>
-            <div class="step-contact__group step-contact__group_checkbox">
-                <input id="agreement"
-                       type="checkbox"
-                       onchange={changeHandler}
-                       checked={settings.agreement}
-                       class="step-contact__input step-contact__input_left"
-                       name="agreement">
-                <label for="agreement"
-                       class="step-contact__label step-contact__label_required">Согласен с&nbsp;
-                    <a href={settings.linkAgreement}
-                       target="_blank">договором присоединения</a></label>
-            </div>
-        </div>
-        <z-step-button-navigation onback={backButtonHandler}
-                                  onnext={nextButtonHandler}
-                                  error={error}
-                                  is-back-button-need></z-step-button-navigation>
-    </div>
+                     </div>
+                     <div class="step-contact__group step-contact__group_checkbox">
+                            <input id="agreement"
+                                   type="checkbox"
+                                   onchange={changeHandler}
+                                   checked={settings.agreement}
+                                   class="step-contact__input step-contact__input_left"
+                                   name="agreement">
+                            <label for="agreement"
+                                   class="step-contact__label step-contact__label_required">Согласен с&nbsp;
+                                   <a href={settings.linkAgreement}
+                                      target="_blank">договором присоединения</a></label>
+                     </div>
+              </div>
+              <z-step-button-navigation onback={backButtonHandler}
+                                        onnext={nextButtonHandler}
+                                        error={error}
+                                        is-back-button-need></z-step-button-navigation>
+       </div>
 </template>
