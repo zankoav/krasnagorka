@@ -20,11 +20,11 @@ export default class StepDate extends LightningElement {
     @track error;
 
     get dateStart(){
-        return this.settings.dateStart || ' - ';
+        return this.settings.dateStart ? this.settings.dateStart.replaceAll('-', '.') : '—';
     }
 
     get dateEnd(){
-        return this.settings.dateEnd || ' - ';
+        return this.settings.dateEnd ? this.settings.dateEnd.replaceAll('-', '.') : '—';
     }
 
     backButtonHandler(){

@@ -1,34 +1,34 @@
 <template>
-    <div class="step-checkout">
-        <div class="step-checkout__body">
-            <h3 class="step-checkout__title">Ваш заказ</h3>
-            <p class="step-checkout__item"
-               data-label="Домик:">{calendarName}</p>
-            <p class="step-checkout__item"
-               data-label="Количество человек:"
-               data-help="Возраст детей и необходимость доп. спального места для них указывайте в комментарии">
-                {peopleCount}</p>
+   <div class="step-checkout">
+      <div class="step-checkout__body">
+         <h3 class="step-checkout__title">Ваш заказ</h3>
+         <p class="step-checkout__item"
+            data-label="Домик:">{calendar.name}</p>
+         <p class="step-checkout__item"
+            data-label="Количество человек:"
+            data-help="Возраст детей и необходимость доп. спального места для них указывайте в комментарии">
+            {peopleCount}</p>
 
-            <p class="step-checkout__item"
-               data-label="Дата заезда:">{dateStart}</p>
-            <p class="step-checkout__item"
-               data-label="Дата выезда:">{dateEnd}</p>
+         <p class="step-checkout__item"
+            data-label="Дата заезда:">{dateStart}</p>
+         <p class="step-checkout__item"
+            data-label="Дата выезда:">{dateEnd}</p>
 
-            <p class="step-checkout__item"
-               data-label="ФИО:">{settings.fio}</p>
-            <p class="step-checkout__item"
-               data-label="Телефон:">{settings.phone}</p>
-            <p class="step-checkout__item"
-               data-label="E-mail:">{settings.email}</p>
-            <p class="step-checkout__item"
-               data-label="Паспорт:"
-               data-help="Личный (идентификационный) номер паспорта">{settings.passport}</p>
-            <p class="step-checkout__item"
-               data-label="Комментарий:">{settings.comment}</p>
-        </div>
-        <z-step-button-navigation is-back-button-need
-                                  onback={backButtonHandler}
-                                  onnext={bookingHandler}
-                                  next-title="Забронировать"></z-step-button-navigation>
-    </div>
+         <p class="step-checkout__item"
+            data-label="ФИО:">{settings.fio}</p>
+         <p class="step-checkout__item"
+            data-label="Телефон:">{settings.phone}</p>
+         <p class="step-checkout__item"
+            data-label="E-mail:">{settings.email}</p>
+         <p class="step-checkout__item"
+            data-label="Паспорт:"
+            data-help="Личный (идентификационный) номер паспорта">{passport}</p>
+         <p class="step-checkout__item"
+            data-label="Комментарий:">{comment}</p>
+      </div>
+      <z-step-button-navigation is-back-button-need
+                                onback={backButtonHandler}
+                                onnext={bookingHandler}
+                                next-title="Забронировать"></z-step-button-navigation>
+   </div>
 </template>

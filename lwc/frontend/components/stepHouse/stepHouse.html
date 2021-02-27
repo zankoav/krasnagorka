@@ -3,6 +3,7 @@
         <div class="step-house__body">
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
+                
                 <z-select class="step-house__calendars"
                           onchange={calendarChange}
                           disabled-label=" -- Выберите Домик -- "
