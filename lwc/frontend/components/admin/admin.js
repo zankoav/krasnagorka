@@ -12,9 +12,9 @@ export default class Admin extends LightningElement {
             orderedSuccess: false,
             bookingErrorMessage: null,
             house: null,
-            fio: getCookie("kg_name"),
-            phone: getCookie("kg_phone"),
-            email: getCookie("kg_email"),
+            fio: getCookie("kg_name") || '',
+            phone: getCookie("kg_phone") || '',
+            email: getCookie("kg_email") || '',
             counts: null,
             dateStart: this.model.dateFrom ? 
                 new moment(this.model.dateFrom, "YYYY-MM-DD").format("DD-MM-YYYY") : 
