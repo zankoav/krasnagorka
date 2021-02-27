@@ -21,7 +21,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'posts_per_page' => -1
         ]);
         $calendarId = trim($request['calendarId']);
-        $isTeremCalendar = trim($request['isTeremCalendar']);
+        $isTeremCalendar = trim($request['isTeremCalendar']) == 'on';
         if ($calendarId == '') {
             exit('enter calendarID');
         }
