@@ -10,15 +10,15 @@ export default class StepHouse extends LightningElement {
     connectedCallback(){
         const calendar = this.settings.calendars.find(c => c.selected);
         if(calendar && !this.settings.house){
-            this.initHouse(calendar.id);
+            this.initHouse(calendar.id, calendar.isTerem);
         }
     }
 
-    async initHouse(calendarId){
+    async initHouse(calendarId, isTeremCalendar){
         const id = parseInt(calendarId);
         this.error = false;
         this.loading = true;
-        const house = await fetch(`https://krasnagorka.by/wp-json/krasnagorka/v1/ls/house/?calendarId=${id}`)
+        const house = await fetch(`https://krasnagorka.by/wp-json/krasnagorka/v1/ls/house/?calendarId=${id}&isTeremCalendar=${isTeremCalendar}`)
             .catch(error => {
                 console.log('error', error);
             }).then(data => data.json());
@@ -51,7 +51,8 @@ export default class StepHouse extends LightningElement {
     }
 
     calendarChange(event){
-        this.initHouse(event.detail);
+        const calendar = this.settings.calendars.find(c => c.id == event.detail);
+        this.initHouse(calendar.id, calendar.isTerem);
         this.dispatchEvent(
             new CustomEvent('update', {
                  detail: {
