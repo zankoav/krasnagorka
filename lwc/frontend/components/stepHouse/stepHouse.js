@@ -9,7 +9,7 @@ export default class StepHouse extends LightningElement {
     
     connectedCallback(){
         const calendar = this.settings.calendars.find(c => c.selected);
-        if(calendar){
+        if(calendar && !this.settings.house){
             this.initHouse(calendar.id);
         }
     }
