@@ -331,6 +331,7 @@ class Model
             $result[] = [
                 'id' => $term->term_id,
                 'name' => $term->name,
+                'slug' => $term->slug,
                 'selected' => $selected
             ];
         }
