@@ -21,4 +21,10 @@
             'type' => 'text',
         ) );
 
+        $cmb_term->add_field( array(
+            'name' => 'Включить на форме бронирования',
+            'id'   => $prefix . 'visible',
+            'type' => 'checkbox',
+        ) );
+
     }
