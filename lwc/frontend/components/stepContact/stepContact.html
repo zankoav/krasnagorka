@@ -5,18 +5,21 @@
                             <label for="fio"
                                    class="step-contact__label step-contact__label_required">ФИО</label>
                             <input id="fio"
-                                   oninput={changeHandler}
+                                   onchange={changeHandler}
                                    maxlength="60"
                                    type="text"
                                    value={settings.fio}
                                    class="step-contact__input"
                                    name="fio">
                      </div>
+                     <input type="hidden"
+                            class="step-contact__input"
+                            name="message">
                      <div class="step-contact__group">
                             <label for="phone"
                                    class="step-contact__label step-contact__label_required">Телефон</label>
                             <input id="phone"
-                                   oninput={changeHandler}
+                                   onchange={changeHandler}
                                    value={settings.phone}
                                    maxlength="20"
                                    type="tel"
@@ -27,7 +30,7 @@
                             <label for="email"
                                    class="step-contact__label step-contact__label_required">E-mail</label>
                             <input id="email"
-                                   oninput={changeHandler}
+                                   onchange={changeHandler}
                                    value={settings.email}
                                    maxlength="60"
                                    type="email"
@@ -39,7 +42,7 @@
                                    class="step-contact__label">Личный (идентификационный) номер
                                    паспорта</label>
                             <input id="passport"
-                                   oninput={changeHandler}
+                                   onchange={changeHandler}
                                    value={settings.passport}
                                    maxlength="60"
                                    type="text"
@@ -50,7 +53,7 @@
                             <label for="comment"
                                    class="step-contact__label">Комментарий</label>
                             <textarea id="comment"
-                                      oninput={changeHandler}
+                                      onchange={changeHandler}
                                       maxlength="500"
                                       class="step-contact__input"
                                       rows="4"

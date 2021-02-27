@@ -24,6 +24,8 @@
 		color: $GRAY_1;
 		background-color: $WHITE;
 		outline: none;
+		-webkit-appearance: none;
+		appearance: none;
 
 		&_selected {
 			border-color: $PRIMARY_2;

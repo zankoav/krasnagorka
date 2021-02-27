@@ -11,8 +11,8 @@ export default class StepContact extends LightningElement {
 
     async connectedCallback() {
         await skip();
-        this.fio = this.template.querySelector('[name="fio"]');
-		Inputmask({ regex: "^[a-zA-Zа-яА-Я\\s]*$" }).mask(this.fio);
+        // this.fio = this.template.querySelector('[name="fio"]');
+		// Inputmask({ regex: "^[a-zA-Zа-яА-Я\\s]*$" }).mask(this.fio);
 		this.phone = this.template.querySelector('[name="phone"]');
 		Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
     }
