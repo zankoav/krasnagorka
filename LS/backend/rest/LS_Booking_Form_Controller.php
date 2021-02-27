@@ -32,7 +32,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $metaId = get_post_meta($houseId, "mastak_house_calendar", true);
             $isTerem = get_post_meta($houseId, 'mastak_house_is_it_terem', true);
             $metaId = preg_replace('/[^0-9]/', '', $metaId);
-            LS_WP_Logger::info("isTerem: $isTerem, isTeremCalendar $isTeremCalendar");
             if ($metaId == $calendarId) {
                 $imageId = get_post_thumbnail_id();
                 $picture = wp_get_attachment_image_url($imageId, 'welcome_tab_laptop');
@@ -54,6 +53,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'picture' => $picture,
                     'title' => $term->name
                 ];
+                break;
             } else {
                 $houseInfo = 'this house not found';
             }
