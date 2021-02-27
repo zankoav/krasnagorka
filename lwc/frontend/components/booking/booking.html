@@ -1,22 +1,31 @@
 <template>
-    <div class="booking">
+    <div class="booking"
+         onbooking={bookingOrder}>
         <div class="container">
             <div class="booking__card">
-                <z-steps-navigator settings={settings}></z-steps-navigator>
-                <div class="booking__body">
-                    <z-step-house if:true={isHouseStep}
-                                  settings={settings}>
-                    </z-step-house>
-                    <z-step-date if:true={isDateStep}
-                                 settings={settings}>
-                    </z-step-date>
-                    <z-step-contact if:true={isContactStep}
-                                    settings={settings}>
-                    </z-step-contact>
-                    <z-step-checkout if:true={isCheckoutStep}
-                                     settings={settings}>
-                    </z-step-checkout>
-                </div>
+                <z-loader if:true={loading}></z-loader>
+                <templte if:false={loading}>
+                    <templte if:true={settings.orderedSuccess}>
+                        Order Succesful
+                    </templte>
+                    <templte if:false={settings.orderedSuccess}>
+                        <z-steps-navigator settings={settings}></z-steps-navigator>
+                        <div class="booking__body">
+                            <z-step-house if:true={isHouseStep}
+                                          settings={settings}>
+                            </z-step-house>
+                            <z-step-date if:true={isDateStep}
+                                         settings={settings}>
+                            </z-step-date>
+                            <z-step-contact if:true={isContactStep}
+                                            settings={settings}>
+                            </z-step-contact>
+                            <z-step-checkout if:true={isCheckoutStep}
+                                             settings={settings}>
+                            </z-step-checkout>
+                        </div>
+                    </templte>
+                </templte>
             </div>
         </div>
     </div>

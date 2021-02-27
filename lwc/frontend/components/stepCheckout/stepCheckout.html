@@ -27,6 +27,7 @@
             data-label="Комментарий:">{comment}</p>
       </div>
       <z-step-button-navigation is-back-button-need
+                                error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
                                 onnext={bookingHandler}
                                 next-title="Забронировать"></z-step-button-navigation>

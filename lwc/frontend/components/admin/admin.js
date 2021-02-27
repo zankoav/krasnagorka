@@ -9,13 +9,15 @@ export default class Admin extends LightningElement {
     connectedCallback(){
 
         this.settings = {
+            orderedSuccess: false,
+            bookingErrorMessage: null,
             house: null,
             fio: getCookie("kg_name"),
             phone: getCookie("kg_phone"),
             email: getCookie("kg_email"),
             counts: null,
-            dateStart: null,
-            dateEnd: null,
+            dateStart: this.model.dateFrom,
+            dateEnd: this.model.dateTo,
             comment: null,
             passport: null,
             agreement: true,
