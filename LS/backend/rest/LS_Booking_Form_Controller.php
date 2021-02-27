@@ -27,15 +27,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $houseInfo = [];
         foreach ($query as $house) {
             $query->the_post();
-            $metaId = get_post_meta(get_the_ID(), "mastak_house_calendar", true);
+            $houseId = get_the_ID();
+            $metaId = get_post_meta($houseId, "mastak_house_calendar", true);
             $metaId = preg_replace('/[^0-9]/', '', $metaId);
             if ($metaId == $calendarId) {
                 $imageId = get_post_thumbnail_id();
                 $picture = wp_get_attachment_image_url($imageId, 'welcome_tab_laptop');
                 $houseInfo = [
-                    'id' => get_the_ID(),
+                    'id' => $houseId,
                     'description' => get_the_content(),
-                    'peopleMaxCount' => get_post_meta(get_the_ID(), "max_people", true),
+                    'peopleMaxCount' => get_post_meta($houseId, "max_people", true),
                     'picture' => $picture,
                     'title' => get_the_title()
                 ];

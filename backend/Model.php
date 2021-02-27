@@ -327,11 +327,17 @@ class Model
         $terms = get_terms(['taxonomy' => 'sbc_calendars']);
         $result = [];
         foreach ($terms as $term) {
+            $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
+            $isTeremRoom = get_term_meta($term->term_id, 'kg_calendars_terem', 1);
+            if (!$isAvailable) {
+                continue;
+            }
             $selected = $calendarId == $term->term_id;
             $result[] = [
                 'id' => $term->term_id,
                 'name' => $term->name,
                 'slug' => $term->slug,
+                'isTerem' => $isTeremRoom,
                 'selected' => $selected
             ];
         }

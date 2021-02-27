@@ -27,4 +27,10 @@
             'type' => 'checkbox',
         ) );
 
+        $cmb_term->add_field( array(
+            'name' => 'Комната Терема',
+            'id'   => $prefix . 'terem',
+            'type' => 'checkbox',
+        ) );
+
     }
