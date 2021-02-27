@@ -63,6 +63,9 @@ export default class StepContact extends LightningElement {
         if(name === 'agreement'){
             value = event.target.checked;
         }
+        if(name === 'passport'){
+            value = value.toUpperCase();
+        }
         this.dispatchEvent(
             new CustomEvent('update', {
                  detail: {

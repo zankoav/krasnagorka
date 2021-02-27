@@ -8,9 +8,9 @@ export default class Admin extends LightningElement {
     connectedCallback(){
         this.settings = {
             house: null,
-            fio: "Занько",
-            phone: "+375295558386",
-            email: "zankoav@gmail.com",
+            fio: null,
+            phone: null,
+            email: null,
             counts: null,
             dateStart: null,
             dateEnd: null,
@@ -23,7 +23,7 @@ export default class Admin extends LightningElement {
                 {
                     label: 'Выбор Домика',
                     value: 'house',
-                    available: false,
+                    available: true,
                     active: true
                 },
                 {
@@ -55,7 +55,6 @@ export default class Admin extends LightningElement {
             this.settings = {...this.settings, ...event.detail};
         }
         this.updateAvailableSteps();
-        console.log('settings', this.settings);
     }
 
     updateAvailableSteps(){

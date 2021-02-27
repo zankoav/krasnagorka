@@ -6,6 +6,15 @@ export default class StepHouse extends LightningElement {
     @api settings;
     @track loading;
     @track error;
+    
+    connectedCallback(){
+        const calendar = this.settings.calendars.find(c => c.selected);
+        if(calendar){
+            this.calendarChange({
+                detail: calendar.id
+            });
+        }
+    }
 
     async calendarChange(event){
         const id = parseInt(event.detail);
