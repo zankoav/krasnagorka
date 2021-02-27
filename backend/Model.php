@@ -183,7 +183,6 @@ class Model
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
         $calendarId = $_GET['calendarId'];
-        $v2 = $_GET['v2'];
         $title     = null;
         $type      = null;
 
@@ -214,7 +213,6 @@ class Model
         $result        = [
             'id'            => $calendarId,
             'maxCount'      => $maxCount,
-            'v2'            => $v2,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
             'mainMenu'      => $this->getMainMenu(),

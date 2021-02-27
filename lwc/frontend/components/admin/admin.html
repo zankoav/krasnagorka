@@ -2,13 +2,13 @@
     <z-app if:true={model}>
         <z-header-primary model={model}
                           slot="header"></z-header-primary>
-        <template if:true={model.v2}>
+        <template if:false={model.pay}>
             <z-booking onupdate={updateSettings}
                        settings={settings}
                        slot="main">
             </z-booking>
         </template>
-        <template if:false={model.v2}>
+        <template if:true={model.pay}>
             <z-booking-form obj-id={model.id}
                             max-count={model.maxCount}
                             date-from={model.dateFrom}
