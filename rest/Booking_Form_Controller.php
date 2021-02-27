@@ -492,17 +492,21 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function create_amocrm_lead($request)
     {
         $result = ['status' => 'error'];
+        LS_WP_Logger::info('create_amocrm_lead 1');
         try {
             if (isset($request['data'])) {
                 require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                 $href = 'https://krasnagorka.by/booking-form';
                 $type = 'booking-form';
+                LS_WP_Logger::info('create_amocrm_lead 2');
                 $amo = new AmoIntegration($type, $request['data'], $href);
                 $result['status'] = 'success';
+                LS_WP_Logger::info('create_amocrm_lead 3');
             }
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
         }
+        LS_WP_Logger::info('create_amocrm_lead 4');
         return new WP_REST_Response($result, 200);
     }
 

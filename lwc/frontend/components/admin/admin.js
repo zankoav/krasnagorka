@@ -1,4 +1,5 @@
 import { LightningElement, api, track} from 'lwc';
+import {getCookie} from 'z/utils';
 import './admin.scss';
 export default class Admin extends LightningElement {
     
@@ -6,18 +7,19 @@ export default class Admin extends LightningElement {
     @track settings;
 
     connectedCallback(){
+
         this.settings = {
             house: null,
-            fio: null,
-            phone: null,
-            email: null,
+            fio: getCookie("kg_name"),
+            phone: getCookie("kg_phone"),
+            email: getCookie("kg_email"),
             counts: null,
             dateStart: null,
             dateEnd: null,
             comment: null,
             passport: null,
             agreement: true,
-            linkAgreement: 'http://tut.by',
+            linkAgreement: this.model.mainContent.contractOffer,
             calendars: [...this.model.calendars],
             menu:[
                 {
