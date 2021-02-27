@@ -3,10 +3,22 @@
          onbooking={bookingOrder}>
         <div class="container">
             <div class="booking__card">
-                <z-loader if:true={loading}></z-loader>
+                <templte if:true={loading}>
+                    <div class="booking__body">
+                        <h3 class="booking__title">Бронирую...</h3>
+                        <z-loader></z-loader>
+                    </div>
+                </templte>
                 <templte if:false={loading}>
                     <templte if:true={settings.orderedSuccess}>
-                        Order Succesful
+                        <div class="booking__body booking__body_success">
+                            <h3 class="booking__title">Бронирование выполнено успешно!</h3>
+                            <img src={okImage}
+                                 alt="checkon"
+                                 class="booking__ok">
+                            <p class="booking__description">Наш сотрудник скоро свяжется с вами для уточнения деталей
+                            </p>
+                        </div>
                     </templte>
                     <templte if:false={settings.orderedSuccess}>
                         <z-steps-navigator settings={settings}></z-steps-navigator>

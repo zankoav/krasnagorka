@@ -13,6 +13,32 @@
 		}
 	}
 
+	&__title {
+		font-size: 20px;
+		padding-top: 2rem;
+		text-align: center;
+		color: $GRAY_1;
+	}
+
+	&__ok {
+		width: 60px;
+		margin-top: 1rem;
+	}
+
+	&__body {
+		&_success {
+			text-align: center;
+		}
+	}
+
+	&__description {
+		padding: 1rem 1rem 2rem;
+		font-size: 14px;
+		max-width: 300px;
+		color: $GRAY_5;
+		margin: 0 auto;
+	}
+
 	&__card {
 		background-color: $WHITE;
 		overflow: hidden;

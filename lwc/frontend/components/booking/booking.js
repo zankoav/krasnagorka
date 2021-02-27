@@ -3,11 +3,13 @@ import {getCookie, setCookie} from 'z/utils';
 import "./booking.scss";
 
 const MAX_AGE = 3600 * 24 * 100;
+const OK = require('./../../icons/checkon.svg');
 
 export default class BookingForm extends LightningElement {
 
 	@api settings;
     @track loading;
+    @track okImage = OK;
 
     get isHouseStep(){
         return this.settings.menu[0].active;
@@ -60,7 +62,15 @@ export default class BookingForm extends LightningElement {
         }).then(data => data.json());
 
         if(response){
-            this.orderedSuccess = true;
+            this.dispatchEvent(
+                new CustomEvent('update', {
+                     detail: {
+                        orderedSuccess: true
+                     }, 
+                     bubbles:true, 
+                     composed:true
+                 })
+            );
             setCookie("kg_name", this.settings.fio, { "max-age": MAX_AGE });
             setCookie("kg_phone", this.settings.phone, { "max-age": MAX_AGE });
             setCookie("kg_email", this.settings.email, { "max-age": MAX_AGE });
