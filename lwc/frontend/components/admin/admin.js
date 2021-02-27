@@ -51,6 +51,8 @@ export default class Admin extends LightningElement {
             ]
         };
 
+        console.log('init settings', this.settings);
+
         this.updateSettings();
     }
 
@@ -59,6 +61,7 @@ export default class Admin extends LightningElement {
             this.settings = {...this.settings, ...event.detail};
         }
         this.updateAvailableSteps();
+        console.log('updated settings', this.settings);
     }
 
     updateAvailableSteps(){
