@@ -24,7 +24,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
     <div class="our-house__header-image">
         <a href="<?= get_the_permalink(); ?>" target="_blank" class="our-house__header-image-wrap">
             <img class="object-fit-img" src="<?= wp_get_attachment_image_url($icon_id, $size); ?>" srcset="<?= wp_get_attachment_image_srcset($icon_id, $size); ?>" sizes="<?= wp_get_attachment_image_sizes($icon_id, $size); ?>">
-            <?php if (!$isTerem) : ?>
+            <?php if (!$isTerem or true) : ?>
                 <div class="our-house__price js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $price_byn; ?>"><?= $price; ?></div>
             <?php endif; ?>
         </a>
