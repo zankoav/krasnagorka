@@ -44,7 +44,7 @@ export default class BookingForm extends LightningElement {
             dateStart: dateStart,
             dateEnd: dateEnd,
             count: peopleCount,
-            contract: true,
+            contract: false,
             comment: this.settings.comment,
             orderTitle: calendar.name,
             orderType: 'Домик:',
