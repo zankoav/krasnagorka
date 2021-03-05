@@ -464,7 +464,7 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 
-    
+
     (function($) {
 
         $('.our-house__button, .house-booking__button').on('click', function() {
@@ -489,13 +489,13 @@ if (is_page_template("template-mastak-map.php")) : ?>
             });
         });
 
-        $('.accordion-mixed__tab').on('click', function(){
-            if($( window ).width() < 768){
-                setTimeout(()=>{
+        $('.accordion-mixed__tab').on('click', function() {
+            if ($(window).width() < 768) {
+                setTimeout(() => {
                     $([document.documentElement, document.body]).animate({
                         scrollTop: $(this).offset().top
                     }, 400);
-                },400);
+                }, 400);
             }
         });
     })(jQuery);
@@ -658,6 +658,7 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 </script>
+<img src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32" alt="">
 </body>
 
 </html>
