@@ -658,9 +658,6 @@ if (is_page_template("template-mastak-map.php")) : ?>
         });
     });
 </script>
-<video width="400" height="300">
-    <source src="http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32">
-</video>
 </body>
 
 </html>
