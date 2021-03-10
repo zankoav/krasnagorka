@@ -26,7 +26,7 @@ export default class Admin extends LightningElement {
             ,
             comment: null,
             passport: null,
-            agreement: true,
+            agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
             calendars: [...this.model.calendars],
             menu:[
