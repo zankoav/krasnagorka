@@ -671,13 +671,13 @@ class Booking_Form_Controller extends WP_REST_Controller
         generateCheck($_POST['site_order_id']);
         $checkOutList = ob_get_contents();
         ob_end_clean();
-        // wp_mail(
-        //     [
-        //         $order['email']
-        //     ],
-        //     'Успешная оплата в Красногорке',
-        //     $checkOutList
-        // );
+        wp_mail(
+            [
+                'zankoav@gmail.com'   //$order['email']
+            ],
+            'Успешная оплата в Красногорке',
+            $checkOutList
+        );
         if ($_POST['transaction_id']) {
             update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
             update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
