@@ -1847,6 +1847,24 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Паспорт клиента',
+            'id'   => 'sbc_order_passport',
+            'type' => 'text',
+            'attributes' => array(
+				'readonly' => 'readonly'
+			)
+        ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Количество человек',
+            'id'   => 'sbc_order_count_people',
+            'type' => 'text_small',
+            'attributes' => array(
+				'readonly' => 'readonly'
+			)
+        ));
+
+        $sbc_client->add_field(array(
             'name' => 'Lead ID',
             'id'   => 'sbc_lead_id',
             'type' => 'text_small',

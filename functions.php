@@ -313,24 +313,51 @@ function generateCheck($orderId, $isWebSite = false)
     $clientId = $pieces[0];
     $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
     $fio = get_the_title($clientId);
-
     $fio = explode("+", $fio);
 
-    $message = get_template_part("mastak/views/webpay/success", null, [
+    $passport = get_post_meta($orderId, 'sbc_order_passport', 1);
+    $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
+
+    $calendarSlug = $calendars[0]->slug;
+    $calendarId = $calendars[0]->term_id;
+    $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
+    $houseLink = getHouseLinkByShortCode($calendarShortCode);
+
+    $message = get_template_part($viewPath, null, [
         'order' => [
             'created' => $created,
             'from' => date("d.m.Y", strtotime($start)),
             'to' => date("d.m.Y", strtotime($end)),
             'price' => $price,
-            'passport' => 'xxxxxxxxxxxxx',
+            'subprice' => $price,
+            'passport' => $passport ?? '-',
             'fio' => $fio[0],
             'leadId' => $leadId,
+            'peopleCount' => $peopleCount,
             'phone' => $phone,
             'calendarName' => $calendars[0]->name,
-            'calendarLink' => 'https://krasnagorka.by/dom-na-braslavskih-ozyorah/'
+            'calendarLink' => $houseLink
         ]
     ]);
     return $message;
+}
+
+function getHouseLinkByShortCode($calendarShortCode)
+{
+    $result = null;
+    $houses = get_posts(['post_type'   => 'house', 'numberposts' => -1]);
+
+    foreach ($houses as $house) {
+        $isTerem = get_post_meta($house->ID, 'mastak_house_is_it_terem', 1);
+        $shortcode = get_post_meta($house->ID, 'mastak_house_calendar', 1);
+        if ($result == null and $isTerem) {
+            $result = get_post_permalink($house->ID);
+        } else if ($shortcode == $calendarShortCode) {
+            $result = get_post_permalink($house->ID);
+            break;
+        }
+    }
+    return $result;
 }
 
 function getEmailFromOrder($orderId)
