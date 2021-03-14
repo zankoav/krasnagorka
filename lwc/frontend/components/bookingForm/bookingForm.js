@@ -315,6 +315,8 @@ export default class BookingForm extends LightningElement {
                      * https://securesandbox.webpay.by
                      */
                     generateAndSubmitForm(
+                        email === 'zankoav@gmail.com' ? 
+                        'https://securesandbox.webpay.by' : 
                         'https://payment.webpay.by',  
                         result.values,
                         result.names

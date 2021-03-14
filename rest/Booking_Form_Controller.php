@@ -620,14 +620,14 @@ class Booking_Form_Controller extends WP_REST_Controller
                  *  production: '320460709'
                  *  sandbox: '515854557'
                  */
-                $wsb_storeid = '320460709';
+                $wsb_storeid = $request['email'] == 'zankoav@gmail.com' ? '515854557' : '320460709';
                 $wsb_order_num = $order['orderId'];
 
                 /**
                  * production: '0'
                  * sandbox: '1'
                  */
-                $wsb_test = '0';
+                $wsb_test = $request['email'] == 'zankoav@gmail.com' ? '1' : '0';
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $order['price'];
                 $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
@@ -650,7 +650,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         'wsb_invoice_item_quantity[0]' => '1',
                         'wsb_invoice_item_price[0]' => $wsb_total,
                         'wsb_total' => $wsb_total,
-                        'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success/',
+                        'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success',
                         // 'wsb_return_url' => "https://krasnagorka.by/payed-success",
                     ]
                 ];
