@@ -342,6 +342,18 @@ function generateCheck($orderId, $isWebSite = false)
     return $message;
 }
 
+function generateGuestMemo()
+{
+    $memoLink = get_option('mastak_theme_options')['guest_memo'];
+
+    $message = get_template_part("mastak/views/webpay/memo-guest", null, [
+        'data' => [
+            'memo' => $memoLink
+        ]
+    ]);
+    return $message;
+}
+
 function getHouseLinkByShortCode($calendarShortCode)
 {
     $result = null;

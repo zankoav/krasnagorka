@@ -113,7 +113,9 @@
                                 <div>Контактный номер телефона: <strong>
                                         <?=$order['phone']?>
                                     </strong></div>
-                                <div>Число гостей: <strong><?=$order['peopleCount']?></strong></div>
+                                <div>Число гостей: <strong>
+                                        <?=$order['peopleCount']?>
+                                    </strong></div>
                             </td>
                         </tr>
                         <tr>
@@ -121,11 +123,15 @@
                                 style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
                                 <div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">
                                     Оплата:</div>
-                                <div>Общая стоимость: <strong><?=$order['price']?></strong> белорусских рублей.</div>
+                                <div>Общая стоимость: <strong>
+                                        <?=$order['price']?>
+                                    </strong> белорусских рублей.</div>
                                 <div>В стоимость уже включены комиссии платежных систем, туристический сбор не
                                     требуется.
                                     <div>Предоплата вносится в размере
-                                        <strong><?=$order['subprice']?></strong> белорусских рублей
+                                        <strong>
+                                            <?=$order['subprice']?>
+                                        </strong> белорусских рублей
                                     </div>
                                     <div style="
 											line-height: 1;"><small style="color:#999;"><span style="color:#f00;">*</span>
@@ -141,7 +147,9 @@
                                     Дополнительная информация:</div>
                                 <div>Данное подтверждение свидетельствует о том, что Вы внесли
                                     предоплату на основании заявки на бронирование, оставленной
-                                    через сайт krasnagorka.by и приняли условия договора присоединения,
+                                    через сайт <a style="color: #1498c6; text-decoration: underline;"
+                                       href="https://krasnagorka.by">krasnagorka.by</a> и приняли условия договора
+                                    присоединения,
                                     прикрепленного к форме бронирования. Подробнее с договором можно
                                     ознакомиться повторно по ссылке далее: <a
                                        style="color: #1498c6; text-decoration: underline;"

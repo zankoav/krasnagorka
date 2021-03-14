@@ -582,6 +582,12 @@
             'id'   => 'contract_offer',
             'type' => 'file'
         ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Памятка гостя',
+            'id'   => 'guest_memo',
+            'type' => 'file'
+        ));
     }
 
     add_action('cmb2_admin_init', 'mastak_register_theme_options_metabox');

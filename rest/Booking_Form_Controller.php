@@ -651,7 +651,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         'wsb_invoice_item_price[0]' => $wsb_total,
                         'wsb_total' => $wsb_total,
                         'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success',
-                        // 'wsb_return_url' => "https://krasnagorka.by/payed-success",
+                        'wsb_return_url' => "https://krasnagorka.by/payed-success",
                     ]
                 ];
                 $resultStatus = 200;
@@ -671,13 +671,26 @@ class Booking_Form_Controller extends WP_REST_Controller
         generateCheck($_POST['site_order_id']);
         $checkOutList = ob_get_contents();
         ob_end_clean();
-        wp_mail(
-            [
-                'zankoav@gmail.com'   //$order['email']
+        wp_mail([
+                $order['email']
             ],
             'Успешная оплата в Красногорке',
             $checkOutList
         );
+
+
+        ob_start();
+        generateGuestMemo();
+        $guestMemoMail = ob_get_contents();
+        ob_end_clean();
+
+        wp_mail([
+                $order['email']
+            ],
+            'Памятка гостя',
+            $guestMemoMail
+        );
+
         if ($_POST['transaction_id']) {
             update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
             update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
