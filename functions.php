@@ -380,3 +380,31 @@ function getEmailFromOrder($orderId)
     $email = get_post_meta($clientId, 'sbc_client_email', 1);
     return $email;
 }
+
+
+
+// регистрируем 5минутный интервал
+add_filter('cron_schedules', 'cron_add_five_min');
+function cron_add_five_min($schedules)
+{
+    $schedules['five_min'] = array(
+        'interval' => 60 * 5,
+        'display' => 'Раз в 5 минут'
+    );
+    return $schedules;
+}
+
+add_action('wp', 'kg_clear_order');
+function kg_clear_order()
+{
+    if (!wp_next_scheduled('kg_clear_order_five_min_event')) {
+        wp_schedule_event(time(), 'five_min', 'kg_clear_order_five_min_event');
+    }
+}
+// добавляем функцию к указанному хуку
+add_action('kg_clear_order_five_min_event', 'kg_clear_order');
+function kg_clear_order()
+{
+    // делаем что-либо каждые 5 минут
+    LS_WP_Logger::info('kg_clear_order done');
+}
