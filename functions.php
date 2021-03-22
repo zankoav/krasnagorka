@@ -402,8 +402,8 @@ function kg_clear_order()
     }
 }
 // добавляем функцию к указанному хуку
-add_action('kg_clear_order_five_min_event', 'kg_clear_order');
-function kg_clear_order()
+add_action('kg_clear_order_five_min_event', 'kg_clear_orders');
+function kg_clear_orders()
 {
     // делаем что-либо каждые 5 минут
     LS_WP_Logger::info('kg_clear_order done');
