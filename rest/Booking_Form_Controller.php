@@ -1484,6 +1484,40 @@ class Booking_Form_Controller extends WP_REST_Controller
         $email = getEmailFromOrder('15618');
         return new WP_REST_Response(['status' => 1, 'email' => $email], 200);
     }
+
+    public static function clear_order($leadId){
+            $apiClient = self::getAmoCrmApiClient();
+            $lead = $apiClient->leads()->getOne((int)$leadId);
+
+            $leadCustomFields = new CustomFieldsValuesCollection();
+
+            // Order ID
+            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            $orderIdFieldValueModel->setFieldId(639191);
+            $orderIdFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue('')
+                    )
+            );
+            $leadCustomFields->add($orderIdFieldValueModel);
+
+            // Order Type
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue('')
+                    )
+            );
+            $leadCustomFields->add($typeFieldValueModel);
+
+            $lead->setCustomFieldsValues($leadCustomFields);
+            $lead = $apiClient->leads()->updateOne($lead);
+
+            return $lead->getId();
+    }
 }
 
 add_action('wp', 'refresh_amo_crm_api_client');

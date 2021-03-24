@@ -425,14 +425,19 @@ function kg_clear_orders()
             ),
             'date_query' => array(
                 array(
-                    'before'    => '10 minutes ago',
+                    'before'    => '25 minutes ago',
                     'inclusive' => true
                 )
             )
         ]
     );
     $orders = $query->get_posts();
+    
 
-    // делаем что-либо каждые 5 минут
-    LS_WP_Logger::info('kg_clear_order done = ' . count($orders));
+    foreach ($orders as $order) {
+        $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
+        $clearLeadId = Booking_Form_Controller::clear_order($leadId);
+        LS_WP_Logger::info("Cleared lead_id: $clearLeadId");
+        wp_delete_post($order->ID, true);
+    }
 }
