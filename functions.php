@@ -417,6 +417,12 @@ function kg_clear_orders()
                     'value'   => 'reserved',
                     'compare' => '='
                 )
+            ),
+            'date_query' => array(
+                array(
+                    'after'    => '3 minutes ago',
+                    'inclusive' => true
+                )
             )
         ]
     );
@@ -424,5 +430,4 @@ function kg_clear_orders()
 
     // делаем что-либо каждые 5 минут
     LS_WP_Logger::info('kg_clear_order done = ' . count($orders));
-    
 }
