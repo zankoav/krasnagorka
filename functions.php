@@ -432,10 +432,10 @@ function kg_clear_orders()
         ]
     );
     $orders = $query->get_posts();
-    
 
     foreach ($orders as $order) {
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
+        LS_WP_Logger::info("Before lead_id: $leadId");
         $clearLeadId = Booking_Form_Controller::clear_order($leadId);
         LS_WP_Logger::info("Cleared lead_id: $clearLeadId");
         wp_delete_post($order->ID, true);
