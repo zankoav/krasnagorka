@@ -1488,7 +1488,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     public static function clear_order($leadId){
             $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne((int)$leadId);
-            LS_WP_Logger::info("clear_order 1");
+            LS_WP_Logger::info("clear_order 1" . $lead->getPrice());
             $leadCustomFields = new CustomFieldsValuesCollection();
 
             // Order ID
@@ -1497,7 +1497,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $orderIdFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())
-                            ->setValue('')
+                            ->setValue(null)
                     )
             );
             $leadCustomFields->add($orderIdFieldValueModel);
@@ -1508,7 +1508,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue('')
+                            ->setValue(null)
                     )
             );
             $leadCustomFields->add($typeFieldValueModel);
