@@ -416,14 +416,19 @@ function kg_clear_orders()
                     'key'     => 'sbc_order_select',
                     'value'   => 'reserved',
                     'compare' => '='
+                ),
+                array(
+                    'key'     => 'sbc_task_id',
+                    'value'   => '',
+                    'compare' => '!='
                 )
             ),
-            'date_query' => array(
-                array(
-                    'after'    => '5 minutes ago',
-                    'inclusive' => true
-                )
-            )
+            // 'date_query' => array(
+            //     array(
+            //         'before'    => '5 minutes ago',
+            //         'inclusive' => true
+            //     )
+            // )
         ]
     );
     $orders = $query->get_posts();
