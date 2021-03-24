@@ -405,6 +405,24 @@ function kg_clear_order()
 add_action('kg_clear_order_five_min_event', 'kg_clear_orders');
 function kg_clear_orders()
 {
+
+    $query = new WP_Query(
+        [
+            'post_type'  => 'sbc_orders',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'     => 'sbc_order_select',
+                    'value'   => 'reserved',
+                    'compare' => '='
+                )
+            )
+        ]
+    );
+    $orders = $query->get_posts();
+
     // делаем что-либо каждые 5 минут
-    LS_WP_Logger::info('kg_clear_order done');
+    LS_WP_Logger::info('kg_clear_order done = ' . count($orders));
+    
 }
