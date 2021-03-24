@@ -136,11 +136,13 @@
                                  class="phone-item__icon phone-item__icon--mts">
                             <a href="tel: <?= $mts; ?>" class="phone-item__phone-number phone-item__phone-number_mts"><?= $mts; ?></a>
                         </div>
-                        <div class="phone-item">
-                            <img src="<?= CORE_PATH; ?>assets/icons/life.svg" alt="icon-life"
-                                 class="phone-item__icon phone-item__icon--life">
-                            <a href="tel: <?= $life; ?>" class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
-                        </div>
+                        <?php if(isset($life)):?>
+                            <div class="phone-item">
+                                <img src="<?= CORE_PATH; ?>assets/icons/life.svg" alt="icon-life"
+                                    class="phone-item__icon phone-item__icon--life">
+                                <a href="tel: <?= $life; ?>" class="phone-item__phone-number phone-item__phone-number_life"><?= $life; ?></a>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <div class="contacts-popup__email">
                         <img src="<?= CORE_PATH; ?>assets/icons/envelope.svg" alt="icon-envelope"
