@@ -420,7 +420,7 @@ function kg_clear_orders()
             ),
             'date_query' => array(
                 array(
-                    'after'    => '3 minutes ago',
+                    'after'    => '5 minutes ago',
                     'inclusive' => true
                 )
             )
