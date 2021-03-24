@@ -16,7 +16,7 @@
                    <img class="contacts-popup__item-icon" src={icons.mts} alt="mts">
                    <a class="contacts-popup__item-text" href={hrefMts}>{model.mts}</a>
                </div>
-               <div class="contacts-popup__item-info">
+               <div if:true={model.life} class="contacts-popup__item-info">
                    <img class="contacts-popup__item-icon" src={icons.life} alt="life">
                    <a class="contacts-popup__item-text" href={hrefLife}>{model.life}</a>
                </div>
