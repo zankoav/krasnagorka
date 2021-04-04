@@ -168,7 +168,7 @@
          */
         $cmb_options = new_cmb2_box(array(
             'id'           => $prefix . 'page',
-            'title'        => esc_html__('НСТРОЙКИ ТЕМЫ KRASNAGORKA', 'krasnagorka'),
+            'title'        => esc_html__('НAСТРОЙКИ ТЕМЫ KRASNAGORKA', 'krasnagorka'),
             'object_types' => array('options-page'),
 
             /*
