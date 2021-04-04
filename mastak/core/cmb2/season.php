@@ -197,11 +197,9 @@ function season_register_page() {
 /**
  * Display callback for the submenu page.
  */
-function season_register_page() { 
-    ?>
-		<div class="wrap">
-			<h1><?php _e( 'Books Shortcode Reference', 'textdomain' ); ?></h1>
-			<p><?php _e( 'Helpful stuff here', 'textdomain' ); ?></p>
-		</div>
-    <?php
-}
+function season_register_page() {?>
+<div class="wrap">
+<h1><?='Books Shortcode Reference', 'textdomain';?></h1>
+<p><?='Helpful stuff here', 'textdomain';?></p>
+</div>
+<?php } ?>
