@@ -202,4 +202,6 @@ function season_ref_page_callback() {?>
 		<h1><?='Books Shortcode Reference', 'textdomain';?></h1>
 		<p><?='Helpful stuff here', 'textdomain';?></p>
 	</div>
-<?php } ?>
+<?php } 
+
+add_action( 'admin_menu', 'season_register_page');
