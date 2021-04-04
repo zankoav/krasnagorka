@@ -201,8 +201,7 @@ function season_register_page()
 function season_ref_page_callback()
 { ?>
 	<div class="wrap">
-		<h1><?= 'Books Shortcode Reference', 'textdomain'; ?></h1>
-		<p><?= 'Helpful stuff here', 'textdomain'; ?></p>
+		<h1><?= 'Books Shortcode Reference'; ?></h1>
 	</div>
 <?php }
 
