@@ -208,7 +208,7 @@ function seasom_register()
 		'position'        => 5, // Menu position. Only applicable if 'parent_slug' is left empty.
 		// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
 		// 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
-		// 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+		'save_button'     => 'Добавить', // The text for the options-page save button. Defaults to 'Save'.
 		// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
 		// 'message_cb'      => 'yourprefix_options_page_message_callback',
 		// 'tab_group'       => '', // Tab-group identifier, enables options page tab navigation.
