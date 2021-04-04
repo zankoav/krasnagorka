@@ -96,7 +96,7 @@ function register_post_type_team_member()
 			//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
 			//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
 			//'hierarchical'        => false,
-			// 'supports'            => array('title'),
+			'supports'            => array('custom-fields'),
 			// 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
 			//'taxonomies'          => array(),
 			'has_archive'         => false,
