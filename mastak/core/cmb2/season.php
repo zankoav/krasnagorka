@@ -190,7 +190,7 @@ function season_register_page()
 		'Генератор сезонных интервалов',
 		'Генератор сезонных интервалов',
 		'manage_options',
-		'season-shortcode-ref',
+		'season-generator',
 		'season_ref_page_callback'
 	);
 }
