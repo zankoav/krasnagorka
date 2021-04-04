@@ -183,25 +183,27 @@ function mastak_season_interval()
 /**
  * Adds a submenu page under a custom post type parent.
  */
-function season_register_page() {
-    add_submenu_page(
-        'edit.php?post_type=season',
-        'Генератор сезонных интервалов',
-        'Генератор сезонных интервалов',
-        'manage_options',
-        'season-shortcode-ref',
-        'season_ref_page_callback'
-    );
+function season_register_page()
+{
+	add_submenu_page(
+		'edit.php?post_type=season_interval',
+		'Генератор сезонных интервалов',
+		'Генератор сезонных интервалов',
+		'manage_options',
+		'season-shortcode-ref',
+		'season_ref_page_callback'
+	);
 }
- 
+
 /**
  * Display callback for the submenu page.
  */
-function season_ref_page_callback() {?>
+function season_ref_page_callback()
+{ ?>
 	<div class="wrap">
-		<h1><?='Books Shortcode Reference', 'textdomain';?></h1>
-		<p><?='Helpful stuff here', 'textdomain';?></p>
+		<h1><?= 'Books Shortcode Reference', 'textdomain'; ?></h1>
+		<p><?= 'Helpful stuff here', 'textdomain'; ?></p>
 	</div>
-<?php } 
+<?php }
 
-add_action( 'admin_menu', 'season_register_page');
+add_action('admin_menu', 'season_register_page');
