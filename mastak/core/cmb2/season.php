@@ -180,41 +180,28 @@ function mastak_season_interval()
 	));
 }
 
-
-function seasom_register()
-{
-
-	$prefix = 'seasom_register_';
-	/**
-	 * Registers options page menu item and form.
-	 */
-	$cmb_options = new_cmb2_box(array(
-		'id'           => $prefix . 'page',
-		'title'        => esc_html__('Создание сезонных интервалов', 'krasnagorka'),
-		'object_types' => array('options-page'),
-
-		/*
-		 * The following parameters are specific to the options-page box
-		 * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
-		 */
-
-		'option_key' => 'seasom_register',
-		// The option key and admin menu page slug.
-		// 'icon_url'   => wp_get_attachment_image_src(get_option('mastak_theme_options')['footer_logo_id'], 'icon-menu')[0],//'dashicons-palmtree',
-		// Menu icon. Only applicable if 'parent_slug' is left empty.
-		'menu_title'      => esc_html__('Генератор сезонных интервалов', 'cmb2'), // Falls back to 'title' (above).
-		'parent_slug'     => 'edit.php?post_type=season', // Make options page a submenu item of the themes menu.
-		// 'capability'      => 'manage_options', // Cap required to view options-page.
-		'position'        => 5, // Menu position. Only applicable if 'parent_slug' is left empty.
-		// 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
-		// 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
-		'save_button'     => 'Добавить', // The text for the options-page save button. Defaults to 'Save'.
-		// 'disable_settings_errors' => true, // On settings pages (not options-general.php sub-pages), allows disabling.
-		// 'message_cb'      => 'yourprefix_options_page_message_callback',
-		// 'tab_group'       => '', // Tab-group identifier, enables options page tab navigation.
-		// 'tab_title'       => null, // Falls back to 'title' (above).
-		// 'autoload'        => false, // Defaults to true, the options-page option will be autloaded.
-	));
+/**
+ * Adds a submenu page under a custom post type parent.
+ */
+function season_register_page() {
+    add_submenu_page(
+        'edit.php?post_type=season',
+        'Генератор сезонных интервалов',
+        'Генератор сезонных интервалов',
+        'manage_options',
+        'season-shortcode-ref',
+        'season_ref_page_callback'
+    );
 }
-
-add_action('cmb2_admin_init', 'seasom_register');
+ 
+/**
+ * Display callback for the submenu page.
+ */
+function season_register_page() { 
+    ?>
+		<div class="wrap">
+			<h1><?php _e( 'Books Shortcode Reference', 'textdomain' ); ?></h1>
+			<p><?php _e( 'Helpful stuff here', 'textdomain' ); ?></p>
+		</div>
+    <?php
+}
