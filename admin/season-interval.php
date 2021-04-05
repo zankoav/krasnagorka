@@ -10,12 +10,23 @@
 
 ?>
 
-<link href="https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/css/public_style.css" rel="stylesheet"/>
-<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
-<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery-migrate.min.js' id='jquery-migrate-js'></script>
-<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/dist/vendor/moment.min.js' id='moment-js'></script>
-<script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js' id='fullcalendar-js'></script>
-<script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js' id='ru-js'></script>
+<link href="https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/css/public_style.css"
+      rel="stylesheet" />
+<script type='text/javascript'
+        src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js'
+        id='jquery-core-js'></script>
+<script type='text/javascript'
+        src='https://krasnagorka.by/wp-includes/js/jquery/jquery-migrate.min.js'
+        id='jquery-migrate-js'></script>
+<script type='text/javascript'
+        src='https://krasnagorka.by/wp-includes/js/dist/vendor/moment.min.js'
+        id='moment-js'></script>
+<script type='text/javascript'
+        src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js'
+        id='fullcalendar-js'></script>
+<script type='text/javascript'
+        src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js'
+        id='ru-js'></script>
 
 <style>
     .cell-between,
@@ -45,7 +56,15 @@
     }
 
     .calendar_block .calendar_legend ul li {
-        font-size: 10px;
+        width: 100%;
+    }
+
+    .calendar_block {
+        width: 500px;
+    }
+
+    .fc-view-container {
+        background-color: #fff;
     }
 </style>
 
@@ -59,20 +78,32 @@
             </ul>
         </div>
     </div>
-    <form action="" method="POST">
-        <input id="season-from" type="hidden" name="from" readonly/>
-        <input id="season-to" type="hidden" name="to" readonly/>
-        <input id="season-id" type="hidden" name="season-id" readonly/>
-        <input type="submit" name="season-generator" value="Create"/>
+    <form action=""
+          method="POST">
+        <input id="season-from"
+               type="hidden"
+               name="from"
+               readonly />
+        <input id="season-to"
+               type="hidden"
+               name="to"
+               readonly />
+        <input id="season-id"
+               type="hidden"
+               name="season-id"
+               readonly />
+        <input type="submit"
+               name="season-generator"
+               value="Create" />
     </form>
 </div>
 
 <script>
 
     const message_1 = "Нельзя бронировать прошлые даты",
-    message_2 = "Дата выезда должна быть позже даты заезда",
-    message_3 = "В интервале бронирования не должно быть занятых дат",
-    message_4 = "Выберите свободную дату";
+        message_2 = "Дата выезда должна быть позже даты заезда",
+        message_3 = "В интервале бронирования не должно быть занятых дат",
+        message_4 = "Выберите свободную дату";
 
     let $ = jQuery;
     let events = [];
@@ -88,7 +119,7 @@
             right: "next"
         },
         events: events,
-        eventAfterAllRender:  () => {
+        eventAfterAllRender: () => {
             if (jsFromDate) {
                 const element = document.querySelector(
                     `.fc-widget-content[data-date="${jsFromDate.d}"]`
@@ -154,7 +185,7 @@
             } else if (jsFromDate && jsFromDate.d > d) {
                 showMessage(message_2);
             }
-        
+
 
             if (jsFromDate && jsToDate) {
                 const fromDateClearFormat = new moment(
@@ -189,7 +220,7 @@
         }
     });
 
-    function updateDates(from, to){
+    function updateDates(from, to) {
         console.log('from', from);
         console.log('to', to);
         $('#season-from').val(from);
@@ -213,16 +244,16 @@
         $calendar.find(`.cell-between`).removeClass("cell-between");
         if (jsToDate) {
             $calendar.find('.fc-day[data-date]').each(function () {
-                    const $item = $(this);
-                    const dateStr = $item.data("date");
-                    if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
-                        $item.addClass("cell-between");
-                    }
+                const $item = $(this);
+                const dateStr = $item.data("date");
+                if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
+                    $item.addClass("cell-between");
                 }
+            }
             );
         }
     }
-    
+
     function clearAll() {
         if (jsToDate) {
             $(jsToDate.el).removeClass("cell-range");
@@ -233,10 +264,10 @@
         jsToDate = null;
         jsFromDate = null;
     }
-    
+
     function checkStartDate(events, startDate) {
         var result = true;
-    
+
         for (var i = 0; i < events.length; i++) {
             var event = events[i];
             var startEvent = jQuery.fullCalendar
@@ -246,20 +277,20 @@
                 .moment(event.end, "YYYY-MM-DD")
                 .subtract(1, "days")
                 .format("YYYY-MM-DD");
-    
+
             if (startDate < endEvent && startDate > startEvent) {
                 result = false;
                 showMessage(message_4);
                 break;
             }
         }
-    
+
         return result;
     }
-    
+
     function checkDateRange(events, startDate, endDate) {
         var result = true;
-    
+
         for (var i = 0; i < events.length; i++) {
             var event = events[i];
             var startEvent = jQuery.fullCalendar
@@ -269,21 +300,21 @@
                 .moment(event.end, "YYYY-MM-DD")
                 .subtract(1, "days")
                 .format("YYYY-MM-DD");
-    
+
             if (startDate < endEvent && endDate > startEvent) {
                 result = false;
                 showMessage(message_3);
                 break;
             }
         }
-    
+
         return result;
     }
-    
+
     function showMessage(message) {
         new ErrorAlert(message);
     }
-    
+
     function ErrorAlert(message) {
         this.messageElement = $(
             `<div class="error-message"><p class="error-message__inner">Ошибка! ${message}</p></div>`
