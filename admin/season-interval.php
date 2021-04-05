@@ -76,7 +76,7 @@
     }
 
     .reserved-type-wrapper{
-        margin: 1rem 0 2rem;
+        margin: 1.5rem 0 2rem;
         font-size: 16px;
         display:flex;
         align-items:center;
@@ -94,11 +94,11 @@
     <form action=""
           method="POST">
         <input id="season-from"
-               type="hidden"
+               type="text"
                name="from"
                readonly />
         <input id="season-to"
-               type="hidden"
+               type="text"
                name="to"
                readonly />
         <input id="season-id"
@@ -108,7 +108,7 @@
         <input type="submit"
                class="button button-primary button-large"
                name="season-generator"
-               value="Create" />
+               value="Создать" />
     </form>
 </div>
 
