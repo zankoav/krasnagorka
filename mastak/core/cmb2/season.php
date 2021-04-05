@@ -191,8 +191,7 @@ function season_register_page()
 		'Генератор сезонных интервалов',
 		'manage_options',
 		'season-generator',
-		get_template_directory() . '/admin/season-interval.php'
-		// 'season_ref_page_callback'
+		'season_ref_page_callback'
 	);
 }
 
@@ -200,10 +199,9 @@ function season_register_page()
  * Display callback for the submenu page.
  */
 function season_ref_page_callback()
-{ ?>
-	<div class="wrap">
-		<h1><?= 'Books Shortcode Reference'; ?></h1>
-	</div>
-<?php }
+{
+	$message = get_template_part("admin/season-interval", null, []);
+	echo $message;
+}
 
 add_action('admin_menu', 'season_register_page');
