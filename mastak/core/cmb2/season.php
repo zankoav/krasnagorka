@@ -187,8 +187,8 @@ function season_register_page()
 {
 	add_submenu_page(
 		'edit.php?post_type=season_interval',
-		'Генератор сезонных интервалов',
-		'Генератор сезонных интервалов',
+		'Генератор сезонов',
+		'Генератор сезонов',
 		'manage_options',
 		'season-generator',
 		'season_ref_page_callback'

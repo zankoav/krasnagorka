@@ -66,16 +66,25 @@
     .fc-view-container {
         background-color: #fff;
     }
+    .reserved-type{
+        display:inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: #65b2ed;
+        margin-right: .25rem;
+    }
+
+    .reserved-type-wrapper{
+        margin: 1rem 0 2rem;
+    }
 </style>
 
 <div class="wrap">
-    <h1 class="wp-heading">Seasons generator</h1>
+    <h1 class="wp-heading">Генератор сезонов</h1>
     <div class="calendar_block">
         <div id="calendar"></div>
-        <div class="calendar_legend">
-            <ul>
-                <li><b class="reserved"></b>Занято</li>
-            </ul>
+        <div class="reserved-type-wrapper">
+            <b class="reserved-type"></b>Занято
         </div>
     </div>
     <form action=""
@@ -93,6 +102,7 @@
                name="season-id"
                readonly />
         <input type="submit"
+               class="button button-primary button-large"
                name="season-generator"
                value="Create" />
     </form>
