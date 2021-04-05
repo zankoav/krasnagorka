@@ -83,12 +83,17 @@
         align-items: center;
     }
 
-    .z-form-group{
+    .z-form-group {
         margin: 1rem;
     }
 
-    .z-form-group__label{
+    .z-form-group__label {
         margin-right: 1rem;
+        display: inline-block;
+        width: 60px;
+    }
+    .button-large{
+        float: right;
     }
 </style>
 
@@ -103,7 +108,8 @@
     <form action=""
           method="POST">
         <div class="z-form-group">
-            <label class="z-form-group__label" for="season-from">Начало</label>
+            <label class="z-form-group__label"
+                   for="season-from">Начало</label>
             <input id="season-from"
                    type="text"
                    placeholder="Начало"
@@ -111,7 +117,8 @@
                    readonly />
         </div>
         <div class="z-form-group">
-            <label class="" for="season-to">Конец</label>
+            <label class=""
+                   for="season-to">Конец</label>
             <input id="season-to"
                    type="text"
                    placeholder="Конец"
