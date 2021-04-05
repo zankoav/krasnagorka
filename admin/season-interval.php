@@ -55,9 +55,7 @@
         <div id="calendar"></div>
         <div class="calendar_legend">
             <ul>
-                <li><b class="reserved"></b>Зарезервировано</li>
-                <li><b class="prepaid"></b>Предоплачено</li>
-                <li><b class="booked"></b>Оплачено</li>
+                <li><b class="reserved"></b>Занято</li>
             </ul>
         </div>
     </div>
