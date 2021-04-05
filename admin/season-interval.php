@@ -72,10 +72,14 @@
         height: 20px;
         background-color: #65b2ed;
         margin-right: .25rem;
+        
     }
 
     .reserved-type-wrapper{
         margin: 1rem 0 2rem;
+        font-size: 16px;
+        display:flex;
+        align-items:center;
     }
 </style>
 
