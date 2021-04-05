@@ -91,7 +91,6 @@
         },
         events: events,
         eventAfterAllRender:  () => {
-            /*
             if (jsFromDate) {
                 const element = document.querySelector(
                     `.fc-widget-content[data-date="${jsFromDate.d}"]`
@@ -115,7 +114,6 @@
                 }
             }
             fillCells();
-            */
         },
         dayClick: function (date, jsEvent, view) {
             const d = date.format("YYYY-MM-DD");
