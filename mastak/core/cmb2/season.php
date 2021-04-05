@@ -191,7 +191,7 @@ function season_register_page()
 		'Генератор сезонных интервалов',
 		'manage_options',
 		'season-generator',
-		__DIR__ . '/admin/season-interval.php'
+		get_template_directory() . '/admin/season-interval.php'
 		// 'season_ref_page_callback'
 	);
 }
