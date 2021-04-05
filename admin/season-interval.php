@@ -66,20 +66,29 @@
     .fc-view-container {
         background-color: #fff;
     }
-    .reserved-type{
-        display:inline-block;
+
+    .reserved-type {
+        display: inline-block;
         width: 20px;
         height: 20px;
         background-color: #65b2ed;
         margin-right: .25rem;
-        
+
     }
 
-    .reserved-type-wrapper{
+    .reserved-type-wrapper {
         margin: 1.5rem 0 2rem;
         font-size: 16px;
-        display:flex;
-        align-items:center;
+        display: flex;
+        align-items: center;
+    }
+
+    .z-form-group{
+        margin: 1rem;
+    }
+
+    .z-form-group__label{
+        margin-right: 1rem;
     }
 </style>
 
@@ -93,14 +102,22 @@
     </div>
     <form action=""
           method="POST">
-        <input id="season-from"
-               type="text"
-               name="from"
-               readonly />
-        <input id="season-to"
-               type="text"
-               name="to"
-               readonly />
+        <div class="z-form-group">
+            <label class="z-form-group__label" for="season-from">Начало</label>
+            <input id="season-from"
+                   type="text"
+                   placeholder="Начало"
+                   name="from"
+                   readonly />
+        </div>
+        <div class="z-form-group">
+            <label class="" for="season-to">Конец</label>
+            <input id="season-to"
+                   type="text"
+                   placeholder="Конец"
+                   name="to"
+                   readonly />
+        </div>
         <input id="season-id"
                type="hidden"
                name="season-id"
