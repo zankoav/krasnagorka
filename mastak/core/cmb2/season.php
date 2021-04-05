@@ -200,8 +200,7 @@ function season_register_page()
  */
 function season_ref_page_callback()
 {
-	$message = get_template_part("admin/season-interval", null, []);
-	echo $message;
+	get_template_part("admin/season-interval", null, []);
 }
 
 add_action('admin_menu', 'season_register_page');
