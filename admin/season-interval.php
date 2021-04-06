@@ -1,13 +1,16 @@
 <?php
 
+    $seasons = get_posts(['post_type'   => 'season', 'numberposts' => -1]);
+
     $from = $_POST['from'];
     $to = $_POST['to'];
     $seasonId = $_POST['season'];
 
-
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
-        echo $from, $to, $seasonId;
+        echo $from, $to, ", seasonId:" ,$seasonId;
     }
+
+
 
 ?>
 
@@ -133,11 +136,9 @@
                 <select class="cmb2_select"
                         id="season-name"
                         name="season">
-                    <option value="9898">Выходные дни (30.04 - 09.06)</option>
-                    <option value="9897">Цены на отдых на предсезонный период (09.06-25.06)</option>
-                    <option value="9619">Цены на отдых на внесезонный период на Браславских озерах</option>
-                    <option value="9618">Летний сезон (25.06 - 31.08)</option>
-                    <option value="9617">Новогодний сезон</option>
+                        <?php foreach($seasons as $season):?>
+                            <option value="<?=$season->ID;?>"><?=$season->post_title;?></option>
+                        <?php endforeach;?>
                 </select>
             </div>
             <div class="z-form-group">
@@ -167,7 +168,7 @@
             <input type="submit"
                    class="button button-primary button-large"
                    name="season-generator"
-                   value="Создать" />
+                   value="Создать сезонный интервал" />
         </form>
     </div>
 
