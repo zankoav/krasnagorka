@@ -146,6 +146,14 @@ add_action('cmb2_admin_init', 'mastak_season_interval');
 function mastak_season_interval()
 {
 
+	$seasonIntervalId = get_post_meta(get_the_ID(), "season_id", true);
+	$seasonName = '-';
+
+	if ($seasonIntervalId) {
+		$seasonName = get_the_title($seasonIntervalId);
+	}
+
+
 	$cmb_season = new_cmb2_box(array(
 		'id'           => 'seasons_interval_option',
 		'title'        => esc_html__('Сезонный Интервал', 'krasnagorka'),
@@ -153,12 +161,10 @@ function mastak_season_interval()
 	));
 
 	$cmb_season->add_field(array(
-		'name'          => 'Сезон',
-		'id'            => 'season',
-		'type' 			=> 'text',
-		'attributes' 	=> array(
-			'readonly' => 'readonly'
-		)
+		'name' => 'Имя Сезон',
+		'desc' => $seasonName,
+		'type' => 'title',
+		'id'   => 'season_name'
 	));
 
 	$cmb_season->add_field(array(
@@ -174,6 +180,15 @@ function mastak_season_interval()
 		'name'          => 'Конец',
 		'id'            => 'season_to',
 		'type' 			=> 'date',
+		'attributes' 	=> array(
+			'readonly' => 'readonly'
+		)
+	));
+
+	$cmb_season->add_field(array(
+		'name'          => 'Id Сезон',
+		'id'            => 'season_id',
+		'type' 			=> 'text',
 		'attributes' 	=> array(
 			'readonly' => 'readonly'
 		)

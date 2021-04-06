@@ -8,6 +8,22 @@
 
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
         echo $from, $to, ", seasonId:" ,$seasonId;
+
+        // Create post object
+        $seasonInterval = array(
+            'post_title'    => '',
+            'post_content'  => '',
+            'post_status'   => 'publish',
+            'post_author'   => 23,
+            'post_type' => 'season'
+        );
+        
+        // Insert the post into the database
+        $seasonIntervalId = wp_insert_post( $seasonInterval );
+        update_post_meta($seasonIntervalId, 'season_id', $seasonId);
+        update_post_meta($seasonIntervalId, 'season_from', $from);
+        update_post_meta($seasonIntervalId, 'season_to', $to);
+
     }
 
 
@@ -136,9 +152,11 @@
                 <select class="cmb2_select"
                         id="season-name"
                         name="season">
-                        <?php foreach($seasons as $season):?>
-                            <option value="<?=$season->ID;?>"><?=$season->post_title;?></option>
-                        <?php endforeach;?>
+                    <?php foreach($seasons as $season):?>
+                    <option value="<?=$season->ID;?>">
+                        <?=$season->post_title;?>
+                    </option>
+                    <?php endforeach;?>
                 </select>
             </div>
             <div class="z-form-group">
