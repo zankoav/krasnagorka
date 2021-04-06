@@ -7,8 +7,12 @@
         $from = get_post_meta($interval->ID,'season_from',1);
         $to = get_post_meta($interval->ID,'season_to',1);
         $result[]=[
-            'from' => $from, 
-            'to' =>$to
+            "id" => $interval->ID, 
+            "title" => "ok",
+            "start" => $from, 
+            "end" => $to,
+            "allDay" =>  true,
+            "color"=> "#1e377d"
         ];
     }
 
