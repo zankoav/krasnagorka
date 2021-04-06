@@ -174,26 +174,18 @@ function mastak_season_interval()
 		'name'          => 'Id Сезона',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
-		'render_row_cb' => 'season_render_row_cb',
+		'escape_cb' => 'season_render_row_cb',
 	));
 }
 
-/**
- * Manually render a field.
- *
- * @param  array      $field_args Array of field arguments.
- * @param  CMB2_Field $field      The field object
- */
-function season_render_row_cb($field_args, $field)
+function season_render_row_cb($value, $field_args, $field)
 {
-	LS_WP_Logger::info('field_args: ' . json_encode($field_args));
+	LS_WP_Logger::info('value: ' . $value);
 	
-	$title = get_the_title($field->args( 'id' ));
-	?>
-		<div class="custom-field-row">
-			<p class="description"><?= $title; ?></p>
-		</div>
-    <?php
+	$title = get_the_title($value);
+	LS_WP_Logger::info('title: ' . $title);
+
+	return $title;
 }
 
 /**
