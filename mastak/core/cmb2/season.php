@@ -174,10 +174,22 @@ function mastak_season_interval()
 		'name'          => 'Id Сезона',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
+		'default_cb' 	=> 'season_get_name',
 		'attributes' 	=> array(
 			'readonly' => 'readonly'
 		)
 	));
+}
+
+/**
+ * Set to day of week.
+ *
+ * @param  object $field_args Current field args
+ * @param  object $field      Current field object
+ */
+function season_get_name($field_args, $field)
+{
+	return get_the_title($field_args->id);
 }
 
 /**
