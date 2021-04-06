@@ -90,7 +90,7 @@
     .z-form-group__label {
         margin-right: 1rem;
         display: inline-block;
-        width: 60px;
+        width: 100px;
     }
 
     .button-large {
@@ -99,7 +99,7 @@
 
     .z-input {
         display: inline-block;
-        width: 80px;
+        width: 200px;
     }
 </style>
 
@@ -124,7 +124,7 @@
                    readonly />
         </div>
         <div class="z-form-group">
-            <label class=""
+            <label class="z-form-group__label"
                    for="season-to">Конец</label>
             <input id="season-to"
                    class="z-input"
