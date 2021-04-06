@@ -2,10 +2,11 @@
 
     $from = $_POST['from'];
     $to = $_POST['to'];
-    $seasonId = $_POST['season-id'];
+    $seasonId = $_POST['season'];
+
 
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
-        echo $from,$to,$seaseonId;
+        echo $from, $to, $seaseonId;
     }
 
 ?>
@@ -131,7 +132,7 @@
                        for="season-name">Сезон</label>
                 <select class="cmb2_select"
                         id="season-name"
-                        name="season-id">
+                        name="season">
                     <option value="9898">Выходные дни (30.04 - 09.06)</option>
                     <option value="9897">Цены на отдых на предсезонный период (09.06-25.06)</option>
                     <option value="9619">Цены на отдых на внесезонный период на Браславских озерах</option>
