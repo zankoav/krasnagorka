@@ -108,6 +108,10 @@
     .z-form {
         flex-grow: 1;
     }
+
+    .mt-20 {
+        margin-top: 2rem;
+    }
 </style>
 
 <div class="wrap">
@@ -122,7 +126,7 @@
         <form class="z-form"
               action=""
               method="POST">
-            <div class="cmb-td">
+            <div class="mt-20 cmb-td">
                 <label class="z-form-group__label"
                        for="season-name">Сезон</label>
                 <select class="cmb2_select"
