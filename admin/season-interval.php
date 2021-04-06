@@ -6,7 +6,7 @@
 
 
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
-        echo $from, $to, $seaseonId;
+        echo $from, $to, $seasonId;
     }
 
 ?>
