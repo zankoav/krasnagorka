@@ -7,15 +7,13 @@
     $seasonId = $_POST['season'];
 
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
-        echo $from, $to, ", seasonId:" ,$seasonId;
-
         // Create post object
         $seasonInterval = array(
             'post_title'    => '',
             'post_content'  => '',
             'post_status'   => 'publish',
             'post_author'   => 23,
-            'post_type' => 'season'
+            'post_type' => 'season_interval'
         );
         
         // Insert the post into the database
