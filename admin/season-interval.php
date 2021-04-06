@@ -61,6 +61,8 @@
 
     .calendar_block {
         width: 500px;
+        flex: 1 0 500px;
+        padding-right: 2rem;
     }
 
     .fc-view-container {
@@ -90,58 +92,67 @@
     .z-form-group__label {
         margin-right: 1rem;
         display: inline-block;
-        width: 100px;
-    }
-
-    .button-large {
-        float: right;
+        width: 80px;
     }
 
     .z-input {
         display: inline-block;
         width: 200px;
     }
+
+    .z-wrapper {
+        display: flex;
+    }
+
+    .z-form {
+        flex-grow: 1;
+    }
 </style>
 
 <div class="wrap">
     <h1 class="wp-heading">Генератор сезонов</h1>
-    <div class="calendar_block">
-        <div id="calendar"></div>
-        <div class="reserved-type-wrapper">
-            <b class="reserved-type"></b>Занято
+    <div class="z-wrapper">
+        <div class="calendar_block">
+            <div id="calendar"></div>
+            <div class="reserved-type-wrapper">
+                <b class="reserved-type"></b>Занято
+            </div>
         </div>
+        <form class="z-form"
+              action=""
+              method="POST">
+            <div class="z-form-group">
+                <label class="z-form-group__label"
+                       for="season-from">Начало</label>
+                <input id="season-from"
+                       class="z-input"
+                       type="text"
+                       placeholder="Начало"
+                       name="from"
+                       readonly />
+            </div>
+            <div class="z-form-group">
+                <label class="z-form-group__label"
+                       for="season-to">Конец</label>
+                <input id="season-to"
+                       class="z-input"
+                       type="text"
+                       placeholder="Конец"
+                       name="to"
+                       readonly />
+            </div>
+            <input id="season-id"
+                   type="hidden"
+                   name="season-id"
+                   readonly />
+            <input type="submit"
+                   class="button button-primary button-large"
+                   name="season-generator"
+                   value="Создать" />
+        </form>
     </div>
-    <form action=""
-          method="POST">
-        <div class="z-form-group">
-            <label class="z-form-group__label"
-                   for="season-from">Начало</label>
-            <input id="season-from"
-                   class="z-input"
-                   type="text"
-                   placeholder="Начало"
-                   name="from"
-                   readonly />
-        </div>
-        <div class="z-form-group">
-            <label class="z-form-group__label"
-                   for="season-to">Конец</label>
-            <input id="season-to"
-                   class="z-input"
-                   type="text"
-                   placeholder="Конец"
-                   name="to"
-                   readonly />
-        </div>
-        <input id="season-id"
-               type="hidden"
-               name="season-id"
-               readonly />
-        <input type="submit"
-               class="button button-primary button-large"
-               name="season-generator"
-               value="Создать" />
-    </form>
+
+
 </div>
 
 <script>
