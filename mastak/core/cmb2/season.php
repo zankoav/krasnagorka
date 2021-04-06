@@ -189,7 +189,10 @@ function mastak_season_interval()
  */
 function season_get_name($field_args, $field)
 {
-	return get_the_title($field_args->id);
+	LS_WP_Logger::info('field_args: ' . json_encode($field_args));
+	LS_WP_Logger::info('field: ' . json_encode($field));
+
+	return 'OK';
 }
 
 /**
