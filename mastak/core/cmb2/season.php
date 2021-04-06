@@ -171,21 +171,16 @@ function mastak_season_interval()
 	));
 
 	$cmb_season->add_field(array(
-		'name'          => 'Id Сезона',
+		'name'          => 'Сезон',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
-		'escape_cb' => 'season_render_row_cb',
+		'escape_cb' => 'season_escape_cb',
 	));
 }
 
-function season_render_row_cb($value, $field_args, $field)
+function season_escape_cb($value, $field_args, $field)
 {
-	LS_WP_Logger::info('value: ' . $value);
-	
-	$title = get_the_title($value);
-	LS_WP_Logger::info('title: ' . $title);
-
-	return $title;
+	return get_the_title($value);
 }
 
 /**
