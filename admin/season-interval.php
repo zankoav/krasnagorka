@@ -4,10 +4,10 @@
     $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
     $result = [];
     foreach($seasonIntervals as $interval){
-        $from = update_post_meta($interval->ID,'season_from',1);
-        $to = update_post_meta($interval->ID,'season_to',1);
+        $from = get_post_meta($interval->ID,'season_from',1);
+        $to = get_post_meta($interval->ID,'season_to',1);
         $result[]=[
-            'from' =>$from, 
+            'from' => $from, 
             'to' =>$to
         ];
     }
@@ -210,7 +210,7 @@
         message_4 = "Выберите свободную дату";
 
     let $ = jQuery;
-    let events = JSON.parse("<?=json_encode($result)?>");
+    let events = JSON.parse('<?=json_encode($result)?>');
     console.log('events', events);
     let jsFromDate, jsToDate, $calendar;
     $calendar = $('#calendar');
