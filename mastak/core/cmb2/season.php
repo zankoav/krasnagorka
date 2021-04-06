@@ -179,15 +179,14 @@ function mastak_season_interval()
 }
 
 /**
- * Set to day of week.
+ * Manually render a field.
  *
- * @param  object $field_args Current field args
- * @param  object $field      Current field object
+ * @param  array      $field_args Array of field arguments.
+ * @param  CMB2_Field $field      The field object
  */
 function season_render_row_cb($field_args, $field)
 {
 	LS_WP_Logger::info('field_args: ' . json_encode($field_args));
-	LS_WP_Logger::info('field: ' . json_encode($field));
 	
 	$title = get_the_title($field->args( 'id' ));
 	?>
