@@ -170,7 +170,7 @@ function mastak_season_interval()
 	$cmb_season->add_field(array(
 		'name'          => 'Начало',
 		'id'            => 'season_from',
-		'type' 			=> 'date',
+		'type' 			=> 'text',
 		'attributes' 	=> array(
 			'readonly' => 'readonly'
 		)
@@ -179,7 +179,7 @@ function mastak_season_interval()
 	$cmb_season->add_field(array(
 		'name'          => 'Конец',
 		'id'            => 'season_to',
-		'type' 			=> 'date',
+		'type' 			=> 'text',
 		'attributes' 	=> array(
 			'readonly' => 'readonly'
 		)
