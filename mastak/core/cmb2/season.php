@@ -149,6 +149,7 @@ function mastak_season_interval()
 	$seasonIntervalId = get_post_meta(get_the_ID(), "season_id", true);
 	$seasonName = '-';
 
+	LS_WP_Logger::info('get_the_ID: ' . get_the_ID());
 	LS_WP_Logger::info('seasonIntervalId: ' . $seasonIntervalId);
 
 
