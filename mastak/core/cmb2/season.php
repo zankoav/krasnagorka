@@ -146,12 +146,12 @@ add_action('cmb2_admin_init', 'mastak_season_interval');
 function mastak_season_interval()
 {
 
-	$seasonIntervalId = get_post_meta(get_the_ID(), "season_id", true);
-	$seasonName = '-';
+	// $seasonIntervalId = get_post_meta(get_the_ID(), "season_id", true);
+	// $seasonName = '-';
 
-	if ($seasonIntervalId) {
-		$seasonName = get_the_title($seasonIntervalId);
-	}
+	// if ($seasonIntervalId) {
+	// 	$seasonName = get_the_title($seasonIntervalId);
+	// }
 
 
 	$cmb_season = new_cmb2_box(array(
@@ -160,12 +160,12 @@ function mastak_season_interval()
 		'object_types' => array('season_interval'), // Post type
 	));
 
-	$cmb_season->add_field(array(
-		'name' => 'Имя Сезон',
-		'desc' => $seasonName,
-		'type' => 'title',
-		'id'   => 'season_name'
-	));
+	// $cmb_season->add_field(array(
+	// 	'name' => 'Имя Сезон',
+	// 	'desc' => $seasonName,
+	// 	'type' => 'title',
+	// 	'id'   => 'season_name'
+	// ));
 
 	$cmb_season->add_field(array(
 		'name'          => 'Начало',
