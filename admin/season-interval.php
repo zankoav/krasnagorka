@@ -83,6 +83,7 @@
         font-size: 16px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .z-form-group {
@@ -121,6 +122,19 @@
         <form class="z-form"
               action=""
               method="POST">
+            <div class="cmb-td">
+                <label class="z-form-group__label"
+                       for="season-name">Сезон</label>
+                <select class="cmb2_select"
+                        id="season-name"
+                        name="season-id">
+                    <option value="9898">Выходные дни (30.04 - 09.06)</option>
+                    <option value="9897">Цены на отдых на предсезонный период (09.06-25.06)</option>
+                    <option value="9619">Цены на отдых на внесезонный период на Браславских озерах</option>
+                    <option value="9618">Летний сезон (25.06 - 31.08)</option>
+                    <option value="9617">Новогодний сезон</option>
+                </select>
+            </div>
             <div class="z-form-group">
                 <label class="z-form-group__label"
                        for="season-from">Начало</label>
