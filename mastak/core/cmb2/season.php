@@ -174,10 +174,7 @@ function mastak_season_interval()
 		'name'          => 'Id Сезона',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
-		'default_cb' 	=> 'season_get_name',
-		'attributes' 	=> array(
-			'readonly' => 'readonly'
-		)
+		'render_row_cb' => 'season_render_row_cb',
 	));
 }
 
@@ -187,12 +184,17 @@ function mastak_season_interval()
  * @param  object $field_args Current field args
  * @param  object $field      Current field object
  */
-function season_get_name($field_args, $field)
+function season_render_row_cb($field_args, $field)
 {
 	LS_WP_Logger::info('field_args: ' . json_encode($field_args));
 	LS_WP_Logger::info('field: ' . json_encode($field));
-
-	return 'OK';
+	
+	$title = get_the_title($field->args( 'id' ));
+	?>
+		<div class="custom-field-row">
+			<p class="description"><?= $title; ?></p>
+		</div>
+    <?php
 }
 
 /**
