@@ -9,7 +9,7 @@
     if(isset($_POST['season-generator'], $from, $to, $seasonId)){
         // Create post object
         $seasonInterval = array(
-            'post_title'    => '',
+            'post_title'    => "С $from По $to",
             'post_content'  => '',
             'post_status'   => 'publish',
             'post_author'   => 23,
