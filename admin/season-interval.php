@@ -84,7 +84,7 @@
     }
 
     .z-form-group {
-        margin: 1rem;
+        margin: 1rem 0;
     }
 
     .z-form-group__label {
@@ -92,8 +92,14 @@
         display: inline-block;
         width: 60px;
     }
-    .button-large{
+
+    .button-large {
         float: right;
+    }
+
+    .z-input {
+        display: inline-block;
+        width: 80px;
     }
 </style>
 
@@ -111,6 +117,7 @@
             <label class="z-form-group__label"
                    for="season-from">Начало</label>
             <input id="season-from"
+                   class="z-input"
                    type="text"
                    placeholder="Начало"
                    name="from"
@@ -120,6 +127,7 @@
             <label class=""
                    for="season-to">Конец</label>
             <input id="season-to"
+                   class="z-input"
                    type="text"
                    placeholder="Конец"
                    name="to"
