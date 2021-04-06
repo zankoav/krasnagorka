@@ -6,6 +6,13 @@
     foreach($seasonIntervals as $interval){
         $from = get_post_meta($interval->ID,'season_from',1);
         $to = get_post_meta($interval->ID,'season_to',1);
+
+        $dateFrom = new DateTime($from);
+        $from = $dateFrom->format('Y-m-d');
+
+        $dateTo = new DateTime($to);
+        $to = $dateTo->format('Y-m-d');
+
         $result[]=[
             "id" => $interval->ID, 
             "title" => "ok",
