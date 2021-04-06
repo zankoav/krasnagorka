@@ -174,12 +174,25 @@ function mastak_season_interval()
 		'name'          => 'Сезон',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
-		'column' => array(
-			'position' => 2,
-			'name'     => 'Сезон',
-		),
+		'column'     => true,
+		'display_cb' => 'season_display_cb',
 		'escape_cb' => 'season_escape_cb',
 	));
+}
+
+/**
+ * Manually render a field column display.
+ *
+ * @param  array      $field_args Array of field arguments.
+ * @param  CMB2_Field $field      The field object
+ */
+function season_display_cb($field_args, $field)
+{
+?>
+	<div class="custom-column-display <?php echo $field->row_classes(); ?>">
+		<p><?= $field->escaped_value(); ?></p>
+	</div>
+<?php
 }
 
 function season_escape_cb($value, $field_args, $field)
