@@ -174,6 +174,10 @@ function mastak_season_interval()
 		'name'          => 'Сезон',
 		'id'            => 'season_id',
 		'type' 			=> 'text',
+		'column' => array(
+			'position' => 2,
+			'name'     => 'Сезон',
+		),
 		'escape_cb' => 'season_escape_cb',
 	));
 }
