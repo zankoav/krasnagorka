@@ -355,8 +355,8 @@
     function isNotBusy(date) {
         let result = true;
         events.forEach(event => {
-            const from = (new moment(event.start, "YYYY-MM-DD")).format("DD-MM-YYYY");
-            const to = (new moment(event.end, "YYYY-MM-DD")).format("DD-MM-YYYY");
+            const from = (new moment(event.start, "YYYY-MM-DD")).format("YYYY-MM-DD");
+            const to = (new moment(event.end, "YYYY-MM-DD")).format("YYYY-MM-DD");
 
             console.log('from', from);
             console.log('date', date);
