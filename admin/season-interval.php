@@ -168,7 +168,7 @@
                 <b class="reserved-type"></b>Занято
                 <input type="button"
                        id="z-clear"
-                       class="ml-2 button button-large"
+                       class="ml-20 button button-large"
                        value="Очистить" />
             </div>
         </div>
@@ -236,6 +236,7 @@
     $('#z-clear').click(function () {
         clearAll();
         fillCells();
+        updateDates('', '');
     });
 
     $calendar = $('#calendar');
