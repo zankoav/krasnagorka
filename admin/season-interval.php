@@ -271,9 +271,32 @@
                 showMessage(message_1);
             } else if (!jsFromDate) {
                 jsFromDate = { d: datePressed, el: cell };
+                const fromDateClearFormat = new moment(
+                    jsFromDate.d,
+                    "YYYY-MM-DD"
+                );
                 $(jsFromDate.el).addClass("cell-range");
+                updateDates(
+                    fromDateClearFormat.format("DD-MM-YYYY"),
+                    fromDateClearFormat.format("DD-MM-YYYY")
+                );
+            } else if (isBusyInterval(datePressed)) {
+                showMessage(message_3);
             } else if (!jsToDate) {
-
+                jsToDate = { d: datePressed, el: cell };
+                const toDateClearFormat = new moment(
+                    jsToDate.d,
+                    "YYYY-MM-DD"
+                );
+                const fromDateClearFormat = new moment(
+                    jsFromDate.d,
+                    "YYYY-MM-DD"
+                );
+                fillCells();
+                updateDates(
+                    fromDateClearFormat.format("DD-MM-YYYY"),
+                    toDateClearFormat.format("DD-MM-YYYY")
+                );
             }
 
             return;
@@ -365,6 +388,24 @@
         return result;
     }
 
+    function isBusyInterval(endDate) {
+        let result = false;
+
+        const startDate = new moment(
+            jsFromDate.d,
+            "YYYY-MM-DD"
+        ).format("YYYY-MM-DD");
+
+        events.forEach(event => {
+            const startEvent = (new moment(event.start, "YYYY-MM-DD")).format("YYYY-MM-DD");
+            const endEvent = (new moment(event.end, "YYYY-MM-DD")).format("YYYY-MM-DD");
+            if (startEvent >= startDate && startEvent <= endDate) {
+                result = true;
+            }
+        });
+        return result;
+    }
+
 
 
 
@@ -392,11 +433,10 @@
             $calendar.find('.fc-day[data-date]').each(function () {
                 const $item = $(this);
                 const dateStr = $item.data("date");
-                if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
+                if (jsFromDate.d <= dateStr && jsToDate.d >= dateStr) {
                     $item.addClass("cell-between");
                 }
-            }
-            );
+            });
         }
     }
 
