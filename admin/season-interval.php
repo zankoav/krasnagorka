@@ -300,7 +300,7 @@
                 showMessage(message_3);
             } else if (
                 !jsToDate &&
-                (new moment(jsFromDate.d, "YYYY-MM-DD")).format("DD-MM-YYYY") > datePressed) {
+                (new moment(jsFromDate.d, "YYYY-MM-DD")).format("DD-MM-YYYY") <= datePressed) {
 
                 const fromDateClearFormat = new moment(
                     jsFromDate.d,
