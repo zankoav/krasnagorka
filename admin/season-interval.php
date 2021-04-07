@@ -155,7 +155,7 @@
     }
 
     .ml-20 {
-        margin-left: 2rem;
+        margin-left: 2rem !important;
     }
 </style>
 
@@ -251,7 +251,7 @@
             right: "next"
         },
         events: events,
-        eventAfterAllRender_test: () => {
+        eventAfterAllRender: () => {
             if (jsFromDate) {
                 const element = document.querySelector(
                     `.fc-widget-content[data-date="${jsFromDate.d}"]`
