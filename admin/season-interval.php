@@ -149,6 +149,9 @@
     .mt-20 {
         margin-top: 2rem;
     }
+    .fc-time{
+        display: none;
+    }
 </style>
 
 <div class="wrap">
