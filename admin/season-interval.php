@@ -153,6 +153,10 @@
     .fc-time {
         display: none;
     }
+
+    .ml-20 {
+        margin-left: 2rem;
+    }
 </style>
 
 <div class="wrap">
@@ -162,6 +166,10 @@
             <div id="calendar"></div>
             <div class="reserved-type-wrapper">
                 <b class="reserved-type"></b>Занято
+                <input type="button"
+                       id="z-clear"
+                       class="ml-2 button button-large"
+                       value="Очистить" />
             </div>
         </div>
         <form class="z-form"
@@ -218,14 +226,21 @@
 
     const message_1 = "Нельзя выбирать прошлые даты",
         message_2 = "Дата начала должна быть позже даты окончания интервала",
-        message_3 = "В интервалы не должно пересекаться",
+        message_3 = "Интервалы не должно пересекаться",
         message_4 = "Выберите свободную дату";
 
     let $ = jQuery;
     let events = JSON.parse('<?=json_encode($result)?>');
     let jsFromDate, jsToDate, $calendar;
+
+    $('#z-clear').click(function () {
+        clearAll();
+        fillCells();
+    });
+
     $calendar = $('#calendar');
     console.log(events);
+
     $calendar.fullCalendar({
         height: 400,
         locale: "ru",
@@ -405,6 +420,7 @@
         });
         return result;
     }
+
 
 
 
