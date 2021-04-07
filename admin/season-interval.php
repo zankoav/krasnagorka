@@ -6,7 +6,7 @@
     $to = $_POST['to'];
     $seasonId = $_POST['season'];
 
-    if(isset($_POST['season-generator'], $from, $to, $seasonId)){
+    if(isset($_POST['season-generator'], $from, $to, $seasonId) and !empty($from) and !empty($to)){
         // Create post object
         $seasonInterval = array(
             'post_title'    => "С $from По $to",
