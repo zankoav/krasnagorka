@@ -41,8 +41,8 @@
             "title" => "ok",
             "start" => $from, 
             "end" => $to,
-            "allDay" =>  false,
-            "color"=> "#1e377d"
+            "allDay" =>  true,
+            "color"=> "#2271b1"
         ];
     }
 
@@ -111,7 +111,7 @@
         display: inline-block;
         width: 20px;
         height: 20px;
-        background-color: #65b2ed;
+        background-color: #2271b1;
         margin-right: .25rem;
 
     }
