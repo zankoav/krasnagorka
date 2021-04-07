@@ -215,14 +215,13 @@
 
 <script>
 
-    const message_1 = "Нельзя бронировать прошлые даты",
-        message_2 = "Дата выезда должна быть позже даты заезда",
-        message_3 = "В интервале бронирования не должно быть занятых дат",
+    const message_1 = "Нельзя выбирать прошлые даты",
+        message_2 = "Дата начала должна быть позже даты окончания интервала",
+        message_3 = "В интервалы не должно пересекаться",
         message_4 = "Выберите свободную дату";
 
     let $ = jQuery;
     let events = JSON.parse('<?=json_encode($result)?>');
-    console.log('events', events);
     let jsFromDate, jsToDate, $calendar;
     $calendar = $('#calendar');
 
@@ -337,8 +336,6 @@
     });
 
     function updateDates(from, to) {
-        console.log('from', from);
-        console.log('to', to);
         $('#season-from').val(from);
         $('#season-to').val(to);
     }
@@ -394,7 +391,7 @@
                 .subtract(1, "days")
                 .format("YYYY-MM-DD");
 
-            if (startDate < endEvent && startDate > startEvent) {
+            if (startDate <= endEvent && startDate >= startEvent) {
                 result = false;
                 showMessage(message_4);
                 break;
