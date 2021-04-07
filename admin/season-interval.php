@@ -265,7 +265,7 @@
             const datePressed = date.format("YYYY-MM-DD");
             const dateToday = (new moment(Date.now())).format("YYYY-MM-DD");
 
-            if (isNotBusy(datePressed)) {
+            if (isBusy(datePressed)) {
                 showMessage(message_4);
             } else if (datePressed < dateToday) {
                 showMessage(message_1);
@@ -352,20 +352,15 @@
         }
     });
 
-    function isNotBusy(date) {
-        let result = true;
+    function isBusy(date) {
+        let result = false;
+
         events.forEach(event => {
             const from = (new moment(event.start, "YYYY-MM-DD")).format("YYYY-MM-DD");
             const to = (new moment(event.end, "YYYY-MM-DD")).format("YYYY-MM-DD");
-
-            console.log('from', from);
-            console.log('date', date);
-            console.log('to', to);
-
             if (date >= from && date <= to) {
-                result = false;
+                result = true;
             }
-
         });
         return result;
     }
