@@ -344,12 +344,12 @@
     function initFrom(d, el) {
         var a = new moment(Date.now());
         if (
-            d >= a.format("YYYY-MM-DD") &&
+            d > a.format("YYYY-MM-DD") &&
             checkStartDate(events, d)
         ) {
             jsFromDate = { d: d, el: el };
             $(jsFromDate.el).addClass("cell-range");
-        } else if (d < a.format("YYYY-MM-DD")) {
+        } else if (d <= a.format("YYYY-MM-DD")) {
             showMessage(message_1);
         }
     }
