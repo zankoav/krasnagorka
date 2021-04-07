@@ -1,29 +1,7 @@
 <?php
 
     $seasons = get_posts(['post_type'   => 'season', 'numberposts' => -1]);
-    $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
-    $result = [];
-    foreach($seasonIntervals as $interval){
-        $from = get_post_meta($interval->ID,'season_from',1);
-        $to = get_post_meta($interval->ID,'season_to',1);
-
-        $dateFrom = new DateTime($from);
-        $from = $dateFrom->format('Y-m-d');
-
-        $dateTo = new DateTime($to);
-        $to = $dateTo->format('Y-m-d');
-
-        $result[]=[
-            "id" => $interval->ID, 
-            "title" => "ok",
-            "start" => $from, 
-            "end" => $to,
-            "allDay" =>  true,
-            "color"=> "#1e377d"
-        ];
-    }
-
-
+    
     $from = $_POST['from'];
     $to = $_POST['to'];
     $seasonId = $_POST['season'];
@@ -46,7 +24,27 @@
 
     }
 
+    $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
+    $result = [];
+    foreach($seasonIntervals as $interval){
+        $from = get_post_meta($interval->ID,'season_from',1);
+        $to = get_post_meta($interval->ID,'season_to',1);
 
+        $dateFrom = new DateTime($from);
+        $from = $dateFrom->format('Y-m-d');
+
+        $dateTo = new DateTime($to);
+        $to = $dateTo->format('Y-m-d');
+
+        $result[]=[
+            "id" => $interval->ID, 
+            "title" => "ok",
+            "start" => $from, 
+            "end" => $to,
+            "allDay" =>  true,
+            "color"=> "#1e377d"
+        ];
+    }
 
 ?>
 
