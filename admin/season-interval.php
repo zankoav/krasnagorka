@@ -298,16 +298,21 @@
                 );
             } else if (isBusyInterval(datePressed)) {
                 showMessage(message_3);
-            } else if (!jsToDate) {
+            } else if (
+                !jsToDate &&
+                (new moment(jsFromDate.d, "YYYY-MM-DD")).format("DD-MM-YYYY") > datePressed) {
+
+                const fromDateClearFormat = new moment(
+                    jsFromDate.d,
+                    "YYYY-MM-DD"
+                );
+
                 jsToDate = { d: datePressed, el: cell };
                 const toDateClearFormat = new moment(
                     jsToDate.d,
                     "YYYY-MM-DD"
                 );
-                const fromDateClearFormat = new moment(
-                    jsFromDate.d,
-                    "YYYY-MM-DD"
-                );
+
                 fillCells();
                 updateDates(
                     fromDateClearFormat.format("DD-MM-YYYY"),
