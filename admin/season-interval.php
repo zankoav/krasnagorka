@@ -222,7 +222,7 @@
     let events = JSON.parse('<?=json_encode($result)?>');
     let jsFromDate, jsToDate, $calendar;
     $calendar = $('#calendar');
-
+    console.log(events);
     $calendar.fullCalendar({
         height: 400,
         locale: "ru",
