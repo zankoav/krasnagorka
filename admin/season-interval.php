@@ -359,7 +359,6 @@
             const to = (new moment(event.end, "YYYY-MM-DD")).format("DD-MM-YYYY");
             if (date >= from && date <= to) {
                 result = false;
-                break;
             }
 
         });
