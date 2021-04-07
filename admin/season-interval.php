@@ -326,6 +326,7 @@
 
 
                 updateDates(
+                    fromDateClearFormat.format("DD-MM-YYYY"),
                     fromDateClearFormat.format("DD-MM-YYYY")
                 );
             } else {
