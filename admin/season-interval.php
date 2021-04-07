@@ -23,7 +23,7 @@
         update_post_meta($seasonIntervalId, 'season_to', $to);
 
     }else if (isset($_POST['season-generator'])){
-        $errroMessage = 'Заполните Даты';
+        $errroMessage = 1;
     }
 
     $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
@@ -230,13 +230,14 @@
         message_2 = "Дата начала должна быть позже даты окончания интервала",
         message_3 = "Интервалы не должно пересекаться",
         message_4 = "Выберите свободную дату";
+        message_5 = "Заполните Даты";
 
     let $ = jQuery;
     let events = JSON.parse('<?=json_encode($result)?>');
     let jsFromDate, jsToDate, $calendar;
     const errorMessage = "<?=$errroMessage;?>";
     if(errorMessage){
-        showMessage(errorMessage);
+        showMessage(message_5);
     }
 
     $('#z-clear').click(function () {
