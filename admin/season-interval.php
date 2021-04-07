@@ -386,6 +386,7 @@
                 .format("YYYY-MM-DD");
             var endEvent = jQuery.fullCalendar
                 .moment(event.end, "YYYY-MM-DD")
+                .subtract(1, "days")
                 .format("YYYY-MM-DD");
 
             if (startDate < endEvent && startDate > startEvent) {
@@ -408,6 +409,7 @@
                 .format("YYYY-MM-DD");
             var endEvent = jQuery.fullCalendar
                 .moment(event.end, "YYYY-MM-DD")
+                .subtract(1, "days")
                 .format("YYYY-MM-DD");
 
             if (startDate < endEvent && endDate > startEvent) {
