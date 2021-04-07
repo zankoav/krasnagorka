@@ -357,6 +357,11 @@
         events.forEach(event => {
             const from = (new moment(event.start, "YYYY-MM-DD")).format("DD-MM-YYYY");
             const to = (new moment(event.end, "YYYY-MM-DD")).format("DD-MM-YYYY");
+
+            console.log('from', from);
+            console.log('date', date);
+            console.log('to', to);
+
             if (date >= from && date <= to) {
                 result = false;
             }
