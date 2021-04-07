@@ -149,7 +149,8 @@
     .mt-20 {
         margin-top: 2rem;
     }
-    .fc-time{
+
+    .fc-time {
         display: none;
     }
 </style>
@@ -263,18 +264,21 @@
             const cell = this;
             const datePressed = date.format("YYYY-MM-DD");
             const dateToday = (new moment(Date.now())).format("YYYY-MM-DD");
-            console.log('datePressed', datePressed);
-            console.log('dateToday', dateToday);
-            if(datePressed < dateToday){
+
+            if (isNotBusy(datePressed)) {
+                showMessage(message_4);
+            } else if (datePressed < dateToday) {
                 showMessage(message_1);
-            }else if (!jsFromDate ) {
+            } else if (!jsFromDate) {
                 jsFromDate = { d: datePressed, el: cell };
                 $(jsFromDate.el).addClass("cell-range");
+            } else if (!jsToDate) {
+
             }
-            
+
             return;
-            
-            
+
+
             if (!jsFromDate) {
                 initFrom(d, cell);
             } else if (jsFromDate && jsFromDate.d === d) {
@@ -347,6 +351,23 @@
             }
         }
     });
+
+    function isNotBusy(date) {
+        let result = true;
+        events.forEach(event => {
+            const from = (new moment(event.start, "YYYY-MM-DD")).format("DD-MM-YYYY");
+            const to = (new moment(event.end, "YYYY-MM-DD")).format("DD-MM-YYYY");
+            if (date >= from && date <= to) {
+                result = false;
+                break;
+            }
+
+        });
+        return result;
+    }
+
+
+
 
     function updateDates(from, to) {
         $('#season-from').val(from);
