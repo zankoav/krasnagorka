@@ -41,7 +41,7 @@
             "title" => "ok",
             "start" => $from, 
             "end" => $to,
-            "allDay" =>  true,
+            "allDay" =>  false,
             "color"=> "#1e377d"
         ];
     }
