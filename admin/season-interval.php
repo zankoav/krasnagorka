@@ -263,7 +263,8 @@
             const cell = this;
             const datePressed = date.format("YYYY-MM-DD");
             const dateToday = (new moment(Date.now())).format("YYYY-MM-DD");
-
+            console.log('datePressed', datePressed);
+            console.log('dateToday', dateToday);
             if(datePressed < dateToday){
                 showMessage(message_1);
             }else if (!jsFromDate ) {
