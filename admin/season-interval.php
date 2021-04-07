@@ -39,7 +39,7 @@
         $result[]=[
             "id" => $interval->ID, 
             "start" => $from."T00:01:00", 
-            "end" => $to."T00:01:00",
+            "end" => $to."T00:02:00",
             "allDay" => false,
             "color"=> "#2271b1"
         ];
