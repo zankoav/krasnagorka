@@ -234,7 +234,7 @@
             right: "next"
         },
         events: events,
-        eventAfterAllRender: () => {
+        eventAfterAllRender_test: () => {
             if (jsFromDate) {
                 const element = document.querySelector(
                     `.fc-widget-content[data-date="${jsFromDate.d}"]`
@@ -260,9 +260,20 @@
             fillCells();
         },
         dayClick: function (date, jsEvent, view) {
-            const d = date.format("YYYY-MM-DD");
             const cell = this;
-            let newMenu;
+            const datePressed = date.format("YYYY-MM-DD");
+            const dateToday = (new moment(Date.now())).format("YYYY-MM-DD");
+
+            if(datePressed < dateToday){
+                showMessage(message_1);
+            }else if (!jsFromDate ) {
+                jsFromDate = { d: datePressed, el: cell };
+                $(jsFromDate.el).addClass("cell-range");
+            }
+            
+            return;
+            
+            
             if (!jsFromDate) {
                 initFrom(d, cell);
             } else if (jsFromDate && jsFromDate.d === d) {
@@ -389,7 +400,6 @@
                 .format("YYYY-MM-DD");
             var endEvent = jQuery.fullCalendar
                 .moment(event.end, "YYYY-MM-DD")
-                .subtract(1, "days")
                 .format("YYYY-MM-DD");
 
             if (startDate < endEvent && startDate > startEvent) {
