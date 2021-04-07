@@ -240,7 +240,6 @@
     });
 
     $calendar = $('#calendar');
-    console.log(events);
 
     $calendar.fullCalendar({
         height: 400,
@@ -319,80 +318,6 @@
                     toDateClearFormat.format("DD-MM-YYYY")
                 );
             }
-
-            return;
-
-
-            if (!jsFromDate) {
-                initFrom(d, cell);
-            } else if (jsFromDate && jsFromDate.d === d) {
-                clearAll();
-                fillCells();
-            } else if (
-                jsFromDate &&
-                !jsToDate &&
-                jsFromDate.d < d &&
-                checkDateRange(events, jsFromDate.d, d)
-            ) {
-                jsToDate = { d: d, el: cell };
-                $(jsToDate.el).addClass("cell-range");
-                fillCells();
-            } else if (
-                jsFromDate &&
-                jsToDate &&
-                jsToDate.d !== d &&
-                jsFromDate.d < d &&
-                checkDateRange(events, jsFromDate.d, d)
-            ) {
-                $(jsToDate.el)
-                    .removeClass("cell-range")
-                    .empty();
-                jsToDate = { d: d, el: cell };
-                $(jsToDate.el).addClass("cell-range");
-
-                fillCells();
-            } else if (jsToDate && jsToDate.d === d) {
-                $(jsToDate.el)
-                    .removeClass("cell-range")
-                    .empty();
-                jsToDate = null;
-                fillCells();
-            } else if (jsFromDate && jsFromDate.d > d) {
-                showMessage(message_2);
-            }
-
-
-            if (jsFromDate && jsToDate) {
-                const fromDateClearFormat = new moment(
-                    jsFromDate.d,
-                    "YYYY-MM-DD"
-                );
-                const toDateClearFormat = new moment(
-                    jsToDate.d,
-                    "YYYY-MM-DD"
-                );
-
-
-                updateDates(
-                    fromDateClearFormat.format("DD-MM-YYYY"),
-                    toDateClearFormat.format("DD-MM-YYYY")
-                );
-
-            } else if (jsFromDate) {
-                const fromDateClearFormat = new moment(
-                    jsFromDate.d,
-                    "YYYY-MM-DD"
-                );
-
-
-                updateDates(
-                    fromDateClearFormat.format("DD-MM-YYYY"),
-                    fromDateClearFormat.format("DD-MM-YYYY")
-                );
-            } else {
-
-                updateDates();
-            }
         }
     });
 
@@ -427,26 +352,9 @@
         return result;
     }
 
-
-
-
-
     function updateDates(from, to) {
         $('#season-from').val(from);
         $('#season-to').val(to);
-    }
-
-    function initFrom(d, el) {
-        var a = new moment(Date.now());
-        if (
-            d >= a.format("YYYY-MM-DD") &&
-            checkStartDate(events, d)
-        ) {
-            jsFromDate = { d: d, el: el };
-            $(jsFromDate.el).addClass("cell-range");
-        } else if (d < a.format("YYYY-MM-DD")) {
-            showMessage(message_1);
-        }
     }
 
     function fillCells() {
@@ -471,51 +379,6 @@
         }
         jsToDate = null;
         jsFromDate = null;
-    }
-
-    function checkStartDate(events, startDate) {
-        var result = true;
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i];
-            var startEvent = jQuery.fullCalendar
-                .moment(event.start, "YYYY-MM-DD")
-                .format("YYYY-MM-DD");
-            var endEvent = jQuery.fullCalendar
-                .moment(event.end, "YYYY-MM-DD")
-                .format("YYYY-MM-DD");
-
-            if (startDate < endEvent && startDate > startEvent) {
-                result = false;
-                showMessage(message_4);
-                break;
-            }
-        }
-
-        return result;
-    }
-
-    function checkDateRange(events, startDate, endDate) {
-        var result = true;
-
-        for (var i = 0; i < events.length; i++) {
-            var event = events[i];
-            var startEvent = jQuery.fullCalendar
-                .moment(event.start, "YYYY-MM-DD")
-                .format("YYYY-MM-DD");
-            var endEvent = jQuery.fullCalendar
-                .moment(event.end, "YYYY-MM-DD")
-                .subtract(1, "days")
-                .format("YYYY-MM-DD");
-
-            if (startDate < endEvent && endDate > startEvent) {
-                result = false;
-                showMessage(message_3);
-                break;
-            }
-        }
-
-        return result;
     }
 
     function showMessage(message) {
