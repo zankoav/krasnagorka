@@ -22,6 +22,8 @@
         update_post_meta($seasonIntervalId, 'season_from', $from);
         update_post_meta($seasonIntervalId, 'season_to', $to);
 
+    }else if (isset($_POST['season-generator'])){
+        $errroMessage = 'Заполните Даты';
     }
 
     $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
@@ -232,6 +234,10 @@
     let $ = jQuery;
     let events = JSON.parse('<?=json_encode($result)?>');
     let jsFromDate, jsToDate, $calendar;
+    const errorMessage = "<?=$errroMessage;?>";
+    if(errorMessage){
+        showMessage(errorMessage);
+    }
 
     $('#z-clear').click(function () {
         clearAll();
