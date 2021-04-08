@@ -9,18 +9,18 @@
     function register_event_type() {
         register_post_type('event', array(
             'labels'             => array(
-                'name'               => 'Мероприятие', // Основное название типа записи
-                'singular_name'      => __('Мероприятие'), // отдельное название записи типа Book
-                'add_new'            => __('Добавить мероприятие'),
-                'add_new_item'       => __('Добавить новое мероприятие'),
-                'edit_item'          => __('Редактировать мероприятие'),
-                'new_item'           => __('Новое мероприятие'),
-                'view_item'          => __('Посмотреть мероприятие'),
-                'search_items'       => __('Найти мероприятие'),
-                'not_found'          => __('Мероприятий не найдено'),
-                'not_found_in_trash' => __('В корзине мероприятия не найдено'),
+                'name'               => 'Скидка', // Основное название типа записи
+                'singular_name'      => __('Скидка'), // отдельное название записи типа Book
+                'add_new'            => __('Добавить скидку'),
+                'add_new_item'       => __('Добавить новую скидку'),
+                'edit_item'          => __('Редактировать скидку'),
+                'new_item'           => __('Новая скидка'),
+                'view_item'          => __('Посмотреть скидку'),
+                'search_items'       => __('Найти скидку'),
+                'not_found'          => __('Скидок не найдено'),
+                'not_found_in_trash' => __('В корзине скидок не найдено'),
                 'menu_name'          => get_option('mastak_event_appearance_options')['breadcrumbs'],
-                'items_archive'      => 'Мероприятия архив',
+                'items_archive'      => 'Скидки архив',
             ),
             'public'             => true,
             'publicly_queryable' => true,
@@ -28,7 +28,7 @@
             'show_in_menu'       => true,
             'show_in_nav_menus'  => true,
             'query_var'          => true,
-            'rewrite'            => array('slug' => 'meropriyatiya', 'with_front' => false),
+            'rewrite'            => array('slug' => 'stocks', 'with_front' => false),
             'capability_type'    => 'post',
             'has_archive'        => true,
             'hierarchical'       => false,
