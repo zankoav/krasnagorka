@@ -34,7 +34,7 @@
                         </li>
                         <li class="menu__item"><a href="https://krasnagorka.by/">Услуги и развлечения </a></li>
                         <li class="menu__item"><a href="https://krasnagorka.by/">Цены</a></li>
-                        <li class="menu__item menu__item_active"><a href="https://krasnagorka.by/">Мероприятия</a></li>
+                        <li class="menu__item menu__item_active"><a href="https://krasnagorka.by/">Акции</a></li>
                         <li class="menu__item"><a href="https://krasnagorka.by/">Схема проезда</a></li>
                         <li class="menu__item"><a href="https://krasnagorka.by/">Календарь бронирования</a></li>
                     </ul>

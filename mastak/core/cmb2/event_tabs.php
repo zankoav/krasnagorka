@@ -31,7 +31,7 @@
                 'type_6' => __('Видео (несколько)', 'cmb2'),
                 'type_7' => __('Иконка/Заголовок/Текст (несколько)', 'cmb2'),
                 'type_8' => __('Таблица Домов', 'cmb2'),
-                'type_9' => __('Таблица Мероприятий', 'cmb2'),
+                'type_9' => __('Таблица Акций', 'cmb2'),
             ),
             'attributes'       => array(
                 'data-validation' => 'required',
@@ -508,7 +508,7 @@
          */
         $sbc_client = new_cmb2_box(array(
             'id'           => $prefix,
-            'title'        => esc_html__('Таблица Мероприятий', 'krasnagorka'),
+            'title'        => esc_html__('Таблица Акций', 'krasnagorka'),
             'object_types' => array('event_tab'), // Post type
             'context'      => 'normal',
             'priority'     => 'high',
@@ -521,10 +521,10 @@
             'description' => __('Можно добавлять любое количество домов', 'krasnagorka'),
             // 'repeatable'  => false, // use false if you want non-repeatable group
             'options'     => array(
-                'group_title'   => __('Мероприятие {#}', 'krasnagorka'),
+                'group_title'   => __('Акция {#}', 'krasnagorka'),
                 // since version 1.1.4, {#} gets replaced by row number
-                'add_button'    => __('Добавить Мероприятие', 'krasnagorka'),
-                'remove_button' => __('Удалить Мероприятие', 'krasnagorka'),
+                'add_button'    => __('Добавить Акцию', 'krasnagorka'),
+                'remove_button' => __('Удалить Акцию', 'krasnagorka'),
                 'sortable'      => true,
                 // beta
                 'closed'        => true, // true to have the groups closed by default
@@ -532,7 +532,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'             => 'Мероприятие',
+            'name'             => 'Акция',
             'id'               => 'event',
             'type'             => 'select',
             'show_option_none' => true,

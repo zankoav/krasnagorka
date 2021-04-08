@@ -15,7 +15,7 @@ const ERROR_DATE_END_EMPTY = "Поле Дата выезда не заполне
 const ERROR_EMAIL_INVALID = "Поле Email не валидно";
 const ERROR_CONTRACT_UNCHECKED = "Вы не согласились с договором присоединения";
 const ERROR_DATE_END_INVALID = "Дата выезда должны быть позже даты заезда";
-const ERROR_HOUSE_EMPTY = "Поле Домик/Мероприятие не заполнено";
+const ERROR_HOUSE_EMPTY = "Поле Домик/Акция не заполнено";
 const ERROR_DATE_START_LATE =
 	"Поле Дата заезда должно быть не раньше сегоднешнего дня";
 
@@ -280,7 +280,7 @@ export default class BookingForm extends LightningElement {
 		this.isLoading = true;
 
 		let orderTitle = this.objectTitle ? this.objectTitle : bookingOrder;
-        let orderType = this.objectType ? this.objectType : "Домик/Мероприятие";
+        let orderType = this.objectType ? this.objectType : "Домик/Акции";
         
 
         if(this.pay){

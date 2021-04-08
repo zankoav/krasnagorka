@@ -396,7 +396,7 @@
 	function events_widgets_init() {
 
 		register_sidebar( array(
-			'name'          => 'Мероприятия текстовая область',
+			'name'          => 'Акции текстовая область',
 			'id'            => 'events-content',
 			'before_widget' => '<section class="b-container big-text">
                                     <div class="big-text__container content-text">',

@@ -194,7 +194,7 @@ class Model
                 if ($post->post_type === 'house') {
                     $type = 'Домик:';
                 } else if ($post->post_type === 'event') {
-                    $type = 'Мероприятие:';
+                    $type = 'Акция:';
                 }
             }
         }

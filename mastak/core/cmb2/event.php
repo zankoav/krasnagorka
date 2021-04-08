@@ -9,7 +9,7 @@
          */
         $sbc_client = new_cmb2_box(array(
             'id'           => $prefix . 'data',
-            'title'        => esc_html__('Данные о мероприятии', 'krasnagorka'),
+            'title'        => esc_html__('Данные об акции', 'krasnagorka'),
             'object_types' => array('event'), // Post type
             'context'      => 'normal',
             'priority'     => 'high',
@@ -59,7 +59,7 @@
         ));
 
         $sbc_client->add_field(array(
-            'name'         => 'Стоимость мероприятия',
+            'name'         => 'Стоимость акции',
             'id'           => $prefix . 'price',
             'type'         => 'text',
             'before_field' => 'BYN'
@@ -78,7 +78,7 @@
         ));
 
         $sbc_client->add_field(array(
-            'name' => 'Даты мероприятия',
+            'name' => 'Даты акции',
             'id'   => $prefix . 'date_title',
             'type' => 'title'
         ));
@@ -97,21 +97,21 @@
         ));
 
         $sbc_client->add_field(array(
-            'name'        => 'Дата начала мероприятия',
+            'name'        => 'Дата начала акции',
             'id'          => $prefix . 'date_start',
             'type'        => 'text_date_timestamp',
             'date_format' => 'd/m/Y',
         ));
 
         $sbc_client->add_field(array(
-            'name'        => 'Дата окончания мероприятия',
+            'name'        => 'Дата окончания акции',
             'id'          => $prefix . 'date_finish',
             'type'        => 'text_date_timestamp',
             'date_format' => 'd/m/Y',
         ));
 
         $sbc_client->add_field(array(
-            'name' => 'Не показывать в предстоящих мероприятиях',
+            'name' => 'Не показывать в предстоящих акциях',
             'id'   => $prefix . 'hide_early',
             'type' => 'checkbox'
         ));
@@ -188,7 +188,7 @@
          */
         $cmb_options = new_cmb2_box(array(
             'id'           => $prefix . 'page',
-            'title'        => esc_html__('Настройки страницы мероприятий', 'krasnagorka'),
+            'title'        => esc_html__('Настройки страницы акции', 'krasnagorka'),
             'object_types' => array('options-page'),
             /*
              * The following parameters are specific to the options-page box
@@ -218,14 +218,14 @@
 
         $cmb_options->add_field(array(
             'name' => __('Подзаголовок №1', 'krasnagorka'),
-            'desc' => __('Предстоящие мероприятия', 'krasnagorka'),
+            'desc' => __('Предстоящие акции', 'krasnagorka'),
             'id'   => 'subtitle_1',
             'type' => 'text'
         ));
 
         $cmb_options->add_field(array(
             'name' => __('Подзаголовок №2', 'krasnagorka'),
-            'desc' => __('Прошедшие мероприятия', 'krasnagorka'),
+            'desc' => __('Прошедшие акции', 'krasnagorka'),
             'id'   => 'subtitle_2',
             'type' => 'text'
         ));
@@ -253,7 +253,7 @@
         $group_field_event = $cmb_options->add_field(array(
             'id'          => 'special_events',
             'type'        => 'group',
-            'description' => __('Можно добавлять любое количество мероприятий в слайдер', 'krasnagorka'),
+            'description' => __('Можно добавлять любое количество акций в слайдер', 'krasnagorka'),
             // 'repeatable'  => false, // use false if you want non-repeatable group
             'options'     => array(
                 'group_title'   => __('Слайд {#}', 'krasnagorka'),

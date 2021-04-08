@@ -9,18 +9,18 @@
     function register_event_type() {
         register_post_type('event', array(
             'labels'             => array(
-                'name'               => 'Скидка', // Основное название типа записи
-                'singular_name'      => __('Скидка'), // отдельное название записи типа Book
-                'add_new'            => __('Добавить скидку'),
-                'add_new_item'       => __('Добавить новую скидку'),
-                'edit_item'          => __('Редактировать скидку'),
-                'new_item'           => __('Новая скидка'),
-                'view_item'          => __('Посмотреть скидку'),
-                'search_items'       => __('Найти скидку'),
-                'not_found'          => __('Скидок не найдено'),
-                'not_found_in_trash' => __('В корзине скидок не найдено'),
+                'name'               => 'Акция', // Основное название типа записи
+                'singular_name'      => __('Акция'), // отдельное название записи типа Book
+                'add_new'            => __('Добавить акцию'),
+                'add_new_item'       => __('Добавить новую акцию'),
+                'edit_item'          => __('Редактировать акцию'),
+                'new_item'           => __('Новая акция'),
+                'view_item'          => __('Посмотреть акцию'),
+                'search_items'       => __('Найти акцию'),
+                'not_found'          => __('Акции не найдено'),
+                'not_found_in_trash' => __('В корзине акций не найдено'),
                 'menu_name'          => get_option('mastak_event_appearance_options')['breadcrumbs'],
-                'items_archive'      => 'Скидки архив',
+                'items_archive'      => 'Акции архив',
             ),
             'public'             => true,
             'publicly_queryable' => true,
@@ -43,7 +43,7 @@
     function register_event_tab_type() {
         register_post_type('event_tab', array(
             'labels'              => array(
-                'name'               => 'Таб Мероприятия', // Основное название типа записи
+                'name'               => 'Таб Акции', // Основное название типа записи
                 'singular_name'      => __('Таб'), // отдельное название записи типа Book
                 'add_new'            => __('Добавить Таб'),
                 'add_new_item'       => __('Добавить новый Таб'),
