@@ -3,15 +3,17 @@
 .select {
 	position: relative;
 
-	&:after {
-		content: "";
-		position: absolute;
-		width: 4px;
-		height: 4px;
-		border-radius: 50%;
-		background-color: $RED;
-		top: 8px;
-		left: 8px;
+	&_required {
+		&:after {
+			content: "";
+			position: absolute;
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			background-color: $RED;
+			top: 8px;
+			left: 8px;
+		}
 	}
 
 	&__options {

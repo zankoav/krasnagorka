@@ -167,6 +167,18 @@ function sbc_orders_metabox() {
         ),
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Количество спальных мест', 'sbc' ),
+        'id'   => $prefix . 'people_count',
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Количество детей без спальных мест', 'sbc' ),
+        'id'   => $prefix . 'childs',
+        'type' => 'text'
+    ) );
+
 }
 
 

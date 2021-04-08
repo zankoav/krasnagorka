@@ -1,4 +1,4 @@
-import {LightningElement, track , api } from 'lwc';
+import { LightningElement, track, api } from 'lwc';
 // import {getCookie, setCookie} from 'z/utils';
 import './stepCheckout.scss';
 
@@ -6,60 +6,65 @@ import './stepCheckout.scss';
 export default class StepCheckout extends LightningElement {
     @api settings;
 
-    get calendar(){
+    get calendar() {
         return this.settings.calendars.find(c => c.selected);
     }
 
-    get peopleCount(){
+    get peopleCount() {
         return this.settings.counts.find(c => c.selected).name;
     }
 
-    get dateStart(){
+    get childCount() {
+        const item = this.settings.childCounts.find(c => c.selected);
+        return item ? item.name : 0;
+    }
+
+    get dateStart() {
         return this.settings.dateStart.replaceAll('-', '.');
     }
 
-    get dateEnd(){
+    get dateEnd() {
         return this.settings.dateEnd.replaceAll('-', '.');
     }
 
-    get comment(){
+    get comment() {
         return this.settings.commet || '—';
     }
-    
-    get passport(){
+
+    get passport() {
         return this.settings.passport || '—';
     }
 
-    async bookingHandler(){
+    async bookingHandler() {
         this.dispatchEvent(
             new CustomEvent('update', {
-                 detail: {
+                detail: {
                     bookingErrorMessage: null
-                 }, 
-                 bubbles:true, 
-                 composed:true
-             })
+                },
+                bubbles: true,
+                composed: true
+            })
         );
         this.dispatchEvent(
             new CustomEvent('booking', {
-                 bubbles:true, 
-                 composed:true
-             })
+                bubbles: true,
+                composed: true
+            })
         );
     }
 
-    backButtonHandler(){
+    backButtonHandler() {
         const newMenu = this.settings.menu.map(it => {
-            return {...it, active:it.value === 'contacts'};
+            return { ...it, active: it.value === 'contacts' };
         });
         this.dispatchEvent(
             new CustomEvent('update', {
-                 detail: {
+                detail: {
                     menu: newMenu
-                 }, 
-                 bubbles:true, 
-                 composed:true
-             })
+                },
+                bubbles: true,
+                composed: true
+            })
         );
     }
 }

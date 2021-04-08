@@ -16,6 +16,7 @@ export default class Admin extends LightningElement {
             phone: getCookie("kg_phone") || '',
             email: getCookie("kg_email") || '',
             counts: null,
+            childCounts: null,
             dateStart: this.model.dateFrom ? 
                 new moment(this.model.dateFrom, "YYYY-MM-DD").format("DD-MM-YYYY") : 
                 null

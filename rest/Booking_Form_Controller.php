@@ -533,6 +533,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "dateFrom" => $dateStart,
                         "dateTo" => $dateEnd,
                         "comment" => $request['comment'],
+                        "childs" => $request['childs'],
+                        "peopleCount" => $request['count'],
                         "contactName" => $request['fio'],
                         "contactPhone" => $request['phone'],
                         "contactEmail" => $request['email']
@@ -930,6 +932,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactPhone  = $request['contactPhone'];
             $contactEmail  = $request['contactEmail'];
             $contactStatus = $request['contactStatus'];
+            $childs = $request['childs'];
+            $peopleCount = $request['peopleCount'];
 
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
@@ -1007,6 +1011,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 if (!empty($comment)) {
                     update_post_meta($post_id, 'sbc_order_desc', $comment);
+                }
+                if (!empty($peopleCount)) {
+                    update_post_meta($post_id, 'sbc_order_people_count', $peopleCount);
+                }
+                if (!empty($childs)) {
+                    update_post_meta($post_id, 'sbc_order_childs', $childs);
                 }
 
                 if (!empty($objectIds)) {

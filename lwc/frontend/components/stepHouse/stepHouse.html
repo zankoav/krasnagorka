@@ -4,6 +4,7 @@
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
                 <z-select class="step-house__calendars"
+                          required
                           onchange={calendarChange}
                           disabled-label=" -- Выберите Домик -- "
                           options={settings.calendars}></z-select>
@@ -19,9 +20,19 @@
                                      src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/teamwork.svg"
                                      alt="team">
                                 <z-select class="step-house__counts"
+                                          required
                                           onchange={countChange}
                                           disabled-label=" -- Количество человек -- "
                                           options={settings.counts}></z-select>
+                            </div>
+                            <div class="step-house__group">
+                                <img class="step-house__max-people"
+                                     src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/child.svg"
+                                     alt="team">
+                                <z-select class="step-house__counts"
+                                          onchange={childCountChange}
+                                          disabled-label=" -- Детей без спального места -- "
+                                          options={settings.childCounts}></z-select>
                             </div>
                         </div>
                     </div>
