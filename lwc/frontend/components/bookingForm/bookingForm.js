@@ -310,8 +310,8 @@ export default class BookingForm extends LightningElement {
             .then(result => {
                 console.log('result', result);
                 if(result.status === 2){
-                    result.names.wsb_customer_name = fio;
-                    result.names.wsb_service_date = `${orderTitle}, ${count} спальных мест, c ${dateStart} по ${dateEnd}`;
+                    result.values.wsb_customer_name = fio;
+                    result.values.wsb_service_date = `${orderTitle}, количество спальных мест ${count}, c ${dateStart} по ${dateEnd}`;
                     /**
                      * https://payment.webpay.by
                      * https://securesandbox.webpay.by
