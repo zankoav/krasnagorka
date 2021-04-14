@@ -17,87 +17,87 @@ const ERROR_CONTRACT_UNCHECKED = "Вы не согласились с догов
 const ERROR_DATE_END_INVALID = "Дата выезда должны быть позже даты заезда";
 const ERROR_HOUSE_EMPTY = "Поле Домик/Акция не заполнено";
 const ERROR_DATE_START_LATE =
-	"Поле Дата заезда должно быть не раньше сегоднешнего дня";
+    "Поле Дата заезда должно быть не раньше сегоднешнего дня";
 
 const i118 = {
-	previousMonth: "Предыдущий",
-	nextMonth: "Следующий",
-	months: [
-		"Январь",
-		"Февраль",
-		"Март",
-		"Апрель",
-		"Май",
-		"Июнь",
-		"Июль",
-		"Август",
-		"Сентябрь",
-		"Октябрь",
-		"Ноябрь",
-		"Декабрь",
-	],
-	weekdays: [
-		"Воскресенье",
-		"Понедельник",
-		"Вторник",
-		"Среда",
-		"Четверг",
-		"Пятница",
-		"Суббота",
-	],
-	weekdaysShort: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"],
+    previousMonth: "Предыдущий",
+    nextMonth: "Следующий",
+    months: [
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апрель",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
+    ],
+    weekdays: [
+        "Воскресенье",
+        "Понедельник",
+        "Вторник",
+        "Среда",
+        "Четверг",
+        "Пятница",
+        "Суббота",
+    ],
+    weekdaysShort: ["ВС", "ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ"],
 };
 
 export default class BookingForm extends LightningElement {
-	@api objectType;
-	@api objectTitle;
-	@api contractOffer;
-	@api dateFrom;
-	@api dateTo;
-	@api objId;
-	@api maxCount;
-	@api eventTabId;
-	@api pay;
-	@api price;
-	@api model;
+    @api objectType;
+    @api objectTitle;
+    @api contractOffer;
+    @api dateFrom;
+    @api dateTo;
+    @api objId;
+    @api maxCount;
+    @api eventTabId;
+    @api pay;
+    @api price;
+    @api model;
 
-	@track formMessageSuccess;
-	@track formMessageError;
-	@track isLoading;
-	@track deprecateEditableDates;
+    @track formMessageSuccess;
+    @track formMessageError;
+    @track isLoading;
+    @track deprecateEditableDates;
 
-	async skip() {
-		await new Promise((resolve) => setImmediate(resolve));
-	}
+    async skip() {
+        await new Promise((resolve) => setImmediate(resolve));
+    }
 
-	async connectedCallback() {
+    async connectedCallback() {
 
         console.log('model', this.model);
         this.deprecateEditableDates = !!this.dateFrom;
-		this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
-		this.dateTo = this.dateTo || "";
-		this.dateFrom = this.dateFrom || "";
-		this.eventTabId = this.eventTabId || "";
-		this.objId = this.objId === "undefined" ? null : this.objId;
-		const cid = getCookie("_ga");
-		if (cid) {
-			this.cid = cid.replace(/GA1.2./g, "");
-		}
+        this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1);
+        this.dateTo = this.dateTo || "";
+        this.dateFrom = this.dateFrom || "";
+        this.eventTabId = this.eventTabId || "";
+        this.objId = this.objId === "undefined" ? null : this.objId;
+        const cid = getCookie("_ga");
+        if (cid) {
+            this.cid = cid.replace(/GA1.2./g, "");
+        }
 
-		this.fioValue = getCookie("kg_name");
-		this.phoneValue = getCookie("kg_phone");
-		this.emailValue = getCookie("kg_email");
+        this.fioValue = getCookie("kg_name");
+        this.phoneValue = getCookie("kg_phone");
+        this.emailValue = getCookie("kg_email");
 
-		if (this.fioValue && this.phoneValue && this.emailValue) {
-			this.isContactsExistsInCookies = true;
-		}
-		await this.skip();
-		this.dateStart = this.template.querySelector('[name="date-start"]');
+        if (this.fioValue && this.phoneValue && this.emailValue) {
+            this.isContactsExistsInCookies = true;
+        }
+        await this.skip();
+        this.dateStart = this.template.querySelector('[name="date-start"]');
         this.dateEnd = this.template.querySelector('[name="date-end"]');
-        if(this.deprecateEditableDates){
+        if (this.deprecateEditableDates) {
             this.dateStart.setAttribute('disabled', 'disabled');
             this.dateEnd.setAttribute('disabled', 'disabled');
-        }else{
+        } else {
             this.pikStart = new Pikaday({
                 i18n: i118,
                 field: this.dateStart,
@@ -124,33 +124,33 @@ export default class BookingForm extends LightningElement {
                     this.dateTo = `${year}-${month}-${day}`;
                 },
             });
-            
-        }
-		
 
-		this.order = this.template.querySelector('[name="order"]');
-		if (this.order) {
-			Inputmask({ regex: "^[a-zA-Zа-яА-Я0-9\\s]*$" }).mask(this.order);
-		}
-		this.fio = this.template.querySelector('[name="fio"]');
-		Inputmask({ regex: "^[a-zA-Zа-яА-Я\\s]*$" }).mask(this.fio);
-		this.phone = this.template.querySelector('[name="phone"]');
-		Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
-		this.email = this.template.querySelector('[name="email"]');
-		this.count = this.template.querySelector('[name="count"]');
-		this.comment = this.template.querySelector('[name="comment"]');
-		this.contract = this.template.querySelector('[name="contract"]');
-		this.passport = this.template.querySelector('[name="passport"]');
-		this.spam = this.template.querySelector('[name="message"]');
-
-		if (this.isContactsExistsInCookies) {
-			this.isContactsExistsInCookies = false;
-			this.fio.value = this.fioValue;
-			this.phone.value = this.phoneValue;
-			this.email.value = this.emailValue;
         }
-        
-        const url =  window.location.href
+
+
+        this.order = this.template.querySelector('[name="order"]');
+        if (this.order) {
+            Inputmask({ regex: "^[a-zA-Zа-яА-Я0-9\\s]*$" }).mask(this.order);
+        }
+        this.fio = this.template.querySelector('[name="fio"]');
+        Inputmask({ regex: "^[a-zA-Zа-яА-Я\\s]*$" }).mask(this.fio);
+        this.phone = this.template.querySelector('[name="phone"]');
+        Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);
+        this.email = this.template.querySelector('[name="email"]');
+        this.count = this.template.querySelector('[name="count"]');
+        this.comment = this.template.querySelector('[name="comment"]');
+        this.contract = this.template.querySelector('[name="contract"]');
+        this.passport = this.template.querySelector('[name="passport"]');
+        this.spam = this.template.querySelector('[name="message"]');
+
+        if (this.isContactsExistsInCookies) {
+            this.isContactsExistsInCookies = false;
+            this.fio.value = this.fioValue;
+            this.phone.value = this.phoneValue;
+            this.email.value = this.emailValue;
+        }
+
+        const url = window.location.href
             .split('&')
             .filter(it => it.indexOf('clear=') === -1)
             .join('&');
@@ -160,131 +160,131 @@ export default class BookingForm extends LightningElement {
         }, document.title, url);
     }
 
-    renderedCallback(){
-        if(!this.pay){
+    renderedCallback() {
+        if (!this.pay) {
             const actionsWrapper = this.template.querySelector('.booking-form__send-button-wrapper');
-            if(actionsWrapper){
+            if (actionsWrapper) {
                 actionsWrapper.classList.add('booking-form__send-button-wrapper_single');
             }
         }
     }
-    
-    get sendButtonTitle(){
+
+    get sendButtonTitle() {
         return this.pay ? 'Оплатить' : 'Отправить';
     }
 
-    get sendButtonTitleProcess(){
+    get sendButtonTitleProcess() {
         return this.pay ? 'Перенаправление...' : 'Отправка...';
     }
 
-    calendarChange(event){
+    calendarChange(event) {
         console.log('event', event.value);
     }
 
-	clearError() {
-		this.formMessageError = null;
-		this.formMessageSuccess = null;
-	}
+    clearError() {
+        this.formMessageError = null;
+        this.formMessageSuccess = null;
+    }
 
-	async showFromPiker() {
-		await this.skip();
-		this.pikStart.show();
-	}
+    async showFromPiker() {
+        await this.skip();
+        this.pikStart.show();
+    }
 
-	async showToPiker() {
-		await this.skip();
-		this.pikEnd.show();
-	}
+    async showToPiker() {
+        await this.skip();
+        this.pikEnd.show();
+    }
 
-	async sendOrder() {
-		const spam = this.spam.value;
+    async sendOrder() {
+        const spam = this.spam.value;
 
-		if (spam) {
-			return;
-		}
+        if (spam) {
+            return;
+        }
 
-		let bookingOrder;
+        let bookingOrder;
 
-		if (this.order) {
-			const order = this.order.value;
-			if (!order) {
-				this.showError(ERROR_HOUSE_EMPTY);
-				return;
-			}
-			bookingOrder = order;
-		}
+        if (this.order) {
+            const order = this.order.value;
+            if (!order) {
+                this.showError(ERROR_HOUSE_EMPTY);
+                return;
+            }
+            bookingOrder = order;
+        }
 
-		const fio = this.fio.value;
+        const fio = this.fio.value;
 
-		if (!fio) {
-			this.showError(ERROR_FIO_EMPTY);
-			return;
-		}
+        if (!fio) {
+            this.showError(ERROR_FIO_EMPTY);
+            return;
+        }
 
-		const phone = this.phone.value;
+        const phone = this.phone.value;
 
-		if (!phone) {
-			this.showError(ERROR_PHONE_EMPTY);
-			return;
-		}
+        if (!phone) {
+            this.showError(ERROR_PHONE_EMPTY);
+            return;
+        }
 
-		const email = this.email.value;
+        const email = this.email.value;
 
-		if (!email) {
-			this.showError(ERROR_EMAIL_EMPTY);
-			return;
-		}
+        if (!email) {
+            this.showError(ERROR_EMAIL_EMPTY);
+            return;
+        }
 
-		if (!this.emailValidator(email)) {
-			this.showError(ERROR_EMAIL_INVALID);
-			return;
-		}
+        if (!this.emailValidator(email)) {
+            this.showError(ERROR_EMAIL_INVALID);
+            return;
+        }
 
-		const dateStart = this.dateStart.value;
+        const dateStart = this.dateStart.value;
 
-		if (!dateStart) {
-			this.showError(ERROR_DATE_START_EMPTY);
-			return;
-		}
+        if (!dateStart) {
+            this.showError(ERROR_DATE_START_EMPTY);
+            return;
+        }
 
-		const today = getTodayDate();
+        const today = getTodayDate();
 
-		if (dateStart < today) {
-			this.showError(ERROR_DATE_START_LATE);
-			return;
-		}
+        if (dateStart < today) {
+            this.showError(ERROR_DATE_START_LATE);
+            return;
+        }
 
-		const dateEnd = this.dateEnd.value;
+        const dateEnd = this.dateEnd.value;
 
-		if (!dateEnd) {
-			this.showError(ERROR_DATE_END_EMPTY);
-			return;
-		}
+        if (!dateEnd) {
+            this.showError(ERROR_DATE_END_EMPTY);
+            return;
+        }
 
-		if (dateEnd < dateStart) {
-			this.showError(ERROR_DATE_END_INVALID);
-			return;
-		}
+        if (dateEnd < dateStart) {
+            this.showError(ERROR_DATE_END_INVALID);
+            return;
+        }
 
-		const count = this.count.options[this.count.selectedIndex].value;
-		const passport = this.passport.value;
-		const comment = this.comment.value;
-		const contract = this.contract.checked;
+        const count = this.count.options[this.count.selectedIndex].value;
+        const passport = this.passport.value;
+        const comment = this.comment.value;
+        const contract = this.contract.checked;
 
-		if (!contract) {
-			this.showError(ERROR_CONTRACT_UNCHECKED);
-			return;
-		}
+        if (!contract) {
+            this.showError(ERROR_CONTRACT_UNCHECKED);
+            return;
+        }
 
-		this.formMessageError = null;
-		this.isLoading = true;
+        this.formMessageError = null;
+        this.isLoading = true;
 
-		let orderTitle = this.objectTitle ? this.objectTitle : bookingOrder;
+        let orderTitle = this.objectTitle ? this.objectTitle : bookingOrder;
         let orderType = this.objectType ? this.objectType : "Домик/Акции";
-        
 
-        if(this.pay){
-            fetch("/wp-json/krasnagorka/v1/pay/",{
+
+        if (this.pay) {
+            fetch("/wp-json/krasnagorka/v1/pay/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
@@ -304,47 +304,47 @@ export default class BookingForm extends LightningElement {
                     message: spam
                 })
             })
-            .then(response => {
-                return response.json();
-            })
-            .then(result => {
-                console.log('result', result);
-                if(result.status === 2){
-                    result.values.wsb_customer_name = fio;
-                    result.values.wsb_phone = phone;
-                    result.values.wsb_email = email;
-                    result.values.wsb_service_date = `${orderTitle}, количество спальных мест ${count}, c ${dateStart} по ${dateEnd}`;
-                    /**
-                     * https://payment.webpay.by
-                     * https://securesandbox.webpay.by
-                     */
-                    generateAndSubmitForm(
-                        email === 'zankoav@gmail.com' ? 
-                        'https://securesandbox.webpay.by' : 
-                        'https://payment.webpay.by',  
-                        result.values,
-                        result.names
+                .then(response => {
+                    return response.json();
+                })
+                .then(result => {
+                    console.log('result', result);
+                    if (result.status === 2) {
+                        result.values.wsb_customer_name = escape(fio);
+                        result.values.wsb_phone = escape(phone.replace('+', ''));
+                        result.values.wsb_email = escape(email);
+                        result.values.wsb_service_date = escape(`${orderTitle}, количество спальных мест ${count}, c ${dateStart} по ${dateEnd}`);
+                        /**
+                         * https://payment.webpay.by
+                         * https://securesandbox.webpay.by
+                         */
+                        generateAndSubmitForm(
+                            email === 'zankoav@gmail.com' ?
+                                'https://securesandbox.webpay.by' :
+                                'https://payment.webpay.by',
+                            result.values,
+                            result.names
+                        );
+                    } else if (result.status === 1) {
+                        this.formMessageSuccess = null;
+                        this.formMessageError = `Извините! Данное предложение уже забронировано.`;
+                        this.isLoading = false;
+                    } else {
+                        this.isLoading = false;
+                        this.formMessageSuccess = null;
+                        this.formMessageError = `Произошла системная ошибка, попробуйте позже`;
+                    }
+                })
+                .catch(e => {
+                    this.isLoading = false;
+                    this.showError(
+                        "Соединение с сервером прервано, попробуйте позже"
                     );
-                }else if(result.status === 1){
-                    this.formMessageSuccess = null;
-                    this.formMessageError = `Извините! Данное предложение уже забронировано.`;
-                    this.isLoading = false;
-                }else{
-                    this.isLoading = false;
-                    this.formMessageSuccess = null;
-                    this.formMessageError = `Произошла системная ошибка, попробуйте позже`;
-                }
-            })
-            .catch(e => {
-                this.isLoading = false;
-                this.showError(
-                    "Соединение с сервером прервано, попробуйте позже"
-                );
-                console.log('Error:', e);
-            });
+                    console.log('Error:', e);
+                });
 
-            
-        }else{
+
+        } else {
 
             fetch("/wp-json/krasnagorka/v1/order/", {
                 method: "POST",
@@ -425,33 +425,33 @@ export default class BookingForm extends LightningElement {
                     );
                 });
         }
-	}
+    }
 
-	showError(message) {
-		this.formMessageSuccess = null;
-		this.formMessageError = `Ошибка! ${message}`;
-	}
+    showError(message) {
+        this.formMessageSuccess = null;
+        this.formMessageError = `Ошибка! ${message}`;
+    }
 
-	emailValidator(email) {
-		let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-		return re.test(email);
-	}
+    emailValidator(email) {
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 }
 
 function getTodayDate() {
-	let today = new Date();
-	let dd = today.getDate();
+    let today = new Date();
+    let dd = today.getDate();
 
-	let mm = today.getMonth() + 1;
-	const yyyy = today.getFullYear();
-	if (dd < 10) {
-		dd = `0${dd}`;
-	}
+    let mm = today.getMonth() + 1;
+    const yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = `0${dd}`;
+    }
 
-	if (mm < 10) {
-		mm = `0${mm}`;
-	}
-	return `${yyyy}-${mm}-${dd}`;
+    if (mm < 10) {
+        mm = `0${mm}`;
+    }
+    return `${yyyy}-${mm}-${dd}`;
 }
 
 function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method = 'POST') {
