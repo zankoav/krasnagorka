@@ -176,7 +176,7 @@ class Model
 
     public function getBookingModel()
     {
-
+        LS_WP_Logger::info('Browser: ' . $_SERVER['HTTP_USER_AGENT']);
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
         $dateFrom  = $_GET['from'];

@@ -308,12 +308,10 @@ export default class BookingForm extends LightningElement {
                     return response.json();
                 })
                 .then(result => {
-                    console.log('result', result);
                     if (result.status === 2) {
                         result.values.wsb_customer_name = fio;
                         result.values.wsb_phone = phone.replace('+', '');
                         result.values.wsb_email = email;
-                        result.values.wsb_service_date = `${orderTitle}, количество спальных мест ${count}, c ${dateStart} по ${dateEnd}`;
                         /**
                          * https://payment.webpay.by
                          * https://securesandbox.webpay.by
