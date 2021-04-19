@@ -1,31 +1,65 @@
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LWCWebpackPlugin = require('lwc-webpack-plugin');
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const AssetsPlugin = require('assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-
+const webpack = require('webpack');
 
 module.exports = env => {
     const IS_DEV = env.MODE === 'development';
-    const publicPath = IS_DEV ? '' :'/wp-content/themes/krasnagorka/src/';
+    const publicPath = IS_DEV ? '' : '/wp-content/themes/krasnagorka/src/';
     const settins = {
         devtool: IS_DEV ? 'inline-source-map' : 'none',
         entry: {
             booking: './frontend/booking.js'
         },
+        optimization: {
+            minimizer: [
+                new TerserJSPlugin({}),
+                new OptimizeCSSAssetsPlugin({})
+            ],
+        },
+        // devServer: {
+        //     overlay: true,
+        //     contentBase: publicPath,
+        //     proxy: {
+        //         '/': {
+        //             target: 'https://krasnagorka.by/',
+        //             changeOrigin: true
+        //         }
+        //     }
+        // },
         output: {
             path: path.resolve(__dirname, './../src'),
             publicPath: publicPath,
             filename: `javascript/[name].[hash].min.js`,
             chunkFilename:
-            'javascript/[name]' + (IS_DEV ? '.js' : '.[hash].min.js'),
-            library: '[name]'
+                'javascript/[name]' + (IS_DEV ? '.js' : '.[hash].min.js')
         },
         mode: env.MODE,
         module: {
             rules: [
+                {
+                    test: /\.m?js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                [
+                                    "@babel/preset-env"
+                                ]
+                            ],
+                            plugins: [
+                                "@babel/plugin-transform-runtime"
+                            ]
+                        }
+                    }
+                },
                 {
                     test: /\.pug$/,
                     loader: 'pug-loader',
@@ -36,30 +70,29 @@ module.exports = env => {
                 {
                     test: /\.(css|sass|scss)$/,
                     exclude: /(node_modules)/,
-                    use: ExtractTextPlugin.extract({
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader'
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: () => [autoprefixer]
-                                }
-                            },
-                            {
-                                loader: 'resolve-url-loader'
-                            },
-                            {
-                                loader: 'sass-loader',
-
-                                options: {
-                                    sourceMap: true
-                                }
+                    use: [
+                        {
+                            loader: MiniCssExtractPlugin.loader
+                        },
+                        {
+                            loader: 'css-loader'
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => [autoprefixer]
                             }
-                        ]
-                    })
+                        },
+                        {
+                            loader: 'resolve-url-loader'
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
                 },
                 // Image Loader
                 {
@@ -100,20 +133,28 @@ module.exports = env => {
             ]
         },
         plugins: [
+            new MiniCssExtractPlugin({
+                filename: IS_DEV ? "stylesheets/[name].css" : "stylesheets/[name].[hash:6].min.css",
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Booking page',
+                filename: `booking.html`,
+                template: './frontend/booking.pug',
+                chunks: ['booking']
+            }),
             new LWCWebpackPlugin({
                 namespace: {
                     z: path.resolve('./frontend/components')
                 }
             }),
-            new ExtractTextPlugin({
-                filename: `stylesheets/[name].[hash].min.css`,
-                disable: false,
-                allChunks: false
-            })
+            // new webpack.DefinePlugin({
+            //     DEBUG_MODE: 'ANY value'
+            // }),
         ],
         resolve: {
             alias: {
-                lwc: require.resolve('@lwc/engine')
+                lwc: require.resolve('@lwc/engine'),
+                img: path.join(__dirname, '/assets/img')
             }
         }
     };
@@ -127,19 +168,5 @@ module.exports = env => {
             })
         );
     }
-
-    if (IS_DEV) {
-        settins.plugins.splice(
-            0,
-            0,
-            new HtmlWebpackPlugin({
-                title: 'Booking page',
-                filename: `booking.html`,
-                template: './frontend/booking.pug',
-                chunks: ['booking']
-            })
-        );
-    }
-
     return settins;
 };
