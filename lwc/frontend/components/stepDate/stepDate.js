@@ -9,7 +9,7 @@ const message_1 = "Нельзя бронировать прошлые даты",
 let $ = jQuery;
 let events, jsFromDate, jsToDate, $calendar;
 
-const IMG_BOOKING = require('./../../icons/date-clicking-selecting.png');
+import IMG_BOOKING from './../../icons/date-clicking-selecting.png';
 
 
 export default class StepDate extends LightningElement {

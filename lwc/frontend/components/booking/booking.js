@@ -3,7 +3,7 @@ import { getCookie, setCookie } from 'z/utils';
 import "./booking.scss";
 
 const MAX_AGE = 3600 * 24 * 100;
-const OK = require('./../../icons/checkon.svg');
+import OK from './../../icons/checkon.svg';
 
 export default class BookingForm extends LightningElement {
 
