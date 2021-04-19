@@ -20,11 +20,11 @@ export default class StepCheckout extends LightningElement {
     }
 
     get dateStart() {
-        return this.settings.dateStart.replaceAll('-', '.');
+        return this.settings.dateStart.replace(/-/g, ".");
     }
 
     get dateEnd() {
-        return this.settings.dateEnd.replaceAll('-', '.');
+        return this.settings.dateEnd.replace(/-/g, ".");
     }
 
     get comment() {
