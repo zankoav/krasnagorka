@@ -1,11 +1,11 @@
-import {LightningElement, track , api } from 'lwc';
-import {skip} from 'z/utils';
+import { LightningElement, track, api } from 'lwc';
+import { skip } from 'z/utils';
 import './stepDate.scss';
 const message_1 = "Нельзя бронировать прошлые даты",
     message_2 = "Дата выезда должна быть позже даты заезда",
     message_3 = "В интервале бронирования не должно быть занятых дат",
     message_4 = "Выберите свободную дату";
-    
+
 let $ = jQuery;
 let events, jsFromDate, jsToDate, $calendar;
 
@@ -19,53 +19,53 @@ export default class StepDate extends LightningElement {
     @track bookingImg = IMG_BOOKING;
     @track error;
 
-    get dateStart(){
-        return this.settings.dateStart ? this.settings.dateStart.replaceAll('-', '.') : '—';
+    get dateStart() {
+        return this.settings.dateStart ? this.settings.dateStart.replace(/-/g, ".") : '—';
     }
 
-    get dateEnd(){
-        return this.settings.dateEnd ? this.settings.dateEnd.replaceAll('-', '.') : '—';
+    get dateEnd() {
+        return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, ".") : '—';
     }
 
-    backButtonHandler(){
+    backButtonHandler() {
         const newMenu = this.settings.menu.map(it => {
-            return {...it, active:it.value === 'house'};
+            return { ...it, active: it.value === 'house' };
         });
         this.dispatchEvent(
             new CustomEvent('update', {
-                 detail: {
+                detail: {
                     menu: newMenu
-                 }, 
-                 bubbles:true, 
-                 composed:true
-             })
+                },
+                bubbles: true,
+                composed: true
+            })
         );
     }
 
-    nextButtonHandler(){
-        if(!this.settings.dateStart){
+    nextButtonHandler() {
+        if (!this.settings.dateStart) {
             this.error = 'Выберите дату заезда';
-        }else if(!this.settings.dateEnd){
+        } else if (!this.settings.dateEnd) {
             this.error = 'Выберите дату выезда';
-        }else{
+        } else {
             const newMenu = this.settings.menu.map(it => {
-                return {...it, active:it.value === 'contacts'};
+                return { ...it, active: it.value === 'contacts' };
             });
             this.dispatchEvent(
                 new CustomEvent('update', {
-                     detail: {
+                    detail: {
                         menu: newMenu
-                     }, 
-                     bubbles:true, 
-                     composed:true
-                 })
+                    },
+                    bubbles: true,
+                    composed: true
+                })
             );
         }
     }
 
-    initDate(date){
+    initDate(date) {
         let result;
-        if(date){
+        if (date) {
             result = {
                 d: (new moment(date, "DD-MM-YYYY")).format("YYYY-MM-DD")
             };
@@ -73,7 +73,7 @@ export default class StepDate extends LightningElement {
         return result;
     }
 
-    async connectedCallback(){
+    async connectedCallback() {
         events = null;
         jsFromDate = this.initDate(this.settings.dateStart);
         jsToDate = this.initDate(this.settings.dateEnd);
@@ -96,7 +96,7 @@ export default class StepDate extends LightningElement {
                 right: "next"
             },
             events: events,
-            eventAfterAllRender:  () => {
+            eventAfterAllRender: () => {
                 this.updateStyle();
                 if (jsFromDate) {
                     const element = document.querySelector(
@@ -163,7 +163,7 @@ export default class StepDate extends LightningElement {
                 } else if (jsFromDate && jsFromDate.d > d) {
                     showMessage(message_2);
                 }
-            
+
 
                 if (jsFromDate && jsToDate) {
                     const fromDateClearFormat = new moment(
@@ -177,13 +177,13 @@ export default class StepDate extends LightningElement {
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
-                             detail: {
+                            detail: {
                                 dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
                                 dateEnd: toDateClearFormat.format("DD-MM-YYYY")
-                             }, 
-                             bubbles:true, 
-                             composed:true
-                         })
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
                     );
                 } else if (jsFromDate) {
                     const fromDateClearFormat = new moment(
@@ -194,41 +194,41 @@ export default class StepDate extends LightningElement {
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
-                             detail: {
+                            detail: {
                                 dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
                                 dateEnd: null
-                             }, 
-                             bubbles:true, 
-                             composed:true
-                         })
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
                     );
                 } else {
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
-                             detail: {
+                            detail: {
                                 dateStart: null,
                                 dateEnd: null
-                             }, 
-                             bubbles:true, 
-                             composed:true
-                         })
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
                     );
                 }
             }
         });
 
-        
+
     }
 
-    updateStyle(){
+    updateStyle() {
         const head = document.head || document.getElementsByTagName("head")[0];
-        if(this.calendarStyle){
+        if (this.calendarStyle) {
             head.removeChild(this.calendarStyle);
         }
         this.calendarStyle = document.createElement("style");
-        const targetMargin = $($(".fc-day-top")[0]).width()/2;
-        const css =`.fc-view .fc-body .fc-start { 
+        const targetMargin = $($(".fc-day-top")[0]).width() / 2;
+        const css = `.fc-view .fc-body .fc-start { 
                         margin-left: ${targetMargin}px; 
                         border-top-left-radius: 5px;
                         border-bottom-left-radius: 5px;
@@ -244,7 +244,7 @@ export default class StepDate extends LightningElement {
         head.appendChild(this.calendarStyle);
     }
 
-    getTemplate(){
+    getTemplate() {
         return `
             <div class="calendar_block">
                 <div id="calendar"></div>
@@ -277,12 +277,12 @@ function fillCells() {
     $calendar.find(`.cell-between`).removeClass("cell-between");
     if (jsToDate) {
         $calendar.find('.fc-day[data-date]').each(function () {
-                const $item = $(this);
-                const dateStr = $item.data("date");
-                if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
-                    $item.addClass("cell-between");
-                }
+            const $item = $(this);
+            const dateStr = $item.data("date");
+            if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
+                $item.addClass("cell-between");
             }
+        }
         );
     }
 }

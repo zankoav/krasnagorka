@@ -1,5 +1,7 @@
 export async function skip() {
-    await new Promise((resolve) => setImmediate(resolve));
+    await new Promise(resolve => {
+        setTimeout(resolve, 10)
+    });
 }
 
 export function getCookie(name) {
@@ -44,7 +46,7 @@ export function deleteCookie(name) {
 }
 
 
-export function getMonthTodayRu(){
+export function getMonthTodayRu() {
     const monthsRuList = [
         'Января',
         'Февраля',
@@ -62,7 +64,7 @@ export function getMonthTodayRu(){
     return monthsRuList[new Date().getUTCMonth()];
 }
 
-export function getDayNumberToday(){
+export function getDayNumberToday() {
     return new Date().getUTCDate();
 }
 
