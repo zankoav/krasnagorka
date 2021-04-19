@@ -160,6 +160,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'change_contact_permissions_check')
             ),
         ]);
+
+        $call_path      = '/amocrm-call/';
+
+        register_rest_route($namespace, $call_path, [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'amocrm_call'),
+                'permission_callback' => array($this, 'amocrm_call_permissions_check')
+            ),
+        ]);
     }
 
     public function create_order_permissions_check($request)
@@ -196,6 +206,64 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
         return true;
     }
+
+    public function amocrm_call_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function amocrm_call($request)
+    {
+        LS_WP_Logger::info('amocrm_call: ' . json_encode($_POST));
+
+        //Получим сделку
+        // try {
+
+        //     $leadId = (int)$_POST['leads']['status'][0]['id'];
+        //     $apiClient = self::getAmoCrmApiClient();
+        //     $lead = $apiClient->leads()->getOne($leadId, [LeadModel::CONTACTS]);
+        //     //Получим основной контакт сделки
+        //     /** @var ContactsCollection $leadContacts */
+        //     $leadContacts = $lead->getContacts();
+        //     if ($leadContacts) {
+        //         $leadMainContact = $leadContacts->getBy('isMain', true);
+        //         $contact =  $apiClient->contacts()->getOne($leadMainContact->getId(), [ContactModel::LEADS]);
+        //         $leads =  $contact->getLeads()->toArray();
+        //         $ids = [];
+        //         foreach ($leads as $item) {
+        //             $ids[] = $item['id'];
+        //         }
+        //         $filter = new LeadsFilter();
+        //         $filter->setIds($ids);
+        //         $leads = $apiClient->leads()->get($filter)->toArray();
+        //         $counter = 0;
+        //         foreach ($leads as $l) {
+        //             if ($l['status_id'] == 142) {
+        //                 $counter++;
+        //             }
+        //         }
+        //         if ($counter > 2) {
+        //             $contactCustomFields = new CustomFieldsValuesCollection();
+        //             $typeFieldValueContact = new SelectCustomFieldValuesModel();
+        //             $typeFieldValueContact->setFieldId(72295);
+
+        //             $tCollection = new SelectCustomFieldValueCollection();
+        //             $tModel = new SelectCustomFieldValueModel();
+        //             $tModel->setEnumId(149825);
+        //             $tCollection->add($tModel);
+        //             $typeFieldValueContact->setValues($tCollection);
+        //             $contactCustomFields->add($typeFieldValueContact);
+        //             $contact->setCustomFieldsValues($contactCustomFields);
+        //             $contact = $apiClient->contacts()->updateOne($contact);
+        //         }
+        //     }
+        // } catch (AmoCRMApiException $e) {
+        //     LS_WP_Logger::info('AmoCRMApiException: ' . $e);
+        // } catch (Exception $e) {
+        //     LS_WP_Logger::info('Exception: ' . $e->getMessage());
+        // }
+    }
+
 
     public function change_contact($request)
     {
