@@ -303,7 +303,7 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Процент',
 		'id'            => 'sale_percentage',
-		'type' 			=> 'text_money',
+		'type' 			=> 'text_small',
 		'attributes'      => array(
 			'type'    => 'number',
 			'min' => '1',
