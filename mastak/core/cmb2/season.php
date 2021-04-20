@@ -306,6 +306,7 @@ function mastak_sales()
 		'type' 			=> 'text_money',
 		'attributes'      => array(
 			'type'    => 'number',
+			'min' => '1',
 			'data-validation' => 'required'
 		),
 		'after_field' => '%'
