@@ -276,7 +276,10 @@ function mastak_sales()
 		'type'             => 'select',
 		'show_option_none' => true,
 		'default'          => 'custom',
-		'options_cb'       => 'show_seasons_options'
+		'options_cb'       => 'show_seasons_options',
+		'attributes' => array(
+			'data-validation' => 'required',
+		),
 	));
 
 	$cmb_sale->add_field(array(
@@ -302,7 +305,8 @@ function mastak_sales()
 		'id'            => 'sale_percentage',
 		'type' 			=> 'text_money',
 		'attributes'      => array(
-			'type'    => 'number'
+			'type'    => 'number',
+			'data-validation' => 'required'
 		),
 		'after_field' => '%'
 	));
@@ -310,7 +314,8 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Подсказка о скидке',
 		'id'            => 'sale_help_message',
-		'type' 			=> 'textarea_small'
+		'type' 			=> 'textarea_small',
+		'data-validation' => 'required'
 	));
 }
 
