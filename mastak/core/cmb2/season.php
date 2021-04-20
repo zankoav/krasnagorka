@@ -315,7 +315,9 @@ function mastak_sales()
 		'name'          => 'Подсказка о скидке',
 		'id'            => 'sale_help_message',
 		'type' 			=> 'textarea_small',
-		'data-validation' => 'required'
+		'attributes' => array(
+			'data-validation' => 'required',
+		),
 	));
 }
 
