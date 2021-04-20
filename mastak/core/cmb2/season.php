@@ -230,13 +230,13 @@ function mastak_season_interval()
 		// 'name'          => 'Сезон',
 		'id'            => 'season_id',
 		'type' 			=> 'title',
-		'label_cb' => 'season_escape_cb',
+		'label_cb' => 'season_display_cb',
 		'column' => array(
 			'position' => 2,
 			'name'     => 'Сезон',
 		),
 		// 'display_cb' => 'season_display_cb',
-		// 'escape_cb' => 'season_escape_cb',
+		'escape_cb' => 'season_escape_cb',
 	));
 
 	$cmb_season->add_field(array(
