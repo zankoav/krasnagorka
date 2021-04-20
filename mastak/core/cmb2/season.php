@@ -258,6 +258,8 @@ function mastak_sales()
 		'name'          => 'Календарь',
 		'id'            => 'sale_calendar',
 		'type'           => 'select',
+		'show_option_none' => true,
+		'default'          => 'custom',
 		'options_cb'     => 'cmb2_get_term_options',
 		'get_terms_args' => array(
 			'taxonomy'   => 'sbc_calendars',
