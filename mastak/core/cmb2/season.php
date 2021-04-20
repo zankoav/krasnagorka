@@ -240,6 +240,12 @@ function mastak_season_interval()
 		'display_cb' => 'season_display_cb',
 		'escape_cb' => 'season_escape_cb',
 	));
+
+	$cmb_season->add_field(array(
+		'name'          => 'Блокировать оплату',
+		'id'            => 'season_bloked',
+		'type' 			=> 'checkbox'
+	));
 }
 
 
