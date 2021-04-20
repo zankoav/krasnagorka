@@ -3,6 +3,10 @@
 	opacity: 1;
 }
 
-.width-300px {
-	width: 300px !important;
+div.width-300px .cmb-th {
+	width: 100%;
+}
+
+div.width-300px .cmb-td {
+	width: 0%;
 }
