@@ -180,10 +180,6 @@ function mastak_season()
 			'name' => 'Минимальное кол-во людей',
 			'id'   =>  'house_min_people_' . $house_id,
 			'type'            => 'text',
-			'attributes'      => array(
-				'type'    => 'number',
-				'min' => '1'
-			)
 		));
 	}
 
@@ -285,19 +281,13 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Человек >=',
 		'id'            => 'sale_people_min',
-		'type' 			=> 'text',
-		'attributes'      => array(
-			'type'    => 'number'
-		)
+		'type' 			=> 'text'
 	));
 
 	$cmb_sale->add_field(array(
 		'name'          => 'Дней >=',
 		'id'            => 'sale_days_min',
-		'type' 			=> 'text',
-		'attributes'      => array(
-			'type'    => 'number'
-		)
+		'type' 			=> 'text'
 	));
 
 	$cmb_sale->add_field(array(
@@ -307,7 +297,7 @@ function mastak_sales()
 		'attributes'      => array(
 			'type'    => 'number'
 		),
-		'before_field' => '%'
+		'after_field' => '%'
 	));
 
 	$cmb_sale->add_field(array(
