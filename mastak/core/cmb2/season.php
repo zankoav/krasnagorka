@@ -177,7 +177,7 @@ function mastak_season()
 			'before_field' => 'BYN'
 		));
 		$cmb_season->add_field(array(
-			'name' => 'Минимальное кол-во людей',
+			'name' => "$house_title мин. кол-во людей",
 			'id'   =>  'house_min_people_' . $house_id,
 			'type'            => 'text',
 		));
