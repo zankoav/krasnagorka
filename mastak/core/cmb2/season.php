@@ -230,7 +230,7 @@ function mastak_season_interval()
 		// 'name'          => 'Сезон',
 		'id'            => 'season_id',
 		'type' 			=> 'title',
-		'value' => 'OK',
+		'description' => 'OK',
 		'label_cb' => 'season_display_cb',
 		'column' => array(
 			'position' => 2,
