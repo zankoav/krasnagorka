@@ -177,9 +177,9 @@ function mastak_season()
 			'before_field' => 'BYN'
 		));
 		$cmb_season->add_field(array(
-			'name' => "$house_title мин. кол-во людей",
+			'name' => "$house_title (мин. кол-во людей)",
 			'id'   =>  'house_min_people_' . $house_id,
-			'type'            => 'text',
+			'type'            => 'text_small',
 		));
 	}
 
@@ -255,12 +255,17 @@ function mastak_sales()
 	));
 
 	$cmb_sale->add_field(array(
-		'name'          => 'Домик',
-		'id'            => 'sale_house',
-		'type'             => 'text',
-		// 'show_option_none' => true,
-		// 'default'          => 'custom',
-		// 'options_cb'       => 'show_seasons_options',
+		'name'          => 'Календарь',
+		'id'            => 'sale_calendar',
+		'type'           => 'select',
+		'options_cb'     => 'cmb2_get_term_options',
+		'get_terms_args' => array(
+			'taxonomy'   => 'sbc_calendars',
+			'hide_empty' => false,
+		),
+		'attributes' => array(
+			'data-validation' => 'required',
+		),
 	));
 
 	$cmb_sale->add_field(array(
@@ -281,13 +286,13 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Человек >=',
 		'id'            => 'sale_people_min',
-		'type' 			=> 'text'
+		'type' 			=> 'text_small'
 	));
 
 	$cmb_sale->add_field(array(
 		'name'          => 'Дней >=',
 		'id'            => 'sale_days_min',
-		'type' 			=> 'text'
+		'type' 			=> 'text_small'
 	));
 
 	$cmb_sale->add_field(array(
