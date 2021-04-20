@@ -261,13 +261,19 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Домик',
 		'id'            => 'sale_house',
-		'type' 			=> 'text'
+		'type'             => 'text',
+		// 'show_option_none' => true,
+		// 'default'          => 'custom',
+		// 'options_cb'       => 'show_seasons_options',
 	));
 
 	$cmb_sale->add_field(array(
 		'name'          => 'Сезон',
 		'id'            => 'sale_season',
-		'type' 			=> 'text'
+		'type'             => 'select',
+		'show_option_none' => true,
+		'default'          => 'custom',
+		'options_cb'       => 'show_seasons_options'
 	));
 
 	$cmb_sale->add_field(array(
@@ -279,19 +285,28 @@ function mastak_sales()
 	$cmb_sale->add_field(array(
 		'name'          => 'Человек >=',
 		'id'            => 'sale_people_min',
-		'type' 			=> 'text'
+		'type' 			=> 'text',
+		'attributes'      => array(
+			'type'    => 'number'
+		)
 	));
 
 	$cmb_sale->add_field(array(
 		'name'          => 'Дней >=',
 		'id'            => 'sale_days_min',
-		'type' 			=> 'text'
+		'type' 			=> 'text',
+		'attributes'      => array(
+			'type'    => 'number'
+		)
 	));
 
 	$cmb_sale->add_field(array(
 		'name'          => 'Процент',
 		'id'            => 'sale_percentage',
 		'type' 			=> 'text_money',
+		'attributes'      => array(
+			'type'    => 'number'
+		),
 		'before_field' => '%'
 	));
 
