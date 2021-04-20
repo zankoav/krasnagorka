@@ -236,7 +236,7 @@ function mastak_season_interval()
 			'name'     => 'Сезон',
 		),
 		// 'display_cb' => 'season_display_cb',
-		'escape_cb' => 'season_escape_cb',
+		'escape_cb' => 'season_display_cb',
 	));
 
 	$cmb_season->add_field(array(
