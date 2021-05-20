@@ -1387,8 +1387,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                 $contact = $contactsCollection->first();
-                LS_WP_Logger::info('1 by phone: ' . $contact->getFirstName());
-
+                $contact->setFirstName($contactName);
                 $customFields = $contact->getCustomFieldsValues();
 
                 $emailField = $customFields->getBy('fieldCode', 'EMAIL');
@@ -1428,9 +1427,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                     $contact = $contactsCollection->first();
-
-                    LS_WP_Logger::info('2 by email: ' . $contact->getFirstName());
-
+                    $contact->setFirstName($contactName);
 
                     $customFields = $contact->getCustomFieldsValues();
                     $phoneField = $customFields->getBy('fieldCode', 'PHONE');
@@ -1462,8 +1459,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 } else {
                     $contact = new ContactModel();
                     $contact->setFirstName($contactName);
-                    LS_WP_Logger::info('3 setFirstName: ' . $contactName);
-
 
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
