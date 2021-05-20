@@ -1274,7 +1274,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient = self::getAmoCrmApiClient();
 
             $orderType = 'reserved';
-            $commentNote = "Спец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
+            $commentNote = "ФИО: $contactName\nСпец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
             $leadName = 'Сделка через WEBPAY';
             $statusId = 35452366; // id воронки
 
@@ -1387,6 +1387,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                 $contact = $contactsCollection->first();
+                LS_WP_Logger::info('1 by phone: ' . $contact->getFirstName());
+
                 $customFields = $contact->getCustomFieldsValues();
 
                 $emailField = $customFields->getBy('fieldCode', 'EMAIL');
@@ -1426,6 +1428,10 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                     $contact = $contactsCollection->first();
+
+                    LS_WP_Logger::info('2 by email: ' . $contact->getFirstName());
+
+
                     $customFields = $contact->getCustomFieldsValues();
                     $phoneField = $customFields->getBy('fieldCode', 'PHONE');
                     if (empty($phoneField)) {
@@ -1456,6 +1462,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 } else {
                     $contact = new ContactModel();
                     $contact->setFirstName($contactName);
+                    LS_WP_Logger::info('3 setFirstName: ' . $contactName);
+
 
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
