@@ -1389,7 +1389,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                 $contact = $contactsCollection->first();
-                $contact->setFirstName($contactName);
+                $contact->setName($contactName);
                 $customFields = $contact->getCustomFieldsValues();
 
                 $emailField = $customFields->getBy('fieldCode', 'EMAIL');
@@ -1429,7 +1429,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                     $contact = $contactsCollection->first();
-                    $contact->setFirstName($contactName);
+                    $contact->setName($contactName);
 
                     $customFields = $contact->getCustomFieldsValues();
                     $phoneField = $customFields->getBy('fieldCode', 'PHONE');
@@ -1460,7 +1460,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $contact = $apiClient->contacts()->updateOne($contact);
                 } else {
                     $contact = new ContactModel();
-                    $contact->setFirstName($contactName);
+                    $contact->setName($contactName);
 
                     $contactCustomFields = new CustomFieldsValuesCollection();
                     $phoneFieldValueModel = new MultitextCustomFieldValuesModel();
