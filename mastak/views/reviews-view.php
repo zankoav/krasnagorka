@@ -6,7 +6,7 @@
         echo '<noindex>';
     }
 
-    if (count($comments) > 4 and false) :?>
+    if (count($comments) > 4) :?>
 
 
 
