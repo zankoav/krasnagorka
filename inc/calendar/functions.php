@@ -276,7 +276,7 @@
 
 		echo '<div class="head_row"><div class="head_col col">Заголовок</div><div class="head_col col">Календарь</div>
 <div class="head_col col">Статус</div><div class="head_col col">Дата заезд</div><div class="head_col col">Дата выезда</div>
-<div class="head_col col">Цена</div><div class="head_col col">Предоплата</div><div class="head_col col">Комментарий</div></div>';
+<div class="head_col col">Цена</div><div class="head_col col">Lead Id</div><div class="head_col col">Предоплата</div><div class="head_col col">Комментарий</div></div>';
 
 		if ( isset( $query ) && ! empty( $query ) ) :
 			foreach ( $query as $post ) {
@@ -325,6 +325,7 @@
 				echo '<div class="row_col col">' . get_post_meta( $post->ID, 'sbc_order_start', true ) . '</div>';
 				echo '<div class="row_col col">' . get_post_meta( $post->ID, 'sbc_order_end', true ) . '</div>';
 				echo '<div class="row_col col">' . get_post_meta( $post->ID, 'sbc_order_price', true ) . '</div>';
+				echo '<div class="row_col col">' . get_post_meta( $post->ID, 'sbc_lead_id', true ) . '</div>';
 				echo '<div class="row_col col">';
 				if ( get_post_meta( $post->ID, 'sbc_order_prepaid', true ) ) {
 					echo get_post_meta( $post->ID, 'sbc_order_prepaid', true );

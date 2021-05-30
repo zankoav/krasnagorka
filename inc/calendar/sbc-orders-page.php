@@ -225,6 +225,7 @@
 		$columns['sbc_order_end']    = 'sbc_order_end';
 		$columns['sbc_order_client'] = 'sbc_order_client';
 		$columns['sbc_order_price']  = 'sbc_order_price';
+		$columns['sbc_lead_id']  = 'sbc_lead_id';
 
 		return $columns;
 	}
@@ -254,6 +255,10 @@
 					break;
 				case 'sbc_order_price':
 					$query->set( 'meta_key', 'sbc_order_price' );
+					$query->set( 'orderby', 'meta_value_num' );
+					break;
+				case 'sbc_lead_id':
+					$query->set( 'meta_key', 'sbc_lead_id' );
 					$query->set( 'orderby', 'meta_value_num' );
 					break;
 				default:
