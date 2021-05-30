@@ -1876,7 +1876,10 @@
             'type' => 'text_small',
             'attributes' => array(
 				'readonly' => 'readonly'
-			)
+			),
+            'column' => array(
+                'name'     => 'Lead Id',
+            )
         ));
 
         $sbc_client->add_field(array(
