@@ -37,6 +37,8 @@ export default class StepContact extends LightningElement {
             this.error = 'Введите телефон';
         }else if(!this.settings.email){
             this.error = 'Введите email';
+        }else if(!this.settings.passport){
+            this.error = 'Введите паспортные данные';
         }else if(!this.settings.agreement){
             this.error = 'Вы не согласились с договором присоединения';
         }else{

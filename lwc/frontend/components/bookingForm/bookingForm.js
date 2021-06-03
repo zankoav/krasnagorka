@@ -10,6 +10,7 @@ const MAX_AGE = 3600 * 24 * 100;
 const ERROR_FIO_EMPTY = "Поле ФИО не заполнено";
 const ERROR_PHONE_EMPTY = "Поле Телефон не заполнено";
 const ERROR_EMAIL_EMPTY = "Поле Email не заполнено";
+const ERROR_PASSPORT_EMPTY = "Заполните паспортные данные";
 const ERROR_DATE_START_EMPTY = "Поле Дата заезда не заполнено";
 const ERROR_DATE_END_EMPTY = "Поле Дата выезда не заполнено";
 const ERROR_EMAIL_INVALID = "Поле Email не валидно";
@@ -270,6 +271,11 @@ export default class BookingForm extends LightningElement {
         const passport = this.passport.value;
         const comment = this.comment.value;
         const contract = this.contract.checked;
+
+        if (!passport) {
+            this.showError(ERROR_PASSPORT_EMPTY);
+            return;
+        }
 
         if (!contract) {
             this.showError(ERROR_CONTRACT_UNCHECKED);

@@ -58,8 +58,6 @@ export default class Admin extends LightningElement {
             ]
         };
 
-        console.log('init settings', this.settings);
-
         this.updateSettings();
     }
 
@@ -95,6 +93,7 @@ export default class Admin extends LightningElement {
             this.settings.fio && 
             this.settings.phone &&
             this.settings.email &&
+            this.settings.passport &&
             this.settings.agreement
         ){
             availableSteps.push('checkout');
