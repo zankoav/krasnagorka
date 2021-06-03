@@ -90,7 +90,7 @@
                 </div>
                 <div class="booking-form__group">
                     <label for="passport"
-                           class="booking-form__label">Личный (идентификационный) номер
+                           class="booking-form__label booking-form__label_required">Личный (идентификационный) номер
                         паспорта</label>
                     <input id="passport"
                            onfocus={clearError}
@@ -121,7 +121,8 @@
                            target="_blank">договором присоединения</a></label>
                 </div>
                 <div class="booking-form__send-button-wrapper">
-                    <div if:true={pay} class="booking-form__checkout">
+                    <div if:true={pay}
+                         class="booking-form__checkout">
                         <span class="booking-form__price">{price}</span>
                     </div>
                     <template if:false={isLoading}>
