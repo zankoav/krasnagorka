@@ -811,8 +811,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
             try {
                 $task = $apiClient->tasks()->getOne($taskId);
-                $task->setTaskTypeId(925198)
-                    ->setText('Клиент оплатил 100%. Отправить чек клиенту.')
+                $task->setTaskTypeId(2126242)
+                    ->setText('Клиент оплатил 100%. Передать информацию Юре.')
                     ->setCompleteTill(mktime(date("H"), date("i") + 30))
                     ->setEntityType(EntityTypesInterface::LEADS)
                     ->setEntityId($lead->getId())
