@@ -708,7 +708,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     ],
                     "values" => [
                         'wsb_storeid' => $wsb_storeid,
-                        'wsb_store' => 'OOO Краснагорка',
+                        'wsb_store' => 'ИП Терещенко Иван Игоревич', 
                         'wsb_order_num' => $wsb_order_num,
                         'wsb_currency_id' => $wsb_currency_id,
                         'wsb_version' => "2",
