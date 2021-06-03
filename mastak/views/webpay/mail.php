@@ -41,7 +41,6 @@ $order = $args['order'];
                                             <div>Контакты:</div>
                                             <div>+375 29 320 19 19</div>
                                             <div>+375 29 701 19 19</div>
-                                            <div>+375 25 920 19 19</div>
                                         </td>
                                         <td valign="top">
                                             <div>Координаты:</div>
