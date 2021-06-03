@@ -973,6 +973,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
         $type     = $request['type'];
         $orderId  = $request['orderId'];
+        $leadId  = $request['leadId'];
         $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
         $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $dateFrom = date("Y-m-d", $request['dateFrom']);
@@ -1082,6 +1083,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 if (!empty($peopleCount)) {
                     update_post_meta($post_id, 'sbc_order_people_count', $peopleCount);
+                }
+                if (!empty($leadId)) {
+                    update_post_meta($post_id, 'sbc_lead_id', $leadId);
                 }
                 if (!empty($childs)) {
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
