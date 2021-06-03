@@ -1874,9 +1874,9 @@
             'name' => 'Lead ID',
             'id'   => 'sbc_lead_id',
             'type' => 'text_small',
-            // 'attributes' => array(
-			// 	'readonly' => 'readonly'
-			// ),
+            'attributes' => array(
+				'readonly' => 'readonly'
+			),
             'column' => array(
                 'name'     => 'Lead Id',
             )
