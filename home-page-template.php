@@ -57,8 +57,8 @@
 ?>
 
     
-<section class="b-bgc-wrapper b-pb-2">
-    <div class="b-container more-questions b-mt-2">
+<section class="b-bgc-wrapper b-pb-2 b-pt-2">
+    <div class="b-container more-questions">
         <div class="more-questions__wrapper">
             <div class="more-questions__inner">
                 <p class="more-questions__title"><?=$need_more_title?></p>
