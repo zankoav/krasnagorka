@@ -339,7 +339,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                         </div>
                     <? endif; ?>
                     <div data-mixed-tab="7" class="accordion-mixed__tab">
-                        Проживание
+                        Условия и цены
                     </div>
                     <div data-mixed-conent="7" class="accordion-mixed__content">
                         <div class="accordion-mixed__content-inner booking-houses__text">

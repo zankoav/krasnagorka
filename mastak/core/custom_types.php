@@ -731,7 +731,7 @@
 
 
         $sbc_client->add_field(array(
-            'name' => 'Порядок проживание',
+            'name' => 'Условия и цены',
             'id'   => $prefix . 'residence',
             'type' => 'wysiwyg'
         ));
