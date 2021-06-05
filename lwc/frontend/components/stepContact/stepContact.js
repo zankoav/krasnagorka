@@ -37,6 +37,8 @@ export default class StepContact extends LightningElement {
             this.error = 'Введите телефон';
         }else if(!this.settings.email){
             this.error = 'Введите email';
+        }else if(!this.emailValidator(this.settings.email)){
+            this.error = 'Поле Email не валидно';
         }else if(!this.settings.passport){
             this.error = 'Введите паспортные данные';
         }else if(!this.settings.agreement){
@@ -55,6 +57,11 @@ export default class StepContact extends LightningElement {
                  })
             );
         }
+    }
+
+    emailValidator(email) {
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 
     changeHandler(event){
