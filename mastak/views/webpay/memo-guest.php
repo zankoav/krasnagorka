@@ -9,6 +9,8 @@ $data = $args['data'];
 					<tbody>
 						<tr>
 							<td>
+								<a style="color: #1498c6; text-decoration: underline;" href="<?= $data['memo']; ?>" target="_blank">Памятка гостю</a>
+								<br>
 								<img width="100%" src="<?= $data['memo']; ?>">
 							</td>
 						</tr>
