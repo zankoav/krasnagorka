@@ -55,7 +55,18 @@
     );
 
 ?>
-
+<div class="b-container more-questions b-mt-2">
+    <div class="more-questions__wrapper">
+        <div class="more-questions__inner">
+            <p class="more-questions__title"><?=$need_more_title?></p>
+            <p class="more-questions__description ta-c"><?=$need_more_description?></p>
+            <div class="ta-c">
+                <a href="<?=$need_more_link?>" target="_blank" class="more-questions__submit"><?=$need_more_link_title?></a>
+            </div>
+        </div>
+    </div>
+</div>
+    
 <section class="b-bgc-wrapper b-pb-2">
     <div class="b-container header-title">
         <h2 class="header-title__subtitle"><?= $subtitle_1; ?></h2>
@@ -76,18 +87,6 @@
             <a class="latest-projects__view-all" href="<?= get_post_type_archive_link('opportunity') ?>">Посмотреть все
                 услуги
             </a>
-        </div>
-    </div>
-
-    <div class="b-container more-questions b-mt-2">
-        <div class="more-questions__wrapper">
-            <div class="more-questions__inner">
-                <p class="more-questions__title"><?=$need_more_title?></p>
-                <p class="more-questions__description ta-c"><?=$need_more_description?></p>
-                <div class="ta-c">
-                    <a href="<?=$need_more_link?>" target="_blank" class="more-questions__submit"><?=$need_more_link_title?></a>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -128,17 +127,6 @@
     </div>
 
 </section>
-
-<!--
-<section class="get-test">
-    <img src="<?php //= $test_image; ?>" alt=get-test" class="get-test__image">
-    <div class="get-test__content">
-        <p class="get-test__title"><?php //= $test_title; ?></p>
-        <p class="get-test__description"><?php //= $test_description; ?></p>
-        <a href="<?php //= $test_button_url; ?>" target="_blank" class="get-test__button"><?php //= $test_button_title; ?></a>
-    </div>
-</section>
--->
 
 <section class="b-bgc-wrapper">
     <?php
