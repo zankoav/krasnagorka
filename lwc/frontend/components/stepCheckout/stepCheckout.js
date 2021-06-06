@@ -28,7 +28,7 @@ export default class StepCheckout extends LightningElement {
     }
 
     get comment() {
-        return this.settings.commet || '—';
+        return this.settings.comment || '—';
     }
 
     get passport() {
