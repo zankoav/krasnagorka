@@ -83,7 +83,7 @@
             <a class="menu__navigation-phone-button" href="javascript:void(0);" onclick={toggleContacts}>
                 <img src={icons.phone} alt="Phone" class="menu__navigation-phone-icon">
             </a>
-            <z-contacts-popup model={model.popupContacts} onhidepopup={toggleContacts} is-open={contactsPopupIsOpen}></z-contacts-popup>
+            <z-contacts-popup model={model} onhidepopup={toggleContacts} is-open={contactsPopupIsOpen}></z-contacts-popup>
         </div>
     </div>
     <template if:true={videoOpened}>

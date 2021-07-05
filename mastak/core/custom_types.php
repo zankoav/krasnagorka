@@ -287,6 +287,13 @@
             'type' => 'text_url'
         ));
 
+        $telegram = $cmb_options->add_field(array(
+            'name' => 'Telegram',
+            'desc' => 'Telegram (url)',
+            'id'   => $prefix . 'telegram',
+            'type' => 'text_url'
+        ));
+
 
         $cmb_options->add_field(array(
             'name' => __('Контактная информация', 'krasnagorka'),

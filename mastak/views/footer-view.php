@@ -7,6 +7,7 @@
     $odnoklassniki = $options['mastak_theme_options_odnoklassniki'];
     $vk            = $options['mastak_theme_options_vkontakte'];
     $youtobe       = $options['mastak_theme_options_youtube'];
+    $telegram       = $options['mastak_theme_options_telegram'];
     $paymants      = $options['mastak_theme_options_paymants'];
     $unp           = $options['mastak_theme_options_unp'];
     $location      = $options['mastak_theme_options_location'];
@@ -195,6 +196,14 @@
                              src="<?= CORE_PATH ?>assets/icons/social/youtube_w.svg"
                              alt="Youtube"
                              title="Youtube">
+                    </a>
+                <?php endif; ?>
+                <?php if (!empty($telegram)): ?>
+                    <a href="<?= $telegram; ?>" target="_blank">
+                        <img class="footer-bottom-left-img"
+                             src="<?= CORE_PATH ?>assets/icons/social/telegram_footer.svg"
+                             alt="Telegram"
+                             title="Telegram">
                     </a>
                 <?php endif; ?>
                 <div class="footer-bottom-left__text">

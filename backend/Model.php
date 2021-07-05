@@ -158,6 +158,10 @@ class Model
                 [
                     'value' => 'youtube',
                     'url'   => $this->baseModel['mastak_theme_options_youtube'],
+                ],
+                [
+                    'value' => 'telegram',
+                    'url'   => $this->baseModel['mastak_theme_options_telegram'],
                 ]
             ]
         ];
