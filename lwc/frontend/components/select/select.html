@@ -1,20 +1,26 @@
 <template>
-    <div class={cssStyle}>
-        <select class={css}
-                onchange={changeOption}>
-            <option disabled
-                    value
-                    selected>{disabledLabel}</option>
-            <template for:each={values}
-                      for:item="option">
-                <option if:true={option.selected}
-                        selected
-                        key={option.id}
-                        value={option.id}>{option.name}</option>
-                <option if:false={option.selected}
-                        key={option.id}
-                        value={option.id}>{option.name}</option>
-            </template>
-        </select>
+    <div class="select" tabindex="0" onblur={closeHandler}>
+        <div class={selectBlockCss} onclick={toggleHandler}>
+            <div if:true={label} class="select__label">{label}</div>
+            <div class="select__value">{value}</div>
+            <div if:true={required} class="select__required"></div>
+            <div class="select__arrow"></div>
+        </div>
+        <div class="select__options-wrapper">
+            <div if:true={isOpen} class="select__options">
+                <template for:each={options} for:item="option">
+                    <div if:true={option.selected} 
+                        key={option.id} 
+                        onclick={chooseOption}
+                        class="select__option select__option_selected"
+                        data-value={option.id}>{option.name}</div>
+                    <div if:false={option.selected} 
+                        key={option.id} 
+                        onclick={chooseOption}
+                        class="select__option" 
+                        data-value={option.id}>{option.name}</div>
+                </template>
+            </div>
+        </div>
     </div>
 </template>

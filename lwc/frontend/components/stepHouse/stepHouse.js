@@ -1,11 +1,21 @@
 import { LightningElement, track, api } from 'lwc';
 import './stepHouse.scss';
+import IMG_BOOKING from './../../icons/date-clicking-selecting.png';
 
 export default class StepHouse extends LightningElement {
 
     @api settings;
     @track loading;
+    @track bookingImg = IMG_BOOKING;
     @track error;
+
+    get dateStart() {
+        return this.settings.dateStart ? this.settings.dateStart.replace(/-/g, ".") : '—';
+    }
+
+    get dateEnd() {
+        return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, ".") : '—';
+    }
 
     connectedCallback() {
         const calendar = this.settings.calendars.find(c => c.selected);
@@ -123,9 +133,13 @@ export default class StepHouse extends LightningElement {
                 selectorCounts.showError();
                 this.error = 'Выберите количество отдыхающих';
             }
+        }else if (!this.settings.dateStart) {
+            this.error = 'Выберите дату заезда';
+        } else if (!this.settings.dateEnd) {
+            this.error = 'Выберите дату выезда';
         } else {
             const newMenu = this.settings.menu.map(it => {
-                return { ...it, active: it.value === 'date' };
+                return { ...it, active: it.value === 'contacts' };
             });
             this.dispatchEvent(
                 new CustomEvent('update', {

@@ -127,7 +127,7 @@
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--viber">
                             <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg" alt="icon-whatsapp"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--whatsapp">
-                            <a href="<?=$telegram;?>">
+                            <a href="<?=$telegram;?>" target="_blank">
                                  <img src="<?= CORE_PATH; ?>assets/icons/social/telegram.svg" alt="icon-telegram"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--telegram">
                             </a>

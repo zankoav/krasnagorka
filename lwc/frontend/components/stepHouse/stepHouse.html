@@ -3,12 +3,51 @@
         <div class="step-house__body">
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
-                <z-select class="step-house__calendars"
+                <z-select if:false={settings.house} class="step-house__select"
                           required
+                          label="Выберите Домик"
                           onchange={calendarChange}
-                          disabled-label=" -- Выберите Домик -- "
                           options={settings.calendars}></z-select>
                 <template if:true={settings.house}>
+
+                    <div class="step-house__row">
+                        <div class="step-house__col">
+                            <z-select class="step-house__select step-house__calendars"
+                                    required
+                                    label="Домик"
+                                    onchange={calendarChange}
+                                    options={settings.calendars}></z-select>
+        
+                            <z-select class="step-house__select step-house__counts"
+                                    required
+                                    label="Количество человек"
+                                    onchange={countChange}
+                                    options={settings.counts}></z-select>
+        
+                            <z-select class="step-house__select"
+                                    label="Детей без спального места"
+                                    onchange={childCountChange}
+                                    options={settings.childCounts}></z-select>
+        
+                            <div class="step-house__booking">
+                                <img src={bookingImg}
+                                        alt="booking img"
+                                        class="step-house__booking-icon">
+                                <div class="step-house__booking-dates">
+                                    <div class="step-house__booking-from"
+                                            data-date="Дата заезда:">{dateStart}</div>
+                                    <div class="step-house__booking-from"
+                                            data-date="Дата выезда:">{dateEnd}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="step-house__col">
+                            <z-calendar settings={settings}></z-calendar>
+                        </div>
+                    </div>
+                    <div class="step-house__delimeter"></div>
+
+                
                     <div class="step-house__wrapper">
                         <img src={settings.house.picture}
                              alt={settings.house.title}
@@ -19,28 +58,18 @@
                                 <img class="step-house__max-people"
                                      src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/teamwork.svg"
                                      alt="team">
-                                <z-select class="step-house__counts"
-                                          required
-                                          onchange={countChange}
-                                          disabled-label=" -- Количество человек -- "
-                                          options={settings.counts}></z-select>
                             </div>
                             <div class="step-house__group">
                                 <img class="step-house__max-people"
                                      src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/child.svg"
                                      alt="team">
-                                <z-select class="step-house__counts"
-                                          onchange={childCountChange}
-                                          disabled-label=" -- Детей без спального места -- "
-                                          options={settings.childCounts}></z-select>
                             </div>
                         </div>
                     </div>
                 </template>
             </template>
-
         </div>
-        <z-step-button-navigation error={error}
+        <z-step-button-navigation if:true={settings.house} error={error}
                                   onnext={nextButtonHandler}></z-step-button-navigation>
     </div>
 </template>

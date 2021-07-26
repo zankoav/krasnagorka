@@ -15,16 +15,12 @@ export default class BookingForm extends LightningElement {
         return this.settings.menu[0].active;
     }
 
-    get isDateStep() {
+    get isContactStep() {
         return this.settings.menu[1].active;
     }
 
-    get isContactStep() {
-        return this.settings.menu[2].active;
-    }
-
     get isCheckoutStep() {
-        return this.settings.menu[3].active;
+        return this.settings.menu[2].active;
     }
 
     async bookingOrder() {

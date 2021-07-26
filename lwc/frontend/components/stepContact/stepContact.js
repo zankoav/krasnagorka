@@ -17,7 +17,7 @@ export default class StepContact extends LightningElement {
 
     backButtonHandler(){
         const newMenu = this.settings.menu.map(it => {
-            return {...it, active:it.value === 'date'};
+            return {...it, active:it.value === 'house'};
         });
         this.dispatchEvent(
             new CustomEvent('update', {

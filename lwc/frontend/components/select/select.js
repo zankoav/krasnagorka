@@ -3,35 +3,56 @@ import './select.scss';
 
 export default class Select extends LightningElement {
 
-    @api disabledLabel = "-- Choose option --";
     @api required;
+    @api label;
+    @api options;
+    @api error;
 
-    @api set options(values) {
-        this.values = values;
-        console.log('this.values', this.values);
-        this.css = this.values.find(opt => opt.selected) ?
-            'select__options select__options_selected' :
-            'select__options';
-    };
+    @track isOpen;
 
-    get options() {
-        return this.values;
+    @api showError(){
+        this.error = true;
     }
 
-    get cssStyle() {
-        return this.required ? 'select select_required' : 'select';
+    get currentOption(){
+        return this.options.find(option => option.selected);
     }
 
-    @track values;
-    @track css;
-
-    @api showError() {
-        this.css = 'select__options select__options_error';
+    get value(){
+        return this.currentOption?.name;
     }
 
-    changeOption(event) {
-        this.dispatchEvent(
-            new CustomEvent('change', { detail: event.target.value })
-        );
+    get selectBlockCss(){
+        let result = "select__value-block";
+        if(this.value != 0 && !this.value){
+            result += ' select__value-block_empty';
+        }
+        if(this.error){
+            result += ' select__value-block_error';
+        }
+
+        if(this.isOpen){
+            result += ' select__value-block_open';
+        }
+        return result;
+    }
+
+    toggleHandler() {
+        this.isOpen = !this.isOpen;
+    }
+
+    closeHandler() {
+        this.isOpen = false;
+    }
+
+    chooseOption(event) {
+        const value = event.currentTarget.dataset.value;
+        if (this.currentValue?.id != value) {
+            this.closeHandler();
+            this.error = false;
+            this.dispatchEvent(
+                new CustomEvent('change', { detail: value })
+            );
+        }
     }
 }

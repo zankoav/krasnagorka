@@ -38,12 +38,6 @@ export default class Admin extends LightningElement {
                     active: true
                 },
                 {
-                    label: 'Даты Бронирования',
-                    value: 'date',
-                    available: false,
-                    active: false
-                },
-                {
                     label: 'Контакты',
                     value: 'contacts',
                     available: false,
@@ -75,13 +69,7 @@ export default class Admin extends LightningElement {
 
         if(
             this.settings.house && 
-            this.settings.counts.find(c=>c.selected)
-        ){
-            availableSteps.push('date');
-        }
-
-        if(
-            availableSteps.includes('date') && 
+            this.settings.counts.find(c=>c.selected) && 
             this.settings.dateStart && 
             this.settings.dateEnd
         ){
