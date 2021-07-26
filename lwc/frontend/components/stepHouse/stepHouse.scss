@@ -136,4 +136,23 @@
 		background-color: $GRAY;
 		margin: 1.5rem 0;
 	}
+
+	&__item-sale {
+		color: $GRAY_5;
+		display: block;
+		margin-top: .5rem;
+		font-weight: 300;
+
+		&:first-child{
+			margin-top: 1rem;
+		}
+	}
+
+	&__item-number {
+		font-weight: 500;
+	}
+
+	&__item-percent {
+		color: $RED_2;
+	}
 }
