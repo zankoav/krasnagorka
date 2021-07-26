@@ -45,13 +45,20 @@ export default class ContactsPopup extends LightningElement {
         return this.cssClass === ACTIVE_CSS_CLASS;
     }
 
+    get telegramLink(){
+        const telegramItem = this.model.footerBottom.socials.find(item => item.value === 'telegram');
+        if(telegramItem){
+            return telegramItem.url;
+        }
+    }
+
 
     connectedCallback() {
-        if(this.model){
-            this.hrefA1 = `tel: ${this.model.a1}`;
-            this.hrefMts = `tel: ${this.model.mts}`;
-            this.hrefLife = `tel: ${this.model.life}`;
-            this.hrefEmail = `mailto: ${this.model.email}`;
+        if(this.model && this.model.popupContacts){
+            this.hrefA1 = `tel: ${this.model.popupContacts.a1}`;
+            this.hrefMts = `tel: ${this.model.popupContacts.mts}`;
+            this.hrefLife = `tel: ${this.model.popupContacts.life}`;
+            this.hrefEmail = `mailto: ${this.model.popupContacts.email}`;
         }
     }
 

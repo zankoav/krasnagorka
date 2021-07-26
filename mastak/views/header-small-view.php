@@ -5,6 +5,7 @@
     $life    = $options['mastak_theme_options_life'];
     $a1  = $options['mastak_theme_options_a1'];
     $mts     = $options['mastak_theme_options_mts'];
+    $telegram       = $options['mastak_theme_options_telegram'];
     $weekend = $options['mastak_theme_options_weekend'];
     $time    = $options['mastak_theme_options_time'];
     $video   = $options['mastak_theme_options_video'];
@@ -400,9 +401,11 @@
                             <img src="<?= CORE_PATH; ?>assets/icons/social/whatsapp.svg"
                                  alt="icon-whatsapp"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--whatsapp">
-                            <img src="<?= CORE_PATH; ?>assets/icons/social/telegram.svg"
+                            <a href="<?=$telegram;?>">
+                                 <img src="<?= CORE_PATH; ?>assets/icons/social/telegram.svg"
                                  alt="icon-telegram"
                                  class="phone-item__icon phone-item__icon--small phone-item__icon--telegram">
+                            </a>
                         </div>
                     </div>
                     <div class="contacts-popup__phones phone-list">
