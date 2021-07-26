@@ -40,6 +40,11 @@
                                             data-date="Дата выезда:">{dateEnd}</div>
                                 </div>
                             </div>
+                            <template for:each={settings.house.daysSales} for:item="item">
+                                <span key={item.sale} class="step-house__item-sale">от <span
+                                    class="step-house__item-number">{item.dayes}</span> ночей скидка <span class="step-house__item-percent">-{item.sale}%</span>
+                                </span>
+                            </template>
                         </div>
                         <div class="step-house__col">
                             <z-calendar settings={settings}></z-calendar>
@@ -54,11 +59,6 @@
                         </div>
                         <div class="step-house__col"></div>
                     </div>
-                    <template for:each={settings.house.daysSales} for:item="item">
-                        <span key={item.sale} class="step-house__item-sale">от <span
-                            class="step-house__item-number">{item.dayes}</span> ночей скидка <span class="step-house__item-percent">-{item.sale}%</span>
-                        </span>
-                    </template>
                 </template>
             </template>
         </div>

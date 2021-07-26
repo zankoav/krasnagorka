@@ -141,7 +141,6 @@
 		color: $GRAY_5;
 		display: block;
 		margin-top: .5rem;
-		font-weight: 300;
 
 		&:first-child{
 			margin-top: 1rem;
@@ -149,10 +148,11 @@
 	}
 
 	&__item-number {
-		font-weight: 500;
+		font-weight: 700;
 	}
 
 	&__item-percent {
 		color: $RED_2;
+		font-weight: 700;
 	}
 }
