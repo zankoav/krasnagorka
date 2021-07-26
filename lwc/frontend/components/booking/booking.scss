@@ -41,7 +41,6 @@
 
 	&__card {
 		background-color: $WHITE;
-		overflow: hidden;
 		@include lg {
 			border-radius: 8px;
 			box-shadow: 0 2px 4px $GRAY_6;
