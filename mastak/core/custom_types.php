@@ -632,13 +632,14 @@
                 'remove_button' => __('Удалить Скидку', 'krasnagorka'),
                 'sortable'      => true,
                 // beta
-                'closed'        => false, // true to have the groups closed by default
+                'closed'        => true, // true to have the groups closed by default
             ),
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Скидка',
             'id'   => 'sale',
+            'after_field' => '%',
             'type' => 'text'
         ));
 
