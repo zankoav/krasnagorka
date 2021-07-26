@@ -37,7 +37,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $daysSalesEntries = get_post_meta($houseId, "sale_days", true);
             $daysSales = [];
             foreach ( (array) $daysSalesEntries as $key => $entry ) {
-                $daysSales[] = $entry;
+                if(isset($entry['sale'])){
+                    $daysSales[] = $entry;
+                }
             }
 
 
