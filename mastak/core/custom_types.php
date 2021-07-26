@@ -620,6 +620,34 @@
             'type' => 'text'
         ));
 
+        $group_field_event = $sbc_client->add_field(array(
+            'id'          => 'sale_days',
+            'type'        => 'group',
+            'description' => __('Скидки от количеаства дней', 'krasnagorka'),
+            // 'repeatable'  => false, // use false if you want non-repeatable group
+            'options'     => array(
+                'group_title'   => __('Скидка {#}', 'krasnagorka'),
+                // since version 1.1.4, {#} gets replaced by row number
+                'add_button'    => __('Добавить Скидку', 'krasnagorka'),
+                'remove_button' => __('Удалить Скидку', 'krasnagorka'),
+                'sortable'      => true,
+                // beta
+                'closed'        => false, // true to have the groups closed by default
+            ),
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Скидка',
+            'id'   => 'sale',
+            'type' => 'text'
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Количество дней',
+            'id'   => 'dayes',
+            'type' => 'text'
+        ));
+
         $sbc_client->add_field(array(
             'name' => __('Это терем?', 'krasnagorka'),
             'desc' => __('При включении данной опции некоторые поля не будут отображаться. Для полной настройки дома терем перейдите на вкладку "Настройка Терема"', 'krasnagorka'),
