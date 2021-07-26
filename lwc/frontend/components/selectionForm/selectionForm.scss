@@ -1,0 +1,27 @@
+.selection-form {
+	display: flex;
+	max-width: initial;
+	box-sizing: border-box;
+	border-radius: 8px;
+	border: 2px #eeeeee solid;
+	position: relative;
+	align-items: center;
+	padding: 12px 16px;
+	justify-content: space-between;
+	color: #212e35;
+	font-weight: 300;
+	font-size: 14px;
+
+	&_active {
+		border-color: #80d3dd;
+	}
+
+	&__title {
+		font-size: 14pt;
+		margin-right: 16px;
+	}
+
+	&__icon {
+		flex-shrink: 0;
+	}
+}

@@ -1,0 +1,33 @@
+.object-info {
+	font-size: 16px;
+	color: #80828a;
+	font-weight: 300;
+	display: flex;
+
+	&__img {
+		margin-right: 16px;
+		width: 152px;
+		height: 64px;
+		object-fit: cover;
+		display: flex;
+	}
+
+	&__title {
+		color: #212e35;
+		font-weight: 500;
+		margin-top: 6px;
+		display: flex;
+		align-items: center;
+		padding-bottom: 17px;
+	}
+
+	&__more {
+		font-size: 12px;
+		border: 2px solid #eeeeee;
+		box-sizing: border-box;
+		border-radius: 6px;
+		padding: 4px 24px;
+		text-decoration: none;
+		color: #80828a;
+	}
+}

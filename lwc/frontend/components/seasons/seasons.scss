@@ -1,0 +1,15 @@
+.seasons {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	font-weight: 500;
+	color: #b4afb5;
+
+	&::after {
+		content: "";
+		border-top: 1px solid #eeeeee;
+		margin-left: 16px;
+		flex-grow: 1;
+	}
+}
+

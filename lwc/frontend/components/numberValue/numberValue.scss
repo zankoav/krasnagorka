@@ -1,0 +1,13 @@
+.number-value {
+	font-weight: 500;
+	font-size: 16px;
+	color: #ed123d;
+
+	&::after {
+		content: attr(data-after);
+		font-weight: 300;
+		font-size: 12px;
+		color: #b4afb5;
+		margin-left: 4px;
+	}
+}
