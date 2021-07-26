@@ -1,3 +1,7 @@
-.house-info__el {
-	margin-top: 16px;
+.house-info {
+
+	&__el {
+		display: block;
+		margin-top: 16px;
+	}
 }

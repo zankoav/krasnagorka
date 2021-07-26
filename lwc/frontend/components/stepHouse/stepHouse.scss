@@ -132,7 +132,8 @@
 	}
 
 	&__delimeter{
-		border-bottom: 1px solid  $GRAY;
-		padding: 1rem 0;
+		height: 1px;
+		background-color: $GRAY;
+		margin: 1.5rem 0;
 	}
 }

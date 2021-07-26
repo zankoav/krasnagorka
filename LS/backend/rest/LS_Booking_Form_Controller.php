@@ -39,6 +39,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'id' => $houseId,
                     'peopleMaxCount' => get_post_meta($houseId, "max_people", true),
                     'picture' => $picture,
+                    'link' => get_the_permalink($houseId),
                     'title' => get_the_title()
                 ];
                 break;
@@ -50,6 +51,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $houseInfo = [
                     'id' => $houseId,
                     'peopleMaxCount' => $maxCount,
+                    'link' => get_the_permalink($houseId),
                     'picture' => $picture,
                     'title' => $term->name
                 ];
