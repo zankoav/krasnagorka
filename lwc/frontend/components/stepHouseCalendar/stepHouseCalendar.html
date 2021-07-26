@@ -1,0 +1,23 @@
+<template>
+    <div class="step-house">
+        <div class="step-house__body">
+            <z-loader if:true={loading}></z-loader>
+            <template if:false={loading}>
+
+                <z-dates-visual></z-dates-visual>
+                <!-- <z-number-value num="30"
+                                value="руб"></z-number-value> -->
+                <z-object-info></z-object-info>
+                <z-seasons></z-seasons>
+                <z-selection-form></z-selection-form>
+                <z-total-price></z-total-price>
+                <z-season-details></z-season-details>
+                <z-house-info></z-house-info>
+                <z-decoding-price></z-decoding-price>
+
+            </template>
+        </div>
+        <z-step-button-navigation error={error}
+                                  onnext={nextButtonHandler}></z-step-button-navigation>
+    </div>
+</template>

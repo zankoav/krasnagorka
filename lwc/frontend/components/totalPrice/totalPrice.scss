@@ -1,0 +1,37 @@
+.total-price {
+	display: flex;
+	justify-content: space-between;
+
+	&__title {
+		font-size: 16px;
+		font-weight: 400;
+		color: #212e35;
+	}
+
+	&__more {
+		font-size: 14px;
+		font-weight: 300;
+		color: #80828a;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+	}
+
+	&__more::after {
+		content: "";
+		display: block;
+		width: 6px;
+		height: 6px;
+		border-bottom: 1px solid #80828a;
+		border-right: 1px solid #80828a;
+		margin-left: 8px;
+		margin-bottom: 2px;
+		transform: rotate(45deg);
+		transition: all 0.3s;
+	}
+
+	&__more_active::after {
+		transform: rotate(-135deg);
+		margin-bottom: -6px;
+	}
+}

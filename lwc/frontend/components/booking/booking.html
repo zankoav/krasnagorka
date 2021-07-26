@@ -23,9 +23,9 @@
                     <templte if:false={settings.orderedSuccess}>
                         <z-steps-navigator settings={settings}></z-steps-navigator>
                         <div class="booking__body">
-                            <z-step-house if:true={isHouseStep}
-                                          settings={settings}>
-                            </z-step-house>
+                            <z-step-house-calendar if:true={isHouseStep}
+                                                   settings={settings}>
+                            </z-step-house-calendar>
                             <z-step-date if:true={isDateStep}
                                          settings={settings}>
                             </z-step-date>

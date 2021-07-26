@@ -1,0 +1,30 @@
+.dates-visual {
+	display: flex;
+
+	&__icon {
+		width: 56px;
+		height: auto;
+		margin-top: -3px;
+		margin-left: -2px;
+	}
+
+	&__dates {
+		margin-left: 16px;
+		font-size: 14px;
+	}
+
+	&__date:last-child {
+		margin-top: 12px;
+	}
+
+	&__date-text {
+		display: inline-block;
+		color: #80828a;
+		min-width: 100px;
+	}
+
+	&__date-number {
+		color: #212e35;
+	}
+}
+
