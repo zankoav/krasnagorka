@@ -22,6 +22,7 @@
 				flex-direction: row-reverse;
 				border-radius: 8px;
 				overflow: hidden;
+				box-shadow: 0 2px 4px 0 hsl(0deg 1% 67% / 50%);
 			}
 		}
 
@@ -88,6 +89,8 @@
 			background-color: #E01515;
 			border-radius: 8px;
 			color: #fff;
+			font-weight: 700;
+			box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
 			padding: .75rem 3rem;
 			text-decoration: none;
 		}
