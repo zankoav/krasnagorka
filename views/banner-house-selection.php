@@ -13,7 +13,6 @@
 <div class="b-container more-questions">
 	<style>
 		.banner-house {
-			font-family: 'Verdana';
 			background-color: #fff;
 		}
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible"
+			  content="IE=edge">
+		<meta name="viewport"
+			  content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+
+	<body>
+		<style>
+			.banner-house {
+				font-family: 'Verdana';
+				background-color: #fff;
+			}
+
+			@media (min-width:1024px) {
+				.banner-house {
+					display: flex;
+					flex-direction: row-reverse;
+					border-radius: 8px;
+					overflow: hidden;
+				}
+			}
+
+			.banner-house__img {
+				display: flex;
+				height: 104px;
+				width: 100%;
+				object-fit: cover;
+			}
+
+			@media (min-width:1024px) {
+				.banner-house__img {
+					height: 230px;
+					width: 50%;
+				}
+			}
+
+			.banner-house__text {
+				color: #4A4A4A;
+				text-align: center;
+				padding: 16px 8px 24px;
+			}
+
+			@media (min-width:1024px) {
+				.banner-house__text {
+					display: flex;
+					flex-direction: column;
+					width: 50%;
+					align-items: center;
+					justify-content: center;
+					padding: 0;
+				}
+			}
+
+
+
+			.banner-house__text-title {
+				font-size: 24px;
+			}
+
+			@media (min-width:1024px) {
+				.banner-house__text-title {
+					font-size: 30px;
+				}
+			}
+
+			.banner-house__text-info {
+				font-size: 14px;
+				margin-top: 8px;
+				line-height: 1.4;
+			}
+
+			@media (min-width:1024px) {
+				.banner-house__text-info {
+					font-size: 16px;
+					margin-top: 16px;
+				}
+			}
+
+			.banner-house__button {
+				display: inline-block;
+				font-size: 14px;
+				margin-top: 16px;
+				background-color: #E01515;
+				border-radius: 8px;
+				color: #fff;
+				padding: .75rem 3rem;
+				text-decoration: none;
+			}
+		</style>
+		<div class="banner-house">
+			<img class="banner-house__img"
+				 src="https://krasnagorka.by/wp-content/uploads/2020/05/DSC4512-scaled.jpg">
+			<div class="banner-house__text">
+				<div class="banner-house__text-title">Хотите забронировать?</div>
+				<div class="banner-house__text-info">Выберите понравившийся домик,<br>
+					забронируйте свободные даты,<br>
+					а детали мы Вам подробно объясним</div>
+				<a class="banner-house__button"
+				   href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/">выбрать домик</a>
+			</div>
+		</div>
+
+	</body>
+
+</html>
