@@ -93,6 +93,11 @@
 			box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
 			padding: .75rem 3rem;
 			text-decoration: none;
+			transition: all 0.4s;
+		}
+
+		.banner-house__button:hover {
+			background-color: #23c4f5;
 		}
 	</style>
 	<div class="banner-house">
