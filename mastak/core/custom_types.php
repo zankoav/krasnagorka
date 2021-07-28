@@ -1697,6 +1697,12 @@
             'type' => 'text',
         ));
 
+        $cmb_options->add_field(array(
+            'name' => __('Картинка', 'krasnagorka'),
+            'id'   => $prefix . 'need_more_img',
+            'type' => 'file',
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'mastak_home_page');

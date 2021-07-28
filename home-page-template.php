@@ -26,11 +26,6 @@
     $subtitle_1 = $options['mastak_home_subtitle_1'];
     $subtitle_2 = $options['mastak_home_subtitle_2'];
 
-    $need_more_title = $options['mastak_home_need_more_title'];
-    $need_more_description = $options['mastak_home_need_more_description'];
-    $need_more_link_title = $options['mastak_home_need_more_link_title'];
-    $need_more_link = $options['mastak_home_need_more_link'];
-
     $opportunities_ids   = $options['opportunity_home'];
     $opportunities_array = [];
     foreach ((array)$opportunities_ids as $key => $entry) {
@@ -58,17 +53,9 @@
 
     
 <section class="b-bgc-wrapper b-py-2">
-    <div class="b-container more-questions">
-        <div class="more-questions__wrapper">
-            <div class="more-questions__inner">
-                <p class="more-questions__title"><?=$need_more_title?></p>
-                <p class="more-questions__description ta-c"><?=$need_more_description?></p>
-                <div class="ta-c">
-                    <a href="<?=$need_more_link?>" target="_blank" class="more-questions__submit"><?=$need_more_link_title?></a>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <?php get_template_part("views/banner-house-selection");?>
+
     <div class="b-container header-title">
         <h2 class="header-title__subtitle"><?= $subtitle_1; ?></h2>
     </div>
