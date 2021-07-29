@@ -176,7 +176,7 @@ function mastak_season()
 			'type'            => 'title',
 		));
 		$cmb_season->add_field(array(
-			'name' => __("$house_title (Базовая стоимость в день)", 'krasnagorka'), 
+			'name' => __("$house_title (Базовая стоимость в день)", 'krasnagorka'),
 			'id'   =>  'house_price_' . $house_id,
 			'type'         => 'text_money',
 			'before_field' => 'BYN'
@@ -201,33 +201,33 @@ function mastak_season()
 
 
 		$group_field_event = $cmb_season->add_field(array(
-            'id'          => 'house_days_for_sale' . $house_id,
-            'type'        => 'group',
-            'description' => __('Можно добавлять любое количество скидок', 'krasnagorka'),
-            // 'repeatable'  => false, // use false if you want non-repeatable group
-            'options'     => array(
-                'group_title'   => __('Скидка {#}', 'krasnagorka'),
-                // since version 1.1.4, {#} gets replaced by row number
-                'add_button'    => __('Добавить Скидку', 'krasnagorka'),
-                'remove_button' => __('Удалить Скидку', 'krasnagorka'),
-                'sortable'      => true,
-                // beta
-                'closed'        => true, // true to have the groups closed by default
-            ),
-        ));
+			'id'          => 'house_days_for_sale_' . $house_id,
+			'type'        => 'group',
+			'description' => __('Можно добавлять любое количество скидок', 'krasnagorka'),
+			// 'repeatable'  => false, // use false if you want non-repeatable group
+			'options'     => array(
+				'group_title'   => __('Скидка {#}', 'krasnagorka'),
+				// since version 1.1.4, {#} gets replaced by row number
+				'add_button'    => __('Добавить Скидку', 'krasnagorka'),
+				'remove_button' => __('Удалить Скидку', 'krasnagorka'),
+				'sortable'      => true,
+				// beta
+				'closed'        => true, // true to have the groups closed by default
+			),
+		));
 
-        $cmb_season->add_group_field($group_field_event, array(
-            'name' => 'Мин.кол-во дней для скидки',
-            'id'   => 'sale_days',
-            'type' => 'text_small',
-        ));
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Мин.кол-во дней для скидки',
+			'id'   => 'sale_days',
+			'type' => 'text_small',
+		));
 
-        $cmb_season->add_group_field($group_field_event, array(
-            'name' => 'Скидка от кол-ва дней',
-            'id'   => 'sale_percent',
-            'type' => 'text_small',
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Скидка от кол-ва дней',
+			'id'   => 'sale_percent',
+			'type' => 'text_small',
 			'after_field' => '%'
-        ));
+		));
 	}
 
 	$cmb_season->add_field(array(

@@ -480,7 +480,7 @@ class Model
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
 
-                $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
+                $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_days_for_sale_$house->ID", true);
 
                 $housePeoplesForSales = [];
 
