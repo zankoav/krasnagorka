@@ -10,7 +10,7 @@ export default class SeasonDetails extends LightningElement {
 	}
 
 	get price() {
-		return this.targetHouse ? this.targetHouse.price : '';
+		return parseInt(this.targetHouse.price);
 	}
 
 	get minPricePerDay() {
@@ -18,8 +18,7 @@ export default class SeasonDetails extends LightningElement {
 		return result;
 	}
 
-	connectedCallback() {
-		console.log('house', this.house);
-		console.log('season', this.season);
+	get minDays() {
+		return this.targetHouse.minDays;
 	}
 }

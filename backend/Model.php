@@ -489,7 +489,7 @@ class Model
                     $housePeoplesForSale = [];
 
                     if (isset($entry['sale_days'])) {
-                        $housePeoplesForSale['days'] = $entry['sale_days'];
+                        $housePeoplesForSale['people'] = $entry['sale_days'];
                     }
                     if (isset($entry['sale_percent'])) {
                         $housePeoplesForSale['percent'] = $entry['sale_percent'];
