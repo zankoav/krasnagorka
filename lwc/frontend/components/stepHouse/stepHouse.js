@@ -22,8 +22,6 @@ export default class StepHouse extends LightningElement {
         if (calendar && !this.settings.house) {
             this.initHouse(calendar.id, calendar.isTerem);
         }
-
-        console.log('seasons', this.settings.seasons);
     }
 
     async initHouse(calendarId, isTeremCalendar) {
@@ -79,6 +77,25 @@ export default class StepHouse extends LightningElement {
                 detail: {
                     dateStart: null,
                     dateEnd: null
+                },
+                bubbles: true,
+                composed: true
+            })
+        );
+    }
+
+    seasonsChange(event) {
+        console.log('seasonsChange');
+        const seasons = this.settings.seasons.map(season => {
+            return {
+                ...season,
+                current: season.id == event.detail
+            };
+        });
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    seasons: seasons
                 },
                 bubbles: true,
                 composed: true

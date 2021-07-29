@@ -3,7 +3,8 @@
         <div class="step-house__body">
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
-                <z-select if:false={settings.house} class="step-house__select"
+                <z-select if:false={settings.house}
+                          class="step-house__select"
                           required
                           label="Выберите Домик"
                           onchange={calendarChange}
@@ -13,37 +14,40 @@
                     <div class="step-house__row">
                         <div class="step-house__col">
                             <z-select class="step-house__select step-house__calendars"
-                                    required
-                                    label="Домик"
-                                    onchange={calendarChange}
-                                    options={settings.calendars}></z-select>
-        
+                                      required
+                                      label="Домик"
+                                      onchange={calendarChange}
+                                      options={settings.calendars}></z-select>
+
                             <z-select class="step-house__select step-house__counts"
-                                    required
-                                    label="Количество человек"
-                                    onchange={countChange}
-                                    options={settings.counts}></z-select>
-        
+                                      required
+                                      label="Количество человек"
+                                      onchange={countChange}
+                                      options={settings.counts}></z-select>
+
                             <z-select class="step-house__select"
-                                    label="Детей без спального места"
-                                    onchange={childCountChange}
-                                    options={settings.childCounts}></z-select>
-        
+                                      label="Детей без спального места"
+                                      onchange={childCountChange}
+                                      options={settings.childCounts}></z-select>
+
                             <div class="step-house__booking">
                                 <img src={bookingImg}
-                                        alt="booking img"
-                                        class="step-house__booking-icon">
+                                     alt="booking img"
+                                     class="step-house__booking-icon">
                                 <div class="step-house__booking-dates">
                                     <div class="step-house__booking-from"
-                                            data-date="Дата заезда:">{dateStart}</div>
+                                         data-date="Дата заезда:">{dateStart}</div>
                                     <div class="step-house__booking-from"
-                                            data-date="Дата выезда:">{dateEnd}</div>
+                                         data-date="Дата выезда:">{dateEnd}</div>
                                 </div>
                             </div>
                             <div class="step-house__sales">
-                                <template for:each={settings.house.daysSales} for:item="item">
-                                    <span key={item.sale} class="step-house__item-sale">от <span
-                                        class="step-house__item-number">{item.dayes}</span> ночей скидка <span class="step-house__item-percent">-{item.sale}%</span>
+                                <template for:each={settings.house.daysSales}
+                                          for:item="item">
+                                    <span key={item.sale}
+                                          class="step-house__item-sale">от <span
+                                              class="step-house__item-number">{item.dayes}</span> ночей скидка <span
+                                              class="step-house__item-percent">-{item.sale}%</span>
                                     </span>
                                 </template>
                             </div>
@@ -57,14 +61,18 @@
 
                     <div class="step-house__row">
                         <div class="step-house__col">
-                            <z-house-info settings={settings} ></z-house-info>
+                            <z-house-info onchangeseason={seasonsChange}
+                                          settings={settings}></z-house-info>
                         </div>
-                        <div class="step-house__col"></div>
+                        <div class="step-house__col">
+                            <c-season-details></c-season-details>
+                        </div>
                     </div>
                 </template>
             </template>
         </div>
-        <z-step-button-navigation if:true={settings.house} error={error}
+        <z-step-button-navigation if:true={settings.house}
+                                  error={error}
                                   onnext={nextButtonHandler}></z-step-button-navigation>
     </div>
 </template>
