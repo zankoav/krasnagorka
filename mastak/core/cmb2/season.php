@@ -171,6 +171,11 @@ function mastak_season()
 
 	foreach ($houses as $house_id => $house_title) {
 		$cmb_season->add_field(array(
+			'name' => $house_title,
+			'id'   =>  'house_title_id_' . $house_id,
+			'type'            => 'title',
+		));
+		$cmb_season->add_field(array(
 			'name' => __($house_title, 'krasnagorka'),
 			'id'   =>  'house_price_' . $house_id,
 			'type'         => 'text_money',
@@ -218,7 +223,7 @@ function mastak_season()
         ));
 
         $cmb_season->add_group_field($group_field_event, array(
-            'name' => 'Скадка от кол-ва дней',
+            'name' => 'Скидка от кол-ва дней',
             'id'   => 'sale_percent',
             'type' => 'text_small',
 			'after_field' => '%'
