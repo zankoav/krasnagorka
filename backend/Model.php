@@ -445,12 +445,75 @@ class Model
         return $freshPrice;
     }
 
-   
-    
+
+
     private function getAllSeasons()
     {
-        
-        
-        return [1,3,8];
+
+        $queryHouse = new WP_Query(array(
+            'post_type'      => 'house',
+            'posts_per_page' => -1
+        ));
+
+        $houses = $queryHouse->get_posts();
+
+
+        $query = new WP_Query(array(
+            'post_type'      => 'season',
+            'posts_per_page' => -1
+        ));
+
+        $current_season_id = get_option('mastak_theme_options')['current_season'];
+
+        $seasons = [];
+        $posts   = $query->get_posts();
+        foreach ($posts as $post) {
+            $season = [];
+            $season["id"] = $post->ID;
+            $season["name"] = $post->post_title;
+            $season["current"] = $post->ID == $current_season_id;
+            $housesResult = [];
+
+            foreach ($houses as $house) {
+                $housePrice = get_post_meta($post->ID, "house_price_$house->ID", true);
+                $houseMinPeople = get_post_meta($post->ID, "house_min_people_$house->ID", true);
+                $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
+                $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
+
+                $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
+
+                $housePeoplesForSales = [];
+
+                foreach ((array) $housePeoplesForSalesEntities as $key => $entry) {
+
+                    $housePeoplesForSale = [];
+
+                    if (isset($entry['sale_days'])) {
+                        $housePeoplesForSale['days'] = $entry['sale_days'];
+                    }
+                    if (isset($entry['sale_percent'])) {
+                        $housePeoplesForSale['percent'] = $entry['sale_percent'];
+                    }
+
+                    $housePeoplesForSales[] = $housePeoplesForSale;
+                    // Do something with the data
+                }
+
+                $housesResult[] = [
+                    'id' => $house->ID,
+                    'price' => $housePrice,
+                    'minPeople' => $houseMinPeople,
+                    'minDays' => $houseMinDays,
+                    'minPercent' => $houseMinPercent,
+                    'peoplesForSales' => $housePeoplesForSales
+                ];
+            }
+
+            $season["houses"] = $housesResult;
+
+            $seasons[] = $season;
+        }
+
+        return $seasons;
     }
 }
