@@ -24,7 +24,8 @@
 			</div>
 		</div>
 
-		<div class="season-details__condition season-details__condition_border">
+		<div if:true={targetHouse.peoplesForSales.length}
+			 class="season-details__condition season-details__condition_border">
 			<div class="season-details__subtitle">Скидки на количество человек:</div>
 			<template for:each={targetHouse.peoplesForSales}
 					  for:item="sale">
