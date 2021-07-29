@@ -22,6 +22,8 @@ export default class StepHouse extends LightningElement {
         if (calendar && !this.settings.house) {
             this.initHouse(calendar.id, calendar.isTerem);
         }
+
+        console.log('seasons', this.settings.seasons);
     }
 
     async initHouse(calendarId, isTeremCalendar) {
@@ -133,7 +135,7 @@ export default class StepHouse extends LightningElement {
                 selectorCounts.showError();
                 this.error = 'Выберите количество отдыхающих';
             }
-        }else if (!this.settings.dateStart) {
+        } else if (!this.settings.dateStart) {
             this.error = 'Выберите дату заезда';
         } else if (!this.settings.dateEnd) {
             this.error = 'Выберите дату выезда';
