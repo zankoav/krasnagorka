@@ -220,6 +220,7 @@ class Model
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
             'mainMenu'      => $this->getMainMenu(),
+            'seasons'       => $this->getAllSeasons(),
             'weather'       => $weather,
             'currencies'    => $this->getCurrencies(),
             'pageTitle'     => get_the_title(),
@@ -442,5 +443,14 @@ class Model
             }
         }
         return $freshPrice;
+    }
+
+   
+    
+    private function getAllSeasons()
+    {
+        
+        
+        return [1,3,8];
     }
 }
