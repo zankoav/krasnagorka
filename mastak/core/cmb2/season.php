@@ -176,7 +176,7 @@ function mastak_season()
 			'type'            => 'title',
 		));
 		$cmb_season->add_field(array(
-			'name' => __($house_title, 'krasnagorka'), "(Базовая стоимость в день)"
+			'name' => __("$house_title (Базовая стоимость в день)", 'krasnagorka'), 
 			'id'   =>  'house_price_' . $house_id,
 			'type'         => 'text_money',
 			'before_field' => 'BYN'
