@@ -1,14 +1,15 @@
-import { LightningElement, api, track} from 'lwc';
-import {getCookie} from 'z/utils';
+import { LightningElement, api, track } from 'lwc';
+import { getCookie } from 'z/utils';
 import './admin.scss';
 export default class Admin extends LightningElement {
-    
+
     @api model;
     @track settings;
 
-    connectedCallback(){
+    connectedCallback() {
 
         this.settings = {
+            seasons: this.model.seasons,
             orderedSuccess: false,
             bookingErrorMessage: null,
             house: null,
@@ -17,12 +18,12 @@ export default class Admin extends LightningElement {
             email: getCookie("kg_email") || '',
             counts: null,
             childCounts: null,
-            dateStart: this.model.dateFrom ? 
-                new moment(this.model.dateFrom, "YYYY-MM-DD").format("DD-MM-YYYY") : 
+            dateStart: this.model.dateFrom ?
+                new moment(this.model.dateFrom, "YYYY-MM-DD").format("DD-MM-YYYY") :
                 null
             ,
-            dateEnd: this.model.dateTo ? 
-                new moment(this.model.dateTo, "YYYY-MM-DD").format("DD-MM-YYYY") : 
+            dateEnd: this.model.dateTo ?
+                new moment(this.model.dateTo, "YYYY-MM-DD").format("DD-MM-YYYY") :
                 null
             ,
             comment: null,
@@ -30,7 +31,7 @@ export default class Admin extends LightningElement {
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
             calendars: [...this.model.calendars],
-            menu:[
+            menu: [
                 {
                     label: 'Выбор Домика',
                     value: 'house',
@@ -55,40 +56,40 @@ export default class Admin extends LightningElement {
         this.updateSettings();
     }
 
-    updateSettings(event){
-        if(event){
-            this.settings = {...this.settings, ...event.detail};
+    updateSettings(event) {
+        if (event) {
+            this.settings = { ...this.settings, ...event.detail };
         }
         this.updateAvailableSteps();
         console.log('updated settings', this.settings);
     }
 
-    updateAvailableSteps(){
+    updateAvailableSteps() {
 
         const availableSteps = ['house'];
 
-        if(
-            this.settings.house && 
-            this.settings.counts.find(c=>c.selected) && 
-            this.settings.dateStart && 
+        if (
+            this.settings.house &&
+            this.settings.counts.find(c => c.selected) &&
+            this.settings.dateStart &&
             this.settings.dateEnd
-        ){
+        ) {
             availableSteps.push('contacts');
         }
 
-        if(
-            availableSteps.includes('contacts') && 
-            this.settings.fio && 
+        if (
+            availableSteps.includes('contacts') &&
+            this.settings.fio &&
             this.settings.phone &&
             this.settings.email &&
             this.settings.passport &&
             this.settings.agreement
-        ){
+        ) {
             availableSteps.push('checkout');
         }
 
         this.settings.menu = this.settings.menu.map(item => {
-            return {...item, available: availableSteps.includes(item.value)};
+            return { ...item, available: availableSteps.includes(item.value) };
         });
     }
 }
