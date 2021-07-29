@@ -65,7 +65,8 @@
                                           settings={settings}></z-house-info>
                         </div>
                         <div class="step-house__col">
-                            <c-season-details></c-season-details>
+                            <z-season-details season={currentSeason}
+                                              house={settings.house}></z-season-details>
                         </div>
                     </div>
                 </template>

@@ -10,14 +10,15 @@
 	justify-content: space-between;
 	color: #212e35;
 	font-weight: 300;
-	font-size: 14px;
+	font-size: 16px;
+	cursor: pointer;
+
 
 	&_active {
 		border-color: #80d3dd;
 	}
 
 	&__title {
-		font-size: 14pt;
 		margin-right: 16px;
 	}
 

@@ -17,6 +17,10 @@ export default class StepHouse extends LightningElement {
         return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, ".") : '—';
     }
 
+    get currentSeason() {
+        return this.settings.seasons.find(season => season.current);
+    }
+
     connectedCallback() {
         const calendar = this.settings.calendars.find(c => c.selected);
         if (calendar && !this.settings.house) {
