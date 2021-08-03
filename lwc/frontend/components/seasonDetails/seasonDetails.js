@@ -10,12 +10,13 @@ export default class SeasonDetails extends LightningElement {
 	}
 
 	get price() {
-		return parseInt(this.targetHouse.price);
+		const price = parseInt(this.targetHouse.price);
+		return isNaN(price) ? null : price;
 	}
 
 	get minPricePerDay() {
 		const result = parseInt(this.price) * parseInt(this.targetHouse.minPeople);
-		return result;
+		return isNaN(result) ? null : result;
 	}
 
 	get minDays() {
