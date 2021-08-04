@@ -10,6 +10,10 @@ export default class StepContact extends LightningElement {
     @track error;
 
     async connectedCallback() {
+        gtag('event', 'step_navigation', {
+            "step":"contacts",
+            "type":"view"
+        });
         await skip();
 		this.phone = this.template.querySelector('[name="phone"]');
 		Inputmask({ regex: "^\\+[0-9]*$" }).mask(this.phone);

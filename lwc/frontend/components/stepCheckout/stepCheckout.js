@@ -34,6 +34,13 @@ export default class StepCheckout extends LightningElement {
     get passport() {
         return this.settings.passport || '—';
     }
+    
+    connectedCallback(){
+        gtag('event', 'step_navigation', {
+            "step":"checkout",
+            "type":"view"
+        });
+    }
 
     async bookingHandler() {
         this.dispatchEvent(
