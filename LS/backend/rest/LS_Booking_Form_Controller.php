@@ -100,39 +100,39 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $intervals = get_posts([
             'post_type' => 'season_interval', 
             'numberposts' => -1,
-            'meta_query' => [
-                'relation' => 'OR',
-                [
-                    'relation' => 'AND',
-                    [
-                        'key'     => 'season_from',
-                        'value'   => $dateStart,
-                        'type'    => 'DATE',
-                        'compare' => '<'
-                    ],
-                    [
-                        'key'     => 'season_to',
-                        'value'   => $dateStart,
-                        'type'    => 'DATE',
-                        'compare' => '>'
-                    ]
-                ],
-                [
-                    'relation' => 'AND',
-                    [
-                        'key'     => 'season_from',
-                        'value'   => $dateEnd,
-                        'type'    => 'date',
-                        'compare' => '<'
-                    ],
-                    [
-                        'key'     => 'season_to',
-                        'value'   => $dateEnd,
-                        'type'    => 'date',
-                        'compare' => '>'
-                    ]
-                ]
-            ]
+            // 'meta_query' => [
+            //     'relation' => 'OR',
+            //     [
+            //         'relation' => 'AND',
+            //         [
+            //             'key'     => 'season_from',
+            //             'value'   => $dateStart,
+            //             'type'    => 'DATE',
+            //             'compare' => '<'
+            //         ],
+            //         [
+            //             'key'     => 'season_to',
+            //             'value'   => $dateStart,
+            //             'type'    => 'DATE',
+            //             'compare' => '>'
+            //         ]
+            //     ],
+            //     [
+            //         'relation' => 'AND',
+            //         [
+            //             'key'     => 'season_from',
+            //             'value'   => $dateEnd,
+            //             'type'    => 'date',
+            //             'compare' => '<'
+            //         ],
+            //         [
+            //             'key'     => 'season_to',
+            //             'value'   => $dateEnd,
+            //             'type'    => 'date',
+            //             'compare' => '>'
+            //         ]
+            //     ]
+            // ]
         ]);
 
         foreach( $intervals as $interval ){
