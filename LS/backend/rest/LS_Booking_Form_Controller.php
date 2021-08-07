@@ -99,22 +99,23 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $$leftAndRightSeasonArgs = array(
             'post_type' => 'season_interval',
-            'meta_query' => [
-                // 'relation' => 'OR',
-                // [
-                    'relation' => 'AND',
-                    [
-                        'key'     => 'season_from',
-                        'value'   => $dateStart,
-                        'type'    => 'date',
-                        'compare' => '<'
-                    ],
-                    [
-                        'key'     => 'season_to',
-                        'value'   => $dateStart,
-                        'type'    => 'date',
-                        'compare' => '>'
-                    ]
+            'posts_per_page' => -1,
+            // 'meta_query' => [
+            //     // 'relation' => 'OR',
+            //     // [
+            //         'relation' => 'AND',
+            //         [
+            //             'key'     => 'season_from',
+            //             'value'   => $dateStart,
+            //             'type'    => 'DATE',
+            //             'compare' => '<'
+            //         ],
+            //         [
+            //             'key'     => 'season_to',
+            //             'value'   => $dateStart,
+            //             'type'    => 'DATE',
+            //             'compare' => '>'
+            //         ]
                 // ],
                 // [
                 //     'relation' => 'AND',
@@ -131,11 +132,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 //         'compare' => '>'
                 //     ]
                 // ]
-            ]
+            // ]
         );
 
         $leftAndRightSeasonQuery = new WP_Query;
         $intervals = $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
+        LS_WP_Logger::info($dateStart );
+        LS_WP_Logger::info($dateEnd );
         LS_WP_Logger::info(json_encode($intervals));
         foreach( $intervals as $interval ){
             $result[$interval->ID] = $interval->post_title;
