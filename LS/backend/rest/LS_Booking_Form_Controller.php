@@ -135,7 +135,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             // ]
         );
 
-        $intervals = get_posts($leftAndRightSeasonArgs);
+        $intervals = get_posts(['post_type' => 'season_interval', 'numberposts' => -1]);
         LS_WP_Logger::info($dateStart );
         LS_WP_Logger::info($dateEnd );
         LS_WP_Logger::info(json_encode($intervals));
