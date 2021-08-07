@@ -91,6 +91,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public function calculate($request)
     {
-        return new WP_REST_Response(['message' => 'Zanko'], 200);
+        return new WP_REST_Response([
+            'house' => $request['house'],
+            'dateStart' => $request['dateStart'],
+            'dateEnd' => $request['dateEnd'],
+            'peopleCount' => $request['peopleCount']
+        ], 200);
     }
 }
