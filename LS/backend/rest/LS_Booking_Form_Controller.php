@@ -16,9 +16,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         register_rest_route($namespace, '/ls/calculate/', [
             array(
                 'methods'             => 'POST',
-                'callback'            => array($this, 'calculate')
+                'callback'            => array($this, 'calculate'),
+                'permission_callback' => array($this, 'calculate_permissions_check')
             ),
         ]);
+    }
+
+    public function calculate_permissions_check($request)
+    {
+        return true;
     }
 
     public function order_house($request)
