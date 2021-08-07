@@ -137,7 +137,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $leftAndRightSeasonQuery = new WP_Query;
         $intervals = $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
-        
+        LS_WP_Logger::info(json_encode($intervals));
         foreach( $intervals as $interval ){
             $result[$interval->ID] = $interval->post_title;
         }
