@@ -101,8 +101,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'post_type' => 'season_interval',
             'posts_per_page' => -1,
             'meta_query' => [
-                'relation' => 'OR',
-                [
+                // 'relation' => 'OR',
+                // [
                     'relation' => 'AND',
                     [
                         'key'     => 'season_from',
@@ -116,22 +116,22 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         'type'    => 'date',
                         'compare' => '>'
                     ]
-                ],
-                [
-                    'relation' => 'AND',
-                    [
-                        'key'     => 'season_from',
-                        'value'   => $dateEnd,
-                        'type'    => 'date',
-                        'compare' => '<'
-                    ],
-                    [
-                        'key'     => 'season_to',
-                        'value'   => $dateEnd,
-                        'type'    => 'date',
-                        'compare' => '>'
-                    ]
-                ]
+                // ],
+                // [
+                //     'relation' => 'AND',
+                //     [
+                //         'key'     => 'season_from',
+                //         'value'   => $dateEnd,
+                //         'type'    => 'date',
+                //         'compare' => '<'
+                //     ],
+                //     [
+                //         'key'     => 'season_to',
+                //         'value'   => $dateEnd,
+                //         'type'    => 'date',
+                //         'compare' => '>'
+                //     ]
+                // ]
             ]
         );
 
