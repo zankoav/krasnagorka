@@ -99,7 +99,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $$leftAndRightSeasonArgs = array(
             'post_type' => 'season_interval',
-            'posts_per_page' => -1,
             'meta_query' => [
                 // 'relation' => 'OR',
                 // [
