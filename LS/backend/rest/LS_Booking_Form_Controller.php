@@ -100,22 +100,22 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $intervals = get_posts([
             'post_type' => 'season_interval', 
             'numberposts' => -1,
-            // 'meta_query' => [
+            'meta_query' => [
             //     'relation' => 'OR',
             //     [
-            //         'relation' => 'AND',
-            //         [
-            //             'key'     => 'season_from',
-            //             'value'   => $dateStart,
-            //             'type'    => 'DATE',
-            //             'compare' => '<'
-            //         ],
-            //         [
-            //             'key'     => 'season_to',
-            //             'value'   => $dateStart,
-            //             'type'    => 'DATE',
-            //             'compare' => '>'
-            //         ]
+                    'relation' => 'AND',
+                    [
+                        'key'     => 'season_from',
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '<'
+                    ],
+                    [
+                        'key'     => 'season_to',
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '>'
+                    ]
             //     ],
             //     [
             //         'relation' => 'AND',
@@ -132,7 +132,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             //             'compare' => '>'
             //         ]
             //     ]
-            // ]
+            ]
         ]);
 
         foreach( $intervals as $interval ){
