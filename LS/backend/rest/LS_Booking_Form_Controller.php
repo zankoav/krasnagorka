@@ -97,48 +97,44 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateEnd = $request['dateEnd'];
         $peopleCount = $request['peopleCount'];
 
-        $$leftAndRightSeasonArgs = array(
-            'post_type' => 'season_interval',
-            'posts_per_page' => -1,
-            // 'meta_query' => [
-            //     // 'relation' => 'OR',
-            //     // [
-            //         'relation' => 'AND',
-            //         [
-            //             'key'     => 'season_from',
-            //             'value'   => $dateStart,
-            //             'type'    => 'DATE',
-            //             'compare' => '<'
-            //         ],
-            //         [
-            //             'key'     => 'season_to',
-            //             'value'   => $dateStart,
-            //             'type'    => 'DATE',
-            //             'compare' => '>'
-            //         ]
-                // ],
-                // [
-                //     'relation' => 'AND',
-                //     [
-                //         'key'     => 'season_from',
-                //         'value'   => $dateEnd,
-                //         'type'    => 'date',
-                //         'compare' => '<'
-                //     ],
-                //     [
-                //         'key'     => 'season_to',
-                //         'value'   => $dateEnd,
-                //         'type'    => 'date',
-                //         'compare' => '>'
-                //     ]
-                // ]
-            // ]
-        );
+        $intervals = get_posts([
+            'post_type' => 'season_interval', 
+            'numberposts' => -1,
+            'meta_query' => [
+                'relation' => 'OR',
+                [
+                    'relation' => 'AND',
+                    [
+                        'key'     => 'season_from',
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '<'
+                    ],
+                    [
+                        'key'     => 'season_to',
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '>'
+                    ]
+                ],
+                [
+                    'relation' => 'AND',
+                    [
+                        'key'     => 'season_from',
+                        'value'   => $dateEnd,
+                        'type'    => 'date',
+                        'compare' => '<'
+                    ],
+                    [
+                        'key'     => 'season_to',
+                        'value'   => $dateEnd,
+                        'type'    => 'date',
+                        'compare' => '>'
+                    ]
+                ]
+            ]
+        ]);
 
-        $intervals = get_posts(['post_type' => 'season_interval', 'numberposts' => -1]);
-        LS_WP_Logger::info($dateStart );
-        LS_WP_Logger::info($dateEnd );
-        LS_WP_Logger::info(json_encode($intervals));
         foreach( $intervals as $interval ){
             $result[$interval->ID] = $interval->post_title;
         }
