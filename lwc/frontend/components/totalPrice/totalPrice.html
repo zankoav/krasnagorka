@@ -1,9 +1,14 @@
 <template>
-	<div class="total-price">
-		<div class="total-price__title">
-			Итого: <span class="number-value"
-				  data-after="руб">752</span>
-		</div>
-		<div class="total-price__more">см. расшифровку</div>
-	</div>
+	<z-loader if:true={settings.totalPriceLoading}></z-loader>
+	<template if:false={settings.totalPriceLoading}>
+		<template if:true={settings.total}>
+			<div class="total-price">
+				<div class="total-price__title">
+					Итого: <span class="number-value" data-after="руб">752</span>
+				</div>
+				<div class="total-price__more">см. расшифровку</div>
+			</div>
+			<z-decoding-price class="total-price__decoding-price" settings={settings}></z-decoding-price>
+		</template>
+	</template>
 </template>

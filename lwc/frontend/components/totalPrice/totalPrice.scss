@@ -1,6 +1,8 @@
 .total-price {
 	display: flex;
 	justify-content: space-between;
+	border-top: 1px solid #f7f7f7;
+	padding-top: 1.5rem;
 
 	&__title {
 		font-size: 16px;
@@ -33,5 +35,10 @@
 	&__more_active::after {
 		transform: rotate(-135deg);
 		margin-bottom: -6px;
+	}
+
+	&__decoding-price{
+		display: block;
+		padding: 1.5rem 0;
 	}
 }

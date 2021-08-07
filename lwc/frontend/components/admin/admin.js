@@ -99,15 +99,23 @@ export default class Admin extends LightningElement {
     }
 
     async checkTotalPrice() {
-        const house = this.settings.house;
-        const dateStart = this.settings.dateStart;
-        const dateEnd = this.settings.dateEnd;
-        const peopleCount = this.settings.counts.find(c => c.selected).name;
+        if(!this.settings.dateStart || !this.settings.dateEnd){
+            return;
+        }
+        const house = this.settings.house.id;
+        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const peopleCount = this.settings.counts?.find(c => c.selected)?.name;
         const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount });
+
+        
+
         if (house && dateStart && dateEnd && peopleCount && hash != calculatorHash) {
             calculatorHash = hash;
+            
+            this.updateSettingsOnly({totalPriceLoading: true});
 
-            const response = await fetch("/wp-json/krasnagorka/v1/ls/calculate/", {
+            const response = await fetch("https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
@@ -116,7 +124,15 @@ export default class Admin extends LightningElement {
             });
             const data = await response.json();
 
-            console.log('calculatorData', data);
+            this.updateSettingsOnly({totalPriceLoading: false});
+
+            if(data){
+                this.updateSettingsOnly({total: data});
+            }
         }
+    }
+
+    updateSettingsOnly(obj){
+        this.settings = {...this.settings, ...obj};
     }
 }
