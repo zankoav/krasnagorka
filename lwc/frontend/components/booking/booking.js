@@ -76,11 +76,7 @@ export default class BookingForm extends LightningElement {
             setCookie("kg_name", this.settings.fio, { "max-age": MAX_AGE });
             setCookie("kg_phone", this.settings.phone, { "max-age": MAX_AGE });
             setCookie("kg_email", this.settings.email, { "max-age": MAX_AGE });
-            ga("send", {
-                hitType: "event",
-                eventCategory: "form_bronirovanie",
-                eventAction: "success_send",
-            });
+           
             await fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
                 method: "POST",
                 headers: {
@@ -88,6 +84,7 @@ export default class BookingForm extends LightningElement {
                 },
                 body: JSON.stringify({ data: response })
             });
+            gtag('event', 'create_lead');
         } else {
             this.dispatchEvent(
                 new CustomEvent('update', {

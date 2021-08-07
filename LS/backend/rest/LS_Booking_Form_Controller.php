@@ -5,15 +5,22 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function register_routes()
     {
         $namespace = 'krasnagorka/v1';
-        $path      = '/ls/house/';
 
-        register_rest_route($namespace, $path, [
+        register_rest_route($namespace, '/ls/house/', [
             array(
                 'methods'             => 'GET',
                 'callback'            => array($this, 'order_house')
             ),
         ]);
+
+        register_rest_route($namespace, '/ls/calculate/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'calculate')
+            ),
+        ]);
     }
+
     public function order_house($request)
     {
         $query = new WP_Query([
@@ -74,5 +81,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
         }
         return new WP_REST_Response($houseInfo, 200);  // addres wordpress/wp-json/krasnagorka/v1/ls/house/?calendarId=5
+    }
+
+    public function calculate($request)
+    {
+        return new WP_REST_Response(['message' => 'Zanko'], 200);
     }
 }

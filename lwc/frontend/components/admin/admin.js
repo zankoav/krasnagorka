@@ -1,10 +1,14 @@
 import { LightningElement, api, track } from 'lwc';
 import { getCookie } from 'z/utils';
 import './admin.scss';
+
+let calculatorHash;
 export default class Admin extends LightningElement {
 
     @api model;
     @track settings;
+
+
 
     connectedCallback() {
 
@@ -61,6 +65,7 @@ export default class Admin extends LightningElement {
             this.settings = { ...this.settings, ...event.detail };
         }
         this.updateAvailableSteps();
+        this.checkTotalPrice();
         console.log('updated settings', this.settings);
     }
 
@@ -91,5 +96,27 @@ export default class Admin extends LightningElement {
         this.settings.menu = this.settings.menu.map(item => {
             return { ...item, available: availableSteps.includes(item.value) };
         });
+    }
+
+    async checkTotalPrice() {
+        const house = this.settings.house;
+        const dateStart = this.settings.dateStart;
+        const dateEnd = this.settings.dateEnd;
+        const peopleCount = this.settings.counts.find(c => c.selected).name;
+        const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount });
+        if (house && dateStart && dateEnd && peopleCount && hash != calculatorHash) {
+            calculatorHash = hash;
+
+            const response = await fetch("/wp-json/krasnagorka/v1/ls/calculate/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: calculatorHash
+            });
+            const data = await response.json();
+
+            console.log('calculatorData', data);
+        }
     }
 }
