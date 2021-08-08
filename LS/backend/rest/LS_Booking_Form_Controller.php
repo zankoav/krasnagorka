@@ -116,18 +116,21 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
 
-        // $period = new DatePeriod(
-        //     new DateTime($dateStart),
-        //     new DateInterval('P1D'),
-        //     (new DateTime($dateEnd))->modify( '+1 day' )
-        // );
 
-        // $days = [];
-        // foreach ($period as $key => $value) {
-        //     $days[] = $value->format('Y-m-d');    
-        // }
+        $dateEndDT = new DateTime($dateEnd);
 
-        // LS_WP_Logger::info('days: '. json_encode( $days));
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
+
+        LS_WP_Logger::info('days: '. json_encode( $days));
 
         
         return new WP_REST_Response( $result, 200);
