@@ -157,7 +157,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
         $result = [
-            'total' => 0,
+            'total_price' => 0,
             'days_count' => count($days),
             'day_sale_next' => $daySaleNext,
             'seasons_group' => []
