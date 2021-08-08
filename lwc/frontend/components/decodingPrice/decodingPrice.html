@@ -1,50 +1,47 @@
 <template>
 	<div class="decoding-price">
 		<div class="decoding-price__list">
-			<div class="decoding-price__item">
-				<div class="decoding-price__item-header">
-					<div class="decoding-price__item-date">02.04.2021 - 06.04.2021</div>
-					<div class="decoding-price__item-title">цены на отдых на предсезонный период</div>
+			<template for:each={seasons} for:item="season">
+				<div key={season.season_id} class="decoding-price__item">
+					<div class="decoding-price__item-header">
+						<div class="decoding-price__item-title">{season.price_block.title}</div>
+					</div>
+					<div class="decoding-price__item-sum">
+						<template if:true={season.price_block.people_sale}>(</template>
+						<template if:false={season.price_block.people_sale}>
+							<template if:true={season.price_block.days_sale}>(</template>
+						</template>
+						<z-number-value num={season.price_block.base_price} value="руб"></z-number-value> 
+						<template if:true={season.price_block.people_sale}>
+							- <z-number-value num={season.price_block.people_sale} value="%"></z-number-value>
+						</template>
+						<template if:true={season.price_block.days_sale}>
+							- <z-number-value num={season.price_block.days_sale} value="%"></z-number-value>
+						</template>
+						<template if:true={season.price_block.people_sale}>)</template>
+						<template if:false={season.price_block.people_sale}>
+							<template if:true={season.price_block.days_sale}>)</template>
+						</template>
+							* <z-number-value num={season.price_block.days_count} value="ночь"></z-number-value> 
+						<template if:true={season.price_block.base_people_count}>
+							* <z-number-value num={season.price_block.base_people_count} value="чел"></z-number-value> 
+					    </template>
+							= <z-number-value num={season.price_block.total} value="руб"></z-number-value>
+					</div>
+					<span if:true={season.price_block.people_sale_next} class="decoding-price__item-sale">При выборе от <span
+							  class="decoding-price__item-number">{season.price_block.people_sale_next.people}</span>
+						человек ваша скидка будет <span class="decoding-price__item-percent">-{season.price_block.people_sale_next.sale}%</span></span>
 				</div>
-				<div class="decoding-price__item-sum">(
-					<z-number-value num="30"
-                                value="руб"></z-number-value> - <z-number-value num="12"
-                                value="%"></z-number-value> - <z-number-value num="10"
-                                value="%"></z-number-value>) * <z-number-value num="4"
-                                value="ночь"></z-number-value> * <z-number-value num="5"
-                                value="чел"></z-number-value> = <z-number-value num="468"
-                                value="руб"></z-number-value>
-				</div>
-				<span class="decoding-price__item-sale">При выборе от <span
-						  class="decoding-price__item-number">6</span>
-					человек ваша скидка будет <span class="decoding-price__item-percent">-15%</span></span>
-			</div>
-			<div class="decoding-price__item">
-				<div class="decoding-price__item-header">
-					<div class="decoding-price__item-date">06.04.2021 - 08.04.2021</div>
-					<div class="decoding-price__item-title">выходные дни</div>
-				</div>
-				<div class="decoding-price__item-sum">(<z-number-value num="35"
-					value="руб"></z-number-value> - <z-number-value num="9"
-					value="%"></z-number-value> - <z-number-value num="10"
-					value="%"></z-number-value>) * <z-number-value num="2"
-					value="ночь"></z-number-value> * <z-number-value num="5"
-					value="чел"></z-number-value> = <z-number-value num="283,5"
-					value="руб"></z-number-value>
-				</div>
-				<span class="decoding-price__item-sale">При выборе от <span
-						  class="decoding-price__item-number">7</span>
-					человек ваша скидка будет <span class="decoding-price__item-percent">-10%</span></span>
-			</div>
+			</template>
 		</div>
 		<div class="decoding-price__description ">
 			<div class="decoding-price__final-sum">Итоговая стоимость:<span
 					  class="decoding-price__total-number number-value"
-					  data-after="руб">752</span>
+					  data-after="руб">{settings.total.total_price}</span>
 			</div>
-			<span class="decoding-price__sale">При выборе от <span
-					  class="decoding-price__number">11</span> человек ваша скидка будет <span
-					  class="decoding-price__percent">-12%</span>
+			<span if:true={settings.total.day_sale_next} class="decoding-price__sale">При выборе от <span
+					  class="decoding-price__number">{settings.total.day_sale_next.dayesNumber}</span> дней, ваша скидка будет <span
+					  class="decoding-price__percent">-{settings.total.day_sale_next.sale}%</span>
 			</span>
 		</div>
 	</div>
