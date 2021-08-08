@@ -137,13 +137,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         foreach($days as $day) {
             foreach($seasonsIntervals as $interval) {
-                $season = $result['seasons_group'][$interval['season_id']];
-
-                if(empty($season)){
-                    $result['seasons_group'][$interval['season_id']] = [];
-                }
-
-                $result['seasons_group'][$interval['season_id']][] = $day;
+                if($interval['date_from'] <= $day and $interval['date_to'] >= $day){
+                    $season = $result['seasons_group'][$interval['season_id']];
+                    if(empty($season)){
+                        $result['seasons_group'][$interval['season_id']] = [];
+                    }
+                    $result['seasons_group'][$interval['season_id']][] = $day;
+                    continue;
+                } 
             }
         }
         
