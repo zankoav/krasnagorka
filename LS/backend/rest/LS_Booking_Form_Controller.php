@@ -103,19 +103,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'meta_query' => [
                 // 'relation' => 'OR',
                 // [
-                    // 'relation' => 'AND',
+                    'relation' => 'AND',
                     [
                         'key'     => 'season_from',
-                        'value'   => '2021-09-12',
-                        // 'type'    => 'DATE',
-                        'compare' => '='
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '<'
                     ],
-                    // [
-                    //     'key'     => 'season_to',
-                    //     'value'   => $dateStart,
-                    //     'type'    => 'DATE',
-                    //     'compare' => '<'
-                    // ]
+                    [
+                        'key'     => 'season_to',
+                        'value'   => $dateStart,
+                        'type'    => 'DATE',
+                        'compare' => '>'
+                    ]
                 // ],
                 // [
                 //     'relation' => 'AND',
@@ -139,9 +139,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $intervals = $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
         foreach( $intervals as $interval ){
             $result[$interval->ID] = [
-                'from' => get_post_meta($interval->ID,'season_from',1),
-                'to' => get_post_meta($interval->ID,'season_to',1),
-                'seasonId' => get_post_meta($interval->ID,'season_id',1)
+                'date_from' => get_post_meta($interval->ID,'season_from',1),
+                'date_to' => get_post_meta($interval->ID,'season_to',1),
+                'season_id' => get_post_meta($interval->ID,'season_id',1)
             ];
         }
         
