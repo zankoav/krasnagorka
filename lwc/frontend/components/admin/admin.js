@@ -103,8 +103,8 @@ export default class Admin extends LightningElement {
             return;
         }
         const house = this.settings.house.id;
-        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
-        const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const dateStart = this.settings.dateStart;
+        const dateEnd = this.settings.dateEnd;
         const peopleCount = this.settings.counts?.find(c => c.selected)?.name;
         const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount });
 
