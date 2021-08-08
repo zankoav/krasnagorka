@@ -97,6 +97,30 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateEnd = $request['dateEnd'];
         $peopleCount = $request['peopleCount'];
 
+        $intervals = $this->firstCalculeate($dateStart, $dateEnd);
+        if(count($intervals) == 2){
+            $fromDates = [
+                get_post_meta($intervals[0]->ID,'season_from',1),
+                get_post_meta($intervals[1]->ID,'season_from',1)
+            ];
+            asort($fromDates);
+            $intervals = $this->secondCalculeate($fromDates);
+        }
+
+        foreach( $intervals as $interval ){
+            $result[$interval->ID] = [
+                'date_from' => get_post_meta($interval->ID,'season_from',1),
+                'date_to' => get_post_meta($interval->ID,'season_to',1),
+                'season_id' => get_post_meta($interval->ID,'season_id',1)
+            ];
+        }
+        
+        return new WP_REST_Response( $result, 200);
+    }
+
+
+    private function firstCalculeate($dateStart, $dateEnd)
+    {
         $leftAndRightSeasonArgs = array(
             'post_type' => 'season_interval',
             'posts_per_page' => -1,
@@ -136,15 +160,25 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         );
 
         $leftAndRightSeasonQuery = new WP_Query;
-        $intervals = $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
-        foreach( $intervals as $interval ){
-            $result[$interval->ID] = [
-                'date_from' => get_post_meta($interval->ID,'season_from',1),
-                'date_to' => get_post_meta($interval->ID,'season_to',1),
-                'season_id' => get_post_meta($interval->ID,'season_id',1)
-            ];
-        }
-        
-        return new WP_REST_Response( $result, 200);
+        return $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
+    }
+
+    private function secondCalculeate($fromDates)
+    {
+        $args = array(
+            'post_type' => 'season_interval',
+            'posts_per_page' => -1,
+            'meta_query' => [
+                [
+                    'key'     => 'season_from',
+                    'value'   => $fromDates,
+                    'type'    => 'DATE',
+                    'compare' => 'BETWEEN'
+                ]
+            ]
+        );
+
+        $query = new WP_Query;
+        return $query->query($args);
     }
 }
