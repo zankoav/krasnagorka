@@ -263,7 +263,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
             
             $result['seasons_group'][$season->ID]['price_block']['total'] = ($basePrice * (1 - $deltaSale / 100) ) * (empty($basePeopleCount) ? 1 : $basePeopleCount) * $seasonDaysCount;
-            $result['total'] += $result['seasons_group'][$season->ID]['price_block']['total'];
+            $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
         }
         
         return new WP_REST_Response( $result, 200);
