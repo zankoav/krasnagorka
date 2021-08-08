@@ -120,8 +120,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             new DateTime($dateStart),
             new DateInterval('P1D'),
             new DateTime($dateEnd)
-       );
-       LS_WP_Logger::info('period: '. json_encode( $period));
+        );
+
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
+        LS_WP_Logger::info('days: '. json_encode( $days));
 
         
         return new WP_REST_Response( $result, 200);
