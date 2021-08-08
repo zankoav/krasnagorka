@@ -157,6 +157,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
         $result = [
+            'total' => 0,
             'days_count' => count($days),
             'day_sale_next' => $daySaleNext,
             'seasons_group' => []
@@ -216,7 +217,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'base_price' => $basePrice,
                 'days_count' => $seasonDaysCount,
                 'base_people_count' => $basePeopleCount,
-                'days_sale' => $daysSale
+                'days_sale' => (float)$daysSale
             ];
 
             $housePeoplesForSalesEntities = get_post_meta($season->ID, 'house_days_for_sale_'.$houseId, 1);
@@ -251,6 +252,18 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['seasons_group'][$season->ID]['price_block']['people_sale'] = $peopleSale;
             $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;
 
+            $deltaSale = 0;
+
+            if(!empty($peopleSale)){
+                    $deltaSale += $peopleSale;
+            }
+
+            if(!empty($daysSale)){
+                    $deltaSale += $daysSale;
+            }
+            
+            $result['seasons_group'][$season->ID]['price_block']['total'] = ($basePrice * (1 - $deltaSale / 100) ) * (empty($basePeopleCount) ? 1 : $basePeopleCount) * $seasonDaysCount;
+            $result['total'] += $result['seasons_group'][$season->ID]['price_block']['total'];
         }
         
         return new WP_REST_Response( $result, 200);
