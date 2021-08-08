@@ -126,6 +126,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         foreach ($period as $key => $value) {
             $days[] = $value->format('Y-m-d');    
         }
+        LS_WP_Logger::info('from: '. $dateStart);
+        LS_WP_Logger::info('to: '. $dateTo);
+
         LS_WP_Logger::info('days: '. json_encode( $days));
 
         
