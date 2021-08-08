@@ -108,13 +108,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         'key'     => 'season_from',
                         'value'   => $dateStart,
                         'type'    => 'DATE',
-                        'compare' => '<'
+                        'compare' => '>'
                     ],
                     [
                         'key'     => 'season_to',
                         'value'   => $dateStart,
                         'type'    => 'DATE',
-                        'compare' => '>'
+                        'compare' => '<'
                     ]
                 // ],
                 // [
