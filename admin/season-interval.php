@@ -19,8 +19,12 @@
         // Insert the post into the database
         $seasonIntervalId = wp_insert_post( $seasonInterval );
         update_post_meta($seasonIntervalId, 'season_id', $seasonId);
-        update_post_meta($seasonIntervalId, 'season_from', $from);
-        update_post_meta($seasonIntervalId, 'season_to', $to);
+
+        $dateFromFormat = (new DateTime($from))->format('Y-m-d');
+        update_post_meta($seasonIntervalId, 'season_from', $dateFromFormat);
+
+        $dateToFormat = (new DateTime($to))->format('Y-m-d');
+        update_post_meta($seasonIntervalId, 'season_to', $dateToFormat);
 
     }else if (isset($_POST['season-generator'])){
         $errroMessage = 1;
