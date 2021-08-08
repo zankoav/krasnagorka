@@ -127,7 +127,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $days[] = $value->format('Y-m-d');    
         }
         LS_WP_Logger::info('from: '. $dateStart);
-        LS_WP_Logger::info('to: '. $dateTo);
+        LS_WP_Logger::info('to: '. $dateEnd);
 
         LS_WP_Logger::info('days: '. json_encode( $days));
 
