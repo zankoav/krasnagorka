@@ -114,6 +114,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'season_id' => get_post_meta($interval->ID,'season_id',1)
             ];
         }
+
+
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            new DateTime($dateEnd)
+       );
+       LS_WP_Logger::info('period: '. json_encode( $period));
+
         
         return new WP_REST_Response( $result, 200);
     }
