@@ -107,7 +107,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     [
                         'key'     => 'season_from',
                         'value'   => '01-10-2021',
-                        'type'    => 'DATE',
+                        // 'type'    => 'DATE',
                         'compare' => '>'
                     ],
                     // [
