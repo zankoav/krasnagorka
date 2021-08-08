@@ -98,6 +98,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $peopleCount = $request['peopleCount'];
 
         $intervals = $this->firstCalculeate($dateStart, $dateEnd);
+
+        LS_WP_Logger::info('intervals 1: '. json_encode( $intervals));
+
         if(count($intervals) == 2){
             $fromDates = [
                 get_post_meta($intervals[0]->ID,'season_from',1),
@@ -105,6 +108,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ];
             asort($fromDates);
             $intervals = $this->secondCalculeate($fromDates);
+            LS_WP_Logger::info('intervals 2: '. json_encode( $intervals));
         }
 
         foreach( $intervals as $interval ){
