@@ -214,6 +214,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             $result['seasons_group'][$season->ID]['price_block'] = [
                 'title' =>  $season->post_title,
+                'season_id' =>  $season->ID,
                 'base_price' => $basePrice,
                 'days_count' => $seasonDaysCount,
                 'base_people_count' => $basePeopleCount,
