@@ -187,6 +187,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     private function secondCalculeate($fromDates)
     {
+
+        LS_WP_Logger::info('secondCalculeate: '. json_encode( $fromDates));
+
         $args = array(
             'post_type' => 'season_interval',
             'posts_per_page' => -1,
