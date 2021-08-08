@@ -107,6 +107,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 get_post_meta($intervals[1]->ID,'season_from',1)
             ];
             asort($fromDates);
+            $fromDates = (array) $fromDates;
+            LS_WP_Logger::info('fromDates: '. json_encode( $fromDates));
+
             $intervals = $this->secondCalculeate($fromDates);
             LS_WP_Logger::info('intervals 2: '. json_encode( $intervals));
         }
@@ -118,8 +121,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'season_id' => get_post_meta($interval->ID,'season_id',1)
             ];
         }
-
-
 
         $dateEndDT = new DateTime($dateEnd);
 
@@ -187,9 +188,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     private function secondCalculeate($fromDates)
     {
-
-        LS_WP_Logger::info('secondCalculeate: '. json_encode( $fromDates));
-
         $args = array(
             'post_type' => 'season_interval',
             'posts_per_page' => -1,
