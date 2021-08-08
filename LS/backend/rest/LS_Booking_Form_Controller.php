@@ -140,12 +140,49 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 if($interval['date_from'] <= $day and $interval['date_to'] >= $day){
                     $season = $result['seasons_group'][$interval['season_id']];
                     if(empty($season)){
-                        $result['seasons_group'][$interval['season_id']] = [];
+                        $result['seasons_group'][$interval['season_id']] = [
+                            'season_id' => $interval['season_id'],
+                            'days' => []
+                        ];
                     }
-                    $result['seasons_group'][$interval['season_id']][] = $day;
+                    $result['seasons_group'][$interval['season_id']]['days'][] = $day;
                     continue;
                 } 
             }
+        }
+
+        $seasonsQuery = new WP_Query(array(
+            'post_type'      => 'season',
+            'posts_per_page' => -1,
+            'post__in' => array_keys($result['seasons_group'])
+        ));
+
+        $seasons   = $seasonsQuery->get_posts();
+        foreach ($seasons as $season) {
+            $housePrice = get_post_meta($season->ID, 'house_price_'.$houseId, 1);
+            $houseMinPeople = get_post_meta($season->ID, 'house_min_people_'.$houseId, 1);
+            $houseMinDays = get_post_meta($season->ID, 'house_min_days_'.$houseId, 1);
+            $houseMinPercent = get_post_meta($season->ID, 'house_min_percent_'.$houseId, 1);
+
+            $result['seasons_group'][$season->ID]['house_price'] = $housePrice;
+            $result['seasons_group'][$season->ID]['house_min_people'] = $houseMinPeople;
+            $result['seasons_group'][$season->ID]['house_min_days'] = $houseMinDays;
+            $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
+
+            $housePeoplesForSalesEntities = get_post_meta($season->ID, 'house_days_for_sale_'.$houseId, 1);
+            $housePeoplesForSales = [];
+
+            foreach ((array)$housePeoplesForSalesEntities as $key => $entry) {
+                $housePeoplesForSale = [];
+
+                if (isset($entry['sale_percent']) and isset($entry['sale_days'])) {
+                    $housePeoplesForSale['people'] = $entry['sale_days'];
+                    $housePeoplesForSale['percent'] = $entry['sale_percent'];
+                    $housePeoplesForSales[] = $housePeoplesForSale;
+                }
+            }
+
+            $result['seasons_group'][$season->ID]['peoples_for_sales'] = $housePeoplesForSales;
         }
         
         return new WP_REST_Response( $result, 200);
