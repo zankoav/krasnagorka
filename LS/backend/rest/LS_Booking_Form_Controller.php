@@ -107,7 +107,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 get_post_meta($intervals[1]->ID,'season_from',1)
             ];
             asort($fromDates);
-            $fromDates = (array) $fromDates;
+            $fromDates = array_values($fromDates);
             LS_WP_Logger::info('fromDates: '. json_encode( $fromDates));
 
             $intervals = $this->secondCalculeate($fromDates);
