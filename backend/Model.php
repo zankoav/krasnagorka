@@ -480,7 +480,7 @@ class Model
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
 
-                $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_days_for_sale_$house->ID", true);
+                $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_people_for_sale_$house->ID", true);
 
                 $housePeoplesForSales = [];
 
@@ -488,9 +488,9 @@ class Model
 
                     $housePeoplesForSale = [];
 
-                    if (isset($entry['sale_percent']) and isset($entry['sale_days'])) {
+                    if (isset($entry['sale_percent']) and isset($entry['sale_people'])) {
 
-                        $housePeoplesForSale['people'] = $entry['sale_days'];
+                        $housePeoplesForSale['people'] = $entry['sale_people'];
                         $housePeoplesForSale['percent'] = $entry['sale_percent'];
 
                         $housePeoplesForSales[] = $housePeoplesForSale;
