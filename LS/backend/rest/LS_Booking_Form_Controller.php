@@ -231,6 +231,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
 
             ksort($housePeoplesForSales);
+            LS_WP_Logger::info('housePeoplesForSales: ' . json_encode($housePeoplesForSales));
+
 
             $peopleSale = null;
             $peopleSaleNext = null;
