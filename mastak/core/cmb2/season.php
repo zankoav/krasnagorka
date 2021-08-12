@@ -186,6 +186,7 @@ function mastak_season()
 			'id'   =>  'house_min_people_' . $house_id,
 			'type'            => 'text_small',
 		));
+
 		$cmb_season->add_field(array(
 			'name' => "$house_title (мин. кол-во дней без надбавки)",
 			'id'   =>  'house_min_days_' . $house_id,
@@ -201,9 +202,9 @@ function mastak_season()
 
 
 		$group_field_event = $cmb_season->add_field(array(
-			'id'          => 'house_days_for_sale_' . $house_id,
+			'id'          => 'house_people_for_sale_' . $house_id,
 			'type'        => 'group',
-			'description' => __('Можно добавлять любое количество скидок', 'krasnagorka'),
+			'description' => __('Можно добавлять любое количество скидок от количества человек', 'krasnagorka'),
 			// 'repeatable'  => false, // use false if you want non-repeatable group
 			'options'     => array(
 				'group_title'   => __('Скидка {#}', 'krasnagorka'),
@@ -217,13 +218,13 @@ function mastak_season()
 		));
 
 		$cmb_season->add_group_field($group_field_event, array(
-			'name' => 'Мин.кол-во дней для скидки',
-			'id'   => 'sale_days',
+			'name' => 'Мин. кол-во человек',
+			'id'   => 'sale_people',
 			'type' => 'text_small',
 		));
 
 		$cmb_season->add_group_field($group_field_event, array(
-			'name' => 'Скидка от кол-ва дней',
+			'name' => 'Скидка',
 			'id'   => 'sale_percent',
 			'type' => 'text_small',
 			'after_field' => '%'
