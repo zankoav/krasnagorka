@@ -237,7 +237,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $peopleSale = null;
             $peopleSaleNext = null;
             
-            foreach($housePeoplesForSales as $peopleNumber => $sale){
+            foreach((array)$housePeoplesForSales as $peopleNumber => $sale){
                 
                 $peopleSaleNext = [
                     'sale' => $sale,
