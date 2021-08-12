@@ -95,7 +95,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $houseId = $request['house'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
-        $peopleCount = $request['peopleCount'];
+        $peopleCount = (int)$request['peopleCount'];
 
         $dateEndDT = new DateTime($dateEnd);
 
@@ -244,7 +244,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'people' => $peopleNumber
                 ];
 
-                if(count($peopleCount) < $peopleNumber){
+                if($peopleCount < $peopleNumber){
                     break;
                 }else{
                     $peopleSale = $sale;
