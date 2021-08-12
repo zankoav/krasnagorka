@@ -221,12 +221,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'days_sale' => (float)$daysSale
             ];
 
-            $housePeoplesForSalesEntities = get_post_meta($season->ID, 'house_days_for_sale_'.$houseId, 1);
+            $housePeoplesForSalesEntities = get_post_meta($season->ID, 'house_people_for_sale_'.$houseId, 1);
             $housePeoplesForSales = [];
 
             foreach ((array)$housePeoplesForSalesEntities as $key => $entry) {
-                if (isset($entry['sale_percent']) and isset($entry['sale_days'])) {
-                    $housePeoplesForSales[$entry['sale_days']] = $entry['sale_percent'];
+                if (isset($entry['sale_percent']) and isset($entry['sale_people'])) {
+                    $housePeoplesForSales[$entry['sale_people']] = $entry['sale_percent'];
                 }
             }
 
