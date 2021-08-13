@@ -13,6 +13,7 @@ export default class Admin extends LightningElement {
     connectedCallback() {
 
         this.settings = {
+            admin: this.model.admin,
             seasons: this.model.seasons,
             orderedSuccess: false,
             bookingErrorMessage: null,
@@ -66,7 +67,6 @@ export default class Admin extends LightningElement {
         }
         this.updateAvailableSteps();
         this.checkTotalPrice();
-        console.log('updated settings', this.settings);
     }
 
     updateAvailableSteps() {
@@ -99,16 +99,16 @@ export default class Admin extends LightningElement {
     }
 
     async checkTotalPrice() {
-        if(!this.settings.dateStart || !this.settings.dateEnd){
+        const peopleCount = this.settings.counts?.find(c => c.selected)?.name;
+
+        if(!peopleCount || !this.settings.dateStart || !this.settings.dateEnd){
+            this.updateSettingsOnly({total: null});
             return;
         }
         const house = this.settings.house.id;
-        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").add(1, 'days').format("YYYY-MM-DD");
         const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
-        const peopleCount = this.settings.counts?.find(c => c.selected)?.name;
         const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount });
-
-        
 
         if (house && dateStart && dateEnd && peopleCount && hash != calculatorHash) {
             calculatorHash = hash;

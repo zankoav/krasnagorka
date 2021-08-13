@@ -7,26 +7,26 @@
 						<div class="decoding-price__item-title">{season.price_block.title}</div>
 					</div>
 					<div class="decoding-price__item-sum">
-						<template if:true={season.price_block.people_sale}>(</template>
+						<template if:true={season.price_block.people_sale}><span class="decoding-price__sign">(</span></template>
 						<template if:false={season.price_block.people_sale}>
-							<template if:true={season.price_block.days_sale}>(</template>
+							<template if:true={season.price_block.days_sale}><span class="decoding-price__sign">(</span></template>
 						</template>
 						<z-number-value num={season.price_block.base_price} value="руб"></z-number-value> 
 						<template if:true={season.price_block.people_sale}>
-							- <z-number-value num={season.price_block.people_sale} value="%"></z-number-value>
+							<span class="decoding-price__sign">-</span><z-number-value num={season.price_block.people_sale} value="%"></z-number-value>
 						</template>
 						<template if:true={season.price_block.days_sale}>
-							- <z-number-value num={season.price_block.days_sale} value="%"></z-number-value>
+							<span class="decoding-price__sign">-</span> <z-number-value num={season.price_block.days_sale} value="%"></z-number-value>
 						</template>
-						<template if:true={season.price_block.people_sale}>)</template>
+						<template if:true={season.price_block.people_sale}><span class="decoding-price__sign">)</span></template>
 						<template if:false={season.price_block.people_sale}>
-							<template if:true={season.price_block.days_sale}>)</template>
+							<template if:true={season.price_block.days_sale}><span class="decoding-price__sign">)</span></template>
 						</template>
-							* <z-number-value num={season.price_block.days_count} value="ночь"></z-number-value> 
+						<span class="decoding-price__sign">*</span><z-number-value num={season.price_block.days_count} value="ночь"></z-number-value> 
 						<template if:true={season.price_block.base_people_count}>
-							* <z-number-value num={season.price_block.base_people_count} value="чел"></z-number-value> 
+							<span class="decoding-price__sign">*</span><z-number-value num={season.price_block.base_people_count} value="чел"></z-number-value> 
 					    </template>
-							= <z-number-value num={season.price_block.total} value="руб"></z-number-value>
+						<span class="decoding-price__sign">=</span><z-number-value num={season.price_block.total} value="руб"></z-number-value>
 					</div>
 					<span if:true={season.price_block.people_sale_next} class="decoding-price__item-sale">При выборе от <span
 							  class="decoding-price__item-number">{season.price_block.people_sale_next.people}</span>

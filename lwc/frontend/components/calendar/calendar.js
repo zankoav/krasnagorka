@@ -51,7 +51,7 @@ export default class Calendar extends LightningElement {
         $calendar = $('#calendar');
         const step = this;
         $calendar.fullCalendar({
-            height: 400,
+            height: 380,
             locale: "ru",
             header: {
                 left: "prev",

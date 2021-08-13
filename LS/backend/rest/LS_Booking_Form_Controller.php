@@ -251,8 +251,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $peopleSaleNext = null;
                 }
             }
-            LS_WP_Logger::info('people_sale: ' . json_encode($peopleSale));
-            LS_WP_Logger::info('peopleSaleNext: ' . json_encode($peopleSaleNext));
 
             $result['seasons_group'][$season->ID]['price_block']['people_sale'] = $peopleSale;
             $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;

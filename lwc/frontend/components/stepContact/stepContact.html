@@ -71,7 +71,7 @@
                                       target="_blank">договором присоединения</a></label>
                      </div>
               </div>
-              <!-- <z-total-price settings={settings}></z-total-price> -->
+              <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
               <z-step-button-navigation onback={backButtonHandler}
                                         onnext={nextButtonHandler}
                                         error={error}

@@ -72,7 +72,7 @@
                 </template>
             </template>
         </div>
-        <!-- <z-total-price settings={settings}></z-total-price> -->
+        <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
         <z-step-button-navigation if:true={settings.house}
                                   error={error}
                                   onnext={nextButtonHandler}></z-step-button-navigation>
