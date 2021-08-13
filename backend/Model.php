@@ -216,7 +216,7 @@ class Model
         $weather       = $this->getWeather();
         $result        = [
             'id'            => $calendarId,
-            'admin'         => is_admin(),
+            'admin'         => is_user_logged_in(),
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
