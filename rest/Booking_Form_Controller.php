@@ -1406,8 +1406,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 Logger::log('Exceptions: contact phone ' . $e->getTitle());
             }
 
-            LS_WP_Logger::info('setFirstName: ' . $contactName);
-
             if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                 $contact = $contactsCollection->first();
                 $contact->setName($contactName);
