@@ -1,10 +1,16 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import './totalPrice.scss';
 
 export default class TotalPrice extends LightningElement {
+    
     @api settings;
+    @track isOpenTotalPrice;
 
-    connectedCallback(){
-        console.log('Total Price hide decoding');
+    get classNameMore(){
+        return this.isOpenTotalPrice ? 'total-price__more total-price__more_active' : 'total-price__more';
+    }
+
+    tooglePrice(){
+        this.isOpenTotalPrice = !this.isOpenTotalPrice;
     }
 }

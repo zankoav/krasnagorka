@@ -275,7 +275,7 @@ function mastak_season_interval()
 		'id'            => 'season_from',
 		'type' 			=> 'text',
 		'attributes' 	=> array(
-			// 'readonly' => 'readonly'
+			'readonly' => 'readonly'
 		)
 	));
 
@@ -284,7 +284,7 @@ function mastak_season_interval()
 		'id'            => 'season_to',
 		'type' 			=> 'text',
 		'attributes' 	=> array(
-			// 'readonly' => 'readonly'
+			'readonly' => 'readonly'
 		)
 	));
 

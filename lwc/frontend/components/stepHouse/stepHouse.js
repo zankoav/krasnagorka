@@ -78,6 +78,7 @@ export default class StepHouse extends LightningElement {
     }
 
     calendarChange(event) {
+        this.error = false;
         const calendar = this.settings.calendars.find(c => c.id == event.detail);
         this.initHouse(calendar.id, calendar.isTerem);
         this.dispatchEvent(
@@ -93,7 +94,6 @@ export default class StepHouse extends LightningElement {
     }
 
     seasonsChange(event) {
-        console.log('seasonsChange');
         const seasons = this.settings.seasons.map(season => {
             return {
                 ...season,
@@ -112,6 +112,7 @@ export default class StepHouse extends LightningElement {
     }
 
     countChange(event) {
+        this.error = false;
         const id = parseInt(event.detail);
         const newCounts = this.settings.counts.map(c => {
             return { ...c, selected: c.id === id };

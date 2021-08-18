@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	border-top: 1px solid #f7f7f7;
-	padding-top: 1.5rem;
+	padding: 1.5rem 0;
 
 	&__title {
 		font-size: 16px;
@@ -28,17 +28,18 @@
 		border-right: 1px solid #80828a;
 		margin-left: 8px;
 		margin-bottom: 2px;
-		transform: rotate(45deg);
-		transition: all 0.3s;
+		transition: all .3s ease-in;
+		transform-origin: center;
+		transform: rotate(-135deg) scale(-1, -1);
 	}
 
 	&__more_active::after {
-		transform: rotate(-135deg);
+		transform: rotate(-135deg) scale(1, 1);
 		margin-bottom: -6px;
 	}
 
 	&__decoding-price{
 		display: block;
-		padding: 1.5rem 0;
+		padding-bottom: 1.5rem;
 	}
 }
