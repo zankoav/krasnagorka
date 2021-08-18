@@ -28,6 +28,7 @@ export default class BookingForm extends LightningElement {
         this.loading = true;
 
         const calendar = this.settings.calendars.find(c => c.selected);
+        const houseId = this.settings.house.id;
         const peopleCount = this.settings.counts.find(c => c.selected).name;
 
         const childCountsSeectedItem = this.settings.childCounts.find(c => c.selected);
@@ -43,6 +44,7 @@ export default class BookingForm extends LightningElement {
             dateStart: dateStart,
             dateEnd: dateEnd,
             count: peopleCount,
+            houseId: houseId,
             childs: childCounts,
             contract: false,
             comment: this.settings.comment,

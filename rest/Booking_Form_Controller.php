@@ -595,7 +595,18 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result = false;
 
                 if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
-                    $totalPrice = 0;
+                    $eventTabId = $request['eventTabId'];
+                    $totalPrice = null;
+                    
+                    if(empty($eventTabId)){
+                        $totalPrice = LS_Booking_Form_Controller::calculateResult([
+                            'house' => $request['houseId'],
+                            'dateStart' => $dateStart,
+                            'dateEnd' => $dateEnd,
+                            'peopleCount' => $request['count']
+                        ]);
+                    }
+                    
                     $response = $this->insertWPLead([
                         "type" => "reserved",
                         "objectIds" => [$calendarId],

@@ -91,6 +91,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public function calculate($request)
     {
+        $result = self::calculateResult($request);
+        return new WP_REST_Response( $result, 200);
+    }
+
+    public static function calculateResult($request){
         $seasonsIntervals = [];
         $houseId = $request['house'];
         $dateStart = $request['dateStart'];
@@ -136,7 +141,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
 
-        $intervals = $this->firstCalculeate($dateStart, $dateEnd);
+        $intervals = self::firstCalculeate($dateStart, $dateEnd);
 
         if(count($intervals) == 2){
             $fromDates = [
@@ -145,7 +150,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ];
             asort($fromDates);
             $fromDates = array_values($fromDates);
-            $intervals = $this->secondCalculeate($fromDates);
+            $intervals = self::secondCalculeate($fromDates);
         }
 
         foreach( $intervals as $interval ){
@@ -268,12 +273,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['seasons_group'][$season->ID]['price_block']['total'] = round(($basePrice * (1 - $deltaSale / 100) ) * (empty($basePeopleCount) ? 1 : $basePeopleCount) * $seasonDaysCount, 2);
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
         }
-                
-        return new WP_REST_Response( $result, 200);
+        return $result;
     }
 
-
-    private function firstCalculeate($dateStart, $dateEnd)
+    private static function firstCalculeate($dateStart, $dateEnd)
     {
         $leftAndRightSeasonArgs = array(
             'post_type' => 'season_interval',
@@ -317,7 +320,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $leftAndRightSeasonQuery->query($leftAndRightSeasonArgs);
     }
 
-    private function secondCalculeate($fromDates)
+    private static function secondCalculeate($fromDates)
     {
         $args = array(
             'post_type' => 'season_interval',
