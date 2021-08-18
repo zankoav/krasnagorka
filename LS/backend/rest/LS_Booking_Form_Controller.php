@@ -115,6 +115,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $days[] = $value->format('Y-m-d');    
         }
 
+        LS_WP_Logger::info('days: ' . json_encode( $days));
+
+
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
         foreach ((array)$houseDaysSales as $key => $entry) {
