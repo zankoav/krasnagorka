@@ -628,6 +628,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                             if (!empty($freshPrice)) {
                                 $request['data'] .= '&freshPrice=' . $freshPrice;
                             }
+                        }else{
+                            $request['data'] .= '&freshPrice=' . $totalPrice;
                         }
 
                         $request['data'] .= '&orderId=' . $response['orderId'];
