@@ -597,11 +597,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
                     $eventTabId = $request['eventTabId'];
                     $totalPrice = null;
-                    
+                
                     if(empty($eventTabId)){
+                        $tempDate = new DateTime($dateStart);
                         $priceData = LS_Booking_Form_Controller::calculateResult([
                             'house' => $request['houseId'],
-                            'dateStart' => $dateStart,
+                            'dateStart' => $tempDate->modify('+1 day')->format('Y-m-d'),
                             'dateEnd' => $dateEnd,
                             'peopleCount' => $request['count']
                         ]);
