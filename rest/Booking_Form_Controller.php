@@ -599,12 +599,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $totalPrice = null;
                     
                     if(empty($eventTabId)){
-                        $totalPrice = LS_Booking_Form_Controller::calculateResult([
+                        $priceData = LS_Booking_Form_Controller::calculateResult([
                             'house' => $request['houseId'],
                             'dateStart' => $dateStart,
                             'dateEnd' => $dateEnd,
                             'peopleCount' => $request['count']
                         ]);
+                        $totalPrice = $priceData['total_price'];
                     }
                     
                     $response = $this->insertWPLead([
