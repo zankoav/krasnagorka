@@ -595,7 +595,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result = false;
 
                 if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
-                    $totalPrice = 1001;
+                    $totalPrice = 0;
                     $response = $this->insertWPLead([
                         "type" => "reserved",
                         "objectIds" => [$calendarId],
