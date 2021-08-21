@@ -490,7 +490,7 @@ class Model
             $season["current"] = $post->ID == $current_season_id;
             $housesResult = [];
 
-            foreach($calendars as $room_name => $room_id){
+            foreach($calendarsFromTerem as $room_name => $room_id){
                 $roomPrice = get_post_meta($post->ID, "room_price_$room_id", true);
                 $roomMinPeople = get_post_meta($post->ID, "room_min_people_$room_id", true);
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
