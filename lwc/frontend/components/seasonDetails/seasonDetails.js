@@ -21,7 +21,7 @@ export default class SeasonDetails extends LightningElement {
 	}
 
 	get minPricePerDay() {
-		const result = parseFloat(this.price) * parseFloat(this.targetHouse.minPeople);
+		const result = parseFloat(this.price) * parseFloat(this.targetHouse.minPeople.replace(',','.'));
 		return isNaN(result) ? null : parseInt(result);
 	}
 
