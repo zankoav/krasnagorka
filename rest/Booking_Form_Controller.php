@@ -604,7 +604,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'house' => $request['houseId'],
                             'dateStart' => $tempDate->modify('+1 day')->format('Y-m-d'),
                             'dateEnd' => $dateEnd,
-                            'peopleCount' => $request['count']
+                            'peopleCount' => $request['count'],
+                            'calendarId' => $calendarId,
+                            'isTerem' => $request['isTerem'],
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
