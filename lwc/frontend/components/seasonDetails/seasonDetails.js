@@ -1,9 +1,13 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import './seasonDetails.scss';
 
 export default class SeasonDetails extends LightningElement {
 	@api season;
 	@api house;
+
+	connectedCallback(){
+		console.log('targetHouse',this.targetHouse);
+	}
 
 	get targetHouse() {
 		return this.season.houses.find(house => {
