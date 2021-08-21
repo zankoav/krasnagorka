@@ -1,9 +1,18 @@
 <?php
 
+if (!defined('ABSPATH')) { exit; }
 
-if (!defined('ABSPATH')) {
-    exit;
-}
+require __DIR__ . '/L-S/utils/index.php';
+require __DIR__ . '/L-S/setup.php';
+require __DIR__ . '/L-S/cmb2/index.php';
+
+
+
+
+///* START
+
+
+
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -111,7 +120,7 @@ function getOrderStatus($calendarId, $dateStart, $dateEnd)
 // for delete
 
 if (!isset($content_width)) {
-    $content_width = 1200; /* pixels */
+    $content_width = 1200; 
 }
 
 
@@ -439,3 +448,5 @@ function kg_clear_orders()
         wp_delete_post($order->ID, true);
     }
 }
+
+//END */

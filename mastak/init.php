@@ -1050,7 +1050,6 @@
 
     function zankoav_theme_init() {
 
-        add_image_size( 'icon-menu', 24, 24, false );
         add_image_size( 'footer-logo', 160, 160, false );
 
 
