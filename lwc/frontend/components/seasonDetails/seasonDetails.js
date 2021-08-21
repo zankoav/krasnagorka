@@ -5,12 +5,6 @@ export default class SeasonDetails extends LightningElement {
 	@api season;
 	@api house;
 
-	connectedCallback(){
-		console.log('season', this.season);
-		console.log('house', this.house);
-		console.log('targetHouse',this.targetHouse);
-	}
-
 	get targetHouse() {
 		return this.season.houses.find(house => {
 			let result = house.id == this.house.id;
@@ -27,8 +21,8 @@ export default class SeasonDetails extends LightningElement {
 	}
 
 	get minPricePerDay() {
-		const result = parseInt(this.price) * parseInt(this.targetHouse.minPeople);
-		return isNaN(result) ? null : result;
+		const result = this.price * this.targetHouse.minPeople;
+		return isNaN(result) ? null : parseInt(result);
 	}
 
 	get minDays() {
