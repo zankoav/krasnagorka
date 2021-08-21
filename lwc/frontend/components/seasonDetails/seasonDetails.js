@@ -14,7 +14,7 @@ export default class SeasonDetails extends LightningElement {
 	get targetHouse() {
 		return this.season.houses.find(house => {
 			let result = house.id == this.house.id;
-			if(house.isTerem){
+			if(this.house.isTerem){
 				result = house.id == this.house.calendarId;
 			}
 			return result;
