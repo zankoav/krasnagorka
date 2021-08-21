@@ -686,7 +686,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'dateTo' => $request['dateEnd'],
                 'orderId' => $order['orderId'],
                 'calendarId' => $request['id'],
-                'comment' => $request['comment']
+                'comment' => $request['comment'],
+                'eventTabId' => $request['eventTabId']
             ];
 
             $contactData = [
@@ -1293,7 +1294,7 @@ class Booking_Form_Controller extends WP_REST_Controller
          */
         $lead = null;
         try {
-
+            $messagePrice = isset($leadData['eventTabId']) ? 'Спец. предложение' : 'Сумма:';
             $apiClient = self::getAmoCrmApiClient();
 
             $orderType = 'reserved';
