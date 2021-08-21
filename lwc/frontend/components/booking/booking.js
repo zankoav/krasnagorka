@@ -57,8 +57,6 @@ export default class BookingForm extends LightningElement {
             data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}`
         }
 
-        console.log(requestData);
-
         const response = await fetch("/wp-json/krasnagorka/v1/order/", {
             method: "POST",
             headers: {

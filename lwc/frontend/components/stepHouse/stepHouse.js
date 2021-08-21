@@ -22,7 +22,6 @@ export default class StepHouse extends LightningElement {
     }
 
     connectedCallback() {
-        console.log('calendars', this.settings.calendars);
         gtag('event', 'step_navigation', {
             "step":"house",
             "type":"view",
