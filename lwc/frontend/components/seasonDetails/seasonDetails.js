@@ -6,7 +6,13 @@ export default class SeasonDetails extends LightningElement {
 	@api house;
 
 	get targetHouse() {
-		return this.season.houses.find(house => house.id == this.house.id);
+		return this.season.houses.find(house => {
+			let result = house.id == this.house.id;
+			if(house.isTerem){
+				result = house.id == this.house.calendarId;
+			}
+			return result;
+		});
 	}
 
 	get price() {
