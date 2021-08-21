@@ -103,6 +103,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
+        $calendarId = (int)$request['calendarId'];
+        $isTerem = $request['isTerem'];
 
         $dateEndDT = new DateTime($dateEnd);
 
@@ -195,10 +197,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $seasons   = $seasonsQuery->get_posts();
         foreach ($seasons as $season) {
-            $housePrice = (float)get_post_meta($season->ID, 'house_price_'.$houseId, 1);
-            $houseMinPeople = (float)get_post_meta($season->ID, 'house_min_people_'.$houseId, 1);
-            $houseMinDays = (float)get_post_meta($season->ID, 'house_min_days_'.$houseId, 1);
-            $houseMinPercent = (float)get_post_meta($season->ID, 'house_min_percent_'.$houseId, 1);
+            $prefix = 'house';
+            if($isTerem){
+                $prefix = 'room';
+                $houseId = $calendarId;
+            }
+            $housePrice = (float)get_post_meta($season->ID, $prefix.'_price_'.$houseId, 1);
+            $houseMinPeople = get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
+            $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
+            $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
+            $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
 
             $result['seasons_group'][$season->ID]['house_price'] = $housePrice;
             $result['seasons_group'][$season->ID]['house_min_people'] = $houseMinPeople;
@@ -229,7 +237,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'days_sale' => (float)$daysSale
             ];
 
-            $housePeoplesForSalesEntities = get_post_meta($season->ID, 'house_people_for_sale_'.$houseId, 1);
+            $housePeoplesForSalesEntities = get_post_meta($season->ID, $prefix.'_people_for_sale_'.$houseId, 1);
             $housePeoplesForSales = [];
 
             foreach ((array)$housePeoplesForSalesEntities as $key => $entry) {

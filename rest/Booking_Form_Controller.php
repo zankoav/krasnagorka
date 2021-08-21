@@ -604,7 +604,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'house' => $request['houseId'],
                             'dateStart' => $tempDate->modify('+1 day')->format('Y-m-d'),
                             'dateEnd' => $dateEnd,
-                            'peopleCount' => $request['count']
+                            'peopleCount' => $request['count'],
+                            'calendarId' => $calendarId,
+                            'isTerem' => $request['isTerem'],
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
@@ -684,7 +686,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'dateTo' => $request['dateEnd'],
                 'orderId' => $order['orderId'],
                 'calendarId' => $request['id'],
-                'comment' => $request['comment']
+                'comment' => $request['comment'],
+                'eventTabId' => $request['eventTabId']
             ];
 
             $contactData = [
@@ -1291,11 +1294,11 @@ class Booking_Form_Controller extends WP_REST_Controller
          */
         $lead = null;
         try {
-
+            $messagePrice = isset($leadData['eventTabId']) ? 'Спец. предложение' : 'Сумма:';
             $apiClient = self::getAmoCrmApiClient();
 
             $orderType = 'reserved';
-            $commentNote = "ФИО: $contactName\nСпец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
+            $commentNote = "ФИО: $contactName\n$messagePrice: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
             $leadName = 'Сделка через WEBPAY';
             $statusId = 35452366; // id воронки
 
