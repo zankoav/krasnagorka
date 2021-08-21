@@ -163,6 +163,21 @@ function mastak_season()
 {
 	$houses = show_house_options();
 
+	$calendarsFromTerem = [
+		'Терем 1'=>18,
+		'Терем 2'=>19,
+		'Терем 3'=>20,
+		'Терем 4'=>21,
+		'Терем 5'=>22,
+		'Терем 6'=>23,
+		'Терем 7'=>24,
+		'Терем 8'=>25,
+		'Терем 9'=>26,
+		'Терем 10'=>27,
+		'Терем 11'=>28,
+		'Терем 12'=>29
+	];
+
 	$cmb_season = new_cmb2_box(array(
 		'id'           => 'seasons_option',
 		'title'        => esc_html__('Настройка Цен Сезона', 'krasnagorka'),
@@ -231,6 +246,43 @@ function mastak_season()
 		));
 	}
 
+
+	foreach($calendarsFromTerem as $room_name=>$room_id){
+
+		$cmb_season->add_field(array(
+			'name' => $room_name,
+			'id'   =>  'room_title_id_' . $room_id,
+			'type'            => 'title',
+		));
+
+		$cmb_season->add_field(array(
+			'name' => __("$room_name (Базовая стоимость в день)", 'krasnagorka'),
+			'id'   =>  'room_price_' . $room_id,
+			'type'         => 'text_money',
+			'before_field' => 'BYN'
+		));
+
+		$cmb_season->add_field(array(
+			'name' => "$room_name (мин. кол-во людей)",
+			'id'   =>  'room_min_people_' . $room_id,
+			'type'            => 'text_small',
+		));
+
+		$cmb_season->add_field(array(
+			'name' => "$room_name (мин. кол-во дней без надбавки)",
+			'id'   =>  'room_min_days_' . $room_id,
+			'type'            => 'text_small',
+		));
+
+		$cmb_season->add_field(array(
+			'name' => "$room_name (надбавка на меньшее кол-во дней)",
+			'id'   =>  'room_min_percent_' . $room_id,
+			'type'            => 'text_small',
+			'after_field' => '%'
+		));
+	}
+
+
 	$cmb_season->add_field(array(
 		'name'            => 'Порядок',
 		'id'              => 'season_order',
@@ -292,86 +344,6 @@ function mastak_season_interval()
 		'name'          => 'Блокировать оплату',
 		'id'            => 'season_bloked',
 		'type' 			=> 'checkbox'
-	));
-}
-
-
-add_action('cmb2_admin_init', 'mastak_sales');
-
-function mastak_sales()
-{
-
-	$cmb_sale = new_cmb2_box(array(
-		'id'           => 'sale_option',
-		'title'        => esc_html__('Локализация скидки', 'krasnagorka'),
-		'object_types' => array('sale'), // Post type
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Календарь',
-		'id'            => 'sale_calendar',
-		'type'           => 'select',
-		'show_option_none' => true,
-		'default'          => 'custom',
-		'options_cb'     => 'cmb2_get_term_options',
-		'get_terms_args' => array(
-			'taxonomy'   => 'sbc_calendars',
-			'hide_empty' => false,
-		),
-		'attributes' => array(
-			'data-validation' => 'required',
-		),
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Сезон',
-		'id'            => 'sale_season',
-		'type'             => 'select',
-		'show_option_none' => true,
-		'default'          => 'custom',
-		'options_cb'       => 'show_seasons_options',
-		'attributes' => array(
-			'data-validation' => 'required',
-		),
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Настройки скидки',
-		'id'            => 'settings_title_id',
-		'type' 			=> 'title'
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Человек >=',
-		'id'            => 'sale_people_min',
-		'type' 			=> 'text_small'
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Дней >=',
-		'id'            => 'sale_days_min',
-		'type' 			=> 'text_small'
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Процент',
-		'id'            => 'sale_percentage',
-		'type' 			=> 'text_small',
-		'attributes'      => array(
-			'type'    => 'number',
-			'min' => '1',
-			'data-validation' => 'required'
-		),
-		'after_field' => '%'
-	));
-
-	$cmb_sale->add_field(array(
-		'name'          => 'Подсказка о скидке',
-		'id'            => 'sale_help_message',
-		'type' 			=> 'textarea_small',
-		'attributes' => array(
-			'data-validation' => 'required',
-		),
 	));
 }
 
