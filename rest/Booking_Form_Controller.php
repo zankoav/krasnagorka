@@ -1298,7 +1298,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient = self::getAmoCrmApiClient();
 
             $orderType = 'reserved';
-            $commentNote = "ФИО: $contactName\nСпец. предложение: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
+            $commentNote = "ФИО: $contactName\n$messagePrice: $price руб.\nКоличество человек: $peopleCount\nПаспорт №: $contactPassport\nКомментарий: $comment";
             $leadName = 'Сделка через WEBPAY';
             $statusId = 35452366; // id воронки
 

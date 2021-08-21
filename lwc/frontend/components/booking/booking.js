@@ -29,7 +29,7 @@ export default class BookingForm extends LightningElement {
 
         const calendar = this.settings.calendars.find(c => c.selected);
         const houseId = this.settings.house.id;
-        const isTerem = this.settings.house.isTerem;
+        const isTerem = this.settings.house.isTerem || '';
         const peopleCount = this.settings.counts.find(c => c.selected).name;
 
         const childCountsSeectedItem = this.settings.childCounts.find(c => c.selected);
@@ -54,7 +54,7 @@ export default class BookingForm extends LightningElement {
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
-            data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}`
+            data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
         }
 
         const response = await fetch("/wp-json/krasnagorka/v1/order/", {
