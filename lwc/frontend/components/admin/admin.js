@@ -108,7 +108,9 @@ export default class Admin extends LightningElement {
         const house = this.settings.house.id;
         const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").add(1, 'days').format("YYYY-MM-DD");
         const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
-        const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount });
+        const calendarId = this.settings.house.calendarId;
+        const isTerem = this.settings.house.isTerem;
+        const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount, calendarId, isTerem });
 
         if (house && dateStart && dateEnd && peopleCount && hash != calculatorHash) {
             calculatorHash = hash;
