@@ -280,6 +280,35 @@ function mastak_season()
 			'type'            => 'text_small',
 			'after_field' => '%'
 		));
+
+		$group_field_event = $cmb_season->add_field(array(
+			'id'          => 'room_people_for_sale_' . $room_id,
+			'type'        => 'group',
+			'description' => __('Можно добавлять любое количество скидок от количества человек', 'krasnagorka'),
+			// 'repeatable'  => false, // use false if you want non-repeatable group
+			'options'     => array(
+				'group_title'   => __('Скидка {#}', 'krasnagorka'),
+				// since version 1.1.4, {#} gets replaced by row number
+				'add_button'    => __('Добавить Скидку', 'krasnagorka'),
+				'remove_button' => __('Удалить Скидку', 'krasnagorka'),
+				'sortable'      => true,
+				// beta
+				'closed'        => true, // true to have the groups closed by default
+			),
+		));
+
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Мин. кол-во человек',
+			'id'   => 'sale_people',
+			'type' => 'text_small',
+		));
+
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Скидка',
+			'id'   => 'sale_percent',
+			'type' => 'text_small',
+			'after_field' => '%'
+		));
 	}
 
 
