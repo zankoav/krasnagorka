@@ -451,6 +451,21 @@ class Model
     private function getAllSeasons()
     {
 
+        $calendarsFromTerem = [
+            'Терем 1'=>18,
+            'Терем 2'=>19,
+            'Терем 3'=>20,
+            'Терем 4'=>21,
+            'Терем 5'=>22,
+            'Терем 6'=>23,
+            'Терем 7'=>24,
+            'Терем 8'=>25,
+            'Терем 9'=>26,
+            'Терем 10'=>27,
+            'Терем 11'=>28,
+            'Терем 12'=>29
+        ];
+
         $queryHouse = new WP_Query(array(
             'post_type'      => 'house',
             'posts_per_page' => -1
@@ -474,6 +489,40 @@ class Model
             $season["name"] = $post->post_title;
             $season["current"] = $post->ID == $current_season_id;
             $housesResult = [];
+
+            foreach($calendars as $room_name => $room_id){
+                $roomPrice = get_post_meta($post->ID, "room_price_$room_id", true);
+                $roomMinPeople = get_post_meta($post->ID, "room_min_people_$room_id", true);
+                $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
+                $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
+
+                $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
+
+                $roomPeoplesForSales = [];
+
+                foreach ((array) $roomPeoplesForSalesEntities as $key => $entry) {
+
+                    $roomPeoplesForSale = [];
+
+                    if (isset($entry['sale_percent']) and isset($entry['sale_people'])) {
+
+                        $roomPeoplesForSale['people'] = $entry['sale_people'];
+                        $roomPeoplesForSale['percent'] = $entry['sale_percent'];
+
+                        $roomPeoplesForSales[] = $roomPeoplesForSale;
+                    }
+                    // Do something with the data
+                }
+
+                $housesResult[] = [
+                    'id' => $room_id, ///???
+                    'price' => $roomPrice,
+                    'minPeople' => $roomMinPeople,
+                    'minDays' => $roomMinDays,
+                    'minPercent' => $roomMinPercent,
+                    'peoplesForSales' => $roomPeoplesForSales
+                ];
+            }
 
             foreach ($houses as $house) {
                 $housePrice = get_post_meta($post->ID, "house_price_$house->ID", true);

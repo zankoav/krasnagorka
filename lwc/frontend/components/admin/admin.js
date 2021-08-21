@@ -64,6 +64,7 @@ export default class Admin extends LightningElement {
     updateSettings(event) {
         if (event) {
             this.settings = { ...this.settings, ...event.detail };
+            console.log('settings', this.settings);
         }
         this.updateAvailableSteps();
         this.checkTotalPrice();
