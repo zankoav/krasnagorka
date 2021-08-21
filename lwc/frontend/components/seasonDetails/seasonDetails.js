@@ -6,6 +6,8 @@ export default class SeasonDetails extends LightningElement {
 	@api house;
 
 	connectedCallback(){
+		console.log('season', this.season);
+		console.log('house', this.house);
 		console.log('targetHouse',this.targetHouse);
 	}
 
