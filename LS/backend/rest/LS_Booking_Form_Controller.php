@@ -77,6 +77,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'id' => $houseId,
                     'peopleMaxCount' => $maxCount,
                     'daysSales' => $daysSales,
+                    'isTerem' => true,
+                    'calendarId' => $calendarId,
                     'link' => get_the_permalink($houseId),
                     'picture' => $picture,
                     'title' => $term->name
