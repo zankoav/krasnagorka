@@ -220,6 +220,7 @@
                          alt="paymant"
                          title="paymant">
                 <?php endforeach; ?>
+                <iframe class="footer-bottom-right-img" src="https://yandex.by/sprav/widget/rating-badge/191151810278" width="150" height="50" frameborder="0"></iframe>
             </div>
             <div class="footer-bottom-right__description">
                 <?= $unp; ?>
