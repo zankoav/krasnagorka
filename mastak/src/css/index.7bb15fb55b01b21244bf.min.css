@@ -6419,9 +6419,9 @@ button.swiper-pagination-bullet {
 	justify-content: space-between;
 }
 .footer-bottom-right-img {
-	min-height: 24px;
-	padding: 0 0.5rem;
-	max-width: 100px;
+	height: 50px;
+	padding: 0.25rem 0.5rem;
+	width: 166px;
 }
 .footer-bottom-right__banks-icons {
 	display: -webkit-box;
@@ -6433,9 +6433,7 @@ button.swiper-pagination-bullet {
 	-ms-flex-align: center;
 	align-items: center;
 	margin: 1.5rem 0;
-	-webkit-box-pack: start;
-	-ms-flex-pack: start;
-	justify-content: flex-start;
+	justify-content: center;
 }
 .footer-bottom-right__description {
 	display: -webkit-box;
