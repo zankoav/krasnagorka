@@ -158,7 +158,7 @@
         ));
     }
 
-    add_action('cmb2_admin_init', 'mastak_register_theme_options_metabox');
+    add_action('init', 'register_house_type');
 
     function mastak_house_metabox() {
         $prefix = 'mastak_house_';
