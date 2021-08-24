@@ -182,7 +182,9 @@ class Model
     {
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = false;
-        if(!empty($bookingSettings)){
+        LS_WP_Logger::info('bookingSettings: ' . json_encode($bookingSettings));
+
+        if(isset($bookingSettings, $bookingSettings['booking_price_show'])){
             $showPrice = $bookingSettings['booking_price_show'];
         }
         
@@ -221,7 +223,7 @@ class Model
         $weather       = $this->getWeather();
         $result        = [
             'id'            => $calendarId,
-            'admin'         => !$showPrice,
+            'admin'         => $showPrice,
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
