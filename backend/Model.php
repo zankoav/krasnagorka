@@ -185,7 +185,7 @@ class Model
         LS_WP_Logger::info('bookingSettings: ' . json_encode($bookingSettings));
 
         if(isset($bookingSettings, $bookingSettings['booking_price_show'])){
-            $showPrice = $bookingSettings['booking_price_show'];
+            $showPrice = $bookingSettings['booking_price_show'] == 'on';
         }
         
         $bookingId = $_GET['booking'];
