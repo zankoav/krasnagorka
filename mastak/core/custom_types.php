@@ -1366,7 +1366,7 @@
          * Registers options page menu item and form.
          */
         $cmb_options = new_cmb2_box(array(
-            'id'           => $prefix . 'page',
+            'id'           => 'mastak_booking_page',
             'title'        => esc_html__('Настройки страницы бронирования', 'krasnagorka'),
             'object_types' => array('options-page'),
             /*
@@ -1391,8 +1391,14 @@
         $cmb_options->add_field(array(
             'name' => __('Картинка в шапке', 'krasnagorka'),
             'desc' => __('Картинка в шапке (2736 x 710)', 'krasnagorka'),
-            'id'   => $prefix . 'image',
+            'id'   => 'mastak_booking_pageimage',
             'type' => 'file',
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Показывать калькулятор цен',
+            'id'   => 'booking_price_show',
+            'type' => 'checkbox',
         ));
 
     }

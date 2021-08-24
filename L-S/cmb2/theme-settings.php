@@ -5,16 +5,14 @@ use Cmb2Grid\Grid\Cmb2Grid;
 add_action('cmb2_admin_init', function () {
 
     $logoUrl = 'dashicons-palmtree';
-    $logoId = get_option('mastak_theme_options', [])['footer_logo_id'];
+    $logoOptions = get_option('mastak_theme_options');
     
-    if(!empty($logoId)){
-        $logoUrl = wp_get_attachment_image_src($logoId, 'icon-menu')[0];
+    if(isset($logoOptions, $logoOptions['footer_logo_id'])){
+        $logoUrl = wp_get_attachment_image_src($logoOptions['footer_logo_id'], 'icon-menu')[0];
     }
-
-    $prefix = 'mastak_theme_options_';
   
     $cmb_options = new_cmb2_box(array(
-        'id'           => $prefix . 'page',
+        'id'           => 'mastak_theme_options_page',
         'title'        => esc_html__('НAСТРОЙКИ ТЕМЫ KRASNAGORKA', 'krasnagorka'),
         'object_types' => array('options-page'),
         'option_key' => 'mastak_theme_options',

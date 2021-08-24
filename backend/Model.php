@@ -180,7 +180,12 @@ class Model
 
     public function getBookingModel()
     {
-        LS_WP_Logger::info('Browser: ' . $_SERVER['HTTP_USER_AGENT']);
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+        $showPrice = false;
+        if(!empty($bookingSettings)){
+            $showPrice = $bookingSettings['booking_price_show'];
+        }
+        
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
         $dateFrom  = $_GET['from'];
@@ -216,7 +221,7 @@ class Model
         $weather       = $this->getWeather();
         $result        = [
             'id'            => $calendarId,
-            'admin'         => is_user_logged_in(),
+            'admin'         => !$showPrice,
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
