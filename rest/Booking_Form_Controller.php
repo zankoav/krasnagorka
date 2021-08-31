@@ -214,7 +214,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function amocrm_call($request)
     {
-        LS_WP_Logger::info('amocrm_call: ' . json_encode($_POST));
 
         //Получим сделку
         // try {
@@ -258,9 +257,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         //         }
         //     }
         // } catch (AmoCRMApiException $e) {
-        //     LS_WP_Logger::info('AmoCRMApiException: ' . $e);
         // } catch (Exception $e) {
-        //     LS_WP_Logger::info('Exception: ' . $e->getMessage());
         // }
     }
 
@@ -311,9 +308,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
             }
         } catch (AmoCRMApiException $e) {
-            LS_WP_Logger::info('AmoCRMApiException: ' . $e);
         } catch (Exception $e) {
-            LS_WP_Logger::info('Exception: ' . $e->getMessage());
         }
     }
 
@@ -1570,7 +1565,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ->setAccessToken($accessToken)
             ->onAccessTokenRefresh(
                 function (AccessTokenInterface $accessToken, string $baseDomain) {
-                    LS_WP_Logger::info('Refresh Token: ' . $accessToken->getRefreshToken());
+                    // LS_WP_Logger::info('Refresh Token' , $accessToken->getRefreshToken());
                     saveToken(
                         [
                             'access_token' => $accessToken->getToken(),
@@ -1635,6 +1630,6 @@ function refresh_amo_crm_api_client()
 add_action('refresh_amo_crm', 'refresh_amo');
 function refresh_amo()
 {
-    LS_WP_Logger::info('Try to refresh token');
+    // LS_WP_Logger::info('refresh_amo', 'Try to refresh token');
     Booking_Form_Controller::getAmoCrmApiClient();
 }

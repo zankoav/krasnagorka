@@ -182,8 +182,6 @@ class Model
     {
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = false;
-        LS_WP_Logger::info('bookingSettings: ' . json_encode($bookingSettings));
-
         if(isset($bookingSettings, $bookingSettings['booking_price_show'])){
             $showPrice = $bookingSettings['booking_price_show'] == 'on';
         }
