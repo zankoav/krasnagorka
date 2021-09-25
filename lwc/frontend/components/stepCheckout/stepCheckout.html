@@ -30,13 +30,15 @@
       <z-payment-methods if:true={settings.payment} class="step-checkout__payment" settings={settings}></z-payment-methods>
       <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
       
-      <z-step-button-navigation if:true={settings.payment} is-back-button-need
+      <z-step-button-navigation if:true={settings.payment} 
+                                is-back-button-need
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
                                 onnext={bookingPay}
-                                next-title="Оплатить"></z-step-button-navigation>
+                                next-title={buttonTitle}></z-step-button-navigation>
 
-      <z-step-button-navigation if:false={settings.payment} is-back-button-need
+      <z-step-button-navigation if:false={settings.payment} 
+                                is-back-button-need
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
                                 onnext={bookingHandler}

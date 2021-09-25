@@ -1,6 +1,8 @@
 <template>
     <div class="booking"
-         onbooking={bookingOrder}>
+         onbooking={bookingOrder}
+         onorder={sendOrder}
+         >
         <div class="container">
             <div class="booking__card">
                 <templte if:true={loading}>

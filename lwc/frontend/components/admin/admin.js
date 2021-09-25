@@ -15,17 +15,17 @@ export default class Admin extends LightningElement {
         // this.settings = {
         //     "admin": true,
         //     "payment": true,
-        //     "paymentMethod":null,
-        //     "prepaidType": "FULL",
+        //     "paymentMethod":"card",
+        //     "prepaidType": 100,
         //     "minPrice": 350, //need to admin
         //     "prepaidOptions" :[   //need to admin
         //         {
         //             "label": "100%",
-        //             "value": "FULL"
+        //             "value": 100
         //         },
         //         {
-        //             "label": "50%",
-        //             "value": "678"
+        //             "label": "20%",
+        //             "value": 20
         //         }
         //     ],
             
@@ -692,7 +692,9 @@ export default class Admin extends LightningElement {
         //         }
         //     },
         //     "totalPriceLoading": false
-        // };
+        // }; 
+
+
 
         this.settings = {
             admin: this.model.admin,

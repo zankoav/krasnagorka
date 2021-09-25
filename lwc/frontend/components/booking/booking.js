@@ -100,4 +100,44 @@ export default class BookingForm extends LightningElement {
         }
         this.loading = false;
     }
+
+    async sendOrder(){
+        this.loading = true;
+        const calendar = this.settings.calendars.find(c => c.selected);
+        const houseId = this.settings.house.id;
+        const isTerem = this.settings.house.isTerem || '';
+        const peopleCount = this.settings.counts.find(c => c.selected).name;
+
+        const childCountsSeectedItem = this.settings.childCounts.find(c => c.selected);
+        const childCounts = childCountsSeectedItem ? childCountsSeectedItem.name : 0;
+        const cid = getCookie("_ga") ? getCookie("_ga").replace(/GA1.2./g, "") : null;
+        const dateStart = new moment(this.settings.dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
+        const dateEnd = new moment(this.settings.dateEnd, "DD-MM-YYYY").format("YYYY-MM-DD");
+        
+        const requestData = {
+            id: calendar.id,
+            fio: this.settings.fio,
+            phone: this.settings.phone,
+            email: this.settings.email,
+            paymentMethod: this.settings.paymentMethod,
+            prepaidType: this.settings.prepaidType,
+            isTerem: isTerem,
+            dateStart: dateStart,
+            dateEnd: dateEnd,
+            count: peopleCount,
+            houseId: houseId,
+            childs: childCounts,
+            contract: false,
+            comment: this.settings.comment,
+            orderTitle: calendar.name,
+            orderType: 'Домик:',
+            cid: cid,
+            passport: this.settings.passport,
+            data: `prepaidType=${this.settings.prepaidType}paymentMethod=${this.settings.paymentMethod}fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
+        };
+
+        console.log('requestData', requestData);
+
+        this.loading = false;
+    }
 }

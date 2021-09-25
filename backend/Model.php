@@ -194,14 +194,14 @@ class Model
             $prepaidOptions = [
                 [
                     "label"=> "100%",
-                    "value"=> "FULL"
+                    "value"=> 100
                 ]
             ];
 
             if(isset($prepaidPercantage)){
                 $prepaidOptions[] = [
                     "label"=> $prepaidPercantage . '%',
-                    "value"=> "PARTIAL"
+                    "value"=> $prepaidPercantage
                 ];
             }
         }
@@ -243,8 +243,8 @@ class Model
             'id'                => $calendarId,
             'admin'             => $showPrice,
             'payment'           => $showPayments,
-            'paymentMethod'     => null,
-            'prepaidType'       => null,
+            'paymentMethod'     => 'card',
+            'prepaidType'       => 100,
             'minPrice'          => $minPrepaidPrice,
             'prepaidOptions'    => $prepaidOptions,
             'maxCount'      => $maxCount,

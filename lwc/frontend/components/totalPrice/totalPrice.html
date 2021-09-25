@@ -9,6 +9,11 @@
 				<div class={classNameMore} onclick={tooglePrice}>см. расшифровку</div>
 			</div>
 			<z-decoding-price if:true={isOpenTotalPrice} class="total-price__decoding-price" settings={settings}></z-decoding-price>
+			<div if:true={prepaidPrice} class="total-price">
+				<div class="total-price__title">
+					К оплате: <span class="number-value number-value_prepaid" data-after="руб">{prepaidPrice}</span>
+				</div>
+			</div>
 		</template>
 	</template>
 </template>

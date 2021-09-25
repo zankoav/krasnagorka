@@ -34,6 +34,14 @@ export default class StepCheckout extends LightningElement {
     get passport() {
         return this.settings.passport || '—';
     }
+
+    get buttonTitle() {
+        let title = "Оплатить";
+        if(this.settings.paymentMethod !== 'card'){
+            title = "Забронировать";
+        }
+        return title;
+    }
     
     connectedCallback(){
         gtag('event', 'step_navigation', {
@@ -70,7 +78,13 @@ export default class StepCheckout extends LightningElement {
                 composed: true
             })
         );
-        console.log('send to pay');
+        
+        this.dispatchEvent(
+            new CustomEvent('order', {
+                bubbles: true,
+                composed: true
+            })
+        );
     }
 
     backButtonHandler() {
