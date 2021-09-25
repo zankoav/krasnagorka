@@ -617,7 +617,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "peopleCount" => $request['count'],
                         "contactName" => $request['fio'],
                         "contactPhone" => $request['phone'],
-                        "contactEmail" => $request['email']
+                        "contactEmail" => $request['email'],
+                        "paymentMethod" => $request['paymentMethod'],
+                        "prepaidType" => $request['prepaidType']
                     ]);
                     $result = $response['status'] === 'success';
                     if ($result) {
@@ -995,7 +997,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         $dateTo = date("Y-m-d", $request['dateTo']);
         $objectIds  = $request['objectIds'];
 
-
         if ($type != 'remove') {
 
             $kalendars = array_map('intval', $objectIds);
@@ -1104,6 +1105,66 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 if (!empty($childs)) {
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
+                }
+
+
+                $paymentMethod  = $request['paymentMethod'];
+                if (!empty($paymentMethod)) {
+                    update_post_meta($post_id, 'sbc_order_payment_method', $paymentMethod);
+                }
+
+                $paymentType  = (int)$request['paymentType'];
+                if (!empty($paymentType)) {
+                    update_post_meta($post_id, 'sbc_order_prepaid_percantage', $paymentType);
+
+                    if($paymentType != 100 and $paymentMethod == 'card_layter'){
+
+                        $secret_key = '2091988';
+                        $wsb_seed = strtotime("now");
+
+                        /**
+                         *  production: '320460709'
+                         *  sandbox: '515854557'
+                         */
+                        $wsb_storeid = $request['email'] == 'zankoav@gmail.com' ? '515854557' : '320460709';
+                        $wsb_order_num = $post_id;
+
+                        /**
+                         * production: '0'
+                         * sandbox: '1'
+                         */
+                        $wsb_test = $request['email'] == 'zankoav@gmail.com' ? '1' : '0';
+                        $wsb_currency_id = 'BYN';
+                        $wsb_total = (int)($totalPrice * $paymentType / 100);
+                        $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
+
+                        $sourceValue = [
+                            "names" => [
+                                '*scart'
+                            ],
+                            "values" => [
+                                'wsb_storeid' => $wsb_storeid,
+                                'wsb_store' => 'ИП Терещенко Иван Игоревич', 
+                                'wsb_order_num' => $wsb_order_num,
+                                'wsb_currency_id' => $wsb_currency_id,
+                                'wsb_version' => "2",
+                                'wsb_language_id' => "russian",
+                                'wsb_seed' => $wsb_seed,
+                                'wsb_test' => $wsb_test,
+                                'wsb_signature' => $wsb_signature,
+                                'wsb_invoice_item_name[0]' => $request['orderTitle'],
+                                'wsb_invoice_item_quantity[0]' => '1',
+                                'wsb_invoice_item_price[0]' => $wsb_total,
+                                'wsb_total' => $wsb_total,
+                                'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success',
+                                'wsb_return_url' => "https://krasnagorka.by/payed-success",
+                            ]
+                        ];
+                        $solt = "lightning-soft";
+                        $source = md5($post_id . $solt);
+                        update_post_meta($post_id, 'sbc_order_prepaid_source', $source);
+                        update_post_meta($post_id, 'sbc_order_prepaid_value', json_encode($sourceValue));
+                    }
                 }
 
                 if (!empty($objectIds)) {
