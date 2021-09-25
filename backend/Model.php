@@ -200,7 +200,7 @@ class Model
 
             if(isset($prepaidPercantage)){
                 $prepaidOptions[] = [
-                    "label"=> $prepaidPercantage + '%',
+                    "label"=> $prepaidPercantage . '%',
                     "value"=> "PARTIAL"
                 ];
             }
