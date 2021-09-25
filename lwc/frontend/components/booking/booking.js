@@ -5,6 +5,29 @@ import "./booking.scss";
 const MAX_AGE = 3600 * 24 * 100;
 import OK from './../../icons/checkon.svg';
 
+const SUCCESS = {
+    BASE: {
+        title: 'Бронирование выполнено успешно!',
+        description: 'Наш сотрудник скоро свяжется с вами для уточнения деталей',
+        redirect: false
+    },
+    PAID:{
+        title: 'Перенаправление на оплату...',
+        description: 'После оплаты, Вам на почту придет письмо с заказом и инструкцией',
+        redirect: true
+    },
+    LAITER:{
+        title: 'Бронирование выполнено успешно!',
+        description: 'На Вашу почту отправлено письмо с инструкцией по оплате.',
+        redirect: false
+    },
+    OFFICE:{
+        title: 'Бронирование выполнено успешно!',
+        description: 'На Вашу почту отправлено письмо с координатами нашего офиса',
+        redirect: false
+    }
+};
+
 export default class BookingForm extends LightningElement {
 
     @api settings;
@@ -21,6 +44,20 @@ export default class BookingForm extends LightningElement {
 
     get isCheckoutStep() {
         return this.settings.menu[2].active;
+    }
+
+    get orderedSuccessData(){
+        let result = SUCCESS.BASE;
+        if(this.settings.payment){
+            if(this.settings.paymentMethod === 'card'){
+                result = SUCCESS.PAID;
+            }else if(this.settings.paymentMethod === 'card_layter'){
+                result = SUCCESS.LAITER;
+            }else if(this.settings.paymentMethod === 'office'){
+                result = SUCCESS.OFFICE;
+            }
+        }
+        return result;
     }
 
     async bookingOrder() {
@@ -135,9 +172,7 @@ export default class BookingForm extends LightningElement {
             passport: this.settings.passport,
             data: `prepaidType=${this.settings.prepaidType}&paymentMethod=${this.settings.paymentMethod}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
         };
-
-        console.log('requestData', requestData);
-
+        
         const response = await fetch("/wp-json/krasnagorka/v1/order/", {
             method: "POST",
             headers: {
@@ -146,9 +181,41 @@ export default class BookingForm extends LightningElement {
             body: JSON.stringify(requestData)
         }).then(data => data.json());
 
-        console.log('response', response);
+        if(response.status && response.data){
+            console.log('response', response);
+            this.dispatchEvent(
+                new CustomEvent('update', {
+                    detail: {
+                        orderedSuccess: true,
 
+                    },
+                    bubbles: true,
+                    composed: true
+                })
+            );
+            setCookie("kg_name", this.settings.fio, { "max-age": MAX_AGE });
+            setCookie("kg_phone", this.settings.phone, { "max-age": MAX_AGE });
+            setCookie("kg_email", this.settings.email, { "max-age": MAX_AGE });
 
+            await fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({ data: response.data })
+            });
+            gtag('event', 'create_lead');
+        }else {
+            this.dispatchEvent(
+                new CustomEvent('update', {
+                    detail: {
+                        bookingErrorMessage: 'Извините! Выбранные даты заняты. Выберите свободный интервал.'
+                    },
+                    bubbles: true,
+                    composed: true
+                })
+            );
+        }
         this.loading = false;
     }
 }

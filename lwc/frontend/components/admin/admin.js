@@ -17,8 +17,8 @@ export default class Admin extends LightningElement {
         //     "payment": true,
         //     "paymentMethod":"card",
         //     "prepaidType": 100,
-        //     "minPrice": 300, //need to admin
-        //     "prepaidOptions" :[   //need to admin
+        //     "minPrice": 300, 
+        //     "prepaidOptions" :[
         //         {
         //             "label": "100%",
         //             "value": 100
@@ -28,9 +28,6 @@ export default class Admin extends LightningElement {
         //             "value": 50
         //         }
         //     ],
-            
-
-            
         //     "seasons": [
         //         {
         //             "id": 9898,

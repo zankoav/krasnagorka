@@ -14,11 +14,12 @@
                 <templte if:false={loading}>
                     <templte if:true={settings.orderedSuccess}>
                         <div class="booking__body booking__body_success">
-                            <h3 class="booking__title">Бронирование выполнено успешно!</h3>
-                            <img src={okImage}
+                            <h3 class="booking__title">{orderedSuccessData.title}</h3>
+                            <z-loader if:true={orderedSuccessData.redirect}></z-loader>
+                            <img if:false={orderedSuccessData.redirect} src={okImage}
                                  alt="checkon"
                                  class="booking__ok">
-                            <p class="booking__description">Наш сотрудник скоро свяжется с вами для уточнения деталей
+                            <p class="booking__description">{orderedSuccessData.description}
                             </p>
                         </div>
                     </templte>

@@ -1117,8 +1117,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_order_payment_method', $paymentMethod);
                 }
 
-                $prepaidType  = (int)$request['prepaidType'];
+                $prepaidType  = $request['prepaidType'];
                 if (!empty($prepaidType)) {
+                    $prepaidType = intval($prepaidType);
                     update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidType);
 
                     if($paymentMethod == 'card_layter'){
