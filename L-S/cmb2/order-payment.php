@@ -17,14 +17,11 @@ function payment_metabox() {
         'name' => 'Способ оплаты',
         'id'   => 'sbc_order_payment_method',
         'type' => 'select',
-        'default' => null,
+        'show_option_none' => true,
         'options' => array(
             'card'  => __('Картой', 'krasnagorka'),
             'card_layter' => __('Картой позже', 'krasnagorka'),
             'office' => __('В оффисе', 'krasnagorka')
-        ),
-        'attributes' => array(
-            'readonly' => 'readonly'
         )
     ));
 
