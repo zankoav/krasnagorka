@@ -696,6 +696,7 @@ export default class Admin extends LightningElement {
 
         this.settings = {
             admin: this.model.admin,
+            payment: this.model.payment,
             prepaidType: this.model.prepaidType,
             paymentMethod: this.model.paymentMethod,
             seasons: this.model.seasons,

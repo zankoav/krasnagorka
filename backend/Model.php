@@ -184,11 +184,11 @@ class Model
         $showPrice = false;
         $showPayments = false;
         if(isset($bookingSettings['booking_price_show'])){
-            $showPrice = $bookingSettings['booking_price_show'] == 'on' and  is_user_logged_in();
+            $showPrice = $bookingSettings['booking_price_show'] == 'on';
         }
 
         if($showPrice){
-            $showPayments = $bookingSettings['booking_payments_show'] == 'on';
+            $showPayments = $bookingSettings['booking_payments_show'] == 'on'  &&  is_user_logged_in();
             $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
             $prepaidPercantage = $bookingSettings['booking_payments_type_percentage'];
             $prepaidOptions = [
