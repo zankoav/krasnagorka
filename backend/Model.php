@@ -184,7 +184,7 @@ class Model
         $showPrice = false;
         $showPayments = false;
         if(isset($bookingSettings['booking_price_show'])){
-            $showPrice = $bookingSettings['booking_price_show'] == 'on';
+            $showPrice = $bookingSettings['booking_price_show'] == 'on' and  is_user_logged_in();
         }
 
         if($showPrice){
