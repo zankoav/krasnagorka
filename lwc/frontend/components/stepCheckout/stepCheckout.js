@@ -60,6 +60,19 @@ export default class StepCheckout extends LightningElement {
         );
     }
 
+    async bookingPay(){
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    bookingErrorMessage: null
+                },
+                bubbles: true,
+                composed: true
+            })
+        );
+        console.log('send to pay');
+    }
+
     backButtonHandler() {
         const newMenu = this.settings.menu.map(it => {
             return { ...it, active: it.value === 'contacts' };

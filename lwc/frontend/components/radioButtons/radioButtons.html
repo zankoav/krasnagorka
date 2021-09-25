@@ -1,0 +1,7 @@
+<template>
+    <div class="radio-buttons">
+        <template for:each={options} for:item="item">
+            <z-radio-button class="radio-buttons__item" key={item.value} item={item}></z-radio-button>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,21 @@
+@import "./../../common/mixins";
+
+.radio-button {
+	cursor: pointer;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 6px 8px;
+	color: $PRIMARY_2;
+	transition: all .3s ease-out;
+
+	@include sm{
+		font-size: 14px;
+	};
+
+	&_selected{
+		color: $WHITE;
+		background-color: $PRIMARY_2;
+	}
+}

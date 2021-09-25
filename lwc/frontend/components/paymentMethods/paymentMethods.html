@@ -1,0 +1,15 @@
+<template>
+    <div class="payment-methods">
+        <div class="payment-methods__label">Выберите способ оплаты:</div>
+        <div class="payment-methods__container">
+            <div if:true={prepead} class="payment-methods__prepaid">
+                <div class="payment-methods__prepaid-label">Оплата:</div>
+                <z-radio-buttons class="payment-methods__buttons" onradiochange={prepaidOptionsHandle} options={prepaidOptions}></z-radio-buttons>
+            </div>
+            <div class="payment-methods__payment-methods">
+                <div class="payment-methods__payment-methods-label">Способ оплаты:</div>
+                <z-radio-buttons class="payment-methods__buttons" onradiochange={paymentMethodsHandle} options={paymentMethods}></z-radio-buttons>
+            </div>
+        </div>
+    </div>
+</template>

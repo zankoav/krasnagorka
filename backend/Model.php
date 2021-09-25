@@ -182,8 +182,28 @@ class Model
     {
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = false;
-        if(isset($bookingSettings, $bookingSettings['booking_price_show'])){
+        $showPayments = false;
+        if(isset($bookingSettings['booking_price_show'])){
             $showPrice = $bookingSettings['booking_price_show'] == 'on';
+        }
+
+        if($showPrice){
+            $showPayments = $bookingSettings['booking_payments_show'] == 'on';
+            $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
+            $prepaidPercantage = $bookingSettings['booking_payments_type_percentage'];
+            $prepaidOptions = [
+                [
+                    "label"=> "100%",
+                    "value"=> "FULL"
+                ]
+            ];
+
+            if(isset($prepaidPercantage)){
+                $prepaidOptions[] = [
+                    "label"=> $prepaidPercantage + '%',
+                    "value"=> "PARTIAL"
+                ];
+            }
         }
         
         $bookingId = $_GET['booking'];
@@ -220,8 +240,13 @@ class Model
         $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
         $weather       = $this->getWeather();
         $result        = [
-            'id'            => $calendarId,
-            'admin'         => $showPrice,
+            'id'                => $calendarId,
+            'admin'             => $showPrice,
+            'payment'           => $showPayments,
+            'paymentMethod'     => null,
+            'prepaidType'       => null,
+            'minPrice'          => $minPrepaidPrice,
+            'prepaidOptions'    => $prepaidOptions,
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),

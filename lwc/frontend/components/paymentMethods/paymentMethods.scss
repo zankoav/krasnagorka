@@ -1,0 +1,36 @@
+@import './../../common/mixins';
+
+.payment-methods {
+    &__label{
+        margin-right: 0.5rem;
+        font-size: 14px;
+        color: $GRAY_4;
+        text-transform: uppercase;
+    }
+
+    &__prepaid, &__payment-methods{
+        margin: 1rem 0;
+        @include sm {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__payment-methods{
+        margin-bottom: 0;
+    }
+
+    &__buttons{
+        width: 300px;
+    }
+
+    &__prepaid-label, &__payment-methods-label{
+        color: $GRAY_4;
+        font-size: 14px;
+        margin-bottom: 4px;
+        @include sm {
+            margin-bottom: 0;
+            width: 120px;
+        }
+    }
+}
