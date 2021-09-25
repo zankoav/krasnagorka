@@ -47,7 +47,7 @@ function cmb2_booking_page() {
     $cmb_options->add_field(array(
         'name' => 'Предоплата',
         'id'   => 'booking_payments_type_percentage',
-        'type'         => 'text_money',
+        'type'         => 'text_small',
         'before_field' => '%'
     ));
 
