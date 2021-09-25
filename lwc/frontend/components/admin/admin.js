@@ -700,6 +700,7 @@ export default class Admin extends LightningElement {
             prepaidType: this.model.prepaidType,
             paymentMethod: this.model.paymentMethod,
             prepaidOptions: this.model.prepaidOptions,
+            minPrice: this.model.minPrice,
             seasons: this.model.seasons,
             orderedSuccess: false,
             bookingErrorMessage: null,
