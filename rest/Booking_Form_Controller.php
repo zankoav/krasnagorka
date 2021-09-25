@@ -1117,7 +1117,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if (!empty($prepaidType)) {
                     update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidType);
 
-                    if($prepaidType != 100 and $paymentMethod == 'card_layter'){
+                    if($paymentMethod == 'card_layter'){
 
                         $secret_key = '2091988';
                         $wsb_seed = strtotime("now");
