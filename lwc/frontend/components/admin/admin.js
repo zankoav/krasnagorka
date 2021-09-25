@@ -694,8 +694,6 @@ export default class Admin extends LightningElement {
         //     "totalPriceLoading": false
         // }; 
 
-
-
         this.settings = {
             admin: this.model.admin,
             payment: this.model.payment,

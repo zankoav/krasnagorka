@@ -12,7 +12,7 @@ export default class TotalPrice extends LightningElement {
 
     get prepaidPrice(){
         const prepaid = parseInt(this.settings.total.total_price * this.settings.prepaidType / 100);
-        return prepaid == this.settings.total.total_price ? null : prepaid;
+        return prepaid == parseInt(this.settings.total.total_price) ? null : prepaid;
     }
 
     tooglePrice(){
