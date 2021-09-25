@@ -23,16 +23,16 @@ module.exports = env => {
                 new OptimizeCSSAssetsPlugin({})
             ],
         },
-        // devServer: {
-        //     overlay: true,
-        //     contentBase: publicPath,
-        //     proxy: {
-        //         '/': {
-        //             target: 'https://krasnagorka.by/',
-        //             changeOrigin: true
-        //         }
-        //     }
-        // },
+        devServer: {
+            overlay: true,
+            // contentBase: publicPath,
+            proxy: {
+                '/': {
+                    target: 'https://krasnagorka.by/',
+                    changeOrigin: true
+                }
+            }
+        },
         output: {
             path: path.resolve(__dirname, './../src'),
             publicPath: publicPath,

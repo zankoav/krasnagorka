@@ -571,7 +571,9 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_order($request)
     {
-        $result = true;
+        $result = [
+            'status' => true
+        ];
         try {
             $spam = $request['message'];
 
@@ -587,7 +589,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $isHouse = $request['orderType'] === 'Домик:';
 
             if (!empty($calendarId)) {
-                $result = false;
+                $result['status'] = false;
 
                 if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
                     $eventTabId = $request['eventTabId'];
@@ -621,8 +623,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "paymentMethod" => $request['paymentMethod'],
                         "prepaidType" => $request['prepaidType']
                     ]);
-                    $result = $response['status'] === 'success';
-                    if ($result) {
+                    $result['status'] = $response['status'] === 'success';
+                    if ($result['status']) {
                         $eventTabId = $request['eventTabId'];
                         if (!empty($eventTabId)) {
 
@@ -648,8 +650,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                     }
                 }
             }
-            if ($result) {
-                $result = $request['data'];
+            if ($result['status']) {
+                $result['data'] = $request['data'];
+                $result['prepaidType'] = $request['prepaidType'];
+                $result['paymentMethod'] = $request['paymentMethod'];
             }
         } catch (Exception $e) {
             Logger::log("Exception:" . $e->getMessage());

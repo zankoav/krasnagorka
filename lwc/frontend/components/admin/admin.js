@@ -17,15 +17,15 @@ export default class Admin extends LightningElement {
         //     "payment": true,
         //     "paymentMethod":"card",
         //     "prepaidType": 100,
-        //     "minPrice": 350, //need to admin
+        //     "minPrice": 300, //need to admin
         //     "prepaidOptions" :[   //need to admin
         //         {
         //             "label": "100%",
         //             "value": 100
         //         },
         //         {
-        //             "label": "20%",
-        //             "value": 20
+        //             "label": "50%",
+        //             "value": 50
         //         }
         //     ],
             

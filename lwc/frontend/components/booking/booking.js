@@ -65,7 +65,7 @@ export default class BookingForm extends LightningElement {
             body: JSON.stringify(requestData)
         }).then(data => data.json());
 
-        if (response) {
+        if (response && response.data) {
             this.dispatchEvent(
                 new CustomEvent('update', {
                     detail: {
@@ -84,7 +84,7 @@ export default class BookingForm extends LightningElement {
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
-                body: JSON.stringify({ data: response })
+                body: JSON.stringify({ data: response.data })
             });
             gtag('event', 'create_lead');
         } else {
@@ -133,10 +133,21 @@ export default class BookingForm extends LightningElement {
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
-            data: `prepaidType=${this.settings.prepaidType}paymentMethod=${this.settings.paymentMethod}fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
+            data: `prepaidType=${this.settings.prepaidType}&paymentMethod=${this.settings.paymentMethod}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
         };
 
         console.log('requestData', requestData);
+
+        const response = await fetch("/wp-json/krasnagorka/v1/order/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json; charset=utf-8",
+            },
+            body: JSON.stringify(requestData)
+        }).then(data => data.json());
+
+        console.log('response', response);
+
 
         this.loading = false;
     }
