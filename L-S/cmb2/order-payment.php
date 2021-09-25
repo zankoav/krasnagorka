@@ -29,30 +29,14 @@ function payment_metabox() {
         'name' => 'Оплата',
         'id'   => 'sbc_order_prepaid_percantage',
         'type'         => 'text_small',
-        'before_field' => '%',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
+        'before_field' => '%'
     ));
 
     $sbc_client->add_field(array(
         'name' => 'Ссылка на оплату',
         'desc' => 'Данная ссылка отправляется клиенту в случае оплаты по карте позже',
         'id'   => 'sbc_order_prepaid_link',
-        'type' => 'text_url',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
-    ));
-
-    $sbc_client->add_field(array(
-        'name' => 'Ссылка на оплату',
-        'desc' => 'Данная ссылка отправляется клиенту в случае оплаты по карте позже',
-        'id'   => 'sbc_order_prepaid_link',
-        'type' => 'text_url',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
+        'type' => 'text_url'
     ));
 
     $sbc_client->add_field(array(
