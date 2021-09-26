@@ -1,5 +1,7 @@
 <?php
 
+use Ls\Wp\Log as Log;
+
 if (!defined('ABSPATH')) { exit; }
 
 require __DIR__ . '/L-S/utils/index.php';
@@ -436,6 +438,7 @@ function kg_clear_orders_2()
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
         Booking_Form_Controller::clear_order($leadId);
         wp_delete_post($order->ID, true);
+        Log::info("Бронь удалена по истечению срока неоплаты", $order->ID);
     }
 }
 
