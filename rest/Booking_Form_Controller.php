@@ -1,4 +1,5 @@
 <?php
+use Ls\Wp\Log as Log;
 
 use AmoCRM\Models\LeadModel;
 use AmoCRM\Collections\Leads\LeadsCollection;
@@ -264,8 +265,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function change_contact($request)
     {
-
-
         //Получим сделку
         try {
 
@@ -654,6 +653,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['data'] = $request['data'];
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
+                if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
+                    $this->sendMail($request);
+                }
+                
             }
         } catch (Exception $e) {
             Logger::log("Exception:" . $e->getMessage());
@@ -661,6 +664,32 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         return new WP_REST_Response($result, 200);
+    }
+
+    private function sendMail($request){
+        $emailTo = $request['email'];
+        $data = $request;
+
+        $prepaidType = $request['prepaidType'];
+        $paymentMethod = $request['paymentMethod'];
+
+        $subject = '';
+        $templatePath = '';
+
+        if($paymentMethod == 'card_layter'){
+            $subject = $prepaidType == 100 ? 'Иструкция по оплате (Полная оплата)' : 'Иструкция по оплате (Частичная оплата)';
+            $templatePath = $prepaidType == 100 ? "L-S/mail/templates/tmpl-pay-full-confirm" : "L-S/mail/templates/tmpl-pay-partial-confirm";
+        }else if($paymentMethod == 'office'){
+            $subject = 'Координаты оффиса';
+            $templatePath = "L-S/mail/templates/tmpl-office";
+        }
+        Log::info("sendMail 1", [$subject, $templatePath]);
+        if(!empty($subject) and !empty($templatePath)){
+            $template = LS_Mailer::getTemplate($templatePath, $data);
+            Log::info("sendMail 2", $template);
+            $result = LS_Mailer::sendMail($emailTo, $subject, $template);
+            Log::info("sendMail 3",  $result);
+        }
     }
 
     public function pay($request)

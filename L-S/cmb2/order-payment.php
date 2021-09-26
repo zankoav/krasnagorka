@@ -2,6 +2,8 @@
 
 use Cmb2Grid\Grid\Cmb2Grid;
 
+if (!defined('ABSPATH')) { exit; }
+
 function payment_metabox() {
 
     $sbc_client = new_cmb2_box(array(

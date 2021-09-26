@@ -2,6 +2,8 @@
 
 use Cmb2Grid\Grid\Cmb2Grid;
 
+if (!defined('ABSPATH')) { exit; }
+
 add_action('cmb2_admin_init', function () {
 
     $logoUrl = 'dashicons-palmtree';

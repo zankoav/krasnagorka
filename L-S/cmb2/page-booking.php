@@ -2,6 +2,8 @@
 
 use Cmb2Grid\Grid\Cmb2Grid;
 
+if (!defined('ABSPATH')) { exit; }
+
 function cmb2_booking_page() {
 
     $cmb_options = new_cmb2_box(array(
