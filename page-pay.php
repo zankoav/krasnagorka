@@ -28,6 +28,7 @@
     // );
 
     $query = new WP_Query( $args );
+    var_dump('query', $query );
     while ( $query->have_posts() ) {
         $query->the_post();
         $ID = get_the_ID();
