@@ -15,8 +15,8 @@ export default class Admin extends LightningElement {
         // this.settings = {
         //     "admin": true,
         //     "payment": true,
-        //     "paymentMethod":"card",
-        //     "prepaidType": 100,
+        //     "paymentMethod":"card_layter",
+        //     "prepaidType": 50,
         //     "minPrice": 300, 
         //     "prepaidOptions" :[
         //         {
@@ -411,7 +411,7 @@ export default class Admin extends LightningElement {
         //     },
         //     "fio": "dsvvdvds",
         //     "phone": "+44456789754567",
-        //     "email": "sdbsdbsdb@gfbg.ri",
+        //     "email": "aleksandr.zanko@enway.com",
         //     "counts": [
         //         {
         //             "id": 1,

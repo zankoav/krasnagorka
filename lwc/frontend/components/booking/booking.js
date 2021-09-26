@@ -187,7 +187,6 @@ export default class BookingForm extends LightningElement {
                 new CustomEvent('update', {
                     detail: {
                         orderedSuccess: true,
-
                     },
                     bubbles: true,
                     composed: true
@@ -205,6 +204,16 @@ export default class BookingForm extends LightningElement {
                 body: JSON.stringify({ data: response.data })
             });
             gtag('event', 'create_lead');
+
+            if(response.redirect){
+                generateAndSubmitForm(
+                    this.settings.email === 'zankoav@gmail.com' ?
+                        'https://securesandbox.webpay.by' :
+                        'https://payment.webpay.by',
+                        response.redirect.values,
+                        response.redirect.names
+                );
+            }
         }else {
             this.dispatchEvent(
                 new CustomEvent('update', {
@@ -218,4 +227,31 @@ export default class BookingForm extends LightningElement {
         }
         this.loading = false;
     }
+}
+
+function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method = 'POST') {
+    const form = document.createElement("form");
+    form.action = action;
+    form.method = method;
+
+    paramsWithValue.wsb_cancel_return_url = `${location.href}&clear=${paramsWithValue.wsb_order_num}`;
+
+    // eslint-disable-next-line guard-for-in
+    for (const key in paramsWithValue) {
+        const element = document.createElement("input");
+        element.type = "hidden";
+        element.name = key;
+        element.value = paramsWithValue[key];
+        form.appendChild(element);
+    }
+
+    for (const key of paramsWithNames) {
+        const element = document.createElement("input");
+        element.type = "hidden";
+        element.name = key;
+        form.appendChild(element);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }
