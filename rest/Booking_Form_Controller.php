@@ -1195,7 +1195,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         $solt = "lightning-soft";
                         $source = md5($post_id . $solt);
                         update_post_meta($post_id, 'sbc_order_prepaid_source', $source);
-                        update_post_meta($post_id, 'sbc_order_prepaid_value', json_encode($sourceValue));
+                        update_post_meta($post_id, 'sbc_order_prepaid_value', json_encode($sourceValue, JSON_UNESCAPED_UNICODE));
                     }
                 }
 
