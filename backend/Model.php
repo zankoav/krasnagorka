@@ -190,7 +190,7 @@ class Model
         if($showPrice){
             $showPayments = $bookingSettings['booking_payments_show'] == 'on'  &&  is_user_logged_in();
             $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
-            $prepaidPercantage = $bookingSettings['booking_payments_type_percentage'];
+            $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
             $prepaidOptions = [
                 [
                     "label"=> "100%",
