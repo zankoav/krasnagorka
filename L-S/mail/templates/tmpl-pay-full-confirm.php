@@ -38,7 +38,7 @@
 							<td colspan="6"
 								style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
 								<div>Для оплаты перейдите по ссылке: <a style="color: #1498c6; text-decoration: underline;"
-										href=<?="https://krasnagorka.by/pay?source=$source"?>>
+										href=<?="https://krasnagorka.by/pay/?source=$source"?>>
 										Оплатить
 									</a>
 								</div>							
