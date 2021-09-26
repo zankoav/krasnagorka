@@ -623,6 +623,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "prepaidType" => $request['prepaidType']
                     ]);
                     $result['status'] = $response['status'] === 'success';
+                    $result['redirect'] = $response['redirect'];
                     if ($result['status']) {
                         $eventTabId = $request['eventTabId'];
                         if (!empty($eventTabId)) {
