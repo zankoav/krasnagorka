@@ -12,7 +12,7 @@
     }
 
     $args = array(
-        'post_type'  => 'sbc_order',
+        'post_type'  => 'sbc_orders',
         'meta_query' => array(
             array(
                 'key'     => 'sbc_order_prepaid_source',
