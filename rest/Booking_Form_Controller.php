@@ -683,12 +683,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             $subject = 'Координаты оффиса';
             $templatePath = "L-S/mail/templates/tmpl-office";
         }
-        Log::info("sendMail 1", [$subject, $templatePath]);
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
-            Log::info("sendMail 2", $template);
             $result = LS_Mailer::sendMail($emailTo, $subject, $template);
-            Log::info("sendMail 3",  $result);
         }
     }
 
