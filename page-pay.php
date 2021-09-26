@@ -54,7 +54,7 @@
             form.action = action;
             form.method = method;
 
-            paramsWithValue.wsb_cancel_return_url = `${location.href}&clear=${paramsWithValue.wsb_order_num}`;
+            paramsWithValue.wsb_cancel_return_url = `https://krasnagorka.by/booking-form?clear=${paramsWithValue.wsb_order_num}`;
 
             for (const key in paramsWithValue) {
                 const element = document.createElement("input");
