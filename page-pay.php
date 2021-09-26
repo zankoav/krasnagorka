@@ -51,7 +51,6 @@
 
             paramsWithValue.wsb_cancel_return_url = `${location.href}&clear=${paramsWithValue.wsb_order_num}`;
 
-            // eslint-disable-next-line guard-for-in
             for (const key in paramsWithValue) {
                 const element = document.createElement("input");
                 element.type = "hidden";
