@@ -31,6 +31,11 @@
 
     if(isset($ID)){
         $formData = get_post_meta($ID, 'sbc_order_prepaid_value', 1);
+        $isReserved = get_post_meta($ID, 'sbc_order_select', 1) == 'reserved';
+        if(!$isReserved){
+            echo 'Этот заказ уже оплачен';
+            exit;
+        }
     }
 
     if(empty($formData)){
