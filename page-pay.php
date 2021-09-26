@@ -21,18 +21,12 @@
             ),
         ),
     );
-    // $query = new WP_Query( $args );
-    // $args = array(
-    //     'meta_key'   => 'sbc_order_prepaid_source',
-    //     'meta_value' => $source
-    // );
 
     $query = new WP_Query( $args );
-    // var_dump('query', $query );
     while ( $query->have_posts() ) {
         $query->the_post();
-        // $ID = get_the_ID();
-        var_dump('OK');
+        $ID = get_the_ID();
+        var_dump('OK', $ID);
         break;
     }
 
