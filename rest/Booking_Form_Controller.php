@@ -1150,7 +1150,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $prepaidType = intval($prepaidType);
                     update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidType);
 
-                    if($paymentMethod == 'card_layter'){
+                    if($paymentMethod == 'card_layter' || $paymentMethod == 'card'){
 
                         $secret_key = '2091988';
                         $wsb_seed = strtotime("now");
@@ -1169,6 +1169,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                         $wsb_test = $request['email'] == 'zankoav@gmail.com' ? '1' : '0';
                         $wsb_currency_id = 'BYN';
                         $wsb_total = (int)($totalPrice * $prepaidType / 100);
+                        if($prepaidType == 100){
+                            $wsb_total = $totalPrice;
+                        }
                         $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
 
                         $sourceValue = [
