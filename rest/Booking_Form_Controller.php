@@ -646,6 +646,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         }
 
                         $request['data'] .= '&orderId=' . $response['orderId'];
+                        $request['orderId'] = $response['orderId'];
                     }
                 }
             }
