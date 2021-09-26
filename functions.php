@@ -133,26 +133,6 @@ function getCalendarId($calendarShortCode)
     return $arr[1];
 }
 
-//    add_filter('wpseo_schema_graph_pieces', function ($pieces, $context) {
-//
-//        if (get_the_ID() == 10188) {
-//            var_dump($pieces[0]);
-//            $pieces[0]['aggregateRating'] = [
-//                '@type'       => 'AggregateRating',
-//                'ratingValue' => 4.5,
-//                'ratingCount' => 120
-//            ];
-//            unset($pieces[0]);
-//            unset($pieces[2]);
-//            unset($pieces[3]);
-//            unset($pieces[4]);
-//            unset($pieces[5]);
-//        }
-//
-//        return $pieces;
-//    }, 20, 2);
-
-
 function cmb2_after_form_do_js_validation($post_id, $cmb)
 {
     static $added = false;
@@ -392,14 +372,18 @@ function getEmailFromOrder($orderId)
 }
 
 
-
-// регистрируем 5минутный интервал
-add_filter('cron_schedules', 'cron_add_five_min');
-function cron_add_five_min($schedules)
+add_filter('cron_schedules', 'cron_add_clear_intervals');
+function cron_add_clear_intervals($schedules)
 {
+    // регистрируем 5 минутный интервал
     $schedules['five_min'] = array(
         'interval' => 60 * 5,
         'display' => 'Раз в 5 минут'
+    );
+    // регистрируем 1 дневный  интервал
+    $schedules['one_day'] = array(
+        'interval' => 60 * 60 * 24,
+        'display' => 'Раз в 1 день'
     );
     return $schedules;
 }
@@ -407,11 +391,54 @@ function cron_add_five_min($schedules)
 add_action('wp', 'kg_clear_order');
 function kg_clear_order()
 {
+    $time = time();
     if (!wp_next_scheduled('kg_clear_order_five_min_event')) {
-        wp_schedule_event(time(), 'five_min', 'kg_clear_order_five_min_event');
+        wp_schedule_event($time, 'five_min', 'kg_clear_order_five_min_event');
+    }
+
+    if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
+        wp_schedule_event($time, 'one_day', 'kg_clear_order_1_day_min_event');
     }
 }
-// добавляем функцию к указанному хуку
+
+add_action('kg_clear_order_1_day_min_event', 'kg_clear_orders_2');
+function kg_clear_orders_2()
+{
+
+    $query = new WP_Query(
+        [
+            'post_type'  => 'sbc_orders',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'     => 'sbc_order_select',
+                    'value'   => 'reserved',
+                    'compare' => '='
+                ),
+                array(
+                    'key'     => 'sbc_order_prepaid_source',
+                    'value'   => '',
+                    'compare' => '!='
+                )
+            ),
+            'date_query' => array(
+                array(
+                    'before'    => '2 days ago',
+                    'inclusive' => true
+                )
+            )
+        ]
+    );
+    $orders = $query->get_posts();
+
+    foreach ($orders as $order) {
+        $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
+        Booking_Form_Controller::clear_order($leadId);
+        wp_delete_post($order->ID, true);
+    }
+}
+
 add_action('kg_clear_order_five_min_event', 'kg_clear_orders');
 function kg_clear_orders()
 {
