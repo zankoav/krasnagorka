@@ -656,7 +656,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
                 if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
-                    $this->sendMail($request);
+                    $result['template'] = $this->sendMail($request);
                 }
                 
             }
@@ -689,6 +689,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $template = LS_Mailer::getTemplate($templatePath, $data);
             $result = LS_Mailer::sendMail($emailTo, $subject, $template);
         }
+
+        return $template;
     }
 
     public function pay($request)
