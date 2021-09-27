@@ -656,9 +656,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
                 if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
-                    $result['template'] = $this->sendMail($request);
+                    $orderData = $this->getOrderData($request['orderId']);
+                    $result['template'] = $this->sendMail($orderData);
                 }
-                
             }
         } catch (Exception $e) {
             Logger::log("Exception:" . $e->getMessage());
@@ -666,6 +666,52 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
 
         return new WP_REST_Response($result, 200);
+    }
+
+    private function getOrderData($orderId){
+        $created = get_the_date("d.m.Y", $orderId);
+        $start = get_post_meta($orderId, 'sbc_order_start', 1);
+        $end = get_post_meta($orderId, 'sbc_order_end', 1);
+        $price = get_post_meta($orderId, 'sbc_order_price', 1);
+        $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
+        $calendars  = get_the_terms($orderId, 'sbc_calendars');
+        $client = get_post_meta($orderId, 'sbc_order_client', 1);
+        $pieces = explode(" ", $client);
+        $clientId = $pieces[0];
+        $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
+        $fio = get_the_title($clientId);
+        $fio = explode("+", $fio);
+
+        $passport = get_post_meta($orderId, 'sbc_order_passport', 1);
+        $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
+
+        $calendarSlug = $calendars[0]->slug;
+        $calendarId = $calendars[0]->term_id;
+        $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
+        $houseLink = getHouseLinkByShortCode($calendarShortCode);
+        $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
+        $prepaidPercantage = (int)get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
+
+        $subprice = 0;
+        
+        if(!empty($paymentMethod) and !empty($prepaidPercantage)){
+            $subprice = intval($price * $prepaidPercantage / 100);
+        }
+
+        return [
+            'created' => $created,
+            'from' => date("d.m.Y", strtotime($start)),
+            'to' => date("d.m.Y", strtotime($end)),
+            'price' => $price,
+            'subprice' => $subprice,
+            'passport' => $passport ?? '-',
+            'fio' => $fio[0],
+            'leadId' => $leadId,
+            'peopleCount' => $peopleCount,
+            'phone' => $phone,
+            'calendarName' => $calendars[0]->name,
+            'calendarLink' => $houseLink
+        ];
     }
 
     private function sendMail($request){
