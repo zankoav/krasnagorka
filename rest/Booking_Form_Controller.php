@@ -656,7 +656,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
                 if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
+                    Log::info("orderId", $response['orderId']);
                     $orderData = $this->getOrderData($response['orderId']);
+                    Log::info("orderData", $orderData);
                     $result['template'] = $this->sendMail($orderData);
                 }
             }
@@ -669,37 +671,33 @@ class Booking_Form_Controller extends WP_REST_Controller
     }
 
     private function getOrderData($orderId){
-        try{
-            $created = get_the_date("d.m.Y", $orderId);
-            $start = get_post_meta($orderId, 'sbc_order_start', 1);
-            $end = get_post_meta($orderId, 'sbc_order_end', 1);
-            $price = get_post_meta($orderId, 'sbc_order_price', 1);
-            $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
-            $calendars  = get_the_terms($orderId, 'sbc_calendars');
-            $client = get_post_meta($orderId, 'sbc_order_client', 1);
-            $pieces = explode(" ", $client);
-            $clientId = $pieces[0];
-            $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
-            $fio = get_the_title($clientId);
-            $fio = explode("+", $fio);
+        $created = get_the_date("d.m.Y", $orderId);
+        $start = get_post_meta($orderId, 'sbc_order_start', 1);
+        $end = get_post_meta($orderId, 'sbc_order_end', 1);
+        $price = get_post_meta($orderId, 'sbc_order_price', 1);
+        $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
+        $calendars  = get_the_terms($orderId, 'sbc_calendars');
+        $client = get_post_meta($orderId, 'sbc_order_client', 1);
+        $pieces = explode(" ", $client);
+        $clientId = $pieces[0];
+        $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
+        $fio = get_the_title($clientId);
+        $fio = explode("+", $fio);
 
-            $passport = get_post_meta($orderId, 'sbc_order_passport', 1);
-            $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
+        $passport = get_post_meta($orderId, 'sbc_order_passport', 1);
+        $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
 
-            $calendarSlug = $calendars[0]->slug;
-            $calendarId = $calendars[0]->term_id;
-            $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
-            $houseLink = getHouseLinkByShortCode($calendarShortCode);
-            $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
-            $prepaidPercantage = (int) get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
+        $calendarSlug = $calendars[0]->slug;
+        $calendarId = $calendars[0]->term_id;
+        $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
+        $houseLink = getHouseLinkByShortCode($calendarShortCode);
+        $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
+        $prepaidPercantage = (int) get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
 
-            $subprice = 0;
+        $subprice = 0;
 
-            if(!empty($paymentMethod) and !empty($prepaidPercantage)){
-                $subprice = intval($price * $prepaidPercantage / 100);
-            }
-        } catch (Exception $e) {
-            Log::error('Error getOrderData', $e->getMessage());
+        if(!empty($paymentMethod) and !empty($prepaidPercantage)){
+            $subprice = intval($price * $prepaidPercantage / 100);
         }
             
         return [
