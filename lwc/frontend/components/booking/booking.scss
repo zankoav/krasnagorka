@@ -11,6 +11,10 @@
 			padding: 0 2rem;
 			max-width: 900px;
 		}
+
+		&_template{
+			max-width: 600px;
+		}
 	}
 
 	&__title {
@@ -48,6 +52,15 @@
 		@include lg {
 			border-radius: 8px;
 			box-shadow: 0 2px 4px $GRAY_6;
+		}
+
+
+		&_template{
+			box-shadow: none;
+			
+			strong {
+				font-weight: bold;
+			}
 		}
 	}
 }

@@ -173,7 +173,7 @@ export default class BookingForm extends LightningElement {
             data: `prepaidType=${this.settings.prepaidType}&paymentMethod=${this.settings.paymentMethod}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
         };
         
-        const response = await fetch("/wp-json/krasnagorka/v1/order/", {
+        const responseOrder = await fetch("/wp-json/krasnagorka/v1/order/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json; charset=utf-8",
@@ -181,38 +181,50 @@ export default class BookingForm extends LightningElement {
             body: JSON.stringify(requestData)
         }).then(data => data.json());
 
-        if(response.status && response.data){
-            this.dispatchEvent(
-                new CustomEvent('update', {
-                    detail: {
-                        orderedSuccess: true,
-                    },
-                    bubbles: true,
-                    composed: true
-                })
-            );
+        if(responseOrder.status && responseOrder.data){
             setCookie("kg_name", this.settings.fio, { "max-age": MAX_AGE });
             setCookie("kg_phone", this.settings.phone, { "max-age": MAX_AGE });
             setCookie("kg_email", this.settings.email, { "max-age": MAX_AGE });
 
-            await fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
+            const leadResponse = await fetch("/wp-json/krasnagorka/v1/create-amocrm-lead/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
-                body: JSON.stringify({ data: response.data })
-            });
-            gtag('event', 'create_lead');
+                body: JSON.stringify({ 
+                    data: responseOrder.data ,
+                    orderId: responseOrder.orderId,
+                    email:  this.settings.email,
+                    paymentMethod: this.settings.paymentMethod,
+                    prepaidType: this.settings.prepaidType,
 
-            if(response.redirect){
-                generateAndSubmitForm(
-                    this.settings.email === 'zankoav@gmail.com' ?
-                        'https://securesandbox.webpay.by' :
-                        'https://payment.webpay.by',
-                        response.redirect.values,
-                        response.redirect.names
+                })
+            }).then(data => data.json());
+
+            if(leadResponse){
+                gtag('event', 'create_lead');
+                console.log(leadResponse.template);
+                this.dispatchEvent(
+                    new CustomEvent('update', {
+                        detail: {
+                            tmpl: leadResponse.template,
+                            orderedSuccess: true
+                        },
+                        bubbles: true,
+                        composed: true
+                    })
                 );
-            }
+
+                if(responseOrder.redirect){
+                    generateAndSubmitForm(
+                        this.settings.email === 'zankoav@gmail.com' ?
+                            'https://securesandbox.webpay.by' :
+                            'https://payment.webpay.by',
+                            responseOrder.redirect.values,
+                            responseOrder.redirect.names
+                    );
+                }
+            }            
         }else {
             this.dispatchEvent(
                 new CustomEvent('update', {
@@ -225,6 +237,27 @@ export default class BookingForm extends LightningElement {
             );
         }
         this.loading = false;
+    }
+
+    renderedCallback(){
+        const template = this.template.querySelector('.booking__template');
+        if(template){
+            template.innerHTML = this.finishTemplate;
+        }
+    }
+
+    get finishTemplate(){
+        return this.settings.tmpl?.replace('600px', '100%')
+            .replace('600', '100')
+            .replace('w80', 'width=80');
+    }
+
+    get cssCardTemplate(){
+        return this.settings.tmpl ? "booking__card booking__card_template" : "booking__card";
+    }
+
+    get cssCardTemplateContainer(){
+        return this.settings.tmpl ? "container container_template" : "container";
     }
 }
 

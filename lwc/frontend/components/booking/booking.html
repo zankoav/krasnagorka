@@ -3,8 +3,8 @@
          onbooking={bookingOrder}
          onorder={sendOrder}
          >
-        <div class="container">
-            <div class="booking__card">
+        <div class={cssCardTemplateContainer}>
+            <div class={cssCardTemplate}>
                 <templte if:true={loading}>
                     <div class="booking__body">
                         <h3 class="booking__title">Бронирую...</h3>
@@ -12,30 +12,35 @@
                     </div>
                 </templte>
                 <templte if:false={loading}>
-                    <templte if:true={settings.orderedSuccess}>
-                        <div class="booking__body booking__body_success">
-                            <h3 class="booking__title">{orderedSuccessData.title}</h3>
-                            <z-loader if:true={orderedSuccessData.redirect}></z-loader>
-                            <img if:false={orderedSuccessData.redirect} src={okImage}
-                                 alt="checkon"
-                                 class="booking__ok">
-                            <p class="booking__description">{orderedSuccessData.description}
-                            </p>
-                        </div>
+                    <templte if:true={settings.tmpl}>
+                        <div lwc:dom="manual" class="booking__body booking__template"></div>
                     </templte>
-                    <templte if:false={settings.orderedSuccess}>
-                        <z-steps-navigator settings={settings}></z-steps-navigator>
-                        <div class="booking__body">
-                            <z-step-house if:true={isHouseStep}
-                                          settings={settings}>
-                            </z-step-house>
-                            <z-step-contact if:true={isContactStep}
-                                            settings={settings}>
-                            </z-step-contact>
-                            <z-step-checkout if:true={isCheckoutStep}
-                                             settings={settings}>
-                            </z-step-checkout>
-                        </div>
+                    <templte if:false={settings.tmpl}>
+                        <templte if:true={settings.orderedSuccess}>
+                            <div class="booking__body booking__body_success">
+                                <h3 class="booking__title">{orderedSuccessData.title}</h3>
+                                <z-loader if:true={orderedSuccessData.redirect}></z-loader>
+                                <img if:false={orderedSuccessData.redirect} src={okImage}
+                                     alt="checkon"
+                                     class="booking__ok">
+                                <p class="booking__description">{orderedSuccessData.description}
+                                </p>
+                            </div>
+                        </templte>
+                        <templte if:false={settings.orderedSuccess}>
+                            <z-steps-navigator settings={settings}></z-steps-navigator>
+                            <div class="booking__body">
+                                <z-step-house if:true={isHouseStep}
+                                              settings={settings}>
+                                </z-step-house>
+                                <z-step-contact if:true={isContactStep}
+                                                settings={settings}>
+                                </z-step-contact>
+                                <z-step-checkout if:true={isCheckoutStep}
+                                                 settings={settings}>
+                                </z-step-checkout>
+                            </div>
+                        </templte>
                     </templte>
                 </templte>
             </div>
