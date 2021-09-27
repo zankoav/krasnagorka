@@ -660,6 +660,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             }
             if ($result['status']) {
                 $result['data'] = $request['data'];
+                $result['orderId'] = $request['orderId'];
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
             }
