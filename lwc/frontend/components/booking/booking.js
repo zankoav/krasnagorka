@@ -182,7 +182,6 @@ export default class BookingForm extends LightningElement {
         }).then(data => data.json());
 
         if(response.status && response.data){
-            console.log('response', response);
             this.dispatchEvent(
                 new CustomEvent('update', {
                     detail: {
