@@ -561,6 +561,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $type = 'booking-form';
                 $amo = new AmoIntegration($type, $request['data'], $href);
                 $result['status'] = 'success';
+                if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
+                    $orderData = $this->getOrderData($request['orderId']);
+                    $orderData["email"] = $request['email'];
+                    $orderData['prepaidType'] = $request['prepaidType'];
+                    $orderData['paymentMethod'] = $request['paymentMethod'];
+                    $result['template'] = $this->sendMail($orderData);
+                }
             }
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
@@ -655,12 +662,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['data'] = $request['data'];
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
-                if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
-                    Log::info("orderId", $response['orderId']);
-                    $orderData = $this->getOrderData($response['orderId']);
-                    Log::info("orderData", $orderData);
-                    $result['template'] = $this->sendMail($orderData);
-                }
             }
         } catch (Exception $e) {
             Logger::log("Exception:" . $e->getMessage());
