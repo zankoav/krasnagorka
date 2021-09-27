@@ -656,7 +656,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['prepaidType'] = $request['prepaidType'];
                 $result['paymentMethod'] = $request['paymentMethod'];
                 if($result['paymentMethod'] == 'card_layter' || $result['paymentMethod'] == 'office'){
-                    $orderData = $this->getOrderData($request['orderId']);
+                    $orderData = $this->getOrderData($response['orderId']);
                     $result['template'] = $this->sendMail($orderData);
                 }
             }
@@ -690,10 +690,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
         $houseLink = getHouseLinkByShortCode($calendarShortCode);
         $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
-        $prepaidPercantage = (int)get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
+        $prepaidPercantage = (int) get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
 
         $subprice = 0;
-        
+
         if(!empty($paymentMethod) and !empty($prepaidPercantage)){
             $subprice = intval($price * $prepaidPercantage / 100);
         }
