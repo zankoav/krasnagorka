@@ -616,6 +616,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     
                     $response = $this->insertWPLead([
                         "type" => "reserved",
+                        "passport" => "passport",
                         "objectIds" => [$calendarId],
                         "dateFrom" => $dateStart,
                         "dateTo" => $dateEnd,
@@ -1183,7 +1184,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 if (!empty($peopleCount)) {
                     update_post_meta($post_id, 'sbc_order_people_count', $peopleCount);
+                    update_post_meta($post_id, 'sbc_order_count_people', $peopleCount);
                 }
+                
+                if (!empty($request['passport'])) {
+                    update_post_meta($post_id, 'sbc_order_passport', $request['passport']);
+                }
+                    
                 if (!empty($leadId)) {
                     update_post_meta($post_id, 'sbc_lead_id', $leadId);
                 }
