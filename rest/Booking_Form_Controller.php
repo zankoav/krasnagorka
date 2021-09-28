@@ -1226,7 +1226,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                          * production: '0'
                          * sandbox: '1'
                          */
-                        $wsb_test = $request['email'] == 'zankoav@gmail.com' ? '1' : '0';
+                        $wsb_test = $contactEmail == 'zankoav@gmail.com' ? '1' : '0';
                         $wsb_currency_id = 'BYN';
                         $wsb_total = (int)($totalPrice * $prepaidType / 100);
                         if($prepaidType == 100){
