@@ -1219,7 +1219,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                          *  production: '320460709'
                          *  sandbox: '515854557'
                          */
-                        $wsb_storeid = $request['email'] == 'zankoav@gmail.com' ? '515854557' : '320460709';
+                        $wsb_storeid = $contactEmail == 'zankoav@gmail.com' ? '515854557' : '320460709';
                         $wsb_order_num = $post_id;
 
                         /**
