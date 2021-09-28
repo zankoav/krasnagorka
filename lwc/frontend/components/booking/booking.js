@@ -217,11 +217,9 @@ export default class BookingForm extends LightningElement {
 
                 if(responseOrder.redirect){
                     generateAndSubmitForm(
-                        this.settings.email === 'zankoav@gmail.com' ?
-                            'https://securesandbox.webpay.by' :
-                            'https://payment.webpay.by',
-                            responseOrder.redirect.values,
-                            responseOrder.redirect.names
+                        this.settings.webpaySandbox,
+                        responseOrder.redirect.values,
+                        responseOrder.redirect.names
                     );
                 }
             }            

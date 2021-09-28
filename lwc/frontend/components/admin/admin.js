@@ -15,6 +15,7 @@ export default class Admin extends LightningElement {
         // this.settings = {
         //     "admin": true,
         //     "payment": true,
+        //     "webpaySandbox": "https://securesandbox.webpay.by",
         //     "paymentMethod":"card_layter",
         //     "prepaidType": 50,
         //     "minPrice": 300, 
@@ -395,6 +396,7 @@ export default class Admin extends LightningElement {
         //         }
         //     ],
         //     "orderedSuccess": false,
+        //     "tmpl": null,
         //     "bookingErrorMessage": null,
         //     "house": {
         //         "id": 8733,
@@ -411,7 +413,7 @@ export default class Admin extends LightningElement {
         //     },
         //     "fio": "dsvvdvds",
         //     "phone": "+44456789754567",
-        //     "email": "aleksandr.zanko@enway.com",
+        //     "email": "zankoav@gmail.com",
         //     "counts": [
         //         {
         //             "id": 1,
@@ -692,6 +694,7 @@ export default class Admin extends LightningElement {
         // }; 
 
         this.settings = {
+            webpaySandbox: this.model.webpaySandbox,
             admin: this.model.admin,
             payment: this.model.payment,
             prepaidType: this.model.prepaidType,
@@ -749,6 +752,7 @@ export default class Admin extends LightningElement {
         if (event) {
             this.settings = { ...this.settings, ...event.detail };
         }
+        console.log('this.settings',this.settings);
         this.updateAvailableSteps();
         this.checkTotalPrice();
     }
