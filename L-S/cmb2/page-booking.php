@@ -53,6 +53,12 @@ function cmb2_booking_page() {
         'before_field' => '%'
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Включить тестовый Webpay Sandbox',
+        'id'   => 'is_sand_box_enabled',
+        'type' => 'checkbox',
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');

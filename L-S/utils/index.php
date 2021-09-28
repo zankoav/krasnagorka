@@ -20,7 +20,7 @@ function show_seasons_options() {
 
 function get_webpay_sandbox(){
     $bookingSettings = get_option('mastak_booking_appearance_options');
-    $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'];
+    $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'] == 'on';
 
     $orgUrl = 'https://payment.webpay.by';
     if($isSandBoxEnabled and is_user_logged_in()){
