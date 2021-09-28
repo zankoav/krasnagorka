@@ -17,3 +17,14 @@ function show_seasons_options() {
 
     return $seasons;
 }
+
+function get_webpay_sandbox(){
+    $bookingSettings = get_option('mastak_booking_appearance_options');
+    $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'];
+
+    $orgUrl = 'https://payment.webpay.by';
+    if($isSandBoxEnabled and is_user_logged_in()){
+        $orgUrl = 'https://securesandbox.webpay.by';
+    }
+    return $orgUrl;
+}

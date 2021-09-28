@@ -42,12 +42,13 @@
         exit;
     }
 
+    $paymentOrg = get_webpay_sandbox();
+
 ?>
 <body>
     <script>
         const params = <?=$formData?>;
-        const paymentOrg = false ? 'https://securesandbox.webpay.by' : 'https://payment.webpay.by'
-        generateAndSubmitForm(paymentOrg, params.values, params.names);
+        generateAndSubmitForm("<?=$paymentOrg;?>", params.values, params.names);
 
         function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method = 'POST') {
             const form = document.createElement("form");

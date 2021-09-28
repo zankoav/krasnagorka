@@ -242,6 +242,7 @@ class Model
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
+            'webpaySandbox'     => get_webpay_sandbox(),
             'payment'           => $showPayments,
             'paymentMethod'     => $showPayments ? 'card' : '',
             'prepaidType'       => $showPayments ? 100 : '',
@@ -475,8 +476,6 @@ class Model
         }
         return $freshPrice;
     }
-
-
 
     private function getAllSeasons()
     {
