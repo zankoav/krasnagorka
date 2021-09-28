@@ -236,13 +236,13 @@ class Model
         if ($maxCount == 0) {
             $maxCount = 99;
         }
-
+        $sandbox = get_webpay_sandbox();
         $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
         $weather       = $this->getWeather();
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
-            'webpaySandbox'     => get_webpay_sandbox(),
+            'webpaySandbox'     => $sandbox['url'],
             'payment'           => $showPayments,
             'paymentMethod'     => $showPayments ? 'card' : '',
             'prepaidType'       => $showPayments ? 100 : '',
@@ -296,17 +296,9 @@ class Model
             if ($result['pay']) {
                 $SecretKey = '2091988';
                 $wsb_seed = strtotime("now");
-                /**
-                 *  production: '320460709'
-                 *  sandbox: '515854557'
-                 */
-                $wsb_storeid = '320460709';
+                $wsb_storeid = $sandbox['wsb_storeid'];
                 $wsb_order_num = "gg-1";
-                /**
-                 * production: '0'
-                 * sandbox: '1'
-                 */
-                $wsb_test = '0';
+                $wsb_test = $sandbox['wsb_test'];
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $result['price'];
                 $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $SecretKey);

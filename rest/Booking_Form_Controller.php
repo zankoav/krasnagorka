@@ -781,6 +781,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ];
 
             $leadId = $this->initAmoCrmLead($leadData, $contactData);
+            $sandbox = get_webpay_sandbox();
 
             if (isset($leadId)) {
 
@@ -788,19 +789,9 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 $secret_key = '2091988';
                 $wsb_seed = strtotime("now");
-
-                /**
-                 *  production: '320460709'
-                 *  sandbox: '515854557'
-                 */
-                $wsb_storeid = $request['email'] == 'zankoav@gmail.com' ? '515854557' : '320460709';
+                $wsb_storeid = $sandbox['wsb_storeid'];
                 $wsb_order_num = $order['orderId'];
-
-                /**
-                 * production: '0'
-                 * sandbox: '1'
-                 */
-                $wsb_test = $request['email'] == 'zankoav@gmail.com' ? '1' : '0';
+                $wsb_test = $sandbox['wsb_test'];
                 $wsb_currency_id = 'BYN';
                 $wsb_total = $order['price'];
                 $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
@@ -1206,6 +1197,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 $prepaidType  = $request['prepaidType'];
+                $sandbox = get_webpay_sandbox();
+
                 if (!empty($prepaidType)) {
                     $prepaidType = intval($prepaidType);
                     update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidType);
@@ -1214,19 +1207,9 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                         $secret_key = '2091988';
                         $wsb_seed = strtotime("now");
-
-                        /**
-                         *  production: '320460709'
-                         *  sandbox: '515854557'
-                         */
-                        $wsb_storeid = $contactEmail == 'zankoav@gmail.com' ? '515854557' : '320460709';
+                        $wsb_storeid = $sandbox['wsb_storeid'];
                         $wsb_order_num = $post_id;
-
-                        /**
-                         * production: '0'
-                         * sandbox: '1'
-                         */
-                        $wsb_test = $contactEmail == 'zankoav@gmail.com' ? '1' : '0';
+                        $wsb_test = $sandbox['wsb_test'];
                         $wsb_currency_id = 'BYN';
                         $wsb_total = (int)($totalPrice * $prepaidType / 100);
                         if($prepaidType == 100){

@@ -48,7 +48,7 @@
 <body>
     <script>
         const params = <?=$formData?>;
-        generateAndSubmitForm("<?=$paymentOrg;?>", params.values, params.names);
+        generateAndSubmitForm("<?=$paymentOrg['url'];?>", params.values, params.names);
 
         function generateAndSubmitForm(action, paramsWithValue, paramsWithNames, method = 'POST') {
             const form = document.createElement("form");
