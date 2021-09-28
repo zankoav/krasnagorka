@@ -704,6 +704,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
             
         return [
+            'orderId' => $orderId,
             'created' => $created,
             'from' => date("d.m.Y", strtotime($start)),
             'to' => date("d.m.Y", strtotime($end)),
