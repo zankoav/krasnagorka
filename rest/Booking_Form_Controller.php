@@ -899,6 +899,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $state['message'] = "Клиент оплатил $prepaidType%. Передать информацию Юре.";
         }
 
+        Log::info('updateAmoCrmLead state', $state);
+
         if (!empty($leadId)) {
             $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
@@ -929,10 +931,13 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
             $lead->setCustomFieldsValues($leadCustomFields);
+
+            Log::info('updateAmoCrmLead lead', $lead);
             $apiClient->leads()->updateOne($lead);
 
 
             $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
+            Log::info('updateAmoCrmLead taskId', $taskId);
             try {
                 $task = $apiClient->tasks()->getOne($taskId);
                 $task->setTaskTypeId(2126242)
@@ -944,6 +949,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     ->setResponsibleUserId(2373844);
 
                 $task = $apiClient->tasks()->updateOne($task);
+                Log::info('updateAmoCrmLead task', $task);
             } catch (AmoCRMApiException $e) {
                 Log::error("tasks exception:" , $e->getMessage());
             }
