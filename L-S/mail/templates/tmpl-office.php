@@ -83,7 +83,7 @@
 							<td colspan="6"
 								style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
 								<div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">
-									Информацияоб объектах размещения:</div>
+									Информация об объектах размещения:</div>
 								<div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;"
 										href=<?= $order['calendarLink'] ?>>
 										<?= $order['calendarName'] ?>

@@ -563,9 +563,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $result['status'] = 'success';
                 if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
                     $orderData = $this->getOrderData($request['orderId']);
-                    $orderData["email"] = $request['email'];
-                    $orderData['prepaidType'] = $request['prepaidType'];
-                    $orderData['paymentMethod'] = $request['paymentMethod'];
                     $result['template'] = $this->sendMail($orderData);
                 }
             }
@@ -696,7 +693,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $houseLink = getHouseLinkByShortCode($calendarShortCode);
         $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
         $prepaidPercantage = (int) get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
-
+        $email = getEmailFromOrder($orderId);
         $subprice = 0;
 
         if(!empty($paymentMethod) and !empty($prepaidPercantage)){
@@ -715,12 +712,15 @@ class Booking_Form_Controller extends WP_REST_Controller
             'leadId' => $leadId,
             'peopleCount' => $peopleCount,
             'phone' => $phone,
+            'email' => $email,
+            'paymentMethod' => $paymentMethod,
+            'prepaidType' => $prepaidPercantage,
             'calendarName' => $calendars[0]->name,
             'calendarLink' => $houseLink
         ];
     }
 
-    private function sendMail($request){
+    private function sendMail($request, $isWebPaySuccess = false){
         $emailTo = $request['email'];
         $data = $request;
 
@@ -730,13 +730,17 @@ class Booking_Form_Controller extends WP_REST_Controller
         $subject = '';
         $templatePath = '';
 
-        if($paymentMethod == 'card_layter'){
-            $subject = $prepaidType == 100 ? 'Иструкция по оплате (Полная оплата)' : 'Иструкция по оплате (Частичная оплата)';
+        if($paymentMethod == 'card_layter' and !$isWebPaySuccess){
+            $subject = 'Заявка на бронирование';
             $templatePath = $prepaidType == 100 ? "L-S/mail/templates/tmpl-pay-full-confirm" : "L-S/mail/templates/tmpl-pay-partial-confirm";
-        }else if($paymentMethod == 'office'){
-            $subject = 'Координаты оффиса';
+        }else if($paymentMethod == 'office' and !$isWebPaySuccess){
+            $subject = 'Заявка на бронирование';
             $templatePath = "L-S/mail/templates/tmpl-office";
+        }else if($isWebPaySuccess){
+            $subject = 'Подтверждение бронирования';
+            $templatePath = $prepaidType == 100 ? "L-S/mail/templates/tmpl-pay-full" : "L-S/mail/templates/tmpl-pay-partial";
         }
+        
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
             $result = LS_Mailer::sendMail($emailTo, $subject, $template);
@@ -830,18 +834,37 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function pay_success($request)
     {
-        $order = $this->getOrderById($_POST['site_order_id']);
-        ob_start();
-        generateCheck($_POST['site_order_id']);
-        $checkOutList = ob_get_contents();
-        ob_end_clean();
-        wp_mail([
-                $order['email']
-            ],
-            'Успешная оплата в Красногорке',
-            $checkOutList
-        );
+        $order = $this->getOrderData($_POST['site_order_id']);
+        $prepaidType = $order['prepaidType'];
 
+        if (isset($_POST['transaction_id'])) {
+            
+            update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
+
+            if(isset($paymentMethod) and $prepaidType != 100){
+                $prepaidType = intval($prepaidType);
+                update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'prepaid');
+                update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['subprice']);
+            }else{
+                update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
+                update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
+            }
+        }
+
+        
+
+        // $order = $this->getOrderById($_POST['site_order_id']);
+        $this->sendMail($order, true);
+        // ob_start();
+        // generateCheck($_POST['site_order_id']);
+        // $checkOutList = ob_get_contents();
+        // ob_end_clean();
+        // wp_mail([
+        //         $order['email']
+        //     ],
+        //     'Успешная оплата в Красногорке',
+        //     $checkOutList
+        // );
 
         ob_start();
         generateGuestMemo();
@@ -855,24 +878,37 @@ class Booking_Form_Controller extends WP_REST_Controller
             $guestMemoMail
         );
 
-        if ($_POST['transaction_id']) {
-            update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
-            update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
-            update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
-        }
         try {
-            $this->updateAmoCrmLead($order['leadId'], $_POST['site_order_id']);
+            $this->updateAmoCrmLead($order);
         } catch (AmoCRMApiException $e) {
             Logger::log("AmoCRMApiException Exception:" . $e->getTitle());
         }
     }
 
-    private function updateAmoCrmLead($leadId, $orderId)
+    private function updateAmoCrmLead($order)
     {
+        $leadId = $order['leadId'];
+
+        $state = [
+            'price' => intval($order['price']),
+            'status' => 'booked',
+            'col' => 35452474,
+            'message' => 'Клиент оплатил 100%. Передать информацию Юре.'
+        ];
+
+        if(!empaty($order['prepaidType']) and $order['prepaidType'] != 100){
+            $state['price'] =  intval($order['subprice']);
+            $state['status'] =  $order['prepaid'];
+            $state['col'] =  43023853;
+
+            $prepaidType = intval($order['prepaidType']);
+            $state['message'] = "Клиент оплатил $prepaidType%. Передать информацию Юре.";
+        }
+
         if (!empty($leadId)) {
             $apiClient = self::getAmoCrmApiClient();
             $lead = $apiClient->leads()->getOne($leadId);
-            $lead->setStatusId(35452474);
+            $lead->setStatusId($state['col']);
 
             $leadCustomFields = new CustomFieldsValuesCollection();
 
@@ -881,7 +917,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $payedFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())->setValue(
-                            $lead->getPrice()
+                            $state['price']
                         )
                     )
             );
@@ -892,7 +928,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $typeFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue('booked')
+                            ->setValue($state['status'])
                     )
             );
             $leadCustomFields->add($typeFieldValueModel);
@@ -906,7 +942,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             try {
                 $task = $apiClient->tasks()->getOne($taskId);
                 $task->setTaskTypeId(2126242)
-                    ->setText('Клиент оплатил 100%. Передать информацию Юре.')
+                    ->setText($state['message'])
                     ->setCompleteTill(mktime(date("H"), date("i") + 30))
                     ->setEntityType(EntityTypesInterface::LEADS)
                     ->setEntityId($lead->getId())

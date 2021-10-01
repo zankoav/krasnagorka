@@ -203,7 +203,6 @@ export default class BookingForm extends LightningElement {
 
             if(leadResponse){
                 gtag('event', 'create_lead');
-                console.log(leadResponse.template);
                 this.dispatchEvent(
                     new CustomEvent('update', {
                         detail: {
