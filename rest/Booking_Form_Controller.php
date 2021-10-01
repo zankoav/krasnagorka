@@ -889,6 +889,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     private function updateAmoCrmLead($order)
     {
+        Log::info('updateAmoCrmLead order', $order);
         $leadId = $order['leadId'];
 
         $state = [
