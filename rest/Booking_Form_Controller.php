@@ -838,7 +838,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
         $order = $this->getOrderData($_POST['site_order_id']);
         Log::info('updateAmoCrmLead order', $order);
-        Log::info('updateAmoCrmLead site_order_id',$_POST['site_order_id']);
+        Log::info('updateAmoCrmLead site_order_id',$_POST);
 
         $prepaidType = $order['prepaidType'];
 
@@ -886,7 +886,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $this->updateAmoCrmLead($order);
         } catch (AmoCRMApiException $e) {
-            Logger::log("AmoCRMApiException Exception:" . $e->getTitle());
+            Log::error("AmoCRMApiException Exception:" , $e->getTitle());
         }
     }
 
@@ -956,7 +956,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 $task = $apiClient->tasks()->updateOne($task);
             } catch (AmoCRMApiException $e) {
-                Logger::log("tasks exception:" . $e->getMessage());
+                Log::error("tasks exception:" , $e->getMessage());
             }
         }
     }
