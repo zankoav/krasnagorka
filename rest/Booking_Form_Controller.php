@@ -787,7 +787,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $leadId = $this->initAmoCrmLead($leadData, $contactData);
             $sandbox = get_webpay_sandbox();
 
-            Log::inf('sandbox', $sandbox);
+            Log::info('sandbox', $sandbox);
 
             if (isset($leadId)) {
 
