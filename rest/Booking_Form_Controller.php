@@ -677,8 +677,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $apiClient = self::getAmoCrmApiClient();
 
-        Log::info('0', [$leadId,  $orderId, $message]);
-
         //Создадим задачу
         $tasksCollection = new TasksCollection();
         $task = new TaskModel();
@@ -692,11 +690,9 @@ class Booking_Form_Controller extends WP_REST_Controller
         $tasksCollection->add($task);
 
         try {
-            Log::info('1');
             $tasksCollection = $apiClient->tasks()->add($tasksCollection);
             $taskToStore = $tasksCollection->first();
             update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
-            Log::info('2');
         } catch (AmoCRMApiException $e) {
             Log::error('Exceptions: ' . $e->getTitle(), $e->getDescription());
         }
@@ -869,7 +865,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         if(!empty($order['prepaidType']) and $order['prepaidType'] != 100){
             $state['price'] =  intval($order['subprice']);
-            $state['status'] =  $order['prepaid'];
+            $state['status'] =  'prepaid';
             $state['col'] =  43023853;
 
             $prepaidType = intval($order['prepaidType']);
