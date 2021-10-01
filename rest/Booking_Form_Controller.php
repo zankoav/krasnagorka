@@ -838,7 +838,7 @@ class Booking_Form_Controller extends WP_REST_Controller
     {
         $order = $this->getOrderData($_POST['site_order_id']);
         Log::info('updateAmoCrmLead order', $order);
-        Log::info('updateAmoCrmLead site_order_id',$_POST);
+        Log::info('updateAmoCrmLead POST',$_POST);
 
         $prepaidType = $order['prepaidType'];
 
