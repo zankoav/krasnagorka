@@ -795,7 +795,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
 
-            if(isset($paymentMethod) and $prepaidType != 100){
+            if(!empty($order['prepaidType']) and $order['prepaidType'] != 100){
                 $prepaidType = intval($prepaidType);
                 update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'prepaid');
                 update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['subprice']);
