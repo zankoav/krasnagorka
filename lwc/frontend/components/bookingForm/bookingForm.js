@@ -318,8 +318,11 @@ export default class BookingForm extends LightningElement {
                         result.values.wsb_customer_name = fio;
                         result.values.wsb_phone = phone.replace('+', '');
                         result.values.wsb_email = email;
+                        result.values.wsb_storeid = this.model.webpaySandbox.wsb_storeid;
+                        result.values.wsb_test= this.model.webpaySandbox.wsb_test;
+
                         generateAndSubmitForm(
-                            this.model.webpaySandbox,
+                            this.model.webpaySandbox.url,
                             result.values,
                             result.names
                         );

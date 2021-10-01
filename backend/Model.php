@@ -242,7 +242,7 @@ class Model
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
-            'webpaySandbox'     => $sandbox['url'],
+            'webpaySandbox'     => $sandbox,
             'payment'           => $showPayments,
             'paymentMethod'     => $showPayments ? 'card' : '',
             'prepaidType'       => $showPayments ? 100 : '',

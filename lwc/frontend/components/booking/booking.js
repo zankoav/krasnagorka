@@ -203,6 +203,7 @@ export default class BookingForm extends LightningElement {
 
             if(leadResponse){
                 gtag('event', 'create_lead');
+                console.log(leadResponse.template);
                 this.dispatchEvent(
                     new CustomEvent('update', {
                         detail: {
@@ -214,9 +215,12 @@ export default class BookingForm extends LightningElement {
                     })
                 );
 
+                responseOrder.redirect.values.wsb_storeid = this.settings.webpaySandbox.wsb_storeid;
+                responseOrder.redirect.values.wsb_test= this.settings.webpaySandbox.wsb_test;
+
                 if(responseOrder.redirect){
                     generateAndSubmitForm(
-                        this.settings.webpaySandbox,
+                        this.settings.webpaySandbox.url,
                         responseOrder.redirect.values,
                         responseOrder.redirect.names
                     );
