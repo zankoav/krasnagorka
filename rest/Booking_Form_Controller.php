@@ -936,7 +936,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $apiClient->leads()->updateOne($lead);
 
 
-            $taskId = get_post_meta($orderId, 'sbc_task_id', 1);
+            $taskId = get_post_meta($order['orderId'], 'sbc_task_id', 1);
             Log::info('updateAmoCrmLead taskId', $taskId);
             try {
                 $task = $apiClient->tasks()->getOne($taskId);
