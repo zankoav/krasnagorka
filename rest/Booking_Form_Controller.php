@@ -1013,6 +1013,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_client', $contactTemplate);
                     $this->update_all_clients_orders($clientId, $contactTemplate);
                     update_post_meta($order_id, 'sbc_order_select', 'reserved');
+
+                    update_post_meta($order_id, 'sbc_order_payment_method', $request['paymentMethod']);
+                    update_post_meta($order_id, 'sbc_order_prepaid_percantage', $request['prepaidType']);
+
                     update_post_meta($order_id, 'sbc_order_prepaid', '0');
                     update_post_meta($order_id, 'sbc_order_start', $dateStart);
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);

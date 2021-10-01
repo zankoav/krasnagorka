@@ -308,6 +308,8 @@ export default class BookingForm extends LightningElement {
                     comment: comment,
                     orderTitle: orderTitle,
                     message: spam,
+                    paymentMethod: this.model.paymentMethod,
+                    prepaidType: this.model.prepaidType,
                     wsb_test: this.model.webpaySandbox.wsb_test
                 })
             })
