@@ -251,7 +251,7 @@ export default class BookingForm extends LightningElement {
     get finishTemplate(){
         return this.settings.tmpl?.replace('600px', '100%')
             .replace('600', '100')
-            .replace('w80', 'width=80');
+            .replace('w80', 'width=100');
     }
 
     get cssCardTemplate(){

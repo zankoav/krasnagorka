@@ -18,7 +18,7 @@
     $template = LS_Mailer::getTemplate($templatePath, $order);
     $template = str_replace('600px', '100%', $template);
     $template = str_replace('600', '100', $template);
-    $template = str_replace('w80', 'width=80', $template);
+    $template = str_replace('w80', 'width=100', $template);
 
     $wsbIdStore = get_post_meta($orderId, 'sbc_webpay_transaction_id', 1);
 
