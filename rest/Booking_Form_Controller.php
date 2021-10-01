@@ -679,6 +679,8 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $apiClient = self::getAmoCrmApiClient();
 
+        Log::info('0', [$leadId,  $orderId, $message]);
+
         //Создадим задачу
         $tasksCollection = new TasksCollection();
         $task = new TaskModel();
