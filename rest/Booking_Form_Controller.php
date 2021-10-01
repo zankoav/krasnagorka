@@ -890,7 +890,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             'message' => 'Клиент оплатил 100%. Передать информацию Юре.'
         ];
 
-        if(!empaty($order['prepaidType']) and $order['prepaidType'] != 100){
+        if(!empty($order['prepaidType']) and $order['prepaidType'] != 100){
             $state['price'] =  intval($order['subprice']);
             $state['status'] =  $order['prepaid'];
             $state['col'] =  43023853;
