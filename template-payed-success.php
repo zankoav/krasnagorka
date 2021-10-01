@@ -13,6 +13,13 @@
     $wsbId = $_GET['wsb_tid'];
     $orderId = $_GET['wsb_order_num'];
 
+    $order = get_order_data($orderId);
+    $templatePath = $order['prepaidType'] == 100 ? "L-S/mail/templates/tmpl-pay-full" : "L-S/mail/templates/tmpl-pay-partial";
+    $template = LS_Mailer::getTemplate($templatePath, $order);
+    $template = str_replace('600px', '100%', $template);
+    $template = str_replace('600', '100', $template);
+    $template = str_replace('w80', 'width=80', $template);
+
     $wsbIdStore = get_post_meta($orderId, 'sbc_webpay_transaction_id', 1);
 
     if($wsbId != $wsbIdStore){
@@ -49,7 +56,6 @@
     $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
 
     
-
 ?>
 <style>
 strong {
@@ -58,7 +64,7 @@ strong {
 </style>
 <div style="background:#f8f8f8;">
     <section class="b-container">
-        <?= generateCheck($orderId, true);?>
+        <?= $template;?>
     </section>
 </div>
 <?php
