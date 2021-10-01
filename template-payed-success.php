@@ -61,9 +61,17 @@
 strong {
     font-weight: 700 !important;
 }
+
+@media (min-width : 768px) {
+    .pay-container{ 
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
 </style>
 <div style="background:#f8f8f8;">
-    <section class="b-container">
+    <section class="pay-container">
         <?= $template;?>
     </section>
 </div>
