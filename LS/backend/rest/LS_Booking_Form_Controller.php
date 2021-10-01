@@ -282,6 +282,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             
             $result['seasons_group'][$season->ID]['price_block']['total'] = round(($basePrice * (1 - $deltaSale / 100) ) * (empty($basePeopleCount) ? 1 : $basePeopleCount) * $seasonDaysCount, 2);
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
+            $result['total_price'] = intval($result['total_price']);
         }
         return $result;
     }
