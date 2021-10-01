@@ -170,6 +170,7 @@ export default class BookingForm extends LightningElement {
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
+            wsb_test: this.settings.webpaySandbox.wsb_test,
             data: `prepaidType=${this.settings.prepaidType}&paymentMethod=${this.settings.paymentMethod}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${this.settings.email}&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${this.settings.comment || ''}&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${this.settings.passport || ''}&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
         };
         

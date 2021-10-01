@@ -613,6 +613,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     
                     $response = $this->insertWPLead([
                         "type" => "reserved",
+                        "wsb_test" => $request["wsb_test"],
                         "passport" => $request["passport"],
                         "objectIds" => [$calendarId],
                         "dateFrom" => $dateStart,
@@ -624,6 +625,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "contactName" => $request['fio'],
                         "contactPhone" => $request['phone'],
                         "contactEmail" => $request['email'],
+                        "paymentMethod" => $request['paymentMethod'],
                         "paymentMethod" => $request['paymentMethod'],
                         "prepaidType" => $request['prepaidType']
                     ]);
@@ -785,7 +787,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             ];
 
             $leadId = $this->initAmoCrmLead($leadData, $contactData);
-            $sandbox = get_webpay_sandbox();
+            $sandbox = get_webpay_sandbox($request['wsb_test']);
 
             if (isset($leadId)) {
 
@@ -1233,7 +1235,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 $prepaidType  = $request['prepaidType'];
-                $sandbox = get_webpay_sandbox();
+                $sandbox = get_webpay_sandbox($request['wsb_test']);
 
                 if (!empty($prepaidType)) {
                     $prepaidType = intval($prepaidType);

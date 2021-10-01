@@ -18,19 +18,29 @@ function show_seasons_options() {
     return $seasons;
 }
 
-function get_webpay_sandbox(){
+function get_webpay_sandbox($orgType = null){
     $bookingSettings = get_option('mastak_booking_appearance_options');
     $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'] == 'on';
 
-    $org = [
+    $org = $prod;
+
+    $prod = [
         'url'=>'https://payment.webpay.by',
         'wsb_storeid' => '320460709',
         'wsb_test' => '0',
     ];
-    if($isSandBoxEnabled and is_user_logged_in()){
-        $org['url'] = 'https://securesandbox.webpay.by';
-        $org['wsb_storeid'] = '515854557';
-        $org['wsb_test'] = '1';
+    $sandbox = [
+        'url'=>'https://securesandbox.webpay.by',
+        'wsb_storeid' => '515854557',
+        'wsb_test' => '1',
+    ];
+    if($orgType === '0'){
+        $org = $prod;
+    }else if($orgType === '1'){
+        $org = $sandbox;
+    }else if($isSandBoxEnabled and is_user_logged_in()){
+        $org = $sandbox;
     }
+
     return $org;
 }

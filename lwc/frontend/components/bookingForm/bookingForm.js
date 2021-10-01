@@ -307,7 +307,8 @@ export default class BookingForm extends LightningElement {
                     passport: passport,
                     comment: comment,
                     orderTitle: orderTitle,
-                    message: spam
+                    message: spam,
+                    wsb_test: this.model.webpaySandbox.wsb_test
                 })
             })
                 .then(response => {
