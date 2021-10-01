@@ -216,10 +216,11 @@ export default class BookingForm extends LightningElement {
                     })
                 );
 
-                responseOrder.redirect.values.wsb_storeid = this.settings.webpaySandbox.wsb_storeid;
-                responseOrder.redirect.values.wsb_test= this.settings.webpaySandbox.wsb_test;
-
+                
                 if(responseOrder.redirect){
+                    responseOrder.redirect.values.wsb_storeid = this.settings.webpaySandbox.wsb_storeid;
+                    responseOrder.redirect.values.wsb_test= this.settings.webpaySandbox.wsb_test;
+
                     generateAndSubmitForm(
                         this.settings.webpaySandbox.url,
                         responseOrder.redirect.values,
