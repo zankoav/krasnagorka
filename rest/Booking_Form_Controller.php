@@ -695,6 +695,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         $houseLink = getHouseLinkByShortCode($calendarShortCode);
         $paymentMethod = get_post_meta($orderId, 'sbc_order_payment_method', 1);
         $prepaidPercantage = (int) get_post_meta($orderId, 'sbc_order_prepaid_percantage', 1);
+        $prepaidPercantage = $prepaidPercantage == 0 ? 100 : $prepaidPercantage;
+        $paymentMethod = empty($paymentMethod) ? 'card' : $paymentMethod;
         $email = getEmailFromOrder($orderId);
         $subprice = 0;
 
@@ -837,12 +839,11 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function pay_success($request)
     {
         $order = $this->getOrderData($_POST['site_order_id']);
-        Log::info('updateAmoCrmLead order', $order);
-        Log::info('updateAmoCrmLead POST',$_POST);
 
         $prepaidType = $order['prepaidType'];
+        $transaction_id = get_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', 1);
 
-        if (isset($_POST['transaction_id'])) {
+        if (isset($_POST['transaction_id']) and empty($transaction_id)) {
             
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
 
@@ -854,44 +855,32 @@ class Booking_Form_Controller extends WP_REST_Controller
                 update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'booked');
                 update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
             }
-        }
+    
+            $this->sendMail($order, true);
 
-        
+            ob_start();
+            generateGuestMemo();
+            $guestMemoMail = ob_get_contents();
+            ob_end_clean();
 
-        // $order = $this->getOrderById($_POST['site_order_id']);
-        $this->sendMail($order, true);
-        // ob_start();
-        // generateCheck($_POST['site_order_id']);
-        // $checkOutList = ob_get_contents();
-        // ob_end_clean();
-        // wp_mail([
-        //         $order['email']
-        //     ],
-        //     'Успешная оплата в Красногорке',
-        //     $checkOutList
-        // );
+            wp_mail([
+                    $order['email']
+                ],
+                'Памятка гостя',
+                $guestMemoMail
+            );
 
-        ob_start();
-        generateGuestMemo();
-        $guestMemoMail = ob_get_contents();
-        ob_end_clean();
-
-        wp_mail([
-                $order['email']
-            ],
-            'Памятка гостя',
-            $guestMemoMail
-        );
-
-        try {
-            $this->updateAmoCrmLead($order);
-        } catch (AmoCRMApiException $e) {
-            Log::error("AmoCRMApiException Exception:" , $e->getTitle());
+            try {
+                $this->updateAmoCrmLead($order);
+            } catch (AmoCRMApiException $e) {
+                Log::error("AmoCRMApiException Exception:" , $e->getTitle());
+            }
         }
     }
 
     private function updateAmoCrmLead($order)
     {
+        Log::info('updateAmoCrmLead order', $order);
         $leadId = $order['leadId'];
 
         $state = [
