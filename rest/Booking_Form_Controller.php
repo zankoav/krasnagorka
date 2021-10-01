@@ -561,13 +561,11 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $type = 'booking-form';
                 $amo = new AmoIntegration($type, $request['data'], $href);
                 $result['status'] = 'success';
+                $orderData = get_order_data($request['orderId']);
                 if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
-                    $orderData = get_order_data($request['orderId']);
                     $result['template'] = $this->sendMail($orderData);
                 }
-
                 $this->addTaskForLead($orderData['leadId'], $orderData['orderId'], 'Помочь клиенту определиться с заказом');
-                
             }
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
