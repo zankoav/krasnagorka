@@ -837,6 +837,9 @@ class Booking_Form_Controller extends WP_REST_Controller
     public function pay_success($request)
     {
         $order = $this->getOrderData($_POST['site_order_id']);
+        Log::info('updateAmoCrmLead order', $order);
+        Log::info('updateAmoCrmLead site_order_id',$_POST['site_order_id']);
+
         $prepaidType = $order['prepaidType'];
 
         if (isset($_POST['transaction_id'])) {
@@ -889,7 +892,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     private function updateAmoCrmLead($order)
     {
-        Log::info('updateAmoCrmLead order', $order);
         $leadId = $order['leadId'];
 
         $state = [
