@@ -1,6 +1,15 @@
 @import './../../common/mixins';
 
 .payment-methods {
+
+    &__title{
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 16px;
+        text-align: center;
+        margin: .5rem 0 1rem;
+    }
+
     &__label{
         margin-right: 0.5rem;
         font-size: 14px;
@@ -22,10 +31,11 @@
         @include sm {
             display: flex;
             align-items: center;
+            justify-content: center;
         }
     }
 
     &__buttons{
-        width: 300px;
+        width: 360px;
     }
 }

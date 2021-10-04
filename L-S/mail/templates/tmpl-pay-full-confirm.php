@@ -1,6 +1,7 @@
 <?php
 	$order = $args['data'];
 	$source = get_post_meta($order['orderId'], 'sbc_order_prepaid_source', 1);
+	$order['until'] = date('d-m-Y', strtotime($order['created']. ' + 2 days'));
 ?>
 
 <table bgcolor="#f8f8f8" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%"
@@ -37,8 +38,14 @@
 							<tr>
 								<td colspan="6"
 									style="padding: 0 30px 20px; color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
-									<div style="font-size:18px;margin-bottom:5px;">Ссылка на оплату:
+									<div style="font-size:18px;">Ссылка на оплату:
 										<strong><a style="color: #1498c6; text-decoration: underline; text-transform: uppercase;" href="<?="https://krasnagorka.by/pay/?source=$source"?>" target="_blank">оплатить</a></strong>
+									</div>
+									<div style="line-height: 1;">
+										<small style="color:#999;">
+											<span style="color:#f00;">*</span>
+											Действительна до <?= $order['until']; ?> 12:00
+										</small>
 									</div>
 								</td>
 							</tr>

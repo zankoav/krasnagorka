@@ -5,15 +5,15 @@ import './paymentMethods.scss';
 
 const PAYMENT_METHODS_OPTIONS = [
     {
-        label:"картой",
+        label:"Картой",
         value:"card"
     },
     {
-        label:"картой позже",
+        label:"Картой позже",
         value:"card_layter"
     },
     {
-        label:"в офисе",
+        label:"В офисе",
         value:"office"
     }
 ];

@@ -1,5 +1,12 @@
 <template>
     <div class={cssClass} onclick={fierEvent}>
-        {item.label}
+        <template if:true={item.selected}>
+            <span class="radio-button__circle radio-button__circle_selected"></span>
+        </template>
+        <template  if:false={item.selected}>
+            <span class="radio-button__circle"></span>
+        </template>
+        <span class="radio-button__label">{item.label}</span>
+        
     </div>
 </template>
