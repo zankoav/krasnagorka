@@ -22,8 +22,6 @@ function get_webpay_sandbox($orgType = null){
     $bookingSettings = get_option('mastak_booking_appearance_options');
     $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'] == 'on';
 
-    $org = $prod;
-
     $prod = [
         'url'=>'https://payment.webpay.by',
         'wsb_storeid' => '320460709',
@@ -34,6 +32,9 @@ function get_webpay_sandbox($orgType = null){
         'wsb_storeid' => '515854557',
         'wsb_test' => '1',
     ];
+
+    $org = $prod;
+    
     if($orgType === '0'){
         $org = $prod;
     }else if($orgType === '1'){
