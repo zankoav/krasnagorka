@@ -140,7 +140,7 @@
         <h2 class="header-title__subtitle">Карта</h2>
     </section>
     <div id="main-map">
-        <script src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A78e4c2c77037e73bd8d8ee81e1d9f12cb332ba73769fc3f6b73537f40d72dccc&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=true" defer></script>
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6982053e34835c4a2cd060255b90e9bd22635ef01e7c27b0a1d4360632ad4250&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
     </div>
     
     <!-- <section class="b-container "> -->
