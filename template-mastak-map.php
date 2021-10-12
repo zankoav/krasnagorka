@@ -139,7 +139,9 @@
     <section class="b-container header-title">
         <h2 class="header-title__subtitle">Карта</h2>
     </section>
-    <div id="main-map"></div>
+    <div id="main-map">
+        <script src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A78e4c2c77037e73bd8d8ee81e1d9f12cb332ba73769fc3f6b73537f40d72dccc&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=true" defer></script>
+    </div>
     
     <!-- <section class="b-container "> -->
         
