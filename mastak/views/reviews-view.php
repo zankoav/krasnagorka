@@ -1,4 +1,9 @@
 <?php
+    
+$reviewsOptions = get_option( 'mastak_reviews_appearance_options' );
+$reviewsEnabled = $reviewsOptions["reviews_slider_show"];
+if($reviewsEnabled == 'on'){
+        
     $isCommentsPage = false;
     $number         = 16;
     $comments       = get_comments(array('post_id' => 9105, 'status' => 'approve', 'number' => $number));
@@ -7,8 +12,6 @@
     }
 
     if (count($comments) > 4) :?>
-
-
 
         <section class="b-bgc-wrapper">
             <div class="b-container header-title">
@@ -36,4 +39,6 @@
     if (!is_home()) {
         echo '</noindex>';
     }
+
+}
 
