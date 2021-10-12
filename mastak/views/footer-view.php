@@ -58,6 +58,10 @@
                             tag.src = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A78e4c2c77037e73bd8d8ee81e1d9f12cb332ba73769fc3f6b73537f40d72dccc&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=true";
                             tag.defer = true;
                             document.getElementById('top-map').appendChild(tag);
+                            const mainMap = document.getElementById('main-map');
+                            if(mainMap){
+                                mainMap.appendChild(tag);
+                            }
                         }, 5000);
                     </script>
                 <?php endif;?>
@@ -72,6 +76,10 @@
                                     tag.src = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A78e4c2c77037e73bd8d8ee81e1d9f12cb332ba73769fc3f6b73537f40d72dccc&amp;width=100%25&amp;height=275&amp;lang=ru_RU&amp;scroll=true";
                                     tag.defer = true;
                                     document.getElementById('small-map').appendChild(tag);
+                                    const mainMap = document.getElementById('main-map');
+                                    if(mainMap){
+                                        mainMap.appendChild(tag);
+                                    }
                                 }, 5000);
                             </script>
                         <?php endif;?>

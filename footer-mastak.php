@@ -87,7 +87,7 @@ if (is_page_template("template-mastak-map.php")) : ?>
 
 
     <!--ROUTE SCRIPT-->
-    <script>
+    <!-- <script>
         function googleMapInit() {
 
 
@@ -247,7 +247,7 @@ if (is_page_template("template-mastak-map.php")) : ?>
             // google.maps.event.addDomListener(window, 'load', initialize);
         }
     </script>
-    <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBYTA7whVF5uj5xTK_CghQf19XbhwX_6nI&signed_in=false&libraries=places&callback=googleMapInit"></script> -->
 
 
 <?php endif; ?>

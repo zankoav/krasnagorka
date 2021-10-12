@@ -141,7 +141,8 @@
     </section>
 
     <section class="b-container ">
-        <p class="way__subtitle">Укажите город из которого Вы планируете к нам ехать и нажмите кнопку проложить
+        <div id="main-map"></div>
+        <!-- <p class="way__subtitle">Укажите город из которого Вы планируете к нам ехать и нажмите кнопку проложить
             маршрут</p>
         <div class="way__map">
             <input id="pac-input" class="controls-routemap" type="text" placeholder="Откуда ехать?"
@@ -150,7 +151,7 @@
                    onclick="codeAddress()">
 
             <div id="map-route-canvas" class="way__canvas"></div>
-        </div>
+        </div> -->
     </section>
 
 <?php
