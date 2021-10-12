@@ -137,11 +137,12 @@
     </section>
 
     <section class="b-container header-title">
-        <h2 class="header-title__subtitle">Проложить маршрут</h2>
+        <h2 class="header-title__subtitle">Карта</h2>
     </section>
-
-    <section class="b-container ">
-        <div id="main-map"></div>
+    <div id="main-map"></div>
+    
+    <!-- <section class="b-container "> -->
+        
         <!-- <p class="way__subtitle">Укажите город из которого Вы планируете к нам ехать и нажмите кнопку проложить
             маршрут</p>
         <div class="way__map">
@@ -152,7 +153,7 @@
 
             <div id="map-route-canvas" class="way__canvas"></div>
         </div> -->
-    </section>
+    <!-- </section> -->
 
 <?php
 
