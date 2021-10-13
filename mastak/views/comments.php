@@ -10,6 +10,16 @@
         align-items: center;
     }
 
+    @media (min-width:768px) {
+        .review-form__out{
+            flex-direction: row;
+        }
+
+        .review-form__out-title{
+            margin-right: 8px;
+        }
+    }
+
     .review-form__out-container{
         display: flex;
         margin-top: 1rem;
@@ -47,7 +57,7 @@
                 comment_form($args, $post_id = null);
             ?>
             <div class="review-form__out">
-                Оставьте свой отзыв в:
+                <span class="review-form__out-title">Оставьте свой отзыв в:</span>
                 <div class="review-form__out-container">
                     <a class="review-form__out-item" href="https://www.google.com/search?q=%D0%B1%D0%B0%D0%B7%D0%B0+%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0+%D0%BA%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B3%D0%BE%D1%80%D0%BA%D0%B0&rlz=1C5CHFA_enBY932BY932&biw=1440&bih=789&sxsrf=AOaemvLVgEwFxXsvpX_bwu1DacCicmG9LQ%3A1633850638747&ei=DpViYZCJLcXtsAeIrLlY&ved=0ahUKEwiQyMD3p7_zAhXFNuwKHQhWDgsQ4dUDCA4&uact=5&oq=%D0%B1%D0%B0%D0%B7%D0%B0+%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0+%D0%BA%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B3%D0%BE%D1%80%D0%BA%D0%B0&gs_lcp=Cgdnd3Mtd2l6EAMyFwguEIAEEMcBEK8BEIsDEKYDEKgDEJMCMgUIABCABDoHCCMQsAMQJzoHCAAQRxCwAzoECCMQJzoUCC4QgAQQxwEQrwEQiwMQqAMQpgM6CwguEIAEEMcBEK8BOgYIABAHEB46BwgjELACECc6EwguEMcBEK8BEA0QiwMQpgMQqAM6BAgAEA06CgguEMcBEK8BEA06CAgAEAgQDRAeOhYILhDHARCvARANEIsDEKYDEKgDEJMCSgQIQRgAUMcnWKxRYL5UaARwAngAgAF3iAHvDJIBBDExLjaYAQCgAQHIAQq4AQPAAQE&sclient=gws-wiz#lrd=0x46c2e1254fde00c5:0xfda7b40d40fb64b1,1" target="_blank">Google</a>
                     <span>и</span>
