@@ -10,16 +10,6 @@
         align-items: center;
     }
 
-    @media (min-width:768px) {
-        .review-form__out{
-            flex-direction: row;
-        }
-
-        .review-form__out-title{
-            margin-right: 8px;
-        }
-    }
-
     .review-form__out-container{
         display: flex;
         margin-top: 1rem;
@@ -38,6 +28,21 @@
 
     .review-form__submit:hover {
         background-color: #23c4f5;
+    }
+
+    @media (min-width:768px) {
+        .review-form__out{
+            flex-direction: row;
+            margin-top: 2rem;
+        }
+
+        .review-form__out-title{
+            margin-right: 8px;
+        }
+
+        .review-form__out-container{
+            margin-top: 0;
+        }
     }
 
 </style>
