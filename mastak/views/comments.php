@@ -4,6 +4,10 @@
 <style>
     .review-form__out{
         margin-top: 1rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .review-form__out-container{
