@@ -17,7 +17,7 @@
     }
 
     .review-form__out-item{
-        padding: 10px 32px;
+        padding: 8px 32px;
         color: #fff;
         background-color: #d0021b;
         border-radius: 4px;
@@ -26,7 +26,7 @@
         margin: 0 8px;
     }
 
-    .review-form__submit:hover {
+    .review-form__out-item:hover {
         background-color: #23c4f5;
     }
 
