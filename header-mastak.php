@@ -280,12 +280,25 @@ if (!defined('ABSPATH')) {
 		.added-info-price a{
 			color: #23C4FC;
 		}
+
 		@media (min-width:768px) {
 			.added-info-price{
 				margin-top:4px;
 				margin-bottom: 0;
 			}
 		}
+
+		.added-info-price_first{
+			margin-top: 16px;
+			text-align: center;
+		}
+
+		@media (min-width:768px) {
+			.added-info-price_first{
+				text-align: initial;
+			}
+		}
+		
 	</style>
 
 	<script type="text/javascript">

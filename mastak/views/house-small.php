@@ -123,7 +123,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                     </a>
                 <?php endif; ?>
             </div>
-            <p class="added-info-price">Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
+            <p class="added-info-price added-info-price_first">Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
             </p>
         </div>
         <?php if (!$isTerem) : ?>
