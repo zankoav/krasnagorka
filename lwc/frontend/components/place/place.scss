@@ -4,9 +4,9 @@
     font-size : 14px;
     color     : $WHITE;
 
-    @include sm{
-        margin-left : 1.5rem;
-    }
+    // @include sm{
+    //     margin-left : 1.5rem;
+    // }
 
     &__title {
         text-transform : uppercase;

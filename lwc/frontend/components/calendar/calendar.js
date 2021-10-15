@@ -38,6 +38,7 @@ export default class Calendar extends LightningElement {
     async connectedCallback() {
         
         jsFromDate = this.initDate(this.settings.dateStart);
+        console.log('jsFromDate',jsFromDate);
         jsToDate = this.initDate(this.settings.dateEnd);
         const calendarSlug = this.settings.calendars.find(c => c.selected).slug;
         this.loading = true;
@@ -52,7 +53,8 @@ export default class Calendar extends LightningElement {
         const step = this;
         $calendar.fullCalendar({
             height: 380,
-            locale: "ru",
+            locale: "ru",   
+            defaultDate: jsFromDate ? jsFromDate.d : undefined,
             header: {
                 left: "prev",
                 center: "title",

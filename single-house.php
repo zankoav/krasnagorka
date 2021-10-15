@@ -347,9 +347,13 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                         </div>
                     </div>
                     <footer class="house-booking">
-                        <p class="house-booking__info">
-                            <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
-                        </p>
+                        <div class="house-booking__container">
+                            <p class="house-booking__info">
+                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
+                            </p>
+                            <p class="added-info-price">Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
+                            </p>
+                        </div>
                         <?php if (!$isTerem) : ?>
                             <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="house-booking__button">забронировать
                             </a>

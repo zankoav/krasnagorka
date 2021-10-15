@@ -1,23 +1,7 @@
 @import "./../../common/mixins";
 
 .header-primary {
-	height: 64vh;
-	min-height: 300px;
 	position: relative;
-
-	@include sm {
-		min-height: 500px;
-	}
-
-	@include md {
-		height: 50vh;
-		min-height: 500px;
-	}
-
-	@include lg {
-		height: 40vh;
-		min-height: 400px;
-	}
 
 	&__banner {
 		position: absolute;
@@ -47,12 +31,18 @@
 	}
 
 	&__title {
+		padding: 1rem 0 2rem;
 		text-align: center;
 		font-size: 26px;
 		font-family: AvenirNextCyr-Bold, sans-serif;
 
 		@include sm {
 			font-size: 40px;
+			padding: 2rem 0 3rem;
+		}
+
+		@include lg {
+			padding: 4rem 0 5rem;
 		}
 	}
 }

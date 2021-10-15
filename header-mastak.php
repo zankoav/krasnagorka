@@ -271,6 +271,23 @@ if (!defined('ABSPATH')) {
 		}
 	</style>
 
+	<style>
+		.added-info-price{
+			margin-top:8px;
+			margin-bottom: 16px;
+			color: #7d8798;
+		}
+		.added-info-price a{
+			color: #23C4FC;
+		}
+		@media (min-width:768px) {
+			.added-info-price{
+				margin-top:4px;
+				margin-bottom: 0;
+			}
+		}
+	</style>
+
 	<script type="text/javascript">
 		// Yandex.Metrika counter 
 		(function(m, e, t, r, i, k, a) {
