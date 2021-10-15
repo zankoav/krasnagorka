@@ -1351,7 +1351,8 @@
 
         $query = new WP_Query(array(
             'post_type'      => 'house',
-            'posts_per_page' => -1
+            'posts_per_page' => -1,
+            'post_status' => array("publish")
         ));
 
         $house = [];
