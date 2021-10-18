@@ -7,4 +7,5 @@ if(is_admin()){
     require __DIR__ . '/page-reviews.php';
     require __DIR__ . '/order-amocrm.php';
     require __DIR__ . '/order-payment.php';
+    require __DIR__ . '/post.php';
 }
