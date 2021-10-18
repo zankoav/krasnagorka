@@ -364,7 +364,8 @@ if (!defined('ABSPATH')) {
 <?php $bg_gray =
 	(is_page_template("template-mastak-prices.php")
 		or is_page_template("template-mastak-booking.php")
-		or is_page_template("template-mastak-map.php"))
+		or is_page_template("template-mastak-map.php")
+		or is_page_template("template-page-posts.php"))
 	? "b-bgc-wrapper"
 	: is_singular('event') ? "b-bgc-wrapper" :
 	is_post_type_archive('event') ? "b-bgc-wrapper" : "";
