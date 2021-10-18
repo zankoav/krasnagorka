@@ -1,4 +1,10 @@
 <?php
+/**
+ *
+ * Template Name: Статьи
+ *
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }
