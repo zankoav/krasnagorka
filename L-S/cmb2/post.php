@@ -24,14 +24,4 @@ add_action('cmb2_admin_init', function (){
         'id'   => $prefix . 'description',
         'type' => 'textarea',
     ));
-
-    $sbc_client->add_field(array(
-        'name'    => __('Цвет рамки', 'krasnagorka'),
-        'desc'    => __('Цвет рамки', 'krasnagorka'),
-        'id'      => $prefix . 'frame_color',
-        'type'    => 'colorpicker',
-        'default' => '#ffffff'
-    ));
-
-    
 });

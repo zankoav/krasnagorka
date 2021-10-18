@@ -7,9 +7,6 @@
         <p class="opportunity__description">
             <?= get_post_meta(get_the_ID(), "post_settings_description", true); ?>
         </p>
-        <div class="opportunity__flag flag flag--b-red flag--b "
-             style="--bg-color: <?= get_post_meta(get_the_ID(), "post_settings_frame_color", true); ?>">
-        </div>
     </div>
     <div class="opportunity__image-wrapper">
         <?php the_post_thumbnail('opportunity_small_iphone_5', ['class' => 'object-fit-img']); ?>
