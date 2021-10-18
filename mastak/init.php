@@ -441,7 +441,7 @@
             return get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
 		} else if ( is_page_template( "template-mastak-map.php" ) ) {
             return get_option( 'mastak_map_appearance_options' )['mastak_map_image_id'];
-		} else if ( is_page_template( "mastak-page-default-template.php" ) ) {
+		} else if ( is_page_template( "mastak-page-default-template.php" ) or (is_single() && 'post' == get_post_type())) {
             return get_post_thumbnail_id();
 		}else if ( is_404() ) {
             return get_option( 'mastak_theme_options' )['bgimage_404_id'];
@@ -491,7 +491,7 @@
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h1>';
-		} else if ( is_page_template( "mastak-page-default-template.php" ) ) {
+		} else if ( is_page_template( "mastak-page-default-template.php" )  or (is_single() && 'post' == get_post_type()) ) {
 			echo '<h2 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h2>';

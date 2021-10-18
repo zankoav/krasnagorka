@@ -243,7 +243,7 @@
             );
 		}
 
-		if ( is_page_template( 'mastak-page-default-template.php' ) ) {
+		if ( is_page_template( 'mastak-page-default-template.php' ) or (is_single() && 'post' == get_post_type()) ) {
 
 			$scriptsData = get_assets_json( "reviews" );
 
