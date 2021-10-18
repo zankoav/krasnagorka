@@ -38,7 +38,7 @@ $subtitle_1 = 'Последние новости';//get_option('mastak_event_app
 
             while ($query_early->have_posts()) {
                 $query_early->the_post();
-                get_template_part('mastak/views/single/single', 'opportunity');
+                get_template_part('mastak/views/single/single', 'post');
             }
             wp_reset_postdata();
             ?>

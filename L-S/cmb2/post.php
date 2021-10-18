@@ -8,8 +8,9 @@ if (!defined('ABSPATH')) { exit; }
 
 add_action('cmb2_admin_init', function (){
 
+    $prefix = 'post_settings_';
     $sbc_client = new_cmb2_box(array(
-        'id'           => 'post_settings',
+        'id'           => $prefix.'id',
         'title'        => esc_html__('Настройки статьи', 'krasnagorka'),
         'object_types' => array('post'),
         'context'      => 'normal',
