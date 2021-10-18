@@ -85,7 +85,7 @@
             );
 		}
 
-		if ( is_post_type_archive( 'event' ) ) {
+		if ( is_post_type_archive( 'event' ) or is_page_template('template-page-posts.php')) {
 
 			$scriptsData = get_assets_json( "events" );
             $scriptsHouseData = get_assets_json( "house" );

@@ -425,7 +425,7 @@
 			return get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_header_image_id'];
 		} else if ( is_post_type_archive( 'opportunity' ) ) {
             return get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_header_image_id'];
-		} else if ( is_post_type_archive( 'event' ) ) {
+		} else if ( is_post_type_archive( 'event' )) {
             return get_option( 'mastak_event_appearance_options' )['mastak_event_submenu_header_image_id'];
 		} else if ( is_singular( 'house' ) ) {
             return get_post_meta( get_the_ID(), "mastak_house_header_image_id", true );
@@ -441,7 +441,11 @@
             return get_option( 'mastak_booking_appearance_options' )['mastak_booking_image_id'];
 		} else if ( is_page_template( "template-mastak-map.php" ) ) {
             return get_option( 'mastak_map_appearance_options' )['mastak_map_image_id'];
-		} else if ( is_page_template( "mastak-page-default-template.php" ) or (is_single() && 'post' == get_post_type())) {
+		} else if ( 
+				is_page_template( "mastak-page-default-template.php" ) 
+				or is_page_template( "template-page-posts.php" ) 
+				or (is_single() && 'post' == get_post_type())
+		) {
             return get_post_thumbnail_id();
 		}else if ( is_404() ) {
             return get_option( 'mastak_theme_options' )['bgimage_404_id'];
@@ -491,7 +495,11 @@
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h1>';
-		} else if ( is_page_template( "mastak-page-default-template.php" )  or (is_single() && 'post' == get_post_type()) ) {
+		} else if ( 
+			is_page_template( "mastak-page-default-template.php" )  
+			or is_page_template( "template-page-posts.php" )  
+			or (is_single() && 'post' == get_post_type()) 
+		) {
 			echo '<h2 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h2>';
