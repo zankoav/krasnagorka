@@ -298,6 +298,26 @@ if (!defined('ABSPATH')) {
 				text-align: initial;
 			}
 		}
+
+		.big-text a{
+			color: #1498c6;
+			display: inline-block;
+			transition: color .4s ease-in;
+		}
+
+		.big-text a:hover{
+			color: #00bdff;
+		}
+
+		.big-text a:focus{
+			color: #1498c6;
+		}
+
+		.big-text img {
+			display: block;
+			width:100%;
+			margin: 1rem 0;
+		}
 		
 	</style>
 
