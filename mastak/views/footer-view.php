@@ -110,6 +110,14 @@
                                     <span class="contacts-data__item-text">Договор присоединения</span>
                                 </div>
                             </a>
+                            <a href="https://krasnagorka.by/novosti/" class="contacts-data__item">
+                                <img src="<?= CORE_PATH ?>assets/icons/contacts-data/news.svg"
+                                     alt="support"
+                                     class="contacts-data__item-icon">
+                                <div class="contacts-data__item-text-wrapper">
+                                    <span class="contacts-data__item-text">Новости</span>
+                                </div>
+                            </a>
                         </div>
                         <div class="contacts-data__second">
                             <div class="contacts-data__item">
