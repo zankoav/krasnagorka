@@ -15,12 +15,13 @@ get_template_part("mastak/views/header", "small-view");
 $one_day  = 24 * 60 * 60; //seconds
 $time_naw = time();
 
-$subtitle_1 = 'Последние новости';//get_option('mastak_event_appearance_options')['subtitle_1'];
+//'Последние новости';
+$subtitle = get_post_meta(get_the_ID(), 'page_posts_news_title', 1);
 
 ?>
 
 <section class="b-container header-title">
-	<h2 class="header-title__subtitle"><?= $subtitle_1; ?></h2>
+	<h2 class="header-title__subtitle"><?= $subtitle; ?></h2>
 </section>
 
 <div class="b-container">
@@ -48,8 +49,8 @@ $subtitle_1 = 'Последние новости';//get_option('mastak_event_app
 </div>
 <?php
 
-if (is_active_sidebar('events-content')) {
-    dynamic_sidebar('events-content');
+if (is_active_sidebar('news-content')) {
+    dynamic_sidebar('news-content');
 }
 
 get_template_part("mastak/views/reviews", "view");
