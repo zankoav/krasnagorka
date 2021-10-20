@@ -338,7 +338,7 @@ if (!defined('ABSPATH')) {
 		.date-delimiter_to::before {
 			content: 'выезд';
 			position: absolute;
-			font-size: 10px;
+			font-size: 8px;
 			color: #3c3c3c;
 			top: 0px;
 			left: 2px;
@@ -347,7 +347,7 @@ if (!defined('ABSPATH')) {
 		.date-delimiter_from::before {
 			content: 'заезд';
 			position: absolute;
-			font-size: 10px;
+			font-size: 8px;
 			color: #3c3c3c;
 			bottom: 0;
 			right: 2px;
