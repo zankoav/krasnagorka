@@ -340,8 +340,8 @@ if (!defined('ABSPATH')) {
 			position: absolute;
 			font-size: 10px;
 			color: #3c3c3c;
-			top: 4px;
-			left: 4px;
+			top: 0px;
+			left: 2px;
 		}
 
 		.date-delimiter_from::before {
