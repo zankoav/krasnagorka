@@ -325,6 +325,7 @@ if (!defined('ABSPATH')) {
 	<style>
 
 		.fc-day{
+			overflow: hidden;
 			position: relative;
 		}
 
