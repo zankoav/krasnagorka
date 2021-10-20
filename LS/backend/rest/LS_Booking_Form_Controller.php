@@ -224,7 +224,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $basePeopleCount = (int)$peopleCount;
 
             if($peopleCount < $houseMinPeople){
-                $basePrice =  (float)$housePrice * (float)$houseMinPeople;
+                $basePrice =  (float)$basePrice * (float)$houseMinPeople;
                 $basePeopleCount = null;
             }
 
