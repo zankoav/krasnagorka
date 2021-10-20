@@ -221,6 +221,8 @@ jQuery(document).ready(function ($) {
                             }
 
                             fillCells();
+                            console.log('eventAfterAllRender');
+                            addInOutDelimiters(events);
                         },
                         dayClick: function (date, jsEvent, view) {
                             setDate();
@@ -370,6 +372,30 @@ jQuery(document).ready(function ($) {
                 console.log("error", x);
             }
         });
+
+        function addInOutDelimiters(){
+            for(let event of events){
+
+                const elementStart = document.querySelector(
+                    `#calendar_${data.id} .fc-widget-content[data-date="${event.start}"]`
+                );
+                const elementEnd = document.querySelector(
+                    `#calendar_${data.id} .fc-widget-content[data-date="${event.end}"]`
+                );
+
+                if(elementStart && elementStart.innerHTML){
+                    elementStart.innerHTML += delimeterFromView;
+                }else if (elementStart && !elementStart.innerHTML){
+                    elementStart.innerHTML = delimeterFromView;
+                }
+
+                if(elementEnd && elementEnd.innerHTML){
+                    elementEnd.innerHTML += delimeterToView;
+                }else if (elementEnd && !elementEnd.innerHTML){
+                    elementEnd.innerHTML = delimeterToView;
+                }
+            }
+        }
     }
 
     function buttonAnimate($buttonView) {
@@ -459,3 +485,11 @@ jQuery(document).ready(function ($) {
         }, 2000);
     }
 });
+
+
+const delimeterFromView =   `<div class="date-delimiter date-delimiter_from">
+                                <div class="date-delimiter__line"></div>
+                            </div>`;
+const delimeterToView =   `<div class="date-delimiter date-delimiter_to">
+                                <div class="date-delimiter__line"></div>
+                            </div>`;

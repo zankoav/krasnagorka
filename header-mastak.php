@@ -321,6 +321,50 @@ if (!defined('ABSPATH')) {
 		
 	</style>
 
+	<!-- Calendar Delimeter Start-->
+	<style>
+
+		.fc-day{
+			position: relative;
+		}
+
+		.date-delimiter {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+		}
+
+		.date-delimiter_to::before {
+			content: 'выезд';
+			position: absolute;
+			font-size: 10px;
+			color: #3c3c3c;
+			top: 4px;
+			left: 4px;
+		}
+
+		.date-delimiter_from::before {
+			content: 'заезд';
+			position: absolute;
+			font-size: 10px;
+			color: #3c3c3c;
+			bottom: 4px;
+			right: 4px;
+		}
+
+		.date-delimiter__line {
+			position: absolute;
+			width: 100%;
+			border-bottom: 1px dashed #3c3c3c;
+			top: calc(50% + 4px);
+			left: 0;
+			transform: rotate(-45deg);
+			transform-origin: center center;
+		}
+	</style>
+	<!-- Calendar Delimeter End-->
+
+
 	<script type="text/javascript">
 		// Yandex.Metrika counter 
 		(function(m, e, t, r, i, k, a) {
