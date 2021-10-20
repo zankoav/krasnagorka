@@ -38,9 +38,9 @@ export default class Calendar extends LightningElement {
     async connectedCallback() {
         
         jsFromDate = this.initDate(this.settings.dateStart);
-        console.log('jsFromDate',jsFromDate);
         jsToDate = this.initDate(this.settings.dateEnd);
         const calendarSlug = this.settings.calendars.find(c => c.selected).slug;
+        const calendarId = this.settings.calendars.find(c => c.selected).id;
         this.loading = true;
         $calendar = null;
         events = null;
@@ -86,6 +86,7 @@ export default class Calendar extends LightningElement {
                     }
                 }
                 fillCells();
+                addInOutDelimiters(events);
             },
             dayClick: function (date, jsEvent, view) {
                 const d = date.format("YYYY-MM-DD");
@@ -182,7 +183,35 @@ export default class Calendar extends LightningElement {
             }
         });
 
+        function addInOutDelimiters(){
+            for(let event of events){
 
+                const elementStart = $calendar[0].querySelector(
+                    `.fc-widget-content[data-date="${event.start}"]`
+                );
+
+                var endEvent = jQuery.fullCalendar
+                .moment(event.end, "YYYY-MM-DD")
+                .subtract(1, "days")
+                .format("YYYY-MM-DD");
+
+                const elementEnd = $calendar[0].querySelector(
+                    `.fc-widget-content[data-date="${endEvent}"]`
+                );
+
+                if(elementStart && elementStart.innerHTML){
+                    elementStart.innerHTML += delimeterFromView;
+                }else if (elementStart && !elementStart.innerHTML){
+                    elementStart.innerHTML = delimeterFromView;
+                }
+
+                if(elementEnd && elementEnd.innerHTML){
+                    elementEnd.innerHTML += delimeterToView;
+                }else if (elementEnd && !elementEnd.innerHTML){
+                    elementEnd.innerHTML = delimeterToView;
+                }
+            }
+        }
     }
 
     updateStyle() {
@@ -224,6 +253,12 @@ export default class Calendar extends LightningElement {
     }
 }
 
+const delimeterFromView =   `<div class="date-delimiter date-delimiter_from">
+                                <div class="date-delimiter__line"></div>
+                            </div>`;
+const delimeterToView =   `<div class="date-delimiter date-delimiter_to">
+                                <div class="date-delimiter__line"></div>
+                            </div>`;
 
 function initFrom(d, el) {
     var a = new moment(Date.now());

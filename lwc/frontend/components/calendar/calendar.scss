@@ -35,3 +35,42 @@
         font-weight: bold;
     }
 }
+
+.fc-day{
+    overflow: hidden;
+    position: relative;
+}
+
+.date-delimiter {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.date-delimiter_to::before {
+    content: 'выезд';
+    position: absolute;
+    font-size: 8px;
+    color: #3c3c3c;
+    top: 0px;
+    left: 2px;
+}
+
+.date-delimiter_from::before {
+    content: 'заезд';
+    position: absolute;
+    font-size: 8px;
+    color: #3c3c3c;
+    bottom: 0;
+    right: 2px;
+}
+
+.date-delimiter__line {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px dashed #3c3c3c;
+    top: calc(50% + 4px);
+    left: 0;
+    transform: rotate(-45deg);
+    transform-origin: center center;
+}

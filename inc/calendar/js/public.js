@@ -221,7 +221,6 @@ jQuery(document).ready(function ($) {
                             }
 
                             fillCells();
-                            console.log('eventAfterAllRender');
                             addInOutDelimiters(events);
                         },
                         dayClick: function (date, jsEvent, view) {
