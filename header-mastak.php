@@ -349,8 +349,8 @@ if (!defined('ABSPATH')) {
 			position: absolute;
 			font-size: 10px;
 			color: #3c3c3c;
-			bottom: 4px;
-			right: 4px;
+			bottom: 0;
+			right: 2px;
 		}
 
 		.date-delimiter__line {
