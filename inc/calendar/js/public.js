@@ -379,8 +379,14 @@ jQuery(document).ready(function ($) {
                 const elementStart = document.querySelector(
                     `#calendar_${data.id} .fc-widget-content[data-date="${event.start}"]`
                 );
+
+                var endEvent = jQuery.fullCalendar
+                .moment(event.end, "YYYY-MM-DD")
+                .subtract(1, "days")
+                .format("YYYY-MM-DD");
+
                 const elementEnd = document.querySelector(
-                    `#calendar_${data.id} .fc-widget-content[data-date="${event.end}"]`
+                    `#calendar_${data.id} .fc-widget-content[data-date="${endEvent}"]`
                 );
 
                 if(elementStart && elementStart.innerHTML){
