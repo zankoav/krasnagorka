@@ -592,7 +592,7 @@ tr:first-child > td > .fc-day-grid-event {
 .fc-day-grid-event .fc-content {
     white-space: nowrap;
     overflow: hidden;
-    height: 5px;
+    height: 2px;
 }
 
 .fc-day-grid-event .fc-time {
