@@ -33,7 +33,7 @@ $subtitle = get_post_meta(get_the_ID(), 'page_posts_news_title', 1);
             $query_early = new WP_Query(
                 [
                     'post_type'  => 'post',
-                    'posts_per_page' => 4
+                    'posts_per_page' => 20
                 ]
             );
 
