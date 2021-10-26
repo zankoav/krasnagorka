@@ -19,7 +19,7 @@
     .review-form__out-item{
         padding: 8px 32px;
         color: #fff;
-        background-color: #d0021b;
+        background-color: #7ed321;
         border-radius: 4px;
         box-shadow: 0 2px 4px #4a4a4a;
         transition: all .4s;
@@ -27,7 +27,7 @@
     }
 
     .review-form__out-item:hover {
-        background-color: #23c4f5;
+        background-color: rgba(126,211,33,.6);
     }
 
     @media (min-width:768px) {
