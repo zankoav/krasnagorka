@@ -65,7 +65,7 @@
                     srcset="<?= wp_get_attachment_image_srcset($schema_services_id, $image_size_schema) ?>"
                     sizes="<?= wp_get_attachment_image_sizes($schema_services_id, $image_size_schema) ?>">
             </a>
-            <div class="base-place__content">
+            <div class="base-place__content" style="padding-bottom:0">
                 <?php
                     if (is_active_sidebar('map-2-content')) {
                         dynamic_sidebar('map-2-content');
