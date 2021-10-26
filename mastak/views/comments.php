@@ -27,7 +27,7 @@
     }
 
     .review-form__out-item:hover {
-        background-color: rgba(126,211,33,.6);
+        background-color: #6fbb1b;
     }
 
     @media (min-width:768px) {
