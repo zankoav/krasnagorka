@@ -57,7 +57,7 @@
             </div>
         </div>
         <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта услуг</h2>
-        <div class="base-place b-mb-2">
+        <div class="base-place">
             <a rel="group" href="<?= wp_get_attachment_image_url($schema_services_id, 'full'); ?>"
             class="base-place__image fancybox image">
                 <img class="base-place__image-inner" alt="Карта услуг"
@@ -77,7 +77,7 @@
     <section class="b-container header-title">
         <h2 class="header-title__subtitle">Карта</h2>
     </section>
-    <div id="main-map">
+    <div id="main-map" class="b-mb-2">
         <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6982053e34835c4a2cd060255b90e9bd22635ef01e7c27b0a1d4360632ad4250&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>    
     </div>
     <section class="b-container">
