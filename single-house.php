@@ -351,7 +351,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             <p class="house-booking__info">
                                 <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
                             </p>
-                            <p class="added-info-price">Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
+                            <p class="added-info-price"><span class="added-info-price__star">*</span>Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
                             </p>
                         </div>
                         <?php if (!$isTerem) : ?>

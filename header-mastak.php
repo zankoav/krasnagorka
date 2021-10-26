@@ -276,6 +276,8 @@ if (!defined('ABSPATH')) {
 			margin-top:8px;
 			margin-bottom: 16px;
 			color: #7d8798;
+			text-align: center;
+    		font-size: 13px;
 		}
 		.added-info-price a{
 			color: #23C4FC;
@@ -297,6 +299,10 @@ if (!defined('ABSPATH')) {
 			.added-info-price_first{
 				text-align: initial;
 			}
+		}
+
+		.added-info-price__star{
+			color: #d0021b;
 		}
 
 		.big-text a{
