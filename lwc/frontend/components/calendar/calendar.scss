@@ -50,27 +50,30 @@
 .date-delimiter_to::before {
     content: 'выезд';
     position: absolute;
-    font-size: 8px;
-    color: #3c3c3c;
+    text-transform: uppercase;
+    font-size: 6px;
+    line-height: 1;
+    color: #929090;
     top: 0px;
-    left: 2px;
+    left: 0;
 }
 
 .date-delimiter_from::before {
     content: 'заезд';
     position: absolute;
-    font-size: 8px;
-    color: #3c3c3c;
+    text-transform: uppercase;
+    font-size: 6px;
+    line-height: 1;
+    color: #929090;
     bottom: 0;
-    right: 2px;
+    right: 0;
 }
 
 .date-delimiter__line {
     position: absolute;
-    width: 100%;
-    border-bottom: 1px dashed #3c3c3c;
-    top: calc(50% + 4px);
-    left: 0;
-    transform: rotate(-45deg);
-    transform-origin: center center;
+    height: 50%;
+    width: 1px;
+    background: #d0d0d0;
+    bottom: 25%;
+    left: 50%;
 }
