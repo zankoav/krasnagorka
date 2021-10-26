@@ -303,6 +303,7 @@ if (!defined('ABSPATH')) {
 
 		.added-info-price__star{
 			color: #d0021b;
+			margin-right: 4px;
 		}
 
 		.big-text a{
