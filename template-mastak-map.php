@@ -73,6 +73,14 @@
                 ?>
             </div>
         </div>
+    </section>
+    <section class="b-container header-title">
+        <h2 class="header-title__subtitle">Карта</h2>
+    </section>
+    <div id="main-map">
+        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6982053e34835c4a2cd060255b90e9bd22635ef01e7c27b0a1d4360632ad4250&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>    
+    </div>
+    <section class="b-container">
         <h2 class="header-title__subtitle b-mb-2 b-mt-2">Контакты</h2>
         <div class="base-place__contacts">
             <p class="base-place__address"><?= $address; ?></p>
@@ -135,27 +143,6 @@
         </div>
         <div class="b-light-line b-my-3 b-d-block-sm"></div>
     </section>
-
-    <section class="b-container header-title">
-        <h2 class="header-title__subtitle">Карта</h2>
-    </section>
-    <div id="main-map">
-    <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A6982053e34835c4a2cd060255b90e9bd22635ef01e7c27b0a1d4360632ad4250&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>    </div>
-    
-    <!-- <section class="b-container "> -->
-        
-        <!-- <p class="way__subtitle">Укажите город из которого Вы планируете к нам ехать и нажмите кнопку проложить
-            маршрут</p>
-        <div class="way__map">
-            <input id="pac-input" class="controls-routemap" type="text" placeholder="Откуда ехать?"
-                   onkeypress="isEnterPressed(this.value, event)">
-            <input id="pac-input-button" class="controls-routemap" type="button" value="Проложить маршрут"
-                   onclick="codeAddress()">
-
-            <div id="map-route-canvas" class="way__canvas"></div>
-        </div> -->
-    <!-- </section> -->
-
 <?php
 
     get_template_part("mastak/views/reviews", "view");
