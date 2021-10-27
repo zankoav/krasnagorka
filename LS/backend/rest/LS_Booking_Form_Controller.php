@@ -240,6 +240,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'title' =>  $season->post_title,
                 'season_id' =>  $season->ID,
                 'base_price' => $basePrice,
+                'min_percent' => $houseMinPercent,
                 'base_price_without_upper' => $basePriceWithoutUpper,
                 'days_count' => $seasonDaysCount,
                 'base_people_count' => $basePeopleCount,
