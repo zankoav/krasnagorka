@@ -1,4 +1,6 @@
 <?php
+use Ls\Wp\Log as Log;
+
 class LS_Booking_Form_Controller extends WP_REST_Controller
 {
 
@@ -203,7 +205,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $houseId = $calendarId;
             }
             $housePrice = (float)get_post_meta($season->ID, $prefix.'_price_'.$houseId, 1);
-            $houseMinPeople = get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
+            $houseMinPeople = (float)get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
             $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
             $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
             $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
@@ -214,18 +216,20 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
 
             $basePrice = $housePrice;
-
+            Log::error('basePrice 1: ', $basePrice);
             $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
         
             if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
-                $basePrice *= (1 + (float)$houseMinPercent / 100);
+                $basePrice *= (1 + $houseMinPercent/100);
+                Log::error('basePrice 2: ', $basePrice);
             }
 
-            $basePeopleCount = (int)$peopleCount;
+            $basePeopleCount = $peopleCount;
 
             if($peopleCount < $houseMinPeople){
-                $basePrice =  (float)$basePrice * (float)$houseMinPeople;
+                $basePrice = $basePrice * (float)$houseMinPeople;
                 $basePeopleCount = null;
+                Log::error('basePrice 3: ', $basePrice);
             }
 
             $result['seasons_group'][$season->ID]['price_block'] = [
