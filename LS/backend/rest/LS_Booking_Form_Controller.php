@@ -217,18 +217,22 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             $basePrice = $housePrice;
             Log::error('basePrice 1: ', $basePrice);
+
             $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
         
-            if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
-                $basePrice *= (1 + $houseMinPercent/100);
-                Log::error('basePrice 2: ', $basePrice);
-            }
-
             $basePeopleCount = $peopleCount;
 
             if($peopleCount < $houseMinPeople){
-                $basePrice = $basePrice * (float)$houseMinPeople;
+                $basePrice *= (float)$houseMinPeople;
                 $basePeopleCount = null;
+                Log::error('basePrice 2: ', $basePrice);
+            }
+
+            $basePriceWithoutUpper = null;
+
+            if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
+                $basePriceWithoutUpper = $basePrice;
+                $basePrice *= (1 + $houseMinPercent/100);
                 Log::error('basePrice 3: ', $basePrice);
             }
 
@@ -236,6 +240,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'title' =>  $season->post_title,
                 'season_id' =>  $season->ID,
                 'base_price' => $basePrice,
+                'base_price_without_upper' => $basePriceWithoutUpper,
                 'days_count' => $seasonDaysCount,
                 'base_people_count' => $basePeopleCount,
                 'days_sale' => (float)$daysSale
