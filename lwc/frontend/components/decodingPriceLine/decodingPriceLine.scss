@@ -53,5 +53,9 @@
 	&__sign{
 		margin-left: 4px;
 		margin-right: 4px;
+
+		&_ml_none{
+			margin-left: 0;
+		}
 	}
 }

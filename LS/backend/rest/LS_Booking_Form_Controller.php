@@ -256,6 +256,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             ksort($housePeoplesForSales);
 
+            $daysUpperPersent = self::getDaysUpperPersent($season->ID, 'house_days_count_upper_'.$houseId);
+            Log::info('daysUpperPersent', $daysUpperPersent);
 
             $peopleSale = null;
             $peopleSaleNext = null;
@@ -300,6 +302,20 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
             $result['total_price'] = intval($result['total_price']);
         }
+        return $result;
+    }
+
+    private static function getDaysUpperPersent($seasonId, $metaKey){
+        $result = [];
+        $entities = get_post_meta($seasonId, $metaKey, 1);
+
+        foreach ((array)$entities as $key => $entry) {
+            if (isset($entry['sale_day']) and isset($entry['upper_percent'])) {
+                $result[$entry['sale_day']] = $entry['upper_percent'];
+            }
+        }
+
+        ksort($result);
         return $result;
     }
 
