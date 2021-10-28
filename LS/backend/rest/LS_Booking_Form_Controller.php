@@ -216,8 +216,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
 
             $basePrice = $housePrice;
-            Log::error('basePrice 1: ', $basePrice);
-
             $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
         
             $basePeopleCount = $peopleCount;
@@ -225,15 +223,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if($peopleCount < $houseMinPeople){
                 $basePrice *= (float)$houseMinPeople;
                 $basePeopleCount = null;
-                Log::error('basePrice 2: ', $basePrice);
             }
 
             $basePriceWithoutUpper = null;
 
+            $percentTotal = 0;
+
             if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
                 $basePriceWithoutUpper = $basePrice;
-                $basePrice *= (1 + $houseMinPercent/100);
-                Log::error('basePrice 3: ', $basePrice);
+                $percentTotal -= $houseMinPercent;
             }
 
             $result['seasons_group'][$season->ID]['price_block'] = [
@@ -289,8 +287,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if(!empty($daysSale)){
                     $deltaSale += $daysSale;
             }
+
+            $percentTotal += $deltaSale;
+
+            $priceBlockTotal = round(
+                ($basePrice * (1 - $percentTotal / 100) ) * 
+                (empty($basePeopleCount) ? 1 : $basePeopleCount) * 
+                $seasonDaysCount
+            , 2);
             
-            $result['seasons_group'][$season->ID]['price_block']['total'] = round(($basePrice * (1 - $deltaSale / 100) ) * (empty($basePeopleCount) ? 1 : $basePeopleCount) * $seasonDaysCount, 2);
+            $result['seasons_group'][$season->ID]['price_block']['total'] = $priceBlockTotal;
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
             $result['total_price'] = intval($result['total_price']);
         }

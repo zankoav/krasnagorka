@@ -1,6 +1,8 @@
 .decoding-price {
-	&__item,
+
+	&__item, 
 	&__description {
+		display: block;
 		margin-top: 32px;
 	}
 
@@ -8,11 +10,23 @@
 		margin-top: 0px;
 	}
 
-	&__item-header {
-		display: inline;
+	&__sale {
+		color: #80828a;
+		font-size: 12px;
+		display: block;
+		font-weight: 300;
 	}
 
-	&__item-date,
+	&__number {
+		font-weight: 700;
+		margin-right: 4px;
+	}
+
+	&__percent {
+		font-weight: 700;
+		color: #ed123d;
+	}
+
 	&__final-sum {
 		font-size: 16px;
 		font-weight: 300;
@@ -20,47 +34,7 @@
 		display: inline;
 	}
 
-	&__item-title {
-		font-size: 16px;
-		font-weight: 300;
-		color: #80828a;
-		display: inline;
-		// margin-left: 20px;
-	}
-
-	&__item-sum {
-		color: #80828a;
-		font-size: 16px;
-		font-weight: 300;
-		margin-top: 16px;
-	}
-
-	&__sale,
-	&__item-sale {
-		color: #80828a;
-		font-size: 12px;
-		display: block;
-		font-weight: 300;
-	}
-
-	&__number,
-	&__item-number {
-		font-weight: 700;
-		margin-right: 4px;
-	}
-
-	&__percent,
-	&__item-percent {
-		font-weight: 700;
-		color: #ed123d;
-	}
-
 	&__total-number {
 		margin-left: 4px;
-	}
-
-	&__sign{
-		margin-left: 4px;
-		margin-right: 4px;
 	}
 }

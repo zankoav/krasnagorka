@@ -1,0 +1,57 @@
+.decoding-price-line {
+
+	&__description {
+		margin-top: 32px;
+	}
+
+	&__item-header {
+		display: inline;
+	}
+
+	&__item-date{
+		font-size: 16px;
+		font-weight: 300;
+		color: #212e35;
+		display: inline;
+	}
+
+	&__item-title {
+		font-size: 16px;
+		font-weight: 300;
+		color: #80828a;
+		display: inline;
+	}
+
+	&__item-sum {
+		color: #80828a;
+		font-size: 16px;
+		font-weight: 300;
+		margin-top: 16px;
+	}
+
+	&__item-sale {
+		color: #80828a;
+		font-size: 12px;
+		display: block;
+		font-weight: 300;
+	}
+
+	&__item-number {
+		font-weight: 700;
+		margin-right: 4px;
+	}
+
+	&__item-percent {
+		font-weight: 700;
+		color: #ed123d;
+	}
+
+	&__total-number {
+		margin-left: 4px;
+	}
+
+	&__sign{
+		margin-left: 4px;
+		margin-right: 4px;
+	}
+}
