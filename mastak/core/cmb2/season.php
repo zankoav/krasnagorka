@@ -201,10 +201,10 @@ function mastak_season()
 			'description' => __('Можно добавлять любое количество надбавок от количества ДНЕЙ', 'krasnagorka'),
 			// 'repeatable'  => false, // use false if you want non-repeatable group
 			'options'     => array(
-				'group_title'   => __('Скидка {#}', 'krasnagorka'),
+				'group_title'   => __('Надбавка {#}', 'krasnagorka'),
 				// since version 1.1.4, {#} gets replaced by row number
-				'add_button'    => __('Добавить Скидку', 'krasnagorka'),
-				'remove_button' => __('Удалить Скидку', 'krasnagorka'),
+				'add_button'    => __('Добавить Надбавку', 'krasnagorka'),
+				'remove_button' => __('Удалить Надбавку', 'krasnagorka'),
 				'sortable'      => true,
 				// beta
 				'closed'        => true, // true to have the groups closed by default
