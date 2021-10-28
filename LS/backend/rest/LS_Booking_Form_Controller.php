@@ -229,7 +229,24 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             $percentTotal = 0;
 
-            if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
+
+            $daysUpperPersents = self::getDaysUpperPersent($season->ID, 'house_days_count_upper_'.$houseId);
+            Log::info('daysUpperPersents', $daysUpperPersents);
+
+            $upperPercent = false;
+            if(count($daysUpperPersents) > 0){    
+                foreach($daysUpperPersents as $day => $persent){
+                    if($seasonDaysCount <= intval($day)){
+                        $upperPercent = intval($persent);
+                        break;
+                    }
+                }
+            }
+            
+            if($upperPercent){
+                $basePriceWithoutUpper = $basePrice;
+                $percentTotal -= $upperPercent;
+            }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
                 $basePriceWithoutUpper = $basePrice;
                 $percentTotal -= $houseMinPercent;
             }
@@ -255,9 +272,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
 
             ksort($housePeoplesForSales);
-
-            $daysUpperPersent = self::getDaysUpperPersent($season->ID, 'house_days_count_upper_'.$houseId);
-            Log::info('daysUpperPersent', $daysUpperPersent);
 
             $peopleSale = null;
             $peopleSaleNext = null;
@@ -311,7 +325,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         foreach ((array)$entities as $key => $entry) {
             if (isset($entry['sale_day']) and isset($entry['upper_percent'])) {
-                $result[$entry['sale_day']] = $entry['upper_percent'];
+                $result[$entry['sale_day']] = (int)$entry['upper_percent'];
             }
         }
 
