@@ -19,15 +19,24 @@
     .review-form__out-item{
         padding: 8px 32px;
         color: #fff;
-        background-color: #7ed321;
+        background-color: #04a89f;
         border-radius: 4px;
-        box-shadow: 0 2px 4px #4a4a4a;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
         transition: all .4s;
         margin: 0 8px;
     }
 
     .review-form__out-item:hover {
-        background-color: #6fbb1b;
+        background-color: #01867f;
+    }
+
+    .review-form__submit{
+        background-color: #04a89f;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    }
+
+    .review-form__submit:hover{
+        background-color: #01867f;
     }
 
     @media (min-width:768px) {
