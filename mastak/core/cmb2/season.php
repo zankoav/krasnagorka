@@ -288,6 +288,35 @@ function mastak_season()
 			'type' => 'text_small',
 			'after_field' => '%'
 		));
+
+		$group_field_event = $cmb_season->add_field(array(
+			'id'          => 'room_days_count_upper_' . $room_id,
+			'type'        => 'group',
+			'description' => __('Можно добавлять любое количество надбавок от количества ДНЕЙ', 'krasnagorka'),
+			// 'repeatable'  => false, // use false if you want non-repeatable group
+			'options'     => array(
+				'group_title'   => __('Надбавка {#}', 'krasnagorka'),
+				// since version 1.1.4, {#} gets replaced by row number
+				'add_button'    => __('Добавить Надбавку', 'krasnagorka'),
+				'remove_button' => __('Удалить Надбавку', 'krasnagorka'),
+				'sortable'      => true,
+				// beta
+				'closed'        => true, // true to have the groups closed by default
+			),
+		));
+
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Мин. кол-во дней',
+			'id'   => 'sale_day',
+			'type' => 'text_small',
+		));
+
+		$cmb_season->add_group_field($group_field_event, array(
+			'name' => 'Надбавка',
+			'id'   => 'upper_percent',
+			'type' => 'text_small',
+			'after_field' => '%'
+		));
 	}
 
 

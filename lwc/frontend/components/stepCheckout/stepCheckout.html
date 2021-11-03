@@ -35,6 +35,7 @@
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
                                 onnext={bookingPay}
+                                settings={settings}
                                 next-title={buttonTitle}></z-step-button-navigation>
 
       <z-step-button-navigation if:false={settings.payment} 
@@ -42,6 +43,7 @@
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
                                 onnext={bookingHandler}
+                                settings={settings}
                                 next-title="Забронировать"></z-step-button-navigation>
    </div>
 </template>

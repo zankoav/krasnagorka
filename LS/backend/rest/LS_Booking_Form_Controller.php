@@ -230,7 +230,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $percentTotal = 0;
 
 
-            $daysUpperPersents = self::getDaysUpperPersent($season->ID, 'house_days_count_upper_'.$houseId);
+            $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
 
             $upperPercent = false;
             if(count($daysUpperPersents) > 0){    

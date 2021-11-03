@@ -6,16 +6,8 @@ export default class StepsNavigator extends LightningElement {
     delta = 0;
 
     @api settings;
-    // @track _current;
 
-    // @api set current(value){
-    //     this._current = value;
-    //     this.initData();
 
-    // }
-    // get current(){
-    //     return  this._current;
-    // }
 
     constructor(){
         super();
@@ -23,19 +15,10 @@ export default class StepsNavigator extends LightningElement {
         this.itemPressedHandler = this.itemPressed.bind(this);
     }
 
-    connectedCallback(){
-        // this.initData();
-    }
 
     renderedCallback(){
         this.animate();
     }
-
-    // initData(){
-    //     this.items = this.items.map(item => {
-    //         return {...item, active: item.value === this._current};
-    //     });
-    // }
 
     animate(){
         

@@ -6,9 +6,20 @@ export default class StepButtonNavigation extends LightningElement {
     @api nextTitle = "Далее";
     @api backTitle = "Назад";
     @api error;
+    @api settings;
+
 
     get classForNextButton(){
-        return this.canGoNext ? 'step-button-navigation__button step-button-navigation__button_available' : 'step-button-navigation__button';
+        let canGoNext = false;
+        this.settings.menu.forEach((item, index) => {
+            console.log('item',item);
+            if(!canGoNext && item.active && this.settings.menu[index + 1]){
+                canGoNext = this.settings.menu[index + 1].available;
+            }else if(!canGoNext && item.active && this.settings.menu.length === (index + 1)){
+                canGoNext = true;
+            }
+        });
+        return canGoNext ? 'step-button-navigation__button step-button-navigation__button_available' : 'step-button-navigation__button';
     }
 
     nextButtonPressed(){

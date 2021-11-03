@@ -9,7 +9,7 @@
         <div class="step-button-navigation__button-next-wrapper">
             <a href="javascript:void(0)"
                onclick={nextButtonPressed}
-               class="step-button-navigation__button step-button-navigation__button_available">{nextTitle}</a>
+               class={classForNextButton}>{nextTitle}</a>
             <p if:true={error}
                class="step-button-navigation__error">{error}</p>
         </div>

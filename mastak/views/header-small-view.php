@@ -192,7 +192,7 @@
 ?>
 
 <style>
-    @media(max-width:768px) {
+    @media(max-width:1025px) {
         header.header-second {
             min-height: initial;
             height: initial;

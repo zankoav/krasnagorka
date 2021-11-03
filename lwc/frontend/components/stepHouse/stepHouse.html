@@ -74,6 +74,7 @@
         <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
         <z-step-button-navigation if:true={settings.house}
                                   error={error}
+                                  settings={settings}
                                   onnext={nextButtonHandler}></z-step-button-navigation>
     </div>
 </template>
