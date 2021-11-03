@@ -5251,11 +5251,16 @@ button.swiper-pagination-bullet {
 }
 @media (min-width: 768px) {
 	.main-slider__slide-content-button {
-		width: 33%;
+		width: initial;
+		margin-bottom: 0;
 	}
 	.main-slider__slide-content-sub-title {
 		margin-bottom: 3rem;
 		margin-top: 0.5rem;
+	}
+
+	.main-slider__slide-content-sub-title:empty {
+		margin: 1rem 0 0 0;
 	}
 }
 @media (min-width: 1280px) {
@@ -5267,8 +5272,8 @@ button.swiper-pagination-bullet {
 		display: none;
 	}
 	.main-slider__slide-content-button {
-		width: auto;
 		padding: 0.5rem 5rem;
+		margin-bottom: 2.5rem;
 	}
 }
 .menu-bottom {
