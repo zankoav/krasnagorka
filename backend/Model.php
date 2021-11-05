@@ -6,6 +6,7 @@
  * Date: 10/28/19
  * Time: 9:27 AM
  */
+use Ls\Wp\Log as Log;
 
 use AmoCRM\Helpers\EntityTypesInterface;
 use AmoCRM\Collections\TasksCollection;
@@ -239,6 +240,12 @@ class Model
         $sandbox = get_webpay_sandbox();
         $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
         $weather       = $this->getWeather();
+
+        $selectedSeasonId = null;
+        if (!empty($dateFrom) and !empty($dateTo)) {
+            $selectedSeasonId = $this->getSelectedSeasonId($dateFrom);
+        }
+
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
@@ -252,7 +259,7 @@ class Model
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
             'mainMenu'      => $this->getMainMenu(),
-            'seasons'       => $this->getAllSeasons(),
+            'seasons'       => $this->getAllSeasons($selectedSeasonId),
             'weather'       => $weather,
             'currencies'    => $this->getCurrencies(),
             'pageTitle'     => get_the_title(),
@@ -333,6 +340,41 @@ class Model
         }
 
         return json_encode($result);
+    }
+
+    private function getSelectedSeasonId($dateFrom){
+        $id = null;
+        
+        $firstSeasonIntervalParams = array(
+            'post_type' => 'season_interval',
+            'posts_per_page' => 1,
+            'meta_query' => [
+                'relation' => 'OR',
+                [
+                    'relation' => 'AND',
+                    [
+                        'key'     => 'season_from',
+                        'value'   => $dateFrom,
+                        'type'    => 'DATE',
+                        'compare' => '<='
+                    ],
+                    [
+                        'key'     => 'season_to',
+                        'value'   => $dateFrom,
+                        'type'    => 'DATE',
+                        'compare' => '>='
+                    ]
+                ]
+            ]
+        );
+        $intervalsQuery = new WP_Query;
+        $intervals = $intervalsQuery->query($firstSeasonIntervalParams);
+        if(count($intervals) > 0){
+            $id = get_post_meta($intervals[0]->ID,'season_id', 1);
+        }
+
+        Log::info('$id,$dateFrom', [$id, $dateFrom]);
+        return $id;
     }
 
     private function getHouses()
@@ -469,7 +511,7 @@ class Model
         return $freshPrice;
     }
 
-    private function getAllSeasons()
+    private function getAllSeasons($selectedSeasonId = null)
     {
 
         $calendarsFromTerem = [
@@ -508,7 +550,7 @@ class Model
             $season = [];
             $season["id"] = $post->ID;
             $season["name"] = $post->post_title;
-            $season["current"] = $post->ID == $current_season_id;
+            $season["current"] = $selectedSeasonId == null ? ($post->ID == $current_season_id) : ($post->ID == $selectedSeasonId);
             $housesResult = [];
 
             foreach($calendarsFromTerem as $room_name => $room_id){
