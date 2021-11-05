@@ -373,7 +373,6 @@ class Model
             $id = get_post_meta($intervals[0]->ID,'season_id', 1);
         }
 
-        Log::info('$id,$dateFrom', [$id, $dateFrom]);
         return $id;
     }
 
