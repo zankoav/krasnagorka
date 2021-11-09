@@ -205,7 +205,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $houseId = $calendarId;
             }
             $housePrice = (float)get_post_meta($season->ID, $prefix.'_price_'.$houseId, 1);
-            $houseMinPeople = (float)get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
+            $houseMinPeople = get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
             $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
             $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
             $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
