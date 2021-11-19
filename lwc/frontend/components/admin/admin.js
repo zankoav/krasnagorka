@@ -751,7 +751,12 @@ export default class Admin extends LightningElement {
     }
 
     updateSettings(event) {
+        console.log('event.detail', event.detail);
+
+        
+
         if (!event.kgInit) {
+            this.updateSeasons(event.detail.dateStart);
             this.settings = { ...this.settings, ...event.detail };
         }
         console.log('this.settings',this.settings);
@@ -763,6 +768,31 @@ export default class Admin extends LightningElement {
             event.detail.house 
         ){
             this.checkTotalPrice();
+        }
+    }
+
+    async updateSeasons(dateStart){
+
+        if( dateStart && dateStart != this.settings.dateStart){
+            this.updateSettingsOnly({seasonsLoading: true});
+            const response = await fetch("https://krasnagorka.by/wp-json/krasnagorka/v1/ls/current-season/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8",
+                },
+                body: JSON.stringify({ dateStart})
+            });
+            const seasonId = await response.json();
+            const result = {seasonsLoading: false};
+            if(seasonId){
+                result.seasons = this.settings.seasons.map(season => {
+                    return {
+                        ...season,
+                        current: season.id == seasonId
+                    };
+                });
+            }
+            this.updateSettingsOnly(result);
         }
     }
 
@@ -830,17 +860,8 @@ export default class Admin extends LightningElement {
             this.updateSettingsOnly({totalPriceLoading: false});
 
             if(data){
-
-                const seasons = this.settings.seasons.map(season => {
-                    return {
-                        ...season,
-                        current: season.id == data.selectedSeason
-                    };
-                });
-
                 this.updateSettingsOnly({
-                    total: data.total,
-                    seasons: seasons
+                    total: data
                 });
             }
         }

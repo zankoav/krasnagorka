@@ -22,9 +22,22 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'calculate_permissions_check')
             ),
         ]);
+
+        register_rest_route($namespace, '/ls/current-season/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'current_season'),
+                'permission_callback' => array($this, 'current_season_permissions_check')
+            ),
+        ]);
     }
 
     public function calculate_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function current_season_permissions_check($request)
     {
         return true;
     }
@@ -93,15 +106,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return new WP_REST_Response($houseInfo, 200);  // addres wordpress/wp-json/krasnagorka/v1/ls/house/?calendarId=5
     }
 
+    public function current_season($request){
+        $selectedSeasonId = Model::getSelectedSeasonId($request['dateStart']);
+        return new WP_REST_Response( $selectedSeasonId, 200);
+    }
+
     public function calculate($request)
     {
         $result = self::calculateResult($request);
-        $dateStart = $request['dateStart'];
-        $selectedSeasonId = Model::getSelectedSeasonId($dateStart);
-        return new WP_REST_Response( [
-            'total' => $result,
-            'selectedSeason' => $selectedSeasonId
-        ], 200);
+        return new WP_REST_Response( $result, 200);
     }
 
     public static function calculateResult($request){

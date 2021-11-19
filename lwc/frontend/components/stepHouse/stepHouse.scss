@@ -7,6 +7,10 @@
 		padding: 24px 32px 32px;
 	}
 
+	&__season-loading{
+		flex-grow: 1;
+	}
+
 	&__select{
 		display: block;
 		margin-top: 1rem;
