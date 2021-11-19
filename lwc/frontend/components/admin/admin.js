@@ -775,20 +775,22 @@ export default class Admin extends LightningElement {
 
         if( dateStart && dateStart != this.settings.dateStart){
             this.updateSettingsOnly({seasonsLoading: true});
+            const dateStartFormat = new moment(dateStart, "DD-MM-YYYY").format("YYYY-MM-DD");
+
             const response = await fetch("https://krasnagorka.by/wp-json/krasnagorka/v1/ls/current-season/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
-                body: JSON.stringify({ dateStart})
+                body: JSON.stringify({ dateStart: dateStartFormat})
             });
-            const seasonId = await response.json();
+            const data = await response.json();
             const result = {seasonsLoading: false};
-            if(seasonId){
+            if(data.seasonId){
                 result.seasons = this.settings.seasons.map(season => {
                     return {
                         ...season,
-                        current: season.id == seasonId
+                        current: season.id == data.seasonId
                     };
                 });
             }
