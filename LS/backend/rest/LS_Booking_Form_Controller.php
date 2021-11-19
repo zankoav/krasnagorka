@@ -108,7 +108,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public function current_season($request){
         $selectedSeasonId = Model::getSelectedSeasonId($request['dateStart']);
-        return new WP_REST_Response( $selectedSeasonId, 200);
+        return new WP_REST_Response( ['seasonId' => $selectedSeasonId], 200);
     }
 
     public function calculate($request)
