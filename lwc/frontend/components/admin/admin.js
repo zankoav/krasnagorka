@@ -744,16 +744,26 @@ export default class Admin extends LightningElement {
             ]
         };
 
-        this.updateSettings();
+        this.updateSettings({
+            detail:this.settings, 
+            kgInit: true
+        });
     }
 
     updateSettings(event) {
-        if (event) {
+        if (!event.kgInit) {
             this.settings = { ...this.settings, ...event.detail };
         }
         console.log('this.settings',this.settings);
         this.updateAvailableSteps();
-        this.checkTotalPrice();
+        if( 
+            event.detail.dateStart || 
+            event.detail.dateEnd   ||
+            event.detail.counts    ||
+            event.detail.house 
+        ){
+            this.checkTotalPrice();
+        }
     }
 
     updateAvailableSteps() {
