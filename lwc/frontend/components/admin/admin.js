@@ -804,7 +804,7 @@ export default class Admin extends LightningElement {
             dateStart && 
             dateEnd && 
             peopleCount && 
-            this.settings.menu.find(step => step.active).value === 'contacts') {
+            this.settings.menu.find(step => step.active).value === 'house') {
             
             this.updateSettingsOnly({totalPriceLoading: true});
 
