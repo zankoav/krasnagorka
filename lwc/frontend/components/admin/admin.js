@@ -2,7 +2,6 @@ import { LightningElement, api, track } from 'lwc';
 import { getCookie } from 'z/utils';
 import './admin.scss';
 
-let calculatorHash;
 export default class Admin extends LightningElement {
 
     @api model;
@@ -800,8 +799,12 @@ export default class Admin extends LightningElement {
         const isTerem = this.settings.house.isTerem;
         const hash = JSON.stringify({ house, dateStart, dateEnd, peopleCount, calendarId, isTerem });
 
-        if (house && dateStart && dateEnd && peopleCount && hash != calculatorHash) {
-            calculatorHash = hash;
+        if (
+            house && 
+            dateStart && 
+            dateEnd && 
+            peopleCount && 
+            this.settings.menu.find(step => step.active).value === 'contacts') {
             
             this.updateSettingsOnly({totalPriceLoading: true});
 
@@ -810,14 +813,25 @@ export default class Admin extends LightningElement {
                 headers: {
                     "Content-Type": "application/json; charset=utf-8",
                 },
-                body: calculatorHash
+                body: hash
             });
             const data = await response.json();
 
             this.updateSettingsOnly({totalPriceLoading: false});
 
             if(data){
-                this.updateSettingsOnly({total: data});
+
+                const seasons = this.settings.seasons.map(season => {
+                    return {
+                        ...season,
+                        current: season.id == data.selectedSeason
+                    };
+                });
+
+                this.updateSettingsOnly({
+                    total: data.total,
+                    seasons: seasons
+                });
             }
         }
     }

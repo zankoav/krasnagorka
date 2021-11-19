@@ -243,7 +243,7 @@ class Model
 
         $selectedSeasonId = null;
         if (!empty($dateFrom) and !empty($dateTo)) {
-            $selectedSeasonId = $this->getSelectedSeasonId($dateFrom);
+            $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
         }
 
         $result        = [
@@ -342,7 +342,7 @@ class Model
         return json_encode($result);
     }
 
-    private function getSelectedSeasonId($dateFrom){
+    public static function getSelectedSeasonId($dateFrom){
         $id = null;
         
         $firstSeasonIntervalParams = array(

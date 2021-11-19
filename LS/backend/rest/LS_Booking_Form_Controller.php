@@ -96,7 +96,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function calculate($request)
     {
         $result = self::calculateResult($request);
-        return new WP_REST_Response( $result, 200);
+        $dateStart = $request['dateStart'];
+        $selectedSeasonId = Model::getSelectedSeasonId($dateStart);
+        return new WP_REST_Response( [
+            'total' => $result,
+            'selectedSeason' => $selectedSeasonId
+        ], 200);
     }
 
     public static function calculateResult($request){

@@ -11,7 +11,7 @@ require __DIR__ . '/L-S/widgets/index.php';
 require __DIR__ . '/L-S/mail/LS_Mailer.php';
 
 
-///* START
+// START
 
 require __DIR__ . '/vendor/autoload.php';
 
