@@ -91,6 +91,22 @@
 		margin-right: 1.5rem;
 	}
 
+	&__info{
+		display: block;
+		margin: 1.5rem 0 2rem;
+
+		@include sm{
+			margin: 1.5rem 0;
+		}
+	}
+
+	&__seasons-title{
+		text-align: center;
+		font-size: 16px;
+		font-weight: 500;
+		color: #b4afb5;
+	}
+
 	&__booking {
 		display: flex;
 		align-items: center;
@@ -136,9 +152,27 @@
 	}
 
 	&__delimeter{
-		height: 1px;
-		background-color: $GRAY;
-		margin: 1.5rem 0;
+		margin: 2rem 0 1.5rem;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 500;
+		color: #b4afb5;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		&:after, &:before{
+			content: '';
+			height: 1px;
+			background-color: $GRAY;
+			flex-grow: 1;
+			margin-left: 1rem;
+		}
+
+		&:before{
+			margin-left: 0;
+			margin-right: 1rem;
+		}
 	}
 
 	&__item-sale {

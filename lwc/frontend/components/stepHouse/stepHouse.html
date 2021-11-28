@@ -50,14 +50,14 @@
                                     </span>
                                 </template>
                             </div>
+		                    <z-object-info class="step-house__info" settings={settings}></z-object-info>
                         </div>
                         <div class="step-house__col">
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
 
-                    <div class="step-house__delimeter"></div>
-
+                    <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
                     <div class="step-house__row">
                         <template if:true={settings.seasonsLoading}>
                             <z-loader class="step-house__season-loading"></z-loader>
