@@ -30,6 +30,35 @@ export default class PaymentMethods extends LightningElement {
             && this.settings.total.total_price >= this.settings.minPrice;
     }
 
+    get paymentText(){
+
+        const paymentMethod = this.settings.paymentMethod;
+        const prepaidType = this.settings.prepaidType;
+
+        let result = ''
+        if(paymentMethod == 'card'){
+            if(prepaidType == 100){
+                result = this.settings.textFullCard
+            }else{
+                result = this.settings.textPartCard
+            }
+        }else if(paymentMethod == 'card_layter'){
+            if(prepaidType == 100){
+                result = this.settings.textFullLaterCard
+            }else{
+                result = this.settings.textPartLaterCard
+            }
+        }else if(paymentMethod == 'office'){
+            if(prepaidType == 100){
+                result = this.settings.textFullOffice
+            }else{
+                result = this.settings.textPartOffice
+            }
+        }
+        
+        return result;
+    }
+
     connectedCallback(){
         if(this.settings.payment){
             this.prepaidOptions = this.settings.prepaidOptions.map((option,index) => {

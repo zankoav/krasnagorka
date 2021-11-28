@@ -38,4 +38,15 @@
     &__buttons{
         width: 360px;
     }
+
+    &__text{
+        margin: 1rem auto 0;
+        max-width: 508px;
+        font-size: 12px;
+        color: #bbb;
+
+        &:empty{
+            display: none;
+        }
+    }
 }

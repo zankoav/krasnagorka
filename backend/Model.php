@@ -245,6 +245,12 @@ class Model
         if (!empty($dateFrom) and !empty($dateTo)) {
             $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
         }
+        $textFullCard =  !empty($bookingSettings['text_full_card']) ? $bookingSettings['text_full_card'] : '';
+        $textPartCard =  !empty($bookingSettings['text_part_card']) ? $bookingSettings['text_part_card'] : '';
+        $textFullLaterCard =  !empty($bookingSettings['text_full_later_card']) ? $bookingSettings['text_full_later_card'] : '';
+        $textPartLaterCard =  !empty($bookingSettings['text_part_later_card']) ? $bookingSettings['text_part_later_card'] : '';
+        $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
+        $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
         $result        = [
             'id'                => $calendarId,
@@ -253,6 +259,12 @@ class Model
             'payment'           => $showPayments,
             'paymentMethod'     => $showPayments ? 'card' : '',
             'prepaidType'       => $showPayments ? 100 : '',
+            'textFullCard'          => $textFullCard,
+            'textPartCard'          => $textPartCard,
+            'textFullLaterCard'     => $textFullLaterCard,
+            'textPartLaterCard'     => $textPartLaterCard,
+            'textFullOffice'        => $textFullOffice,
+            'textPartOffice'        => $textPartOffice,
             'minPrice'          => $minPrepaidPrice,
             'prepaidOptions'    => $prepaidOptions,
             'maxCount'      => $maxCount,

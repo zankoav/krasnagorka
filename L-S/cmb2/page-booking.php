@@ -54,6 +54,49 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Предоплата',
+        'id'   => 'booking_payments_type_percentage',
+        'type'         => 'text_small',
+        'before_field' => '%'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой 100% (Текст)',
+        'id'   => 'text_full_card',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой Частично (Текст)',
+        'id'   => 'text_part_card',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой 100% Позже (Текст)',
+        'id'   => 'text_full_later_card',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой Частично Позже (Текст)',
+        'id'   => 'text_part_later_card',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой 100% в Офисе (Текст)',
+        'id'   => 'text_full_office',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Картой Частично в Офисе (Текст)',
+        'id'   => 'text_part_office',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Включить тестовый Webpay Sandbox для админов',
         'id'   => 'is_sand_box_enabled',
         'type' => 'checkbox',
