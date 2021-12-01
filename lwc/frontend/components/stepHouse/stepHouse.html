@@ -12,12 +12,16 @@
                 <template if:true={settings.house}>
                     <div class="step-house__row">
                         <div class="step-house__col">
-                            <z-select class="step-house__select step-house__calendars"
+                            <div class="step-house__info-group">
+                                <img class="step-house__object-info-img"
+                                        src={settings.house.picture}
+                                        alt={settings.house.title}>
+                                <z-select class="step-house__select step-house__calendars"
                                       required
                                       label="Домик"
                                       onchange={calendarChange}
                                       options={settings.calendars}></z-select>
-
+                            </div>
                             <z-select class="step-house__select step-house__counts"
                                       required
                                       label="Количество человек"
@@ -50,7 +54,6 @@
                                     </span>
                                 </template>
                             </div>
-		                    <z-object-info class="step-house__info" settings={settings}></z-object-info>
                         </div>
                         <div class="step-house__col">
                             <z-calendar settings={settings}></z-calendar>

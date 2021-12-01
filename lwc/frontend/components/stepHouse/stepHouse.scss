@@ -193,4 +193,23 @@
 		color: $RED_2;
 		font-weight: 700;
 	}
+
+	&__info-group {
+		display: flex;
+		align-items: center;
+	}
+
+	&__object-info-img{
+		max-width: 80px;
+    	height: 45px;
+		object-fit: cover;
+		flex: 1 0 80px;
+		margin-right: 1rem;
+		border-radius: 8px;
+	}
+
+	&__calendars{
+		flex-grow: 1;
+		margin-top: 0;
+	}
 }
