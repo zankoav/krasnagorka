@@ -4,5 +4,5 @@ import { createElement } from "lwc";
 import Admin from "./components/admin/admin";
 
 const appEl = createElement("z-admin", { is: Admin });
-appEl.model = JSON.parse(model);
+appEl.model = JSON.parse(model.replace(/\n/g, "\\n"));
 document.body.appendChild(appEl);
