@@ -254,11 +254,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if(count($daysUpperPersents) > 0){    
                 foreach($daysUpperPersents as $day => $persent){
                     if( count($days) <= $seasonDaysCount){
-                        Log::info("Total days",$days);
-                        Log::info("seasonDaysCount",$seasonDaysCount);
-                        Log::info("day",$day);
-                        Log::info("persent",$persent);
-                        Log::info("===========",null);
                         $upperPercent = intval($persent);
                         break;
                     }
