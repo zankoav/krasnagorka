@@ -139,6 +139,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $days[] = $value->format('Y-m-d');    
         }
 
+        Log::info('$days', $days);
+
 
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
