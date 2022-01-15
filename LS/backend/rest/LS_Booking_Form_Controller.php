@@ -143,6 +143,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $isRemoveIncreaseFromShortOrder = $bookingSettings['remove_increase_from_short_order'] == 'on';
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
+            Log::info('numberShortOrder', $numberShortOrder);
             $sizeOfDays = count($days);
             if(($numberShortOrder + 1) == $sizeOfDays){
                 $firstDay = $days[0];
