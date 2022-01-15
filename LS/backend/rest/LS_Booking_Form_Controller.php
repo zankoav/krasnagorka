@@ -378,6 +378,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             )
         ));
 
+        Log::info('calendarId', $calendarId);
         Log::info('dateStart', $dateStart);
         Log::info('dateEnd', $dateEnd);
         Log::info('orders', count($orders));
