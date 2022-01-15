@@ -147,7 +147,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $sizeOfDays = count($days);
             Log::info('days', $days);
 
-            if(($numberShortOrder + 2) == $sizeOfDays){
+            if(($numberShortOrder + 1) == $sizeOfDays){
                 $firstDay = $days[0];
                 $lastDay = end($days);
 
