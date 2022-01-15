@@ -370,11 +370,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 //     'type'    => 'DATE',
                 //     'compare' => '=',
                 // ),
-                array(
-                    'key'     => 'sbc_order_start',
-                    'value'   => $dateEnd,
-                    'compare' => '='
-                )
+                // array(
+                //     'key'     => 'sbc_order_start',
+                //     'value'   => $dateEnd,
+                //     'compare' => '='
+                // )
             )
         ));
 
