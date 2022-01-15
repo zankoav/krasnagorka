@@ -364,17 +364,18 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ],
             'meta_query' => array(
                 // 'relation' => 'OR',
-                array(
-                    'key'     => 'sbc_order_end',
-                    'value'   => $dateStart,
-                    'type'    => 'DATE',
-                    'compare' => '=',
-                ),
                 // array(
-                //     'key'     => 'sbc_order_start',
-                //     'value'   => $dateEnd,
+                //     'key'     => 'sbc_order_end',
+                //     'value'   => $dateStart,
+                //     'type'    => 'DATE',
                 //     'compare' => '=',
-                // )
+                // ),
+                array(
+                    'key'     => 'sbc_order_start',
+                    'value'   => $dateEnd,
+                    'type'    => 'DATE',
+                    'compare' => '='
+                )
             )
         ));
 
