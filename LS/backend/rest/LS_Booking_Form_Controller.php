@@ -369,14 +369,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'value'   => $dateStart,
                     'compare' => '=',
                 ),
-                array(
-                    'key'     => 'sbc_order_start',
-                    'value'   => $dateEnd,
-                    'compare' => '=',
-                )
+                // array(
+                //     'key'     => 'sbc_order_start',
+                //     'value'   => $dateEnd,
+                //     'compare' => '=',
+                // )
             )
         ));
 
+        Log::info('dateStart', $dateStart);
+        Log::info('dateEnd', $dateEnd);
         Log::info('orders', $orders);
         Log::info('isShortOrderWindow', $result);
         return $result;
