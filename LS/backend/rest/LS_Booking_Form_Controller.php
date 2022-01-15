@@ -380,7 +380,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         Log::info('dateStart', $dateStart);
         Log::info('dateEnd', $dateEnd);
-        Log::info('orders', $orders);
+        Log::info('orders', count($orders));
         Log::info('isShortOrderWindow', $result);
         return $result;
     }
