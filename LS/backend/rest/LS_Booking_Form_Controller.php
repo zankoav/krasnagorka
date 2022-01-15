@@ -145,9 +145,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
             if($numberShortOrder == (count($days) + 1)){
-                $firstDay = $days[0];
-                $lastDay = end($days);
-                $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId);
+                $removeOrderIncrease = self::isShortOrderWindow($dateStart, $dateEnd, $calendarId);
             }
         }
         
@@ -348,9 +346,38 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    private static function isShortOrderWindow($days, $calendarId){
+    private static function isShortOrderWindow($dateStart, $dateEnd, $calendarId){
         $result = false;
+        $dateStart = date("Y-m-d", strtotime($dateStart));
+        $dateEnd = date("Y-m-d", strtotime($dateEnd));
 
+
+        $ordersQuery = new WP_Query;
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'sbc_calendars',
+                    'terms' => [$calendarId]
+                ]
+            ],
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '==',
+                ),
+                array(
+                    'key'     => 'sbc_order_start',
+                    'value'   => $dateEnd,
+                    'compare' => '==',
+                )
+            )
+        ));
+
+        Log::info('orders', $orders);
         Log::info('isShortOrderWindow', $result);
         return $result;
     }
