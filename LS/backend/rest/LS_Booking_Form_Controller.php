@@ -145,7 +145,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
             if($numberShortOrder == (count($days) + 1)){
-                $cId = $isTerem ? $calendarId : $houseId;
+                if($isTerem){
+                    $cId = $calendarId;
+                }else{
+                    $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+                    $cId = getCalendarId($calendarShortCode);
+                }
                 $removeOrderIncrease = self::isShortOrderWindow($dateStart, $dateEnd, $cId);
             }
         }
