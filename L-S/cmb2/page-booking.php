@@ -102,6 +102,18 @@ function cmb2_booking_page() {
         'type' => 'checkbox',
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Отключить надбавки для заказов-окошек',
+        'id'   => 'remove_increase_from_short_order',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Длинна заказа-окошка',
+        'id'   => 'number_short_order',
+        'type' => 'text_small',
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');

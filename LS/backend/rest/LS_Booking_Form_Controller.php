@@ -139,13 +139,20 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $days[] = $value->format('Y-m-d');    
         }
 
-        $firstDay = $days[0];
-        $lastDay = end($days);
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+        $isRemoveIncreaseFromShortOrder = $bookingSettings['remove_increase_from_short_order'] == 'on';
+        if($isRemoveIncreaseFromShortOrder){
+            $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
+            $firstDay = $days[0];
+            $lastDay = end($days);
+            $sizeOfDays = count($days);
 
-        Log::info('firstDay', $firstDay);
-        Log::info('$lastDay', $lastDay);
-
-
+            Log::info('numberShortOrder', $numberShortOrder);
+            Log::info('firstDay', $firstDay);
+            Log::info('lastDay', $lastDay);
+            Log::info('count', $sizeOfDays);
+        }
+        
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
         foreach ((array)$houseDaysSales as $key => $entry) {
