@@ -145,7 +145,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
             if($numberShortOrder == (count($days) + 1)){
-                $removeOrderIncrease = self::isShortOrderWindow($dateStart, $dateEnd, $calendarId);
+                $cId = $isTerem ? $calendarId : $houseId;
+                $removeOrderIncrease = self::isShortOrderWindow($dateStart, $dateEnd, $cId);
             }
         }
         
@@ -347,11 +348,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     private static function isShortOrderWindow($dateStart, $dateEnd, $calendarId){
-        $result = false;
         $dateStart = date("Y-m-d", strtotime($dateStart));
         $dateEnd = date("Y-m-d", strtotime($dateEnd));
-
-
         $ordersQuery = new WP_Query;
         $orders = $ordersQuery->query(array(
             'post_type' => 'sbc_orders',
@@ -362,28 +360,26 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'terms' => [$calendarId]
                 ]
             ],
-            // 'meta_query' => array(
-                // 'relation' => 'OR',
-                // array(
-                //     'key'     => 'sbc_order_end',
-                //     'value'   => $dateStart,
-                //     'type'    => 'DATE',
-                //     'compare' => '=',
-                // ),
-                // array(
-                //     'key'     => 'sbc_order_start',
-                //     'value'   => $dateEnd,
-                //     'compare' => '='
-                // )
-            // )
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '=',
+                ),
+                array(
+                    'key'     => 'sbc_order_start',
+                    'value'   => $dateEnd,
+                    'compare' => '='
+                )
+            )
         ));
 
         Log::info('calendarId', $calendarId);
         Log::info('dateStart', $dateStart);
         Log::info('dateEnd', $dateEnd);
         Log::info('orders', count($orders));
-        Log::info('isShortOrderWindow', $result);
-        return $result;
+        return count($orders) == 2;
     }
 
     private static function getDaysUpperPersent($seasonId, $metaKey){
