@@ -362,7 +362,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'terms' => [$calendarId]
                 ]
             ],
-            'meta_query' => array(
+            // 'meta_query' => array(
                 // 'relation' => 'OR',
                 // array(
                 //     'key'     => 'sbc_order_end',
@@ -375,7 +375,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 //     'value'   => $dateEnd,
                 //     'compare' => '='
                 // )
-            )
+            // )
         ));
 
         Log::info('calendarId', $calendarId);
