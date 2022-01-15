@@ -141,15 +141,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $isRemoveIncreaseFromShortOrder = $bookingSettings['remove_increase_from_short_order'] == 'on';
+        $removeOrderIncrease = false;
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = isset($bookingSettings['number_short_order']) ?  (int)$bookingSettings['number_short_order'] : 0;
-            $sizeOfDays = count($days);
-            if($numberShortOrder == ($sizeOfDays + 1)){
+            if($numberShortOrder == (count($days) + 1)){
                 $firstDay = $days[0];
                 $lastDay = end($days);
-
-                Log::info('firstDay', $firstDay);
-                Log::info('lastDay', $lastDay);
+                $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId);
             }
         }
         
@@ -347,6 +345,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
             $result['total_price'] = intval($result['total_price']);
         }
+        return $result;
+    }
+
+    private static function isShortOrderWindow($days, $calendarId){
+        $result = false;
+
+        Log::info('isShortOrderWindow', $result);
         return $result;
     }
 
