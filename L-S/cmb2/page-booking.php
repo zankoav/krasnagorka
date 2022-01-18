@@ -103,6 +103,12 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Настройки по надбавкам',
+        'id'   => 'remove_increase_from_short_order_title',
+        'type' => 'title',
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Отключить надбавки для заказов-окошек',
         'id'   => 'remove_increase_from_short_order',
         'type' => 'checkbox',
@@ -112,6 +118,30 @@ function cmb2_booking_page() {
         'name' => 'Длинна заказа-окошка',
         'id'   => 'number_short_order',
         'type' => 'text_small',
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Настройки по заказам с оконами по сторонам',
+        'id'   => 'order_with_windows_title',
+        'type' => 'title',
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Отключить возможность оплаты брони с оконами в одну ночь',
+        'id'   => 'order_with_windows_enabled',
+        'type' => 'checkbox',
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Длинна окошка',
+        'id'   => 'number_short_order',
+        'type' => 'text_small',
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Сообщение',
+        'id'   => 'order_with_windows_message',
+        'type' => 'textarea_small',
     ));
 
 }
