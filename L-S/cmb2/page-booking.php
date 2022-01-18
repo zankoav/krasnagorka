@@ -134,7 +134,7 @@ function cmb2_booking_page() {
 
     $cmb_options->add_field(array(
         'name' => 'Длинна окошка',
-        'id'   => 'number_short_order',
+        'id'   => 'number_of_days',
         'type' => 'text_small',
     ));
 
