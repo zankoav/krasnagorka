@@ -367,8 +367,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ];
 
             $left = [
-                date("Y-m-d", strtotime("-1 day", strtotime($dateStart))),
-                date("Y-m-d", strtotime("-$windowNumber day", strtotime($dateStart)))
+                date("Y-m-d", strtotime("-$windowNumber day", strtotime($dateStart))),
+                date("Y-m-d", strtotime("-1 day", strtotime($dateStart)))
             ];
 
             $cId = false;
