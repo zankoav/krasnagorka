@@ -416,8 +416,7 @@ function kg_clear_orders_2()
                 ),
                 array(
                     'key'     => 'sbc_order_prepaid_source',
-                    'value'   => '',
-                    'compare' => '!='
+                    'compare' => 'EXISTS'
                 )
             ),
             'date_query' => array(
