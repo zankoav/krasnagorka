@@ -357,7 +357,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $isOrderWithWindowsMessage = $bookingSettings['order_with_windows_message'];
 
         if($isOrderWithWindowsEnabled){
-            $windowNumber= intval($bookingSettings['number_of_days']);
+            $windowNumber = intval($bookingSettings['number_of_days']);
             $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
             $dateEnd = end($days);
 
