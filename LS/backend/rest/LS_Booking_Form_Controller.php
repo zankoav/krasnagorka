@@ -142,7 +142,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         /**
          * is short order window
          */
-        $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId);  
+        $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
               
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
@@ -341,7 +341,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    private static function isShortOrderWindow($days, $calendarId, $houseId){
+    private static function isShortOrderWindow($days, $calendarId, $houseId, $isTerem){
         
         $result = false;
         $bookingSettings = get_option('mastak_booking_appearance_options');
@@ -349,49 +349,51 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         if($isRemoveIncreaseFromShortOrder){
             $numberShortOrder = intval($bookingSettings['number_short_order']);
-            // if($numberShortOrder == (count($days) + 1)){
-            //     if($isTerem){
-            //         $cId = $calendarId;
-            //     }else{
-            //         $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
-            //         $cId = getCalendarId($calendarShortCode);
-            //     }
+            if($numberShortOrder == (count($days) + 1)){
+                $cId = false;
+                if($isTerem){
+                    $cId = $calendarId;
+                }else{
+                    $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+                    $cId = getCalendarId($calendarShortCode);
+                }
 
-            //     $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($date_raw)));
-            //     $dateEnd = date("Y-m-d", strtotime($dateEnd));
-            //     $ordersQuery = new WP_Query;
-            //     $orders = $ordersQuery->query(array(
-            //         'post_type' => 'sbc_orders',
-            //         'posts_per_page' => -1,
-            //         'tax_query' => [
-            //             [
-            //                 'taxonomy' => 'sbc_calendars',
-            //                 'terms' => [$calendarId]
-            //             ]
-            //         ],
-            //         'meta_query' => array(
-            //             'relation' => 'OR',
-            //             array(
-            //                 'key'     => 'sbc_order_end',
-            //                 'value'   => $dateStart,
-            //                 'compare' => '=',
-            //             ),
-            //             array(
-            //                 'key'     => 'sbc_order_start',
-            //                 'value'   => $dateEnd,
-            //                 'compare' => '='
-            //             )
-            //         )
-            //     ));
+                $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+                $dateEnd = end($days);
+                $ordersQuery = new WP_Query;
+                $orders = $ordersQuery->query(array(
+                    'post_type' => 'sbc_orders',
+                    'posts_per_page' => -1,
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'sbc_calendars',
+                            'terms' => [$cId]
+                        ]
+                    ],
+                    'meta_query' => array(
+                        'relation' => 'OR',
+                        array(
+                            'key'     => 'sbc_order_end',
+                            'value'   => $dateStart,
+                            'compare' => '=',
+                        ),
+                        array(
+                            'key'     => 'sbc_order_start',
+                            'value'   => $dateEnd,
+                            'compare' => '='
+                        )
+                    )
+                ));
 
                 Log::info('calendarId', $calendarId);
                 Log::info('houseId', $houseId);
-                // Log::info('dateStart', $dateStart);
-                // Log::info('dateEnd', $dateEnd);
-                Log::info('days', $days);
-                // Log::info('orders', count($orders));
-                
-            // }
+                Log::info('dateStart', $dateStart);
+                Log::info('dateEnd', $dateEnd);
+                Log::info('orders', count($orders));
+                $result = count($orders) === 2;
+            }
+
+            Log::info('result', $result);
         }
         return $result;
     }
