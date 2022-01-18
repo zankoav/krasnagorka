@@ -455,8 +455,7 @@ function kg_clear_orders()
                 ),
                 array(
                     'key'     => 'sbc_task_id',
-                    'value'   => '',
-                    'compare' => '!='
+                    'compare' => 'EXISTS'
                 )
             ),
             'date_query' => array(
