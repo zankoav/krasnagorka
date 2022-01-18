@@ -1,8 +1,28 @@
 .total-price {
-	display: flex;
-	justify-content: space-between;
+	
 	border-top: 1px solid #f7f7f7;
 	padding: 1.5rem 0;
+
+    &__container{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__warning{
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    &__warning-icon{
+        flex-shrink: 0;
+        margin-right: .5rem;
+    }
+
+    &__warning-message{
+        color: #f5a623;
+        font-size: 14px;
+    }
 
 	&__title {
 		font-size: 16px;

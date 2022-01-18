@@ -42,6 +42,10 @@ export default class StepCheckout extends LightningElement {
         }
         return title;
     }
+
+    get isPayment(){
+        return this.settings.payment && !this.settings.total.only_booking_order.enabled;
+    }
     
     connectedCallback(){
         gtag('event', 'step_navigation', {

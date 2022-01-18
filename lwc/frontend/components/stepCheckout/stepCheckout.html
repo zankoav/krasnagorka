@@ -27,10 +27,10 @@
          <p class="step-checkout__item"
             data-label="Комментарий:">{comment}</p>
       </div>
-      <z-payment-methods if:true={settings.payment} class="step-checkout__payment" settings={settings}></z-payment-methods>
+      <z-payment-methods if:true={isPayment} class="step-checkout__payment" settings={settings}></z-payment-methods>
       <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
       
-      <z-step-button-navigation if:true={settings.payment} 
+      <z-step-button-navigation if:true={isPayment} 
                                 is-back-button-need
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}
@@ -38,7 +38,7 @@
                                 settings={settings}
                                 next-title={buttonTitle}></z-step-button-navigation>
 
-      <z-step-button-navigation if:false={settings.payment} 
+      <z-step-button-navigation if:false={isPayment} 
                                 is-back-button-need
                                 error={settings.bookingErrorMessage}
                                 onback={backButtonHandler}

@@ -411,9 +411,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
         return [
             'enabled' => $result,
-            'right' => $right,
-            'left' => $left,
-            'orders' => count($orders),
             'message' => $isOrderWithWindowsMessage
         ];
     }
