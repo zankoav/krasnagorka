@@ -127,7 +127,7 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Отключить возможность оплаты брони с окнами в одну ночь',
+        'name' => 'Отключить возможность оплаты брони с окнами по сторонам',
         'id'   => 'order_with_windows_enabled',
         'type' => 'checkbox',
     ));
