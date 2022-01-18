@@ -253,14 +253,17 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $percentTotal = 0;
 
 
-            $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
 
             $upperPercent = false;
-            if(count($daysUpperPersents) > 0){    
-                foreach($daysUpperPersents as $day => $persent){
-                    if(count($days) <= intval($day)){
-                        $upperPercent = intval($persent);
-                        break;
+
+            if(!$removeOrderIncrease){
+                $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
+                if(count($daysUpperPersents) > 0){    
+                    foreach($daysUpperPersents as $day => $persent){
+                        if(count($days) <= intval($day)){
+                            $upperPercent = intval($persent);
+                            break;
+                        }
                     }
                 }
             }
