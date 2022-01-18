@@ -147,7 +147,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         /**
          * is only booking order
          */
-        $onlyBookingOrder = self::isOnlyBookingOrder($days);                
+        $onlyBookingOrder = self::isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem);                
 
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
@@ -350,7 +350,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    private static function isOnlyBookingOrder($days){
+    private static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem){
         $result = false;
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
@@ -373,13 +373,48 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 date("Y-m-d", strtotime("-$numberDelta day", strtotime($dateStart)))
             ];
 
+            $cId = false;
+            if($isTerem){
+                $cId = $calendarId;
+            }else{
+                $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+                $cId = getCalendarId($calendarShortCode);
+            }
+
+            $ordersQuery = new WP_Query;
+                $orders = $ordersQuery->query(array(
+                    'post_type' => 'sbc_orders',
+                    'posts_per_page' => -1,
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'sbc_calendars',
+                            'terms' => [$cId]
+                        ]
+                    ],
+                    'meta_query' => array(
+                        'relation' => 'OR',
+                        array(
+                            'key'     => 'sbc_order_end',
+                            'value'   => $left,
+                            'type'      =>  'date',
+                            'compare' =>  'between'   
+                        ),
+                        array(
+                            'key'     => 'sbc_order_start',
+                            'value'   =>  $right,
+                            'type'      =>  'date',
+                            'compare' =>  'between'   
+                        )
+                    )
+                ));
+                $result = count($orders) > 0;
+
 
         }
         return [
             'enabled' => $result,
             'right' => $right,
             'left' => $left,
-            'windowNumber' => $windowNumber,
             'message' => $isOrderWithWindowsMessage
         ];
     }
