@@ -147,7 +147,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         /**
          * is only booking order
          */
-        $isOnlyBookingOrder = self::isOnlyBookingOrder();                
+        $onlyBookingOrder = self::isOnlyBookingOrder();                
 
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
@@ -200,7 +200,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'days_count' => count($days),
             'day_sale_next' => $daySaleNext,
             'seasons_group' => [],
-            'only_booking_order' => $isOnlyBookingOrder
+            'only_booking_order' => $onlyBookingOrder
         ];
 
         foreach($days as $day) {
@@ -352,8 +352,17 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     private static function isOnlyBookingOrder(){
         $result = false;
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+        $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
+        $isOrderWithWindowsMessage = $bookingSettings['order_with_windows_message'];
 
-        return $result;
+        if($isOrderWithWindowsEnabled){
+            $windowNumber= intval($bookingSettings['number_of_days']);
+        }
+        return [
+            'enabled' => $result,
+            'message' => $isOrderWithWindowsMessage
+        ];
     }
 
     private static function isShortOrderWindow($days, $calendarId, $houseId, $isTerem){
