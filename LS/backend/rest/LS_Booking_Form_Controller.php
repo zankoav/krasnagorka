@@ -143,6 +143,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          * is short order window
          */
         $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
+        Log::info('removeOrderIncrease', $removeOrderIncrease);
               
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
@@ -384,16 +385,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         )
                     )
                 ));
-
-                Log::info('calendarId', $calendarId);
-                Log::info('houseId', $houseId);
-                Log::info('dateStart', $dateStart);
-                Log::info('dateEnd', $dateEnd);
-                Log::info('orders', count($orders));
                 $result = count($orders) === 2;
             }
-
-            Log::info('result', $result);
         }
         return $result;
     }
