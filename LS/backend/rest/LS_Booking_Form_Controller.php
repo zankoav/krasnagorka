@@ -361,12 +361,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
             $dateEnd = end($days);
 
-            $numberDelta = $windowNumber + 1;
+            // $numberDelta = $windowNumber + 1;
 
             $right = [
-                // date("Y-m-d", strtotime("2 day", strtotime($dateEnd))),
-                // date("Y-m-d", strtotime("$numberDelta day", strtotime($dateEnd)))
+                // date("Y-m-d", strtotime("+2 day", strtotime($dateEnd))),
+                // date("Y-m-d", strtotime("+$numberDelta day", strtotime($dateEnd)))
             ];
+
             $left = [
                 // date("Y-m-d", strtotime("-2 day", strtotime($dateStart))),
                 // date("Y-m-d", strtotime("-$numberDelta day", strtotime($dateStart)))
