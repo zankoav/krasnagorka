@@ -143,8 +143,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          * is short order window
          */
         $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
-        Log::info('removeOrderIncrease', $removeOrderIncrease);
               
+        /**
+         * is only booking order
+         */
+        $isOnlyBookingOrder = self::isOnlyBookingOrder();                
+
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
         foreach ((array)$houseDaysSales as $key => $entry) {
@@ -195,7 +199,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'total_price' => 0,
             'days_count' => count($days),
             'day_sale_next' => $daySaleNext,
-            'seasons_group' => []
+            'seasons_group' => [],
+            'only_booking_order' => $isOnlyBookingOrder
         ];
 
         foreach($days as $day) {
@@ -342,6 +347,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
             $result['total_price'] = intval($result['total_price']);
         }
+        return $result;
+    }
+
+    private static function isOnlyBookingOrder(){
+        $result = false;
+
         return $result;
     }
 
