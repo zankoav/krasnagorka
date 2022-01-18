@@ -147,7 +147,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         /**
          * is only booking order
          */
-        $onlyBookingOrder = false;// self::isOnlyBookingOrder();                
+        $onlyBookingOrder = self::isOnlyBookingOrder($days);                
 
         $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
         $houseDaysSalesResult = [];
@@ -350,39 +350,39 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    // private static function isOnlyBookingOrder($days){
-    //     $result = false;
-    //     $bookingSettings = get_option('mastak_booking_appearance_options');
-    //     $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
-    //     $isOrderWithWindowsMessage = $bookingSettings['order_with_windows_message'];
+    private static function isOnlyBookingOrder($days){
+        $result = false;
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+        $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
+        $isOrderWithWindowsMessage = $bookingSettings['order_with_windows_message'];
 
-    //     if($isOrderWithWindowsEnabled){
-    //         $windowNumber = intval($bookingSettings['number_of_days']);
-    //         $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
-    //         $dateEnd = end($days);
+        if($isOrderWithWindowsEnabled){
+            $windowNumber = intval($bookingSettings['number_of_days']);
+            $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+            $dateEnd = end($days);
 
-    //         $numberDelta = $windowNumber + 1;
+            $numberDelta = $windowNumber + 1;
 
-    //         $right = [
-    //             date("Y-m-d", strtotime("+2 day", strtotime($dateEnd))),
-    //             date("Y-m-d", strtotime("+$numberDelta day", strtotime($dateEnd)))
-    //         ];
+            $right = [
+                date("Y-m-d", strtotime("+2 day", strtotime($dateEnd))),
+                date("Y-m-d", strtotime("+$numberDelta day", strtotime($dateEnd)))
+            ];
 
-    //         $left = [
-    //             date("Y-m-d", strtotime("-2 day", strtotime($dateStart))),
-    //             date("Y-m-d", strtotime("-$numberDelta day", strtotime($dateStart)))
-    //         ];
+            $left = [
+                date("Y-m-d", strtotime("-2 day", strtotime($dateStart))),
+                date("Y-m-d", strtotime("-$numberDelta day", strtotime($dateStart)))
+            ];
 
 
-    //     }
-    //     return [
-    //         'enabled' => $result,
-    //         'right' => $right,
-    //         'left' => $left,
-    //         'windowNumber' => $windowNumber,
-    //         'message' => $isOrderWithWindowsMessage
-    //     ];
-    // }
+        }
+        return [
+            'enabled' => $result,
+            'right' => $right,
+            'left' => $left,
+            'windowNumber' => $windowNumber,
+            'message' => $isOrderWithWindowsMessage
+        ];
+    }
 
     private static function isShortOrderWindow($days, $calendarId, $houseId, $isTerem){
         
