@@ -358,8 +358,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         if($isOrderWithWindowsEnabled){
             // $windowNumber = intval($bookingSettings['number_of_days']);
-            $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
-            $dateEnd = end($days);
+            // $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+            // $dateEnd = end($days);
 
             // $numberDelta = $windowNumber + 1;
 
@@ -377,8 +377,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
         return [
             'enabled' => $result,
-            'right' => $right,
-            'left' => $left,
+            // 'right' => $right,
+            // 'left' => $left,
             // 'windowNumber' => $windowNumber,
             'message' => $isOrderWithWindowsMessage
         ];
