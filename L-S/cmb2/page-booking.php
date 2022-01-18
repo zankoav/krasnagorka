@@ -121,13 +121,13 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Настройки по заказам с оконами по сторонам',
+        'name' => 'Настройки по заказам с окнами по сторонам',
         'id'   => 'order_with_windows_title',
         'type' => 'title',
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Отключить возможность оплаты брони с оконами в одну ночь',
+        'name' => 'Отключить возможность оплаты брони с окнами в одну ночь',
         'id'   => 'order_with_windows_enabled',
         'type' => 'checkbox',
     ));
