@@ -350,7 +350,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $result;
     }
 
-    private static function isOnlyBookingOrder(){
+    private static function isOnlyBookingOrder($days){
         $result = false;
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
@@ -358,9 +358,26 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         if($isOrderWithWindowsEnabled){
             $windowNumber= intval($bookingSettings['number_of_days']);
+            $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+            $dateEnd = end($days);
+
+            $numberDelta = $windowNumber + 1;
+
+            $right = [
+                date("Y-m-d", strtotime("+2 day", strtotime($dateEnd))),
+                date("Y-m-d", strtotime("+$numberDelta day", strtotime($dateEnd)))
+            ];
+            $left = [
+                date("Y-m-d", strtotime("-2 day", strtotime($dateStart))),
+                date("Y-m-d", strtotime("-$numberDelta day", strtotime($dateStart)))
+            ];
+
+
         }
         return [
             'enabled' => $result,
+            'right' => $right,
+            'left' => $left,
             'message' => $isOrderWithWindowsMessage
         ];
     }
