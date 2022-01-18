@@ -379,6 +379,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'enabled' => $result,
             'right' => $right,
             'left' => $left,
+            'windowNumber' => $windowNumber,
             'message' => $isOrderWithWindowsMessage
         ];
     }
