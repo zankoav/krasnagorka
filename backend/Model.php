@@ -182,14 +182,11 @@ class Model
     public function getBookingModel()
     {
         $bookingSettings = get_option('mastak_booking_appearance_options');
-        $showPrice = false;
+        $showPrice = $bookingSettings['booking_price_show'] == 'on';
         $showPayments = false;
-        if(isset($bookingSettings['booking_price_show'])){
-            $showPrice = $bookingSettings['booking_price_show'] == 'on';
-        }
 
         if($showPrice){
-            $showPayments = $bookingSettings['booking_payments_show'] == 'on'  &&  is_user_logged_in();
+            $showPayments = $bookingSettings['booking_payments_show'] == 'on';
             $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
             $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
             $prepaidOptions = [
