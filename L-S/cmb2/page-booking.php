@@ -115,12 +115,6 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Длинна заказа-окошка',
-        'id'   => 'number_short_order',
-        'type' => 'text_small',
-    ));
-
-    $cmb_options->add_field(array(
         'name' => 'Настройки по заказам с окнами по сторонам',
         'id'   => 'order_with_windows_title',
         'type' => 'title',

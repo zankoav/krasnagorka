@@ -198,7 +198,7 @@ function mastak_season()
 		$group_field_event = $cmb_season->add_field(array(
 			'id'          => 'house_days_count_upper_' . $house_id,
 			'type'        => 'group',
-			'description' => __('Можно добавлять любое количество надбавок от количества ДНЕЙ', 'krasnagorka'),
+			'description' => __('Можно добавлять любое количество надбавок от количества НОЧЕЙ', 'krasnagorka'),
 			// 'repeatable'  => false, // use false if you want non-repeatable group
 			'options'     => array(
 				'group_title'   => __('Надбавка {#}', 'krasnagorka'),
@@ -212,7 +212,7 @@ function mastak_season()
 		));
 
 		$cmb_season->add_group_field($group_field_event, array(
-			'name' => 'Мин. кол-во дней',
+			'name' => 'Мин. кол-во ночей',
 			'id'   => 'sale_day',
 			'type' => 'text_small',
 		));
@@ -292,7 +292,7 @@ function mastak_season()
 		$group_field_event = $cmb_season->add_field(array(
 			'id'          => 'room_days_count_upper_' . $room_id,
 			'type'        => 'group',
-			'description' => __('Можно добавлять любое количество надбавок от количества ДНЕЙ', 'krasnagorka'),
+			'description' => __('Можно добавлять любое количество надбавок от количества НОЧЕЙ', 'krasnagorka'),
 			// 'repeatable'  => false, // use false if you want non-repeatable group
 			'options'     => array(
 				'group_title'   => __('Надбавка {#}', 'krasnagorka'),
@@ -306,7 +306,7 @@ function mastak_season()
 		));
 
 		$cmb_season->add_group_field($group_field_event, array(
-			'name' => 'Мин. кол-во дней',
+			'name' => 'Мин. кол-во ночей',
 			'id'   => 'sale_day',
 			'type' => 'text_small',
 		));

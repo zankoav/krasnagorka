@@ -422,44 +422,41 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $isRemoveIncreaseFromShortOrder = $bookingSettings['remove_increase_from_short_order'] == 'on';
 
         if($isRemoveIncreaseFromShortOrder){
-            $numberShortOrder = intval($bookingSettings['number_short_order']);
-            if($numberShortOrder == (count($days) + 1)){
-                $cId = false;
-                if($isTerem){
-                    $cId = $calendarId;
-                }else{
-                    $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
-                    $cId = getCalendarId($calendarShortCode);
-                }
-
-                $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
-                $dateEnd = end($days);
-                $ordersQuery = new WP_Query;
-                $orders = $ordersQuery->query(array(
-                    'post_type' => 'sbc_orders',
-                    'posts_per_page' => -1,
-                    'tax_query' => [
-                        [
-                            'taxonomy' => 'sbc_calendars',
-                            'terms' => [$cId]
-                        ]
-                    ],
-                    'meta_query' => array(
-                        'relation' => 'OR',
-                        array(
-                            'key'     => 'sbc_order_end',
-                            'value'   => $dateStart,
-                            'compare' => '=',
-                        ),
-                        array(
-                            'key'     => 'sbc_order_start',
-                            'value'   => $dateEnd,
-                            'compare' => '='
-                        )
-                    )
-                ));
-                $result = count($orders) === 2;
+            $cId = false;
+            if($isTerem){
+                $cId = $calendarId;
+            }else{
+                $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+                $cId = getCalendarId($calendarShortCode);
             }
+
+            $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+            $dateEnd = end($days);
+            $ordersQuery = new WP_Query;
+            $orders = $ordersQuery->query(array(
+                'post_type' => 'sbc_orders',
+                'posts_per_page' => -1,
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'sbc_calendars',
+                        'terms' => [$cId]
+                    ]
+                ],
+                'meta_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $dateStart,
+                        'compare' => '=',
+                    ),
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateEnd,
+                        'compare' => '='
+                    )
+                )
+            ));
+            $result = count($orders) === 2;
         }
         return $result;
     }
