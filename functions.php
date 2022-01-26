@@ -453,8 +453,9 @@ function kg_clear_orders()
                     'compare' => '='
                 ),
                 array(
-                    'key'     => 'sbc_task_id',
-                    'compare' => 'EXISTS'
+                    'key'     => 'sbc_order_payment_method',
+                    'value'   => 'card',
+                    'compare' => '='
                 )
             ),
             'date_query' => array(
