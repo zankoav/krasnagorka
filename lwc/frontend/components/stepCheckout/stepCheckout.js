@@ -58,7 +58,8 @@ export default class StepCheckout extends LightningElement {
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {
-                    bookingErrorMessage: null
+                    bookingErrorMessage: null,
+                    payment: false
                 },
                 bubbles: true,
                 composed: true
