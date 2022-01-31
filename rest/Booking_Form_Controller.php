@@ -553,7 +553,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_amocrm_lead($request)
     {
-        Log::info('#2 create_amocrm_lead', $request);
+        // Log::info('#2 create_amocrm_lead', $request);
         $result = ['status' => 'error'];
         try {
             if (isset($request['data'])) {
@@ -576,7 +576,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_order($request)
     {
-        Log::info('#1 create_order', $request);
+        // Log::info('#1 create_order', $request);
         $result = [
             'status' => true
         ];
