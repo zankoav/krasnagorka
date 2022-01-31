@@ -60,6 +60,7 @@ export default class BookingForm extends LightningElement {
         return result;
     }
 
+    // Only booking
     async bookingOrder() {
 
         this.loading = true;
@@ -138,6 +139,7 @@ export default class BookingForm extends LightningElement {
         this.loading = false;
     }
 
+    // Booking with pay
     async sendOrder(){
         this.loading = true;
         const calendar = this.settings.calendars.find(c => c.selected);
