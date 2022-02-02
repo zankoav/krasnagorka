@@ -6797,7 +6797,7 @@ button.swiper-pagination-bullet {
 .house-booking__price-per-men[data-currency="byn"]:after {
 	content: "byn";
 }
-.house-booking__price-per-men[data-currency="rur"]:after {
+.house-booking__price-per-men[data-currency="rus"]:after {
 	content: "\20BD";
 }
 .house-booking__price-per-men[data-currency="eur"]:after {
