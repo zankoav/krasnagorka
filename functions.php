@@ -380,8 +380,8 @@ function cron_add_clear_intervals($schedules)
     );
     // регистрируем 1 дневный  интервал
     $schedules['one_day'] = array(
-        'interval' => 60 * 60 * 24,
-        'display' => 'Раз в 1 день'
+        'interval' => 60 * 60 * 12,
+        'display' => 'Раз в 12 часов'
     );
     return $schedules;
 }
