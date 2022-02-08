@@ -560,7 +560,9 @@ class Booking_Form_Controller extends WP_REST_Controller
                 require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                 $href = 'https://krasnagorka.by/booking-form';
                 $type = 'booking-form';
+                Log::info('Before AmoIntegration', $request['data']);
                 $amo = new AmoIntegration($type, $request['data'], $href);
+                Log::info('After AmoIntegration');
                 $result['status'] = 'success';
                 $orderData = get_order_data($request['orderId']);
                 if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
