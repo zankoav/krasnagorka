@@ -471,6 +471,7 @@ function kg_clear_orders()
     foreach ($orders as $order) {
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
         Booking_Form_Controller::clear_order($leadId);
+        Booking_Form_Controller::createAmoCrmTask('Истекло время и бронь удалилась из сайта (100% по карте)', $leadId);
         wp_delete_post($order->ID, true);
     }
 }

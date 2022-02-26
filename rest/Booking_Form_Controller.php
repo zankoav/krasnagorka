@@ -702,6 +702,29 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
+    public static function createAmoCrmTask($message, $leadId){
+
+        $apiClient = self::getAmoCrmApiClient();
+
+        //Создадим задачу
+        $tasksCollection = new TasksCollection();
+        $task = new TaskModel();
+        $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+            ->setText($message)
+            ->setCompleteTill(mktime(date("H"), date("i") + 30))
+            ->setEntityType(EntityTypesInterface::LEADS)
+            ->setEntityId(intval($leadId))
+            ->setDuration(1 * 60 * 60) // 1 час
+            ->setResponsibleUserId(2373844);
+        $tasksCollection->add($task);
+
+        try {
+            $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+        } catch (AmoCRMApiException $e) {
+            Log::error('Exceptions: ' . $e->getTitle(), $e->getDescription());
+        }
+    }
+
     private function sendMail($request, $isWebPaySuccess = false){
         $emailTo = $request['email'];
         $data = $request;
