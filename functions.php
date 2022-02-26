@@ -432,8 +432,8 @@ function kg_clear_orders_2()
     foreach ($orders as $order) {
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
         Booking_Form_Controller::clear_order($leadId);
+        Booking_Form_Controller::createAmoCrmTask('Истекло время ожидания и бронь удалилась из сайта', $leadId);
         wp_delete_post($order->ID, true);
-        Log::info("Бронь удалена по истечению срока неоплаты", $order->ID);
     }
 }
 
