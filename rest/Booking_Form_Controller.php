@@ -568,7 +568,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
                     $result['template'] = $this->sendMail($orderData);
                 }
-                $this->addTaskForLead($orderData['leadId'], $orderData['orderId'], 'Помочь клиенту определиться с заказом');
+                // $this->addTaskForLead($orderData['leadId'], $orderData['orderId'], 'Помочь клиенту определиться с заказом');
             }
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
@@ -677,30 +677,30 @@ class Booking_Form_Controller extends WP_REST_Controller
         return new WP_REST_Response($result, 200);
     }
 
-    public function addTaskForLead($leadId, $orderId, $message){
+    // public function addTaskForLead($leadId, $orderId, $message){
 
-        $apiClient = self::getAmoCrmApiClient();
+    //     $apiClient = self::getAmoCrmApiClient();
 
-        //Создадим задачу
-        $tasksCollection = new TasksCollection();
-        $task = new TaskModel();
-        $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-            ->setText($message)
-            ->setCompleteTill(mktime(date("H"), date("i") + 30))
-            ->setEntityType(EntityTypesInterface::LEADS)
-            ->setEntityId(intval($leadId))
-            ->setDuration(1 * 60 * 60) // 1 час
-            ->setResponsibleUserId(2373844);
-        $tasksCollection->add($task);
+    //     //Создадим задачу
+    //     $tasksCollection = new TasksCollection();
+    //     $task = new TaskModel();
+    //     $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+    //         ->setText($message)
+    //         ->setCompleteTill(mktime(date("H"), date("i") + 30))
+    //         ->setEntityType(EntityTypesInterface::LEADS)
+    //         ->setEntityId(intval($leadId))
+    //         ->setDuration(1 * 60 * 60) // 1 час
+    //         ->setResponsibleUserId(2373844);
+    //     $tasksCollection->add($task);
 
-        try {
-            $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-            $taskToStore = $tasksCollection->first();
-            update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
-        } catch (AmoCRMApiException $e) {
-            Log::error('Exceptions: ' . $e->getTitle(), $e->getDescription());
-        }
-    }
+    //     try {
+    //         $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+    //         $taskToStore = $tasksCollection->first();
+    //         update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
+    //     } catch (AmoCRMApiException $e) {
+    //         Log::error('Exceptions: ' . $e->getTitle(), $e->getDescription());
+    //     }
+    // }
 
     public static function createAmoCrmTask($message, $leadId){
 
@@ -1708,24 +1708,24 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
             // Создадим задачу
-            // $tasksCollection = new TasksCollection();
-            // $task = new TaskModel();
-            // $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-            //     ->setText('Помочь клиенту определиться с заказом')
-            //     ->setCompleteTill(mktime(date("H"), date("i") + 30))
-            //     ->setEntityType(EntityTypesInterface::LEADS)
-            //     ->setEntityId($lead->getId())
-            //     ->setDuration(1 * 60 * 60) // 1 час
-            //     ->setResponsibleUserId(2373844);
-            // $tasksCollection->add($task);
+            $tasksCollection = new TasksCollection();
+            $task = new TaskModel();
+            $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+                ->setText('Помочь клиенту определиться с заказом')
+                ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($lead->getId())
+                ->setDuration(1 * 60 * 60) // 1 час
+                ->setResponsibleUserId(2373844);
+            $tasksCollection->add($task);
 
-            // try {
-            //     $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-            //     $taskToStore = $tasksCollection->first();
-            //     update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
-            // } catch (AmoCRMApiException $e) {
-            //     Logger::log('Exceptions: ' . $e->getTitle() . ' <<< tasksCollection >>> ' . $e->getDescription());
-            // }
+            try {
+                $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+                $taskToStore = $tasksCollection->first();
+                update_post_meta($orderId, 'sbc_task_id', $taskToStore->getId());
+            } catch (AmoCRMApiException $e) {
+                Logger::log('Exceptions: ' . $e->getTitle() . ' <<< tasksCollection >>> ' . $e->getDescription());
+            }
 
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions: ' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
