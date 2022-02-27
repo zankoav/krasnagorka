@@ -935,19 +935,22 @@ class Booking_Form_Controller extends WP_REST_Controller
 
 
             $taskId = get_post_meta($order['orderId'], 'sbc_task_id', 1);
-            try {
-                $task = $apiClient->tasks()->getOne($taskId);
-                $task->setTaskTypeId(2126242)
-                    ->setText($state['message'])
-                    ->setCompleteTill(mktime(date("H"), date("i") + 30))
-                    ->setEntityType(EntityTypesInterface::LEADS)
-                    ->setEntityId($lead->getId())
-                    ->setDuration(1 * 60 * 60) // 1 час
-                    ->setResponsibleUserId(2373844);
-
-                $task = $apiClient->tasks()->updateOne($task);
-            } catch (AmoCRMApiException $e) {
-                Log::error("tasks exception:" , $e->getMessage());
+            if(!empty($taskId)){
+                try {
+                    $task = $apiClient->tasks()->getOne($taskId);
+                   
+                    $task->setTaskTypeId(2126242)
+                        ->setText($state['message'])
+                        ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                        ->setEntityType(EntityTypesInterface::LEADS)
+                        ->setEntityId($lead->getId())
+                        ->setDuration(1 * 60 * 60) // 1 час
+                        ->setResponsibleUserId(2373844);
+    
+                    $task = $apiClient->tasks()->updateOne($task);
+                } catch (AmoCRMApiException $e) {
+                    Log::error("tasks exception:" , $e->getMessage());
+                }  
             }
         }
     }
