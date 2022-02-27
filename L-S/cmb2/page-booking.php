@@ -138,6 +138,13 @@ function cmb2_booking_page() {
         'type' => 'textarea_small',
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Цена на детскую кроватку',
+        'id'   => 'baby_bed_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');

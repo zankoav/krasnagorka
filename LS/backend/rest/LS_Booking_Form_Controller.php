@@ -125,6 +125,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $peopleCount = (int)$request['peopleCount'];
         $calendarId = (int)$request['calendarId'];
         $isTerem = $request['isTerem'];
+        $babyBed = $request['babyBed'];
+
+        $bookingSettings = get_option('mastak_booking_appearance_options');
 
         $dateEndDT = new DateTime($dateEnd);
 
@@ -346,6 +349,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['seasons_group'][$season->ID]['price_block']['total'] = $priceBlockTotal;
             $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
             $result['total_price'] = intval($result['total_price']);
+        }
+        if($babyBed){
+            $babyBedPrice = intval($bookingSettings['baby_bed_price']);
+            $babyBedTotalPrice = $babyBedPrice * intval($result['days_count']);
+            $result['total_price'] += $babyBedTotalPrice;
+            $result['baby_bed_total_price'] = $babyBedTotalPrice;
         }
         return $result;
     }

@@ -279,7 +279,8 @@ class Model
                 "type"          => $type,
                 "contractOffer" => $this->baseModel['contract_offer']
             ],
-            "footerBottom"  => $this->getFooterBottom()
+            "footerBottom"  => $this->getFooterBottom(),
+            "babyBedPrice" => $bookingSettings['baby_bed_price']
         ];
 
         if (!empty($dateFrom) and !empty($dateTo)) {
