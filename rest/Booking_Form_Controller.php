@@ -1028,7 +1028,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_price', $price);
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
-                    update_post_meta($order_id, 'sbc_order_desc', $request['comment']);
+                    update_post_meta($order_id, 'sbc_order_desc', $request['comment']  + "\nКоличество человек: " + $request['count']);
 
                     $objectIds = array_map('intval', [$calendarId]);
                     $objectIds = array_unique($objectIds);
