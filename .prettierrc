@@ -1,0 +1,31 @@
+{
+    "trailingComma": "none",
+    "apexInsertFinalNewline": false,
+    "overrides": [
+        {
+            "files": "*.js",
+            "options": {
+                "semi": false,
+                "singleQuote": true,
+                "tabWidth": 4,
+                "printWidth": 100
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "parser": "lwc",
+                "tabWidth": 4,
+                "bracketSameLine": true,
+                "printWidth": 150
+            }
+        },
+        {
+            "files": "*.scss",
+            "options": {
+                "tabWidth": 4,
+                "printWidth": 150
+            }
+        }
+    ]
+}

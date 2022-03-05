@@ -975,6 +975,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $result = ['status' => 0];
         try {
             $calendarId = $request['id'];
+            $babyBed = $request['babyBed'] == 'true';
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
 
@@ -1026,6 +1027,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_start', $dateStart);
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
+                    update_post_meta($order_id, 'sbc_order_baby_bed', $babyBed);
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
                     update_post_meta($order_id, 'sbc_order_desc', $request['comment']."\nКоличество человек: ".$request['count']);
@@ -1135,6 +1137,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactStatus = $request['contactStatus'];
             $childs = $request['childs'];
             $peopleCount = $request['peopleCount'];
+            $babyBed = $request['babyBed'] == 'true';
 
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
@@ -1225,8 +1228,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if (!empty($leadId)) {
                     update_post_meta($post_id, 'sbc_lead_id', $leadId);
                 }
+
                 if (!empty($childs)) {
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
+                }
+
+                if (!empty($babyBed)) {
+                    update_post_meta($post_id, 'sbc_order_baby_bed', $babyBed);
                 }
 
 

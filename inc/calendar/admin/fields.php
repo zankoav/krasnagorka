@@ -179,6 +179,15 @@ function sbc_orders_metabox() {
         'type' => 'text'
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => 'Детская кроватка',
+        'id'   => $prefix . 'baby_bed',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'type' => 'checkbox'
+    ) );
+
 }
 
 
