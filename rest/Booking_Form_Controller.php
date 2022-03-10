@@ -610,6 +610,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'peopleCount' => $request['count'],
                             'calendarId' => $calendarId,
                             'isTerem' => $request['isTerem'],
+                            'babyBed' => $request['babyBed'],
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
