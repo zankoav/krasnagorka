@@ -5,6 +5,7 @@
         }
     },
     "require": {
-        "amocrm/amocrm-api-library": "^0.2.7"
+        "amocrm/amocrm-api-library": "^0.2.7",
+        "spipu/html2pdf": "^5.2"
     }
 }
