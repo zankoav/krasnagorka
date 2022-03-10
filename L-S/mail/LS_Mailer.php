@@ -18,11 +18,14 @@ class LS_Mailer {
 
     public static function sendMail($emailTo, $subject, $template){
         Log::info('1', '+');
-        $html2pdf = new Html2Pdf('P', 'A4', 'ru');
-        $html2pdf->setDefaultFont('Arial');
-        $html2pdf->writeHTML($template);
-        $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-        Log::info('2', '+');
+        if(class_exists('Html2Pdf')){
+            Log::info('2', '+');
+            $html2pdf = new Html2Pdf('P', 'A4', 'ru');
+            $html2pdf->setDefaultFont('Arial');
+            $html2pdf->writeHTML($template);
+            $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
+            Log::info('3', '+');
+        }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
         return wp_mail([$emailTo],$subject,$template, $headers, $attachments);
