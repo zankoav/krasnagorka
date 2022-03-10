@@ -1217,7 +1217,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                 }
                 if (!empty($comment)) {
-                    update_post_meta($post_id, 'sbc_order_desc', $comment."\nКоличество человек: $peopleCount");
+                    update_post_meta($post_id, 'sbc_order_desc', $comment);
                 }
                 if (!empty($peopleCount)) {
                     update_post_meta($post_id, 'sbc_order_people_count', $peopleCount);
