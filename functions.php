@@ -4,17 +4,15 @@ use Ls\Wp\Log as Log;
 
 if (!defined('ABSPATH')) { exit; }
 
+// START
+
+require __DIR__ . '/vendor/autoload.php';
+
 require __DIR__ . '/L-S/utils/index.php';
 require __DIR__ . '/L-S/setup.php';
 require __DIR__ . '/L-S/cmb2/index.php';
 require __DIR__ . '/L-S/widgets/index.php';
 require __DIR__ . '/L-S/mail/LS_Mailer.php';
-
-
-// START
-
-require __DIR__ . '/vendor/autoload.php';
-
 
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
