@@ -362,7 +362,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['baby_bed'] = [
                 'total_price' => $babyBedTotalPrice,
                 'days' => $dayCount,
-                'daysDiscount' => $daysSale
+                'discount' => $daysSale
             ];
         }
         return $result;
