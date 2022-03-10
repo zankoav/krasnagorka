@@ -21,10 +21,13 @@ class LS_Mailer {
         if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
             Log::info('2', '+');
             $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
-            $html2pdf->setDefaultFont('Arial');
-            $html2pdf->writeHTML($template);
-            $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
             Log::info('3', '+');
+            $html2pdf->setDefaultFont('Arial');
+            Log::info('4', '+');
+            $html2pdf->writeHTML($template);
+            Log::info('5', '+');
+            $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
+            Log::info('6', '+');
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
