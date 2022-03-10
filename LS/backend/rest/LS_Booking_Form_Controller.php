@@ -358,7 +358,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $babyBedTotalPrice =  round($babyBedTotalPrice * (1 - $daysSale / 100));
             }
             $result['total_price'] += $babyBedTotalPrice;
-            //$result['baby_bed_total_price'] = $babyBedTotalPrice;
+            
             $result['baby_bed'] = [
                 'total_price' => $babyBedTotalPrice,
                 'price' => $babyBedPrice,
