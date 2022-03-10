@@ -1,5 +1,5 @@
 <?php
-use Spipu\Html2Pdf\Html2Pdf;
+// use Spipu\Html2Pdf\Html2Pdf;
 
 class LS_Mailer {
 
@@ -16,11 +16,12 @@ class LS_Mailer {
     }
 
     public static function sendMail($emailTo, $subject, $template){
-        $html2pdf = new Html2Pdf();
-        $html2pdf->writeHTML($template);
+        // $html2pdf = new Html2Pdf();
+        // $html2pdf->writeHTML($template);
         // $html2pdf->output('attachment');
         $attachments = array(WP_CONTENT_DIR . '/uploads/text.txt');
-        return wp_mail([$emailTo],$subject,$template, null, $attachments);
+        $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
+        return wp_mail([$emailTo],$subject,$template, $headers, $attachments);
     }
 }
 
