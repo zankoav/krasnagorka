@@ -62,6 +62,7 @@ function get_order_data($orderId){
 
     $passport = get_post_meta($orderId, 'sbc_order_passport', 1);
     $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
+    $babyBed = get_post_meta($orderId, 'sbc_order_baby_bed', 1);
 
     $calendarSlug = $calendars[0]->slug;
     $calendarId = $calendars[0]->term_id;
@@ -81,6 +82,7 @@ function get_order_data($orderId){
     return [
         'orderId' => $orderId,
         'created' => $created,
+        'babyBed' => $babyBed == 'on',
         'from' => date("d.m.Y", strtotime($start)),
         'to' => date("d.m.Y", strtotime($end)),
         'price' => $price,

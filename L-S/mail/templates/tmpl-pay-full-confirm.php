@@ -109,6 +109,9 @@
 										<?= $order['phone'] ?>
 										</strong></div>
 									<div>Число гостей: <strong><?= $order['peopleCount'] ?></strong></div>
+                                    <?php if($order['babyBed']):?>
+                                        <div>Детская кроватка: <strong>Да</strong></div>
+                                    <?php endif;?>
 								</td>
 							</tr>
 							<tr>
