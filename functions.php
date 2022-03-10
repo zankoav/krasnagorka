@@ -9,8 +9,9 @@ if (!defined('ABSPATH')) { exit; }
 require __DIR__ . '/vendor/autoload.php';
 
 use Spipu\Html2Pdf\Html2Pdf;
+use AmoCRM\Models\TagModel;
 
-if(class_exists('Html2Pdf')){
+if(class_exists('TagModel')){
     Log::info('OK','OK');
 }else{
     Log::info('NO','NO');
