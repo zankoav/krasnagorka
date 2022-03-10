@@ -1,5 +1,4 @@
 <?php
-use Spipu\Html2Pdf\Html2Pdf;
 use Ls\Wp\Log as Log;
 
 class LS_Mailer {
@@ -24,11 +23,17 @@ class LS_Mailer {
             Log::info('3', '+');
             $html2pdf->setDefaultFont('Arial');
             Log::info('4', '+');
-            $html2pdf->writeHTML($template);
-            Log::info('5', '+');
-            Log::info('6', WP_CONTENT_DIR.'/uploads/document.pdf');
-            $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-            Log::info('7', '+');
+            try {
+                $html2pdf->writeHTML($template);
+                Log::info('5', '+');
+                Log::info('6', WP_CONTENT_DIR.'/uploads/document.pdf');
+                $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
+                Log::info('7', '+');
+            } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
+                $html2pdf->clean();
+                $formatter = new Spipu\Html2Pdf\Exception\ExceptionFormatter($e);
+                Log::info('0', $formatter->getHtmlMessage());
+            }
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
