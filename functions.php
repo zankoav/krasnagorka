@@ -12,6 +12,8 @@ use Spipu\Html2Pdf\Html2Pdf;
 
 if(class_exists('Html2Pdf')){
     Log::info('OK','OK');
+}else{
+    Log::info('NO','NO');
 }
 
 require __DIR__ . '/L-S/utils/index.php';
