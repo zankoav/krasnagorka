@@ -555,7 +555,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_amocrm_lead($request)
     {
-        // Log::info('#2 create_amocrm_lead', $request);
         $result = ['status' => 'error'];
         try {
             if (isset($request['data'])) {
@@ -578,7 +577,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_order($request)
     {
-        // Log::info('#1 create_order', $request);
         $result = [
             'status' => true
         ];
@@ -977,7 +975,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $calendarId = $request['id'];
             $babyBed = $request['babyBed'] == 'true';
-            Log::info('babyBed 2', $request['babyBed']);
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
 
@@ -1030,7 +1027,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
                     if($babyBed){
-                        Log::info('+');
                         update_post_meta($order_id, 'sbc_order_baby_bed', 'on');
                     }
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
@@ -1144,7 +1140,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             $peopleCount = $request['peopleCount'];
             $comment  = empty($request['comment']) ? "Количество человек: $peopleCount" : $request['comment']."\nКоличество человек: $peopleCount";
             $babyBed = $request['babyBed'] == 'true';
-            Log::info('babyBed 1', $request['babyBed']);
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
             $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
@@ -1240,7 +1235,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if ($babyBed) {
-                    Log::info('+');
                     update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
                 }
 
