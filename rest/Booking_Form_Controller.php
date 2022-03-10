@@ -1028,7 +1028,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
                     if($babyBed){
-                        update_post_meta($order_id, 'sbc_order_baby_bed', 1);
+                        Log::info('+');
+                        update_post_meta($order_id, 'sbc_order_baby_bed', 'on');
                     }
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
@@ -1237,7 +1238,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if ($babyBed) {
-                    update_post_meta($post_id, 'sbc_order_baby_bed', 1);
+                    Log::info('+');
+                    update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
                 }
 
 
