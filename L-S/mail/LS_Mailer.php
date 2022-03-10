@@ -19,10 +19,9 @@ class LS_Mailer {
         if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
             $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
             $html2pdf->setDefaultFont('Arial');
-            Log::info('1', gettype($template));
-            Log::info('1.1', strlen($template));
             try {
-                $html2pdf->writeHTML('<h1>Test KG</h1>');
+                Log::info('1', '+');
+                $html2pdf->writeHTML($template);
                 $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
                 Log::info('2', '+');
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
