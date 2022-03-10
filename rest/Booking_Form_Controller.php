@@ -753,6 +753,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
             $result = LS_Mailer::sendMail($emailTo, $subject, $template);
+            Log::info('result', $result);
         }
 
         return $template;
