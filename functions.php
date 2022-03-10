@@ -8,13 +8,6 @@ if (!defined('ABSPATH')) { exit; }
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Spipu\Html2Pdf\Html2Pdf;
-
-if(class_exists('Html2Pdf')){
-    Log::info('OK','OK');
-}else{
-    Log::info('NO','NO');
-}
 
 require __DIR__ . '/L-S/utils/index.php';
 require __DIR__ . '/L-S/setup.php';
