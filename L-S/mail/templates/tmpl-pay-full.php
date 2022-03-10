@@ -94,6 +94,12 @@
                                     <?php if($order['babyBed']):?>
                                         <div>Детская кроватка: <strong>Да</strong></div>
                                     <?php endif;?>
+                                    <?php if(!empty($order['bathHouseWhite'])):?>
+                                        <div>Количество сеансов бани по-белому: <strong><?=$order['bathHouseWhite']?></strong></div>
+                                    <?php endif;?>
+                                    <?php if(!empty($order['bathHouseBlack'])):?>
+                                        <div>Количество сеансов бани по-черному: <strong><?=$order['bathHouseBlack']?></strong></div>
+                                    <?php endif;?>
 							</td>
 						</tr>
 						<tr>

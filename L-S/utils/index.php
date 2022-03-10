@@ -64,6 +64,9 @@ function get_order_data($orderId){
     $peopleCount = get_post_meta($orderId, 'sbc_order_count_people', 1);
     $babyBed = get_post_meta($orderId, 'sbc_order_baby_bed', 1);
 
+    $bathHouseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', 1);
+    $bathHouseBlack = get_post_meta($orderId, 'sbc_order_bath_house_black', 1);
+
     $calendarSlug = $calendars[0]->slug;
     $calendarId = $calendars[0]->term_id;
     $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
@@ -83,6 +86,8 @@ function get_order_data($orderId){
         'orderId' => $orderId,
         'created' => $created,
         'babyBed' => $babyBed == 'on',
+        'bathHouseWhite' => $bathHouseWhite,
+        'bathHouseBlack' => $bathHouseBlack,
         'from' => date("d.m.Y", strtotime($start)),
         'to' => date("d.m.Y", strtotime($end)),
         'price' => $price,
