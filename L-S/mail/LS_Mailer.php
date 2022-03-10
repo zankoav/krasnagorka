@@ -21,10 +21,10 @@ class LS_Mailer {
             $html2pdf->setDefaultFont('Arial');
             try {
                 Log::info('1', '+');
-                Log::info('2', strval($template));
+                Logger::log("template:" . $template);
                 $html2pdf->writeHTML($template);
                 $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-                Log::info('3', '+');
+                Log::info('2', '+');
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
                 $html2pdf->clean();
                 Log::info('0', $e->getMessage());
