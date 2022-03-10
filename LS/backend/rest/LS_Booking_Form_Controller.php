@@ -351,10 +351,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] = intval($result['total_price']);
         }
         if($babyBed){
+            $dayCount = intval($result['days_count']);
             $babyBedPrice = intval($bookingSettings['baby_bed_price']);
-            $babyBedTotalPrice = $babyBedPrice * intval($result['days_count']);
+            $babyBedTotalPrice = $babyBedPrice * $dayCount;
+            if(!empty($daysSale)){
+                $babyBedTotalPrice =  round($babyBedTotalPrice * (1 - $daysSale / 100));
+            }
             $result['total_price'] += $babyBedTotalPrice;
-            $result['baby_bed_total_price'] = $babyBedTotalPrice;
+            //$result['baby_bed_total_price'] = $babyBedTotalPrice;
+            $result['baby_bed'] = [
+                'total_price' => $babyBedTotalPrice,
+                'days' => $dayCount,
+                'daysDiscount' => $daysSale
+            ];
         }
         return $result;
     }
