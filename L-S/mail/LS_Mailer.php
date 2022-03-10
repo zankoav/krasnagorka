@@ -16,19 +16,14 @@ class LS_Mailer {
     }
 
     public static function sendMail($emailTo, $subject, $template){
-        Log::info('1', '+');
         if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
-            Log::info('2', '+');
             $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
-            Log::info('3', '+');
             $html2pdf->setDefaultFont('Arial');
-            Log::info('4', $template);
+            Log::info('1', ''.$template);
             try {
                 $html2pdf->writeHTML('<h1>Test KG</h1>');
-                Log::info('5', '+');
-                Log::info('6', WP_CONTENT_DIR.'/uploads/document.pdf');
                 $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-                Log::info('7', '+');
+                Log::info('2', '+');
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
                 $html2pdf->clean();
                 Log::info('0', $e->getMessage());
@@ -36,7 +31,7 @@ class LS_Mailer {
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
-        return wp_mail([$emailTo],$subject,$template, $headers, $attachments);
+        return wp_mail([$emailTo],$subject, $template, $headers, $attachments);
     }
 }
 
