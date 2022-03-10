@@ -25,7 +25,7 @@ class LS_Mailer {
             $html2pdf->setDefaultFont('Arial');
             Log::info('4', '+');
             $html2pdf->writeHTML($template);
-            Log::info('5', '+');
+            Log::info('5', WP_CONTENT_DIR.'/uploads/document.pdf');
             $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
             Log::info('6', '+');
         }
