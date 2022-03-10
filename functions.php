@@ -8,15 +8,6 @@ if (!defined('ABSPATH')) { exit; }
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Spipu\Html2Pdf\Html2Pdf;
-use AmoCRM\Models\TagModel;
-
-if(class_exists('TagModel')){
-    Log::info('OK','OK');
-}else{
-    Log::info('NO','NO');
-}
-
 require __DIR__ . '/L-S/utils/index.php';
 require __DIR__ . '/L-S/setup.php';
 require __DIR__ . '/L-S/cmb2/index.php';

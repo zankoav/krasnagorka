@@ -18,9 +18,9 @@ class LS_Mailer {
 
     public static function sendMail($emailTo, $subject, $template){
         Log::info('1', '+');
-        if(class_exists('Html2Pdf')){
+        if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
             Log::info('2', '+');
-            $html2pdf = new Html2Pdf('P', 'A4', 'ru');
+            $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
             $html2pdf->setDefaultFont('Arial');
             $html2pdf->writeHTML($template);
             $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
