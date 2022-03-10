@@ -126,6 +126,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $calendarId = (int)$request['calendarId'];
         $isTerem = $request['isTerem'];
         $babyBed = $request['babyBed'];
+        $bathHouseWhite = $request['bathHouseWhite'];
+        $bathHouseBlack = $request['bathHouseBlack'];
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
@@ -366,6 +368,34 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'discount' => $daysSale
             ];
         }
+
+        $bathHouseWhitePrice = intval($bookingSettings['bath_house_white_price']);
+
+        if(!empty($bathHouseWhite) and !empty($bathHouseWhitePrice)){
+            $bathHouseWhite = intval($bathHouseWhite);
+            $bathHouseWhiteTotalPrice = $bathHouseWhitePrice * $bathHouseWhite;
+            $result['bath_house_white'] = [
+                'total_price' => $bathHouseWhiteTotalPrice,
+                'price' => $bathHouseWhitePrice,
+                'count' => $bathHouseWhite
+            ];
+            $result['total_price'] += $bathHouseWhiteTotalPrice;
+        }
+
+        $bathHouseBlackPrice = intval($bookingSettings['bath_house_black_price']);
+        if(!empty($bathHouseBlack) and !empty($bathHouseBlackPrice)){
+
+            $bathHouseBlack = intval($bathHouseBlack);
+            $bathHouseBlackTotalPrice = $bathHouseBlackPrice * $bathHouseBlack;
+            $result['bath_house_black'] = [
+                'total_price' => $bathHouseBlackTotalPrice,
+                'price' => $bathHouseBlackPrice,
+                'count' => $bathHouseBlack
+            ];
+            $result['total_price'] += $bathHouseBlackTotalPrice;
+
+        }
+
         return $result;
     }
 
