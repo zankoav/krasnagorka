@@ -145,6 +145,20 @@ function cmb2_booking_page() {
         'before_field' => 'BYN'
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Цена на баню по-черному 2 часа',
+        'id'   => 'bath_house_black_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Цена на баню по-белому 2 часа',
+        'id'   => 'bath_house_white_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');

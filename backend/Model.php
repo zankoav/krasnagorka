@@ -280,7 +280,9 @@ class Model
                 "contractOffer" => $this->baseModel['contract_offer']
             ],
             "footerBottom"  => $this->getFooterBottom(),
-            "babyBedPrice" => empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null
+            "babyBedPrice" => empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
+            "bathHouseBlackPrice" => empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
+            "bathHouseWhitePrice" => empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null
         ];
 
         if (!empty($dateFrom) and !empty($dateTo)) {
