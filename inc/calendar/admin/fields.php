@@ -180,6 +180,18 @@ function sbc_orders_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => esc_html__( 'Количество сеансов бани по-белому', 'sbc' ),
+        'id'   => $prefix . 'bath_house_white',
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Количество сеансов бани по-черному', 'sbc' ),
+        'id'   => $prefix . 'bath_house_black',
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
         'name' => 'Детская кроватка',
         'id'   => $prefix . 'baby_bed',
         'attributes' => array(

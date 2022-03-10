@@ -611,6 +611,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'calendarId' => $calendarId,
                             'isTerem' => $request['isTerem'],
                             'babyBed' => $request['babyBed'],
+                            'bathHouseWhite' => $request['bathHouseWhite'],
+                            'bathHouseBlack' => $request['bathHouseBlack']
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
@@ -618,6 +620,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $response = $this->insertWPLead([
                         "type" => "reserved",
                         "babyBed" => $request["babyBed"],
+                        "bathHouseWhite" => $request["bathHouseWhite"],
+                        "bathHouseBlack" => $request["bathHouseBlack"],
                         "wsb_test" => $request["wsb_test"],
                         "passport" => $request["passport"],
                         "objectIds" => [$calendarId],
@@ -976,6 +980,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $calendarId = $request['id'];
             $babyBed = $request['babyBed'] == 'true';
+            $bathHouseWhite = $request['bathHouseWhite'];
+            $bathHouseBlack = $request['bathHouseBlack'];
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
 
@@ -1027,9 +1033,19 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_start', $dateStart);
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
+                    
                     if($babyBed){
                         update_post_meta($order_id, 'sbc_order_baby_bed', 'on');
                     }
+
+                    if (!empty($bathHouseWhite)) {
+                        update_post_meta($order_id, 'sbc_order_bath_house_white', $bathHouseWhite);
+                    }
+    
+                    if (!empty($bathHouseBlack)) {
+                        update_post_meta($order_id, 'sbc_order_bath_house_black', $bathHouseBlack);
+                    }
+
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
                     update_post_meta($order_id, 'sbc_order_desc', $request['comment']."\nКоличество человек: ".$request['count']);
@@ -1141,6 +1157,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $peopleCount = $request['peopleCount'];
             $comment  = empty($request['comment']) ? "Количество человек: $peopleCount" : $request['comment']."\nКоличество человек: $peopleCount";
             $babyBed = $request['babyBed'] == 'true';
+            $bathHouseWhite = $request['bathHouseWhite'];
+            $bathHouseBlack = $request['bathHouseBlack'];
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
             $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
@@ -1239,6 +1257,13 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
                 }
 
+                if (!empty($bathHouseWhite)) {
+                    update_post_meta($post_id, 'sbc_order_bath_house_white', $bathHouseWhite);
+                }
+
+                if (!empty($bathHouseBlack)) {
+                    update_post_meta($post_id, 'sbc_order_bath_house_black', $bathHouseBlack);
+                }
 
                 $paymentMethod  = $request['paymentMethod'];
                 if (!empty($paymentMethod)) {
