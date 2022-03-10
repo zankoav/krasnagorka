@@ -22,17 +22,16 @@ class LS_Mailer {
             $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
             Log::info('3', '+');
             $html2pdf->setDefaultFont('Arial');
-            Log::info('4', '+');
+            Log::info('4', $template);
             try {
-                $html2pdf->writeHTML($template);
+                $html2pdf->writeHTML('<h1>Test KG</h1>');
                 Log::info('5', '+');
                 Log::info('6', WP_CONTENT_DIR.'/uploads/document.pdf');
                 $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
                 Log::info('7', '+');
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
                 $html2pdf->clean();
-                $formatter = new Spipu\Html2Pdf\Exception\ExceptionFormatter($e);
-                Log::info('0', $formatter->getHtmlMessage());
+                Log::info('0', $e->getMessage());
             }
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
