@@ -618,6 +618,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                     
                     $response = $this->insertWPLead([
                         "type" => "reserved",
+                        "babyBed" => $request["babyBed"],
                         "wsb_test" => $request["wsb_test"],
                         "passport" => $request["passport"],
                         "objectIds" => [$calendarId],
