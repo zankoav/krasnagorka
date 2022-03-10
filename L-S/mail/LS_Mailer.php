@@ -17,13 +17,14 @@ class LS_Mailer {
 
     public static function sendMail($emailTo, $subject, $template){
         if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
-            $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru');
+            $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru', true, 'UTF-8');
             $html2pdf->setDefaultFont('Arial');
             try {
                 Log::info('1', '+');
+                Log::info('2', strval($template));
                 $html2pdf->writeHTML($template);
                 $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-                Log::info('2', '+');
+                Log::info('3', '+');
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
                 $html2pdf->clean();
                 Log::info('0', $e->getMessage());
