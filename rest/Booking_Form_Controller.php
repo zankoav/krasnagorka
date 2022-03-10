@@ -976,7 +976,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $calendarId = $request['id'];
             $babyBed = $request['babyBed'] == 'true';
-            Log::info('babyBed', $babyBed);
+            Log::info('babyBed 2', $request['babyBed']);
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
 
@@ -1143,7 +1143,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $peopleCount = $request['peopleCount'];
             $comment  = empty($request['comment']) ? "Количество человек: $peopleCount" : $request['comment']."\nКоличество человек: $peopleCount";
             $babyBed = $request['babyBed'] == 'true';
-            Log::info('babyBed', $babyBed);
+            Log::info('babyBed 1', $request['babyBed']);
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
             $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
