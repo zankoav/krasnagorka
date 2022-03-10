@@ -1129,7 +1129,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $totalPrice = $request['totalPrice'];
             $havePayed  = $request['havePayed'];
-            $comment    = $request['comment'];
+            
 
             $contactName   = $request['contactName'];
             $contactPhone  = $request['contactPhone'];
@@ -1137,6 +1137,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactStatus = $request['contactStatus'];
             $childs = $request['childs'];
             $peopleCount = $request['peopleCount'];
+            $comment  = empty($request['comment']) ? "Количество человек: $peopleCount" : $request['comment']."\nКоличество человек: $peopleCount";
             $babyBed = $request['babyBed'] == 'true';
 
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
