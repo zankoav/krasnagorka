@@ -17,8 +17,7 @@ class LS_Mailer {
     }
 
     public static function sendMail($emailTo, $subject, $template, $checkType, $data){
-        $checkType = 'ok';
-        if(!empty($checkType) && $emailTo == 'zankoav@gmail.com'){
+        if(!empty($checkType)){
 
             $checkHTML = self::generateCheck($checkType, $data);
 
