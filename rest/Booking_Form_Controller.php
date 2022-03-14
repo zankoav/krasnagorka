@@ -738,6 +738,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
         $subject = '';
         $templatePath = '';
+        $checkType = '';
 
         if($paymentMethod == 'card_layter' and !$isWebPaySuccess){
             $subject = 'Заявка на бронирование';
@@ -747,13 +748,13 @@ class Booking_Form_Controller extends WP_REST_Controller
             $templatePath = "L-S/mail/templates/tmpl-office";
         }else if($isWebPaySuccess){
             $subject = 'Подтверждение бронирования';
-            $templatePath = $prepaidType == 100 ? "L-S/mail/templates/tmpl-pay-full" : "L-S/mail/templates/tmpl-pay-partial";
+            $checkType =  $prepaidType == 100 ? 'tmpl-pay-full' : 'tmpl-pay-partial';
+            $templatePath = "L-S/mail/templates/$checkType";
         }
         
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
-            $result = LS_Mailer::sendMail($emailTo, $subject, $template);
-            Log::info('result', $result);
+            $result = LS_Mailer::sendMail($emailTo, $subject, $template, $checkType, $data);
         }
 
         return $template;
@@ -863,6 +864,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 update_post_meta($_POST['site_order_id'], 'sbc_order_prepaid', $order['price']);
             }
     
+            try {
+                $this->updateAmoCrmLead($order);
+            } catch (AmoCRMApiException $e) {
+                Log::error("AmoCRMApiException Exception:" , $e->getTitle());
+            }
+
             $this->sendMail($order, true);
 
             ob_start();
@@ -876,12 +883,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                 'Памятка гостя',
                 $guestMemoMail
             );
-
-            try {
-                $this->updateAmoCrmLead($order);
-            } catch (AmoCRMApiException $e) {
-                Log::error("AmoCRMApiException Exception:" , $e->getTitle());
-            }
         }
     }
 
