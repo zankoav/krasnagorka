@@ -52,11 +52,11 @@ class LS_Mailer {
         </tr>
         <tr>
         <td>Номер бронирования:</td>
-        <td class='f-b'>28557</td>
+        <td class='f-b'>".$data['leadId']."</td>
         </tr>
         <tr>
         <td>от</td>
-        <td class='f-b'>25.02.2021</td>
+        <td class='f-b'>".$data['created']."</td>
         </tr>
         <tr>
         <td colspan='2' class='title'>Ваши даты:</td>
@@ -70,9 +70,7 @@ class LS_Mailer {
         <td class='f-b'>05.04.2021 09:00 – 12:00</td>
         </tr>
         <tr>
-        <td colspan='2' class='title'>
-            Информация об объектах размещения:
-        </td>
+        <td colspan='2' class='title'>Информация об объектах размещения:</td>
         </tr>
         <tr>
         <td>Объект размещения:</td>
