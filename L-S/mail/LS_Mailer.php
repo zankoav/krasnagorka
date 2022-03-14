@@ -25,7 +25,6 @@ class LS_Mailer {
             $html2pdf = new Html2Pdf('P', 'A4', 'ru', true);
             $html2pdf->setDefaultFont('Arial');
             try {
-                
                     Log::info('1', '+');
                     $html2pdf->writeHTML($checkHTML);
                     $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
@@ -38,7 +37,7 @@ class LS_Mailer {
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
-        $result = wp_mail([$emailTo],$subject, $template, $headers, $attachments);
+        $result = wp_mail([$emailTo], $subject, $template, $headers, $attachments);
         unlink(WP_CONTENT_DIR . '/uploads/document.pdf');
         return $result;
     }
