@@ -58,6 +58,56 @@ class LS_Mailer {
         <td>от</td>
         <td class='f-b'>25.02.2021</td>
         </tr>
+        <tr>
+        <td colspan='2' class='title'>Ваши даты:</td>
+        </tr>
+        <tr>
+        <td>Заселение:</td>
+        <td class='f-b'>04.04.2021 14:00 – 22:00</td>
+        </tr>
+        <tr>
+        <td>Выселение:</td>
+        <td class='f-b'>05.04.2021 09:00 – 12:00</td>
+        </tr>
+        <tr>
+        <td colspan='2' class='title'>
+            Информация об объектах размещения:
+        </td>
+        </tr>
+        <tr>
+        <td>Объект размещения:</td>
+        <td class='f-b'>Бабочка</td>
+        </tr>
+        <tr>
+        <td colspan='2' class='title'>Персональные данные клиента:</td>
+        </tr>
+        <tr>
+        <td>ФИО:</td>
+        <td class='f-b'>Александр</td>
+        </tr>
+        <tr>
+        <td>Паспорт ID:</td>
+        <td class='f-b'>EGWEGWEHWE23523DDN</td>
+        </tr>
+        <tr>
+        <td>Контактный номер телефона:</td>
+        <td class='f-b'>+375296259983</td>
+        </tr>
+        <tr>
+        <td>Число гостей:</td>
+        <td class='f-b'>3</td>
+        </tr>
+        <tr>
+        <td colspan='2' class='title'>Оплата:</td>
+        </tr>
+        <tr>
+        <td>Общая стоимость:</td>
+        <td class='f-b'>120 белорусских рублей.</td>
+        </tr>
+        <tr>
+        <td>Предоплата внесена в размере:</td>
+        <td class='f-b'>120 белорусских рублей.</td>
+        </tr>
         </tbody>
         </table>
         </page>
