@@ -22,13 +22,10 @@ class LS_Mailer {
 
             $checkHTML = self::generateCheck($checkType, $data);
 
-            $html2pdf = new Html2Pdf('P', 'A4', 'ru', true, 'UTF-8', 0);
-            // $html2pdf->setDefaultFont('Arial');
+            $html2pdf = new Html2Pdf('P', 'A4', 'ru', true, 'UTF-8', array(5, 5, 5, 8));
             try {
-                    Log::info('1', '+');
-                    $html2pdf->writeHTML($checkHTML);
-                    $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-                    Log::info('2', '+');
+                $html2pdf->writeHTML($checkHTML);
+                $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
             
             } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
                 $html2pdf->clean();
@@ -43,11 +40,23 @@ class LS_Mailer {
     }
 
     private static function generateCheck($checkType, $data){
-        $result = "<page style='font-family:freeserif'>
+        $result = "<style type='text/css'>
+        .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}
+        .f-b{font-weight: bold;}
+        </style>
+        <page style='font-size: 13pt;font-family:freeserif'>
         <table>
         <tbody>
         <tr>
         <td colspan='2' class='title'>ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ</td>
+        </tr>
+        <tr>
+        <td>Номер бронирования:</td>
+        <td class='f-b'>28557</td>
+        </tr>
+        <tr>
+        <td>от</td>
+        <td class='f-b'>25.02.2021</td>
         </tr>
         </tbody>
         </table>
