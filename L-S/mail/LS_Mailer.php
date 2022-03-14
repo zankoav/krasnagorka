@@ -1,5 +1,6 @@
 <?php
 use Ls\Wp\Log as Log;
+use Spipu\Html2Pdf\Html2Pdf;
 
 class LS_Mailer {
 
@@ -16,21 +17,19 @@ class LS_Mailer {
     }
 
     public static function sendMail($emailTo, $subject, $template){
-        if(class_exists('Spipu\Html2Pdf\Html2Pdf')){
-            if($emailTo == 'zankoav@gmail.com'){
-                $html2pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'A4', 'ru', true, 'UTF-8');
-                $html2pdf->setDefaultFont('Arial');
-                try {
-                    
-                        Log::info('1', '+');
-                        $html2pdf->writeHTML('<table><tbody><tr><td>Заказ №</td><td>101</td></tr><tr><td>От</td><td>10.03.2022</td></tr></tbody></table>');
-                        $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
-                        Log::info('2', '+');
+        if($emailTo == 'zankoav@gmail.com'){
+            $html2pdf = new Html2Pdf('P', 'A4', 'ru', true);
+            $html2pdf->setDefaultFont('Arial');
+            try {
                 
-                } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
-                    $html2pdf->clean();
-                    Log::info('0', $e->getMessage());
-                }
+                    Log::info('1', '+');
+                    $html2pdf->writeHTML('<table><tbody><tr><td>Order № 1000</td><td>101</td></tr><tr><td>От</td><td>10.03.2022</td></tr></tbody></table>');
+                    $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
+                    Log::info('2', '+');
+            
+            } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
+                $html2pdf->clean();
+                Log::info('0', $e->getMessage());
             }
         }
         $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
