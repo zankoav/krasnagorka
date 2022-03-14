@@ -43,7 +43,7 @@ class LS_Mailer {
     }
 
     private static function generateCheck($checkType, $data){
-        $result = "<page style='font-size: 13pt;'>
+        $result = "<page style='font-family:freeserif'>
         <table>
         <tbody>
         <tr>
