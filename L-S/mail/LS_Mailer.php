@@ -120,8 +120,8 @@ class LS_Mailer {
         <td class='f-b'>".$data['peopleCount']."</td>
         </tr>
         ".$babyBed."
-        ".$$bathHouseWhite."
-        ".$$bathHouseBlack."
+        ".$bathHouseWhite."
+        ".$bathHouseBlack."
         <tr>
         <td colspan='2' class='title'>Оплата:</td>
         </tr>
