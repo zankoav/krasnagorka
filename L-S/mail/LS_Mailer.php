@@ -31,10 +31,13 @@ class LS_Mailer {
                 Log::info('0', $e->getMessage());
             }
         }
-        $attachments = array(WP_CONTENT_DIR . '/uploads/document.pdf');
+        $filePath = WP_CONTENT_DIR . '/uploads/document.pdf';
+        $attachments = array($filePath);
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
         $result = wp_mail([$emailTo], $subject, $template, $headers, $attachments);
-        unlink(WP_CONTENT_DIR . '/uploads/document.pdf');
+        if (file_exists($filePath)) {
+            unlink(filePath);
+        }
         return $result;
     }
 
