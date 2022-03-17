@@ -167,7 +167,7 @@ export default class StepHouse extends LightningElement {
             this.error = 'Выберите дату выезда';
         } else {
             const newMenu = this.settings.menu.map(it => {
-                return { ...it, active: it.value === 'contacts' };
+                return { ...it, active: it.value === 'additional_services' };
             });
             this.dispatchEvent(
                 new CustomEvent('update', {

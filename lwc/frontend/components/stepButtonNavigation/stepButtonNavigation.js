@@ -12,7 +12,6 @@ export default class StepButtonNavigation extends LightningElement {
     get classForNextButton(){
         let canGoNext = false;
         this.settings.menu.forEach((item, index) => {
-            console.log('item',item);
             if(!canGoNext && item.active && this.settings.menu[index + 1]){
                 canGoNext = this.settings.menu[index + 1].available;
             }else if(!canGoNext && item.active && this.settings.menu.length === (index + 1)){

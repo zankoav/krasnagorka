@@ -1,0 +1,59 @@
+<template>
+    <div class="step-additional-services">
+        <div class="step-additional-services__body">
+            <div if:true={settings.babyBedPrice} class="step-additional-services__group step-additional-services__group_checkbox">
+                <input
+                    id="babyBed"
+                    type="checkbox"
+                    onchange={changeBabyBadHandler}
+                    checked={settings.babyBed}
+                    class="step-additional-services__input step-additional-services__input_left"
+                    name="babyBed" />
+                <label for="babyBed" class="step-additional-services__label">{babyBedLabel}</label>
+            </div>
+            <div if:true={settings.bathHouseBlackPrice} class="step-additional-services__container">
+                <div class="step-additional-services__group step-additional-services__group_checkbox">
+                    <input
+                        id="bathHouseBlack"
+                        type="checkbox"
+                        onchange={changeBathHouseBlackPriceHandler}
+                        checked={bathHouseBlack}
+                        class="step-additional-services__input step-additional-services__input_left"
+                        name="bathHouseBlack" />
+                    <label for="bathHouseBlack" class="step-additional-services__label">{bathHouseBlackLabel}</label>
+                </div>
+                <z-select
+                    if:true={settings.bathHouseBlack}
+                    data-name="bathHouseBlack"
+                    label="Количество сеансов"
+                    onchange={seansChange}
+                    options={seansBlackOptions}></z-select>
+            </div>
+            <div if:true={settings.bathHouseWhitePrice} class="step-additional-services__container">
+                <div class="step-additional-services__group step-additional-services__group_checkbox">
+                    <input
+                        id="bathHouseWhite"
+                        type="checkbox"
+                        onchange={changeBathHouseWhitePriceHandler}
+                        checked={bathHouseWhite}
+                        class="step-additional-services__input step-additional-services__input_left"
+                        name="bathHouseWhite" />
+                    <label for="bathHouseWhite" class="step-additional-services__label">{bathHouseWhiteLabel}</label>
+                </div>
+                <z-select
+                    if:true={settings.bathHouseWhite}
+                    data-name="bathHouseWhite"
+                    label="Количество сеансов"
+                    onchange={seansChange}
+                    options={seansWhiteOptions}></z-select>
+            </div>
+        </div>
+        <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
+        <z-step-button-navigation
+            onback={backButtonHandler}
+            onnext={nextButtonHandler}
+            error={error}
+            settings={settings}
+            is-back-button-need></z-step-button-navigation>
+    </div>
+</template>
