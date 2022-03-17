@@ -1241,6 +1241,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if (!empty($havePayed)) {
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                 }
+
+                if ($babyBed) {
+                    $comment .= "\nДетская кроватка: Да";
+                    update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
+                }
+
+                if (!empty($bathHouseWhite)) {
+                    $comment .= "\nКоличество сеансов бани по-белому: $bathHouseWhite";
+                    update_post_meta($post_id, 'sbc_order_bath_house_white', $bathHouseWhite);
+                }
+
+                if (!empty($bathHouseBlack)) {
+                    $comment .= "\nКоличество сеансов бани по-черному: $bathHouseBlack";
+                    update_post_meta($post_id, 'sbc_order_bath_house_black', $bathHouseBlack);
+                }
+
                 if (!empty($comment)) {
                     update_post_meta($post_id, 'sbc_order_desc', $comment);
                 }
@@ -1259,18 +1275,6 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if (!empty($childs)) {
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
-                }
-
-                if ($babyBed) {
-                    update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
-                }
-
-                if (!empty($bathHouseWhite)) {
-                    update_post_meta($post_id, 'sbc_order_bath_house_white', $bathHouseWhite);
-                }
-
-                if (!empty($bathHouseBlack)) {
-                    update_post_meta($post_id, 'sbc_order_bath_house_black', $bathHouseBlack);
                 }
 
                 $paymentMethod  = $request['paymentMethod'];
