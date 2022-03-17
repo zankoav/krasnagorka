@@ -1036,21 +1036,27 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_end', $dateEnd);
                     update_post_meta($order_id, 'sbc_order_price', $price);
                     
+                    $comment = $request['comment']."\nКоличество человек: ".$request['count'];
+
                     if($babyBed){
+                        $comment .= "\nДетская кроватка: Да";
                         update_post_meta($order_id, 'sbc_order_baby_bed', 'on');
                     }
 
                     if (!empty($bathHouseWhite)) {
+                        $comment .= "\nКоличество сеансов бани по-белому: $bathHouseWhite";
                         update_post_meta($order_id, 'sbc_order_bath_house_white', $bathHouseWhite);
                     }
     
                     if (!empty($bathHouseBlack)) {
+                        $comment .= "\nКоличество сеансов бани по-черному: $bathHouseBlack";
                         update_post_meta($order_id, 'sbc_order_bath_house_black', $bathHouseBlack);
                     }
 
+
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
-                    update_post_meta($order_id, 'sbc_order_desc', $request['comment']."\nКоличество человек: ".$request['count']);
+                    update_post_meta($order_id, 'sbc_order_desc', $comment);
 
                     $objectIds = array_map('intval', [$calendarId]);
                     $objectIds = array_unique($objectIds);
