@@ -1582,19 +1582,17 @@ export default class Admin extends LightningElement {
             orderedSuccess: false,
             bookingErrorMessage: null,
             house: null,
-            fio: getCookie("kg_name") || '',
-            phone: getCookie("kg_phone") || '',
-            email: getCookie("kg_email") || '',
+            fio: getCookie('kg_name') || '',
+            phone: getCookie('kg_phone') || '',
+            email: getCookie('kg_email') || '',
             counts: null,
             childCounts: null,
-            dateStart: this.model.dateFrom ?
-                new moment(this.model.dateFrom, "YYYY-MM-DD").format("DD-MM-YYYY") :
-                null
-            ,
-            dateEnd: this.model.dateTo ?
-                new moment(this.model.dateTo, "YYYY-MM-DD").format("DD-MM-YYYY") :
-                null
-            ,
+            dateStart: this.model.dateFrom
+                ? new moment(this.model.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                : null,
+            dateEnd: this.model.dateTo
+                ? new moment(this.model.dateTo, 'YYYY-MM-DD').format('DD-MM-YYYY')
+                : null,
             comment: null,
             passport: null,
             agreement: false,
@@ -1606,6 +1604,12 @@ export default class Admin extends LightningElement {
                     value: 'house',
                     available: true,
                     active: true
+                },
+                {
+                    label: 'Доп. услуги',
+                    value: 'additional_services',
+                    available: false,
+                    active: false
                 },
                 {
                     label: 'Контакты',
@@ -1624,7 +1628,7 @@ export default class Admin extends LightningElement {
             babyBedPrice: this.model.babyBedPrice,
             bathHouseBlackPrice: this.model.bathHouseBlackPrice,
             bathHouseWhitePrice: this.model.bathHouseWhitePrice
-        };
+        }
 
         this.updateSettings({
             detail: this.settings,
