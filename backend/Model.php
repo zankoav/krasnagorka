@@ -570,6 +570,9 @@ class Model
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
 
+                $roomSmallAnimalPrice = get_post_meta($post->ID, "room_small_animal_price_$room_id", true);
+                $roomBigAnimalPrice = get_post_meta($post->ID, "room_big_animal_price_$room_id", true);
+
                 $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
 
                 $roomPeoplesForSales = [];
@@ -589,11 +592,13 @@ class Model
                 }
 
                 $housesResult[] = [
-                    'id' => $room_id, ///???
+                    'id' => $room_id,
                     'price' => $roomPrice,
                     'minPeople' => $roomMinPeople,
                     'minDays' => $roomMinDays,
                     'minPercent' => $roomMinPercent,
+                    'smallAnimalPrice' => $roomSmallAnimalPrice,
+                    'bigAnimalPrice' => $roomBigAnimalPrice,
                     'peoplesForSales' => $roomPeoplesForSales
                 ];
             }
@@ -603,6 +608,9 @@ class Model
                 $houseMinPeople = get_post_meta($post->ID, "house_min_people_$house->ID", true);
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
+
+                $houseSmallAnimalPrice = get_post_meta($post->ID, "house_small_animal_price_$house->ID", true);
+                $houseBigAnimalPrice = get_post_meta($post->ID, "house_big_animal_price_$house->ID", true);
 
                 $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_people_for_sale_$house->ID", true);
 
@@ -630,6 +638,8 @@ class Model
                     'minPeople' => $houseMinPeople,
                     'minDays' => $houseMinDays,
                     'minPercent' => $houseMinPercent,
+                    'smallAnimalPrice' => $houseSmallAnimalPrice,
+                    'bigAnimalPrice' => $houseBigAnimalPrice,
                     'peoplesForSales' => $housePeoplesForSales
                 ];
             }
