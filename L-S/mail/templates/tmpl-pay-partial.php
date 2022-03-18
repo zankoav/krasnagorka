@@ -100,6 +100,12 @@
                                     <?php if(!empty($order['bathHouseBlack'])):?>
                                         <div>Количество сеансов бани по-черному: <strong><?=$order['bathHouseBlack']?></strong></div>
                                     <?php endif;?>
+                                    <?php if($order['smallAnimalsCount'] > 0):?>
+                                        <div>Количество мелких животных (до 30 см в холке): <strong><?=$order['smallAnimalsCount']?></strong></div>
+                                    <?php endif;?>
+                                    <?php if($order['bigAnimalsCount'] > 0):?>
+                                        <div>Количество крупных животных (более 30 см в холке): <strong><?=$order['bigAnimalsCount']?></strong></div>
+                                    <?php endif;?>
 							</td>
 						</tr>
 						<tr>

@@ -45,6 +45,8 @@ class LS_Mailer {
         $babyBed = '';
         $bathHouseWhite = '';
         $bathHouseBlack = '';
+        $smallAnimalsCount = '';
+        $bigAnimalsCount = '';
         if($data['babyBed']){
             $babyBed = "<tr>
             <td>Детская кроватка:</td>
@@ -63,6 +65,20 @@ class LS_Mailer {
             $bathHouseBlack = "<tr>
             <td>Количество сеансов бани по-черному:</td>
             <td class='f-b'>".$data['bathHouseBlack']."</td>
+            </tr>";
+        }
+
+        if($data['smallAnimalsCount'] > 0){
+            $smallAnimalsCount = "<tr>
+            <td>Количество мелких животных (до 30 см в холке):</td>
+            <td class='f-b'>".$data['smallAnimalsCount']."</td>
+            </tr>";
+        }
+
+        if($data['bigAnimalsCount'] > 0){
+            $bigAnimalsCount = "<tr>
+            <td>Количество крупных животных (более 30 см в холке):</td>
+            <td class='f-b'>".$data['bigAnimalsCount']."</td>
             </tr>";
         }
 
@@ -124,6 +140,8 @@ class LS_Mailer {
         ".$babyBed."
         ".$bathHouseWhite."
         ".$bathHouseBlack."
+        ".$smallAnimalsCount."
+        ".$bigAnimalsCount."
         <tr>
         <td colspan='2' class='title'>Оплата:</td>
         </tr>
