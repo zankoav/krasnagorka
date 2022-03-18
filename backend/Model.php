@@ -609,8 +609,8 @@ class Model
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
 
-                $houseSmallAnimalPrice = get_post_meta($post->ID, "house_small_animal_price_$house->ID", true);
-                $houseBigAnimalPrice = get_post_meta($post->ID, "house_big_animal_price_$house->ID", true);
+                $houseSmallAnimalPrice = intval(get_post_meta($post->ID, "house_small_animal_price_$house->ID", true) ?? 0);
+                $houseBigAnimalPrice = intval(get_post_meta($post->ID, "house_big_animal_price_$house->ID", true) ?? 0);
 
                 $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_people_for_sale_$house->ID", true);
 
