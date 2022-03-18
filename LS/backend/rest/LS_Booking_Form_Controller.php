@@ -126,6 +126,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $calendarId = (int)$request['calendarId'];
         $isTerem = $request['isTerem'];
         $babyBed = $request['babyBed'];
+        $smallAnimalCount = intval($request['smallAnimalCount']);
+        $bigAnimalCount = intval($request['bigAnimalCount']);
         $bathHouseWhite = $request['bathHouseWhite'];
         $bathHouseBlack = $request['bathHouseBlack'];
 
@@ -242,11 +244,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
             $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
             $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
+            
+            $houseSmallAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_small_animal_price_'.$houseId, 1) ?? 0);
+            $houseBigAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_big_animal_price_'.$houseId, 1) ?? 0);
 
             $result['seasons_group'][$season->ID]['house_price'] = $housePrice;
             $result['seasons_group'][$season->ID]['house_min_people'] = $houseMinPeople;
             $result['seasons_group'][$season->ID]['house_min_days'] = $houseMinDays;
             $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
+            $result['seasons_group'][$season->ID]['house_small_animal_price'] = $houseSmallAnimalPrice;
+            $result['seasons_group'][$season->ID]['house_big_animal_price'] = $houseBigAnimalPrice;
 
             $basePrice = $housePrice;
             $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
@@ -295,7 +302,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'base_price_without_upper' => $basePriceWithoutUpper,
                 'days_count' => $seasonDaysCount,
                 'base_people_count' => $basePeopleCount,
-                'days_sale' => (float)$daysSale
+                'days_sale' => (float)$daysSale,
+                'small_animals_price' => $houseSmallAnimalPrice,
+                'big_animals_price' => $houseBigAnimalPrice
             ];
 
             $housePeoplesForSalesEntities = get_post_meta($season->ID, $prefix.'_people_for_sale_'.$houseId, 1);
@@ -347,11 +356,30 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 (empty($basePeopleCount) ? 1 : $basePeopleCount) * 
                 $seasonDaysCount
             , 2);
+
+            $smallAnimalBlockTotal = $seasonDaysCount * $houseSmallAnimalPrice * $smallAnimalCount;
+            
+            if(!empty($daysSale)){
+                $smallAnimalBlockTotal = round($smallAnimalBlockTotal * (1 - $daysSale / 100));
+            }
+
+            $bigAnimalBlockTotal = $seasonDaysCount * $houseBigAnimalPrice * $bigAnimalCount;
+
+            if(!empty($daysSale)){
+                $bigAnimalBlockTotal = round($bigAnimalBlockTotal * (1 - $daysSale / 100));
+            }
             
             $result['seasons_group'][$season->ID]['price_block']['total'] = $priceBlockTotal;
-            $result['total_price'] += $result['seasons_group'][$season->ID]['price_block']['total'];
+
+            $result['seasons_group'][$season->ID]['price_block']['small_animals_total'] = $smallAnimalBlockTotal;
+            $result['seasons_group'][$season->ID]['price_block']['big_animals_total'] = $bigAnimalBlockTotal;
+
+            $result['total_price'] += $priceBlockTotal;
+            $result['total_price'] += $smallAnimalBlockTotal;
+            $result['total_price'] += $bigAnimalBlockTotal;
             $result['total_price'] = intval($result['total_price']);
         }
+
         if($babyBed){
             $dayCount = intval($result['days_count']);
             $babyBedPrice = intval($bookingSettings['baby_bed_price']);
