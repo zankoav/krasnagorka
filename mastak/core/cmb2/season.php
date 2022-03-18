@@ -165,6 +165,22 @@ function mastak_season()
 			'after_field' => '%'
 		));
 
+		$cmb_season->add_field(array(
+			'name' => "$house_title (стоимость для мелкого животного)",
+            'description' => '<= 30см в холке',
+			'id'   =>  'house_small_animal_price_' . $house_id,
+			'type'         => 'text_money',
+			'before_field' => 'BYN'
+		));
+
+		$cmb_season->add_field(array(
+			'name' => "$house_title (стоимость для крупного животного)",
+            'description' => '> 30см в холке',
+			'id'   =>  'house_big_animal_price_' . $house_id,
+			'type'         => 'text_money',
+			'before_field' => 'BYN'
+		));
+
 
 		$group_field_event = $cmb_season->add_field(array(
 			'id'          => 'house_people_for_sale_' . $house_id,
@@ -258,6 +274,22 @@ function mastak_season()
 			'id'   =>  'room_min_percent_' . $room_id,
 			'type'            => 'text_small',
 			'after_field' => '%'
+		));
+
+        $cmb_season->add_field(array(
+			'name' => "$room_name (стоимость для мелкого животного)",
+            'description' => '<= 30см в холке',
+			'id'   =>  'room_small_animal_price_' . $room_id,
+			'type'         => 'text_money',
+			'before_field' => 'BYN'
+		));
+
+		$cmb_season->add_field(array(
+			'name' => "$room_name (стоимость для крупного животного)",
+            'description' => '> 30см в холке',
+			'id'   =>  'room_big_animal_price_' . $room_id,
+			'type'         => 'text_money',
+			'before_field' => 'BYN'
 		));
 
 		$group_field_event = $cmb_season->add_field(array(
