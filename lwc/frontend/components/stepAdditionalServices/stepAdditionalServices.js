@@ -17,6 +17,10 @@ export default class StepAdditionalServices extends LightningElement {
         return `Баня по-белому (${this.settings.bathHouseWhitePrice} BYN / 2 часа)`
     }
 
+    get animalsLabel() {
+        return `Домашние животные`
+    }
+
     get bathHouseWhite() {
         return !!this.settings.bathHouseWhite
     }
@@ -41,6 +45,26 @@ export default class StepAdditionalServices extends LightningElement {
                 id: item,
                 name: item,
                 selected: this.settings.bathHouseBlack === item
+            }
+        })
+    }
+
+    get smallAnimalOptions() {
+        return Array.from(Array(3), (_, index) => index).map((item) => {
+            return {
+                id: item,
+                name: item,
+                selected: this.settings.smallAnimalCount === item
+            }
+        })
+    }
+
+    get bigAnimalOptions() {
+        return Array.from(Array(3), (_, index) => index).map((item) => {
+            return {
+                id: item,
+                name: item,
+                selected: this.settings.bigAnimalCount === item
             }
         })
     }
@@ -89,10 +113,45 @@ export default class StepAdditionalServices extends LightningElement {
         )
     }
 
+    changeAnimalsViewHandler(event) {
+        const animalsShow = event.target.checked ? 1 : null
+
+        const detail = {
+            animalsShow: animalsShow
+        }
+
+        if (!animalsShow) {
+            detail.smallAnimalCount = null
+            detail.bigAnimalCount = null
+        }
+
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: detail,
+                bubbles: true,
+                composed: true
+            })
+        )
+    }
+
     seansChange(event) {
         const count = parseInt(event.detail)
         const name = event.target.getAttribute('data-name')
-        console.log(name, count)
+
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    [name]: count
+                },
+                bubbles: true,
+                composed: true
+            })
+        )
+    }
+
+    animalsChange(event) {
+        const count = parseInt(event.detail)
+        const name = event.target.getAttribute('data-name')
 
         this.dispatchEvent(
             new CustomEvent('update', {

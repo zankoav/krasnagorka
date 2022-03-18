@@ -77,6 +77,9 @@ export default class BookingForm extends LightningElement {
         const cid = getCookie('_ga') ? getCookie('_ga').replace(/GA1.2./g, '') : null
         const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD')
         const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
+
+        const babyBed = !!this.settings.babyBed
+
         const requestData = {
             id: calendar.id,
             fio: this.settings.fio,
@@ -93,14 +96,21 @@ export default class BookingForm extends LightningElement {
             orderTitle: calendar.name,
             orderType: 'Домик:',
             cid: cid,
+            babyBed: babyBed,
+            bathHouseWhite: this.settings.bathHouseWhite,
+            bathHouseBlack: this.settings.bathHouseBlack,
+            smallAnimalCount: this.settings.smallAnimalCount,
+            bigAnimalCount: this.settings.bigAnimalCount,
             passport: this.settings.passport,
-            data: `fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
+            data: `smallAnimalCount=${this.settings.smallAnimalCount}&bigAnimalCount=${this.settings.bigAnimalCount}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email
             }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
                 this.settings.comment || ''
             }&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${
                 this.settings.passport || ''
-            }&id=${calendar.id}&isTerem=${isTerem}&spetial=no`
+            }&id=${calendar.id}&isTerem=${isTerem}&spetial=no&babyBed=${babyBed}&bathHouseWhite=${
+                this.settings.bathHouseWhite || ''
+            }&bathHouseBlack=${this.settings.bathHouseBlack || ''}`
         }
 
         const response = await fetch('/wp-json/krasnagorka/v1/order/', {
@@ -181,13 +191,15 @@ export default class BookingForm extends LightningElement {
             babyBed: babyBed,
             bathHouseWhite: this.settings.bathHouseWhite,
             bathHouseBlack: this.settings.bathHouseBlack,
+            smallAnimalCount: this.settings.smallAnimalCount,
+            bigAnimalCount: this.settings.bigAnimalCount,
             comment: this.settings.comment,
             orderTitle: calendar.name,
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
             wsb_test: this.settings.webpaySandbox.wsb_test,
-            data: `prepaidType=${this.settings.prepaidType}&paymentMethod=${
+            data: `smallAnimalCount=${this.settings.smallAnimalCount}&bigAnimalCount=${this.settings.bigAnimalCount}&prepaidType=${this.settings.prepaidType}&paymentMethod=${
                 this.settings.paymentMethod
             }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email

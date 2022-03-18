@@ -47,6 +47,31 @@
                     onchange={seansChange}
                     options={seansWhiteOptions}></z-select>
             </div>
+            <div class="step-additional-services__container">
+                <div class="step-additional-services__group step-additional-services__group_checkbox">
+                    <input
+                        id="animalsShow"
+                        type="checkbox"
+                        onchange={changeAnimalsViewHandler}
+                        checked={settings.animalsShow}
+                        class="step-additional-services__input step-additional-services__input_left"
+                        name="animalsShow" />
+                    <label for="animalsShow" class="step-additional-services__label">{animalsLabel}</label>
+                </div>
+                <template if:true={settings.animalsShow}>
+                    <z-select
+                        data-name="smallAnimalCount"
+                        label="Количество мелких животных ( <= 30 см в холке)"
+                        onchange={animalsChange}
+                        options={smallAnimalOptions}></z-select>
+                    <z-select
+                        class="step-additional-services__select step-additional-services__select_bottom"
+                        data-name="bigAnimalCount"
+                        label="Количество крупных животных ( > 30 см в холке)"
+                        onchange={animalsChange}
+                        options={bigAnimalOptions}></z-select>
+                </template>
+            </div>
         </div>
         <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
         <z-step-button-navigation

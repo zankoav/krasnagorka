@@ -886,6 +886,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '4',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '5',
@@ -899,6 +901,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '4',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '5',
@@ -912,6 +916,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -920,6 +926,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -928,6 +936,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -936,6 +946,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -944,6 +956,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -952,6 +966,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -960,6 +976,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -968,6 +986,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -976,6 +996,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -984,6 +1006,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -992,6 +1016,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2,5',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -1000,6 +1026,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -1008,6 +1036,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '4',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '5',
@@ -1021,6 +1051,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '2',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: []
         //                 },
         //                 {
@@ -1029,6 +1061,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '6',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '8',
@@ -1042,6 +1076,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '5',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '8',
@@ -1055,6 +1091,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '4',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '5',
@@ -1068,6 +1106,8 @@ export default class Admin extends LightningElement {
         //                     minPeople: '5',
         //                     minDays: '',
         //                     minPercent: '',
+        //                     smallAnimalPrice: 2,
+        //                     bigAnimalPrice: 5,
         //                     peoplesForSales: [
         //                         {
         //                             people: '8',
@@ -1553,11 +1593,11 @@ export default class Admin extends LightningElement {
         //     dateStart: '2022-03-30'
         //         ? new moment('2022-03-30', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateEnd: '2022-03-31'
-        //         ? new moment('2022-03-31', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //     dateEnd: '2022-04-07'
+        //         ? new moment('2022-04-07', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
         //     dateFrom: '2022-03-30',
-        //     dateTo: '2022-03-31',
+        //     dateTo: '2022-04-07',
         //     babyBed: false,
         //     babyBedPrice: 5,
         //     bathHouseWhitePrice: 50,
@@ -1651,6 +1691,8 @@ export default class Admin extends LightningElement {
             event.detail.counts ||
             event.detail.house ||
             event.detail.babyBed !== undefined ||
+            event.detail.smallAnimalCount !== undefined ||
+            event.detail.bigAnimalCount !== undefined ||
             event.detail.bathHouseWhite !== undefined ||
             event.detail.bathHouseBlack !== undefined
         ) {
@@ -1733,6 +1775,8 @@ export default class Admin extends LightningElement {
         const babyBed = this.settings.babyBed
         const bathHouseWhite = this.settings.bathHouseWhite
         const bathHouseBlack = this.settings.bathHouseBlack
+        const smallAnimalCount = parseInt(this.settings.smallAnimalCount || 0)
+        const bigAnimalCount = parseInt(this.settings.bigAnimalCount || 0)
 
         const hash = JSON.stringify({
             house,
@@ -1743,7 +1787,9 @@ export default class Admin extends LightningElement {
             isTerem,
             babyBed,
             bathHouseWhite,
-            bathHouseBlack
+            bathHouseBlack,
+            smallAnimalCount,
+            bigAnimalCount
         })
 
         const activeStep = this.settings.menu.find((step) => step.active).value
@@ -1755,7 +1801,6 @@ export default class Admin extends LightningElement {
             peopleCount &&
             (activeStep === 'house' || activeStep === 'additional_services')
         ) {
-            console.log('activeStep', activeStep)
             this.updateSettingsOnly({ totalPriceLoading: true })
 
             const response = await fetch(

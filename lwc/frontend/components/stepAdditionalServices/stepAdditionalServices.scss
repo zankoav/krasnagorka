@@ -67,4 +67,12 @@
     &__container {
         margin-bottom: 1rem;
     }
+
+    &__select {
+        display: block;
+        
+        &_bottom {
+            margin-top: 1rem;
+        }
+    }
 }
