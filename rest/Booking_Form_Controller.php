@@ -986,6 +986,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $babyBed = $request['babyBed'] == 'true';
             $bathHouseWhite = $request['bathHouseWhite'];
             $bathHouseBlack = $request['bathHouseBlack'];
+            $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
+            $bigAnimalsCount = intval($request['bigAnimalCount'] ?? 0);
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
             $request['dateEnd'] = is_numeric($request['dateEnd']) ? $request['dateEnd'] : strtotime($request['dateEnd']);
 
@@ -1039,6 +1041,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($order_id, 'sbc_order_price', $price);
                     
                     $comment = $request['comment']."\nКоличество человек: ".$request['count'];
+
+                    if($smallAnimalsCount > 0){
+                        $comment .= "\nКоличество мелких животных: $smallAnimalsCount";
+                        update_post_meta($order_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
+                    }
+
+                    if($bigAnimalsCount > 0){
+                        $comment .= "\nКоличество крупных животных: $bigAnimalsCount";
+                        update_post_meta($order_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
+                    }
 
                     if($babyBed){
                         $comment .= "\nДетская кроватка: Да";
@@ -1169,6 +1181,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             $babyBed = $request['babyBed'] == 'true';
             $bathHouseWhite = $request['bathHouseWhite'];
             $bathHouseBlack = $request['bathHouseBlack'];
+            $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
+            $bigAnimalsCount = intval($request['bigAnimalCount'] ?? 0);
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
             $clientId = null;
             $addedName   = empty($contactPhone) ? (empty($contactEmail) ? '' : $contactEmail) : $contactPhone;
@@ -1242,6 +1256,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
                 if (!empty($havePayed)) {
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
+                }
+
+                if($smallAnimalsCount > 0){
+                    $comment .= "\nКоличество мелких животных: $smallAnimalsCount";
+                    update_post_meta($post_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
+                }
+
+                if($bigAnimalsCount > 0){
+                    $comment .= "\nКоличество крупных животных: $bigAnimalsCount";
+                    update_post_meta($post_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
                 }
 
                 if ($babyBed) {
