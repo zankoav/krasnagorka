@@ -624,6 +624,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "babyBed" => $request["babyBed"],
                         "bathHouseWhite" => $request["bathHouseWhite"],
                         "bathHouseBlack" => $request["bathHouseBlack"],
+                        'smallAnimalCount' => $request['smallAnimalCount'],
+                        'bigAnimalCount' => $request['bigAnimalCount'],
                         "wsb_test" => $request["wsb_test"],
                         "passport" => $request["passport"],
                         "objectIds" => [$calendarId],
