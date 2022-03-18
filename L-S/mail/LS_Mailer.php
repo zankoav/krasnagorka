@@ -36,7 +36,7 @@ class LS_Mailer {
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
         $result = wp_mail([$emailTo], $subject, $template, $headers, $attachments);
         if (file_exists($filePath)) {
-            unlink(filePath);
+            unlink($filePath);
         }
         return $result;
     }
