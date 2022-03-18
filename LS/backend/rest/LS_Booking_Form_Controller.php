@@ -304,7 +304,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'base_people_count' => $basePeopleCount,
                 'days_sale' => (float)$daysSale,
                 'small_animals_price' => $houseSmallAnimalPrice,
-                'big_animals_price' => $houseBigAnimalPrice
+                'big_animals_price' => $houseBigAnimalPrice,
+                'small_animals_count' => $smallAnimalCount,
+                'big_animals_count' => $bigAnimalCount
             ];
 
             $housePeoplesForSalesEntities = get_post_meta($season->ID, $prefix.'_people_for_sale_'.$houseId, 1);
