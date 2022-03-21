@@ -32,9 +32,9 @@ function payment_metabox() {
         'id'   => 'sbc_order_prepaid_percantage',
         'type'         => 'text_small',
         'before_field' => '%',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
+        // 'attributes' => array(
+        //     'readonly' => 'readonly'
+        // )
     ));
 
     $sbc_client->add_field(array(
