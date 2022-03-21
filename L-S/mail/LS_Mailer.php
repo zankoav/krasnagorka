@@ -70,14 +70,14 @@ class LS_Mailer {
 
         if($data['smallAnimalsCount'] > 0){
             $smallAnimalsCount = "<tr>
-            <td>Количество мелких животных (до 30 см в холке):</td>
+            <td>Кошки и собаки мелких пород (высота в холке до 40 см):</td>
             <td class='f-b'>".$data['smallAnimalsCount']."</td>
             </tr>";
         }
 
         if($data['bigAnimalsCount'] > 0){
             $bigAnimalsCount = "<tr>
-            <td>Количество крупных животных (более 30 см в холке):</td>
+            <td>Собаки крупных пород (высота в холке более 40 см):</td>
             <td class='f-b'>".$data['bigAnimalsCount']."</td>
             </tr>";
         }

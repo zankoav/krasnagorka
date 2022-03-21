@@ -192,13 +192,13 @@ function sbc_orders_metabox() {
     ) );
 
     $sbc_order->add_field( array(
-        'name' => esc_html__( 'Количество мелких животных (<= 30 см от холки)', 'sbc' ),
+        'name' => esc_html__( 'Кошки и собаки мелких пород (высота в холке до 40 см)', 'sbc' ),
         'id'   => 'sbc_order_small_animlas_count',
         'type' => 'text'
     ) );
 
     $sbc_order->add_field( array(
-        'name' => esc_html__( 'Количество крупных животных (> 30 см от холки)', 'sbc' ),
+        'name' => esc_html__( 'Собаки крупных пород (высота в холке более 40 см)', 'sbc' ),
         'id'   => 'sbc_order_big_animlas_count',
         'type' => 'text'
     ) );

@@ -166,7 +166,7 @@ function mastak_season()
 		));
 
 		$cmb_season->add_field(array(
-			'name' => "$house_title (стоимость для мелкого животного)",
+			'name' => "$house_title (Кошки и собаки мелких пород (высота в холке до 40 см))",
             'description' => '<= 30см в холке',
 			'id'   =>  'house_small_animal_price_' . $house_id,
 			'type'         => 'text_money',
@@ -174,7 +174,7 @@ function mastak_season()
 		));
 
 		$cmb_season->add_field(array(
-			'name' => "$house_title (стоимость для крупного животного)",
+			'name' => "$house_title (Собаки крупных пород (высота в холке более 40 см))",
             'description' => '> 30см в холке',
 			'id'   =>  'house_big_animal_price_' . $house_id,
 			'type'         => 'text_money',
@@ -277,7 +277,7 @@ function mastak_season()
 		));
 
         $cmb_season->add_field(array(
-			'name' => "$room_name (стоимость для мелкого животного)",
+			'name' => "$room_name (Кошки и собаки мелких пород (высота в холке до 40 см))",
             'description' => '<= 30см в холке',
 			'id'   =>  'room_small_animal_price_' . $room_id,
 			'type'         => 'text_money',
@@ -285,7 +285,7 @@ function mastak_season()
 		));
 
 		$cmb_season->add_field(array(
-			'name' => "$room_name (стоимость для крупного животного)",
+			'name' => "$room_name (Собаки крупных пород (высота в холке более 40 см))",
             'description' => '> 30см в холке',
 			'id'   =>  'room_big_animal_price_' . $room_id,
 			'type'         => 'text_money',

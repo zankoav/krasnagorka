@@ -39,6 +39,6 @@ export default class SeasonDetails extends LightningElement {
     }
 
     get smallAnimalsLabel() {
-        return 'Стоимость для мелкого животного (<= 30 см от холки) за ночь'
+        return 'Кошки и собаки мелких пород (высота в холке до 40 см) за ночь'
     }
 }

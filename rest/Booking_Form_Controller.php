@@ -1045,12 +1045,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                     $comment = $request['comment']."\nКоличество человек: ".$request['count'];
 
                     if($smallAnimalsCount > 0){
-                        $comment .= "\nКоличество мелких животных: $smallAnimalsCount";
+                        $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
                         update_post_meta($order_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
                     }
 
                     if($bigAnimalsCount > 0){
-                        $comment .= "\nКоличество крупных животных: $bigAnimalsCount";
+                        $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
                         update_post_meta($order_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
                     }
 
@@ -1261,12 +1261,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if($smallAnimalsCount > 0){
-                    $comment .= "\nКоличество мелких животных: $smallAnimalsCount";
+                    $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
                 }
 
                 if($bigAnimalsCount > 0){
-                    $comment .= "\nКоличество крупных животных: $bigAnimalsCount";
+                    $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
                 }
 
