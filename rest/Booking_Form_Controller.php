@@ -755,6 +755,11 @@ class Booking_Form_Controller extends WP_REST_Controller
             $checkType =  $prepaidType == 100 ? 'tmpl-pay-full' : 'tmpl-pay-partial';
             $templatePath = "L-S/mail/templates/$checkType";
         }
+
+        Log::info('prepaidType',  $prepaidType);
+        Log::info('paymentMethod',  $paymentMethod);
+        Log::info('isWebPaySuccess',  $isWebPaySuccess);
+        Log::info('templatePath',  $templatePath);
         
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
@@ -858,7 +863,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         if (isset($_POST['transaction_id']) and empty($transaction_id)) {
             
             update_post_meta($_POST['site_order_id'], 'sbc_webpay_transaction_id', $_POST['transaction_id']);
-
             if(!empty($order['prepaidType']) and $order['prepaidType'] != 100){
                 $prepaidType = intval($prepaidType);
                 update_post_meta($_POST['site_order_id'], 'sbc_order_select', 'prepaid');
