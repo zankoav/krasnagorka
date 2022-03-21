@@ -140,7 +140,12 @@ export default class BookingForm extends LightningElement {
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'
                 },
-                body: JSON.stringify({ data: response.data })
+                body: JSON.stringify({ 
+                    data: response.data,
+                    orderId: response.orderId,
+                    paymentMethod: response.paymentMethod,
+                    prepaidType: response.prepaidType
+                })
             })
             gtag('event', 'create_lead')
         } else {
