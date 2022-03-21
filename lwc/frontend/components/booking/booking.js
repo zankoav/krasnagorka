@@ -142,6 +142,7 @@ export default class BookingForm extends LightningElement {
                 },
                 body: JSON.stringify({ 
                     data: response.data,
+                    email: this.settings.email,
                     orderId: response.orderId,
                     paymentMethod: response.paymentMethod,
                     prepaidType: response.prepaidType

@@ -755,11 +755,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             $checkType =  $prepaidType == 100 ? 'tmpl-pay-full' : 'tmpl-pay-partial';
             $templatePath = "L-S/mail/templates/$checkType";
         }
-
-        Log::info('prepaidType',  $prepaidType);
-        Log::info('paymentMethod',  $paymentMethod);
-        Log::info('isWebPaySuccess',  $isWebPaySuccess);
-        Log::info('templatePath',  $templatePath);
         
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
