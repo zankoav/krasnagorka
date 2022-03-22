@@ -102,7 +102,7 @@ export default class BookingForm extends LightningElement {
             smallAnimalCount: this.settings.smallAnimalCount,
             bigAnimalCount: this.settings.bigAnimalCount,
             passport: this.settings.passport,
-            data: `smallAnimalCount=${this.settings.smallAnimalCount}&bigAnimalCount=${this.settings.bigAnimalCount}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
+            data: `smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${this.settings.bigAnimalCount || 0}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email
             }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
                 this.settings.comment || ''
@@ -205,7 +205,7 @@ export default class BookingForm extends LightningElement {
             cid: cid,
             passport: this.settings.passport,
             wsb_test: this.settings.webpaySandbox.wsb_test,
-            data: `smallAnimalCount=${this.settings.smallAnimalCount}&bigAnimalCount=${this.settings.bigAnimalCount}&prepaidType=${this.settings.prepaidType}&paymentMethod=${
+            data: `smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${this.settings.bigAnimalCount || 0}&prepaidType=${this.settings.prepaidType}&paymentMethod=${
                 this.settings.paymentMethod
             }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email

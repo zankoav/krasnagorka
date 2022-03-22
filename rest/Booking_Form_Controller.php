@@ -1773,16 +1773,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                         );
                         $contactCustomFields->add($passportFieldValueModel);
                     }
-
-                    $contact = $apiClient->contacts()->addOne($contact);
+                    try {
+                        $contact = $apiClient->contacts()->addOne($contact);
+                    } catch (AmoCRMApiException $e) {
+                        Logger::log('Exceptions: new contact! ' . $e->getTitle() . ' Description: ' . $e->getDescription());
+                    }                    
                 }
             }
 
-            $links = new LinksCollection();
-            $links->add($contact);
-
-            $apiClient->leads()->link($lead, $links);
-
+            if(!empty($contact)){
+                $links = new LinksCollection();
+                $links->add($contact);
+    
+                $apiClient->leads()->link($lead, $links);
+            }else{
+                Log::error('Lead Data and Contact Data', [$leadData, $contactData]);
+            }
 
             // Создадим задачу
             $tasksCollection = new TasksCollection();
@@ -1803,7 +1809,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             } catch (AmoCRMApiException $e) {
                 Logger::log('Exceptions: ' . $e->getTitle() . ' <<< tasksCollection >>> ' . $e->getDescription());
             }
-
         } catch (AmoCRMApiException $e) {
             Logger::log('Exceptions: ' . $e->getTitle() . ' <<< addOne lead >>> ' . $e->getDescription());
         }
