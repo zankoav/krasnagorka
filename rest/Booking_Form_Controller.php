@@ -561,6 +561,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
                 $href = 'https://krasnagorka.by/booking-form';
                 $type = 'booking-form';
+                Log::info('AmoIntegration', $request['data']);
                 $amo = new AmoIntegration($type, $request['data'], $href);
                 $result['status'] = 'success';
                 $orderData = get_order_data($request['orderId']);
@@ -572,6 +573,8 @@ class Booking_Form_Controller extends WP_REST_Controller
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
         }
+        
+        Log::info('create_amocrm_lead', [$result['status'], $result['message']]);
         return new WP_REST_Response($result, 200);
     }
 
@@ -681,6 +684,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             Logger::log("Exception:" . $e->getMessage());
             return false;
         }
+
+        Log::info('create_order', $result);
 
         return new WP_REST_Response($result, 200);
     }
