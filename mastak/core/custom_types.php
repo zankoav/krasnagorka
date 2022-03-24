@@ -169,14 +169,14 @@
         $sbc_client = new_cmb2_box(array(
             'id'           => $prefix . 'data',
             'title'        => esc_html__('Данные о доме', 'krasnagorka'),
-            'object_types' => array('house',), // Post type
+            'object_types' => array('house'), // Post type
             'context'      => 'normal',
             'priority'     => 'high',
             'show_names'   => true, // Show field names on the left
         ));
 
         $sbc_client->add_field(array(
-            'name' => 'Подзаголово',
+            'name' => 'Подзаголовок',
             'id'   => $prefix . 'subtitle',
             'type' => 'text'
         ));
@@ -393,6 +393,18 @@
         $sbc_client->add_field(array(
             'name' => 'Открывать в новой вкладке',
             'id'   => 'new_page',
+            'type' => 'checkbox'
+        ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Запретить животных',
+            'id'   => 'deprecate_animals',
+            'type' => 'checkbox'
+        ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Запретить добавление детской кроватки',
+            'id'   => 'deprecate_baby_bed',
             'type' => 'checkbox'
         ));
     }
