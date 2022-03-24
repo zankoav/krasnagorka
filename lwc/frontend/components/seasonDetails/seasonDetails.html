@@ -11,14 +11,16 @@
                 <div class="season-details__item-title">Минимальная стоимость за ночь</div>
                 <z-number-value num={minPricePerDay} value="руб"></z-number-value>
             </div>
-            <div if:true={smallAnimalPrice} class="season-details__item">
-                <div class="season-details__item-title">{smallAnimalsLabel}</div>
-                <z-number-value num={smallAnimalPrice} value="руб"></z-number-value>
-            </div>
-            <div if:true={bigAnimalPrice} class="season-details__item">
-                <div class="season-details__item-title">Собаки крупных пород (высота в холке более 40 см) за ночь</div>
-                <z-number-value num={bigAnimalPrice} value="руб"></z-number-value>
-            </div>
+            <template if:true={showAnimalsService}>
+                <div if:true={smallAnimalPrice} class="season-details__item">
+                    <div class="season-details__item-title">{smallAnimalsLabel}</div>
+                    <z-number-value num={smallAnimalPrice} value="руб"></z-number-value>
+                </div>
+                <div if:true={bigAnimalPrice} class="season-details__item">
+                    <div class="season-details__item-title">Собаки крупных пород (высота в холке более 40 см) за ночь</div>
+                    <z-number-value num={bigAnimalPrice} value="руб"></z-number-value>
+                </div>
+            </template>
             <template if:true={minDays}>
                 <div class="season-details__item">
                     При выборе менее <span class="season-details__price-night">{minDays}</span> ночей минимальная стоимость увеличится

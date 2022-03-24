@@ -4,6 +4,7 @@ import './seasonDetails.scss'
 export default class SeasonDetails extends LightningElement {
     @api season
     @api house
+    @api settings
 
     get targetHouse() {
         return this.season.houses.find((house) => {
@@ -40,5 +41,9 @@ export default class SeasonDetails extends LightningElement {
 
     get smallAnimalsLabel() {
         return 'Кошки и собаки мелких пород (высота в холке до 40 см) за ночь'
+    }
+
+    get showAnimalsService() {
+        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedAnimals
     }
 }

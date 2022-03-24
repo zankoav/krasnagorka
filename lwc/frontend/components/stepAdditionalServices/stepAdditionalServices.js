@@ -30,10 +30,7 @@ export default class StepAdditionalServices extends LightningElement {
     }
 
     get showBabyBedService() {
-        return (
-            !!this.settings.babyBedPrice &&
-            !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed
-        )
+        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed
     }
 
     get showAnimalsService() {
