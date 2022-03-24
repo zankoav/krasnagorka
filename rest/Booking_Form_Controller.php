@@ -558,23 +558,23 @@ class Booking_Form_Controller extends WP_REST_Controller
         $result = ['status' => 'error'];
         try {
             if (isset($request['data'])) {
-                require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
-                $href = 'https://krasnagorka.by/booking-form';
-                $type = 'booking-form';
-                Log::info('AmoIntegration', $request['data']);
-                $amo = new AmoIntegration($type, $request['data'], $href);
-                $result['status'] = 'success';
                 $orderData = get_order_data($request['orderId']);
+                Log::info('1 ' . $orderData['email'], $orderData);
                 if($request['paymentMethod'] == 'card_layter' || $request['paymentMethod'] == 'office'){
                     $result['template'] = $this->sendMail($orderData);
                 }
-                // $this->addTaskForLead($orderData['leadId'], $orderData['orderId'], 'Помочь клиенту определиться с заказом');
+                Log::info('2 ' . $orderData['email'], $request['data']);
+                require_once WP_PLUGIN_DIR . '/amo-integration/AmoIntegration.php';
+                $href = 'https://krasnagorka.by/booking-form';
+                $type = 'booking-form';
+                $amo = new AmoIntegration($type, $request['data'], $href);
+                $result['status'] = 'success';
             }
         } catch (Exception $e) {
             $result['message'] = $e->getMessage();
         }
         
-        Log::info('create_amocrm_lead', [$result['status'], $result['message']]);
+        Log::info('3 ' . $orderData['email'], [$result['status'], $result['message']]);
         return new WP_REST_Response($result, 200);
     }
 
