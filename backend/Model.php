@@ -605,6 +605,7 @@ class Model
 
             foreach ($houses as $house) {
                 $housePrice = get_post_meta($post->ID, "house_price_$house->ID", true);
+
                 $houseMinPeople = get_post_meta($post->ID, "house_min_people_$house->ID", true);
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
