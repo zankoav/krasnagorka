@@ -555,7 +555,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
     public function create_amocrm_lead($request)
     {
-        $result = ['status' => 'error'];
+        $result = ['status' => 'error', 'message' => null];
         try {
             if (isset($request['data'])) {
                 $orderData = get_order_data($request['orderId']);
