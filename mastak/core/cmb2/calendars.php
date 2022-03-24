@@ -31,15 +31,15 @@
             'name' => 'Комната Терема',
             'id'   => $prefix . 'terem',
             'type' => 'checkbox',
-        ) );
+        ));
 
-        $sbc_client->add_field(array(
+        $cmb_term->add_field(array(
             'name' => 'Запретить животных',
             'id'   => $prefix. 'deprecate_animals',
             'type' => 'checkbox'
         ));
 
-        $sbc_client->add_field(array(
+        $cmb_term->add_field(array(
             'name' => 'Запретить добавление детской кроватки',
             'id'   => $prefix. 'deprecate_baby_bed',
             'type' => 'checkbox'
