@@ -29,6 +29,17 @@ export default class StepAdditionalServices extends LightningElement {
         return !!this.settings.bathHouseBlack
     }
 
+    get showBabyBedService() {
+        return (
+            !!this.settings.babyBedPrice &&
+            !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed
+        )
+    }
+
+    get showAnimalsService() {
+        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedAnimals
+    }
+
     get seansWhiteOptions() {
         return Array.from(Array(24), (_, index) => index + 1).map((item) => {
             return {

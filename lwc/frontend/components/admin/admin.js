@@ -117,6 +117,8 @@ export default class Admin extends LightningElement {
         //             name: '\u0420\u044b\u0431\u0430\u0446\u043a\u0438\u0439',
         //             slug: 'rybatskij',
         //             isTerem: '',
+        //             isDeprecatedBabyBed: true,
+        //             isDeprecatedAnimals: true,
         //             selected: true
         //         },
         //         {

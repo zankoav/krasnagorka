@@ -1,7 +1,7 @@
 <template>
     <div class="step-additional-services">
         <div class="step-additional-services__body">
-            <div if:true={settings.babyBedPrice} class="step-additional-services__group step-additional-services__group_checkbox">
+            <div if:true={showBabyBedService} class="step-additional-services__group step-additional-services__group_checkbox">
                 <input
                     id="babyBed"
                     type="checkbox"
@@ -47,7 +47,7 @@
                     onchange={seansChange}
                     options={seansWhiteOptions}></z-select>
             </div>
-            <div class="step-additional-services__container">
+            <div if:true={showAnimalsService} class="step-additional-services__container">
                 <div class="step-additional-services__group step-additional-services__group_checkbox">
                     <input
                         id="animalsShow"
