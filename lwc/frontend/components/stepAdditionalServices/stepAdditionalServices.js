@@ -34,7 +34,7 @@ export default class StepAdditionalServices extends LightningElement {
     }
 
     get showAnimalsService() {
-        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedAnimals
+        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
     }
 
     get seansWhiteOptions() {
