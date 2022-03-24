@@ -570,8 +570,8 @@ class Model
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
 
-                $roomSmallAnimalPrice = get_post_meta($post->ID, "room_small_animal_price_$room_id", true);
-                $roomBigAnimalPrice = get_post_meta($post->ID, "room_big_animal_price_$room_id", true);
+                $roomSmallAnimalPrice = intval(get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0);
+                $roomBigAnimalPrice = intval(get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0);
 
                 $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
 
