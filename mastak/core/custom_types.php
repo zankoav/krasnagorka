@@ -395,18 +395,6 @@
             'id'   => 'new_page',
             'type' => 'checkbox'
         ));
-
-        $sbc_client->add_field(array(
-            'name' => 'Запретить животных',
-            'id'   => 'deprecate_animals',
-            'type' => 'checkbox'
-        ));
-
-        $sbc_client->add_field(array(
-            'name' => 'Запретить добавление детской кроватки',
-            'id'   => 'deprecate_baby_bed',
-            'type' => 'checkbox'
-        ));
     }
 
     add_action('cmb2_admin_init', 'mastak_house_metabox');
