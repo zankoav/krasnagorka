@@ -34,7 +34,12 @@ class LS_Mailer {
         $filePath = WP_CONTENT_DIR . '/uploads/document.pdf';
         $attachments = array($filePath);
         $headers = 'From: Краснагорка <info@krasnagorka.by>' . "\r\n";
-        $result = wp_mail([$emailTo], $subject, $template, $headers, $attachments);
+        $header = [
+            'From: Краснагорка <info@krasnagorka.by>',
+            'content-type: text/html',
+            'bcc: order@krasnagorka.by'
+        ];
+        $result = wp_mail([$emailTo], $subject, $template, $header, $attachments);
         if (file_exists($filePath)) {
             unlink($filePath);
         }
