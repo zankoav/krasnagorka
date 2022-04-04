@@ -240,15 +240,15 @@
                                 value="1" <?= $currency_name === KGCookie::BYN ? 'selected' : ''; ?>>BYN
                         </option>
                         <option name="<?= KGCookie::RUS; ?>"
-                                value="<?= get_option('rur_currency'); ?>" <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
+                                value="<?= ls_cb_get_rub_rate(); ?>" <?= $currency_name === KGCookie::RUS ? 'selected' : ''; ?>>
                             RUS
                         </option>
                         <option name="<?= KGCookie::USD; ?>"
-                                value="<?= get_option('usd_currency'); ?>" <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
+                                value="<?= ls_cb_get_usd_rate(); ?>" <?= $currency_name === KGCookie::USD ? 'selected' : ''; ?>>
                             USD
                         </option>
                         <option name="<?= KGCookie::EUR; ?>"
-                                value="<?= get_option('eur_currency'); ?>" <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
+                                value="<?= ls_cb_get_eur_rate(); ?>" <?= $currency_name === KGCookie::EUR ? 'selected' : ''; ?>>
                             EUR
                         </option>
                     </select>
