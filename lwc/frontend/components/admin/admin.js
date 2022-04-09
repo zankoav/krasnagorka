@@ -1698,6 +1698,11 @@ export default class Admin extends LightningElement {
             event.detail.bathHouseWhite !== undefined ||
             event.detail.bathHouseBlack !== undefined
         ) {
+            
+            if (event.detail.dateStart || event.detail.dateEnd) {
+                this.updateSettingsOnly({ babyBed: false })
+            }
+
             this.checkTotalPrice()
         }
     }
