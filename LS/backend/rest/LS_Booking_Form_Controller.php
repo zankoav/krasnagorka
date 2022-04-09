@@ -470,7 +470,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $result = [];
 
         foreach($orders as $order){
-            $result[] = $order;
+            $isBabyBedExist = get_post_meta($order->ID, 'sbc_order_baby_bed', 1) == 'on';
+            $result[$order->ID] = $isBabyBedExist;
         }
 
         
