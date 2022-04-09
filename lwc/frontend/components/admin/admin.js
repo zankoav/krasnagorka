@@ -117,8 +117,8 @@ export default class Admin extends LightningElement {
         //             name: '\u0420\u044b\u0431\u0430\u0446\u043a\u0438\u0439',
         //             slug: 'rybatskij',
         //             isTerem: '',
-        //             isDeprecatedBabyBed: true,
-        //             isDeprecatedAnimals: true,
+        //             isDeprecatedBabyBed: false,
+        //             isDeprecatedAnimals: false,
         //             selected: true
         //         },
         //         {
@@ -1592,14 +1592,14 @@ export default class Admin extends LightningElement {
         //             active: false
         //         }
         //     ],
-        //     dateStart: '2022-03-30'
-        //         ? new moment('2022-03-30', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //     dateStart: '2022-04-10'
+        //         ? new moment('2022-04-10', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateEnd: '2022-04-07'
-        //         ? new moment('2022-04-07', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //     dateEnd: '2022-04-15'
+        //         ? new moment('2022-04-15', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateFrom: '2022-03-30',
-        //     dateTo: '2022-04-07',
+        //     dateFrom: '2022-04-10',
+        //     dateTo: '2022-04-15',
         //     babyBed: false,
         //     babyBedPrice: 5,
         //     bathHouseWhitePrice: 50,
