@@ -497,8 +497,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             )
         ));
 
-        Log::info('count of ORDERs', count($orders));
-        Log::info('babyBedTotalCount', $babyBedTotalCount);
+        $result['gg'] = count($orders);
         return $result;
     }
 
