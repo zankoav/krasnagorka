@@ -467,12 +467,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 )
             )
         ));
+        $result = [];
 
-        $result = [
-           'count' => count($orders),
-           'start' => $dateStart,
-           'end' => $dateEnd
-        ];
+        foreach($orders as $order){
+            $result[] = $order;
+        }
+
+        
         return $result;
     }
 
