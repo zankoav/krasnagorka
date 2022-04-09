@@ -146,6 +146,12 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Количество допустимых детских кроваток',
+        'id'   => 'baby_bed_count',
+        'type'         => 'text_small'
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Цена на баню по-черному 2 часа',
         'id'   => 'bath_house_black_price',
         'type'         => 'text_money',
