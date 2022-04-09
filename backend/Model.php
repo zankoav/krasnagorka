@@ -289,7 +289,7 @@ class Model
             "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
             "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
             "foodAvailable" => $bookingSettings['food_available'] == 'on',
-            "foodNotAvailableText" => $bookingSettings['food_not_available_text']
+            "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
         ];
 
         if (!empty($dateFrom) and !empty($dateTo)) {
