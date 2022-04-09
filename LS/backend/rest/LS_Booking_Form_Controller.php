@@ -468,19 +468,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         'compare' => '>='
                     )
                 ),
-                // array(
-                //     'relation' => 'AND',
-                //     array(
-                //         'key'     => 'sbc_order_start',
-                //         'value'   => $dateStart,
-                //         'compare' => '<',
-                //     ),
-                //     array(
-                //         'key'     => 'sbc_order_end',
-                //         'value'   => $dateStart,
-                //         'compare' => '>'
-                //     )
-                // ),
+                array(
+                    'relation' => 'AND',
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateStart,
+                        'compare' => '>',
+                    ),
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateEnd,
+                        'compare' => '<'
+                    )
+                ),
                 // array(
                 //     'relation' => 'AND',
                 //     array(
