@@ -454,46 +454,17 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'post_type' => 'sbc_orders',
             'posts_per_page' => -1,
             'meta_query' => array(
-                'relation' => 'OR',
+                'relation' => 'AND',
                 array(
-                    'relation' => 'AND',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateStart,
-                        'compare' => '<=',
-                    ),
-                    array(
-                        'key'     => 'sbc_order_end',
-                        'value'   => $dateEnd,
-                        'compare' => '>='
-                    )
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '>=',
                 ),
                 array(
-                    'relation' => 'AND',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateStart,
-                        'compare' => '>',
-                    ),
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateEnd,
-                        'compare' => '<'
-                    )
-                ),
-                // array(
-                //     'relation' => 'AND',
-                //     array(
-                //         'key'     => 'sbc_order_start',
-                //         'value'   => $dateStart,
-                //         'compare' => '>',
-                //     ),
-                //     array(
-                //         'key'     => 'sbc_order_end',
-                //         'value'   => $dateStart,
-                //         'compare' => '<'
-                //     )
-                // )
+                    'key'     => 'sbc_order_start',
+                    'value'   => $dateEnd,
+                    'compare' => '<='
+                )
             )
         ));
 
