@@ -9,7 +9,10 @@
                     checked={settings.babyBed}
                     class="step-additional-services__input step-additional-services__input_left"
                     name="babyBed" />
-                <label for="babyBed" class="step-additional-services__label">{babyBedLabel}</label>
+                <label for="babyBed" class="step-additional-services__label">
+                    {babyBedLabel}
+                    <div class="step-additional-services__label-warning">Внимание! При изменении дат бронирования, эта услуга может автоматически отключиться</div>
+                </label>
             </div>
             <div if:true={settings.bathHouseBlackPrice} class="step-additional-services__container">
                 <div class="step-additional-services__group step-additional-services__group_checkbox">
