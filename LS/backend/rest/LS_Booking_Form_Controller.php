@@ -435,7 +435,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     private static function isAvailableBabyBed($days, $calendarId, $houseId, $isTerem){
-        $result = [];
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $babyBedTotalCount = !empty($bookingSettings['baby_bed_count']) ? intval($bookingSettings['baby_bed_count']) : 0;
 
@@ -467,15 +466,18 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 )
             )
         ));
-        $result = [];
 
+        $babyBedCount = $babyBedTotalCount;
         foreach($orders as $order){
-            $isBabyBedExist = get_post_meta($order->ID, 'sbc_order_baby_bed', 1) == 'on';
-            $result[$order->ID] = $isBabyBedExist;
+            if($babyBedCount > 0){
+                $isBabyBedExist = get_post_meta($order->ID, 'sbc_order_baby_bed', 1) == 'on';
+                if($isBabyBedExist){
+                    $babyBedCount --;
+                }
+            }
         }
 
-        
-        return $result;
+        return $babyBedCount > 0;
     }
 
     private static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem){
