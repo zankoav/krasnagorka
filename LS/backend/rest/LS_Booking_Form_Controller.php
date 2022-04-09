@@ -151,7 +151,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          */
         $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
         
-        $result["baby_bed_available"] = self::isAvailableBabyBed($days, $calendarId, $houseId, $isTerem);
 
         /**
          * is only booking order
@@ -209,7 +208,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'days_count' => count($days),
             'day_sale_next' => $daySaleNext,
             'seasons_group' => [],
-            'only_booking_order' => $onlyBookingOrder
+            'only_booking_order' => $onlyBookingOrder,
+            'baby_bed_available' => self::isAvailableBabyBed($days, $calendarId, $houseId, $isTerem)
         ];
 
         foreach($days as $day) {
