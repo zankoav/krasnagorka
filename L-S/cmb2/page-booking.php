@@ -166,6 +166,12 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Питание',
+        'id'   => 'food_title',
+        'type' => 'title',
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Открыть питание для формы',
         'id'   => 'food_available',
         'type' => 'checkbox'
