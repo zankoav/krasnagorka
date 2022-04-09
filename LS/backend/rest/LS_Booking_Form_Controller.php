@@ -450,60 +450,54 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
         $dateEnd = end($days);
         $ordersQuery = new WP_Query;
-        $orders = $ordersQuery->query(array(
-            'post_type' => 'sbc_orders',
-            'posts_per_page' => -1,
-            // 'tax_query' => [
-            //     [
-            //         'taxonomy' => 'sbc_calendars',
-            //         'terms' => [$cId]
-            //     ]
-            // ],
-            'meta_query' => array(
-                'relation' => 'OR',
-                array(
-                    'relation' => 'AND',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateStart,
-                        'compare' => '>=',
-                    ),
-                    array(
-                        'key'     => 'sbc_order_end',
-                        'value'   => $dateEnd,
-                        'compare' => '<='
-                    )
-                ),
-                array(
-                    'relation' => 'AND',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateStart,
-                        'compare' => '<',
-                    ),
-                    array(
-                        'key'     => 'sbc_order_end',
-                        'value'   => $dateStart,
-                        'compare' => '>'
-                    )
-                ),
-                array(
-                    'relation' => 'AND',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   => $dateStart,
-                        'compare' => '>',
-                    ),
-                    array(
-                        'key'     => 'sbc_order_end',
-                        'value'   => $dateStart,
-                        'compare' => '<'
-                    )
-                )
-            )
-        ));
+        // $orders = $ordersQuery->query(array(
+        //     'post_type' => 'sbc_orders',
+        //     'posts_per_page' => -1,
+        //     'meta_query' => array(
+        //         'relation' => 'OR',
+        //         array(
+        //             'relation' => 'AND',
+        //             array(
+        //                 'key'     => 'sbc_order_start',
+        //                 'value'   => $dateStart,
+        //                 'compare' => '>=',
+        //             ),
+        //             array(
+        //                 'key'     => 'sbc_order_end',
+        //                 'value'   => $dateEnd,
+        //                 'compare' => '<='
+        //             )
+        //         ),
+        //         array(
+        //             'relation' => 'AND',
+        //             array(
+        //                 'key'     => 'sbc_order_start',
+        //                 'value'   => $dateStart,
+        //                 'compare' => '<',
+        //             ),
+        //             array(
+        //                 'key'     => 'sbc_order_end',
+        //                 'value'   => $dateStart,
+        //                 'compare' => '>'
+        //             )
+        //         ),
+        //         array(
+        //             'relation' => 'AND',
+        //             array(
+        //                 'key'     => 'sbc_order_start',
+        //                 'value'   => $dateStart,
+        //                 'compare' => '>',
+        //             ),
+        //             array(
+        //                 'key'     => 'sbc_order_end',
+        //                 'value'   => $dateStart,
+        //                 'compare' => '<'
+        //             )
+        //         )
+        //     )
+        // ));
 
-        Log::info('count of ORDERs', count($orders));
+        // Log::info('count of ORDERs', count($orders));
         Log::info('babyBedTotalCount', $babyBedTotalCount);
         return $result;
     }
