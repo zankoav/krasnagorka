@@ -165,6 +165,39 @@ function cmb2_booking_page() {
         'before_field' => 'BYN'
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Открыть питание для формы',
+        'id'   => 'food_available',
+        'type' => 'checkbox'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Цена за один завтрак',
+        'id'   => 'food_breakfast_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Цена за один обед',
+        'id'   => 'food_lunch_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Цена за один ужин',
+        'id'   => 'food_dinner_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Текст при скрытии питания с формы',
+        'id'   => 'food_not_available_text',
+        'type' => 'textarea_small'
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');
