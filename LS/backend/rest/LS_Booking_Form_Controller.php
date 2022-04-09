@@ -431,6 +431,43 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         }
 
+        $foodAvailable = $bookingSettings['food_available'] == 'on';
+
+        if($foodAvailable){
+
+            $foodBreakfastPrice = !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0;
+            $foodLunchPrice = !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0;
+            $foodDinnerPrice = !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0;
+            
+
+            $foodBreakfastCount = intval($request['foodBreakfast']);
+            $foodLunchCount = intval($request['foodLunch']);
+            $foodDinnerCount = intval($request['foodDinner']);
+
+            $result['food'] = [
+                'breakfast' => [
+                    'total_price' => $foodBreakfastPrice * $foodBreakfastCount,
+                    'price' => $foodBreakfastPrice,
+                    'count' => $foodBreakfastCount
+                ],
+                'lunch' => [
+                    'total_price' => $foodLunchPrice * $foodLunchCount,
+                    'price' => $foodLunchPrice,
+                    'count' => $foodLunchCount
+                ],
+                'dinner' => [
+                    'total_price' => $foodDinnerPrice * $foodDinnerCount,
+                    'price' => $foodDinnerPrice,
+                    'count' => $foodDinnerCount
+                ]
+            ];
+
+            $result['total_price'] += $result['food']['breakfast']['total_price'];
+            $result['total_price'] += $result['food']['lunch']['total_price'];
+            $result['total_price'] += $result['food']['dinner']['total_price'];
+
+        }
+
         return $result;
     }
 
