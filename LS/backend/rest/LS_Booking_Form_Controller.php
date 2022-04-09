@@ -125,7 +125,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $peopleCount = (int)$request['peopleCount'];
         $calendarId = (int)$request['calendarId'];
         $isTerem = $request['isTerem'];
-        $babyBed = $request['babyBed'];
+        
         $smallAnimalCount = intval($request['smallAnimalCount']);
         $bigAnimalCount = intval($request['bigAnimalCount']);
         $bathHouseWhite = $request['bathHouseWhite'];
@@ -150,7 +150,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          * is short order window
          */
         $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
-              
+        
+        $result["baby_bed_available"] = self::isAvailableBabyBed($days, $calendarId, $houseId, $isTerem);
+
         /**
          * is only booking order
          */
@@ -382,6 +384,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] = intval($result['total_price']);
         }
 
+
+
+        $babyBed = $request['babyBed'];
         if($babyBed){
             $dayCount = intval($result['days_count']);
             $babyBedPrice = intval($bookingSettings['baby_bed_price']);
@@ -426,6 +431,80 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         }
 
+        return $result;
+    }
+
+    private static function isAvailableBabyBed($days, $calendarId, $houseId, $isTerem){
+        $result = true;
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+        $babyBedTotalCount = !empty($bookingSettings['baby_bed_count']) ? intval($bookingSettings['baby_bed_count']) : 0;
+
+        $cId = false;
+        if($isTerem){
+            $cId = $calendarId;
+        }else{
+            $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+            $cId = getCalendarId($calendarShortCode);
+        }
+
+        $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
+        $dateEnd = end($days);
+        $ordersQuery = new WP_Query;
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            // 'tax_query' => [
+            //     [
+            //         'taxonomy' => 'sbc_calendars',
+            //         'terms' => [$cId]
+            //     ]
+            // ],
+            'meta_query' => array(
+                'relation' => 'OR',
+                array(
+                    'relation' => 'AND',
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateStart,
+                        'compare' => '>=',
+                    ),
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $dateEnd,
+                        'compare' => '<='
+                    )
+                ),
+                array(
+                    'relation' => 'AND',
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateStart,
+                        'compare' => '<',
+                    ),
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $dateStart,
+                        'compare' => '>'
+                    )
+                ),
+                array(
+                    'relation' => 'AND',
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   => $dateStart,
+                        'compare' => '>',
+                    ),
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $dateStart,
+                        'compare' => '<'
+                    )
+                )
+            )
+        ));
+
+        Log::info('count of ORDERs', count($orders));
+        Log::info('babyBedTotalCount', $babyBedTotalCount);
         return $result;
     }
 

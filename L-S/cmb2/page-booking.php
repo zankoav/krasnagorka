@@ -148,7 +148,7 @@ function cmb2_booking_page() {
     $cmb_options->add_field(array(
         'name' => 'Количество допустимых детских кроваток',
         'id'   => 'baby_bed_count',
-        'type'         => 'text_small'
+        'type' => 'text_small'
     ));
 
     $cmb_options->add_field(array(
