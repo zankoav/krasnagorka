@@ -617,7 +617,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'smallAnimalCount' => $request['smallAnimalCount'],
                             'bigAnimalCount' => $request['bigAnimalCount'],
                             'bathHouseWhite' => $request['bathHouseWhite'],
-                            'bathHouseBlack' => $request['bathHouseBlack']
+                            'bathHouseBlack' => $request['bathHouseBlack'],
+                            'foodBreakfast' => $request['foodBreakfast'],
+                            'foodLunch' => $request['foodLunch'],
+                            'foodDinner' => $request['foodDinner']
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
@@ -643,7 +646,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "contactEmail" => $request['email'],
                         "paymentMethod" => $request['paymentMethod'],
                         "paymentMethod" => $request['paymentMethod'],
-                        "prepaidType" => $request['prepaidType']
+                        "prepaidType" => $request['prepaidType'],
+                        'foodBreakfast' => $request['foodBreakfast'],
+                        'foodLunch' => $request['foodLunch'],
+                        'foodDinner' => $request['foodDinner']
                     ]);
                     $result['status'] = $response['status'] === 'success';
                     $result['redirect'] = $response['redirect'];
@@ -684,8 +690,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             Logger::log("Exception:" . $e->getMessage());
             return false;
         }
-
-        Log::info('create_order', $result);
 
         return new WP_REST_Response($result, 200);
     }
@@ -990,8 +994,14 @@ class Booking_Form_Controller extends WP_REST_Controller
         try {
             $calendarId = $request['id'];
             $babyBed = $request['babyBed'] == 'true';
+
             $bathHouseWhite = $request['bathHouseWhite'];
             $bathHouseBlack = $request['bathHouseBlack'];
+
+            $foodBreakfast = intval($request['foodBreakfast']);
+            $foodLunch = intval($request['foodLunch']);
+            $foodDinner = intval($request['foodDinner']);
+
             $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
             $bigAnimalsCount = intval($request['bigAnimalCount'] ?? 0);
             $request['dateStart'] = is_numeric($request['dateStart']) ? $request['dateStart'] : strtotime($request['dateStart']);
@@ -1056,6 +1066,21 @@ class Booking_Form_Controller extends WP_REST_Controller
                     if($bigAnimalsCount > 0){
                         $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
                         update_post_meta($order_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
+                    }
+
+                    if($foodBreakfast > 0){
+                        $comment .= "\nЗавтраки: $foodBreakfast";
+                        update_post_meta($order_id, 'sbc_order_food_breakfast', $foodBreakfast);
+                    }
+    
+                    if($foodLunch > 0){
+                        $comment .= "\nОбеды: $foodLunch";
+                        update_post_meta($order_id, 'sbc_order_food_lunch', $foodLunch);
+                    }
+    
+                    if($foodDinner > 0){
+                        $comment .= "\nУжины: $foodDinner";
+                        update_post_meta($order_id, 'sbc_order_food_dinner', $foodDinner);
                     }
 
                     if($babyBed){
@@ -1187,6 +1212,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             $babyBed = $request['babyBed'] == 'true';
             $bathHouseWhite = $request['bathHouseWhite'];
             $bathHouseBlack = $request['bathHouseBlack'];
+            $foodBreakfast = intval($request['foodBreakfast']);
+            $foodLunch = intval($request['foodLunch']);
+            $foodDinner = intval($request['foodDinner']);
             $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
             $bigAnimalsCount = intval($request['bigAnimalCount'] ?? 0);
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
@@ -1272,6 +1300,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if($bigAnimalsCount > 0){
                     $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
+                }
+
+
+                if($foodBreakfast > 0){
+                    $comment .= "\nЗавтраки: $foodBreakfast";
+                    update_post_meta($post_id, 'sbc_order_food_breakfast', $foodBreakfast);
+                }
+
+                if($foodLunch > 0){
+                    $comment .= "\nОбеды: $foodLunch";
+                    update_post_meta($post_id, 'sbc_order_food_lunch', $foodLunch);
+                }
+
+                if($foodDinner > 0){
+                    $comment .= "\nУжины: $foodDinner";
+                    update_post_meta($post_id, 'sbc_order_food_dinner', $foodDinner);
                 }
 
                 if ($babyBed) {

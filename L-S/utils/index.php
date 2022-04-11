@@ -69,6 +69,10 @@ function get_order_data($orderId){
 
     $smallAnimalsCount = get_post_meta($orderId, 'sbc_order_small_animlas_count', 1) ?? 0;
     $bigAnimalsCount = get_post_meta($orderId, 'sbc_order_big_animlas_count', 1) ?? 0;
+    
+    $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', 1) ?? 0;
+    $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', 1) ?? 0;
+    $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', 1) ?? 0;
 
     $calendarSlug = $calendars[0]->slug;
     $calendarId = $calendars[0]->term_id;
@@ -93,6 +97,9 @@ function get_order_data($orderId){
         'bathHouseBlack' => $bathHouseBlack,
         'smallAnimalsCount' => $smallAnimalsCount,
         'bigAnimalsCount' => $bigAnimalsCount,
+        'foodBreakfast' => intval($foodBreakfast),
+        'foodLunch' => intval($foodLunch),
+        'foodDinner' => intval($foodDinner),
         'from' => date("d.m.Y", strtotime($start)),
         'to' => date("d.m.Y", strtotime($end)),
         'price' => $price,

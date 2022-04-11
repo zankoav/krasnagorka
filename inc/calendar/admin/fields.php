@@ -212,6 +212,24 @@ function sbc_orders_metabox() {
         'type' => 'checkbox'
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Завтраки', 'sbc' ),
+        'id'   => 'sbc_order_food_breakfast',
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Обеды', 'sbc' ),
+        'id'   => 'sbc_order_food_lunch',
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Ужины', 'sbc' ),
+        'id'   => 'sbc_order_food_dinner',
+        'type' => 'text'
+    ) );
+
 }
 
 

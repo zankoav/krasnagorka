@@ -106,6 +106,15 @@
                                     <?php if($order['bigAnimalsCount'] > 0):?>
                                         <div>Собаки крупных пород (высота в холке более 40 см): <strong><?=$order['bigAnimalsCount']?></strong></div>
                                     <?php endif;?>
+                                    <?php if($order['foodBreakfast'] > 0):?>
+                                        <div>Количество завтраков: <strong><?=$order['foodBreakfast']?></strong></div>
+                                    <?php endif;?>
+                                    <?php if($order['foodLunch'] > 0):?>
+                                        <div>Количество обедов: <strong><?=$order['foodLunch']?></strong></div>
+                                    <?php endif;?>
+                                    <?php if($order['foodDinner'] > 0):?>
+                                        <div>Количество ужинов: <strong><?=$order['foodDinner']?></strong></div>
+                                    <?php endif;?>
 							</td>
 						</tr>
 						<tr>
