@@ -192,7 +192,7 @@ export default class StepAdditionalServices extends LightningElement {
 
     backButtonHandler() {
         const newMenu = this.settings.menu.map((it) => {
-            return { ...it, active: it.value === 'house' }
+            return { ...it, active: it.value === 'food' }
         })
         this.dispatchEvent(
             new CustomEvent('update', {

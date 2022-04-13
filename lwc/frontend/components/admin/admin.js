@@ -1574,6 +1574,12 @@ export default class Admin extends LightningElement {
         //             active: true
         //         },
         //         {
+        //             label: 'Питание',
+        //             value: 'food',
+        //             available: false,
+        //             active: false
+        //         },
+        //         {
         //             label: 'Доп. услуги',
         //             value: 'additional_services',
         //             available: false,
@@ -1603,7 +1609,12 @@ export default class Admin extends LightningElement {
         //     babyBed: false,
         //     babyBedPrice: 5,
         //     bathHouseWhitePrice: 50,
-        //     bathHouseBlackPrice: 50
+        //     bathHouseBlackPrice: 50,
+        //     foodBreakfastPrice: 15,
+        //     foodLunchPrice: 20,
+        //     foodDinnerPrice: 10,
+        //     foodAvailable: true,
+        //     foodNotAvailableText: 'На данный момент заказать питание невозможно'
         // }
 
         this.settings = {
@@ -1648,6 +1659,12 @@ export default class Admin extends LightningElement {
                     active: true
                 },
                 {
+                    label: 'Питание',
+                    value: 'food',
+                    available: false,
+                    active: false
+                },
+                {
                     label: 'Доп. услуги',
                     value: 'additional_services',
                     available: false,
@@ -1669,7 +1686,12 @@ export default class Admin extends LightningElement {
             babyBed: false,
             babyBedPrice: this.model.babyBedPrice,
             bathHouseBlackPrice: this.model.bathHouseBlackPrice,
-            bathHouseWhitePrice: this.model.bathHouseWhitePrice
+            bathHouseWhitePrice: this.model.bathHouseWhitePrice,
+            foodBreakfastPrice: this.model.foodBreakfastPrice,
+            foodLunchPrice: this.model.foodLunchPrice,
+            foodDinnerPrice: this.model.foodDinnerPrice,
+            foodAvailable: this.model.foodAvailable,
+            foodNotAvailableText: this.model.foodNotAvailableText
         }
 
         this.updateSettings({
@@ -1696,9 +1718,12 @@ export default class Admin extends LightningElement {
             event.detail.smallAnimalCount !== undefined ||
             event.detail.bigAnimalCount !== undefined ||
             event.detail.bathHouseWhite !== undefined ||
-            event.detail.bathHouseBlack !== undefined
+            event.detail.bathHouseBlack !== undefined ||
+            event.detail.foodBreakfast !== undefined ||          
+            event.detail.foodLunch !== undefined ||        
+            event.detail.foodDinner !== undefined            
+
         ) {
-            
             if (event.detail.dateStart || event.detail.dateEnd) {
                 this.updateSettingsOnly({ babyBed: false })
             }
@@ -1745,6 +1770,7 @@ export default class Admin extends LightningElement {
             this.settings.dateStart &&
             this.settings.dateEnd
         ) {
+            availableSteps.push('food')
             availableSteps.push('additional_services')
             availableSteps.push('contacts')
         }
@@ -1772,6 +1798,7 @@ export default class Admin extends LightningElement {
             this.updateSettingsOnly({ total: null })
             return
         }
+
         const house = this.settings.house.id
         const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY')
             .add(1, 'days')
@@ -1784,6 +1811,9 @@ export default class Admin extends LightningElement {
         const bathHouseBlack = this.settings.bathHouseBlack
         const smallAnimalCount = parseInt(this.settings.smallAnimalCount || 0)
         const bigAnimalCount = parseInt(this.settings.bigAnimalCount || 0)
+        const foodBreakfast = parseInt(this.settings.foodBreakfast || 0)
+        const foodLunch = parseInt(this.settings.foodLunch || 0)
+        const foodDinner = parseInt(this.settings.foodDinner || 0)
 
         const hash = JSON.stringify({
             house,
@@ -1796,7 +1826,10 @@ export default class Admin extends LightningElement {
             bathHouseWhite,
             bathHouseBlack,
             smallAnimalCount,
-            bigAnimalCount
+            bigAnimalCount,
+            foodBreakfast,
+            foodLunch,
+            foodDinner
         })
 
         const activeStep = this.settings.menu.find((step) => step.active).value
@@ -1806,7 +1839,7 @@ export default class Admin extends LightningElement {
             dateStart &&
             dateEnd &&
             peopleCount &&
-            (activeStep === 'house' || activeStep === 'additional_services')
+            (activeStep === 'house'|| activeStep === 'food' || activeStep === 'additional_services')
         ) {
             this.updateSettingsOnly({ totalPriceLoading: true })
 

@@ -18,6 +18,11 @@
             <p if:true={settings.smallAnimalCount} class="step-checkout__item" data-label="Собаки крупных пород (высота в холке более 40 см):">
                 {settings.bigAnimalCount}
             </p>
+
+            <p if:true={settings.foodBreakfast} class="step-checkout__item" data-label="Завтраки:">{settings.foodBreakfast}</p>
+            <p if:true={settings.foodLunch} class="step-checkout__item" data-label="Обеды:">{settings.foodLunch}</p>
+            <p if:true={settings.foodDinner} class="step-checkout__item" data-label="Ужины:">{settings.foodDinner}</p>
+
             <p class="step-checkout__item" data-label="Дата заезда:">{dateStart}</p>
             <p class="step-checkout__item" data-label="Дата выезда:">{dateEnd}</p>
             <p class="step-checkout__item" data-label="ФИО:">{settings.fio}</p>

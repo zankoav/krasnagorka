@@ -21,4 +21,11 @@ export default class DecodingPrice extends LightningElement {
   get seasons() {
     return Object.values(this.settings.total.seasons_group);
   }
+
+//   food:
+//     breakfast: {total_price: 0, price: 15, count: 0}
+//     dinner: {total_price: 30, price: 10, count: 3}
+//     lunch: {total_price: 40, price: 20, count: 2}
+
+
 }

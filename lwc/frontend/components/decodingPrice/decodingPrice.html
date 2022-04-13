@@ -32,6 +32,32 @@
                 <span class="decoding-price-line__sign">=</span>
                 <z-number-value num={settings.total.bath_house_white.total_price} value="руб"></z-number-value>
             </div>
+            <template if:true={settings.total.food}>
+                <div if:true={settings.total.food.breakfast.total_price} class="decoding-price__baby-bed">
+                    <div class="decoding-price__baby-bed-title">Завтраки</div>
+                    <z-number-value num={settings.total.food.breakfast.price} value="руб"></z-number-value>
+                    <span class="decoding-price-line__sign">*</span>
+                    <z-number-value num={settings.total.food.breakfast.count} value="шт"></z-number-value>
+                    <span class="decoding-price-line__sign">=</span>
+                    <z-number-value num={settings.total.food.breakfast.total_price} value="руб"></z-number-value>
+                </div>
+                <div if:true={settings.total.food.dinner.total_price} class="decoding-price__baby-bed">
+                    <div class="decoding-price__baby-bed-title">Обеды</div>
+                    <z-number-value num={settings.total.food.dinner.price} value="руб"></z-number-value>
+                    <span class="decoding-price-line__sign">*</span>
+                    <z-number-value num={settings.total.food.dinner.count} value="шт"></z-number-value>
+                    <span class="decoding-price-line__sign">=</span>
+                    <z-number-value num={settings.total.food.dinner.total_price} value="руб"></z-number-value>
+                </div>
+                <div if:true={settings.total.food.lunch.total_price} class="decoding-price__baby-bed">
+                    <div class="decoding-price__baby-bed-title">Ужины</div>
+                    <z-number-value num={settings.total.food.lunch.price} value="руб"></z-number-value>
+                    <span class="decoding-price-line__sign">*</span>
+                    <z-number-value num={settings.total.food.lunch.count} value="шт"></z-number-value>
+                    <span class="decoding-price-line__sign">=</span>
+                    <z-number-value num={settings.total.food.lunch.total_price} value="руб"></z-number-value>
+                </div>
+            </template>
         </div>
         <div class="decoding-price__description">
             <div class="decoding-price__final-sum">
@@ -39,7 +65,7 @@
             </div>
             <span if:true={settings.total.day_sale_next} class="decoding-price__sale"
                 >При выборе от <span class="decoding-price__number">{settings.total.day_sale_next.dayesNumber}</span> дней, ваша скидка будет
-                <span class="decoding-price__percent">-{settings.total.day_sale_next.sale}%</span>
+                <span class="decoding-price__percent"> -{settings.total.day_sale_next.sale}%</span>
             </span>
         </div>
     </div>

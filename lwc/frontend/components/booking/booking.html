@@ -1,8 +1,5 @@
 <template>
-    <div class="booking"
-         onbooking={bookingOrder}
-         onorder={sendOrder}
-         >
+    <div class="booking" onbooking={bookingOrder} onorder={sendOrder}>
         <div class={cssCardTemplateContainer}>
             <div class={cssCardTemplate}>
                 <templte if:true={loading}>
@@ -20,28 +17,18 @@
                             <div class="booking__body booking__body_success">
                                 <h3 class="booking__title">{orderedSuccessData.title}</h3>
                                 <z-loader if:true={orderedSuccessData.redirect}></z-loader>
-                                <img if:false={orderedSuccessData.redirect} src={okImage}
-                                     alt="checkon"
-                                     class="booking__ok">
-                                <p class="booking__description">{orderedSuccessData.description}
-                                </p>
+                                <img if:false={orderedSuccessData.redirect} src={okImage} alt="checkon" class="booking__ok" />
+                                <p class="booking__description">{orderedSuccessData.description}</p>
                             </div>
                         </templte>
                         <templte if:false={settings.orderedSuccess}>
                             <z-steps-navigator settings={settings}></z-steps-navigator>
                             <div class="booking__body">
-                                <z-step-house if:true={isHouseStep}
-                                              settings={settings}>
-                                </z-step-house>
-                                <z-step-additional-services if:true={isAdditionalServicesStep}
-                                                settings={settings}>
-                                </z-step-additional-services>
-                                <z-step-contact if:true={isContactStep}
-                                                settings={settings}>
-                                </z-step-contact>
-                                <z-step-checkout if:true={isCheckoutStep}
-                                                 settings={settings}>
-                                </z-step-checkout>
+                                <z-step-house if:true={isHouseStep} settings={settings}> </z-step-house>
+                                <z-step-food if:true={isFoodStep} settings={settings}> </z-step-food>
+                                <z-step-additional-services if:true={isAdditionalServicesStep} settings={settings}> </z-step-additional-services>
+                                <z-step-contact if:true={isContactStep} settings={settings}> </z-step-contact>
+                                <z-step-checkout if:true={isCheckoutStep} settings={settings}> </z-step-checkout>
                             </div>
                         </templte>
                     </templte>

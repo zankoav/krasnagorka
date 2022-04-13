@@ -37,16 +37,20 @@ export default class BookingForm extends LightningElement {
         return this.settings.menu[0].active
     }
 
-    get isAdditionalServicesStep() {
+    get isFoodStep() {
         return this.settings.menu[1].active
     }
 
-    get isContactStep() {
+    get isAdditionalServicesStep() {
         return this.settings.menu[2].active
     }
 
-    get isCheckoutStep() {
+    get isContactStep() {
         return this.settings.menu[3].active
+    }
+
+    get isCheckoutStep() {
+        return this.settings.menu[4].active
     }
 
     get orderedSuccessData() {
@@ -101,8 +105,13 @@ export default class BookingForm extends LightningElement {
             bathHouseBlack: this.settings.bathHouseBlack,
             smallAnimalCount: this.settings.smallAnimalCount,
             bigAnimalCount: this.settings.bigAnimalCount,
+            foodBreakfast: this.settings.foodBreakfast,
+            foodLunch: this.settings.foodLunch,
+            foodDinner: this.settings.foodDinner,
             passport: this.settings.passport,
-            data: `smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${this.settings.bigAnimalCount || 0}&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
+            data: `foodDinner=${this.settings.foodDinner}&foodLunch=${this.settings.foodLunch}&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${
+                this.settings.bigAnimalCount || 0
+            }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email
             }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
                 this.settings.comment || ''
@@ -140,7 +149,7 @@ export default class BookingForm extends LightningElement {
                 headers: {
                     'Content-Type': 'application/json; charset=utf-8'
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     data: response.data,
                     email: this.settings.email,
                     orderId: response.orderId,
@@ -199,13 +208,18 @@ export default class BookingForm extends LightningElement {
             bathHouseBlack: this.settings.bathHouseBlack,
             smallAnimalCount: this.settings.smallAnimalCount,
             bigAnimalCount: this.settings.bigAnimalCount,
+            foodBreakfast: this.settings.foodBreakfast,
+            foodLunch: this.settings.foodLunch,
+            foodDinner: this.settings.foodDinner,
             comment: this.settings.comment,
             orderTitle: calendar.name,
             orderType: 'Домик:',
             cid: cid,
             passport: this.settings.passport,
             wsb_test: this.settings.webpaySandbox.wsb_test,
-            data: `smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${this.settings.bigAnimalCount || 0}&prepaidType=${this.settings.prepaidType}&paymentMethod=${
+            data: `foodDinner=${this.settings.foodDinner}&foodLunch=${this.settings.foodLunch}&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${
+                this.settings.bigAnimalCount || 0
+            }&prepaidType=${this.settings.prepaidType}&paymentMethod=${
                 this.settings.paymentMethod
             }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
                 this.settings.email
@@ -230,7 +244,7 @@ export default class BookingForm extends LightningElement {
             setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
             setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
             setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
-            
+
             const leadResponse = await fetch('/wp-json/krasnagorka/v1/create-amocrm-lead/', {
                 method: 'POST',
                 headers: {
