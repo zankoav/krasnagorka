@@ -119,6 +119,7 @@ export default class Admin extends LightningElement {
         //             isTerem: '',
         //             isDeprecatedBabyBed: false,
         //             isDeprecatedAnimals: false,
+        //             maxChild: 1,
         //             selected: true
         //         },
         //         {
@@ -1598,14 +1599,14 @@ export default class Admin extends LightningElement {
         //             active: false
         //         }
         //     ],
-        //     dateStart: '2022-04-10'
-        //         ? new moment('2022-04-10', 'YYYY-MM-DD').format('DD-MM-YYYY')
-        //         : null,
-        //     dateEnd: '2022-04-15'
+        //     dateStart: '2022-04-15'
         //         ? new moment('2022-04-15', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateFrom: '2022-04-10',
-        //     dateTo: '2022-04-15',
+        //     dateEnd: '2022-04-18'
+        //         ? new moment('2022-04-18', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //         : null,
+        //     dateFrom: '2022-04-15',
+        //     dateTo: '2022-04-18',
         //     babyBed: false,
         //     babyBedPrice: 5,
         //     bathHouseWhitePrice: 50,
@@ -1614,7 +1615,8 @@ export default class Admin extends LightningElement {
         //     foodLunchPrice: 20,
         //     foodDinnerPrice: 10,
         //     foodAvailable: true,
-        //     foodNotAvailableText: 'На данный момент заказать питание невозможно'
+        //     foodNotAvailableText: 'На данный момент заказать питание невозможно',
+        //     childCounts: null
         // }
 
         this.settings = {
