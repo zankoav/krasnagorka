@@ -1098,7 +1098,6 @@ class Booking_Form_Controller extends WP_REST_Controller
                         update_post_meta($order_id, 'sbc_order_bath_house_black', $bathHouseBlack);
                     }
 
-
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
                     update_post_meta($order_id, 'sbc_order_desc', $comment);
@@ -1349,7 +1348,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_lead_id', $leadId);
                 }
 
-                if (!empty($childs)) {
+                if ($childs > 0) {
+                    $comment .= "\nКоличество детей без спальных мест: $childs";
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
                 }
 

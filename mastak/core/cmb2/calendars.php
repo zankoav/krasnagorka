@@ -45,4 +45,10 @@
             'type' => 'checkbox'
         ));
 
+        $cmb_term->add_field(array(
+            'name' => 'Максимальное количество детей без спальных мест',
+            'id'   => $prefix. 'max_child',
+            'type' => 'text_small'
+        ));
+
     }
