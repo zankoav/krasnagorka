@@ -1,6 +1,7 @@
 <template>
     <div class="step-food">
         <div if:true={foodAvailable} class="step-food__body">
+            <div class="step-food__help-text">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые вам необходимы в течение вашего периода проживания.</div>
             <div if:true={settings.foodBreakfastPrice} class="step-food__group">
                 <z-select data-name="foodBreakfast" label="Количество завтраков" onchange={foodChange} options={breakfastOptions}></z-select>
                 <div class="step-food__description">
