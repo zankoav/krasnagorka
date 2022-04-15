@@ -4,7 +4,7 @@
             <h3 class="step-checkout__title">Ваш заказ</h3>
             <p class="step-checkout__item" data-label="Домик:">{calendar.name}</p>
             <p class="step-checkout__item" data-label="Количество человек:">{peopleCount}</p>
-            <p class="step-checkout__item" data-label="Количество детей без спальных мест:">{childCount}</p>
+            <p if:true={childCount} class="step-checkout__item" data-label="Количество детей без спальных мест:">{childCount}</p>
             <p if:true={settings.total.baby_bed} class="step-checkout__item" data-label="Детская кроватка:">Да</p>
             <p if:true={settings.total.bath_house_black} class="step-checkout__item" data-label="Количество сеансов бани по-черному:">
                 {settings.total.bath_house_black.count}
