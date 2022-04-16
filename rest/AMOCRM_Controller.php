@@ -110,7 +110,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             'message' => $request['message']
         ];
         $status = 200;
-        new WP_REST_Response($response, $status);
+        return new WP_REST_Response($response, $status);
     }
 
     public function getApiClient()
