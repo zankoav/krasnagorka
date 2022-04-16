@@ -1058,6 +1058,16 @@ class Booking_Form_Controller extends WP_REST_Controller
                     
                     $comment = $request['comment']."\nКоличество человек: ".$request['count'];
 
+                    // $foodTotalPrice = $this->calculateFood([
+                    //     'foodBreakfast' => $foodBreakfast,
+                    //     'foodLunch' => $foodLunch,
+                    //     'foodDinner' => $foodDinner
+                    // ]);
+
+                    // if(!empty($request['prepaidType'])){
+                    //     $foodTotalPrice = intval($foodTotalPrice * (intval($request['prepaidType'])/100));
+                    // }
+
                     if($smallAnimalsCount > 0){
                         $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
                         update_post_meta($order_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
@@ -1098,6 +1108,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                         update_post_meta($order_id, 'sbc_order_bath_house_black', $bathHouseBlack);
                     }
 
+                    // if (!empty($request['prepaidType'])) {
+                    //     $comment .= "\nОстаток: $bathHouseBlack ($foodTotalPrice = питание)";
+                    // }
+
                     update_post_meta($order_id, 'sbc_order_passport', $request['passport']);
                     update_post_meta($order_id, 'sbc_order_count_people', $request['count']);
                     update_post_meta($order_id, 'sbc_order_desc', $comment);
@@ -1116,6 +1130,21 @@ class Booking_Form_Controller extends WP_REST_Controller
             Logger::log("createOrderForPay Exception:" . $e->getMessage());
         }
         return $result;
+    }
+
+    private function calculateFood($food = []){
+
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+
+        $foodBreakfastPrice = intval($bookingSettings['food_breakfast_price']);
+        $foodLunchPrice = intval($bookingSettings['food_lunch_price']);
+        $foodDinnerPrice = intval($bookingSettings['food_dinner_price']);
+        
+        $foodBreakfast = intval($food['foodBreakfast']);
+        $foodLunch = intval($food['foodLunch']);
+        $foodDinner = intval($food['foodDinner']);
+
+        return ($foodBreakfastPrice * $foodBreakfast + $foodLunchPrice *  $foodLunch + $foodDinnerPrice * $foodDinner);
     }
 
     private function initClient($request)
@@ -1877,7 +1906,6 @@ class Booking_Form_Controller extends WP_REST_Controller
             ->setAccessToken($accessToken)
             ->onAccessTokenRefresh(
                 function (AccessTokenInterface $accessToken, string $baseDomain) {
-                    // LS_WP_Logger::info('Refresh Token' , $accessToken->getRefreshToken());
                     saveToken(
                         [
                             'access_token' => $accessToken->getToken(),
