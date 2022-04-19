@@ -25,7 +25,7 @@ class OrderFactory {
 
         if(empty($data['houseId'])){
             throw new OrderException('Empty house id');
-        }else if(!post_exists($data['houseId'])){
+        }else if(post_exists($data['houseId']) == 0){
             throw new OrderException('House id not exists');
         }
 
