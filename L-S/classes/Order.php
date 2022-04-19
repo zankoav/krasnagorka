@@ -1,6 +1,6 @@
 <?php
 
-namespace Ls\Factory;
+namespace LsFactory;
 
 class Order {
     public $id = '100';

@@ -1,6 +1,8 @@
 <?php
 use Ls\Wp\Log as Log;
 
+use LsFactory\OrderFactory;
+
 use AmoCRM\Models\LeadModel;
 use AmoCRM\Collections\Leads\LeadsCollection;
 use AmoCRM\Client\AmoCRMApiClient;
