@@ -109,7 +109,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
         // };
 
         } catch(Exception $e){
-            $order = ["message" => $e->getMessage()];
+            $order = ["message" => 'error'];
         }
 
         return new WP_REST_Response($order, 200);
