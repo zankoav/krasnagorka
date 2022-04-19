@@ -13,7 +13,24 @@ class OrderFactory {
             throw new OrderException('Empty calendar id');
         }
 
+        if(empty($data['dateStart'])){
+            throw new OrderException('Empty date start');
+        }
+
+        if(empty($data['dateEnd'])){
+            throw new OrderException('Empty date end');
+        }
+
+        if(empty($data['houseId'])){
+            throw new OrderException('Empty house id');
+        }
+
         $order->calendarId = $data['id'];
+        $order->dateStart = $data['dateStart'];
+        $order->dateEnd = $data['dateEnd'];
+        $order->houseId = $data['houseId'];
+        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1);
+
         return $order;
     }
 }

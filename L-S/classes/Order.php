@@ -4,21 +4,20 @@ namespace LsFactory;
 
 class Order {
     public $calendarId;
-
+    public $dateStart;
+    public $dateEnd;
+    public $houseId;
+    public $isTerem = false;
 }
 
 
-/*          id: calendar.id,
+/*          
             fio: this.settings.fio,
             phone: this.settings.phone,
             email: this.settings.email,
             paymentMethod: this.settings.paymentMethod,
             prepaidType: this.settings.prepaidType,
-            isTerem: isTerem,
-            dateStart: dateStart,
-            dateEnd: dateEnd,
             count: peopleCount,
-            houseId: houseId,
             childs: childCounts,
             contract: false,
             babyBed: babyBed,
