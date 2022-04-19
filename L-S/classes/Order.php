@@ -3,7 +3,7 @@
 namespace LsFactory;
 
 class Order {
-    private $calendarId;
+    public $calendarId;
 
 }
 
