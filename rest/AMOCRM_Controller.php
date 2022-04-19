@@ -2,7 +2,7 @@
 use Ls\Wp\Log as Log;
 
 use LsFactory\OrderFactory;
-// use LsFactory\OrderException;
+use LsFactory\OrderException;
 
 
 use AmoCRM\Models\LeadModel;
@@ -110,8 +110,8 @@ class AMOCRM_Controller extends WP_REST_Controller {
         //     $response = new ExceptionResponse($e);
         // };
 
-        } catch( \Exception $e){
-            $order = ["error" => 'sdfnfd'];
+        } catch( OrderException $e){
+            $order = ["error" => "$e"];
         }
 
         return new WP_REST_Response($order, 200);
