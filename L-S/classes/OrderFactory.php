@@ -29,7 +29,7 @@ class OrderFactory {
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
-        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1);
+        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
 
         return $order;
     }
