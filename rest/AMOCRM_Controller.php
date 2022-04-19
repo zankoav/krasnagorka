@@ -85,7 +85,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
     }
 
     public function create_lead($request) {
-        // try {
+        try {
 
             $order = OrderFactory::initOrderByRequest($request);
 
@@ -107,6 +107,10 @@ class AMOCRM_Controller extends WP_REST_Controller {
         // } catch(MailFactoryException $e){
         //     $response = new ExceptionResponse($e);
         // };
+
+        } catch(Exception $e){
+            $order = ["message" => $e->getMessage()];
+        }
 
         return new WP_REST_Response($order, 200);
     }
