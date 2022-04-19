@@ -2,7 +2,7 @@
 use Ls\Wp\Log as Log;
 
 use LsFactory\OrderFactory;
-use LsFactory\OrderException;
+// use LsFactory\OrderException;
 
 
 use AmoCRM\Models\LeadModel;
