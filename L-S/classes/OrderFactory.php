@@ -25,6 +25,9 @@ class OrderFactory {
 
         if(empty($data['houseId'])){
             throw new OrderException('Empty house id');
+        }else if(!post_exists($data['houseId'])){
+            throw new OrderException('House id not exists');
+
         }
 
         $order->calendarId = $data['id'];
