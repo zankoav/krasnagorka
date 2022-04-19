@@ -7,7 +7,7 @@ use LsFactory\FactoryException;
 class OrderException extends FactoryException {
 
     public function __construct($message, $code = 0) {
-		parent::__construct($message, $code);
+		parent::__construct($message, 'OrderException', $code);
 	}
 
 }
