@@ -10,7 +10,7 @@ class OrderFactory {
         $order = new Order();
 
         if(empty($data['id'])){
-            throw new OrderException('Empty calendar id');
+            //throw new OrderException('Empty calendar id');
         }
 
         $order->calendarId = $data['id'];
