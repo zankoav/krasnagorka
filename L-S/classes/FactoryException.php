@@ -4,15 +4,12 @@ namespace LsFactory;
 
 class FactoryException extends \Exception {
 
-    protected $type;
 
-    public function __construct($message, $type) {
-		parent::__construct($message);
-        $this->type = $type;
+    public function __construct($message, $code = 0) {
+		parent::__construct($message, $code);
 	}
 
-    // public function getMessage(){
-    //     return '[' . $this->type . ']: ' . $this->message;
-    // }
-
+    public function __toString() {
+        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
+    }
 }
