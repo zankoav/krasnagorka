@@ -110,7 +110,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
         //     $response = new ExceptionResponse($e);
         // };
 
-        } catch( \OrderException $e){
+        } catch( \Exception $e){
             $order = ["error" => 'sdfnfd'];
         }
 
