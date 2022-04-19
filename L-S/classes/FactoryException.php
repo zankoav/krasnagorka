@@ -12,7 +12,7 @@ class FactoryException extends \Exception {
 	}
 
     public function getMessage(){
-        return "[$this->type]: $this->message";
+        return '[' . $this->type . ']: ' . $this->message;
     }
 
 }
