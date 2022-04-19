@@ -2,7 +2,7 @@
 namespace LsFactory;
 
 use LsFactory\Order;
-use LsFactory\OrderException;
+// use LsFactory\OrderException;
 
 class OrderFactory {
 
