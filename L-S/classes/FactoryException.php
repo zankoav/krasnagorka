@@ -2,6 +2,8 @@
 
 namespace LsFactory;
 
+use Ls\Wp\Log as Log;
+
 class FactoryException extends \Exception {
 
     protected $type;
@@ -12,6 +14,7 @@ class FactoryException extends \Exception {
 	}
 
     public function __toString() {
+        Log::error($this->type, $this->message);
         return  "[{$this->type}]: {$this->message}";
     }
 }
