@@ -11,6 +11,8 @@ class OrderFactory {
 
         if(empty($data['id'])){
             throw new OrderException('Empty calendar id');
+        }else if(!term_exists($data['id'])){
+            throw new OrderException('Calendar id not exists');
         }
 
         if(empty($data['dateStart'])){
