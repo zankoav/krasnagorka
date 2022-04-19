@@ -66,29 +66,6 @@ use AmoCRM\Models\NoteType\CommonNote;
 
 class AMOCRM_Controller extends WP_REST_Controller {
 
-    public const CALENDAR_OBJECTS_MAPPING = [
-        9 => 10391,
-        13 => 1036583,
-        14 => 1036585,
-        15 => 10393, 
-        16 => 10389,
-        17 => 1036665,
-        18 => 1036661,
-        19 => 1036659,
-        20 => 1036657,
-        21 => 1036655,
-        22 => 1036653,
-        23 => 1036651,
-        24 => 1036649,
-        25 => 1036647,
-        26 => 1036645,
-        27 => 1036643,
-        28 => 1036641,
-        29 => 1036639,
-        37 => 1036663,
-        43 => 1663367
-    ];
-
     public function register_routes() {
         $namespace = 'amocrm/v4';
 
@@ -106,37 +83,30 @@ class AMOCRM_Controller extends WP_REST_Controller {
     }
 
     public function create_lead($request) {
-        $response = [
-            'message' => $request['message']
-        ];
-        $status = 200;
-        return new WP_REST_Response($response, $status);
-    }
+        // try {
 
-    public function getApiClient()
-    {
+            $order = OrderFactory::initOrderByRequest($request);
 
-        $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
-        $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
-        $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
-        $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $accessToken = getToken();
-        $apiClient
-            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
-            ->setAccessToken($accessToken)
-            ->onAccessTokenRefresh(
-                function (AccessTokenInterface $accessToken, string $baseDomain) {
-                    saveToken(
-                        [
-                            'access_token' => $accessToken->getToken(),
-                            'refresh_token' => $accessToken->getRefreshToken(),
-                            'expires_in' => $accessToken->getExpires(),
-                            'baseDomain' => $baseDomain,
-                        ]
-                    );
-                }
-            );
-        return $apiClient;
+            // if(OrderFactory::isAvailableOrder($order)){
+            //     OrderFactory::createOrder($order);
+            //     AmoCrmFactory::createLead($order);
+            //     MailFactory::sendVoucher($order);
+
+            //     $response = new SuccessfulResponse($order);
+            // }else{
+            //     $response = new NotAvailableResponse();
+            // }
+        // } catch(OrderException $e){
+        //     $response = new ExceptionResponse($e);
+        // } catch(OrderFactoryException $e){
+        //     $response = new ExceptionResponse($e);
+        // } catch(AmoCrmFactoryException $e){
+        //     $response = new ExceptionResponse($e);
+        // } catch(MailFactoryException $e){
+        //     $response = new ExceptionResponse($e);
+        // };
+
+        return new WP_REST_Response($order, 200);
     }
 }
 
