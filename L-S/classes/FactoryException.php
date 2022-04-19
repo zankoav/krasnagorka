@@ -2,7 +2,7 @@
 
 namespace LsFactory;
 
-class FactoryException extends Exception {
+class FactoryException extends \Exception {
 
     protected $type;
 
