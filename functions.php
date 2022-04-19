@@ -6,8 +6,6 @@ if (!defined('ABSPATH')) { exit; }
 
 // START
 
-require_once ABSPATH . 'wp-admin/includes/post.php';
-
 require __DIR__ . '/vendor/autoload.php';
 
 require __DIR__ . '/L-S/utils/index.php';
