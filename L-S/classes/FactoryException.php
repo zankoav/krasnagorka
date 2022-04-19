@@ -2,7 +2,7 @@
 
 namespace LsFactory;
 
-class FactoryException extends \Exception {
+class FactoryException extends Exception {
 
     protected $type;
 
@@ -12,7 +12,7 @@ class FactoryException extends \Exception {
 	}
 
     public function getMessage(){
-        return "[$this->type]: $this->message";
+        return 'gg';//"[$this->type]: $this->message";
     }
 
 }
