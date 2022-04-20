@@ -118,7 +118,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             $response = $e;
         }
 
-        return new WP_REST_Response($order, 200);
+        return new WP_REST_Response($response, 200);
     }
 }
 
