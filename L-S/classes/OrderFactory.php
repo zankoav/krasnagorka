@@ -15,7 +15,7 @@ class OrderFactory {
         
         $order = new Order();
 
-        $order->contact = ContactFactory::initContactByRequest($data);
+        // $order->contact = ContactFactory::initContactByRequest($data);
 
         if(empty($data['id'])){
             throw new OrderException('Empty calendar id');
