@@ -1,13 +1,12 @@
 <?php
 namespace LsFactory;
 
-use LsFactory\Contact;
 use LsFactory\ContactException;
+use LsFactory\ContactFactory;
 
 use LsFactory\Order;
 use LsFactory\OrderException;
 
-use LsFactory\ContactFactory;
 
 class OrderFactory {
 
@@ -15,7 +14,11 @@ class OrderFactory {
         
         $order = new Order();
 
-        $order->contact = ContactFactory::initContactByRequest($data);
+        try{
+            $order->contact = ContactFactory::initContactByRequest($data);
+        }catch(ContactException $e){
+            throw $e;
+        }
 
         if(empty($data['id'])){
             throw new OrderException('Empty calendar id');
