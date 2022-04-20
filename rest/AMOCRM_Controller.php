@@ -1,8 +1,7 @@
 <?php
 use Ls\Wp\Log as Log;
 
-use LsFactory\ContactException;
-use LsFactory\OrderException;
+use LsFactory\FactoryException;
 use LsFactory\OrderFactory;
 
 
@@ -112,10 +111,8 @@ class AMOCRM_Controller extends WP_REST_Controller {
         //     $response = new ExceptionResponse($e);
         // };
 
-        } catch( ContactException $e){
-            $response = $e;
-        } catch( OrderException $e){
-            $response = $e;
+        } catch( FactoryException $e){
+            $response = $e->getResponse();
         }
 
         return new WP_REST_Response($response, 200);

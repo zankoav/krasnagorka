@@ -14,11 +14,11 @@ class OrderFactory {
         
         $order = new Order();
 
-        try{
+        // try{
             $order->contact = ContactFactory::initContactByRequest($data);
-        }catch(ContactException $e){
-            throw $e;
-        }
+        // }catch(ContactException $e){
+        //     throw $e;
+        // }
 
         if(empty($data['id'])){
             throw new OrderException('Empty calendar id');
