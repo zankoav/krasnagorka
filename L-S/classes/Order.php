@@ -2,17 +2,19 @@
 
 namespace LsFactory;
 
+use LsFactory\Contact;
+
 class Order {
 
     /**
      * required
      */
-    public $contact;
+    public Contact $contact;
 
     /**
      * required
      */
-    public $calendarId;
+    public int $calendarId;
 
     /**
      * required
@@ -22,56 +24,35 @@ class Order {
     /**
      * required
      */
-    public $dateStart;
+    public string $dateStart;
 
     /**
      * required
      */
-    public $dateEnd;
+    public string $dateEnd;
 
     /**
      * required
      */
-    public $peopleCount;
+    public int $peopleCount;
 
 
-    public $isTerem = false;
-    public $comment;
+    public bool $isTerem = false;
 
+    public string $comment;
+    public string $paymentMethod;
+    public string $prepaidType;
 
-    public $paymentMethod;
-    public $prepaidType;
-    public $childCount;
-    public $babyBed;
-    public $bathHouseWhite;
-    public $bathHouseBlack;
-    public $smallAnimalCount;
-    public $bigAnimalCount;
-    public $foodBreakfast;
-    public $foodLunch;
-    public $foodDinner;
+    public int $childCount;
+
+    public bool $babyBed;
+
+    public int $bathHouseWhite;
+    public int $bathHouseBlack;
+    public int $smallAnimalCount;
+    public int $bigAnimalCount;
+    public int $foodBreakfast;
+    public int $foodLunch;
+    public int $foodDinner;
 
 }
-
-
-/*          
-            paymentMethod: this.settings.paymentMethod,
-            prepaidType: this.settings.prepaidType,
-            count: peopleCount,
-            childs: childCounts,
-            babyBed: babyBed,
-
-            bathHouseWhite: this.settings.bathHouseWhite,
-            bathHouseBlack: this.settings.bathHouseBlack,
-            smallAnimalCount: this.settings.smallAnimalCount,
-            bigAnimalCount: this.settings.bigAnimalCount,
-
-            foodBreakfast: this.settings.foodBreakfast,
-            foodLunch: this.settings.foodLunch,
-            foodDinner: this.settings.foodDinner,
-            
-            orderTitle: calendar.name,
-            orderType: 'Домик:',
-            cid: cid,
-            wsb_test: this.settings.webpaySandbox.wsb_test,
- */
