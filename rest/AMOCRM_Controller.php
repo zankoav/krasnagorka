@@ -90,7 +90,6 @@ class AMOCRM_Controller extends WP_REST_Controller {
         try {
 
             $order = OrderFactory::initOrderByRequest($request);
-
             $response = $order;
             // if(OrderFactory::isAvailableOrder($order)){
             //     OrderFactory::createOrder($order);
@@ -101,15 +100,15 @@ class AMOCRM_Controller extends WP_REST_Controller {
             // }else{
             //     $response = new NotAvailableResponse();
             // }
-        // } catch(OrderException $e){
-        //     $response = new ExceptionResponse($e);
-        // } catch(OrderFactoryException $e){
-        //     $response = new ExceptionResponse($e);
-        // } catch(AmoCrmFactoryException $e){
-        //     $response = new ExceptionResponse($e);
-        // } catch(MailFactoryException $e){
-        //     $response = new ExceptionResponse($e);
-        // };
+            // } catch(OrderException $e){
+            //     $response = new ExceptionResponse($e);
+            // } catch(OrderFactoryException $e){
+            //     $response = new ExceptionResponse($e);
+            // } catch(AmoCrmFactoryException $e){
+            //     $response = new ExceptionResponse($e);
+            // } catch(MailFactoryException $e){
+            //     $response = new ExceptionResponse($e);
+            // };
 
         } catch( FactoryException $e){
             $response = $e->getResponse();
