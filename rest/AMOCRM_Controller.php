@@ -112,6 +112,8 @@ class AMOCRM_Controller extends WP_REST_Controller {
 
         } catch( FactoryException $e){
             $response = $e->getResponse();
+        } catch (TypeError $e) {
+            $response = ['error' => $e->getMessage()];
         }
 
         return new WP_REST_Response($response, 200);

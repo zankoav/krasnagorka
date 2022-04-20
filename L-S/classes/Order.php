@@ -4,15 +4,53 @@ namespace LsFactory;
 
 class Order {
 
-    public $calendarId;
+    /**
+     * required
+     */
+    public $contact;
+
+    /**
+     * required
+     */
+    public int $calendarId;
+
+    /**
+     * required
+     */
+    public int $houseId;
+
+    /**
+     * required
+     */
     public $dateStart;
+
+    /**
+     * required
+     */
     public $dateEnd;
-    public $houseId;
+
+    /**
+     * required
+     */
+    public $peopleCount;
+
+
     public $isTerem = false;
     public $comment;
 
-    public $contact;
-    
+
+    public $paymentMethod;
+    public $prepaidType;
+    public $childCount;
+    public $babyBed;
+    public $bathHouseWhite;
+    public $bathHouseBlack;
+    public $smallAnimalCount;
+    public $bigAnimalCount;
+    public $foodBreakfast;
+    public $foodLunch;
+    public $foodDinner;
+
 }
 
 
@@ -22,13 +60,16 @@ class Order {
             count: peopleCount,
             childs: childCounts,
             babyBed: babyBed,
+
             bathHouseWhite: this.settings.bathHouseWhite,
             bathHouseBlack: this.settings.bathHouseBlack,
             smallAnimalCount: this.settings.smallAnimalCount,
             bigAnimalCount: this.settings.bigAnimalCount,
+
             foodBreakfast: this.settings.foodBreakfast,
             foodLunch: this.settings.foodLunch,
             foodDinner: this.settings.foodDinner,
+            
             orderTitle: calendar.name,
             orderType: 'Домик:',
             cid: cid,
