@@ -1,8 +1,9 @@
 <?php
 use Ls\Wp\Log as Log;
 
-use LsFactory\OrderFactory;
+use LsFactory\ContactException;
 use LsFactory\OrderException;
+use LsFactory\OrderFactory;
 
 
 use AmoCRM\Models\LeadModel;
@@ -91,6 +92,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
 
             $order = OrderFactory::initOrderByRequest($request);
 
+            $response = $order;
             // if(OrderFactory::isAvailableOrder($order)){
             //     OrderFactory::createOrder($order);
             //     AmoCrmFactory::createLead($order);
@@ -110,8 +112,10 @@ class AMOCRM_Controller extends WP_REST_Controller {
         //     $response = new ExceptionResponse($e);
         // };
 
+        } catch( ContactException $e){
+            $response = $e;
         } catch( OrderException $e){
-            $order = ["error" => "$e"];
+            $response = $e;
         }
 
         return new WP_REST_Response($order, 200);

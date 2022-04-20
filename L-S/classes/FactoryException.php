@@ -15,6 +15,6 @@ class FactoryException extends \Exception {
 
     public function __toString() {
         Log::error($this->type, $this->message);
-        return  "[{$this->type}]: {$this->message}";
+        return ['error' => "[{$this->type}]: {$this->message}"];
     }
 }
