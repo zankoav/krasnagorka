@@ -44,7 +44,7 @@ class OrderFactory {
         $order->paymentMethod = $data['paymentMethod'];
         $order->prepaidType = $data['prepaidType'];
         $order->childCount = intval($data['childCount']);
-        $order->babyBed = $data['babyBed'];
+        $order->babyBed = boolval($data['babyBed']);
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
         $order->bathHouseBlack = intval($data['bathHouseBlack']);
         $order->smallAnimalCount = intval($data['smallAnimalCount']);
