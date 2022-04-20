@@ -4,9 +4,9 @@ namespace LsFactory;
 
 class Contact {
     
-    public $fio;
-    public $phone;
-    public $email;
-    public $passport;
+    public string $fio;
+    public string $phone;
+    public string $email;
+    public string $passport;
     
 }
