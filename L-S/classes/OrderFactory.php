@@ -40,9 +40,9 @@ class OrderFactory {
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
-        $order->comment = $data['comment'];
-        $order->paymentMethod = $data['paymentMethod'];
-        $order->prepaidType = $data['prepaidType'];
+        $order->comment = strval($data['comment']);
+        $order->paymentMethod = strval($data['paymentMethod']);
+        $order->prepaidType = strval($data['prepaidType']);
         $order->childCount = intval($data['childCount']);
         $order->babyBed = boolval($data['babyBed']);
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
