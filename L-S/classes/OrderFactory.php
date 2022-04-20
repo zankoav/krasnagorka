@@ -43,14 +43,14 @@ class OrderFactory {
         $order->comment = $data['comment'];
         $order->paymentMethod = $data['paymentMethod'];
         $order->prepaidType = $data['prepaidType'];
-        $order->childCount = $data['childCount'];
+        $order->childCount = intval($data['childCount']);
         $order->babyBed = $data['babyBed'];
-        $order->bathHouseWhite = $data['bathHouseWhite'];
-        $order->bathHouseBlack = $data['bathHouseBlack'];
-        $order->smallAnimalCount = $data['smallAnimalCount'];
-        $order->foodBreakfast = $data['foodBreakfast'];
-        $order->foodLunch = $data['foodLunch'];
-        $order->foodDinner = $data['foodDinner'];
+        $order->bathHouseWhite = intval($data['bathHouseWhite']);
+        $order->bathHouseBlack = intval($data['bathHouseBlack']);
+        $order->smallAnimalCount = intval($data['smallAnimalCount']);
+        $order->foodBreakfast = intval($data['foodBreakfast']);
+        $order->foodLunch = intval($data['foodLunch']);
+        $order->foodDinner = intval($data['foodDinner']);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
 
 
