@@ -53,8 +53,6 @@ class OrderFactory {
         $order->foodDinner = intval($data['foodDinner']);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
 
-
-
         return $order;
     }
 }
