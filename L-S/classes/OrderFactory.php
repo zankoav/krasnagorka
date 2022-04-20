@@ -18,6 +18,7 @@ class OrderFactory {
             $order->contact = ContactFactory::initContactByRequest($data);
         }catch(ContactException $e){
             throw $e;
+        
         }
 
         if(empty($data['id'])){
