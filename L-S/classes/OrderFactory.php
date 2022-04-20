@@ -36,7 +36,7 @@ class OrderFactory {
             throw new OrderException('House id not exists');
         }
 
-        $order->calendarId = $data['id'];
+        $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
