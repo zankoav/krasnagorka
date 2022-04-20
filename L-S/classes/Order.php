@@ -39,7 +39,7 @@ class Order {
 
     public bool $isTerem = false;
 
-    public string $comment;
+    public ?string $comment;
     public string $paymentMethod;
     public string $prepaidType;
 
