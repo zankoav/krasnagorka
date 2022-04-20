@@ -12,7 +12,7 @@ class Order {
     /**
      * required
      */
-    public int $calendarId;
+    public $calendarId;
 
     /**
      * required
