@@ -43,16 +43,16 @@ class Order {
     public ?string $paymentMethod;
     public ?string $prepaidType;
 
-    public int $childCount;
+    public ?int $childCount;
 
-    public bool $babyBed;
+    public ?bool $babyBed;
 
-    public int $bathHouseWhite;
-    public int $bathHouseBlack;
-    public int $smallAnimalCount;
-    public int $bigAnimalCount;
-    public int $foodBreakfast;
-    public int $foodLunch;
-    public int $foodDinner;
+    public ?int $bathHouseWhite;
+    public ?int $bathHouseBlack;
+    public ?int $smallAnimalCount;
+    public ?int $bigAnimalCount;
+    public ?int $foodBreakfast;
+    public ?int $foodLunch;
+    public ?int $foodDinner;
 
 }
