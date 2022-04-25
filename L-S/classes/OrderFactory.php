@@ -67,7 +67,7 @@ class OrderFactory {
         $period = new \DatePeriod(
             $fromDT,
             new \DateInterval('P1D'),
-            $toDT
+            $toDT->modify( '+1 day' )
         );
 
         $days = [];
