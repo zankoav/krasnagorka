@@ -43,6 +43,7 @@ class OrderFactory {
             $order->dateStart, 
             $order->dateEnd
         );
+        $order->nights = count($order->days) - 1;
         $order->houseId = $data['houseId'];
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);

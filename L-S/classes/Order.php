@@ -39,6 +39,11 @@ class Order {
     /**
      * required
      */
+    public int $nights;
+
+    /**
+     * required
+     */
     public int $peopleCount;
 
 
