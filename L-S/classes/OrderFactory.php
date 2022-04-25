@@ -68,9 +68,9 @@ class OrderFactory {
         );
 
         $days = [];
-        foreach ($period as $key => $value) {
-            $days[] = $value->format('Y-m-d');    
-        }
+        // foreach ($period as $key => $value) {
+        //     $days[] = $value->format('Y-m-d');    
+        // }
         return $days;
     }
 }
