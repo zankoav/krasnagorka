@@ -61,11 +61,11 @@ class OrderFactory {
     }
 
     public static function getDaysPeriod($from, $to){
-        $period = new DatePeriod(
-            new DateTime($from),
-            new DateInterval('P1D'),
-            $to->modify( '+1 day' )
-        );
+        // $period = new DatePeriod(
+        //     new DateTime($from),
+        //     new DateInterval('P1D'),
+        //     $to->modify( '+1 day' )
+        // );
 
         $days = [];
         // foreach ($period as $key => $value) {
