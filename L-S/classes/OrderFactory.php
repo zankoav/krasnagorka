@@ -66,17 +66,17 @@ class OrderFactory {
         
         // ->modify('+1 day')->format('Y-m-d')
 
-        // $period = new DatePeriod(
-        //     $fromDT,
-        //     new DateInterval('P1D'),
-        //     $toDT
-        // );
+        $period = new \DatePeriod(
+            $fromDT,
+            new \DateInterval('P1D'),
+            $toDT
+        );
 
         $days = [$to,$from];
 
-        // foreach ($period as $key => $value) {
-        //     $days[] = $value->format('Y-m-d');    
-        // }
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
         
         return $days;
     }
