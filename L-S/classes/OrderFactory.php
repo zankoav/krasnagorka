@@ -64,15 +64,13 @@ class OrderFactory {
         $toDT = new \DateTime($to);
         $fromDT = new \DateTime($from);
         
-        // ->modify('+1 day')->format('Y-m-d')
-
         $period = new \DatePeriod(
             $fromDT,
             new \DateInterval('P1D'),
             $toDT
         );
 
-        $days = [$to,$from];
+        $days = [];
 
         foreach ($period as $key => $value) {
             $days[] = $value->format('Y-m-d');    
