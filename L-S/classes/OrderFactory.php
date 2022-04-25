@@ -39,6 +39,10 @@ class OrderFactory {
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
+        $order->days = self::getDaysPeriod(
+            $order->dateStart, 
+            $order->dateEnd
+        );
         $order->houseId = $data['houseId'];
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
@@ -54,5 +58,19 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
 
         return $order;
+    }
+
+    public static function getDaysPeriod($from, $to){
+        $period = new DatePeriod(
+            new DateTime($from),
+            new DateInterval('P1D'),
+            $to->modify( '+1 day' )
+        );
+
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
+        return $days;
     }
 }

@@ -34,6 +34,11 @@ class Order {
     /**
      * required
      */
+    public array $days;
+
+    /**
+     * required
+     */
     public int $peopleCount;
 
 
