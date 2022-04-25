@@ -14,6 +14,11 @@ class Order {
     /**
      * required
      */
+    public string $type;
+
+    /**
+     * required
+     */
     public int $calendarId;
 
     /**

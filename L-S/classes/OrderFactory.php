@@ -10,6 +10,8 @@ use LsFactory\OrderException;
 
 class OrderFactory {
 
+    public const TYPE_RESERVED = 'reserved';
+
     public static function initOrderByRequest($data){
         
         $order = new Order();
@@ -36,6 +38,7 @@ class OrderFactory {
             throw new OrderException('House id not exists');
         }
 
+        $order->type = self::TYPE_RESERVED;
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
