@@ -61,8 +61,8 @@ class OrderFactory {
     }
 
     public static function getDaysPeriod($from, $to){
-        $toDT = new DateTime($to);
-        $fromDT = new DateTime($from);
+        $toDT = new \DateTime($to);
+        $fromDT = new \DateTime($from);
         
         // ->modify('+1 day')->format('Y-m-d')
 
