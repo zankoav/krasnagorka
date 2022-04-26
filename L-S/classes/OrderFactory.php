@@ -26,7 +26,9 @@ class OrderFactory {
     public static function initOrderByRequest($data){
         
         $order = new Order();
+
         $order->contact = ContactFactory::initContactByRequest($data);
+        $order->type = self::TYPE_RESERVED;
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
@@ -34,11 +36,11 @@ class OrderFactory {
 
         self::validateOrder($order);
 
-        $order->type = self::TYPE_RESERVED;
-        $order->days = self::getDaysPeriod(
-            $order->dateStart, 
-            $order->dateEnd
-        );
+        
+        // $order->days = self::getDaysPeriod(
+        //     $order->dateStart, 
+        //     $order->dateEnd
+        // );
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
         $order->prepaidType = strval($data['prepaidType']);

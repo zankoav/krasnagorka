@@ -36,10 +36,10 @@ class Order {
      */
     public string $dateEnd;
 
-    /**
-     * required
-     */
-    public array $days;
+    // /**
+    //  * required
+    //  */
+    // public array $days;
 
     /**
      * required
