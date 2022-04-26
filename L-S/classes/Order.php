@@ -39,7 +39,7 @@ class Order {
     /**
      * required
      */
-    public int $peopleCount;
+    public int $people;
 
     public string $comment;
     public string $paymentMethod;
