@@ -4,7 +4,7 @@ use Cmb2Grid\Grid\Cmb2Grid;
 
 if (!defined('ABSPATH')) { exit; }
 
-function order_metabox() {
+function order_amocrm_metabox() {
 
     $sbc_client = new_cmb2_box(array(
         'id'           => 'order_data',
@@ -65,4 +65,4 @@ function order_metabox() {
 
 }
 
-add_action('cmb2_admin_init', 'order_metabox');
+add_action('cmb2_admin_init', 'order_amocrm_metabox');

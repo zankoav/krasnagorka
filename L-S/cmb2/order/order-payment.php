@@ -4,7 +4,7 @@ use Cmb2Grid\Grid\Cmb2Grid;
 
 if (!defined('ABSPATH')) { exit; }
 
-function payment_metabox() {
+function sbc_order_payment_metabox() {
 
     $sbc_client = new_cmb2_box(array(
         'id'           => 'payment_data',
@@ -54,4 +54,4 @@ function payment_metabox() {
     ));
 }
 
-add_action('cmb2_admin_init', 'payment_metabox');
+add_action('cmb2_admin_init', 'sbc_order_payment_metabox');

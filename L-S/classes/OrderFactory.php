@@ -12,41 +12,33 @@ class OrderFactory {
 
     public const TYPE_RESERVED = 'reserved';
 
+    public static function getOrderData(Order $order){
+        self::validateOrder($order);
+        $result = [];
+
+        // set fields
+
+        return $result;
+    }
+
+    
+
     public static function initOrderByRequest($data){
         
         $order = new Order();
-
         $order->contact = ContactFactory::initContactByRequest($data);
-
-        if(empty($data['calendarId'])){
-            throw new OrderException('Empty calendar id');
-        }else if(!get_term($data['calendarId'])){
-            throw new OrderException('Calendar id not exists');
-        }
-
-        if(empty($data['dateStart'])){
-            throw new OrderException('Empty date start');
-        }
-
-        if(empty($data['dateEnd'])){
-            throw new OrderException('Empty date end');
-        }
-
-        if(empty($data['houseId'])){
-            throw new OrderException('Empty house id');
-        }else if(!get_post($data['houseId'])){
-            throw new OrderException('House id not exists');
-        }
-
-        $order->type = self::TYPE_RESERVED;
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
+        $order->houseId = $data['houseId'];
+
+        self::validateOrder($order);
+
+        $order->type = self::TYPE_RESERVED;
         $order->days = self::getDaysPeriod(
             $order->dateStart, 
             $order->dateEnd
         );
-        $order->houseId = $data['houseId'];
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
         $order->prepaidType = strval($data['prepaidType']);
@@ -80,5 +72,27 @@ class OrderFactory {
         }
         
         return $days;
+    }
+
+    public static function validateOrder(Order $order){
+        if(empty($order->calendarId)){
+            throw new OrderException('Empty calendar id');
+        }else if(!get_term($order->calendarId)){
+            throw new OrderException('Calendar id not exists');
+        }
+
+        if(empty($order->dateStart)){
+            throw new OrderException('Empty date start');
+        }
+
+        if(empty($order->dateEnd)){
+            throw new OrderException('Empty date end');
+        }
+
+        if(empty($order->houseId)){
+            throw new OrderException('Empty house id');
+        }else if(!get_post($order->houseId)){
+            throw new OrderException('House id not exists');
+        }
     }
 }
