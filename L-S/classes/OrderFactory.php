@@ -95,6 +95,8 @@ class OrderFactory {
 
         if(empty($order->people)){
             throw new OrderException('Empty people');
+        }else if($order->people < 1){
+            throw new OrderException('Invalid people value');
         }
     }
 }
