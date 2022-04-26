@@ -12,18 +12,6 @@ class OrderFactory {
 
     public const TYPE_RESERVED = 'reserved';
 
-    public static function getOrderData(Order $order){
-        self::validateOrder($order);
-        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
-        $order->days = self::getDaysPeriod(
-            $order->dateStart, 
-            $order->dateEnd
-        );
-        return $order;
-    }
-
-    
-
     public static function initOrderByRequest($data){
         
         $order = new Order();
@@ -38,7 +26,7 @@ class OrderFactory {
 
         self::validateOrder($order);
 
-        $order->comment = strval($data['comment']);
+        $order->comment = $data['comment'];
         $order->paymentMethod = strval($data['paymentMethod']);
         $order->prepaidType = strval($data['prepaidType']);
         $order->childCount = intval($data['childCount']);
@@ -50,6 +38,16 @@ class OrderFactory {
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
 
+        return $order;
+    }
+
+    public static function getOrderData(Order $order){
+        self::validateOrder($order);
+        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
+        $order->days = self::getDaysPeriod(
+            $order->dateStart, 
+            $order->dateEnd
+        );
         return $order;
     }
 
