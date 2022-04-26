@@ -41,7 +41,7 @@ class ContactFactory {
             update_post_meta($clientId, 'sbc_client_email', $contact->email);
         }
 
-        if (!empty($contactPhone)) {
+        if (!empty($contact->phone)) {
             update_post_meta($clientId, 'sbc_client_phone', $contact->phone);
         }
 
