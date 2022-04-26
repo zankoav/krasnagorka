@@ -26,7 +26,7 @@ class OrderFactory {
 
         self::validateOrder($order);
 
-        $order->comment = $data['comment'];
+        $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
         $order->prepaidType = strval($data['prepaidType']);
         $order->childCount = intval($data['childCount']);
