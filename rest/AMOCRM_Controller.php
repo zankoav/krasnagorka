@@ -90,9 +90,9 @@ class AMOCRM_Controller extends WP_REST_Controller {
         try {
 
             $order = OrderFactory::initOrderByRequest($request);
-            $data = OrderFactory::getOrderData($order);
-            $data->house = $data->houseId;
-            $response = LS_Booking_Form_Controller::calculateResult((array)$data);
+            $response = OrderFactory::getOrderData($order);
+            // $data->house = $data->houseId;
+            // $response = LS_Booking_Form_Controller::calculateResult((array)$data);
             
             // if(OrderFactory::isAvailableOrder($order)){
             //     OrderFactory::createOrder($order);
