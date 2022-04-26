@@ -16,13 +16,13 @@ class OrderFactory {
         
         $order = new Order();
 
-        $order->contact = ContactFactory::initContactByRequest($data);
         $order->type = self::TYPE_RESERVED;
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
         $order->people = $data['count'];
+        $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
 

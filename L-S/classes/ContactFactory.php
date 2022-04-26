@@ -6,7 +6,7 @@ use LsFactory\ContactException;
 
 class ContactFactory {
 
-    public static function initContactByRequest($data){
+    public static function initContactByRequest($data = []){
         
         $contact = new Contact();
         $contact->fio = $data['fio'];
