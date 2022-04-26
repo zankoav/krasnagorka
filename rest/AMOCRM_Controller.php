@@ -91,11 +91,12 @@ class AMOCRM_Controller extends WP_REST_Controller {
 
             $order = OrderFactory::initOrderByRequest($request);
             $data = OrderFactory::getOrderData($order);
-            $data->house = $data->houseId;
+            
             if(class_exists('LS_Booking_Form_Controller')){
-                $data->house = 'OOO';
+                $data->house = $data->houseId;
+                $response = LS_Booking_Form_Controller::calculateResult((array)$data);
             }
-            //$response = LS_Booking_Form_Controller::calculateResult((array)$data)
+            
             // if(OrderFactory::isAvailableOrder($order)){
             //     OrderFactory::createOrder($order);
             //     AmoCrmFactory::createLead($order);
@@ -123,7 +124,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             $response = ['error' => $e->getMessage()];
         }
 
-        return new WP_REST_Response($data, 200);
+        return new WP_REST_Response($response, 200);
     }
 }
 
