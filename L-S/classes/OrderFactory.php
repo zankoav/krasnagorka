@@ -42,6 +42,9 @@ class OrderFactory {
             $order->dateStart, 
             $order->dateEnd
         );
+        $priceResult = LS_Booking_Form_Controller::calculateResult((array)$order);
+        $order->price = $priceResult;
+        
         return $order;
     }
 
