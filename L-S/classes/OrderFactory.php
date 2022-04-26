@@ -21,7 +21,7 @@ class OrderFactory {
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
-        $order->people = $data['count'];
+        $order->peopleCount = $data['count'];
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
@@ -102,9 +102,9 @@ class OrderFactory {
             throw new OrderException('House id not exists');
         }
 
-        if(empty($order->people)){
+        if(empty($order->peopleCount)){
             throw new OrderException('Empty people');
-        }else if($order->people < 1){
+        }else if($order->peopleCount < 1){
             throw new OrderException('Invalid people value');
         }
     }

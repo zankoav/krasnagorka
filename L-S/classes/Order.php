@@ -41,7 +41,7 @@ class Order {
     /**
      * required
      */
-    public int $people;
+    public int $peopleCount;
 
     public bool $isTerem = false;
     public array $days = [];
