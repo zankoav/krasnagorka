@@ -4,6 +4,8 @@ namespace LsFactory;
 
 class Contact {
     
+    public int $id;
+
     /**
      * required
      */
