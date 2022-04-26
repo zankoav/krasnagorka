@@ -44,6 +44,7 @@ class Order {
     public int $peopleCount;
 
     public bool $isTerem = false;
+    public string $calendarName;
     public string $comment;
     public string $paymentMethod;
     public string $prepaidType;
@@ -56,6 +57,7 @@ class Order {
     public int $foodBreakfast;
     public int $foodLunch;
     public int $foodDinner;
+    public array $sourceValue;
 
 /*
     //AmoCrm 

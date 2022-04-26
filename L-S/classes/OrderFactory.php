@@ -38,6 +38,7 @@ class OrderFactory {
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
+        $order->calendarName = get_term($order->calendarId)->name;
         $order->price = \LS_Booking_Form_Controller::calculateResult((array)$order)['total_price'];
 
         return $order;
@@ -199,63 +200,58 @@ class OrderFactory {
         }
 
         if (!empty($order->prepaidType)) {
-            update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType);
+            update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType); 
         }
 
-        /*
+        if($order->paymentMethod === 'card_layter' || $order->paymentMethod === 'card'){
 
-            if (!empty($leadId)) {
-                update_post_meta($post_id, 'sbc_lead_id', $leadId);
+            $sandbox = get_webpay_sandbox();
+
+            $secret_key = '2091988';
+            $wsb_seed = strtotime("now");
+            $wsb_storeid = $sandbox['wsb_storeid'];
+            $wsb_order_num = $order->id;
+            $wsb_test = $sandbox['wsb_test'];
+            $wsb_currency_id = 'BYN';
+            $wsb_prepaid_type = intval($order->prepaidType);
+            $wsb_total = (int)($order->price * $wsb_prepaid_type / 100);
+            if($wsb_prepaid_type == 100){
+                $wsb_total = $order->price;
             }
+            $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
 
-            if (!empty($prepaidType)) {
+            $sourceValue = [
+                "names" => [
+                    '*scart'
+                ],
+                "values" => [
+                    'wsb_storeid' => $wsb_storeid,
+                    'wsb_store' => 'ИП Терещенко Иван Игоревич', 
+                    'wsb_order_num' => $wsb_order_num,
+                    'wsb_currency_id' => $wsb_currency_id,
+                    'wsb_version' => "2",
+                    'wsb_language_id' => "russian",
+                    'wsb_seed' => $wsb_seed,
+                    'wsb_test' => $wsb_test,
+                    'wsb_signature' => $wsb_signature,
+                    'wsb_invoice_item_name[0]' => $order->calendarName,
+                    'wsb_invoice_item_quantity[0]' => '1',
+                    'wsb_invoice_item_price[0]' => $wsb_total,
+                    'wsb_total' => $wsb_total,
+                    'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success',
+                    'wsb_return_url' => "https://krasnagorka.by/payed-success",
+                ]
+            ];
+            
+            $solt = "lightning-soft";
+            $source = md5($order->id . $solt);
+            update_post_meta($order->id, 'sbc_order_prepaid_source', $source);
+            update_post_meta($order->id, 'sbc_order_prepaid_value', json_encode($sourceValue, JSON_UNESCAPED_UNICODE));
 
-                if($paymentMethod == 'card_layter' || $paymentMethod == 'card'){
-
-                    $secret_key = '2091988';
-                    $wsb_seed = strtotime("now");
-                    $wsb_storeid = $sandbox['wsb_storeid'];
-                    $wsb_order_num = $post_id;
-                    $wsb_test = $sandbox['wsb_test'];
-                    $wsb_currency_id = 'BYN';
-                    $wsb_total = (int)($totalPrice * $prepaidType / 100);
-                    if($prepaidType == 100){
-                        $wsb_total = $totalPrice;
-                    }
-                    $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
-
-                    $sourceValue = [
-                        "names" => [
-                            '*scart'
-                        ],
-                        "values" => [
-                            'wsb_storeid' => $wsb_storeid,
-                            'wsb_store' => 'ИП Терещенко Иван Игоревич', 
-                            'wsb_order_num' => $wsb_order_num,
-                            'wsb_currency_id' => $wsb_currency_id,
-                            'wsb_version' => "2",
-                            'wsb_language_id' => "russian",
-                            'wsb_seed' => $wsb_seed,
-                            'wsb_test' => $wsb_test,
-                            'wsb_signature' => $wsb_signature,
-                            'wsb_invoice_item_name[0]' => $request['orderTitle'],
-                            'wsb_invoice_item_quantity[0]' => '1',
-                            'wsb_invoice_item_price[0]' => $wsb_total,
-                            'wsb_total' => $wsb_total,
-                            'wsb_notify_url' => 'https://krasnagorka.by/wp-json/krasnagorka/v1/pay-success',
-                            'wsb_return_url' => "https://krasnagorka.by/payed-success",
-                        ]
-                    ];
-                    $solt = "lightning-soft";
-                    $source = md5($post_id . $solt);
-                    update_post_meta($post_id, 'sbc_order_prepaid_source', $source);
-                    update_post_meta($post_id, 'sbc_order_prepaid_value', json_encode($sourceValue, JSON_UNESCAPED_UNICODE));
-                    if($paymentMethod == 'card') { 
-                        $response['redirect'] = $sourceValue;
-                    }
-                }
+            if($order->paymentMethod  === 'card') { 
+                $order->sourceValue = $sourceValue;
             }
-            */
+        }
     }
 
     public static function validateOrder(Order $order){
