@@ -118,7 +118,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public static function calculateResult($request){
-        Log::info('OK 1', $request['house']);
         $seasonsIntervals = [];
         $houseId = $request['house'];
         $dateStart = $request['dateStart'];
@@ -134,23 +133,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
-        try{
-            
-        
+        $dateEndDT = new DateTime($dateEnd);
 
-            $dateEndDT = new DateTime($dateEnd);
-
-            $period = new DatePeriod(
-                new DateTime($dateStart),
-                new DateInterval('P1D'),
-                $dateEndDT->modify( '+1 day' )
-            );
-
-            Log::info('OK');
-
-        }catch ( Exception $e ) {
-            Log::error('GG', $e->getMessage());
-        }
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
 
         $days = [];
         foreach ($period as $key => $value) {
