@@ -6,6 +6,8 @@ use LsFactory\Contact;
 
 class Order {
 
+    public int $id;
+
     /**
      * required
      */
@@ -41,6 +43,8 @@ class Order {
      */
     public int $people;
 
+    public bool $isTerem = false;
+    public array $days = [];
     public string $comment;
     public string $paymentMethod;
     public string $prepaidType;

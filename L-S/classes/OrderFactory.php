@@ -51,6 +51,10 @@ class OrderFactory {
         return $order;
     }
 
+    public static function insert(Order $order){
+        
+    }
+
     public static function getDaysPeriod($from, $to){
         $toDT = new \DateTime($to);
         $fromDT = new \DateTime($from);
