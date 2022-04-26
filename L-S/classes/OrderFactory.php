@@ -47,7 +47,7 @@ class OrderFactory {
         self::validateOrder($order);
         $result = true;
 
-        $ordersQuery = new WP_Query;
+        $ordersQuery = new \WP_Query;
         $orders = $ordersQuery->query(array(
             'post_type' => 'sbc_orders',
             'posts_per_page' => -1,
