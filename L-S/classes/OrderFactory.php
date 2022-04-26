@@ -122,89 +122,93 @@ class OrderFactory {
         $order->id = $post_id;
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
+
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);
         update_post_meta($order->id, 'sbc_order_end', $order->dateEnd);
         update_post_meta($order->id, 'sbc_order_price', $order->price);
+        update_post_meta($order->id, 'sbc_order_people_count', $order->peopleCount);
+        wp_set_object_terms($order->id, [$order->calendarId], 'sbc_calendars');
+
+        $comment = [
+            $order->comment,
+            "Количество человек: {$order->peopleCount}]"
+        ];
+
+        if($order->smallAnimalsCount > 0){
+            $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalsCount}";
+            update_post_meta($order->id, 'sbc_order_small_animlas_count', $order->smallAnimalsCount);
+        }
+
+        if($order->bigAnimalsCount > 0){
+            $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalsCount}";
+            update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalsCount);
+        }
+
+        if($order->foodBreakfast > 0){
+            $comment[] = "Завтраки: {$order->foodBreakfast}";
+            update_post_meta($order->id, 'sbc_order_food_breakfast', $order->foodBreakfast);
+        }
+
+        if($order->foodLunch > 0){
+            $comment[] = "Обеды: {$order->foodLunch}";
+            update_post_meta($order->id, 'sbc_order_food_lunch', $order->foodLunch);
+        }
+
+        if($order->foodDinner > 0){
+            $comment[] = "Ужины: {$order->foodDinner}";
+            update_post_meta($order->id, 'sbc_order_food_dinner', $order->foodDinner);
+        }
+
+        if($order->babyBed){
+            $comment[] = "Детская кроватка: Да";
+            update_post_meta($order->id, 'sbc_order_baby_bed', 'on');
+        }
+
+        if($order->bathHouseWhite > 0){
+            $comment[] = "Количество сеансов бани по-белому: {$order->bathHouseWhite}";
+            update_post_meta($order->id, 'sbc_order_bath_house_white', $order->bathHouseWhite);
+        }
+
+        if($order->bathHouseBlack > 0){
+            $comment[] = "Количество сеансов бани по-черному: {$order->bathHouseBlack}";
+            update_post_meta($order->id, 'sbc_order_bath_house_black', $order->bathHouseBlack);
+        }
+
+        if($order->childCount > 0){
+            $comment[] = "Количество детей без спальных мест: {$order->childCount}";
+            update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
+        }
+
+        if($order->childCount > 0){
+            $comment[] = "Количество детей без спальных мест: {$order->childCount}";
+            update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
+        }
+
+        if (!empty($comment)) {
+            update_post_meta($order->id, 'sbc_order_desc', implode("\n", $comment));
+        }
+
+        if (!empty($order->contact->passport)) {
+            update_post_meta($order->id, 'sbc_order_passport', $order->contact->passport);
+        }
+
+        if (!empty($order->paymentMethod)) {
+            update_post_meta($order->id, 'sbc_order_payment_method', $order->paymentMethod);
+        }
+
+        if (!empty($order->prepaidType)) {
+            update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType);
+        }
+
         /*
-            if (!empty($havePayed)) {
-                update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
-            }
 
-            if($smallAnimalsCount > 0){
-                $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
-                update_post_meta($post_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
-            }
-
-            if($bigAnimalsCount > 0){
-                $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
-                update_post_meta($post_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
-            }
-
-
-            if($foodBreakfast > 0){
-                $comment .= "\nЗавтраки: $foodBreakfast";
-                update_post_meta($post_id, 'sbc_order_food_breakfast', $foodBreakfast);
-            }
-
-            if($foodLunch > 0){
-                $comment .= "\nОбеды: $foodLunch";
-                update_post_meta($post_id, 'sbc_order_food_lunch', $foodLunch);
-            }
-
-            if($foodDinner > 0){
-                $comment .= "\nУжины: $foodDinner";
-                update_post_meta($post_id, 'sbc_order_food_dinner', $foodDinner);
-            }
-
-            if ($babyBed) {
-                $comment .= "\nДетская кроватка: Да";
-                update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
-            }
-
-            if (!empty($bathHouseWhite)) {
-                $comment .= "\nКоличество сеансов бани по-белому: $bathHouseWhite";
-                update_post_meta($post_id, 'sbc_order_bath_house_white', $bathHouseWhite);
-            }
-
-            if (!empty($bathHouseBlack)) {
-                $comment .= "\nКоличество сеансов бани по-черному: $bathHouseBlack";
-                update_post_meta($post_id, 'sbc_order_bath_house_black', $bathHouseBlack);
-            }
-
-            if ($childs > 0) {
-                $comment .= "\nКоличество детей без спальных мест: $childs";
-                update_post_meta($post_id, 'sbc_order_childs', $childs);
-            }
-
-            if (!empty($comment)) {
-                update_post_meta($post_id, 'sbc_order_desc', $comment);
-            }
-            if (!empty($peopleCount)) {
-                update_post_meta($post_id, 'sbc_order_people_count', $peopleCount);
-                update_post_meta($post_id, 'sbc_order_count_people', $peopleCount);
-            }
-
-            if (!empty($request['passport'])) {
-                update_post_meta($post_id, 'sbc_order_passport', $request['passport']);
-            }
-                
             if (!empty($leadId)) {
                 update_post_meta($post_id, 'sbc_lead_id', $leadId);
             }
 
-            $paymentMethod  = $request['paymentMethod'];
-            if (!empty($paymentMethod)) {
-                update_post_meta($post_id, 'sbc_order_payment_method', $paymentMethod);
-            }
-
-            $prepaidType  = $request['prepaidType'];
-            $sandbox = get_webpay_sandbox($request['wsb_test']);
-
             if (!empty($prepaidType)) {
-                $prepaidType = intval($prepaidType);
-                update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidType);
 
                 if($paymentMethod == 'card_layter' || $paymentMethod == 'card'){
 
@@ -251,15 +255,6 @@ class OrderFactory {
                     }
                 }
             }
-
-            if (!empty($objectIds)) {
-                $objectIds = array_map('intval', $objectIds);
-                $objectIds = array_unique($objectIds);
-                wp_set_object_terms($post_id, $objectIds, 'sbc_calendars');
-            }
-
-            $response['orderId'] = $post_id;
-
             */
     }
 
