@@ -36,27 +36,16 @@ class Order {
      */
     public string $dateEnd;
 
-    // /**
-    //  * required
-    //  */
-    // public array $days;
-
     /**
      * required
      */
     public int $peopleCount;
 
-
-    public bool $isTerem = false;
-
     public string $comment;
     public string $paymentMethod;
     public string $prepaidType;
-
     public int $childCount;
-
     public bool $babyBed;
-
     public int $bathHouseWhite;
     public int $bathHouseBlack;
     public int $smallAnimalCount;

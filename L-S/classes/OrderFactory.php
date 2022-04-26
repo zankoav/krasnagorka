@@ -14,9 +14,12 @@ class OrderFactory {
 
     public static function getOrderData(Order $order){
         self::validateOrder($order);
-        $result = (array) $order;
-        
-        return $result;
+        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
+        $order->days = self::getDaysPeriod(
+            $order->dateStart, 
+            $order->dateEnd
+        );
+        return $order;
     }
 
     
@@ -34,11 +37,6 @@ class OrderFactory {
 
         self::validateOrder($order);
 
-        
-        // $order->days = self::getDaysPeriod(
-        //     $order->dateStart, 
-        //     $order->dateEnd
-        // );
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
         $order->prepaidType = strval($data['prepaidType']);
@@ -50,7 +48,6 @@ class OrderFactory {
         $order->foodBreakfast = intval($data['foodBreakfast']);
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
-        $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
 
         return $order;
     }
