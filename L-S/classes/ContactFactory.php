@@ -20,7 +20,12 @@ class ContactFactory {
     }
 
     public static function insert(Contact $contact){
-        $client   = self::get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contact->phone]);
+
+        $client = self::get_client_by_meta([
+            'meta_key' => 'sbc_client_phone', 
+            'meta_value' => $contact->phone
+        ]);
+
         $clientId = null;
 
         if (empty($client)) {
@@ -46,6 +51,8 @@ class ContactFactory {
         }
 
         $contact->id = $clientId;
+
+        self::update_all_clients_orders($contact->id);
     }
 
     public static function validateContact(Contact $contact){
@@ -67,6 +74,10 @@ class ContactFactory {
         }
     }
 
+    public static function getTemplete(Contact $contact){
+        return "{$contact->id} {$contact->fio} {$contact->phone} {$contact->email} <a href='https://krasnagorka.by/wp-admin/post.php?post={$contact->id}&action=edit' target='_blank' class='edit-link'>Редактировать</a>";
+    }
+    
     private static function get_client_by_meta($args = array())
     {
 
@@ -96,5 +107,28 @@ class ContactFactory {
 
         // kick back results ##
         return $posts[0];
+    }
+
+    private static function update_all_clients_orders(Contact $contact)
+    {
+        $contactTemplate = self::getTemplete($contact);
+
+        $args = array(
+            'meta_query'     => array(
+                array(
+                    'key'   => 'sbc_order_client',
+                    'value' => "{$contact->id}",
+                    'compare' => 'LIKE'
+                )
+            ),
+            'post_type'      => 'sbc_orders',
+            'posts_per_page' => '-1'
+        );
+
+        $posts = get_posts($args);
+
+        foreach ($posts as $post) {
+            update_post_meta($post->ID, 'sbc_order_client', $contactTemplate);
+        }
     }
 }
