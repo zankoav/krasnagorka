@@ -133,13 +133,23 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
-        $dateEndDT = new DateTime($dateEnd);
+        try{
+            
+        
 
-        $period = new DatePeriod(
-            new DateTime($dateStart),
-            new DateInterval('P1D'),
-            $dateEndDT->modify( '+1 day' )
-        );
+            $dateEndDT = new DateTime($dateEnd);
+
+            $period = new DatePeriod(
+                new DateTime($dateStart),
+                new DateInterval('P1D'),
+                $dateEndDT->modify( '+1 day' )
+            );
+
+            Log::info('OK');
+
+        }catch ( Exception $e ) {
+            Log::error('GG', $e->getMessage());
+        }
 
         $days = [];
         foreach ($period as $key => $value) {
