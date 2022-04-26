@@ -118,7 +118,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public static function calculateResult($request){
-        Log::info('OK 1', $request);
+        Log::info('OK 1', $request['house']);
         $seasonsIntervals = [];
         $houseId = $request['house'];
         $dateStart = $request['dateStart'];
