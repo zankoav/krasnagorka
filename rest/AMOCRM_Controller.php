@@ -89,8 +89,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
     public function create_lead($request) {
         try {
 
-            $order = OrderFactory::initOrderByRequest($request);
-            $response = OrderFactory::getOrderData($order);
+            $response = OrderFactory::initOrderByRequest($request);
             // $data->house = $data->houseId;
             
             // if(OrderFactory::isAvailableOrder($order)){

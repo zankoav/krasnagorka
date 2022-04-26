@@ -38,42 +38,13 @@ class OrderFactory {
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
-        $order->days = self::getDaysPeriod(
-            $order->dateStart, 
-            $order->dateEnd
-        );
-
         $order->price = \LS_Booking_Form_Controller::calculateResult((array)$order)['total_price'];
 
         return $order;
     }
 
-    public static function getOrderData(Order $order): Order{
-        self::validateOrder($order);
-        return $order;
-    }
-
     public static function insert(Order $order){
         
-    }
-
-    public static function getDaysPeriod($from, $to){
-        $toDT = new \DateTime($to);
-        $fromDT = new \DateTime($from);
-        
-        $period = new \DatePeriod(
-            $fromDT,
-            new \DateInterval('P1D'),
-            $toDT->modify( '+1 day' )
-        );
-
-        $days = [];
-
-        foreach ($period as $key => $value) {
-            $days[] = $value->format('Y-m-d');    
-        }
-        
-        return $days;
     }
 
     public static function validateOrder(Order $order){

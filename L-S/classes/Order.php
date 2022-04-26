@@ -44,7 +44,6 @@ class Order {
     public int $peopleCount;
 
     public bool $isTerem = false;
-    public array $days = [];
     public string $comment;
     public string $paymentMethod;
     public string $prepaidType;
