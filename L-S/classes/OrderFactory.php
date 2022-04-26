@@ -43,8 +43,63 @@ class OrderFactory {
         return $order;
     }
 
-    public static function insert(Order $order){
+    public static function isAvailableOrder(Order $order){
+        self::validateOrder($order);
+        $result = true;
+
+        $ordersQuery = new WP_Query;
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'sbc_calendars',
+                    'terms' => [$order->calendarId]
+                ]
+            ],
+            'meta_query' => array(
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $order->dateStart,
+                    'compare' => '>=',
+                )
+            )
+        ));
+
+        $parseResult = [];
+
+        foreach ($orders  as $item) {
+            $orderId = $item->ID;
+            $start = get_post_meta($orderId, 'sbc_order_start', true);
+            $startTime = strtotime($start);
+            $start = date('Y-m-d', $startTime);
+            $end = get_post_meta($orderId, 'sbc_order_end', true);
+            $endTime = strtotime($end);
+            $end = date('Y-m-d', $endTime);
+            $parseResult[] = [$start, $end, $orderId];
+        }
         
+        foreach ($parseResult as $r) {
+            $from = $r[0];
+            $to = $r[1];
+            $orId = $r[2];
+
+            if ($order->dateStart >= $from and $order->dateStart < $to) {
+                $result = false;
+            }
+
+            if ($order->dateEnd > $from and $order->dateEnd <= $to) {
+                $result = false;
+            }
+
+            if ($order->dateStart < $from and $order->dateEnd > $to) {
+                $result = false;
+            }
+        }   
+
+        if(!$result){
+            throw new OrderException('Order not available');
+        }
     }
 
     public static function validateOrder(Order $order){
