@@ -133,7 +133,7 @@ class OrderFactory {
 
         $comment = [
             $order->comment,
-            "Количество человек: {$order->peopleCount}]"
+            "Количество человек: {$order->peopleCount}"
         ];
 
         if($order->smallAnimalsCount > 0){
