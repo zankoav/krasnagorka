@@ -14,10 +14,8 @@ class OrderFactory {
 
     public static function getOrderData(Order $order){
         self::validateOrder($order);
-        $result = [];
-
-        // set fields
-
+        $result = (array) $order;
+        
         return $result;
     }
 
