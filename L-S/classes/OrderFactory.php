@@ -242,15 +242,12 @@ class OrderFactory {
                     'wsb_return_url' => "https://krasnagorka.by/payed-success",
                 ]
             ];
-            
+
             $solt = "lightning-soft";
             $source = md5($order->id . $solt);
             update_post_meta($order->id, 'sbc_order_prepaid_source', $source);
             update_post_meta($order->id, 'sbc_order_prepaid_value', json_encode($sourceValue, JSON_UNESCAPED_UNICODE));
-
-            if($order->paymentMethod  === 'card') { 
-                $order->sourceValue = $sourceValue;
-            }
+            $order->sourceValue = $sourceValue;
         }
     }
 
