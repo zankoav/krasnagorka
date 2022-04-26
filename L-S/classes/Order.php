@@ -54,7 +54,6 @@ class Order {
     public int $foodLunch;
     public int $foodDinner;
 
-
 /*
     //AmoCrm 
     public string $sbc_order_passport;

@@ -34,6 +34,7 @@ class OrderFactory {
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
+        $order->people = $data['count'];
 
         self::validateOrder($order);
 
@@ -90,6 +91,10 @@ class OrderFactory {
             throw new OrderException('Empty house id');
         }else if(!get_post($order->houseId)){
             throw new OrderException('House id not exists');
+        }
+
+        if(empty($order->people)){
+            throw new OrderException('Empty people');
         }
     }
 }
