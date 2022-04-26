@@ -29,9 +29,10 @@ $model  = new Model();
 require __DIR__ . '/token_actions.php';
 require __DIR__ . '/inc/calendar/init.php';
 require __DIR__ . '/mastak/init.php';
-require __DIR__ . '/rest/rest.php';
 
 require __DIR__ . '/LS/backend/rest/rest.php';
+require __DIR__ . '/rest/rest.php';
+
 
 add_filter('wp_mail_content_type', 'set_html_content_type');
 
