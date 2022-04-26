@@ -52,7 +52,7 @@ class ContactFactory {
 
         $contact->id = $clientId;
 
-        self::update_all_clients_orders($contact->id);
+        self::update_all_clients_orders($contact);
     }
 
     public static function validateContact(Contact $contact){
