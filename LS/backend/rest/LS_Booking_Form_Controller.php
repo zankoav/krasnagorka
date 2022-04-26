@@ -119,7 +119,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public static function calculateResult($request){
         $seasonsIntervals = [];
-        $houseId = $request['house'];
+        $houseId = $request['house'] ?? $request['houseId'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
