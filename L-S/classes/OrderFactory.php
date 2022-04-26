@@ -12,7 +12,7 @@ class OrderFactory {
 
     public const TYPE_RESERVED = 'reserved';
 
-    public static function initOrderByRequest($data){
+    public static function initOrderByRequest($data): Order{
         
         $order = new Order();
 
@@ -37,17 +37,16 @@ class OrderFactory {
         $order->foodBreakfast = intval($data['foodBreakfast']);
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
-
-        return $order;
-    }
-
-    public static function getOrderData(Order $order){
-        self::validateOrder($order);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->days = self::getDaysPeriod(
             $order->dateStart, 
             $order->dateEnd
         );
+        return $order;
+    }
+
+    public static function getOrderData(Order $order): Order{
+        self::validateOrder($order);
         return $order;
     }
 
