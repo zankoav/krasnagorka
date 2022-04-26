@@ -6,7 +6,7 @@ use LsFactory\Contact;
 
 class Order {
 
-    public int $id;
+    public int? $id;
 
     /**
      * required
