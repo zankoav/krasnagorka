@@ -42,7 +42,7 @@ class OrderFactory {
             $order->dateStart, 
             $order->dateEnd
         );
-        $priceResult = 'fff';//LS_Booking_Form_Controller::calculateResult((array)$order);
+        $priceResult = LS_Booking_Form_Controller::calculateResult(array_merge((array)$order, ['house' => $order->houseId]));
         $order->price = $priceResult;
 
         return $order;
