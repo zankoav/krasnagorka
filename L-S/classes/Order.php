@@ -46,7 +46,7 @@ class Order {
     public bool $isTerem = false;
     public string $comment;
     public string $paymentMethod;
-    public int $prepaidType;
+    public string $prepaidType;
     public int $childCount;
     public bool $babyBed;
     public int $bathHouseWhite;
