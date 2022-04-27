@@ -3,6 +3,7 @@ use Ls\Wp\Log as Log;
 
 use LsFactory\FactoryException;
 use LsFactory\OrderFactory;
+use LsFactory\MailFactory;
 
 
 use AmoCRM\Models\LeadModel;
@@ -93,7 +94,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             OrderFactory::isAvailableOrder($order);
             // OrderFactory::insert($order);
             MailFactory::sendOrder($order);
-            
+
             $response = $order;
             
             //     OrderFactory::createOrder($order);
