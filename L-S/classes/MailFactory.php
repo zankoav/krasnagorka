@@ -26,7 +26,7 @@ class MailFactory {
                 $mail->templatePath = $order->prepaidType === 100 ? "L-S/mail/templates/tmpl-pay-full-confirm" : "L-S/mail/templates/tmpl-pay-partial-confirm";
             }else if($order->paymentMethod == Order::METHOD_OFFICE){
                 $mail->subject = 'Заявка на бронирование';
-                $mail->templatePath = "L-S/mail/templates/tmpl-office";
+                $mail->templatePath = "L-S/mail/templates/office";
             } else {
                 throw new MailException('Incorrect order type and method');
             }
@@ -40,7 +40,7 @@ class MailFactory {
         get_template_part(
             $mail->templatePath, 
             null,
-            ['data' => (array)$order]
+            ['order' => $order]
         );
         $mail->template = ob_get_contents();
         ob_end_clean();

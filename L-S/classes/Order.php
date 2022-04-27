@@ -66,4 +66,11 @@ class Order {
     public int $foodLunch;
     public int $foodDinner;
     public array $sourceValue;
+
+    public int $leadId;
+    public string $created;
+
+    public int $price;
+    public int $subprice;
+
 }

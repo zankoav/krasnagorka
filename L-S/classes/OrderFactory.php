@@ -124,6 +124,7 @@ class OrderFactory {
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
+        $order->created = get_the_date("d.m.Y", $order->id);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);
