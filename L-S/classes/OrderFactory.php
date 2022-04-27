@@ -21,7 +21,7 @@ class OrderFactory {
         $order->houseId = $data['houseId'];
         $order->peopleCount = $data['count'];
         $order->paymentMethod = $data['paymentMethod'];
-        $order->prepaidType = self::getPrepaidType($data['prepaidType']);
+        $order->prepaidType = $data['prepaidType'];
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
@@ -258,6 +258,9 @@ class OrderFactory {
     }
 
     public static function validateOrder(Order $order){
+
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+
         if(empty($order->calendarId)){
             throw new OrderException('Empty calendar id');
         }else if(!get_term($order->calendarId)){
@@ -288,28 +291,34 @@ class OrderFactory {
             array_search(
                 $order->paymentMethod, 
                 [
-                    null, 
-                    Order::METHOD_CARD_LAYTER,
-                    Order::METHOD_CARD,
-                    Order::METHOD_OFFICE
+                    1 => null, 
+                    2 => Order::METHOD_CARD_LAYTER,
+                    3 => Order::METHOD_CARD,
+                    4 => Order::METHOD_OFFICE
                 ], 
                 true
-            ) === false){
+            ) === false) {
             throw new OrderException('Invalid payment method');
         }
-    }
 
-    private static function getPrepaidType($prepaidType){
-        $result = 0;
-        if(!empty($prepaidType)){
-            if(intval($prepaidType) === 100){
-                $result = 100;
-            }else{
-                $bookingSettings = get_option('mastak_booking_appearance_options');
-                $result = intval($bookingSettings['booking_payments_type_percentage']);
-            }
+        if(
+            array_search(
+                $order->prepaidType, 
+                [
+                    1 => null, 
+                    2 => 100,
+                    3 => intval($bookingSettings['booking_payments_type_percentage'])
+                ], 
+                true
+            ) === false) {
+            throw new OrderException('Invalid prepaid type');
         }
-        
-        return $result;
+           
+        if( 
+            ($order->paymentMethod === null &&  $order->prepaidType !== null) ||
+            ($order->paymentMethod !== null &&  $order->prepaidType === null)
+        ) {
+            throw new OrderException('Invalid prepaid type or payment method');
+        } 
     }
 }
