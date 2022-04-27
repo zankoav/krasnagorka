@@ -26,7 +26,7 @@ class OrderFactory {
 
         $order->comment = strval($data['comment']);
         $order->paymentMethod = strval($data['paymentMethod']);
-        $order->prepaidType = strval($data['prepaidType']);
+        $order->prepaidType = self::getprepaidType($data['prepaidType']);
         $order->childCount = intval($data['childCount']);
         $order->babyBed = boolval($data['babyBed']);
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
@@ -212,7 +212,7 @@ class OrderFactory {
             $wsb_order_num = $order->id;
             $wsb_test = $sandbox['wsb_test'];
             $wsb_currency_id = 'BYN';
-            $wsb_prepaid_type = intval($order->prepaidType);
+            $wsb_prepaid_type = $order->prepaidType;
             $wsb_total = (int)($order->price * $wsb_prepaid_type / 100);
             if($wsb_prepaid_type == 100){
                 $wsb_total = $order->price;
@@ -276,5 +276,20 @@ class OrderFactory {
         }else if($order->peopleCount < 1){
             throw new OrderException('Invalid people value');
         }
+    }
+
+    private static function getprepaidType($prepaidType){
+        $result = 0;
+        if(!empty($prepaidType)){
+            if(intval($prepaidType) === 100){
+                $result = 100;
+            }else{
+                $bookingSettings = get_option('mastak_booking_appearance_options');
+                $result = intval($bookingSettings['booking_payments_type_percentage']);
+            }
+        }
+        
+        return $result;
+
     }
 }
