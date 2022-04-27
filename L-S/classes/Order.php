@@ -6,6 +6,10 @@ use LsFactory\Contact;
 
 class Order {
 
+    public const TYPE_RESERVED = 'reserved';
+    public const TYPE_PREPAID = 'prepaid';
+    public const TYPE_BOOKED = 'booked';
+
     public int $id;
 
     /**

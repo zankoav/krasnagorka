@@ -10,13 +10,11 @@ use LsFactory\OrderException;
 
 class OrderFactory {
 
-    public const TYPE_RESERVED = 'reserved';
-
     public static function initOrderByRequest($data): Order{
         
         $order = new Order();
 
-        $order->type = self::TYPE_RESERVED;
+        $order->type = Order::TYPE_RESERVED;
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
@@ -103,7 +101,8 @@ class OrderFactory {
         }
     }
 
-    public static function insert(Order $order){
+    public static function insert(Order $order) {
+
         ContactFactory::insert($order->contact);
 
         $post_data = array(
