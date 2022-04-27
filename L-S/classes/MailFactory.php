@@ -27,6 +27,8 @@ class MailFactory {
             }else if($order->paymentMethod == Order::METHOD_OFFICE){
                 $mail->subject = 'Заявка на бронирование';
                 $mail->templatePath = "L-S/mail/templates/tmpl-office";
+            } else {
+                throw new MailException('Incorrect order type and method');
             }
         } else {
             $mail->subject = 'Подтверждение бронирования';
