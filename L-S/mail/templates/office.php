@@ -27,7 +27,7 @@
 									<strong><?= '111'//$order->leadId ?></strong>
 									<div style="font-size:14px;">
 										от 
-										<?= $order->created ?>
+										<?= 444//$order->created ?>
 									</div>
 								</div>
 							</td>
