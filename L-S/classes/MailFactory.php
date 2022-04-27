@@ -36,14 +36,14 @@ class MailFactory {
             $mail->templatePath = "L-S/mail/templates/{$mail->checkType}";
         } 
 
-        // ob_start();
-        // get_template_part(
-        //     $mail->templatePath, 
-        //     null,
-        //     ['data' => (array)$order]
-        // );
-        // $mail->template = ob_get_contents();
-        // ob_end_clean();
+        ob_start();
+        get_template_part(
+            $mail->templatePath, 
+            null,
+            ['data' => (array)$order]
+        );
+        $mail->template = ob_get_contents();
+        ob_end_clean();
 
         return $mail;
     }
