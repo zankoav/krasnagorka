@@ -182,11 +182,6 @@ class OrderFactory {
             update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
         }
 
-        if($order->childCount > 0){
-            $comment[] = "Количество детей без спальных мест: {$order->childCount}";
-            update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
-        }
-
         if (!empty($comment)) {
             update_post_meta($order->id, 'sbc_order_desc', implode("\n", $comment));
         }
@@ -291,10 +286,10 @@ class OrderFactory {
             array_search(
                 $order->paymentMethod, 
                 [
-                    1 => null, 
-                    2 => Order::METHOD_CARD_LAYTER,
-                    3 => Order::METHOD_CARD,
-                    4 => Order::METHOD_OFFICE
+                    null, 
+                    Order::METHOD_CARD_LAYTER,
+                    Order::METHOD_CARD,
+                    Order::METHOD_OFFICE
                 ], 
                 true
             ) === false) {
@@ -305,9 +300,9 @@ class OrderFactory {
             array_search(
                 $order->prepaidType, 
                 [
-                    1 => null, 
-                    2 => 100,
-                    3 => intval($bookingSettings['booking_payments_type_percentage'])
+                    null, 
+                    100,
+                    intval($bookingSettings['booking_payments_type_percentage'])
                 ], 
                 true
             ) === false) {
