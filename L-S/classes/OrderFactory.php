@@ -20,13 +20,14 @@ class OrderFactory {
         $order->dateEnd = $data['dateEnd'];
         $order->houseId = $data['houseId'];
         $order->peopleCount = $data['count'];
+        $order->paymentMethod = $data['paymentMethod'];
+        $order->prepaidType = self::getPrepaidType($data['prepaidType']);
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
 
         $order->comment = strval($data['comment']);
-        $order->paymentMethod = strval($data['paymentMethod']);
-        $order->prepaidType = self::getprepaidType($data['prepaidType']);
+        
         $order->childCount = intval($data['childCount']);
         $order->babyBed = boolval($data['babyBed']);
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
@@ -282,9 +283,23 @@ class OrderFactory {
         }else if($order->peopleCount < 1){
             throw new OrderException('Invalid people value');
         }
+
+        if(
+            array_search(
+                $order->paymentMethod, 
+                [
+                    null, 
+                    Order::METHOD_CARD_LAYTER,
+                    Order::METHOD_CARD,
+                    Order::METHOD_OFFICE
+                ], 
+                true
+            ) === false){
+            throw new OrderException('Invalid payment method');
+        }
     }
 
-    private static function getprepaidType($prepaidType){
+    private static function getPrepaidType($prepaidType){
         $result = 0;
         if(!empty($prepaidType)){
             if(intval($prepaidType) === 100){
@@ -296,6 +311,5 @@ class OrderFactory {
         }
         
         return $result;
-
     }
 }
