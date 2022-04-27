@@ -198,13 +198,8 @@ class OrderFactory {
             update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType); 
         }
 
-        if(
-            (
-                $order->paymentMethod === Order::METHOD_CARD_LAYTER || 
-                $order->paymentMethod === Order::METHOD_CARD
-            ) &&
-            $order->prepaidType > 0
-        ){
+        if( $order->paymentMethod === Order::METHOD_CARD_LAYTER || 
+            $order->paymentMethod === Order::METHOD_CARD) {
 
             $sandbox = get_webpay_sandbox();
 
@@ -215,10 +210,7 @@ class OrderFactory {
             $wsb_test = $sandbox['wsb_test'];
             $wsb_currency_id = 'BYN';
             $wsb_prepaid_type = $order->prepaidType;
-            $wsb_total = (int)($order->price * $wsb_prepaid_type / 100);
-            if($wsb_prepaid_type == 100){
-                $wsb_total = $order->price;
-            }
+            $wsb_total = (int)($order->price * $order->prepaidType / 100);
             $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
 
             $sourceValue = [

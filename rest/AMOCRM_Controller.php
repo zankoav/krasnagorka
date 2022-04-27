@@ -91,7 +91,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             
             $order = OrderFactory::initOrderByRequest($request);
             OrderFactory::isAvailableOrder($order);
-            OrderFactory::insert($order);
+            // OrderFactory::insert($order);
             
             $response = $order;
             
@@ -109,6 +109,8 @@ class AMOCRM_Controller extends WP_REST_Controller {
             // } catch(MailFactoryException $e){
             //     $response = new ExceptionResponse($e);
             // };
+
+            throw new Exception("Configuration file not found.");
 
         } catch( FactoryException $e ){
             $response = $e->getResponse();
