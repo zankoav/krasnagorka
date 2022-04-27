@@ -10,6 +10,10 @@ class Order {
     public const TYPE_PREPAID = 'prepaid';
     public const TYPE_BOOKED = 'booked';
 
+    public const METHOD_OFFICE = 'office';
+    public const METHOD_CARD = 'card';
+    public const METHOD_CARD_LAYTER = 'card_layter';
+
     public int $id;
 
     /**

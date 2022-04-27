@@ -202,7 +202,13 @@ class OrderFactory {
             update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType); 
         }
 
-        if($order->paymentMethod === 'card_layter' || $order->paymentMethod === 'card'){
+        if(
+            (
+                $order->paymentMethod === Order::METHOD_CARD_LAYTER || 
+                $order->paymentMethod === Order::METHOD_CARD
+            ) &&
+            $order->prepaidType > 0
+        ){
 
             $sandbox = get_webpay_sandbox();
 
