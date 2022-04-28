@@ -184,7 +184,7 @@ class AmoCrmFactory {
 
         } catch (AmoCRMApiException $e) {
             throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}");
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new AmoCrmException("Exception {$e->getMessage()}");
         }
     }
