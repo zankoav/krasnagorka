@@ -45,6 +45,9 @@ class OrderFactory {
         }
 
         $order->note = [
+            "ФИО: {$order->contact->fio}",
+            "Телефон: {$order->contact->phone}",
+            "Email: {$order->contact->email}",
             "Сумма: {$order->price} руб.",
             "Домик: {$order->calendarName}",
             "Паспорт №: {$order->contact->passport}"
