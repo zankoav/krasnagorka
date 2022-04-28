@@ -173,7 +173,7 @@ class AmoCrmFactory {
             $messageNote = new CommonNote();
             $messageNote
                 ->setEntityId($lead->getId())
-                ->setText($order->comment);
+                ->setText(implode("\n", $order->note));
             $notesCollection->add($messageNote);
             $apiClient
                 ->notes(EntityTypesInterface::LEADS)

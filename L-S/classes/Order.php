@@ -51,6 +51,7 @@ class Order {
      */
     public int $peopleCount;
 
+    public array $note;
     public bool $isTerem = false;
     public string $calendarName;
     public string $comment;

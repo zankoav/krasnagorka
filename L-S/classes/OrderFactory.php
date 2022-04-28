@@ -39,9 +39,17 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         $order->price = \LS_Booking_Form_Controller::calculateResult((array)$order)['total_price'];
+        
         if(!empty($order->prepaidType)){
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
         }
+
+        $order->note = [
+            "Сумма: {$order->price} руб.",
+            "Домик: {$order->calendarName}",
+            "Паспорт №: {$order->contact->passport}"
+        ];
+
         return $order;
     }
 
@@ -185,6 +193,7 @@ class OrderFactory {
         }
 
         if (!empty($comment)) {
+            $order->note = array_merge($order->note, $comment) ;
             update_post_meta($order->id, 'sbc_order_desc', implode("\n", $comment));
         }
 
