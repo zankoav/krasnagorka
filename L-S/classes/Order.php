@@ -68,9 +68,18 @@ class Order {
     public array $sourceValue;
 
     public int $leadId;
-    public string $created;
 
     public int $price;
     public int $subprice;
+
+    public function getHouseLink(){
+        $calendars  = get_the_terms($this->id, 'sbc_calendars');
+        $calendarSlug = $calendars[0]->slug;
+        $calendarId = $calendars[0]->term_id;
+        $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
+        $houseLink = getHouseLinkByShortCode($calendarShortCode);
+
+        return $houseLink;
+    }
 
 }

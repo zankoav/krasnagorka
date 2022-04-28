@@ -26,8 +26,8 @@
 								<div style="font-size:18px;margin-bottom:5px;">Номер бронирования:
 									<strong><?= '111'//$order->leadId ?></strong>
 									<div style="font-size:14px;">
-										от 
-										<?= 444//$order->created ?>
+										от
+										<?= get_the_date("d.m.Y", $order->id) ?>
 									</div>
 								</div>
 							</td>
@@ -85,7 +85,7 @@
 								<div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">
 									Информация об объектах размещения:</div>
 								<div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;"
-										href=<?= '#'//$order['calendarLink'] ?>>
+										href=<?=$order->getHouseLink()?>>
 										<?= $order->calendarName ?>
 									</a></div>
 							</td>
@@ -140,7 +140,7 @@
 								<div>В стоимость уже включены комиссии платежных систем, туристический сбор не
 									требуется.
 									<div>Предоплата вносится в размере
-										<strong><?= 100//$order->subprice ?></strong> белорусских рублей наличными денежными средствами в
+										<strong><?= $order->subprice ?></strong> белорусских рублей наличными денежными средствами в
 										офисе в Минске в течение двух календарных дней с момента бронирования.
 									</div>
 									<div style="line-height: 1; margin-top:12px;"><small style="color:#999;"><span

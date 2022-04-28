@@ -39,7 +39,9 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         $order->price = \LS_Booking_Form_Controller::calculateResult((array)$order)['total_price'];
-
+        if(!empty($order->prepaidType)){
+            $order->subprice = (int)($order->price * $order->prepaidType / 100);
+        }
         return $order;
     }
 
@@ -124,7 +126,6 @@ class OrderFactory {
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
-        $order->created = get_the_date("d.m.Y", $order->id);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);
@@ -211,7 +212,7 @@ class OrderFactory {
             $wsb_test = $sandbox['wsb_test'];
             $wsb_currency_id = 'BYN';
             $wsb_prepaid_type = $order->prepaidType;
-            $wsb_total = (int)($order->price * $order->prepaidType / 100);
+            $wsb_total = $order->subprice;
             $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $secret_key);
 
             $sourceValue = [
