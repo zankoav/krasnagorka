@@ -51,7 +51,7 @@ class MailFactory {
         if($order->type === Order::TYPE_RESERVED) {
             if($order->paymentMethod == Order::METHOD_CARD_LAYTER){
                 $mail->subject = 'Заявка на бронирование';
-                $mail->templatePath = $order->prepaidType === 100 ? "L-S/mail/templates/tmpl-pay-full-confirm" : "L-S/mail/templates/tmpl-pay-partial-confirm";
+                $mail->templatePath = $order->prepaidType === 100 ? "L-S/mail/templates/pay-full-confirm" : "L-S/mail/templates/pay-partial-confirm";
             }else if($order->paymentMethod == Order::METHOD_OFFICE){
                 $mail->subject = 'Заявка на бронирование';
                 $mail->templatePath = "L-S/mail/templates/office";
@@ -60,7 +60,7 @@ class MailFactory {
             }
         } else {
             $mail->subject = 'Подтверждение бронирования';
-            $mail->checkType =  $order->prepaidType === 100 ? 'tmpl-pay-full' : 'tmpl-pay-partial';
+            $mail->checkType =  $order->prepaidType === 100 ? 'pay-full' : 'pay-partial';
             $mail->templatePath = "L-S/mail/templates/{$mail->checkType}";
         } 
 

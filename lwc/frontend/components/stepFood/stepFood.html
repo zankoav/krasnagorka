@@ -1,21 +1,21 @@
 <template>
     <div class="step-food">
         <div if:true={foodAvailable} class="step-food__body">
-            <div class="step-food__help-text">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые вам необходимы в течение вашего периода проживания.</div>
+            <div class="step-food__help-text">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые необходимы всей вашей компании в течение периода проживания.</div>
             <div if:true={settings.foodBreakfastPrice} class="step-food__group">
-                <z-select data-name="foodBreakfast" label="Количество завтраков" onchange={foodChange} options={breakfastOptions}></z-select>
+                <z-select data-name="foodBreakfast" label="Количество порций завтраков" onchange={foodChange} options={breakfastOptions}></z-select>
                 <div class="step-food__description">
                     Стоимость одного завтрака <span class="number-value" data-after="руб">{settings.foodBreakfastPrice}</span> с человека
                 </div>
             </div>
             <div if:true={settings.foodLunchPrice} class="step-food__group">
-                <z-select data-name="foodLunch" label="Количество обедов" onchange={foodChange} options={lunchOptions}></z-select>
+                <z-select data-name="foodLunch" label="Количество порций обедов" onchange={foodChange} options={lunchOptions}></z-select>
                 <div class="step-food__description">
                     Стоимость одного обеда <span class="number-value" data-after="руб">{settings.foodLunchPrice}</span> с человека
                 </div>
             </div>
             <div if:true={settings.foodDinnerPrice} class="step-food__group">
-                <z-select data-name="foodDinner" label="Количество ужинов" onchange={foodChange} options={dinnerOptions}></z-select>
+                <z-select data-name="foodDinner" label="Количество порций ужинов" onchange={foodChange} options={dinnerOptions}></z-select>
                 <div class="step-food__description">
                     Стоимость одного ужина <span class="number-value" data-after="руб">{settings.foodDinnerPrice}</span> с человека
                 </div>
