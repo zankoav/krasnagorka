@@ -93,24 +93,10 @@ class AMOCRM_Controller extends WP_REST_Controller {
             $order = OrderFactory::initOrderByRequest($request);
             OrderFactory::isAvailableOrder($order);
             OrderFactory::insert($order);
+            // AmoCrmFactory::createLead($order);
             MailFactory::sendOrder($order);
 
             $response = $order;
-            
-            //     OrderFactory::createOrder($order);
-            //     AmoCrmFactory::createLead($order);
-            //     MailFactory::sendVoucher($order);
-            //     $response = new SuccessfulResponse($order);
-       
-            // } catch(OrderException $e){
-            //     $response = new ExceptionResponse($e);
-            // } catch(OrderFactoryException $e){
-            //     $response = new ExceptionResponse($e);
-            // } catch(AmoCrmFactoryException $e){
-            //     $response = new ExceptionResponse($e);
-            // } catch(MailFactoryException $e){
-            //     $response = new ExceptionResponse($e);
-            // };
 
         } catch( FactoryException $e ){
             $response = $e->getResponse();

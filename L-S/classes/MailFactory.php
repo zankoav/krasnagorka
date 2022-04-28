@@ -12,13 +12,41 @@ class MailFactory {
 
         $mail = self::initMail($order);
 
-        $order->mail = $mail;
+        if(!empty($mail->checkType)){
 
+            // $checkHTML = self::generateCheck($mail->checkType, $data);
+
+            // $html2pdf = new Html2Pdf('P', 'A4', 'ru', true, 'UTF-8', array(5, 5, 5, 8));
+            // try {
+            //     $html2pdf->writeHTML($checkHTML);
+            //     $html2pdf->output(WP_CONTENT_DIR.'/uploads/document.pdf', 'F');
+            
+            // } catch (Spipu\Html2Pdf\Exception\Html2PdfException $e) {
+            //     $html2pdf->clean();
+            //     Log::info('0', $e->getMessage());
+            // }
+        }
+        $filePath = WP_CONTENT_DIR . '/uploads/document.pdf';
+        $attachments = array($filePath);
+        $header = [
+            'From: Краснагорка <info@krasnagorka.by>',
+            'content-type: text/html',
+            // 'bcc: order@krasnagorka.by'
+        ];
+        $result = wp_mail([$mail->email], $mail->subject, $mail->template, $header, $attachments);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        if(!$result){
+            throw new MailException('Mail is broken');
+        }
     }
 
     private static function initMail(Order $order){
 
         $mail = (object)[];
+        $mail->email = $order->contact->email;
 
         if($order->type === Order::TYPE_RESERVED) {
             if($order->paymentMethod == Order::METHOD_CARD_LAYTER){

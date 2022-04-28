@@ -77,9 +77,7 @@ class Order {
         $calendarSlug = $calendars[0]->slug;
         $calendarId = $calendars[0]->term_id;
         $calendarShortCode = '[sbc_calendar id="' . $calendarId . '" slug="' . $calendarSlug . '"]';
-        $houseLink = getHouseLinkByShortCode($calendarShortCode);
-
-        return $houseLink;
+        return getHouseLinkByShortCode($calendarShortCode);
     }
 
 }
