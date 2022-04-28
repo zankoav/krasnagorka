@@ -76,117 +76,117 @@ class AmoCrmFactory {
     ];
 
     public static function createLead(Order $order){
-        try{
-            $apiClient = self::getAmoCrmApiClient();
-            $leadsService = $apiClient->leads();
+        // try{
+            // $apiClient = self::getAmoCrmApiClient();
+            // $leadsService = $apiClient->leads();
 
-            $lead = new LeadModel();
+            // $lead = new LeadModel();
 
-            $leadName = 'Сделка с формы бронирования';
-            $stageId = $order->isBookedOnly() ? 19518940 : 35452366; // Подтвердить бронирование | Сделка Из Сайта (webpay)
+            // $leadName = 'Сделка с формы бронирования';
+            // $stageId = $order->isBookedOnly() ? 19518940 : 35452366; // Подтвердить бронирование | Сделка Из Сайта (webpay)
             
-            $lead->setName($leadName);
-            $lead->setStatusId($stageId);
-            $lead->setPrice($order->price);
-            $lead->setTags((new TagsCollection())
-                    ->add(
-                        (new TagModel())
-                            ->setId(1181317)
-                            ->setName('Страница Бронирования')
-                    )
-            );
+            // $lead->setName($leadName);
+            // $lead->setStatusId($stageId);
+            // $lead->setPrice($order->price);
+            // $lead->setTags((new TagsCollection())
+            //         ->add(
+            //             (new TagModel())
+            //                 ->setId(1181317)
+            //                 ->setName('Страница Бронирования')
+            //         )
+            // );
 
-            $leadCustomFields = new CustomFieldsValuesCollection();
+            // $leadCustomFields = new CustomFieldsValuesCollection();
 
-            // Order ID
-            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
-            $orderIdFieldValueModel->setFieldId(639191);
-            $orderIdFieldValueModel->setValues(
-                (new NumericCustomFieldValueCollection())
-                    ->add((new NumericCustomFieldValueModel())
-                            ->setValue($order->id)
-                    )
-            );
-            $leadCustomFields->add($orderIdFieldValueModel);
+            // // Order ID
+            // $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            // $orderIdFieldValueModel->setFieldId(639191);
+            // $orderIdFieldValueModel->setValues(
+            //     (new NumericCustomFieldValueCollection())
+            //         ->add((new NumericCustomFieldValueModel())
+            //                 ->setValue($order->id)
+            //         )
+            // );
+            // $leadCustomFields->add($orderIdFieldValueModel);
 
-            // Order Type
-            $typeFieldValueModel = new TextCustomFieldValuesModel();
-            $typeFieldValueModel->setFieldId(640633);
-            $typeFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->type)
-                    )
-            );
-            $leadCustomFields->add($typeFieldValueModel);
+            // // Order Type
+            // $typeFieldValueModel = new TextCustomFieldValuesModel();
+            // $typeFieldValueModel->setFieldId(640633);
+            // $typeFieldValueModel->setValues(
+            //     (new TextCustomFieldValueCollection())
+            //         ->add((new TextCustomFieldValueModel())
+            //                 ->setValue($order->type)
+            //         )
+            // );
+            // $leadCustomFields->add($typeFieldValueModel);
 
-            // Comment
-            $commentFieldValueModel = new TextCustomFieldValuesModel();
-            $commentFieldValueModel->setFieldId(357377);
-            $commentFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->comment)
-                    )
-            );
-            $leadCustomFields->add($commentFieldValueModel);
+            // // Comment
+            // $commentFieldValueModel = new TextCustomFieldValuesModel();
+            // $commentFieldValueModel->setFieldId(357377);
+            // $commentFieldValueModel->setValues(
+            //     (new TextCustomFieldValueCollection())
+            //         ->add((new TextCustomFieldValueModel())
+            //                 ->setValue($order->comment)
+            //         )
+            // );
+            // $leadCustomFields->add($commentFieldValueModel);
 
-            // Date From
-            $dateFromFieldValueModel = new DateCustomFieldValuesModel();
-            $dateFromFieldValueModel->setFieldId(66211);
-            $dateFromModel = new DateCustomFieldValueModel();
-            $dateFromModel->setValue($order->dateStart);
-            $dateFromModelCollection = new DateCustomFieldValueCollection();
-            $dateFromModelCollection->add($dateFromModel);
-            $dateFromFieldValueModel->setValues($dateFromModelCollection);
-            $leadCustomFields->add($dateFromFieldValueModel);
+            // // Date From
+            // $dateFromFieldValueModel = new DateCustomFieldValuesModel();
+            // $dateFromFieldValueModel->setFieldId(66211);
+            // $dateFromModel = new DateCustomFieldValueModel();
+            // $dateFromModel->setValue($order->dateStart);
+            // $dateFromModelCollection = new DateCustomFieldValueCollection();
+            // $dateFromModelCollection->add($dateFromModel);
+            // $dateFromFieldValueModel->setValues($dateFromModelCollection);
+            // $leadCustomFields->add($dateFromFieldValueModel);
 
-            // Date To 
-            $dateToFieldValueModel = new DateCustomFieldValuesModel();
-            $dateToFieldValueModel->setFieldId(66213);
-            $dateToModel = new DateCustomFieldValueModel();
-            $dateToModel->setValue($order->dateEnd);
-            $dateToModelCollection = new DateCustomFieldValueCollection();
-            $dateToModelCollection->add($dateToModel);
-            $dateToFieldValueModel->setValues($dateToModelCollection);
-            $leadCustomFields->add($dateToFieldValueModel);
+            // // Date To 
+            // $dateToFieldValueModel = new DateCustomFieldValuesModel();
+            // $dateToFieldValueModel->setFieldId(66213);
+            // $dateToModel = new DateCustomFieldValueModel();
+            // $dateToModel->setValue($order->dateEnd);
+            // $dateToModelCollection = new DateCustomFieldValueCollection();
+            // $dateToModelCollection->add($dateToModel);
+            // $dateToFieldValueModel->setValues($dateToModelCollection);
+            // $leadCustomFields->add($dateToFieldValueModel);
 
-            $lead->setCustomFieldsValues($leadCustomFields);
+            // $lead->setCustomFieldsValues($leadCustomFields);
 
-            $houseElement = null;
-            $catalogElementsFilter = new CatalogElementsFilter();
-            $catalogElementsFilter->setIds([self::CALENDAR_OBJECTS_MAPPING[$order->calendarId]]);
-            $catalogElementsService = $apiClient->catalogElements(1321);
-            $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
-            $houseElement = $catalogElementsCollection->first();
-            $houseElement->setQuantity(1);
+            // $houseElement = null;
+            // $catalogElementsFilter = new CatalogElementsFilter();
+            // $catalogElementsFilter->setIds([self::CALENDAR_OBJECTS_MAPPING[$order->calendarId]]);
+            // $catalogElementsService = $apiClient->catalogElements(1321);
+            // $catalogElementsCollection = $catalogElementsService->get($catalogElementsFilter);
+            // $houseElement = $catalogElementsCollection->first();
+            // $houseElement->setQuantity(1);
 
-            $lead = $leadsService->addOne($lead);
+            // $lead = $leadsService->addOne($lead);
 
-            $links = new LinksCollection();
-            $links->add($houseElement);
-            $apiClient
-                ->leads()
-                ->link($lead, $links);
+            // $links = new LinksCollection();
+            // $links->add($houseElement);
+            // $apiClient
+            //     ->leads()
+            //     ->link($lead, $links);
 
-            $notesCollection = new NotesCollection();
-            $messageNote = new CommonNote();
-            $messageNote
-                ->setEntityId($lead->getId())
-                ->setText($order->comment);
-            $notesCollection->add($messageNote);
-            $apiClient
-                ->notes(EntityTypesInterface::LEADS)
-                ->add($notesCollection);
+            // $notesCollection = new NotesCollection();
+            // $messageNote = new CommonNote();
+            // $messageNote
+            //     ->setEntityId($lead->getId())
+            //     ->setText($order->comment);
+            // $notesCollection->add($messageNote);
+            // $apiClient
+            //     ->notes(EntityTypesInterface::LEADS)
+            //     ->add($notesCollection);
 
-            $order->leadId = $lead->getId();
-            update_post_meta($order->id, 'sbc_lead_id', $order->leadId);
+            // $order->leadId = $lead->getId();
+            // update_post_meta($order->id, 'sbc_lead_id', $order->leadId);
 
-        } catch (AmoCRMApiException $e) {
-            throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}");
-        } catch (\Exception $e) {
-            throw new AmoCrmException("Exception {$e->getMessage()}");
-        }
+        // } catch (AmoCRMApiException $e) {
+        //     throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}");
+        // } catch (Exception $e) {
+        //     throw new AmoCrmException("Exception {$e->getMessage()}");
+        // }
     }
 
     private static function getAmoCrmApiClient()
