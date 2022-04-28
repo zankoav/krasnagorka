@@ -3,7 +3,7 @@ use Ls\Wp\Log as Log;
 
 use LsFactory\FactoryException;
 use LsFactory\OrderFactory;
-use LsFactory\AmoCrmFactory;
+// use LsFactory\AmoCrmFactory;
 use LsFactory\MailFactory;
 
 
