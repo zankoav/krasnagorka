@@ -1,9 +1,9 @@
 <?php
 namespace LsFactory;
 
-use LsFactory\Contact;
-use LsFactory\Order;
-use LsFactory\AmoCrmException;
+// use LsFactory\Contact;
+// use LsFactory\Order;
+// use LsFactory\AmoCrmException;
 
 // use AmoCRM\Models\LeadModel;
 // use AmoCRM\Collections\Leads\LeadsCollection;
@@ -192,26 +192,26 @@ class AmoCrmFactory {
     private static function getAmoCrmApiClient()
     {
 
-        $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
-        $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
-        $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
-        $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
-        $accessToken = getToken();
-        $apiClient
-            ->setAccountBaseDomain('krasnogorka.amocrm.ru')
-            ->setAccessToken($accessToken)
-            ->onAccessTokenRefresh(
-                function (AccessTokenInterface $accessToken, string $baseDomain) {
-                    saveToken(
-                        [
-                            'access_token' => $accessToken->getToken(),
-                            'refresh_token' => $accessToken->getRefreshToken(),
-                            'expires_in' => $accessToken->getExpires(),
-                            'baseDomain' => $baseDomain,
-                        ]
-                    );
-                }
-            );
-        return $apiClient;
+        // $clientId = 'fcead59e-467f-482d-ab48-4df278e0bc1c';
+        // $clientSecret = 'tUiAfQfEvIepyj1mLX0T7Zzbot8fpil1zIOoYfXqmZNSF7f4dqRR20dYy0qnlGIW';
+        // $redirectUri = 'https://krasnagorka.by/wp-content/themes/krasnagorka/token_actions.php';
+        // $apiClient = new AmoCRMApiClient($clientId, $clientSecret, $redirectUri);
+        // $accessToken = getToken();
+        // $apiClient
+        //     ->setAccountBaseDomain('krasnogorka.amocrm.ru')
+        //     ->setAccessToken($accessToken)
+        //     ->onAccessTokenRefresh(
+        //         function (AccessTokenInterface $accessToken, string $baseDomain) {
+        //             saveToken(
+        //                 [
+        //                     'access_token' => $accessToken->getToken(),
+        //                     'refresh_token' => $accessToken->getRefreshToken(),
+        //                     'expires_in' => $accessToken->getExpires(),
+        //                     'baseDomain' => $baseDomain,
+        //                 ]
+        //             );
+        //         }
+        //     );
+        // return $apiClient;
     }
 }
