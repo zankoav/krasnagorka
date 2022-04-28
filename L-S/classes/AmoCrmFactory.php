@@ -84,6 +84,7 @@ class AmoCrmFactory {
 
             $leadName = 'Сделка с формы бронирования';
             $stageId = $order->isBookedOnly() ? 19518940 : 35452366; // Подтвердить бронирование | Сделка Из Сайта (webpay)
+            $noteStr = implode("\n", $order->note);
             
             $lead->setName($leadName);
             $lead->setStatusId($stageId);
@@ -126,7 +127,7 @@ class AmoCrmFactory {
             $commentFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->comment)
+                            ->setValue($noteStr)
                     )
             );
             $leadCustomFields->add($commentFieldValueModel);
@@ -173,7 +174,7 @@ class AmoCrmFactory {
             $messageNote = new CommonNote();
             $messageNote
                 ->setEntityId($lead->getId())
-                ->setText(implode("\n", $order->note));
+                ->setText($noteStr);
             $notesCollection->add($messageNote);
             $apiClient
                 ->notes(EntityTypesInterface::LEADS)
