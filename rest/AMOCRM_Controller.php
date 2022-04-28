@@ -1,10 +1,10 @@
 <?php
 use Ls\Wp\Log as Log;
 
-// use LsFactory\FactoryException;
-// use LsFactory\OrderFactory;
-// use LsFactory\AmoCrmFactory;
-// use LsFactory\MailFactory;
+use LsFactory\FactoryException;
+use LsFactory\OrderFactory;
+use LsFactory\AmoCrmFactory;
+use LsFactory\MailFactory;
 
 
 /**
@@ -33,25 +33,25 @@ class AMOCRM_Controller extends WP_REST_Controller {
     }
 
     public function create_order($request) {
-        // try {
+        try {
             
-            // $order = OrderFactory::initOrderByRequest($request);
-            // OrderFactory::isAvailableOrder($order);
-            // OrderFactory::insert($order);
-            // AmoCrmFactory::createLead($order);
-            // MailFactory::sendOrder($order);
+            $order = OrderFactory::initOrderByRequest($request);
+            OrderFactory::isAvailableOrder($order);
+            OrderFactory::insert($order);
+            AmoCrmFactory::createLead($order);
+            MailFactory::sendOrder($order);
 
-            // $response = $order;
+            $response = $order;
 
-        // } catch( FactoryException $e ){
-        //     $response = $e->getResponse();
-        // } catch ( TypeError $e ) {
-        //     $response = ['error' => $e->getMessage()];
-        // } catch ( Exception $e ) {
-        //     $response = ['error' => $e->getMessage()];
-        // }
+        } catch( FactoryException $e ){
+            $response = $e->getResponse();
+        } catch ( TypeError $e ) {
+            $response = ['error' => $e->getMessage()];
+        } catch ( Exception $e ) {
+            $response = ['error' => $e->getMessage()];
+        }
 
-        return new WP_REST_Response(['dd'], 200);
+        return new WP_REST_Response($response, 200);
     }
 }
 
