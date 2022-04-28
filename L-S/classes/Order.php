@@ -80,4 +80,12 @@ class Order {
         return getHouseLinkByShortCode($calendarShortCode);
     }
 
+    public function isBookedOnly(){
+        return (
+            ($this->paymentMethod === null && 
+            $this->prepaidType === null) || 
+            $this->paymentMethod === self::METHOD_OFFICE
+        )
+    }
+
 }

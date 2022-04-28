@@ -24,7 +24,7 @@
 							<td colspan="6"
 								style="padding: 0 30px 20px; color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
 								<div style="font-size:18px;margin-bottom:5px;">Номер бронирования:
-									<strong><?= '111'//$order->leadId ?></strong>
+									<strong><?= $order->leadId ?></strong>
 									<div style="font-size:14px;">
 										от
 										<?= get_the_date("d.m.Y", $order->id) ?>
