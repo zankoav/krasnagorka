@@ -38,7 +38,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             $order = OrderFactory::initOrderByRequest($request);
             OrderFactory::isAvailableOrder($order);
             OrderFactory::insert($order);
-            AmoCrmFactory::createLead($order);
+            // AmoCrmFactory::createLead($order);
             MailFactory::sendOrder($order);
 
             $response = $order;
