@@ -35,13 +35,13 @@ class AMOCRM_Controller extends WP_REST_Controller {
     public function create_order($request) {
         try {
             
-            $order = OrderFactory::initOrderByRequest($request);
-            OrderFactory::isAvailableOrder($order);
-            OrderFactory::insert($order);
+            // $order = OrderFactory::initOrderByRequest($request);
+            // OrderFactory::isAvailableOrder($order);
+            // OrderFactory::insert($order);
             // AmoCrmFactory::createLead($order);
-            MailFactory::sendOrder($order);
+            // MailFactory::sendOrder($order);
 
-            $response = $order;
+            // $response = $order;
 
         } catch( FactoryException $e ){
             $response = $e->getResponse();
@@ -51,7 +51,7 @@ class AMOCRM_Controller extends WP_REST_Controller {
             $response = ['error' => $e->getMessage()];
         }
 
-        return new WP_REST_Response($response, 200);
+        return new WP_REST_Response(['dd'], 200);
     }
 }
 
