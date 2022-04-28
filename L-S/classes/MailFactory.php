@@ -12,7 +12,13 @@ class MailFactory {
 
     public static function sendOrder(Order $order){
 
-        if($order->isBookedOnly() || $order->paymentMethod === Order::METHOD_CARD ) return;
+        if(
+            $order->isBookedOnly() || 
+            ( 
+                $order->paymentMethod === Order::METHOD_CARD && 
+                $order->type === Order::TYPE_RESERVED
+            )
+        ) return;
 
         
         $mail = self::initMail($order);
