@@ -172,9 +172,9 @@ class LS_Mailer {
         ".$bathHouseBlack."
         ".$smallAnimalsCount."
         ".$bigAnimalsCount."
-        ".$$foodBreakfast."
-        ".$$foodLunch."
-        ".$$foodDinner."
+        ".$foodBreakfast."
+        ".$foodLunch."
+        ".$foodDinner."
         <tr>
         <td colspan='2' class='title'>Оплата:</td>
         </tr>
