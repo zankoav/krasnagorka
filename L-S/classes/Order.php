@@ -85,7 +85,7 @@ class Order {
             ($this->paymentMethod === null && 
             $this->prepaidType === null) || 
             $this->paymentMethod === self::METHOD_OFFICE
-        )
+        );
     }
 
 }
