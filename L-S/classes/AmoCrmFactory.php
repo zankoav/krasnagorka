@@ -309,20 +309,20 @@ class AmoCrmFactory {
             $apiClient->leads()->link($lead, $links);
 
             // Создадим задачу
-            // $tasksCollection = new TasksCollection();
-            // $task = new TaskModel();
-            // $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-            //     ->setText('Помочь клиенту определиться с заказом')
-            //     ->setCompleteTill(mktime(date("H"), date("i") + 30))
-            //     ->setEntityType(EntityTypesInterface::LEADS)
-            //     ->setEntityId($lead->getId())
-            //     ->setDuration(1 * 60 * 60) // 1 час
-            //     ->setResponsibleUserId(2373844);
-            // $tasksCollection->add($task);
+            $tasksCollection = new TasksCollection();
+            $task = new TaskModel();
+            $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+                ->setText('Помочь клиенту определиться с заказом')
+                ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                ->setEntityType(EntityTypesInterface::LEADS)
+                ->setEntityId($lead->getId())
+                ->setDuration(1 * 60 * 60) // 1 час
+                ->setResponsibleUserId(2373844);
+            $tasksCollection->add($task);
 
-            // $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-            // $taskToStore = $tasksCollection->first();
-            // update_post_meta($order->id, 'sbc_task_id', $taskToStore->getId());
+            $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+            $taskToStore = $tasksCollection->first();
+            update_post_meta($order->id, 'sbc_task_id', $taskToStore->getId());
            
         } catch (AmoCRMApiException $e) {
             throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}");
