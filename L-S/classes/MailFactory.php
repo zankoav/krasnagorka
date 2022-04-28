@@ -43,6 +43,8 @@ class MailFactory {
             unlink($filePath);
         }
 
+        $order->mail = $mail;
+
         if(!$result){
             throw new MailException('Mail is broken');
         }
