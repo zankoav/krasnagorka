@@ -19,6 +19,12 @@ class FactoryException extends \Exception {
 
     public function getResponse(){
         Log::error($this->type, $this->message);
-        return ['error' => $this->__toString()];
+        return ['error' => 
+            [   
+                'code' => $this->code,
+                'type' => $this->type,
+                'message' => $this->__toString()
+            ]
+        ];
     }
 }

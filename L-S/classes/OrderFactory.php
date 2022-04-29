@@ -33,6 +33,7 @@ class OrderFactory {
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
         $order->bathHouseBlack = intval($data['bathHouseBlack']);
         $order->smallAnimalCount = intval($data['smallAnimalCount']);
+        $order->bigAnimalCount = intval($data['bigAnimalCount']);
         $order->foodBreakfast = intval($data['foodBreakfast']);
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
