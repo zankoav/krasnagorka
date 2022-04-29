@@ -41,14 +41,20 @@ class AMOCRM_Controller extends WP_REST_Controller {
             AmoCrmFactory::createLead($order);
             MailFactory::sendOrder($order);
 
-            $response = $order;
+            $response = OrderFactory::getResponse($order);
 
         } catch( FactoryException $e ){
             $response = $e->getResponse();
         } catch ( TypeError $e ) {
-            $response = ['error' => $e->getMessage()];
+            $response = ['error' => [
+                'message' => $e->getMessage(),
+                'code' => 501
+            ]];
         } catch ( Exception $e ) {
-            $response = ['error' => $e->getMessage()];
+            $response = ['error' => [
+                'message' => $e->getMessage(),
+                'code' => 502
+            ]];
         }
 
         return new WP_REST_Response($response, 200);

@@ -116,6 +116,16 @@ class OrderFactory {
         }
     }
 
+    public static function getResponse(Order $order){
+        $response = [
+            'data' => [
+                'template' => $order->getMailTemplete(),
+                'redirect' => $order->$sourceValue
+            ]
+        ];
+        return $response;
+    }
+
     public static function insert(Order $order) {
 
         ContactFactory::insert($order->contact);

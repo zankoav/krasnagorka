@@ -66,7 +66,7 @@ class Order {
     public int $foodBreakfast;
     public int $foodLunch;
     public int $foodDinner;
-    public array $sourceValue;
+    public ?array $sourceValue;
 
     public int $leadId;
 
@@ -87,6 +87,10 @@ class Order {
             $this->prepaidType === null) || 
             $this->paymentMethod === self::METHOD_OFFICE
         );
+    }
+
+    public function getMailTemplete(){
+        return !empty($this->mail) ? $this->mail->template : null;
     }
 
 }
