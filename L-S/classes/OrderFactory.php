@@ -40,8 +40,8 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         
-        $tempDateStart = new \DateTime(date("Y-m-d", strtotime($dateStart)));
-
+        $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
+        
         $order->price = \LS_Booking_Form_Controller::calculateResult(
             array_merge(
                 (array)$order, 
