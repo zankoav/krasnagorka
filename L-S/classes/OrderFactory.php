@@ -119,6 +119,7 @@ class OrderFactory {
     public static function getResponse(Order $order){
         return [
             'data' => [
+                'ordered_only' => $order->isBookedOnly(),
                 'template' => $order->getMailTemplete(),
                 'redirect' => $order->sourceValue
             ]
