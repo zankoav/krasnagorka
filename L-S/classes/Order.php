@@ -84,9 +84,8 @@ class Order {
 
     public function isBookedOnly(){
         return (
-            ($this->paymentMethod === null && 
-            $this->prepaidType === null) || 
-            $this->paymentMethod === self::METHOD_OFFICE
+            $this->paymentMethod === null && 
+            $this->prepaidType === null
         );
     }
 
