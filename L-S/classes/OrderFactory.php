@@ -143,12 +143,16 @@ class OrderFactory {
         update_post_meta($order->id, 'sbc_order_end', $order->dateEnd);
         update_post_meta($order->id, 'sbc_order_price', $order->price);
         update_post_meta($order->id, 'sbc_order_people_count', $order->peopleCount);
+        update_post_meta($order->id, 'sbc_order_count_people', $order->peopleCount); // need to remove
         wp_set_object_terms($order->id, [$order->calendarId], 'sbc_calendars');
 
         $comment = [
-            $order->comment,
             "Количество человек: {$order->peopleCount}"
         ];
+
+        if(!empty($order->comment)){
+            $comment[] = $order->comment;
+        }
 
         if($order->smallAnimalsCount > 0){
             $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalsCount}";
