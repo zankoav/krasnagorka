@@ -120,7 +120,7 @@ class OrderFactory {
         $response = [
             'data' => [
                 'template' => $order->getMailTemplete(),
-                'redirect' => $order->$sourceValue
+                'redirect' => $order->sourceValue
             ]
         ];
         return $response;

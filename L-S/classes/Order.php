@@ -90,7 +90,7 @@ class Order {
     }
 
     public function getMailTemplete(){
-        return !empty($this->mail) ? $this->mail->template : null;
+        return $this->mail;
     }
 
 }
