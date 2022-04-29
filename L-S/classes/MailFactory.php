@@ -42,7 +42,7 @@ class MailFactory {
         $header = [
             'From: Краснагорка <info@krasnagorka.by>',
             'content-type: text/html',
-            // 'bcc: order@krasnagorka.by'
+            'bcc: order@krasnagorka.by'
         ];
         $result = wp_mail([$mail->email], $mail->subject, $mail->template, $header, [$filePath]);
         if (file_exists($filePath)) {
