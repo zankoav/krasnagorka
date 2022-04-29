@@ -39,7 +39,14 @@ class OrderFactory {
         $order->foodDinner = intval($data['foodDinner']);
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
-        $order->price = \LS_Booking_Form_Controller::calculateResult((array)$order)['total_price'];
+        
+        $tempDateStart = new \DateTime($dateStart);
+        $order->price = \LS_Booking_Form_Controller::calculateResult(
+            array_merge(
+                (array)$order, 
+                ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
+            )
+        )['total_price'];
         
         if(!empty($order->prepaidType)){
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
