@@ -10,6 +10,7 @@ use AmoCRM\Collections\Leads\LeadsCollection;
 use AmoCRM\Client\AmoCRMApiClient;
 use League\OAuth2\Client\Token\AccessTokenInterface;
 use AmoCRM\Exceptions\AmoCRMApiException;
+use AmoCRM\Exceptions\AmoCRMApiNoContentException;
 use AmoCRM\Collections\TagsCollection;
 use AmoCRM\Models\TagModel;
 use AmoCRM\Filters\ContactsFilter;
@@ -184,11 +185,19 @@ class AmoCrmFactory {
             update_post_meta($order->id, 'sbc_lead_id', $order->leadId);
 
             // CONTACT
+
             $contact = null;
+            $contactsCollection = null;
             $contactsFilter = new ContactsFilter();
             $contactsFilter->setQuery($order->contact->phone);
 
-            $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            try{
+                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+            } catch (AmoCRMApiNoContentException $e) {
+                $contact = null;
+                $contactsCollection = null;
+            }
+            
 
 
             if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
@@ -225,8 +234,12 @@ class AmoCrmFactory {
             } else {
                 $contactsFilter->setQuery($order->contact->email);
 
-                $contactsCollection = $apiClient->contacts()->get($contactsFilter);
-
+                try{
+                    $contactsCollection = $apiClient->contacts()->get($contactsFilter);
+                } catch (AmoCRMApiNoContentException $e) {
+                    $contact = null;
+                    $contactsCollection = null;
+                }
 
                 if (!empty($contactsCollection) and $contactsCollection->count() > 0) {
                     $contact = $contactsCollection->first();
