@@ -67,7 +67,7 @@ class Order {
     public int $foodLunch;
     public int $foodDinner;
     public ?array $sourceValue;
-    public ?object $mail;
+    // public ?object $mail;
 
     public int $leadId;
 
