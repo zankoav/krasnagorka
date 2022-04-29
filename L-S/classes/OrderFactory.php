@@ -117,13 +117,12 @@ class OrderFactory {
     }
 
     public static function getResponse(Order $order){
-        $response = [
+        return [
             'data' => [
                 'template' => $order->getMailTemplete(),
-                // 'redirect' => $order->sourceValue
+                'redirect' => $order->sourceValue
             ]
         ];
-        return $response;
     }
 
     public static function insert(Order $order) {

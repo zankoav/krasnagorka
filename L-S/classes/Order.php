@@ -66,8 +66,6 @@ class Order {
     public int $foodBreakfast;
     public int $foodLunch;
     public int $foodDinner;
-    public ?array $sourceValue;
-    // public ?object $mail;
 
     public int $leadId;
 
@@ -90,7 +88,7 @@ class Order {
     }
 
     public function getMailTemplete(){
-        return $this->mail;
+        return $this->mail->template;
     }
 
 }
