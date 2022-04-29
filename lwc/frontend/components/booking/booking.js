@@ -4,6 +4,7 @@ import './booking.scss'
 
 const MAX_AGE = 3600 * 24 * 100
 import OK from './../../icons/checkon.svg'
+import ERROR from './../../icons/error.svg'
 
 const SUCCESS = {
     BASE: {
@@ -29,9 +30,11 @@ const SUCCESS = {
 }
 
 export default class BookingForm extends LightningElement {
+    @api model
     @api settings
     @track loading
     @track okImage = OK
+    @track errorImage = ERROR
 
     get isHouseStep() {
         return this.settings.menu[0].active
@@ -67,62 +70,45 @@ export default class BookingForm extends LightningElement {
         return result
     }
 
-    // Only booking
+    getChildsCount() {
+        const childCountsSeectedItem = this.settings.childCounts.find((c) => c.selected)
+        return childCountsSeectedItem ? childCountsSeectedItem.name : 0
+    }
+
+    isPayment(){
+        return this.settings.payment && !this.settings.total.only_booking_order.enabled;
+    }
+
     async bookingOrder() {
         this.loading = true
 
-        const calendar = this.settings.calendars.find((c) => c.selected)
-        const houseId = this.settings.house.id
-        const isTerem = this.settings.house.isTerem || ''
-        const peopleCount = this.settings.counts.find((c) => c.selected).name
-
-        const childCountsSeectedItem = this.settings.childCounts.find((c) => c.selected)
-        const childCounts = childCountsSeectedItem ? childCountsSeectedItem.name : 0
-        const cid = getCookie('_ga') ? getCookie('_ga').replace(/GA1.2./g, '') : null
-        const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD')
-        const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
-
-        const babyBed = !!this.settings.babyBed
-
         const requestData = {
-            id: calendar.id,
-            fio: this.settings.fio,
-            phone: this.settings.phone,
-            email: this.settings.email,
-            isTerem: isTerem,
-            dateStart: dateStart,
-            dateEnd: dateEnd,
-            count: peopleCount,
-            houseId: houseId,
-            childs: childCounts,
-            contract: false,
+            contact: {
+                fio: this.settings.fio,
+                phone: this.settings.phone,
+                email: this.settings.email,
+                passport: this.settings.passport
+            },
+            calendarId: this.settings.calendars.find((c) => c.selected).id,
+            count: this.settings.counts.find((c) => c.selected).name,
+            dateStart: new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+            dateEnd: new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+            houseId: this.settings.house.id,
+            childCount: this.getChildsCount(),
             comment: this.settings.comment,
-            orderTitle: calendar.name,
-            orderType: 'Домик:',
-            cid: cid,
-            babyBed: babyBed,
-            bathHouseWhite: this.settings.bathHouseWhite,
-            bathHouseBlack: this.settings.bathHouseBlack,
-            smallAnimalCount: this.settings.smallAnimalCount,
-            bigAnimalCount: this.settings.bigAnimalCount,
-            foodBreakfast: this.settings.foodBreakfast,
-            foodLunch: this.settings.foodLunch,
-            foodDinner: this.settings.foodDinner,
-            passport: this.settings.passport,
-            data: `foodDinner=${this.settings.foodDinner}&foodLunch=${this.settings.foodLunch}&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${
-                this.settings.bigAnimalCount || 0
-            }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
-                this.settings.email
-            }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
-                this.settings.comment || ''
-            }&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${
-                this.settings.passport || ''
-            }&id=${calendar.id}&isTerem=${isTerem}&spetial=no&babyBed=${babyBed}&bathHouseWhite=${
-                this.settings.bathHouseWhite || ''
-            }&bathHouseBlack=${this.settings.bathHouseBlack || ''}`
+            paymentMethod: this.isPayment() ? this.settings.paymentMethod : null,
+            prepaidType: this.isPayment() ? this.settings.prepaidType : null,
+            babyBed: !!this.settings.babyBed,
+            bathHouseWhite: this.settings.bathHouseWhite || 0,
+            bathHouseBlack: this.settings.bathHouseBlack || 0,
+            smallAnimalCount: this.settings.smallAnimalCount || 0,
+            bigAnimalCount: this.settings.bigAnimalCount || 0,
+            foodBreakfast: this.settings.foodBreakfast || 0,
+            foodLunch: this.settings.foodLunch || 0,
+            foodDinner: this.settings.foodDinner || 0
         }
 
-        const response = await fetch('/wp-json/krasnagorka/v1/order/', {
+        const response = await fetch('https://krasnagorka.by/wp-json/amocrm/v4/create-order/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json; charset=utf-8'
@@ -130,175 +116,337 @@ export default class BookingForm extends LightningElement {
             body: JSON.stringify(requestData)
         }).then((data) => data.json())
 
-        if (response && response.data) {
-            this.dispatchEvent(
-                new CustomEvent('update', {
-                    detail: {
-                        orderedSuccess: true
-                    },
-                    bubbles: true,
-                    composed: true
-                })
-            )
-            setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
-            setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
-            setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
-
-            await fetch('/wp-json/krasnagorka/v1/create-amocrm-lead/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                },
-                body: JSON.stringify({
-                    data: response.data,
-                    email: this.settings.email,
-                    orderId: response.orderId,
-                    paymentMethod: response.paymentMethod,
-                    prepaidType: response.prepaidType
-                })
-            })
-            gtag('event', 'create_lead')
-        } else {
-            this.dispatchEvent(
-                new CustomEvent('update', {
-                    detail: {
-                        bookingErrorMessage:
-                            'Извините! Выбранные даты заняты. Выберите свободный интервал.'
-                    },
-                    bubbles: true,
-                    composed: true
-                })
-            )
-        }
-        this.loading = false
-    }
-
-    // Booking with pay
-    async sendOrder() {
-        this.loading = true
-        const calendar = this.settings.calendars.find((c) => c.selected)
-        const houseId = this.settings.house.id
-        const isTerem = this.settings.house.isTerem || ''
-        const peopleCount = this.settings.counts.find((c) => c.selected).name
-
-        const childCountsSeectedItem = this.settings.childCounts.find((c) => c.selected)
-        const childCounts = childCountsSeectedItem ? childCountsSeectedItem.name : 0
-        const cid = getCookie('_ga') ? getCookie('_ga').replace(/GA1.2./g, '') : null
-        const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD')
-        const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
-
-        const babyBed = !!this.settings.babyBed
-
-        const requestData = {
-            id: calendar.id,
-            fio: this.settings.fio,
-            phone: this.settings.phone,
-            email: this.settings.email,
-            paymentMethod: this.settings.paymentMethod,
-            prepaidType: this.settings.prepaidType,
-            isTerem: isTerem,
-            dateStart: dateStart,
-            dateEnd: dateEnd,
-            count: peopleCount,
-            houseId: houseId,
-            childs: childCounts,
-            contract: false,
-            babyBed: babyBed,
-            bathHouseWhite: this.settings.bathHouseWhite,
-            bathHouseBlack: this.settings.bathHouseBlack,
-            smallAnimalCount: this.settings.smallAnimalCount,
-            bigAnimalCount: this.settings.bigAnimalCount,
-            foodBreakfast: this.settings.foodBreakfast,
-            foodLunch: this.settings.foodLunch,
-            foodDinner: this.settings.foodDinner,
-            comment: this.settings.comment,
-            orderTitle: calendar.name,
-            orderType: 'Домик:',
-            cid: cid,
-            passport: this.settings.passport,
-            wsb_test: this.settings.webpaySandbox.wsb_test,
-            data: `foodDinner=${this.settings.foodDinner}&foodLunch=${this.settings.foodLunch}&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${this.settings.smallAnimalCount || 0}&bigAnimalCount=${
-                this.settings.bigAnimalCount || 0
-            }&prepaidType=${this.settings.prepaidType}&paymentMethod=${
-                this.settings.paymentMethod
-            }&fio=${this.settings.fio}&phone=${this.settings.phone}&email=${
-                this.settings.email
-            }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
-                this.settings.comment || ''
-            }&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${
-                this.settings.passport || ''
-            }&id=${calendar.id}&isTerem=${isTerem}&spetial=no&babyBed=${babyBed}&bathHouseWhite=${
-                this.settings.bathHouseWhite || ''
-            }&bathHouseBlack=${this.settings.bathHouseBlack || ''}`
-        }
-
-        const responseOrder = await fetch('/wp-json/krasnagorka/v1/order/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(requestData)
-        }).then((data) => data.json())
-
-        if (responseOrder.status && responseOrder.data) {
-            setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
-            setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
-            setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
-
-            const leadResponse = await fetch('/wp-json/krasnagorka/v1/create-amocrm-lead/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                },
-                body: JSON.stringify({
-                    data: responseOrder.data,
-                    orderId: responseOrder.orderId,
-                    email: this.settings.email,
-                    paymentMethod: this.settings.paymentMethod,
-                    prepaidType: this.settings.prepaidType
-                })
-            }).then((data) => data.json())
-
-            if (leadResponse) {
+        if (response) {
+            if (response.error) {
+                if (response.error.code === 212) {
+                    this.dispatchEvent(
+                        new CustomEvent('update', {
+                            detail: {
+                                bookingErrorMessage:
+                                    'Извините! Выбранные даты заняты. Выберите свободный интервал.'
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
+                    )
+                } else {
+                    this.showError()
+                }
+            } else if (response.data) {
+                setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
+                setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
+                setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
                 gtag('event', 'create_lead')
-                console.log(leadResponse.template)
-                this.dispatchEvent(
-                    new CustomEvent('update', {
-                        detail: {
-                            tmpl: leadResponse.template,
-                            orderedSuccess: true
-                        },
-                        bubbles: true,
-                        composed: true
-                    })
-                )
 
-                if (responseOrder.redirect) {
-                    responseOrder.redirect.values.wsb_storeid =
+                if (response.data.template) {
+                    this.dispatchEvent(
+                        new CustomEvent('update', {
+                            detail: {
+                                tmpl: response.data.template,
+                                orderedSuccess: true
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
+                    )
+                } else if (response.data.redirect) {
+                    response.data.redirect.values.wsb_storeid =
                         this.settings.webpaySandbox.wsb_storeid
-                    responseOrder.redirect.values.wsb_test = this.settings.webpaySandbox.wsb_test
+                    response.data.redirect.values.wsb_test = this.settings.webpaySandbox.wsb_test
 
                     generateAndSubmitForm(
                         this.settings.webpaySandbox.url,
-                        responseOrder.redirect.values,
-                        responseOrder.redirect.names
+                        response.data.redirect.values,
+                        response.data.redirect.names
                     )
+
+                    this.dispatchEvent(
+                        new CustomEvent('update', {
+                            detail: {
+                                orderedSuccess: true
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
+                    )
+                }else if(response.data.ordered_only){
+                    this.dispatchEvent(
+                        new CustomEvent('update', {
+                            detail: {
+                                orderedSuccess: true
+                            },
+                            bubbles: true,
+                            composed: true
+                        })
+                    )
+                }else {
+                    this.showError()
                 }
             }
         } else {
-            this.dispatchEvent(
-                new CustomEvent('update', {
-                    detail: {
-                        bookingErrorMessage:
-                            'Извините! Выбранные даты заняты. Выберите свободный интервал.'
-                    },
-                    bubbles: true,
-                    composed: true
-                })
-            )
+            this.showError()
         }
         this.loading = false
     }
+
+    showError() {
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    orderedError: true
+                },
+                bubbles: true,
+                composed: true
+            })
+        )
+    }
+
+    // Only booking
+    // async bookingOrder_Old() {
+    //     this.loading = true
+
+    //     const calendar = this.settings.calendars.find((c) => c.selected)
+    //     const houseId = this.settings.house.id
+    //     const isTerem = this.settings.house.isTerem || ''
+    //     const peopleCount = this.settings.counts.find((c) => c.selected).name
+
+    //     const childCountsSeectedItem = this.settings.childCounts.find((c) => c.selected)
+    //     const childCounts = childCountsSeectedItem ? childCountsSeectedItem.name : 0
+    //     const cid = getCookie('_ga') ? getCookie('_ga').replace(/GA1.2./g, '') : null
+    //     const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD')
+    //     const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
+
+    //     const babyBed = !!this.settings.babyBed
+
+    //     const requestData = {
+    //         id: calendar.id,
+    //         fio: this.settings.fio,
+    //         phone: this.settings.phone,
+    //         email: this.settings.email,
+    //         isTerem: isTerem,
+    //         dateStart: dateStart,
+    //         dateEnd: dateEnd,
+    //         count: peopleCount,
+    //         houseId: houseId,
+    //         childs: childCounts,
+    //         contract: false,
+    //         comment: this.settings.comment,
+    //         orderTitle: calendar.name,
+    //         orderType: 'Домик:',
+    //         cid: cid,
+    //         babyBed: babyBed,
+    //         bathHouseWhite: this.settings.bathHouseWhite,
+    //         bathHouseBlack: this.settings.bathHouseBlack,
+    //         smallAnimalCount: this.settings.smallAnimalCount,
+    //         bigAnimalCount: this.settings.bigAnimalCount,
+    //         foodBreakfast: this.settings.foodBreakfast,
+    //         foodLunch: this.settings.foodLunch,
+    //         foodDinner: this.settings.foodDinner,
+    //         passport: this.settings.passport,
+    //         data: `foodDinner=${this.settings.foodDinner}&foodLunch=${
+    //             this.settings.foodLunch
+    //         }&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${
+    //             this.settings.smallAnimalCount || 0
+    //         }&bigAnimalCount=${this.settings.bigAnimalCount || 0}&fio=${this.settings.fio}&phone=${
+    //             this.settings.phone
+    //         }&email=${
+    //             this.settings.email
+    //         }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
+    //             this.settings.comment || ''
+    //         }&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${
+    //             this.settings.passport || ''
+    //         }&id=${calendar.id}&isTerem=${isTerem}&spetial=no&babyBed=${babyBed}&bathHouseWhite=${
+    //             this.settings.bathHouseWhite || ''
+    //         }&bathHouseBlack=${this.settings.bathHouseBlack || ''}`
+    //     }
+
+    //     const response = await fetch('/wp-json/krasnagorka/v1/order/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json; charset=utf-8'
+    //         },
+    //         body: JSON.stringify(requestData)
+    //     }).then((data) => data.json())
+
+    //     if (response && response.data) {
+    //         this.dispatchEvent(
+    //             new CustomEvent('update', {
+    //                 detail: {
+    //                     orderedSuccess: true
+    //                 },
+    //                 bubbles: true,
+    //                 composed: true
+    //             })
+    //         )
+    //         setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
+    //         setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
+    //         setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
+
+    //         await fetch('/wp-json/krasnagorka/v1/create-amocrm-lead/', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json; charset=utf-8'
+    //             },
+    //             body: JSON.stringify({
+    //                 data: response.data,
+    //                 email: this.settings.email,
+    //                 orderId: response.orderId,
+    //                 paymentMethod: response.paymentMethod,
+    //                 prepaidType: response.prepaidType
+    //             })
+    //         })
+    //         gtag('event', 'create_lead')
+    //     } else {
+    //         this.dispatchEvent(
+    //             new CustomEvent('update', {
+    //                 detail: {
+    //                     bookingErrorMessage:
+    //                         'Извините! Выбранные даты заняты. Выберите свободный интервал.'
+    //                 },
+    //                 bubbles: true,
+    //                 composed: true
+    //             })
+    //         )
+    //     }
+    //     this.loading = false
+    // }
+
+    // Booking with pay
+    
+    
+    async sendOrder() {
+        await this.bookingOrder();
+    }
+
+    // async sendOrder_Old() {
+    //     this.loading = true
+    //     const calendar = this.settings.calendars.find((c) => c.selected)
+    //     const houseId = this.settings.house.id
+    //     const isTerem = this.settings.house.isTerem || ''
+    //     const peopleCount = this.settings.counts.find((c) => c.selected).name
+
+    //     const childCountsSeectedItem = this.settings.childCounts.find((c) => c.selected)
+    //     const childCounts = childCountsSeectedItem ? childCountsSeectedItem.name : 0
+    //     const cid = getCookie('_ga') ? getCookie('_ga').replace(/GA1.2./g, '') : null
+    //     const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD')
+    //     const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
+
+    //     const babyBed = !!this.settings.babyBed
+
+    //     const requestData = {
+    //         id: calendar.id,
+    //         fio: this.settings.fio,
+    //         phone: this.settings.phone,
+    //         email: this.settings.email,
+    //         paymentMethod: this.settings.paymentMethod,
+    //         prepaidType: this.settings.prepaidType,
+    //         isTerem: isTerem,
+    //         dateStart: dateStart,
+    //         dateEnd: dateEnd,
+    //         count: peopleCount,
+    //         houseId: houseId,
+    //         childs: childCounts,
+    //         contract: false,
+    //         babyBed: babyBed,
+    //         bathHouseWhite: this.settings.bathHouseWhite,
+    //         bathHouseBlack: this.settings.bathHouseBlack,
+    //         smallAnimalCount: this.settings.smallAnimalCount,
+    //         bigAnimalCount: this.settings.bigAnimalCount,
+    //         foodBreakfast: this.settings.foodBreakfast,
+    //         foodLunch: this.settings.foodLunch,
+    //         foodDinner: this.settings.foodDinner,
+    //         comment: this.settings.comment,
+    //         orderTitle: calendar.name,
+    //         orderType: 'Домик:',
+    //         cid: cid,
+    //         passport: this.settings.passport,
+    //         wsb_test: this.settings.webpaySandbox.wsb_test,
+    //         data: `foodDinner=${this.settings.foodDinner}&foodLunch=${
+    //             this.settings.foodLunch
+    //         }&foodBreakfast=${this.settings.foodBreakfast}&smallAnimalCount=${
+    //             this.settings.smallAnimalCount || 0
+    //         }&bigAnimalCount=${this.settings.bigAnimalCount || 0}&prepaidType=${
+    //             this.settings.prepaidType
+    //         }&paymentMethod=${this.settings.paymentMethod}&fio=${this.settings.fio}&phone=${
+    //             this.settings.phone
+    //         }&email=${
+    //             this.settings.email
+    //         }&dateStart=${dateStart}&dateEnd=${dateEnd}&count=${peopleCount}&childs=${childCounts}&contract=${true}&comment=${
+    //             this.settings.comment || ''
+    //         }&bookingTitle=${calendar.name}&bookingType=${'Домик:'}&cid=${cid}&passportId=${
+    //             this.settings.passport || ''
+    //         }&id=${calendar.id}&isTerem=${isTerem}&spetial=no&babyBed=${babyBed}&bathHouseWhite=${
+    //             this.settings.bathHouseWhite || ''
+    //         }&bathHouseBlack=${this.settings.bathHouseBlack || ''}`
+    //     }
+
+    //     const responseOrder = await fetch('/wp-json/krasnagorka/v1/order/', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json; charset=utf-8'
+    //         },
+    //         body: JSON.stringify(requestData)
+    //     }).then((data) => data.json())
+
+    //     if (responseOrder.status && responseOrder.data) {
+    //         setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
+    //         setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
+    //         setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
+
+    //         const leadResponse = await fetch('/wp-json/krasnagorka/v1/create-amocrm-lead/', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json; charset=utf-8'
+    //             },
+    //             body: JSON.stringify({
+    //                 data: responseOrder.data,
+    //                 orderId: responseOrder.orderId,
+    //                 email: this.settings.email,
+    //                 paymentMethod: this.settings.paymentMethod,
+    //                 prepaidType: this.settings.prepaidType
+    //             })
+    //         }).then((data) => data.json())
+
+    //         if (leadResponse) {
+    //             gtag('event', 'create_lead')
+    //             console.log(leadResponse.template)
+    //             this.dispatchEvent(
+    //                 new CustomEvent('update', {
+    //                     detail: {
+    //                         tmpl: leadResponse.template,
+    //                         orderedSuccess: true
+    //                     },
+    //                     bubbles: true,
+    //                     composed: true
+    //                 })
+    //             )
+
+    //             if (responseOrder.redirect) {
+    //                 responseOrder.redirect.values.wsb_storeid =
+    //                     this.settings.webpaySandbox.wsb_storeid
+    //                 responseOrder.redirect.values.wsb_test = this.settings.webpaySandbox.wsb_test
+
+    //                 generateAndSubmitForm(
+    //                     this.settings.webpaySandbox.url,
+    //                     responseOrder.redirect.values,
+    //                     responseOrder.redirect.names
+    //                 )
+    //             }
+    //         }
+    //     } else {
+    //         this.dispatchEvent(
+    //             new CustomEvent('update', {
+    //                 detail: {
+    //                     bookingErrorMessage:
+    //                         'Извините! Выбранные даты заняты. Выберите свободный интервал.'
+    //                 },
+    //                 bubbles: true,
+    //                 composed: true
+    //             })
+    //         )
+    //     }
+    //     this.loading = false
+    // }
 
     renderedCallback() {
         const template = this.template.querySelector('.booking__template')

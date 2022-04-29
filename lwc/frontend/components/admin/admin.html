@@ -5,6 +5,7 @@
         <template if:false={model.pay}>
             <z-booking onupdate={updateSettings}
                        settings={settings}
+                       model={model}
                        slot="main">
             </z-booking>
         </template>
