@@ -133,6 +133,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
+        Log::info('E', json_encode($request));
+
         $dateEndDT = new DateTime($dateEnd);
 
         $period = new DatePeriod(
