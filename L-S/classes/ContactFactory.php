@@ -58,19 +58,19 @@ class ContactFactory {
     public static function validateContact(Contact $contact){
 
         if(empty($contact->fio)){
-            throw new ContactException('Empty fio');
+            throw new ContactException('Empty fio', 101);
         }
 
         if(empty($contact->phone)){
-            throw new ContactException('Empty phone');
+            throw new ContactException('Empty phone', 102);
         }
 
         if(empty($contact->email)){
-            throw new ContactException('Empty email');
+            throw new ContactException('Empty email', 102);
         }
 
         if(empty($contact->passport)){
-            throw new ContactException('Empty passport');
+            throw new ContactException('Empty passport', 103);
         }
     }
 

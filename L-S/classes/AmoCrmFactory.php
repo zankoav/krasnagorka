@@ -341,9 +341,9 @@ class AmoCrmFactory {
             }
            
         } catch (AmoCRMApiException $e) {
-            throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}");
+            throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}", 301);
         } catch (Exception $e) {
-            throw new AmoCrmException("Exception {$e->getMessage()}");
+            throw new AmoCrmException("Exception {$e->getMessage()}", 302);
         }
     }
 

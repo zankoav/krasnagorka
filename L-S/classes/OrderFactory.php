@@ -112,7 +112,7 @@ class OrderFactory {
         }   
 
         if(!$result){
-            throw new OrderException('Order not available');
+            throw new OrderException('Order not available', 212);
         }
     }
 
@@ -131,7 +131,7 @@ class OrderFactory {
         $post_id = wp_insert_post(wp_slash($post_data));
 
         if (is_wp_error($post_id)) {
-            throw new OrderException($post_id->get_error_message());
+            throw new OrderException($post_id->get_error_message(), 213);
         }
 
         $order->id = $post_id;
@@ -268,29 +268,29 @@ class OrderFactory {
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
         if(empty($order->calendarId)){
-            throw new OrderException('Empty calendar id');
+            throw new OrderException('Empty calendar id', 201);
         }else if(!get_term($order->calendarId)){
-            throw new OrderException('Calendar id not exists');
+            throw new OrderException('Calendar id not exists', 202);
         }
 
         if(empty($order->dateStart)){
-            throw new OrderException('Empty date start');
+            throw new OrderException('Empty date start', 203);
         }
 
         if(empty($order->dateEnd)){
-            throw new OrderException('Empty date end');
+            throw new OrderException('Empty date end', 204);
         }
 
         if(empty($order->houseId)){
-            throw new OrderException('Empty house id');
+            throw new OrderException('Empty house id', 205);
         }else if(!get_post($order->houseId)){
-            throw new OrderException('House id not exists');
+            throw new OrderException('House id not exists', 206);
         }
 
         if(empty($order->peopleCount)){
-            throw new OrderException('Empty people');
+            throw new OrderException('Empty people', 207);
         }else if($order->peopleCount < 1){
-            throw new OrderException('Invalid people value');
+            throw new OrderException('Invalid people value', 208);
         }
 
         if(
@@ -304,7 +304,7 @@ class OrderFactory {
                 ], 
                 true
             ) === false) {
-            throw new OrderException('Invalid payment method');
+            throw new OrderException('Invalid payment method', 209);
         }
 
         if(
@@ -317,14 +317,14 @@ class OrderFactory {
                 ], 
                 true
             ) === false) {
-            throw new OrderException('Invalid prepaid type');
+            throw new OrderException('Invalid prepaid type', 210);
         }
            
         if( 
             ($order->paymentMethod === null &&  $order->prepaidType !== null) ||
             ($order->paymentMethod !== null &&  $order->prepaidType === null)
         ) {
-            throw new OrderException('Invalid prepaid type or payment method');
+            throw new OrderException('Invalid prepaid type or payment method', 211);
         } 
     }
 }

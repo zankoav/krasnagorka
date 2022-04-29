@@ -52,7 +52,7 @@ class MailFactory {
         $order->mail = $mail;
 
         if(!$result){
-            throw new MailException('Mail is broken');
+            throw new MailException('Mail is broken', 401);
         }
     }
 
@@ -69,7 +69,7 @@ class MailFactory {
                 $mail->subject = 'Заявка на бронирование';
                 $mail->templatePath = "L-S/mail/templates/office";
             } else {
-                throw new MailException('Incorrect order type and method');
+                throw new MailException('Incorrect order type and method', 402);
             }
         } else {
             $mail->subject = 'Подтверждение бронирования';
