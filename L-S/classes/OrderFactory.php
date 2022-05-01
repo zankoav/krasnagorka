@@ -53,6 +53,8 @@ class OrderFactory {
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
         }
 
+        $notePrepaidType = $order->prepaidType ?? '-';
+
         $order->note = [
             "ФИО: {$order->contact->fio}",
             "Телефон: {$order->contact->phone}",
