@@ -90,5 +90,15 @@ class Order {
     public function getMailTemplete(){
         return $this->mail->template;
     }
+    
+    public function getPaymentMethod(){
+        $arr = [
+            null => '-',
+            self::METHOD_OFFICE => 'Оффис',
+            self::METHOD_CARD => 'Картой',
+            self::METHOD_CARD_LAYTER => 'Картой позже',
+        ];
+        return $arr[$this->paymentMethod];
+    }
 
 }

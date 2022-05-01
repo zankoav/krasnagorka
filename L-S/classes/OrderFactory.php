@@ -53,9 +53,6 @@ class OrderFactory {
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
         }
 
-        $notePaymentMethod = $order->paymentMethod ?? '-';
-        $notePrepaidType = $order->prepaidType ?? '-';
-
         $order->note = [
             "ФИО: {$order->contact->fio}",
             "Телефон: {$order->contact->phone}",
@@ -63,8 +60,8 @@ class OrderFactory {
             "Сумма: {$order->price} руб.",
             "Домик: {$order->calendarName}",
             "Паспорт №: {$order->contact->passport}",
-            "Способ оплтаты: {$notePaymentMethod}",
-            "Оплата %: {$notePrepaidType}"
+            "Способ оплтаты: {$order->getPaymentMethod()}",
+            "Оплата %: {$order->notePrepaidType}"
         ];
 
         return $order;
