@@ -63,7 +63,7 @@ class OrderFactory {
             "Домик: {$order->calendarName}",
             "Паспорт №: {$order->contact->passport}",
             "Способ оплтаты: {$order->getPaymentMethod()}",
-            "Оплата %: {$order->notePrepaidType}"
+            "Оплата %: {$notePrepaidType}"
         ];
 
         return $order;
