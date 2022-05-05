@@ -1218,7 +1218,15 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $kalendars = array_map('intval', $objectIds);
             $kalendars = array_unique($kalendars);
-            $result = $this->isAvailableOrder($kalendars[0], $dateFrom, $dateTo, $orderId);
+
+            $result = false;
+            foreach($kalendars as $kalendar){
+                $result = $this->isAvailableOrder($kalendar, $dateFrom, $dateTo, $orderId);
+                if(!$result) {
+                    break;
+                }
+            }
+
             if (!$result) {
                 $response['status'] = 'busy';
                 return $response;
