@@ -322,22 +322,8 @@ class AmoCrmFactory {
             $apiClient->leads()->link($lead, $links);
 
             if($order->isBookedOnly() || $order->paymentMethod === Order::METHOD_CARD){
-
-                // Создадим задачу
-                $tasksCollection = new TasksCollection();
-                $task = new TaskModel();
-                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
-                    ->setText('Помочь клиенту определиться с заказом')
-                    ->setCompleteTill(mktime(date("H"), date("i") + 30))
-                    ->setEntityType(EntityTypesInterface::LEADS)
-                    ->setEntityId($lead->getId())
-                    ->setDuration(1 * 60 * 60) // 1 час
-                    ->setResponsibleUserId(2373844);
-                $tasksCollection->add($task);
-
-                $tasksCollection = $apiClient->tasks()->add($tasksCollection);
-                $taskToStore = $tasksCollection->first();
-                update_post_meta($order->id, 'sbc_task_id', $taskToStore->getId());
+                $taskId = self::addAmoCrmTask('Помочь клиенту определиться с заказом', $lead->getId());
+                update_post_meta($order->id, 'sbc_task_id', $taskId);
             }
            
         } catch (AmoCRMApiException $e) {
@@ -371,5 +357,32 @@ class AmoCrmFactory {
                 }
             );
         return $apiClient;
+    }
+
+    private static function addAmoCrmTask($message, $leadId){
+        $taskId = false;
+
+        $apiClient = self::getAmoCrmApiClient();
+        //Создадим задачу
+        $tasksCollection = new TasksCollection();
+        $task = new TaskModel();
+        $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
+            ->setText($message)
+            ->setCompleteTill(mktime(date("H"), date("i") + 30))
+            ->setEntityType(EntityTypesInterface::LEADS)
+            ->setEntityId(intval($leadId))
+            ->setDuration(1 * 60 * 60) // 1 час
+            ->setResponsibleUserId(2373844);
+        $tasksCollection->add($task);
+
+        try {
+            $tasksCollection = $apiClient->tasks()->add($tasksCollection);
+            $taskToStore = $tasksCollection->first();
+            $taskId = $taskToStore->getId();
+        } catch (AmoCRMApiException $e) {
+            Log::error('Exception: ' . $e->getTitle(), $e->getDescription());
+        }
+
+        return $taskId;
     }
 }
