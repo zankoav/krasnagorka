@@ -174,14 +174,14 @@ class OrderFactory {
             $comment[] = $order->comment;
         }
 
-        if($order->smallAnimalsCount > 0){
-            $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalsCount}";
-            update_post_meta($order->id, 'sbc_order_small_animlas_count', $order->smallAnimalsCount);
+        if($order->smallAnimalCount > 0){
+            $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalCount}";
+            update_post_meta($order->id, 'sbc_order_small_animlas_count', $order->smallAnimalCount);
         }
 
-        if($order->bigAnimalsCount > 0){
-            $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalsCount}";
-            update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalsCount);
+        if($order->bigAnimalCount > 0){
+            $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalCount}";
+            update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalCount);
         }
 
         if($order->foodBreakfast > 0){

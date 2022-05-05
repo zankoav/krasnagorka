@@ -114,11 +114,11 @@
                                 <?php if(!empty($order->bathHouseBlack)):?>
                                     <div>Количество сеансов бани по-черному: <strong><?=$order->bathHouseBlack?></strong></div>
                                 <?php endif;?>
-                                <?php if($order->smallAnimalsCount > 0):?>
-                                    <div>Кошки и собаки мелких пород (высота в холке до 40 см): <strong><?=$order->smallAnimalsCount?></strong></div>
+                                <?php if($order->smallAnimalCount > 0):?>
+                                    <div>Кошки и собаки мелких пород (высота в холке до 40 см): <strong><?=$order->smallAnimalCount?></strong></div>
                                 <?php endif;?>
-                                <?php if($order->bigAnimalsCount > 0):?>
-                                    <div>Собаки крупных пород (высота в холке более 40 см): <strong><?=$order->bigAnimalsCount?></strong></div>
+                                <?php if($order->bigAnimalCount > 0):?>
+                                    <div>Собаки крупных пород (высота в холке более 40 см): <strong><?=$order->bigAnimalCount?></strong></div>
                                 <?php endif;?>
                                 <?php if($order->foodBreakfast > 0):?>
                                     <div>Количество завтраков: <strong><?=$order->foodBreakfast?></strong></div>
