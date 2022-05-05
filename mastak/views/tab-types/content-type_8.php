@@ -44,7 +44,7 @@
     <?php 
     $items = $tab->getItems();
 
-    function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc') ){
+    function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc', 'new_price'=>'asc') ){
         usort( $array, function( $a, $b ) use ( $args ){
             $res = 0;
     
