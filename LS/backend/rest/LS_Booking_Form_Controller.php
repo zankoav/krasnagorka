@@ -572,11 +572,40 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     )
                 )
             ));
-            $result = count($orders) > 0;
+            $numOrder = count($orders);
+            $result = $numOrder > 0;
 
-            Log::error('orders count', count($orders));
-            Log::error('right', $right);
-            Log::error('left', $left);
+            if($result){
+                $ordersQuery = new WP_Query;
+                $orders = $ordersQuery->query(array(
+                    'post_type' => 'sbc_orders',
+                    'posts_per_page' => -1,
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'sbc_calendars',
+                            'terms' => [$cId]
+                        ]
+                    ],
+                    'meta_query' => array(
+                        'relation' => 'OR',
+                        array(
+                            'key'     => 'sbc_order_start',
+                            'value'   => $left[1],
+                            'type'      =>  'date',
+                            'compare' =>  '='   
+                        ),
+                        array(
+                            'key'     => 'sbc_order_end',
+                            'value'   =>  $right[0],
+                            'type'      =>  'date',
+                            'compare' =>  '='   
+                        )
+                    )
+                ));
+
+
+                $result = ($numOrder - count($orders)) > 0;
+            }
         }
         return [
             'enabled' => $result,
