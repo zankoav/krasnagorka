@@ -547,34 +547,36 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
 
             $ordersQuery = new WP_Query;
-                $orders = $ordersQuery->query(array(
-                    'post_type' => 'sbc_orders',
-                    'posts_per_page' => -1,
-                    'tax_query' => [
-                        [
-                            'taxonomy' => 'sbc_calendars',
-                            'terms' => [$cId]
-                        ]
-                    ],
-                    'meta_query' => array(
-                        'relation' => 'OR',
-                        array(
-                            'key'     => 'sbc_order_end',
-                            'value'   => $left,
-                            'type'      =>  'date',
-                            'compare' =>  'between'   
-                        ),
-                        array(
-                            'key'     => 'sbc_order_start',
-                            'value'   =>  $right,
-                            'type'      =>  'date',
-                            'compare' =>  'between'   
-                        )
+            $orders = $ordersQuery->query(array(
+                'post_type' => 'sbc_orders',
+                'posts_per_page' => -1,
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'sbc_calendars',
+                        'terms' => [$cId]
+                    ]
+                ],
+                'meta_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'key'     => 'sbc_order_end',
+                        'value'   => $left,
+                        'type'      =>  'date',
+                        'compare' =>  'between'   
+                    ),
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   =>  $right,
+                        'type'      =>  'date',
+                        'compare' =>  'between'   
                     )
-                ));
-                $result = count($orders) > 0;
+                )
+            ));
+            $result = count($orders) > 0;
 
-
+            Log::error('orders count', count($orders));
+            Log::error('right', $right);
+            Log::error('left', $left);
         }
         return [
             'enabled' => $result,
