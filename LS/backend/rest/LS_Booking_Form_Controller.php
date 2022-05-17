@@ -444,6 +444,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $foodLunchCount = intval($request['foodLunch']);
             $foodDinnerCount = intval($request['foodDinner']);
 
+            $foodTripleSale = 0;
+
+            if(!empty($bookingSettings['food_triple_sale_price'])){
+                $foodTripleSalePrice = intval($bookingSettings['food_triple_sale_price']);
+                if($foodBreakfastCount > 0 && $foodLunchCount > 0 && $foodDinnerCount > 0){
+                    $foodTripleSale = min($foodBreakfastCount, $foodLunchCount, $foodDinnerCount);
+                }
+            }
+
             $result['food'] = [
                 'breakfast' => [
                     'total_price' => $foodBreakfastPrice * $foodBreakfastCount,
@@ -459,13 +468,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'total_price' => $foodDinnerPrice * $foodDinnerCount,
                     'price' => $foodDinnerPrice,
                     'count' => $foodDinnerCount
-                ]
+                ],
+                'total_price' => $foodBreakfastPrice * $foodBreakfastCount + $foodLunchPrice * $foodLunchCount + $foodDinnerPrice * $foodDinnerCount - $foodTripleSale, 
+                'sale' => $foodTripleSale
             ];
 
-            $result['total_price'] += $result['food']['breakfast']['total_price'];
-            $result['total_price'] += $result['food']['lunch']['total_price'];
-            $result['total_price'] += $result['food']['dinner']['total_price'];
-
+            $result['total_price'] += $result['food']['total_price'];
         }
 
         return $result;

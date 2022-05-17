@@ -205,6 +205,13 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Скидка за трех разовое питание',
+        'id'   => 'food_triple_sale_price',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Текст при скрытии питания с формы',
         'id'   => 'food_not_available_text',
         'type' => 'textarea_small'

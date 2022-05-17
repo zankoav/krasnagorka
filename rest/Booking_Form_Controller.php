@@ -1144,6 +1144,10 @@ class Booking_Form_Controller extends WP_REST_Controller
         $foodLunch = intval($food['foodLunch']);
         $foodDinner = intval($food['foodDinner']);
 
+        // if(!empty($bookingSettings['food_triple_sale_price'])){
+        //     $foodTripleSalePrice = intval($bookingSettings['food_triple_sale_price']);
+        // }
+
         return ($foodBreakfastPrice * $foodBreakfast + $foodLunchPrice *  $foodLunch + $foodDinnerPrice * $foodDinner);
     }
 
