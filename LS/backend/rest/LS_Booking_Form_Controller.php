@@ -522,6 +522,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $isOrderWithWindowsEnabled = $bookingSettings['order_with_windows_enabled'] == 'on';
         $isOrderWithWindowsMessage = $bookingSettings['order_with_windows_message'];
+        $isOrderWithDayInDayMessage = $bookingSettings['order_with_day_in_day_message'];
 
         if($isOrderWithWindowsEnabled){
             $windowNumber = intval($bookingSettings['number_of_days']);
@@ -601,16 +602,23 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                             'compare' =>  '='   
                         )
                     )
-                ));
-
-
+                ));            
                 $result = ($numOrder - count($orders)) > 0;
             }
         }
-        return [
+
+        $data = [
             'enabled' => $result,
             'message' => $isOrderWithWindowsMessage
         ];
+
+
+        if($dateStart == date("Y-m-d")){
+            $data['enabled'] = true;
+            $data['message'] = $isOrderWithDayInDayMessage;
+        }
+
+        return $data;
     }
 
     private static function isShortOrderWindow($days, $calendarId, $houseId, $isTerem){

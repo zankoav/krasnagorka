@@ -139,6 +139,12 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name' => 'Сообщение для заказа день в день',
+        'id'   => 'order_with_day_in_day_message',
+        'type' => 'textarea_small',
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Цена на детскую кроватку',
         'id'   => 'baby_bed_price',
         'type'         => 'text_money',
