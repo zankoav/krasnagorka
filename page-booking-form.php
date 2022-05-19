@@ -14,7 +14,7 @@ $bookingModel = $model->getBookingModel();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="<?= get_site_icon_url(); ?>" type="image/x-icon">
     <title><?= get_the_title(); ?></title>
-    <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/AvenirNextCyr/fonts.css" rel="stylesheet"/>
+    <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/fonts/AvenirNextCyr/fonts.css" rel="stylesheet"/>
     <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/css/public_style.css" rel="stylesheet"/>
 </head>
 
