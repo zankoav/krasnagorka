@@ -1,0 +1,50 @@
+@import "./../../../common/mixins";
+
+.step-button-navigation {
+    padding: 1.5rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid $GRAY;
+
+    &__button {
+        padding: 8px 12px;
+        background-color: $PRIMARY_2;
+        color: #fff;
+        font-weight: 700;
+        text-align: center;
+        display: inline-block;
+        align-self: flex-end;
+        min-width: 100px;
+        font-size: 14px;
+        box-shadow: 0 1px 2px 0 $PRIMARY_2;
+        border-radius: 6px;
+        transition: all 0.3s;
+        opacity: 0.85;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &_back {
+            background-color: $GRAY_7;
+            box-shadow: 0 1px 2px 0 $GRAY_7;
+        }
+
+        &_available {
+            background-color: $PRIMARY_1;
+            box-shadow: 0 1px 2px 0 $PRIMARY_1;
+        }
+    }
+
+    &__button-next-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__error {
+        margin-top: 4px;
+        color: $RED;
+        text-align: right;
+        font-size: 14px;
+    }
+}

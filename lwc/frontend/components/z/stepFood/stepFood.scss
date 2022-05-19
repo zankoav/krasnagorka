@@ -1,0 +1,41 @@
+@import "./../../../common/mixins";
+
+.step-food {
+    padding: 20px 12px 32px;
+
+    @include md {
+        padding: 24px 32px 32px;
+    }
+
+    &__description {
+        margin-top: 0.25rem;
+
+        font-size: 14px;
+        color: $GRAY_4;
+    }
+
+    &__help-text {
+        color: $GRAY_4;
+        margin-bottom: 1rem;
+    }
+
+    &__select {
+        display: block;
+    }
+
+    &__group {
+        margin-bottom: 1rem;
+    }
+
+    &__body {
+        &_empty {
+            margin-bottom: 1rem;
+            height: 100px;
+            display: flex;
+            text-align: center;
+            align-items: center;
+            text-transform: uppercase;
+            justify-content: center;
+        }
+    }
+}

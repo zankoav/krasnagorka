@@ -1,0 +1,216 @@
+@import "./../../../common/mixins";
+
+.step-house {
+    padding: 20px 12px 32px;
+
+    @include md {
+        padding: 24px 32px 32px;
+    }
+
+    &__season-loading {
+        flex-grow: 1;
+    }
+
+    &__select {
+        display: block;
+        margin-top: 1rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    &__body {
+        padding-bottom: 1rem;
+        min-height: 100px;
+
+        @include sm {
+            padding-bottom: 1.5rem;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        margin: 1rem 0 0 0;
+
+        @include sm {
+            margin: 1.5rem 0 0 0;
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        color: $PRIMARY_10;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        object-fit: contain;
+        align-self: flex-start;
+        border-radius: 4px;
+        max-width: 100px;
+
+        @include sm {
+            max-width: 140px;
+        }
+    }
+
+    &__content {
+        color: $GRAY_2;
+        font-size: 14px;
+        padding-left: 1rem;
+        flex-grow: 1;
+
+        a {
+            color: $PRIMARY_3;
+        }
+    }
+
+    &__max-people {
+        width: 24px;
+        margin-right: 1rem;
+    }
+
+    &__group {
+        margin: 1rem 0;
+        display: flex;
+        align-items: center;
+    }
+
+    &__counts {
+        flex-grow: 1;
+    }
+
+    &__booking-icon {
+        width: 64px;
+        flex-shrink: 0;
+        margin-right: 1.5rem;
+    }
+
+    &__info {
+        display: block;
+        margin: 1.5rem 0 2rem;
+
+        @include sm {
+            margin: 1.5rem 0;
+        }
+    }
+
+    &__seasons-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: #b4afb5;
+    }
+
+    &__booking {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    }
+
+    &__booking-from {
+        color: $GRAY_2;
+        margin-bottom: 0.25rem;
+
+        &:before {
+            content: attr(data-date);
+            display: inline-block;
+            width: 115px;
+            color: $GRAY_1;
+        }
+    }
+
+    &__row {
+        margin: 0 -1rem;
+        max-width: initial;
+
+        @include sm {
+            display: flex;
+        }
+    }
+
+    &__col {
+        padding: 0 1rem;
+
+        @include sm {
+            max-width: 50%;
+            flex: 1 0 50%;
+        }
+
+        &:last-child {
+            margin-top: 1rem;
+
+            @include sm {
+                margin-top: 0;
+            }
+        }
+    }
+
+    &__delimeter {
+        margin: 2rem 0 1.5rem;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        color: #b4afb5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:after,
+        &:before {
+            content: "";
+            height: 1px;
+            background-color: $GRAY;
+            flex-grow: 1;
+            margin-left: 1rem;
+        }
+
+        &:before {
+            margin-left: 0;
+            margin-right: 1rem;
+        }
+    }
+
+    &__item-sale {
+        color: $GRAY_5;
+        display: block;
+        margin-top: 0.5rem;
+
+        &:first-child {
+            margin-top: 1rem;
+        }
+    }
+
+    &__item-number {
+        font-weight: 700;
+    }
+
+    &__item-percent {
+        color: $RED_2;
+        font-weight: 700;
+    }
+
+    &__info-group {
+        display: flex;
+        align-items: center;
+    }
+
+    &__object-info-img {
+        max-width: 80px;
+        height: 45px;
+        object-fit: cover;
+        flex: 1 0 80px;
+        margin-right: 1rem;
+        border-radius: 8px;
+    }
+
+    &__calendars {
+        flex-grow: 1;
+        margin-top: 0;
+    }
+}

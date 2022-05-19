@@ -16,10 +16,6 @@
             $this->assets = json_decode($content, true);
         }
 
-        public function css($name) {
-            return $this->assets[$name]['css'];
-        }
-
         public function js($name) {
             return $this->assets[$name]['js'];
         }

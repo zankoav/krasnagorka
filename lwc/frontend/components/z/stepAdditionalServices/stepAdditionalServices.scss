@@ -1,0 +1,85 @@
+@import "./../../../common/mixins";
+
+.step-additional-services {
+    padding: 20px 12px 32px;
+
+    @include md {
+        padding: 24px 32px 32px;
+    }
+
+    &__group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+
+        &_checkbox {
+            flex-direction: row;
+            align-items: center;
+
+            label {
+                margin-left: 0.5rem;
+                a {
+                    color: inherit;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    &__label {
+        display: block;
+        color: $GRAY_4;
+        font-size: 14px;
+        cursor: pointer;
+
+        &_required {
+            &:after {
+                content: "*";
+                color: $RED;
+            }
+        }
+    }
+
+    &__label-warning {
+        font-size: 12px;
+        color: $GRAY_6;
+    }
+
+    &__input {
+        padding: 0.5rem;
+        font-size: 16px;
+        color: $GRAY_1;
+        border-radius: 0.25rem;
+        border: 2px solid $GRAY;
+        width: 100%;
+        flex: 1;
+        appearance: none;
+
+        &_left {
+            width: initial;
+            flex: initial;
+            align-self: self-start;
+            appearance: checkbox;
+        }
+
+        &_pass {
+            text-transform: uppercase;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__container {
+        margin-bottom: 1rem;
+    }
+
+    &__select {
+        display: block;
+
+        &_bottom {
+            margin-top: 1rem;
+        }
+    }
+}

@@ -1,0 +1,79 @@
+@import "./../../../common/mixins";
+
+.calendar {
+    .calendar_block {
+        margin: 0;
+    }
+
+    .cell-between,
+    .cell-range {
+        background-color: rgb(188, 232, 241);
+    }
+
+    .calendar_block .calendar_legend ul li {
+        font-size: 10px;
+    }
+}
+
+.error-message {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9999999;
+
+    &__inner {
+        padding: 0.5rem 1rem;
+        max-width: calc(100% - 50px);
+        background-color: $RED;
+        color: $WHITE;
+        border-radius: 6px;
+        box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.75);
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+.fc-day {
+    overflow: hidden;
+    position: relative;
+}
+
+.date-delimiter {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.date-delimiter_to::before {
+    content: "выезд";
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 6px;
+    line-height: 1;
+    color: #929090;
+    top: 0px;
+    left: 0;
+}
+
+.date-delimiter_from::before {
+    content: "заезд";
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 6px;
+    line-height: 1;
+    color: #929090;
+    bottom: 0;
+    right: 0;
+}
+
+.date-delimiter__line {
+    position: absolute;
+    height: 50%;
+    width: 1px;
+    background: #d0d0d0;
+    bottom: 25%;
+    left: 50%;
+}

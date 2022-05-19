@@ -1,0 +1,65 @@
+@import "./../../../common/mixins";
+
+.booking {
+    @include lg {
+        margin: 2rem 0;
+    }
+
+    .container {
+        padding: 0;
+        @include lg {
+            padding: 0 2rem;
+            max-width: 900px;
+        }
+
+        &_template {
+            max-width: 600px;
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+        padding-top: 2rem;
+        text-align: center;
+        color: $GRAY_1;
+    }
+
+    &__ok {
+        width: 60px;
+        margin-top: 1rem;
+    }
+
+    &__body {
+        &_success {
+            text-align: center;
+        }
+    }
+
+    &__description {
+        padding: 1rem 1rem 2rem;
+        font-size: 14px;
+        max-width: 300px;
+        color: $GRAY_5;
+        margin: 0 auto;
+
+        @include sm {
+            max-width: 400px;
+        }
+    }
+
+    &__card {
+        background-color: $WHITE;
+        @include lg {
+            border-radius: 8px;
+            box-shadow: 0 2px 4px $GRAY_6;
+        }
+
+        &_template {
+            box-shadow: none;
+
+            strong {
+                font-weight: bold;
+            }
+        }
+    }
+}

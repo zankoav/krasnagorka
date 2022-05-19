@@ -1,0 +1,18 @@
+@import "./../../../common/mixins";
+
+.step-house {
+    padding: 20px 12px 32px;
+
+    @include md {
+        padding: 24px 32px 32px;
+    }
+
+    &__body {
+        padding-bottom: 1rem;
+        min-height: 100px;
+
+        @include sm {
+            padding-bottom: 1.5rem;
+        }
+    }
+}

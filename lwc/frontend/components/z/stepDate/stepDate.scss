@@ -1,0 +1,63 @@
+@import "./../../../common/mixins";
+
+.step-date {
+    padding: 20px 12px 32px;
+
+    @include md {
+        padding: 24px 32px 32px;
+    }
+
+    &__booking-icon {
+        width: 64px;
+        flex-shrink: 0;
+        margin-right: 1.5rem;
+    }
+
+    &__booking {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__booking-from {
+        color: $GRAY_2;
+        margin-bottom: 0.25rem;
+
+        &:before {
+            content: attr(data-date);
+            display: inline-block;
+            width: 115px;
+            color: $GRAY_1;
+        }
+    }
+}
+
+.cell-between,
+.cell-range {
+    background-color: rgb(188, 232, 241);
+}
+
+.error-message {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9999999;
+
+    &__inner {
+        padding: 0.5rem 1rem;
+        max-width: calc(100% - 50px);
+        background-color: $RED;
+        color: $WHITE;
+        border-radius: 6px;
+        box-shadow: 0 0px 4px 0px rgba(0, 0, 0, 0.75);
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+.calendar_block .calendar_legend ul li {
+    font-size: 10px;
+}
