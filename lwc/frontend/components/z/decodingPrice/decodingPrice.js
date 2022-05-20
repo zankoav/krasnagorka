@@ -14,9 +14,9 @@ export default class DecodingPrice extends LightningElement {
 
     get displayFood() {
         return (
-            this.settings.total.food.breakfast.total_price ||
-            this.settings.total.food.dinner.total_price ||
-            this.settings.total.food.lunch.total_price
+            this.settings.total.food?.breakfast?.total_price ||
+            this.settings.total.food?.dinner?.total_price ||
+            this.settings.total.food?.lunch?.total_price
         )
     }
 
@@ -50,8 +50,10 @@ export default class DecodingPrice extends LightningElement {
         let total = 0
         for (let key in this.settings.total.seasons_group) {
             total += this.settings.total.seasons_group[key].price_block.total
-            const small_animals_total = this.settings.total.seasons_group[key].price_block.small_animals_total
-            const big_animals_total = this.settings.total.seasons_group[key].price_block.big_animals_total
+            const small_animals_total =
+                this.settings.total.seasons_group[key].price_block.small_animals_total
+            const big_animals_total =
+                this.settings.total.seasons_group[key].price_block.big_animals_total
 
             if (small_animals_total) {
                 total += small_animals_total
