@@ -1599,14 +1599,14 @@ export default class Admin extends LightningElement {
         //             active: false
         //         }
         //     ],
-        //     dateStart: '2022-05-15'
-        //         ? new moment('2022-05-15', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //     dateStart: '2022-06-06'
+        //         ? new moment('2022-06-06', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateEnd: '2022-05-18'
-        //         ? new moment('2022-05-18', 'YYYY-MM-DD').format('DD-MM-YYYY')
+        //     dateEnd: '2022-06-08'
+        //         ? new moment('2022-06-08', 'YYYY-MM-DD').format('DD-MM-YYYY')
         //         : null,
-        //     dateFrom: '2022-05-15',
-        //     dateTo: '2022-05-18',
+        //     dateFrom: '2022-06-06',
+        //     dateTo: '2022-06-08',
         //     babyBed: false,
         //     babyBedPrice: 5,
         //     bathHouseWhitePrice: 50,
