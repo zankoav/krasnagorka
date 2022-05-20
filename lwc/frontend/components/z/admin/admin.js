@@ -1616,7 +1616,8 @@ export default class Admin extends LightningElement {
         //     foodDinnerPrice: 10,
         //     foodAvailable: true,
         //     foodNotAvailableText: 'На данный момент заказать питание невозможно',
-        //     childCounts: null
+        //     childCounts: null,
+        //     foodTripleSalePrice: 10
         // }
 
         this.settings = {
@@ -1693,7 +1694,8 @@ export default class Admin extends LightningElement {
             foodLunchPrice: this.model.foodLunchPrice,
             foodDinnerPrice: this.model.foodDinnerPrice,
             foodAvailable: this.model.foodAvailable,
-            foodNotAvailableText: this.model.foodNotAvailableText
+            foodNotAvailableText: this.model.foodNotAvailableText,
+            foodTripleSalePrice: this.model.foodTripleSalePrice
         }
 
         this.updateSettings({

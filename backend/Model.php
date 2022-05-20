@@ -274,6 +274,7 @@ class Model
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
             'popupContacts' => $this->getPopupContacts(),
+            'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
             'mainContent'   => [
                 "title"         => $title,
                 "type"          => $type,
