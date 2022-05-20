@@ -449,7 +449,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if(!empty($bookingSettings['food_triple_sale_price'])){
                 $foodTripleSalePrice = intval($bookingSettings['food_triple_sale_price']);
                 if($foodBreakfastCount > 0 && $foodLunchCount > 0 && $foodDinnerCount > 0){
-                    $foodTripleSale = min($foodBreakfastCount, $foodLunchCount, $foodDinnerCount);
+                    $foodTripleSale = $foodTripleSalePrice * min($foodBreakfastCount, $foodLunchCount, $foodDinnerCount);
                 }
             }
 
