@@ -39,11 +39,17 @@ export default class DecodingPrice extends LightningElement {
     }
 
     get addedServicesTotalPrice() {
-        return (
-            this.settings.total.baby_bed.total_price +
-            this.settings.total.bath_house_black.total_price +
-            this.settings.total.bath_house_white.total_price
-        )
+        let total = 0
+        if (this.settings.total.baby_bed?.total_price) {
+            total += this.settings.total.baby_bed?.total_price
+        }
+        if (this.settings.total.bath_house_black?.total_price) {
+            total += this.settings.total.bath_house_black?.total_price
+        }
+        if (this.settings.total.bath_house_white?.total_price) {
+            total += this.settings.total.bath_house_white?.total_price
+        }
+        return total
     }
 
     get houseTotalPrice() {
