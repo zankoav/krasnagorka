@@ -382,6 +382,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] += $smallAnimalBlockTotal;
             $result['total_price'] += $bigAnimalBlockTotal;
             $result['total_price'] = intval($result['total_price']);
+            $result['accommodation_price'] = $result['total_price'];
         }
 
 

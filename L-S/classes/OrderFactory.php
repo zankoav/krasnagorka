@@ -42,12 +42,22 @@ class OrderFactory {
         
         $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
         
-        $order->price = \LS_Booking_Form_Controller::calculateResult(
+        $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
             array_merge(
                 (array)$order, 
                 ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
             )
-        )['total_price'];
+        );
+
+        $order->price = $calculatedResult['total_price'];
+
+        if(isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])){
+            $order->foodPrice = isset($calculatedResult['food']['total_price']);
+        }else{
+            $order->foodPrice = 0;
+        }
+
+        $order->accommodationPrice = $calculatedResult['accommodation_price'];
         
         if(!empty($order->prepaidType)){
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
@@ -162,6 +172,8 @@ class OrderFactory {
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);
         update_post_meta($order->id, 'sbc_order_end', $order->dateEnd);
         update_post_meta($order->id, 'sbc_order_price', $order->price);
+        update_post_meta($order->id, 'sbc_order_food_price', $order->foodPrice);
+        update_post_meta($order->id, 'sbc_order_accommodation_price', $order->accommodationPrice);
         update_post_meta($order->id, 'sbc_order_people_count', $order->peopleCount);
         update_post_meta($order->id, 'sbc_order_count_people', $order->peopleCount); // need to remove
         wp_set_object_terms($order->id, [$order->calendarId], 'sbc_calendars');

@@ -144,6 +144,29 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => esc_html__( 'Стоимость проживания', 'sbc' ),
+        'id'   => 'sbc_order_accommodation_price',
+        'type' => 'text',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'after_field' => ' руб.'
+    ));
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Стоимость питания', 'sbc' ),
+        'id'   => 'sbc_order_food_price',
+        'type' => 'text',
+        'after_field' => ' руб.',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'column' => array(
+            'name'     => esc_html__( 'Оплачено', 'sbc' ),
+        ),
+    ));
+
+    $sbc_order->add_field( array(
         'name' => esc_html__( 'Комментарий к заказу', 'sbc' ),
         'id'   => 'sbc_order_desc',
         'type' => 'textarea',

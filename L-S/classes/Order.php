@@ -71,6 +71,9 @@ class Order {
 
     public int $price;
     public int $subprice;
+    
+    public int $foodPrice;
+    public int $accommodationPrice;
 
     public function getHouseLink(){
         $calendars  = get_the_terms($this->id, 'sbc_calendars');
