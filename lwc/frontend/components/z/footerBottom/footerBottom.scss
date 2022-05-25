@@ -75,4 +75,16 @@
         text-align: center;
         font-weight: 600;
     }
+
+    &__payments {
+        display: block;
+        width: 100%;
+        object-fit: contain;
+        padding-top: 2rem;
+
+        @include sm {
+            margin-left: 20%;
+            width: 60%;
+        }
+    }
 }
