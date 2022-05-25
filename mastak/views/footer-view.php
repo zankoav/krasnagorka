@@ -51,7 +51,7 @@
         display: block;
         width: 100%;
         object-fit: contain;
-        margin: 1rem 0;
+        padding: 1rem 0;
     }
 </style>
 <footer class="footer-top">
