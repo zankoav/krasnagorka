@@ -67,6 +67,8 @@ class OrderFactory {
 
         $order->note = [
             "Сумма: {$order->price} руб.",
+            "Стоимость питания: {$order->foodPrice} руб.",
+            "Стоимость проживания: {$order->accommodationPrice} руб.",
             "Домик: {$order->calendarName}",
             "Паспорт №: {$order->contact->passport}",
             "Способ оплтаты: {$order->getPaymentMethod()}",

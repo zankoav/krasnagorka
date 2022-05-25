@@ -122,6 +122,29 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($typeFieldValueModel);
 
+            // Order food price
+            $foodPriceFieldValueModel = new TextCustomFieldValuesModel();
+            $foodPriceFieldValueModel->setFieldId(759627);
+            $foodPriceFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue($order->foodPrice)
+                    )
+            );
+            $leadCustomFields->add($foodPriceFieldValueModel);
+
+            // Order accommodation price
+            $accommodationPriceFieldValueModel = new TextCustomFieldValuesModel();
+            $accommodationPriceFieldValueModel->setFieldId(759629);
+            $accommodationPriceFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue($order->accommodationPrice)
+                    )
+            );
+            $leadCustomFields->add($accommodationPriceFieldValueModel);
+
+
             // Comment
             $commentFieldValueModel = new TextCustomFieldValuesModel();
             $commentFieldValueModel->setFieldId(357377);
