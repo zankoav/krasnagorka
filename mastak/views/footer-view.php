@@ -46,6 +46,13 @@
     .contacts-data__item-text.contacts-data__item-text_raiting{
         margin-bottom:0;
     }
+
+    .footer-bottom__payments{
+        display: block;
+        width: 100%;
+        object-fit: contain;
+        margin: 1rem 0;
+    }
 </style>
 <footer class="footer-top">
     <div class="b-container">
@@ -234,5 +241,8 @@
                 <?= $unp; ?>
             </div>
         </div>
+    </div>
+    <div class="b-container">
+        <img class="footer-bottom__payments" src="https://krasnagorka.by/wp-content/uploads/2022/05/cards.jpg" alt="payment systems">
     </div>
 </footer>
