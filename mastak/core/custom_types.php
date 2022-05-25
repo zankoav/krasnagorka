@@ -622,7 +622,8 @@
             'name' => __('Краткое описание', 'krasnagorka'),
             'desc' => __('Краткое описание', 'krasnagorka'),
             'id'   => $prefix . 'description',
-            'type' => 'textarea',
+            // 'type' => 'textarea',
+            'type' => 'wysiwyg'
         ));
 
         $sbc_client->add_field(array(

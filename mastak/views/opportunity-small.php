@@ -18,7 +18,7 @@
    style="border-left-color:<?= $border_color; ?>; border-bottom-color:<?= $border_color; ?>">
     <div class="opportunity__text">
         <p class="opportunity__title"><?= get_the_title(); ?></p>
-        <p class="opportunity__description"><?= get_post_meta(get_the_ID(), "mastak_opportunity_description", true); ?></p>
+        <div class="opportunity__description"><?= wpautop(get_post_meta(get_the_ID(), "mastak_opportunity_description", true)); ?></div>
         <?php if ($isAdded and $price > 0): ?>
             <p class="house-booking__info house-booking__info_opportunity house-booking__info_small">
                 <span class="opportunity__price-title opportunity__price-title_small">Стоимость: </span>
