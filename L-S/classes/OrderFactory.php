@@ -52,7 +52,7 @@ class OrderFactory {
         $order->price = $calculatedResult['total_price'];
 
         if(isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])){
-            $order->foodPrice = isset($calculatedResult['food']['total_price']);
+            $order->foodPrice = $calculatedResult['food']['total_price'];
         }else{
             $order->foodPrice = 0;
         }
