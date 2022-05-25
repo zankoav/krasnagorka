@@ -128,7 +128,7 @@ class AmoCrmFactory {
             $foodPriceFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->foodPrice)
+                            ->setValue(strval($order->foodPrice))
                     )
             );
             $leadCustomFields->add($foodPriceFieldValueModel);
@@ -139,7 +139,7 @@ class AmoCrmFactory {
             $accommodationPriceFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->accommodationPrice)
+                            ->setValue(strval($order->accommodationPrice))
                     )
             );
             $leadCustomFields->add($accommodationPriceFieldValueModel);
