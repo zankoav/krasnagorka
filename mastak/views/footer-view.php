@@ -52,7 +52,7 @@
         background-color: #fff;
         width: 100%;
         object-fit: contain;
-        padding: 1rem 0;
+        padding: .5rem 0;
     }
 </style>
 <footer class="footer-top">
