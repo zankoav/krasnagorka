@@ -54,6 +54,10 @@
         object-fit: contain;
         padding: .5rem 0;
     }
+
+    .pb-1{
+        padding-bottom:1rem;
+    }
 </style>
 <footer class="footer-top">
     <div class="b-container">
@@ -243,7 +247,7 @@
             </div>
         </div>
     </div>
-    <div class="b-container">
+    <div class="b-container pb-1">
         <img class="footer-bottom__payments" src="https://krasnagorka.by/wp-content/uploads/2022/05/image_2022-05-26_09-51-49.png" alt="payment systems">
     </div>
 </footer>
