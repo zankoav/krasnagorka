@@ -601,12 +601,17 @@
             } ?>
             <?php if (!wp_is_mobile() and $isBreadcrumbsBannerEnabled): ?>
             <style>
+                .breadcrumbs {
+                    margin-bottom: 1rem;
+                }
+
                 .breadcrumbs-wrapper {
-                    display: none;
+                    display: block;
                 }
 
                 @media (min-width : 1280px) {
                     .breadcrumbs {
+                        margin-bottom: 0;
                         max-width: 50%;
                         flex: 1 0 50%;
                         text-overflow: ellipsis;
@@ -621,14 +626,18 @@
                 }
 
                 .breadcrumbs-wrapper__link {
-
                     display: flex;
                     align-items: center;
-                    padding-left: 2rem;
-                    max-width: 50%;
-                    flex: 1 0 50%;
                     color: #999;
                     transition: color .3s linear;
+                }
+
+                @media (min-width : 1280px) {
+                    .breadcrumbs-wrapper__link {
+                        flex: 1 0 50%;
+                        padding-left: 2rem; 
+                        max-width: 50%;
+                    }
                 }
 
                 .breadcrumbs-wrapper__link:hover {
@@ -637,16 +646,28 @@
 
                 .breadcrumbs-wrapper__link-img {
                     flex-shrink: 0;
-                    margin-left: auto;
                     margin-right: 1rem;
                     max-height: 1.5rem;
                     display: inline-block;
+                }
+
+                @media (min-width : 1280px) {
+                    .breadcrumbs-wrapper__link-img {
+                        margin-left: auto;
+                    }
                 }
 
                 .breadcrumbs-wrapper__link-title {
                     text-overflow: ellipsis;
                     overflow: hidden;
                     white-space: nowrap;
+                    text-decoration: underline;
+                }
+
+                @media (min-width : 1280px) {
+                    .breadcrumbs-wrapper__link-title {
+                        text-decoration: none;
+                    }
                 }
             </style>
             <a href="<?= $breadcrumbsBannerLink; ?>"
