@@ -133,13 +133,13 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
-        'name' => esc_html__( 'Оплачено', 'sbc' ),
+        'name' => esc_html__( 'Предоплата', 'sbc' ),
         'id'   => 'sbc_order_prepaid',
         'type' => 'text',
         'after_field' => ' руб.', // override '$' symbol if needed
         // 'repeatable' => true,
         'column' => array(
-            'name'     => esc_html__( 'Оплачено', 'sbc' ),
+            'name'     => esc_html__( 'Предоплата', 'sbc' ),
         ),
     ) );
 
@@ -162,7 +162,7 @@ function sbc_order_info_metabox() {
             'readonly' => 'readonly'
         ),
         'column' => array(
-            'name'     => esc_html__( 'Оплачено', 'sbc' ),
+            'name'     => esc_html__( 'Питание', 'sbc' ),
         ),
     ));
 
