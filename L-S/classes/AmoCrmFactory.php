@@ -86,16 +86,6 @@ class AmoCrmFactory {
             $leadName = 'Сделка с формы бронирования';
             $stageId = $order->isBookedOnly() ? 19518940 : 35452366; // Подтвердить бронирование | Сделка Из Сайта (webpay)
             
-            $notePrepaidType = $order->prepaidType ?? '-';
-
-            $order->note[] = "Сумма: {$order->price} руб.";
-            $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
-            $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
-            $order->note[] = "Домик: {$order->calendarName}";
-            $order->note[] = "Паспорт №: {$order->contact->passport}";
-            $order->note[] = "Способ оплтаты: {$order->getPaymentMethod()}";
-            $order->note[] = "Оплата %: {$notePrepaidType}";
-
             $noteStr = implode("\n", $order->note);
             
             $lead->setName($leadName);
@@ -204,6 +194,18 @@ class AmoCrmFactory {
             $apiClient
                 ->leads()
                 ->link($lead, $links);
+
+            $notePrepaidType = $order->prepaidType ?? '-';
+
+            $order->note[] = "Сумма: {$order->price} руб.";
+            $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
+            $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
+            $order->note[] = "Домик: {$order->calendarName}";
+            $order->note[] = "Паспорт №: {$order->contact->passport}";
+            $order->note[] = "Способ оплтаты: {$order->getPaymentMethod()}";
+            $order->note[] = "Оплата %: {$notePrepaidType}";
+
+            $noteStr = implode("\n", $order->note);
 
             $notesCollection = new NotesCollection();
             $messageNote = new CommonNote();
