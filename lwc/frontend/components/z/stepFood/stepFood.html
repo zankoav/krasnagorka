@@ -1,7 +1,7 @@
 <template>
     <div class="step-food">
         <div if:true={foodAvailable} class="step-food__body">
-            <div class="step-food__help-text">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые необходимы всей вашей компании в течение периода проживания.</div>
+            <div class="step-food__help-text step-food__help-text_pb_10">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые необходимы всей вашей компании в течение периода проживания.</div>
             <div if:true={settings.foodBreakfastPrice} class="step-food__group">
                 <z-select data-name="foodBreakfast" label="Количество порций завтраков" onchange={foodChange} options={breakfastOptions}></z-select>
                 <div class="step-food__description">
@@ -20,7 +20,10 @@
                     Стоимость одного ужина <span class="number-value" data-after="руб">{settings.foodDinnerPrice}</span> с человека
                 </div>
             </div>
-            <div if:true={settings.foodTripleSalePrice} class="step-food__help-text">Скидка на трехразовое питание (завтрак, обед и ужин): <z-number-value num={settings.foodTripleSalePrice} value="руб"></z-number-value> в сутки</div>
+            <template if:true={settings.foodTripleSalePrice}>
+                <div class="step-food__help-text"><span class="step-food__sale">Скидка</span> на трехразовое питание (завтрак, обед и ужин): <z-number-value num={settings.foodTripleSalePrice} value="руб"></z-number-value> в сутки.</div>
+                <div class="step-food__help-text-added">Обращаем ваше внимание, что при заказе питания онлайн вам необходимо дополнительно сообщить даты, в которые вы хотели бы воспользоваться данной услугой. Укажите это в комментарии к бонированию (на следующем этапе).</div>
+            </template>
         </div>
         <div if:false={foodAvailable} class="step-food__body step-food__body_empty">{settings.foodNotAvailableText}</div>
         <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
