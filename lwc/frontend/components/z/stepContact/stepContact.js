@@ -46,6 +46,8 @@ export default class StepContact extends LightningElement {
       this.error = "Введите паспортные данные";
     } else if (!this.settings.agreement) {
       this.error = "Вы не согласились с договором присоединения";
+    } else if (!this.settings.adult) {
+      this.error = "Подтвердите что вам уже есть 18";
     } else {
       const newMenu = this.settings.menu.map((it) => {
         return { ...it, active: it.value === "checkout" };
@@ -71,7 +73,7 @@ export default class StepContact extends LightningElement {
   changeHandler(event) {
     const name = event.target.name;
     let value = event.target.value;
-    if (name === "agreement") {
+    if (name === "agreement" || name === "adult") {
       value = event.target.checked;
     }
     if (name === "passport") {

@@ -7,6 +7,12 @@
         padding: 24px 32px 32px;
     }
 
+    &__help-text {
+        color: $GRAY_4;
+        padding-top: 1rem;
+        border-top: 1px solid #f7f7f7;
+    }
+
     &__group {
         display: flex;
         flex-direction: column;
