@@ -602,11 +602,18 @@
             <?php if ($isBreadcrumbsBannerEnabled): ?>
             <style>
                 .breadcrumbs {
-                    margin-bottom: 1rem;
+                    display: none;
                 }
 
                 .breadcrumbs-wrapper {
                     display: block;
+                }
+
+                @media (min-width : 768px) {
+                    .breadcrumbs {
+                        margin-bottom: 1rem;
+                        display: block;
+                    }
                 }
 
                 @media (min-width : 1280px) {
@@ -658,9 +665,6 @@
                 }
 
                 .breadcrumbs-wrapper__link-title {
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    white-space: nowrap;
                     text-decoration: underline;
                 }
 
