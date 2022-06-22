@@ -47,7 +47,7 @@ export default class StepContact extends LightningElement {
     } else if (!this.settings.agreement) {
       this.error = "Вы не согласились с договором присоединения";
     } else if (!this.settings.adult) {
-      this.error = "Подтвердите что вам уже есть 18";
+      this.error = "Подтвердите, что вам уже есть 18";
     } else {
       const newMenu = this.settings.menu.map((it) => {
         return { ...it, active: it.value === "checkout" };

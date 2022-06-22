@@ -9,8 +9,15 @@
 
     &__help-text {
         color: $GRAY_4;
+        font-size: 14px;
         padding-top: 1rem;
         border-top: 1px solid #f7f7f7;
+        
+        &::before{
+            content: '*';
+            color: $RED_2;
+            margin-right: 4px;
+        }
     }
 
     &__group {
