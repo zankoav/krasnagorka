@@ -532,7 +532,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
         $price = 0;
         foreach ($tabHouses as $tabHouse) {
-            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+            $dateTabStart = date("Y-m-d", strtotime('+1 day', strtotime($tabHouse['from'])));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             Log::info('TAB', [$tabHouse['calendar'], $dateTabStart, $dateTabEnd]);
             Log::info('MY', [$calendarId, $dateStart, $dateEnd]);
