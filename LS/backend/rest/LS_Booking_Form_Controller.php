@@ -166,7 +166,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         ];
 
         if($eventTabId != null and $eventTabId != 0){
-            $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $houseId, $isTerem);
+            $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd);
         }else{
             $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
             $houseDaysSalesResult = [];
@@ -528,8 +528,18 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $babyBedCount > 0;
     }
 
-    private static function getEventTotalPrice($eventTabId, $calendarId, $houseId, $isTerem){
-        return 10000;
+    private static function getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd){
+        $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
+        $price = 0;
+        foreach ($tabHouses as $tabHouse) {
+            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+            if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
+                $price = $tabHouse['new_price'];
+                break;
+            }
+        }
+        return $price;
     }
 
     private static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem){
