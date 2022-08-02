@@ -536,7 +536,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateTabStart = date("Y-m-d", strtotime('+1 day', strtotime($tabHouse['from'])));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $price = $tabHouse['new_price'];
+                $price = intval($tabHouse['new_price']);
                 break;
             }
         }
