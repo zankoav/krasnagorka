@@ -534,11 +534,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         foreach ($tabHouses as $tabHouse) {
             $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-            Log::info('calendarId', $calendarId);
-            Log::info('dateTabStart', $dateTabStart);
-            Log::info('dateStart', $dateStart);
-            Log::info('dateTabEnd', $dateTabEnd);
-            Log::info('dateEnd', $dateEnd);
+            Log::info('TAB', [$dateTabStart, $dateTabEnd]);
+            Log::info('MY', [$dateStart, $dateEnd]);
+            Log::info('---------------------------------');
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
                 $price = $tabHouse['new_price'];
                 break;
