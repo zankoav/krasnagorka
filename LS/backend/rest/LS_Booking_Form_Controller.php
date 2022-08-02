@@ -124,6 +124,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
         $calendarId = (int)$request['calendarId'];
+        $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
         $isTerem = $request['isTerem'];
         
         $smallAnimalCount = intval($request['smallAnimalCount']);
@@ -151,241 +152,242 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          */
         $removeOrderIncrease = self::isShortOrderWindow($days, $calendarId, $houseId, $isTerem);  
         
-
         /**
          * is only booking order
          */
-        $onlyBookingOrder = self::isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem);                
-
-        $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
-        $houseDaysSalesResult = [];
-        foreach ((array)$houseDaysSales as $key => $entry) {
-            if (isset($entry['sale']) and isset($entry['dayes'])) {
-                $houseDaysSalesResult[$entry['dayes']] = $entry['sale'];
-            }
-        }
-        ksort($houseDaysSalesResult);
-
-        $daysSale = null;
-        $daySaleNext = null;
-        
-        foreach($houseDaysSalesResult as $dayesNumber => $sale){
-            $daySaleNext = [
-                'sale' => $sale,
-                'dayesNumber' => $dayesNumber
-            ];
-            if(count($days) < $dayesNumber){
-                break;
-            }else{
-                $daysSale = $sale;
-                $daySaleNext = null;
-            }
-        }
-
-
-        $intervals = self::firstCalculeate($dateStart, $dateEnd);
-
-        if(count($intervals) == 2){
-            $fromDates = [
-                get_post_meta($intervals[0]->ID,'season_from',1),
-                get_post_meta($intervals[1]->ID,'season_from',1)
-            ];
-            asort($fromDates);
-            $fromDates = array_values($fromDates);
-            $intervals = self::secondCalculeate($fromDates);
-        }
-
-        foreach( $intervals as $interval ){
-            $seasonsIntervals[] = [
-                'date_from' => get_post_meta($interval->ID,'season_from',1),
-                'date_to' => get_post_meta($interval->ID,'season_to',1),
-                'season_id' => get_post_meta($interval->ID,'season_id',1)
-            ];
-        }
+        $onlyBookingOrder = self::isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem); 
 
         $result = [
             'total_price' => 0,
             'days_count' => count($days),
-            'day_sale_next' => $daySaleNext,
             'seasons_group' => [],
             'only_booking_order' => $onlyBookingOrder,
             'baby_bed_available' => self::isAvailableBabyBed($days, $calendarId, $houseId, $isTerem)
         ];
 
-        foreach($days as $day) {
-            foreach($seasonsIntervals as $interval) {
-                if($interval['date_from'] <= $day and $interval['date_to'] >= $day){
-                    $season = $result['seasons_group'][$interval['season_id']];
-                    if(empty($season)){
-                        $result['seasons_group'][$interval['season_id']] = [
-                            'season_id' => $interval['season_id'],
-                            'days' => []
-                        ];
-                    }
-                    $result['seasons_group'][$interval['season_id']]['days'][] = $day;
-                    continue;
-                } 
+        if($eventTabId != null and $eventTabId != 0){
+            $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $houseId, $isTerem);
+        }else{
+            $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
+            $houseDaysSalesResult = [];
+            foreach ((array)$houseDaysSales as $key => $entry) {
+                if (isset($entry['sale']) and isset($entry['dayes'])) {
+                    $houseDaysSalesResult[$entry['dayes']] = $entry['sale'];
+                }
             }
-        }
+            ksort($houseDaysSalesResult);
 
-        $seasonsQuery = new WP_Query(array(
-            'post_type'      => 'season',
-            'posts_per_page' => -1,
-            'post__in' => array_keys($result['seasons_group'])
-        ));
-
-        $seasons   = $seasonsQuery->get_posts();
-        foreach ($seasons as $season) {
-            $prefix = 'house';
-            if($isTerem){
-                $prefix = 'room';
-                $houseId = $calendarId;
-            }
-            $housePrice = (float)get_post_meta($season->ID, $prefix.'_price_'.$houseId, 1);
-            $houseMinPeople = get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
-            $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
-            $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
-            $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
+            $daysSale = null;
+            $daySaleNext = null;
             
-            $houseSmallAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_small_animal_price_'.$houseId, 1) ?? 0);
-            $houseBigAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_big_animal_price_'.$houseId, 1) ?? 0);
-
-            $result['seasons_group'][$season->ID]['house_price'] = $housePrice;
-            $result['seasons_group'][$season->ID]['house_min_people'] = $houseMinPeople;
-            $result['seasons_group'][$season->ID]['house_min_days'] = $houseMinDays;
-            $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
-            $result['seasons_group'][$season->ID]['house_small_animal_price'] = $houseSmallAnimalPrice;
-            $result['seasons_group'][$season->ID]['house_big_animal_price'] = $houseBigAnimalPrice;
-
-            $basePrice = $housePrice;
-            $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
-        
-            $basePeopleCount = $peopleCount;
-
-            if($peopleCount < $houseMinPeople){
-                $basePrice *= (float)$houseMinPeople;
-                $basePeopleCount = null;
+            foreach($houseDaysSalesResult as $dayesNumber => $sale){
+                $daySaleNext = [
+                    'sale' => $sale,
+                    'dayesNumber' => $dayesNumber
+                ];
+                if(count($days) < $dayesNumber){
+                    break;
+                }else{
+                    $daysSale = $sale;
+                    $daySaleNext = null;
+                }
             }
 
-            $basePriceWithoutUpper = null;
+            $result['day_sale_next'] = $daySaleNext;
 
-            $percentTotal = 0;
+            $intervals = self::firstCalculeate($dateStart, $dateEnd);
+
+            if(count($intervals) == 2){
+                $fromDates = [
+                    get_post_meta($intervals[0]->ID,'season_from',1),
+                    get_post_meta($intervals[1]->ID,'season_from',1)
+                ];
+                asort($fromDates);
+                $fromDates = array_values($fromDates);
+                $intervals = self::secondCalculeate($fromDates);
+            }
+
+            foreach( $intervals as $interval ){
+                $seasonsIntervals[] = [
+                    'date_from' => get_post_meta($interval->ID,'season_from',1),
+                    'date_to' => get_post_meta($interval->ID,'season_to',1),
+                    'season_id' => get_post_meta($interval->ID,'season_id',1)
+                ];
+            }
+
+            foreach($days as $day) {
+                foreach($seasonsIntervals as $interval) {
+                    if($interval['date_from'] <= $day and $interval['date_to'] >= $day){
+                        $season = $result['seasons_group'][$interval['season_id']];
+                        if(empty($season)){
+                            $result['seasons_group'][$interval['season_id']] = [
+                                'season_id' => $interval['season_id'],
+                                'days' => []
+                            ];
+                        }
+                        $result['seasons_group'][$interval['season_id']]['days'][] = $day;
+                        continue;
+                    } 
+                }
+            }
+
+            $seasonsQuery = new WP_Query(array(
+                'post_type'      => 'season',
+                'posts_per_page' => -1,
+                'post__in' => array_keys($result['seasons_group'])
+            ));
+
+            $seasons   = $seasonsQuery->get_posts();
+            foreach ($seasons as $season) {
+                $prefix = 'house';
+                if($isTerem){
+                    $prefix = 'room';
+                    $houseId = $calendarId;
+                }
+                $housePrice = (float)get_post_meta($season->ID, $prefix.'_price_'.$houseId, 1);
+                $houseMinPeople = get_post_meta($season->ID, $prefix.'_min_people_'.$houseId, 1);
+                $houseMinPeople = (float)str_replace(",", ".", $houseMinPeople);
+                $houseMinDays = (float)get_post_meta($season->ID, $prefix.'_min_days_'.$houseId, 1);
+                $houseMinPercent = (float)get_post_meta($season->ID, $prefix.'_min_percent_'.$houseId, 1);
+                
+                $houseSmallAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_small_animal_price_'.$houseId, 1) ?? 0);
+                $houseBigAnimalPrice = (float)(get_post_meta($season->ID, $prefix.'_big_animal_price_'.$houseId, 1) ?? 0);
+
+                $result['seasons_group'][$season->ID]['house_price'] = $housePrice;
+                $result['seasons_group'][$season->ID]['house_min_people'] = $houseMinPeople;
+                $result['seasons_group'][$season->ID]['house_min_days'] = $houseMinDays;
+                $result['seasons_group'][$season->ID]['house_min_percent'] = $houseMinPercent;
+                $result['seasons_group'][$season->ID]['house_small_animal_price'] = $houseSmallAnimalPrice;
+                $result['seasons_group'][$season->ID]['house_big_animal_price'] = $houseBigAnimalPrice;
+
+                $basePrice = $housePrice;
+                $seasonDaysCount = count($result['seasons_group'][$season->ID]['days']);
+            
+                $basePeopleCount = $peopleCount;
+
+                if($peopleCount < $houseMinPeople){
+                    $basePrice *= (float)$houseMinPeople;
+                    $basePeopleCount = null;
+                }
+
+                $basePriceWithoutUpper = null;
+
+                $percentTotal = 0;
 
 
 
-            $upperPercent = false;
+                $upperPercent = false;
 
-            if(!$removeOrderIncrease){
-                $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
-                if(count($daysUpperPersents) > 0){    
-                    foreach($daysUpperPersents as $day => $persent){
-                        if(count($days) <= intval($day)){
-                            $upperPercent = intval($persent);
-                            break;
+                if(!$removeOrderIncrease){
+                    $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
+                    if(count($daysUpperPersents) > 0){    
+                        foreach($daysUpperPersents as $day => $persent){
+                            if(count($days) <= intval($day)){
+                                $upperPercent = intval($persent);
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            
-            if($upperPercent){
-                $basePriceWithoutUpper = $basePrice;
-                $percentTotal -= $upperPercent;
-                $houseMinPercent = $upperPercent;
-            }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
-                $basePriceWithoutUpper = $basePrice;
-                $percentTotal -= $houseMinPercent;
-            }
-
-            $result['seasons_group'][$season->ID]['price_block'] = [
-                'title' =>  $season->post_title,
-                'season_id' =>  $season->ID,
-                'base_price' => $basePrice,
-                'min_percent' => $houseMinPercent,
-                'base_price_without_upper' => $basePriceWithoutUpper,
-                'days_count' => $seasonDaysCount,
-                'base_people_count' => $basePeopleCount,
-                'days_sale' => (float)$daysSale,
-                'small_animals_price' => $houseSmallAnimalPrice,
-                'big_animals_price' => $houseBigAnimalPrice,
-                'small_animals_count' => $smallAnimalCount,
-                'big_animals_count' => $bigAnimalCount
-            ];
-
-            $housePeoplesForSalesEntities = get_post_meta($season->ID, $prefix.'_people_for_sale_'.$houseId, 1);
-            $housePeoplesForSales = [];
-
-            foreach ((array)$housePeoplesForSalesEntities as $key => $entry) {
-                if (isset($entry['sale_percent']) and isset($entry['sale_people'])) {
-                    $housePeoplesForSales[$entry['sale_people']] = $entry['sale_percent'];
-                }
-            }
-
-            ksort($housePeoplesForSales);
-
-            $peopleSale = null;
-            $peopleSaleNext = null;
-            
-            foreach((array)$housePeoplesForSales as $peopleNumber => $sale){
                 
-                $peopleSaleNext = [
-                    'sale' => $sale,
-                    'people' => $peopleNumber
+                if($upperPercent){
+                    $basePriceWithoutUpper = $basePrice;
+                    $percentTotal -= $upperPercent;
+                    $houseMinPercent = $upperPercent;
+                }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
+                    $basePriceWithoutUpper = $basePrice;
+                    $percentTotal -= $houseMinPercent;
+                }
+
+                $result['seasons_group'][$season->ID]['price_block'] = [
+                    'title' =>  $season->post_title,
+                    'season_id' =>  $season->ID,
+                    'base_price' => $basePrice,
+                    'min_percent' => $houseMinPercent,
+                    'base_price_without_upper' => $basePriceWithoutUpper,
+                    'days_count' => $seasonDaysCount,
+                    'base_people_count' => $basePeopleCount,
+                    'days_sale' => (float)$daysSale,
+                    'small_animals_price' => $houseSmallAnimalPrice,
+                    'big_animals_price' => $houseBigAnimalPrice,
+                    'small_animals_count' => $smallAnimalCount,
+                    'big_animals_count' => $bigAnimalCount
                 ];
 
-                if($peopleCount < $peopleNumber){
-                    break;
-                }else{
-                    $peopleSale = $sale;
-                    $peopleSaleNext = null;
+                $housePeoplesForSalesEntities = get_post_meta($season->ID, $prefix.'_people_for_sale_'.$houseId, 1);
+                $housePeoplesForSales = [];
+
+                foreach ((array)$housePeoplesForSalesEntities as $key => $entry) {
+                    if (isset($entry['sale_percent']) and isset($entry['sale_people'])) {
+                        $housePeoplesForSales[$entry['sale_people']] = $entry['sale_percent'];
+                    }
                 }
+
+                ksort($housePeoplesForSales);
+
+                $peopleSale = null;
+                $peopleSaleNext = null;
+                
+                foreach((array)$housePeoplesForSales as $peopleNumber => $sale){
+                    
+                    $peopleSaleNext = [
+                        'sale' => $sale,
+                        'people' => $peopleNumber
+                    ];
+
+                    if($peopleCount < $peopleNumber){
+                        break;
+                    }else{
+                        $peopleSale = $sale;
+                        $peopleSaleNext = null;
+                    }
+                }
+
+                $result['seasons_group'][$season->ID]['price_block']['people_sale'] = $peopleSale;
+                $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;
+
+                $deltaSale = 0;
+
+                if(!empty($peopleSale)){
+                        $deltaSale += $peopleSale;
+                }
+
+                if(!empty($daysSale)){
+                        $deltaSale += $daysSale;
+                }
+
+                $percentTotal += $deltaSale;
+
+                $priceBlockTotal = round(
+                    ($basePrice * (1 - $percentTotal / 100) ) * 
+                    (empty($basePeopleCount) ? 1 : $basePeopleCount) * 
+                    $seasonDaysCount
+                , 2);
+
+                $smallAnimalBlockTotal = $seasonDaysCount * $houseSmallAnimalPrice * $smallAnimalCount;
+                
+                if(!empty($daysSale)){
+                    $smallAnimalBlockTotal = round($smallAnimalBlockTotal * (1 - $daysSale / 100));
+                }
+
+                $bigAnimalBlockTotal = $seasonDaysCount * $houseBigAnimalPrice * $bigAnimalCount;
+
+                if(!empty($daysSale)){
+                    $bigAnimalBlockTotal = round($bigAnimalBlockTotal * (1 - $daysSale / 100));
+                }
+                
+                $result['seasons_group'][$season->ID]['price_block']['total'] = $priceBlockTotal;
+
+                $result['seasons_group'][$season->ID]['price_block']['small_animals_total'] = $smallAnimalBlockTotal;
+                $result['seasons_group'][$season->ID]['price_block']['big_animals_total'] = $bigAnimalBlockTotal;
+
+                $result['total_price'] += $priceBlockTotal;
+                $result['total_price'] += $smallAnimalBlockTotal;
+                $result['total_price'] += $bigAnimalBlockTotal;
+                $result['total_price'] = intval($result['total_price']);
+                $result['accommodation_price'] = $result['total_price'];
             }
-
-            $result['seasons_group'][$season->ID]['price_block']['people_sale'] = $peopleSale;
-            $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;
-
-            $deltaSale = 0;
-
-            if(!empty($peopleSale)){
-                    $deltaSale += $peopleSale;
-            }
-
-            if(!empty($daysSale)){
-                    $deltaSale += $daysSale;
-            }
-
-            $percentTotal += $deltaSale;
-
-            $priceBlockTotal = round(
-                ($basePrice * (1 - $percentTotal / 100) ) * 
-                (empty($basePeopleCount) ? 1 : $basePeopleCount) * 
-                $seasonDaysCount
-            , 2);
-
-            $smallAnimalBlockTotal = $seasonDaysCount * $houseSmallAnimalPrice * $smallAnimalCount;
-            
-            if(!empty($daysSale)){
-                $smallAnimalBlockTotal = round($smallAnimalBlockTotal * (1 - $daysSale / 100));
-            }
-
-            $bigAnimalBlockTotal = $seasonDaysCount * $houseBigAnimalPrice * $bigAnimalCount;
-
-            if(!empty($daysSale)){
-                $bigAnimalBlockTotal = round($bigAnimalBlockTotal * (1 - $daysSale / 100));
-            }
-            
-            $result['seasons_group'][$season->ID]['price_block']['total'] = $priceBlockTotal;
-
-            $result['seasons_group'][$season->ID]['price_block']['small_animals_total'] = $smallAnimalBlockTotal;
-            $result['seasons_group'][$season->ID]['price_block']['big_animals_total'] = $bigAnimalBlockTotal;
-
-            $result['total_price'] += $priceBlockTotal;
-            $result['total_price'] += $smallAnimalBlockTotal;
-            $result['total_price'] += $bigAnimalBlockTotal;
-            $result['total_price'] = intval($result['total_price']);
-            $result['accommodation_price'] = $result['total_price'];
         }
-
-
 
         $babyBed = $request['babyBed'];
         if($babyBed){
@@ -524,6 +526,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
         return $babyBedCount > 0;
+    }
+
+    private static function getEventTotalPrice($eventTabId, $calendarId, $houseId, $isTerem){
+        return 10000;
     }
 
     private static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem){
