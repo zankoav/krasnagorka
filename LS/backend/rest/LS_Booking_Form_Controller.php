@@ -167,6 +167,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         if($eventTabId != null and $eventTabId != 0){
             $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd);
+            $result['accommodation'] = $result['total_price'];
         }else{
             $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
             $houseDaysSalesResult = [];
@@ -534,9 +535,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         foreach ($tabHouses as $tabHouse) {
             $dateTabStart = date("Y-m-d", strtotime('+1 day', strtotime($tabHouse['from'])));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-            Log::info('TAB', [$tabHouse['calendar'], $dateTabStart, $dateTabEnd]);
-            Log::info('MY', [$calendarId, $dateStart, $dateEnd]);
-            Log::info('---------------------------------');
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
                 $price = $tabHouse['new_price'];
                 break;
