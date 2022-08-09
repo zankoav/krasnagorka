@@ -105,7 +105,8 @@ export default class BookingForm extends LightningElement {
             bigAnimalCount: this.settings.bigAnimalCount || 0,
             foodBreakfast: this.settings.foodBreakfast || 0,
             foodLunch: this.settings.foodLunch || 0,
-            foodDinner: this.settings.foodDinner || 0
+            foodDinner: this.settings.foodDinner || 0,
+            eventTabId: this.settings.eventTabId
         }
 
         const response = await fetch('https://krasnagorka.by/wp-json/amocrm/v4/create-order/', {

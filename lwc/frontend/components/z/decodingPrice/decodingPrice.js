@@ -4,6 +4,10 @@ import './decodingPrice.scss'
 export default class DecodingPrice extends LightningElement {
     @api settings
 
+    get subTitle(){
+        return this.settings.total?.accommodation ? 'Проживание по горящему туру': 'Проживание';
+    }
+
     get displayServices() {
         return (
             this.settings.total.baby_bed ||
@@ -54,20 +58,25 @@ export default class DecodingPrice extends LightningElement {
 
     get houseTotalPrice() {
         let total = 0
-        for (let key in this.settings.total.seasons_group) {
-            total += this.settings.total.seasons_group[key].price_block.total
-            const small_animals_total =
-                this.settings.total.seasons_group[key].price_block.small_animals_total
-            const big_animals_total =
-                this.settings.total.seasons_group[key].price_block.big_animals_total
+        if (this.settings.total?.accommodation) {
+            total = this.settings.total.accommodation
+        } else {
+            for (let key in this.settings.total.seasons_group) {
+                total += this.settings.total.seasons_group[key].price_block.total
+                const small_animals_total =
+                    this.settings.total.seasons_group[key].price_block.small_animals_total
+                const big_animals_total =
+                    this.settings.total.seasons_group[key].price_block.big_animals_total
 
-            if (small_animals_total) {
-                total += small_animals_total
-            }
-            if (big_animals_total) {
-                total += big_animals_total
+                if (small_animals_total) {
+                    total += small_animals_total
+                }
+                if (big_animals_total) {
+                    total += big_animals_total
+                }
             }
         }
+
         return total
     }
 }

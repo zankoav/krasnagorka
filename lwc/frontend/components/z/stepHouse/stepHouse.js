@@ -20,6 +20,10 @@ export default class StepHouse extends LightningElement {
         return this.settings.seasons.find((season) => season.current)
     }
 
+    get showEventMessageInfo(){
+        return this.settings.eventTabId && this.settings.eventTabMessageInfo
+    }
+
     connectedCallback() {
         gtag('event', 'step_navigation', {
             step: 'house',

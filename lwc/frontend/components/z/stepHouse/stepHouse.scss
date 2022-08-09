@@ -7,6 +7,20 @@
         padding: 24px 32px 32px;
     }
 
+    &__event-info {
+        padding: 1.5rem 0;
+        line-height: 1.5;
+        text-transform: uppercase;
+        font-size: 14px;
+        color: $GRAY_1;
+    }
+
+    &__event-info-start{
+        font-weight: 700;
+        color: $RED;
+        letter-spacing: 4px;
+    }
+
     &__season-loading {
         flex-grow: 1;
     }

@@ -1,57 +1,73 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track, api } from 'lwc'
 // import {getCookie, setCookie} from 'z/utils';
-import './stepCheckout.scss';
+import './stepCheckout.scss'
 
 // const MAX_AGE = 3600 * 24 * 100;
 export default class StepCheckout extends LightningElement {
-    @api settings;
+    @api settings
 
     get calendar() {
-        return this.settings.calendars.find(c => c.selected);
+        return this.settings.calendars.find((c) => c.selected)
     }
 
     get peopleCount() {
-        return this.settings.counts.find(c => c.selected).name;
+        return this.settings.counts.find((c) => c.selected).name
     }
 
     get childCount() {
-        const item = this.settings.childCounts.find(c => c.selected);
-        return item ? item.name : 0;
+        const item = this.settings.childCounts.find((c) => c.selected)
+        return item ? item.name : 0
     }
 
     get dateStart() {
-        return this.settings.dateStart.replace(/-/g, ".");
+        return this.settings.dateStart.replace(/-/g, '.')
     }
 
     get dateEnd() {
-        return this.settings.dateEnd.replace(/-/g, ".");
+        return this.settings.dateEnd.replace(/-/g, '.')
     }
 
     get comment() {
-        return this.settings.comment || '—';
+        return this.settings.comment || '—'
     }
 
     get passport() {
-        return this.settings.passport || '—';
+        return this.settings.passport || '—'
     }
 
     get buttonTitle() {
-        let title = "Оплатить";
-        if(this.settings.paymentMethod !== 'card'){
-            title = "Забронировать";
+        let title = 'Оплатить'
+        if (this.settings.paymentMethod !== 'card') {
+            title = 'Забронировать'
         }
-        return title;
+        return title
     }
 
-    get isPayment(){
-        return this.settings.payment && !this.settings.total.only_booking_order.enabled;
+    get showPayment() {
+        return this.isPayment && !this.settings.eventTabId
     }
-    
-    connectedCallback(){
+
+    get isPayment() {
+        return this.settings.payment && !this.settings.total?.only_booking_order.enabled
+    }
+
+    get babyBed() {
+        return this.settings.total?.baby_bed
+    }
+
+    get bath_house_black() {
+        return this.settings.total?.bath_house_black
+    }
+
+    get bath_house_white() {
+        return this.settings.total?.bath_house_white
+    }
+
+    connectedCallback() {
         gtag('event', 'step_navigation', {
-            "step":"checkout",
-            "type":"view"
-        });
+            step: 'checkout',
+            type: 'view'
+        })
     }
 
     async bookingHandler() {
@@ -64,16 +80,16 @@ export default class StepCheckout extends LightningElement {
                 bubbles: true,
                 composed: true
             })
-        );
+        )
         this.dispatchEvent(
             new CustomEvent('booking', {
                 bubbles: true,
                 composed: true
             })
-        );
+        )
     }
 
-    async bookingPay(){
+    async bookingPay() {
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {
@@ -82,20 +98,20 @@ export default class StepCheckout extends LightningElement {
                 bubbles: true,
                 composed: true
             })
-        );
-        
+        )
+
         this.dispatchEvent(
             new CustomEvent('order', {
                 bubbles: true,
                 composed: true
             })
-        );
+        )
     }
 
     backButtonHandler() {
-        const newMenu = this.settings.menu.map(it => {
-            return { ...it, active: it.value === 'contacts' };
-        });
+        const newMenu = this.settings.menu.map((it) => {
+            return { ...it, active: it.value === 'contacts' }
+        })
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {
@@ -104,6 +120,6 @@ export default class StepCheckout extends LightningElement {
                 bubbles: true,
                 composed: true
             })
-        );
+        )
     }
 }

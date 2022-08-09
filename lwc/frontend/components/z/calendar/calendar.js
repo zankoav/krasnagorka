@@ -1,110 +1,111 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 /* eslint-disable no-await-in-loop */
-import { LightningElement, track, api } from 'lwc';
-import './calendar.scss';
-import { skip } from 'z/utils';
+import { LightningElement, track, api } from 'lwc'
+import './calendar.scss'
+import { skip } from 'z/utils'
 
-const message_1 = "Нельзя бронировать прошлые даты",
-    message_2 = "Дата выезда должна быть позже даты заезда",
-    message_3 = "В интервале бронирования не должно быть занятых дат",
-    message_4 = "Выберите свободную дату";
+const message_1 = 'Нельзя бронировать прошлые даты',
+    message_2 = 'Дата выезда должна быть позже даты заезда',
+    message_3 = 'В интервале бронирования не должно быть занятых дат',
+    message_4 = 'Выберите свободную дату'
 
-let $ = jQuery;
-let events, jsFromDate, jsToDate, $calendar;
+let $ = jQuery
+let events, jsFromDate, jsToDate, $calendar
 
 export default class Calendar extends LightningElement {
-
-    @api settings;
-    @track loading;
+    @api settings
+    @track loading
 
     get dateStart() {
-        return this.settings.dateStart ? this.settings.dateStart.replace(/-/g, ".") : '—';
+        return this.settings.dateStart ? this.settings.dateStart.replace(/-/g, '.') : '—'
     }
 
     get dateEnd() {
-        return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, ".") : '—';
+        return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, '.') : '—'
     }
 
     initDate(date) {
-        let result;
+        let result
         if (date) {
             result = {
-                d: (new moment(date, "DD-MM-YYYY")).format("YYYY-MM-DD")
-            };
+                d: new moment(date, 'DD-MM-YYYY').format('YYYY-MM-DD')
+            }
         }
-        return result;
+        return result
     }
 
     async connectedCallback() {
-        
-        jsFromDate = this.initDate(this.settings.dateStart);
-        jsToDate = this.initDate(this.settings.dateEnd);
-        const calendarSlug = this.settings.calendars.find(c => c.selected).slug;
-        const calendarId = this.settings.calendars.find(c => c.selected).id;
-        this.loading = true;
-        $calendar = null;
-        events = null;
-        const response = await fetch(`https://krasnagorka.by/wp-json/calendars/${calendarSlug}`);
-        events = await response.json();
-        this.loading = false;
-        await skip();
-        this.template.querySelector('.calendar__content').innerHTML = this.getTemplate();
-        $calendar = $('#calendar');
-        const step = this;
+        jsFromDate = this.initDate(this.settings.dateStart)
+        jsToDate = this.initDate(this.settings.dateEnd)
+        const calendarSlug = this.settings.calendars.find((c) => c.selected).slug
+        const calendarId = this.settings.calendars.find((c) => c.selected).id
+        this.loading = true
+        $calendar = null
+        events = null
+        const response = await fetch(`https://krasnagorka.by/wp-json/calendars/${calendarSlug}`)
+        events = await response.json()
+        this.loading = false
+        await skip()
+        this.template.querySelector('.calendar__content').innerHTML = this.getTemplate()
+        $calendar = $('#calendar')
+        const step = this
         $calendar.fullCalendar({
             height: 380,
-            locale: "ru",   
+            locale: 'ru',
             defaultDate: jsFromDate ? jsFromDate.d : undefined,
             header: {
-                left: "prev",
-                center: "title",
-                right: "next"
+                left: 'prev',
+                center: 'title',
+                right: 'next'
             },
             events: events,
             eventAfterAllRender: () => {
-                this.updateStyle();
+                this.updateStyle()
                 if (jsFromDate) {
                     const element = document.querySelector(
                         `.fc-widget-content[data-date="${jsFromDate.d}"]`
-                    );
+                    )
                     if (element) {
                         jsFromDate = {
                             d: jsFromDate.d,
                             el: element
-                        };
-                        $(jsFromDate.el).addClass("cell-range");
+                        }
+                        $(jsFromDate.el).addClass('cell-range')
                     }
                 }
 
                 if (jsToDate) {
                     const element = document.querySelector(
                         `.fc-widget-content[data-date="${jsToDate.d}"]`
-                    );
+                    )
                     if (element) {
-                        jsToDate = { d: jsToDate.d, el: element };
-                        $(jsToDate.el).addClass("cell-range");
+                        jsToDate = { d: jsToDate.d, el: element }
+                        $(jsToDate.el).addClass('cell-range')
                     }
                 }
-                fillCells();
-                addInOutDelimiters(events);
+                fillCells()
+                addInOutDelimiters(events)
             },
             dayClick: function (date, jsEvent, view) {
-                const d = date.format("YYYY-MM-DD");
-                const cell = this;
+                if (step.settings.eventTabId) {
+                    return
+                }
+                const d = date.format('YYYY-MM-DD')
+                const cell = this
                 if (!jsFromDate) {
-                    initFrom(d, cell);
+                    initFrom(d, cell)
                 } else if (jsFromDate && jsFromDate.d === d) {
-                    clearAll();
-                    fillCells();
+                    clearAll()
+                    fillCells()
                 } else if (
                     jsFromDate &&
                     !jsToDate &&
                     jsFromDate.d < d &&
                     checkDateRange(events, jsFromDate.d, d)
                 ) {
-                    jsToDate = { d: d, el: cell };
-                    $(jsToDate.el).addClass("cell-range");
-                    fillCells();
+                    jsToDate = { d: d, el: cell }
+                    $(jsToDate.el).addClass('cell-range')
+                    fillCells()
                 } else if (
                     jsFromDate &&
                     jsToDate &&
@@ -112,63 +113,47 @@ export default class Calendar extends LightningElement {
                     jsFromDate.d < d &&
                     checkDateRange(events, jsFromDate.d, d)
                 ) {
-                    $(jsToDate.el)
-                        .removeClass("cell-range")
-                        .empty();
-                    jsToDate = { d: d, el: cell };
-                    $(jsToDate.el).addClass("cell-range");
+                    $(jsToDate.el).removeClass('cell-range').empty()
+                    jsToDate = { d: d, el: cell }
+                    $(jsToDate.el).addClass('cell-range')
 
-                    fillCells();
+                    fillCells()
                 } else if (jsToDate && jsToDate.d === d) {
-                    $(jsToDate.el)
-                        .removeClass("cell-range")
-                        .empty();
-                    jsToDate = null;
-                    fillCells();
+                    $(jsToDate.el).removeClass('cell-range').empty()
+                    jsToDate = null
+                    fillCells()
                 } else if (jsFromDate && jsFromDate.d > d) {
-                    showMessage(message_2);
+                    showMessage(message_2)
                 }
 
-
                 if (jsFromDate && jsToDate) {
-                    const fromDateClearFormat = new moment(
-                        jsFromDate.d,
-                        "YYYY-MM-DD"
-                    );
-                    const toDateClearFormat = new moment(
-                        jsToDate.d,
-                        "YYYY-MM-DD"
-                    );
+                    const fromDateClearFormat = new moment(jsFromDate.d, 'YYYY-MM-DD')
+                    const toDateClearFormat = new moment(jsToDate.d, 'YYYY-MM-DD')
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
                             detail: {
-                                dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
-                                dateEnd: toDateClearFormat.format("DD-MM-YYYY")
+                                dateStart: fromDateClearFormat.format('DD-MM-YYYY'),
+                                dateEnd: toDateClearFormat.format('DD-MM-YYYY')
                             },
                             bubbles: true,
                             composed: true
                         })
-                    );
+                    )
                 } else if (jsFromDate) {
-                    const fromDateClearFormat = new moment(
-                        jsFromDate.d,
-                        "YYYY-MM-DD"
-                    );
-
+                    const fromDateClearFormat = new moment(jsFromDate.d, 'YYYY-MM-DD')
 
                     step.dispatchEvent(
                         new CustomEvent('update', {
                             detail: {
-                                dateStart: fromDateClearFormat.format("DD-MM-YYYY"),
+                                dateStart: fromDateClearFormat.format('DD-MM-YYYY'),
                                 dateEnd: null
                             },
                             bubbles: true,
                             composed: true
                         })
-                    );
+                    )
                 } else {
-
                     step.dispatchEvent(
                         new CustomEvent('update', {
                             detail: {
@@ -178,49 +163,48 @@ export default class Calendar extends LightningElement {
                             bubbles: true,
                             composed: true
                         })
-                    );
+                    )
                 }
             }
-        });
+        })
 
-        function addInOutDelimiters(){
-            for(let event of events){
-
+        function addInOutDelimiters() {
+            for (let event of events) {
                 const elementStart = $calendar[0].querySelector(
                     `.fc-widget-content[data-date="${event.start}"]`
-                );
+                )
 
                 var endEvent = jQuery.fullCalendar
-                .moment(event.end, "YYYY-MM-DD")
-                .subtract(1, "days")
-                .format("YYYY-MM-DD");
+                    .moment(event.end, 'YYYY-MM-DD')
+                    .subtract(1, 'days')
+                    .format('YYYY-MM-DD')
 
                 const elementEnd = $calendar[0].querySelector(
                     `.fc-widget-content[data-date="${endEvent}"]`
-                );
+                )
 
-                if(elementStart && elementStart.innerHTML){
-                    elementStart.innerHTML += delimeterFromView;
-                }else if (elementStart && !elementStart.innerHTML){
-                    elementStart.innerHTML = delimeterFromView;
+                if (elementStart && elementStart.innerHTML) {
+                    elementStart.innerHTML += delimeterFromView
+                } else if (elementStart && !elementStart.innerHTML) {
+                    elementStart.innerHTML = delimeterFromView
                 }
 
-                if(elementEnd && elementEnd.innerHTML){
-                    elementEnd.innerHTML += delimeterToView;
-                }else if (elementEnd && !elementEnd.innerHTML){
-                    elementEnd.innerHTML = delimeterToView;
+                if (elementEnd && elementEnd.innerHTML) {
+                    elementEnd.innerHTML += delimeterToView
+                } else if (elementEnd && !elementEnd.innerHTML) {
+                    elementEnd.innerHTML = delimeterToView
                 }
             }
         }
     }
 
     updateStyle() {
-        const head = document.head || document.getElementsByTagName("head")[0];
+        const head = document.head || document.getElementsByTagName('head')[0]
         if (this.calendarStyle) {
-            head.removeChild(this.calendarStyle);
+            head.removeChild(this.calendarStyle)
         }
-        this.calendarStyle = document.createElement("style");
-        const targetMargin = $($(".fc-day-top")[0]).width() / 2;
+        this.calendarStyle = document.createElement('style')
+        const targetMargin = $($('.fc-day-top')[0]).width() / 2
         const css = `.fc-view .fc-body .fc-start { 
                         margin-left: ${targetMargin}px; 
                         border-top-left-radius: 5px;
@@ -230,11 +214,9 @@ export default class Calendar extends LightningElement {
                         margin-right: ${targetMargin}px;
                         border-top-right-radius: 5px;
                         border-bottom-right-radius: 5px;
-                    }`;
-        this.calendarStyle.appendChild(
-            document.createTextNode(css)
-        );
-        head.appendChild(this.calendarStyle);
+                    }`
+        this.calendarStyle.appendChild(document.createTextNode(css))
+        head.appendChild(this.calendarStyle)
     }
 
     getTemplate() {
@@ -249,116 +231,105 @@ export default class Calendar extends LightningElement {
                     </ul>
                 </div>
             </div>
-        `;
+        `
     }
 }
 
-const delimeterFromView =   `<div class="date-delimiter date-delimiter_from">
+const delimeterFromView = `<div class="date-delimiter date-delimiter_from">
                                 <div class="date-delimiter__line"></div>
-                            </div>`;
-const delimeterToView =   `<div class="date-delimiter date-delimiter_to">
+                            </div>`
+const delimeterToView = `<div class="date-delimiter date-delimiter_to">
                                 <div class="date-delimiter__line"></div>
-                            </div>`;
+                            </div>`
 
 function initFrom(d, el) {
-    var a = new moment(Date.now());
-    if (
-        d >= a.format("YYYY-MM-DD") &&
-        checkStartDate(events, d)
-    ) {
-        jsFromDate = { d: d, el: el };
-        $(jsFromDate.el).addClass("cell-range");
-    } else if (d < a.format("YYYY-MM-DD")) {
-        showMessage(message_1);
+    var a = new moment(Date.now())
+    if (d >= a.format('YYYY-MM-DD') && checkStartDate(events, d)) {
+        jsFromDate = { d: d, el: el }
+        $(jsFromDate.el).addClass('cell-range')
+    } else if (d < a.format('YYYY-MM-DD')) {
+        showMessage(message_1)
     }
 }
 
 function fillCells() {
-    $calendar.find(`.cell-between`).removeClass("cell-between");
+    $calendar.find(`.cell-between`).removeClass('cell-between')
     if (jsToDate) {
         $calendar.find('.fc-day[data-date]').each(function () {
-            const $item = $(this);
-            const dateStr = $item.data("date");
+            const $item = $(this)
+            const dateStr = $item.data('date')
             if (jsFromDate.d < dateStr && jsToDate.d > dateStr) {
-                $item.addClass("cell-between");
+                $item.addClass('cell-between')
             }
-        }
-        );
+        })
     }
 }
 
 function clearAll() {
     if (jsToDate) {
-        $(jsToDate.el).removeClass("cell-range");
+        $(jsToDate.el).removeClass('cell-range')
     }
     if (jsFromDate) {
-        $(jsFromDate.el).removeClass("cell-range");
+        $(jsFromDate.el).removeClass('cell-range')
     }
-    jsToDate = null;
-    jsFromDate = null;
+    jsToDate = null
+    jsFromDate = null
 }
 
 function checkStartDate(events, startDate) {
-    var result = true;
+    var result = true
 
     for (var i = 0; i < events.length; i++) {
-        var event = events[i];
-        var startEvent = jQuery.fullCalendar
-            .moment(event.start, "YYYY-MM-DD")
-            .format("YYYY-MM-DD");
+        var event = events[i]
+        var startEvent = jQuery.fullCalendar.moment(event.start, 'YYYY-MM-DD').format('YYYY-MM-DD')
         var endEvent = jQuery.fullCalendar
-            .moment(event.end, "YYYY-MM-DD")
-            .subtract(1, "days")
-            .format("YYYY-MM-DD");
+            .moment(event.end, 'YYYY-MM-DD')
+            .subtract(1, 'days')
+            .format('YYYY-MM-DD')
 
         if (startDate < endEvent && startDate > startEvent) {
-            result = false;
-            showMessage(message_4);
-            break;
+            result = false
+            showMessage(message_4)
+            break
         }
     }
 
-    return result;
+    return result
 }
 
 function checkDateRange(events, startDate, endDate) {
-    var result = true;
+    var result = true
 
     for (var i = 0; i < events.length; i++) {
-        var event = events[i];
-        var startEvent = jQuery.fullCalendar
-            .moment(event.start, "YYYY-MM-DD")
-            .format("YYYY-MM-DD");
+        var event = events[i]
+        var startEvent = jQuery.fullCalendar.moment(event.start, 'YYYY-MM-DD').format('YYYY-MM-DD')
         var endEvent = jQuery.fullCalendar
-            .moment(event.end, "YYYY-MM-DD")
-            .subtract(1, "days")
-            .format("YYYY-MM-DD");
+            .moment(event.end, 'YYYY-MM-DD')
+            .subtract(1, 'days')
+            .format('YYYY-MM-DD')
 
         if (startDate < endEvent && endDate > startEvent) {
-            result = false;
-            showMessage(message_3);
-            break;
+            result = false
+            showMessage(message_3)
+            break
         }
     }
 
-    return result;
+    return result
 }
 
 function showMessage(message) {
-    new ErrorAlert(message);
+    new ErrorAlert(message)
 }
 
 function ErrorAlert(message) {
     this.messageElement = $(
         `<div class="error-message"><p class="error-message__inner">Ошибка! ${message}</p></div>`
-    );
-    $(document.body).append(this.messageElement);
+    )
+    $(document.body).append(this.messageElement)
     setTimeout(() => {
         this.messageElement.fadeIn(function () {
-            $(this).remove();
-        });
-    }, 2000);
+            $(this).remove()
+        })
+    }, 2000)
 }
-
-
-

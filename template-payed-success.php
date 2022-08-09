@@ -77,7 +77,6 @@ strong {
 </div>
 <?php
 
-    get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");
     get_footer('mastak');
 

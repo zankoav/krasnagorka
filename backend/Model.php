@@ -307,7 +307,10 @@ class Model
 
         if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
 
-            $result['pay'] = true;
+            $result['pay'] = false;
+            $result['house'] = [
+                'calendarId' => $calendarId
+            ];
             $_eventTabId = $result['eventTabId'];
             $_dateFrom = $result['dateFrom'];
             $_dateTo = $result['dateTo'];
@@ -318,6 +321,17 @@ class Model
                 $_dateFrom,
                 $_dateTo
             );
+
+            $result['total'] = [
+                "accommodation" =>  intval($result['price']),
+                "total_price" => intval($result['price']),
+                "only_booking_order" => [
+                    "message" => "!!! Message",
+                    "enabled" => false
+                ]
+            ];
+
+            $result['eventTabMessageInfo'] = 'При заказе горящего предложения, вы не можете изменить объект и даты проживания';
 
             if ($result['pay']) {
                 $SecretKey = '2091988';

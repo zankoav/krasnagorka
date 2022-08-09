@@ -1,11 +1,19 @@
 <template>
     <div class="select" tabindex="0" onblur={closeHandler}>
-        <div class={selectBlockCss} onclick={toggleHandler}>
-            <div if:true={label} class="select__label">{label}</div>
-            <div class="select__value">{value}</div>
-            <div if:true={required} class="select__required"></div>
-            <div class="select__arrow"></div>
-        </div>
+        <template if:true={disabled}>
+            <div class={selectBlockCss}>
+                <div if:true={label} class="select__label">{label}</div>
+                <div class="select__value">{value}</div>
+            </div>
+        </template>
+        <template if:false={disabled}>
+            <div class={selectBlockCss} onclick={toggleHandler}>
+                <div if:true={label} class="select__label">{label}</div>
+                <div class="select__value">{value}</div>
+                <div if:true={required} class="select__required"></div>
+                <div class="select__arrow"></div>
+            </div>
+        </template>
         <div class="select__options-wrapper">
             <div if:true={isOpen} class="select__options">
                 <template for:each={options} for:item="option">

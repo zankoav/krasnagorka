@@ -30,14 +30,21 @@ export default class StepAdditionalServices extends LightningElement {
     }
 
     get showBabyBedService() {
-        return (
-            !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed &&
-            this.settings.total.baby_bed_available
-        )
+        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed &&
+            this.settings.eventTabId
+            ? this.settings.baby_bed_available
+            : this.settings.total.baby_bed_available
     }
 
     get showAnimalsService() {
-        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
+        let result = false
+        if (this.settings.total?.accommodation) {
+            result = false
+        } else {
+            result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
+        }
+        console.log('result', result);
+        return result
     }
 
     get seansWhiteOptions() {

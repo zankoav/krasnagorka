@@ -20,33 +20,32 @@
  13. npm install webpack-dev-server --save-dev
  *
  */
-const THEME_NAME = 'krasnagorka';
-
+const THEME_NAME = 'krasnagorka'
 
 let entries = {
     home: './home.js',
     category: './category.js'
-};
+}
 
 let pugs = {
     home: {
-        title: "home title"
+        title: 'home title'
     },
     category: {
-        title: "category title"
+        title: 'category title'
     }
-};
+}
 
-const NODE_ENV = process.env.NODE_ENV;
-const DEV_MODE = NODE_ENV == 0;
-const WP = NODE_ENV == 2;
+const NODE_ENV = process.env.NODE_ENV
+const DEV_MODE = NODE_ENV == 0
+const WP = NODE_ENV == 2
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const AssetsPlugin = require('assets-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const rimraf = require('rimraf');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const rimraf = require('rimraf')
 
 module.exports = {
     context: path.resolve(__dirname, 'assets/templates'),
@@ -57,10 +56,10 @@ module.exports = {
         publicPath: '/src/',
         filename: 'js/[name]' + (DEV_MODE ? '.js' : '.[hash].min.js'),
         chunkFilename: 'js/[name]' + (DEV_MODE ? '.js' : '.[hash].min.js'),
-        library: '[name]',
+        library: '[name]'
     },
     optimization: {
-        runtimeChunk: {name: 'common'},
+        runtimeChunk: { name: 'common' },
         splitChunks: {
             cacheGroups: {
                 default: false,
@@ -69,10 +68,10 @@ module.exports = {
                     chunks: 'all',
                     minChunks: 2,
                     name: 'common',
-                    enforce: true,
-                },
-            },
-        },
+                    enforce: true
+                }
+            }
+        }
     },
     devtool: DEV_MODE ? 'source-map' : false,
     devServer: {
@@ -94,19 +93,22 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules\/(?!(dom7|ssr-window|swiper)\/).*/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader'
                 }
-            }, {
+            },
+            {
                 test: /\.css$/,
                 use: [
                     {
                         loader: 'style-loader'
-                    }, {
+                    },
+                    {
                         loader: 'css-loader',
                         options: {
                             minimize: true
                         }
-                    }, {
+                    },
+                    {
                         loader: 'postcss-loader',
                         options: {
                             plugins: [
@@ -116,41 +118,45 @@ module.exports = {
                             ],
                             sourceMap: true
                         }
-                    }, {
+                    },
+                    {
                         loader: 'resolve-url-loader'
                     }
                 ]
-            }, {
+            },
+            {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    minimize: !DEV_MODE,
-                                }
-                            }, {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: [
-                                        autoprefixer({
-                                            browsers: ['ie >= 10', 'last 3 version']
-                                        })
-                                    ],
-                                    sourceMap: true
-                                }
-                            }, {
-                                loader: 'resolve-url-loader'
-                            }, {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true
-                                }
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: !DEV_MODE
                             }
-                        ]
-                    })
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [
+                                    autoprefixer({
+                                        browsers: ['ie >= 10', 'last 3 version']
+                                    })
+                                ],
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'resolve-url-loader'
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
             },
             // Image Loader
             {
@@ -161,8 +167,9 @@ module.exports = {
                         options: {
                             outputPath: './icons/',
                             name: '[name].[hash:6].[ext]',
-                            publicPath: WP ? `/wp-content/themes/${THEME_NAME}/src/icons/` : '/src/icons/'
-
+                            publicPath: WP
+                                ? `/wp-content/themes/${THEME_NAME}/src/icons/`
+                                : '/src/icons/'
                         }
                     }
                 ]
@@ -176,7 +183,9 @@ module.exports = {
                         options: {
                             outputPath: './fonts/',
                             name: '[name].[hash:6].[ext]',
-                            publicPath: WP ? `/wp-content/themes/${THEME_NAME}/src/fonts/` : '/src/fonts/'
+                            publicPath: WP
+                                ? `/wp-content/themes/${THEME_NAME}/src/fonts/`
+                                : '/src/fonts/'
                         }
                     }
                 ]
@@ -190,7 +199,9 @@ module.exports = {
                         options: {
                             outputPath: './video/',
                             name: '[name].[hash:6].[ext]',
-                            publicPath: WP ? `/wp-content/themes/${THEME_NAME}/src/video/` : '/src/video/'
+                            publicPath: WP
+                                ? `/wp-content/themes/${THEME_NAME}/src/video/`
+                                : '/src/video/'
                         }
                     }
                 ]
@@ -201,7 +212,7 @@ module.exports = {
         {
             apply: (compiler) => {
                 if (!DEV_MODE) {
-                    rimraf.sync(compiler.options.output.path);
+                    rimraf.sync(compiler.options.output.path)
                 }
             }
         },
@@ -215,19 +226,19 @@ module.exports = {
             path: path.resolve(__dirname, 'src')
         })
     ]
-};
+}
 
-
-initHtmlPugs();
+initHtmlPugs()
 
 function initHtmlPugs() {
-
     for (let page in pugs) {
-        module.exports.plugins.push(new HtmlWebpackPlugin({
-            title: pugs[page].title,
-            filename: `${page}.html`,
-            chunks: [page, 'common'],
-            template: path.resolve(__dirname, 'assets/templates') + `/${page}.pug`,
-        }));
+        module.exports.plugins.push(
+            new HtmlWebpackPlugin({
+                title: pugs[page].title,
+                filename: `${page}.html`,
+                chunks: [page, 'common'],
+                template: path.resolve(__dirname, 'assets/templates') + `/${page}.pug`,
+            })
+        )
     }
 }

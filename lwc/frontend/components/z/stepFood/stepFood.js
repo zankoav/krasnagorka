@@ -16,7 +16,16 @@ export default class StepFood extends LightningElement {
     get optionsCount() {
         const counts = this.settings.counts.find((it) => it.selected).name
         const childCounts = this.settings.childCounts.find((it) => it.selected)?.name || 0
-        return (counts + childCounts) * this.settings.total.days_count + 1
+        let daysCount
+        if (this.settings.eventTabId) {
+            const dateStart = moment(this.settings.dateStart, 'DD-MM-YYYY')
+            const dateEnd = moment(this.settings.dateEnd, 'DD-MM-YYYY')
+            daysCount = dateEnd.diff(dateStart, 'days')
+        } else {
+            daysCount = this.settings.total.days_count
+        }
+        console.log('daysCount', daysCount)
+        return (counts + childCounts) * daysCount + 1
     }
 
     get breakfastOptions() {

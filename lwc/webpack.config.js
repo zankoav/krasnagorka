@@ -102,10 +102,10 @@ module.exports = (env) => {
                 template: './frontend/booking.pug',
                 chunks: ['booking']
             }),
-            new LWCWebpackPlugin()
-            // new webpack.DefinePlugin({
-            //     DEBUG_MODE: 'ANY value'
-            // }),
+            new LWCWebpackPlugin(),
+            new webpack.DefinePlugin({
+                DEBUG_MODE: true
+            }),
         ],
         resolve: {
             alias: {

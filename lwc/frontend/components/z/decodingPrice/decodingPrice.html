@@ -1,9 +1,14 @@
 <template>
     <div class="decoding-price">
         <div class="decoding-price__list">
-            <div class="decoding-price__subtitle">Проживание</div>
-            <template for:each={seasons} for:item="season">
-                <z-decoding-price-line class="decoding-price__item" key={season.season_id} season={season}></z-decoding-price-line>
+            <div class="decoding-price__subtitle">{subTitle}</div>
+            <template if:true={settings.eventTabId}>
+
+            </template>
+            <template if:false={settings.eventTabId}>
+                <template for:each={seasons} for:item="season">
+                    <z-decoding-price-line class="decoding-price__item" key={season.season_id} season={season}></z-decoding-price-line>
+                </template>
             </template>
             <div class="decoding-price__baby-bed">
                 Итого: <z-number-value num={houseTotalPrice} value="руб"> </z-number-value>
@@ -56,21 +61,21 @@
                         <span class="decoding-price-line__sign">=</span>
                         <z-number-value num={settings.total.food.breakfast.total_price} value="руб"></z-number-value>
                     </div>
-                    <div if:true={settings.total.food.dinner.total_price} class="decoding-price__baby-bed">
-                        <div class="decoding-price__baby-bed-title">Обеды</div>
-                        <z-number-value num={settings.total.food.dinner.price} value="руб"></z-number-value>
-                        <span class="decoding-price-line__sign">*</span>
-                        <z-number-value num={settings.total.food.dinner.count} value="шт"></z-number-value>
-                        <span class="decoding-price-line__sign">=</span>
-                        <z-number-value num={settings.total.food.dinner.total_price} value="руб"></z-number-value>
-                    </div>
                     <div if:true={settings.total.food.lunch.total_price} class="decoding-price__baby-bed">
-                        <div class="decoding-price__baby-bed-title">Ужины</div>
+                        <div class="decoding-price__baby-bed-title">Обеды</div>
                         <z-number-value num={settings.total.food.lunch.price} value="руб"></z-number-value>
                         <span class="decoding-price-line__sign">*</span>
                         <z-number-value num={settings.total.food.lunch.count} value="шт"></z-number-value>
                         <span class="decoding-price-line__sign">=</span>
                         <z-number-value num={settings.total.food.lunch.total_price} value="руб"></z-number-value>
+                    </div>
+                    <div if:true={settings.total.food.dinner.total_price} class="decoding-price__baby-bed">
+                        <div class="decoding-price__baby-bed-title">Ужины</div>
+                        <z-number-value num={settings.total.food.dinner.price} value="руб"></z-number-value>
+                        <span class="decoding-price-line__sign">*</span>
+                        <z-number-value num={settings.total.food.dinner.count} value="шт"></z-number-value>
+                        <span class="decoding-price-line__sign">=</span>
+                        <z-number-value num={settings.total.food.dinner.total_price} value="руб"></z-number-value>
                     </div>
                     <div if:true={settings.total.food.sale} class="decoding-price__baby-bed">
                         Скидка за трехразовое питание: <z-number-value num={settings.total.food.sale} value="руб"></z-number-value>

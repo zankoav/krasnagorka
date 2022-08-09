@@ -5,11 +5,11 @@
             <p class="step-checkout__item" data-label="Домик:">{calendar.name}</p>
             <p class="step-checkout__item" data-label="Количество человек:">{peopleCount}</p>
             <p if:true={childCount} class="step-checkout__item" data-label="Количество детей без спальных мест:">{childCount}</p>
-            <p if:true={settings.total.baby_bed} class="step-checkout__item" data-label="Детская кроватка:">Да</p>
-            <p if:true={settings.total.bath_house_black} class="step-checkout__item" data-label="Количество сеансов бани по-черному:">
+            <p if:true={babyBed} class="step-checkout__item" data-label="Детская кроватка:">Да</p>
+            <p if:true={bath_house_black} class="step-checkout__item" data-label="Количество сеансов бани по-черному:">
                 {settings.total.bath_house_black.count}
             </p>
-            <p if:true={settings.total.bath_house_white} class="step-checkout__item" data-label="Количество сеансов бани по-белому:">
+            <p if:true={bath_house_white} class="step-checkout__item" data-label="Количество сеансов бани по-белому:">
                 {settings.total.bath_house_white.count}
             </p>
             <p if:true={settings.smallAnimalCount} class="step-checkout__item" data-label="Кошки и собаки мелких пород (высота в холке до 40 см):">
@@ -31,7 +31,7 @@
             <p class="step-checkout__item" data-label="Паспорт:" data-help="Личный (идентификационный) номер паспорта">{passport}</p>
             <p class="step-checkout__item" data-label="Комментарий:">{comment}</p>
         </div>
-        <z-payment-methods if:true={isPayment} class="step-checkout__payment" settings={settings}></z-payment-methods>
+        <z-payment-methods if:true={showPayment} class="step-checkout__payment" settings={settings}></z-payment-methods>
         <z-total-price if:true={settings.admin} settings={settings}></z-total-price>
 
         <z-step-button-navigation

@@ -6,6 +6,7 @@ export default class Select extends LightningElement {
     @api required;
     @api label;
     @api options;
+    @api disabled;
     @api error;
 
     @track isOpen;
@@ -34,6 +35,11 @@ export default class Select extends LightningElement {
         if(this.isOpen){
             result += ' select__value-block_open';
         }
+
+        if(this.disabled){
+            result += ' select__value-block_disabled'
+        }
+
         return result;
     }
 
@@ -54,5 +60,9 @@ export default class Select extends LightningElement {
                 new CustomEvent('change', { detail: value })
             );
         }
+    }
+
+    connectedCallback(){
+        console.log(this.disabled);
     }
 }

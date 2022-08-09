@@ -45,6 +45,12 @@
                 transform: rotate(-135deg) scale(-1, -1);
             }
         }
+
+        &_disabled{
+            cursor: initial;
+            background-color: $GRAY;
+            border-color: $GRAY;
+        }
     }
 
     &__options-wrapper {
