@@ -145,6 +145,17 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($accommodationPriceFieldValueModel);
 
+            // Event id
+            $isEventOrder = empty($order->eventTabId) ? 'Нет' : 'Да';
+            $isEventOrderFieldValueModel = new TextCustomFieldValuesModel();
+            $isEventOrderFieldValueModel->setFieldId(760125);
+            $isEventOrderFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue($isEventOrder)
+                    )
+            );
+            $leadCustomFields->add($isEventOrderFieldValueModel);
 
             // Comment
             $commentFieldValueModel = new TextCustomFieldValuesModel();
@@ -198,6 +209,7 @@ class AmoCrmFactory {
             $notePrepaidType = $order->prepaidType ?? '-';
 
             $order->note[] = "Сумма: {$order->price} руб.";
+            $order->note[] = "Горящее предложение: {$isEventOrder}";
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
             $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
             $order->note[] = "Домик: {$order->calendarName}";

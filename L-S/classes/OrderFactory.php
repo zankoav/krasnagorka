@@ -160,6 +160,10 @@ class OrderFactory {
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
+        if(!empty($order->eventTabId)){
+            update_post_meta($order->id, 'sbc_order_is_event', 'on');
+        }
+
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);

@@ -98,6 +98,14 @@ function sbc_order_info_metabox() {
         ),
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => 'Горящее предложение',
+        'id'   => 'sbc_order_is_event',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'type' => 'checkbox'
+    ) );
 
     $sbc_order->add_field( array(
         'name' => esc_html__( 'Дата заезда', 'sbc' ),
