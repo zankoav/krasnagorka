@@ -22,6 +22,7 @@ class OrderFactory {
         $order->peopleCount = $data['count'];
         $order->paymentMethod = $data['paymentMethod'];
         $order->prepaidType = $data['prepaidType'];
+        $order->eventTabId = $data['eventTabId'];
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
@@ -57,7 +58,7 @@ class OrderFactory {
             $order->foodPrice = 0;
         }
 
-        $order->accommodationPrice = $calculatedResult['accommodation_price'];
+        $order->accommodationPrice = !empty($order->eventTabId) ? $calculatedResult['accommodation'] : $calculatedResult['accommodation_price'];
         
         if(!empty($order->prepaidType)){
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
