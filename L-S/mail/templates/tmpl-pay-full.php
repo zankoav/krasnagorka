@@ -17,7 +17,7 @@
 							</td>
 							<td colspan="5" valign="middle"
 								style="padding: 30px; color:#000;text-transform:uppercase; font-size: 17px; font-weight: 400;">
-								ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ
+                                <?php echo !empty($order['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ ГОРЯЩЕГО ТУРА' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ' ?>					
 							</td>
 						</tr>
 						<tr>
