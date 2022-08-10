@@ -49,9 +49,9 @@ function order_amocrm_metabox() {
         'name' => 'Webpay transaction ID',
         'id'   => 'sbc_webpay_transaction_id',
         'type' => 'text_small',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
+        // 'attributes' => array(
+        //     'readonly' => 'readonly'
+        // )
     ));
 
     $sbc_client->add_field(array(
