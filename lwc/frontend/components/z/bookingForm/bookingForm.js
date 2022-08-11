@@ -67,7 +67,6 @@ export default class BookingForm extends LightningElement {
     }
 
     async connectedCallback() {
-        console.log('model', this.model)
         this.deprecateEditableDates = !!this.dateFrom
         this.countItems = Array.from(Array(this.maxCount), (_, i) => i + 1)
         this.dateTo = this.dateTo || ''

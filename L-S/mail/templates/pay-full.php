@@ -1,6 +1,8 @@
 <?php
 	$order = $args['order'];
     $created = get_the_date("d.m.Y", $order->id);
+    $eventTitle = !empty($order['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+
 
 ?>
 <table bgcolor="#f8f8f8" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%"
@@ -19,7 +21,7 @@
 							</td>
 							<td colspan="5" valign="middle"
 								style="padding: 30px; color:#000;text-transform:uppercase; font-size: 17px; font-weight: 400;">
-								ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ
+								<?=$eventTitle?>
 							</td>
 						</tr>
 						<tr>

@@ -24,7 +24,6 @@ export default class StepFood extends LightningElement {
         } else {
             daysCount = this.settings.total.days_count
         }
-        console.log('daysCount', daysCount)
         return (counts + childCounts) * daysCount + 1
     }
 

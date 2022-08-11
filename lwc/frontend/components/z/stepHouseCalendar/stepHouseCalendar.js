@@ -7,6 +7,5 @@ export default class StepHouseCalendar extends LightningElement {
     @track loading;
 
     nextButtonHandler() {
-        console.log('Pressed nextButtonHandler');
     }
 }

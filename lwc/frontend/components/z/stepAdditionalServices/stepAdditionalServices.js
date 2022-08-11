@@ -43,7 +43,6 @@ export default class StepAdditionalServices extends LightningElement {
         } else {
             result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
         }
-        console.log('result', result);
         return result
     }
 

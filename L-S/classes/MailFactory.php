@@ -72,7 +72,7 @@ class MailFactory {
                 throw new MailException('Incorrect order type and method', 402);
             }
         } else {
-            $mail->subject = 'Подтверждение бронирования';
+            $mail->subject = $eventTitle = !empty($order->eventTabId) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
             $mail->checkType =  $order->prepaidType === 100 ? 'pay-full' : 'pay-partial';
             $mail->templatePath = "L-S/mail/templates/{$mail->checkType}";
         } 
@@ -156,6 +156,8 @@ class MailFactory {
             </tr>";
         }
 
+        $eventTitle = !empty($order->eventTabId) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+
         $result = "<style type='text/css'>
         .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}
         .f-b{font-weight: bold;}
@@ -164,7 +166,7 @@ class MailFactory {
         <table>
         <tbody>
         <tr>
-        <td colspan='2' class='title'>ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ</td>
+        <td colspan='2' class='title'>{$eventTitle}</td>
         </tr>
         <tr>
         <td>Номер бронирования:</td>

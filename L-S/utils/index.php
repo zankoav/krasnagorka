@@ -51,6 +51,7 @@ function get_order_data($orderId){
     $start = get_post_meta($orderId, 'sbc_order_start', 1);
     $end = get_post_meta($orderId, 'sbc_order_end', 1);
     $price = get_post_meta($orderId, 'sbc_order_price', 1);
+    $eventTabId = get_post_meta($orderId, 'sbc_order_is_event', 1);
     $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
     $calendars  = get_the_terms($orderId, 'sbc_calendars');
     $client = get_post_meta($orderId, 'sbc_order_client', 1);
@@ -93,6 +94,7 @@ function get_order_data($orderId){
         'orderId' => $orderId,
         'created' => $created,
         'babyBed' => $babyBed == 'on',
+        'eventTabId' => $eventTabId == 'on',
         'bathHouseWhite' => $bathHouseWhite,
         'bathHouseBlack' => $bathHouseBlack,
         'smallAnimalsCount' => $smallAnimalsCount,

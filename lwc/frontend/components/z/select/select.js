@@ -61,8 +61,4 @@ export default class Select extends LightningElement {
             );
         }
     }
-
-    connectedCallback(){
-        console.log(this.disabled);
-    }
 }

@@ -112,6 +112,8 @@ class LS_Mailer {
             </tr>";
         }
 
+        $eventTitle = !empty($data['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+
         $result = "<style type='text/css'>
         .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}
         .f-b{font-weight: bold;}
@@ -120,7 +122,7 @@ class LS_Mailer {
         <table>
         <tbody>
         <tr>
-        <td colspan='2' class='title'>ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ</td>
+        <td colspan='2' class='title'>{$eventTitle}</td>
         </tr>
         <tr>
         <td>Номер бронирования:</td>
