@@ -24,6 +24,10 @@ export default class Calendar extends LightningElement {
         return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, '.') : '—'
     }
 
+    get cssCalendar() {
+        return this.settings.eventTabId ? 'calendar calendar_event' : 'calendar'
+    }
+
     initDate(date) {
         let result
         if (date) {

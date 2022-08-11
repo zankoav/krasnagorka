@@ -1,6 +1,13 @@
 @import "./../../../common/mixins";
 
 .calendar {
+    
+    &_event {
+        table {
+            background-color: #f7f7f7;
+        }
+    }
+
     .calendar_block {
         margin: 0;
     }
