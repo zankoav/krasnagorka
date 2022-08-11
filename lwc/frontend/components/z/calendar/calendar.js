@@ -65,6 +65,8 @@ export default class Calendar extends LightningElement {
             events: events,
             eventAfterAllRender: () => {
                 this.updateStyle()
+                const table = document.querySelector('#calendar table');
+                table.className = 'main-table';
                 if (jsFromDate) {
                     const element = document.querySelector(
                         `.fc-widget-content[data-date="${jsFromDate.d}"]`
