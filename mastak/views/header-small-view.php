@@ -661,7 +661,7 @@
                         background: initial;
                         border-bottom-left-radius: initial;
                         border-top-left-radius: initial;
-                        box-shadow: 0
+                        box-shadow: initial;
                     }
                 }
 
