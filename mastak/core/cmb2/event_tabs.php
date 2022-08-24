@@ -449,7 +449,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Старая цена',
+            'name'         => 'Текущая',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
@@ -460,6 +460,10 @@
             'id'           => 'sale',
             'type'         => 'text_money',
             'before_field' => '%',
+            'attributes' => array(
+                'disabled' => 'disabled',
+                'readonly' => 'readonly',
+            )
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
