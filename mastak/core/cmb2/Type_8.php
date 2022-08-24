@@ -24,7 +24,7 @@
 			}
 
             $items = $this->initHouses($items);
-            Log::info('items',$items);
+            Log::info('items',$items[0]['house']);
 			return $items;
 		}
 
