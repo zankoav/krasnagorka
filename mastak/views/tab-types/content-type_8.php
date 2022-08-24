@@ -83,7 +83,7 @@
             continue;
         }
 
-        var_dump($item['house']);
+        // var_dump($item['house']);
 
         $house_title = get_the_title($item['house']);
         $house_link = get_the_permalink($item['house']);
