@@ -84,8 +84,10 @@
 
         $house_title = get_the_title($item['house']);
         $house_link = get_the_permalink($item['house']);
-        $house_img = get_the_post_thumbnail_url($item['house'], 'houses_last_iphone_5');
-
+        $house_img = $item['image'];
+        if(empty($house_img)){
+            $house_img = get_the_post_thumbnail_url($item['house'], 'houses_last_iphone_5');
+        }
 
         /**
          * First Step

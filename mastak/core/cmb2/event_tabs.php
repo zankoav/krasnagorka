@@ -480,6 +480,16 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Картинка',
+            'id'           => 'image',
+            'type'         => 'file',
+            'options'      => array(
+                'url' => false, // Hide the text input for the url
+            ),
+            'preview_size' => array(100, 100)
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Описание цены',
             'id'   => 'sale_text',
             'type' => 'text'
