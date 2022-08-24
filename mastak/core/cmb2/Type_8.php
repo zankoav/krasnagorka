@@ -1,4 +1,5 @@
 <?php
+    use Ls\Wp\Log as Log;
 
 	class Type_8 extends BaseMeta {
 
@@ -8,6 +9,8 @@
 		public function __construct( $tab_id ) {
 			parent::__construct( $tab_id );
 			$this->id = $tab_id;
+            // $this->house = $this->getHouseId();
+            Log::info('Hello', 'World!');
 		}
 
 		public function getId(){
@@ -24,4 +27,12 @@
 
 			return $items;
 		}
+
+        private function getHouseId(){
+            $id = 8780;
+            $calendarId = $this->calendar;
+
+            return $id;
+        }
+
 	}
