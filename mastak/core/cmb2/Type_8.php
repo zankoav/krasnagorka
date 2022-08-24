@@ -29,7 +29,7 @@
 		}
 
         private function initHouses($items){
-            foreach($items as $item){
+            foreach($items as &$item){
                 $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
             }
             Log::info('1',$items[0]['house']);
