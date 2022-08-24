@@ -37,7 +37,6 @@
      */
 
     global $currency_name;
-    $current_season_id = get_option('mastak_theme_options')['current_season'];
     $teremItemsIds = array(18,19,20,21,22,23,24,25,26,27,28,29);
 ?>
 <div class="accordion-mixed__content-inner">

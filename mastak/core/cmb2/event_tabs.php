@@ -480,15 +480,6 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'             => 'Цена из сезон',
-            'id'               => 'current_season',
-            'type'             => 'select',
-            'show_option_none' => true,
-            'default'          => 'custom',
-            'options_cb'       => 'show_seasons_options',
-        ));
-
-        $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Описание цены',
             'id'   => 'sale_text',
             'type' => 'text'
