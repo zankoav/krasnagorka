@@ -402,6 +402,46 @@
             )
         ));
 
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'           => 'Календарь',
+            'desc'           => 'Выберите к какому календарю соответствует Домик',
+            'id'             => 'calendar',
+            // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
+            'type'           => 'select',
+            'options_cb'     => 'cmb2_get_term_options',
+            'get_terms_args' => array(
+                'taxonomy'   => 'sbc_calendars',
+                'hide_empty' => false,
+            ),
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата с',
+            'id'   => 'from',
+            'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата до',
+            'id'   => 'to',
+            'desc' => 'Включительно',
+            'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+
         // $sbc_client->add_group_field($group_field_event, array(
         //     'name'             => 'Дом',
         //     'id'               => 'house',
@@ -447,45 +487,6 @@
             'default'          => 'custom',
             'options_cb'       => 'show_seasons_options',
         ));
-
-        $sbc_client->add_group_field($group_field_event, array(
-            'name'           => 'Календарь',
-            'desc'           => 'Выберите к какому календарю соответствует Домик',
-            'id'             => 'calendar',
-            // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
-            'type'           => 'select',
-            'options_cb'     => 'cmb2_get_term_options',
-            'get_terms_args' => array(
-                'taxonomy'   => 'sbc_calendars',
-                'hide_empty' => false,
-            ),
-            'attributes' => array(
-                'data-validation' => 'required',
-            ),
-        ));
-
-        $sbc_client->add_group_field($group_field_event, array(
-            'name' => 'Дата с',
-            'id'   => 'from',
-            'type' => 'text_date',
-            'attributes' => array(
-                'data-validation' => 'required',
-            ),
-            // 'timezone_meta_key' => 'wiki_test_timezone',
-            // 'date_format' => 'l jS \of F Y',
-        ) );
-
-        $sbc_client->add_group_field($group_field_event, array(
-            'name' => 'Дата до',
-            'id'   => 'to',
-            'desc' => 'Включительно',
-            'type' => 'text_date',
-            'attributes' => array(
-                'data-validation' => 'required',
-            ),
-            // 'timezone_meta_key' => 'wiki_test_timezone',
-            // 'date_format' => 'l jS \of F Y',
-        ) );
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Описание цены',
