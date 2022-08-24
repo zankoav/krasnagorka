@@ -23,7 +23,7 @@
 				$items = unserialize( $icons );
 			}
 
-            $this->initHouses($items);
+            $items = $this->initHouses($items);
 
 			return $items;
 		}
@@ -31,8 +31,9 @@
         private function initHouses($items){
             foreach($items as $item){
                 $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
-                Log::info('id', $item['house']);
             }
+
+            return $items;
         }
 
         private function getHouseIdByCalendarId($calendarId){
