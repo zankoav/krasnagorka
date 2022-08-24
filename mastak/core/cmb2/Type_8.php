@@ -9,7 +9,6 @@
 		public function __construct( $tab_id ) {
 			parent::__construct( $tab_id );
 			$this->id = $tab_id;
-            Log::info('1', 'ok');
 		}
 
 		public function getId(){
@@ -30,7 +29,7 @@
 		}
 
         private function initHouses($items){
-            Log::info('2', 'ok');
+            Log::info('initHouses', gettype($items));
         }
 
 	}
