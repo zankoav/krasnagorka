@@ -9,8 +9,7 @@
 		public function __construct( $tab_id ) {
 			parent::__construct( $tab_id );
 			$this->id = $tab_id;
-            // $this->house = $this->getHouseId();
-            Log::info('Hello', 'World!');
+            $this->house = $this->getHouseId();
 		}
 
 		public function getId(){
@@ -29,9 +28,10 @@
 		}
 
         private function getHouseId(){
-            $id = 8780;
-            $calendarId = $this->calendar;
+            $id = $this->house;
+            Log::info('calendar', $this->calendar);
 
+            
             return $id;
         }
 
