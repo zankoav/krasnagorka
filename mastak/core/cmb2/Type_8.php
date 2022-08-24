@@ -30,8 +30,15 @@
 
         private function initHouses($items){
             foreach($items as $item){
-                Log::info('initHouses', $item['calendar']);
+                $house = $this->getHouseIdByCalendarId($item['calendar']);
+                // $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
+                Log::info('initHouses', $house);
             }
+        }
+
+        private function getHouseIdByCalendarId($calendarId){
+            $result = 0;
+            return $result;
         }
 
 	}
