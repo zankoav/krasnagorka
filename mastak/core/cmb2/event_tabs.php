@@ -461,7 +461,6 @@
             'type'         => 'text_money',
             'before_field' => '%',
             'attributes' => array(
-                'disabled' => 'disabled',
                 'readonly' => 'readonly',
             )
         ));
