@@ -29,7 +29,7 @@
 		}
 
         private function initHouses($items){
-            Log::info('initHouses', gettype($items));
+            Log::info('initHouses', $items);
         }
 
 	}
