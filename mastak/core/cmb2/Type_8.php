@@ -29,7 +29,9 @@
 		}
 
         private function initHouses($items){
-            Log::info('initHouses', $items[0]['calendar']);
+            foreach($items as $item){
+                Log::info('initHouses', $item['calendar']);
+            }
         }
 
 	}
