@@ -95,7 +95,6 @@
          */
         $new_price = $item['new_price'];
         $old_price = $item['old_price'];
-        $one_price = $item['one_price'];
 
         /**
          * Second Step
@@ -110,11 +109,7 @@
         $price_byn_sale = null;
         $price_sale     = null;
 
-        if (!empty($one_price)) {
-            $sale      = null;
-            $price_byn = (int)$one_price;
-
-        } else if (!empty($new_price) and !empty($old_price) and $old_price != 0) {
+        if (!empty($new_price) and !empty($old_price) and $old_price != 0) {
 
             $sale           = (int)(100 - $new_price * 100 / $old_price);
             $price_byn_sale = $old_price;
