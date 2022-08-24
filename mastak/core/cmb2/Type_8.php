@@ -9,7 +9,6 @@
 		public function __construct( $tab_id ) {
 			parent::__construct( $tab_id );
 			$this->id = $tab_id;
-            $this->house = $this->getHouseId();
 		}
 
 		public function getId(){
@@ -24,15 +23,13 @@
 				$items = unserialize( $icons );
 			}
 
+            $this->initHouses($items);
+
 			return $items;
 		}
 
-        private function getHouseId(){
-            $id = $this->house;
-            Log::info('calendar', $this->calendar);
-
-            
-            return $id;
+        private function initHouses($items){
+            Log::info('items', $items);
         }
 
 	}
