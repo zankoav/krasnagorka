@@ -402,14 +402,14 @@
             )
         ));
 
-        $sbc_client->add_group_field($group_field_event, array(
-            'name'             => 'Дом',
-            'id'               => 'house',
-            'type'             => 'select',
-            'show_option_none' => true,
-            'default'          => 'custom',
-            'options_cb'       => 'show_house_options',
-        ));
+        // $sbc_client->add_group_field($group_field_event, array(
+        //     'name'             => 'Дом',
+        //     'id'               => 'house',
+        //     'type'             => 'select',
+        //     'show_option_none' => true,
+        //     'default'          => 'custom',
+        //     'options_cb'       => 'show_house_options',
+        // ));
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Новая цена',
