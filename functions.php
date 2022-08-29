@@ -285,9 +285,9 @@ function change_ordered_color($box_id, $cmb)
                 }
             });
 
-            $('#mastak_event_tab_type_8_items_repeat').contentchanged(()=>{
+            $('#mastak_event_tab_type_8_items_repeat').one("DOMSubtreeModified", function() {
                 console.log('zzz contentchanged');
-                
+
                 $(".js-calculate-price input, .js-calculate-price select").change(function(){
                     const name = $(this).attr('name');
                     const dateFrom = name.indexOf('[from]') > -1;
