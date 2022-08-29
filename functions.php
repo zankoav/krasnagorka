@@ -285,29 +285,33 @@ function change_ordered_color($box_id, $cmb)
                 }
             });
 
-            $(".js-calculate-price input, .js-calculate-price select").change(function(){
-                const name = $(this).attr('name');
-                const dateFrom = name.indexOf('[from]') > -1;
-                const dateTo = name.indexOf('[to]') > -1;
-                const calendarId = name.indexOf('[calendar]') > -1;
-                const result = {};
-                let key = 'calendarId';
-                if(calendarId){
-                    key = 'calendarId';
-                }
-                if(dateFrom){
-                    key = 'dateFrom';
-                }
-                if(dateTo){
-                    key = 'dateTo';
-                }
-
-                if(key){
-                    result[key] = $(this).val();
-                }
+            $('#mastak_event_tab_type_8_items_repeat').contentchanged(()=>{
+                console.log('zzz contentchanged');
                 
-                console.log($(this).attr('name'), $(this).val(), result);
-            });
+                $(".js-calculate-price input, .js-calculate-price select").change(function(){
+                    const name = $(this).attr('name');
+                    const dateFrom = name.indexOf('[from]') > -1;
+                    const dateTo = name.indexOf('[to]') > -1;
+                    const calendarId = name.indexOf('[calendar]') > -1;
+                    const result = {};
+                    let key = 'calendarId';
+                    if(calendarId){
+                        key = 'calendarId';
+                    }
+                    if(dateFrom){
+                        key = 'dateFrom';
+                    }
+                    if(dateTo){
+                        key = 'dateTo';
+                    }
+
+                    if(key){
+                        result[key] = $(this).val();
+                    }
+                    
+                    console.log($(this).attr('name'), $(this).val(), result);
+                });
+            })
         });
     </script>
 <?php
