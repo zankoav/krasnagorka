@@ -221,6 +221,8 @@ function cmb2_after_form_do_js_validation($post_id, $cmb)
             }
 
             $form.on('submit', checkValidation);
+
+            
         });
     </script>
 <?php

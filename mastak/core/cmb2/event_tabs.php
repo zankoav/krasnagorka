@@ -399,7 +399,8 @@
                 'sortable'      => true,
                 // beta
                 'closed'        => true, // true to have the groups closed by default
-            )
+            ),
+            'classes_cb' => 'houses_function_to_add_classes',
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
@@ -409,6 +410,7 @@
             // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
             'type'           => 'select',
             'options_cb'     => 'cmb2_get_term_options',
+            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'get_terms_args' => array(
                 'taxonomy'   => 'sbc_calendars',
                 'hide_empty' => false,
@@ -567,4 +569,20 @@
             'id'   => 'description',
             'type' => 'wysiwyg',
         ));
+    }
+
+    function houses_function_to_add_classes( $field_args, $field ) {
+        $classes = array(
+            'a1',
+            'a2'
+        );
+        return $classes;
+    }
+
+    function houses_calendar_function_to_add_classes( $field_args, $field ) {
+        $classes = array(
+            'b1',
+            'b2'
+        );
+        return $classes;
     }
