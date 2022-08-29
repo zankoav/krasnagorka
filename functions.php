@@ -312,6 +312,7 @@ function change_ordered_color($box_id, $cmb)
             }
 
             $('.cmb-add-group-row').on('click', addChanges);
+            
             addChanges();
 
         });
