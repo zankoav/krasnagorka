@@ -286,6 +286,7 @@ function change_ordered_color($box_id, $cmb)
             });
 
             function addChanges(){
+                console.log('1');
                 $(".js-calculate-price input, .js-calculate-price select").change(function(){
                     const name = $(this).attr('name');
                     const dateFrom = name.indexOf('[from]') > -1;
@@ -312,7 +313,7 @@ function change_ordered_color($box_id, $cmb)
             }
 
             $('.cmb-add-group-row').on('click', addChanges);
-            
+
             addChanges();
 
         });
