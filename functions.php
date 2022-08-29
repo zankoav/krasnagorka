@@ -284,40 +284,6 @@ function change_ordered_color($box_id, $cmb)
                     $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
                 }
             });
-
-            function addChanges(){
-                setTimeout(()=>{
-                    $(".js-calculate-price input, .js-calculate-price select").change(function(){
-                        const name = $(this).attr('name');
-                        const dateFrom = name.indexOf('[from]') > -1;
-                        const dateTo = name.indexOf('[to]') > -1;
-                        const calendarId = name.indexOf('[calendar]') > -1;
-                        const result = {};
-                        let key = 'calendarId';
-                        if(calendarId){
-                            key = 'calendarId';
-                        }
-                        if(dateFrom){
-                            key = 'dateFrom';
-                        }
-                        if(dateTo){
-                            key = 'dateTo';
-                        }
-
-                        if(key){
-                            result[key] = $(this).val();
-                        }
-                        
-                        console.log($(this).attr('name'), $(this).val(), result);
-                    });
-                }, 500);
-                
-            }
-
-            $('.cmb-add-group-row').on('click', addChanges);
-
-            addChanges();
-
         });
     </script>
 <?php

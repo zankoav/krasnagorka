@@ -409,7 +409,6 @@
             // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
             'type'           => 'select',
             'options_cb'     => 'cmb2_get_term_options',
-            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'get_terms_args' => array(
                 'taxonomy'   => 'sbc_calendars',
                 'hide_empty' => false,
@@ -423,7 +422,6 @@
             'name' => 'Дата с',
             'id'   => 'from',
             'type' => 'text_date',
-            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'attributes' => array(
                 'data-validation' => 'required',
             ),
@@ -436,7 +434,6 @@
             'id'   => 'to',
             'desc' => 'Включительно',
             'type' => 'text_date',
-            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'attributes' => array(
                 'data-validation' => 'required',
             ),
@@ -572,9 +569,3 @@
         ));
     }
 
-    function houses_calendar_function_to_add_classes( $field_args, $field ) {
-        $classes = array(
-            'js-calculate-price'
-        );
-        return $classes;
-    }
