@@ -502,7 +502,7 @@
     }
 
 
-    function cmb2_render_buttonz( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+    function cmb2_render_buttonset( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
         $buttonset = '<div class="cmb2-buttonset">';	
         $conditional_value =(isset($field->args['attributes']['data-conditional-value'])?'data-conditional-value="' .esc_attr($field->args['attributes']['data-conditional-value']).'"':'');
@@ -521,7 +521,7 @@
         echo $buttonset;
     }
     
-    add_action( 'cmb2_render_buttonz', 'cmb2_render_buttonz', 10, 5 );
+    add_action( 'cmb2_render_buttonset', 'cmb2_render_buttonset', 10, 5 );
 
     function mastak_event_tab_type_9() {
         $prefix = 'mastak_event_tab_type_9';
