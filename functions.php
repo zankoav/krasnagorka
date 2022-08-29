@@ -285,33 +285,37 @@ function change_ordered_color($box_id, $cmb)
                 }
             });
 
-            $('#mastak_event_tab_type_8_items_repeat').one("DOMSubtreeModified", function() {
-                console.log('zzz contentchanged');
+            document.querySelector('#mastak_event_tab_type_8_items_repeat').addEventListener('cmb2_add_row', function(event){
+                console.log(event.target);
+                
+            });
+            // $('#mastak_event_tab_type_8_items_repeat').one("DOMSubtreeModified", function() {
+            //     console.log('zzz contentchanged');
 
-                $(".js-calculate-price input, .js-calculate-price select").change(function(){
-                    const name = $(this).attr('name');
-                    const dateFrom = name.indexOf('[from]') > -1;
-                    const dateTo = name.indexOf('[to]') > -1;
-                    const calendarId = name.indexOf('[calendar]') > -1;
-                    const result = {};
-                    let key = 'calendarId';
-                    if(calendarId){
-                        key = 'calendarId';
-                    }
-                    if(dateFrom){
-                        key = 'dateFrom';
-                    }
-                    if(dateTo){
-                        key = 'dateTo';
-                    }
+            //     $(".js-calculate-price input, .js-calculate-price select").change(function(){
+            //         const name = $(this).attr('name');
+            //         const dateFrom = name.indexOf('[from]') > -1;
+            //         const dateTo = name.indexOf('[to]') > -1;
+            //         const calendarId = name.indexOf('[calendar]') > -1;
+            //         const result = {};
+            //         let key = 'calendarId';
+            //         if(calendarId){
+            //             key = 'calendarId';
+            //         }
+            //         if(dateFrom){
+            //             key = 'dateFrom';
+            //         }
+            //         if(dateTo){
+            //             key = 'dateTo';
+            //         }
 
-                    if(key){
-                        result[key] = $(this).val();
-                    }
+            //         if(key){
+            //             result[key] = $(this).val();
+            //         }
                     
-                    console.log($(this).attr('name'), $(this).val(), result);
-                });
-            })
+            //         console.log($(this).attr('name'), $(this).val(), result);
+            //     });
+            // })
         });
     </script>
 <?php
