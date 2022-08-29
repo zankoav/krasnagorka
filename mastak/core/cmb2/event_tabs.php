@@ -399,8 +399,7 @@
                 'sortable'      => true,
                 // beta
                 'closed'        => true, // true to have the groups closed by default
-            ),
-            'classes_cb' => 'houses_function_to_add_classes',
+            )
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
@@ -424,6 +423,7 @@
             'name' => 'Дата с',
             'id'   => 'from',
             'type' => 'text_date',
+            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'attributes' => array(
                 'data-validation' => 'required',
             ),
@@ -436,6 +436,7 @@
             'id'   => 'to',
             'desc' => 'Включительно',
             'type' => 'text_date',
+            'classes_cb' => 'houses_calendar_function_to_add_classes',
             'attributes' => array(
                 'data-validation' => 'required',
             ),
@@ -571,18 +572,9 @@
         ));
     }
 
-    function houses_function_to_add_classes( $field_args, $field ) {
-        $classes = array(
-            'a1',
-            'a2'
-        );
-        return $classes;
-    }
-
     function houses_calendar_function_to_add_classes( $field_args, $field ) {
         $classes = array(
-            'b1',
-            'b2'
+            'js-calculate-price'
         );
         return $classes;
     }

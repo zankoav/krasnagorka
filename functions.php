@@ -222,7 +222,7 @@ function cmb2_after_form_do_js_validation($post_id, $cmb)
 
             $form.on('submit', checkValidation);
 
-            
+
         });
     </script>
 <?php
@@ -283,6 +283,30 @@ function change_ordered_color($box_id, $cmb)
                     $(this).addClass(`bgc-${state.status}`);
                     $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`);
                 }
+            });
+
+            $(".js-calculate-price input, .js-calculate-price select").change(function(){
+                const name = $(this).attr('name');
+                const dateFrom = name.indexOf('[from]') > -1;
+                const dateTo = name.indexOf('[to]') > -1;
+                const calendarId = name.indexOf('[calendar]') > -1;
+                const result = {};
+                let key = 'calendarId';
+                if(calendarId){
+                    key = 'calendarId';
+                }
+                if(dateFrom){
+                    key = 'dateFrom';
+                }
+                if(dateTo){
+                    key = 'dateTo';
+                }
+
+                if(key){
+                    result[key] = $(this).val();
+                }
+                
+                console.log($(this).attr('name'), $(this).val(), result);
             });
         });
     </script>
