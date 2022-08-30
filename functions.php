@@ -314,7 +314,7 @@ function change_ordered_color($box_id, $cmb)
                     const $inputEl = $(this).parent().parent().find('input');
                     const $spinner = $(this).parent().find('.spinner');
                     let $currentPrice;
-                    const result = {};
+                    const result = {'is_admin_event':true};
                     $message.css({color:''}).empty();
                     $parent.find('input, select').each(function( index ) {
                     const name = $(this).attr('name');
@@ -364,18 +364,24 @@ function change_ordered_color($box_id, $cmb)
                         }
                     }
 
-                    function calculate(data){
+                    async function calculate(data){
                         $spinner.addClass('spinner_show');
                         console.log('data', data);
-
-                        setTimeout(() => {
-                            let result = 110;
-                            
-                            
-                            // $currentPrice.val(result);
+                        const response = await fetch(
+                            'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json; charset=utf-8'
+                                },
+                                body: data
+                            })
+                        const responseData = await response.json();
+                        console.log('responseData', responseData);
+                        if(responseData){
+                            let result = responseData.accommodation_price;
                             $spinner.removeClass('spinner_show');
-
-                        }, 3000);
+                        }
                     }
                 });
             }
