@@ -310,27 +310,27 @@ function change_ordered_color($box_id, $cmb)
             'use strict';
             $(".js-calculate").click(function(){
                 const $parent = $(this).parents('.cmb-row');
-                console.log('$parent', $parent);
                 const result = {};
                 $parent.find('input, select').each(function( index ) {
-                    console.log('$this', $(this));
                     const name = $(this).attr('name');
-                    const dateFrom = name.indexOf('[from]') > -1;
-                    const dateTo = name.indexOf('[to]') > -1;
-                    const calendarId = name.indexOf('[calendar]') > -1;
-                    let key;
-                    if(calendarId){
-                        key = 'calendarId';
-                    }
-                    if(dateFrom){
-                        key = 'dateFrom';
-                    }
-                    if(dateTo){
-                        key = 'dateTo';
-                    }
+                    if(name){
+                        const dateFrom = name.indexOf('[from]') > -1;
+                        const dateTo = name.indexOf('[to]') > -1;
+                        const calendarId = name.indexOf('[calendar]') > -1;
+                        let key;
+                        if(calendarId){
+                            key = 'calendarId';
+                        }
+                        if(dateFrom){
+                            key = 'dateFrom';
+                        }
+                        if(dateTo){
+                            key = 'dateTo';
+                        }
 
-                    if(key){
-                        result[key] = $(this).val();
+                        if(key){
+                            result[key] = $(this).val();
+                        }
                     }
                 });
 
