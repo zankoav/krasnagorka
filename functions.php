@@ -317,6 +317,7 @@ function change_ordered_color($box_id, $cmb)
 
                 const $parent = $(this).parents('.inside.cmb-field-list');
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description');
+                const $spinner = $(this).parent().find('.spinner');
                 const result = {};
                 $message.css({color:''}).empty();
                 $parent.find('input, select').each(function( index ) {
@@ -354,13 +355,17 @@ function change_ordered_color($box_id, $cmb)
                 }
 
                 if(error){
-                    $message.css({color:'red'}).html(error);
+                    $message.css({color:'#b32d2e;'}).html(error);
                 }else {
                     calculate(result);
                 }
 
                 function calculate(data){
+                    $spinner.addClass('spinner_show');
                     console.log('data', data);
+                    setTimeout(() => {
+                        $spinner.removeClass('spinner_show');
+                    }, 3000);
                 }
             });
         })(window, document, jQuery);
