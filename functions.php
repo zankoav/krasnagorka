@@ -308,82 +308,91 @@ function change_ordered_color($box_id, $cmb)
         /* CMB2 Buttonset Event. Add the code below in a file named buttonset_metafield.js ------------- */
         window.CMB2 = (function(window, document, $, undefined){
             'use strict';
-            console.log('init');
-            $(".js-calculate").click(function(){
-                const empty_calendar = "Выберите календарь";
-                const empty_date_from = "Выберите дату заезда";
-                const empty_date_to = "Выберите дату выезда";
-                const booking_unavailable = "Даты заняты";
 
-                const $parent = $(this).parents('.inside.cmb-field-list');
-                const $message = $(this).parent().parent().find('.cmb2-metabox-description');
-                const $inputEl = $(this).parent().parent().find('input');
-                const $spinner = $(this).parent().find('.spinner');
-                let $currentPrice;
-                const result = {};
-                $message.css({color:''}).empty();
-                $parent.find('input, select').each(function( index ) {
-                const name = $(this).attr('name');
+            $('.cmb-add-group-row').click(function(){
+                setTimeout(initCalculations, 500);
+            });
+
+            initCalculations();
+
+            function initCalculations(){
+                console.log('init');
+                $(".js-calculate").click(function(){
+                    const empty_calendar = "Выберите календарь";
+                    const empty_date_from = "Выберите дату заезда";
+                    const empty_date_to = "Выберите дату выезда";
+                    const booking_unavailable = "Даты заняты";
+
+                    const $parent = $(this).parents('.inside.cmb-field-list');
+                    const $message = $(this).parent().parent().find('.cmb2-metabox-description');
+                    const $inputEl = $(this).parent().parent().find('input');
+                    const $spinner = $(this).parent().find('.spinner');
+                    let $currentPrice;
+                    const result = {};
+                    $message.css({color:''}).empty();
+                    $parent.find('input, select').each(function( index ) {
+                    const name = $(this).attr('name');
+                        
+                        if(name){
+                            const dateFrom = name.indexOf('[from]') > -1;
+                            const dateTo = name.indexOf('[to]') > -1;
+                            const calendarId = name.indexOf('[calendar]') > -1;
+                            const oldPrice = name.indexOf('[old_price]') > -1;
+
+                            if(oldPrice){
+                                $currentPrice = $(this);
+                            }
+
+                            let key;
+                            if(calendarId){
+                                key = 'calendarId';
+                            }
+                            if(dateFrom){
+                                key = 'dateFrom';
+                            }
+                            if(dateTo){
+                                key = 'dateTo';
+                            }
+
+                            if(key){
+                                result[key] = $(this).val();
+                            }
+                        }
+                    });
+
+                    let error;
                     
-                    if(name){
-                        const dateFrom = name.indexOf('[from]') > -1;
-                        const dateTo = name.indexOf('[to]') > -1;
-                        const calendarId = name.indexOf('[calendar]') > -1;
-                        const oldPrice = name.indexOf('[old_price]') > -1;
+                    if(!result.calendarId){
+                        error = empty_calendar;
+                    }else if(!result.dateFrom){
+                        error = empty_date_from;
+                    }else if(!result.dateTo){
+                        error = empty_date_to;
+                    }
 
-                        if(oldPrice){
-                            $currentPrice = $(this);
+                    if(error){
+                        $message.css({color:'#b32d2e;'}).html(error);
+                    }else {
+                        if(!$spinner.hasClass('spinner_show')){
+                            calculate(result);
                         }
+                    }
 
-                        let key;
-                        if(calendarId){
-                            key = 'calendarId';
-                        }
-                        if(dateFrom){
-                            key = 'dateFrom';
-                        }
-                        if(dateTo){
-                            key = 'dateTo';
-                        }
+                    function calculate(data){
+                        $spinner.addClass('spinner_show');
+                        console.log('data', data);
 
-                        if(key){
-                            result[key] = $(this).val();
-                        }
+                        setTimeout(() => {
+                            let result = 110;
+                            
+                            
+                            $currentPrice.val(result);
+                            $spinner.removeClass('spinner_show');
+
+                        }, 3000);
                     }
                 });
-
-                let error;
-                
-                if(!result.calendarId){
-                    error = empty_calendar;
-                }else if(!result.dateFrom){
-                    error = empty_date_from;
-                }else if(!result.dateTo){
-                    error = empty_date_to;
-                }
-
-                if(error){
-                    $message.css({color:'#b32d2e;'}).html(error);
-                }else {
-                    if(!$spinner.hasClass('spinner_show')){
-                        calculate(result);
-                    }
-                }
-
-                function calculate(data){
-                    $spinner.addClass('spinner_show');
-                    console.log('data', data);
-
-                    setTimeout(() => {
-                        let result = 110;
-                        
-                        
-                        $currentPrice.val(result);
-                        $spinner.removeClass('spinner_show');
-
-                    }, 3000);
-                }
-            });
+            }
         })(window, document, jQuery);
     </script>
 <?php
