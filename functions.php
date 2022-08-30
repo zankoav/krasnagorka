@@ -356,7 +356,9 @@ function change_ordered_color($box_id, $cmb)
                 if(error){
                     $message.css({color:'#b32d2e;'}).html(error);
                 }else {
-                    calculate(result);
+                    if(!$spinner.hasClass('spinner_show')){
+                        calculate(result);
+                    }
                 }
 
                 function calculate(data){
