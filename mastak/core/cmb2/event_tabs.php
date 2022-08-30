@@ -471,16 +471,6 @@
             'type'         => 'text_small',
             'before_field' => 'BYN',
         ));
-        
-        $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Скидка',
-            'id'           => 'sale',
-            'type'         => 'text_money',
-            'before_field' => '%',
-            // 'attributes' => array(
-            //     'readonly' => 'readonly',
-            // )
-        ));
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Картинка',

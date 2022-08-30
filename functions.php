@@ -289,18 +289,6 @@ function change_ordered_color($box_id, $cmb)
     <style>
         .calculate-field .spinner {float:initial;}
         .calculate-field .spinner.spinner_show {visibility: visible;}
-        /* CMB2 Buttonset Field Styling. Add the code below in a file named buttonset_metafield.css ------------- */
-        /* .cmb2-buttonset{ margin-right: 20px; }
-        .cmb2-buttonset .state-default { background-color: #f5f5f5; background-image: none !important; border-color: #bfbfbf; border-image: none;
-            border-style: solid; border-width: 1px; box-shadow: none !important; color: #707070; font-size: 13px; font-weight: normal; line-height: normal;
-            overflow: visible; transition: background-image 0.1s linear 0s; vertical-align: middle;
-        }
-        .cmb2-buttonset label.cmb2-buttonset-label:nth-child(2) {border-bottom-left-radius: 4px; border-top-left-radius: 4px;}
-        .cmb2-buttonset label.cmb2-buttonset-label:nth-last-child(1) {border-bottom-right-radius: 4px;border-top-right-radius: 4px;}
-        .cmb2-buttonset .cmb2-buttonset-label { cursor: pointer; display: inline-block; font-size: 13px; line-height: normal; padding: 6px 12px; margin-left: 0; margin-right: -4px; }
-        .cmb2-buttonset .cmb2-buttonset-label .buttonset-text { display: block;}
-        .cmb2-buttonset .cmb2-buttonset-label.selected { background-color: #004a97 !important; background-image: none !important; border-color: #005077 !important;   box-shadow: none !important; color: #fff !important;}
-        .cmb2-buttonset .cmb2-buttonset-item { border: 0 none; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; overflow-wrap: normal !important; padding: 0; position: absolute; width: 1px; } */
     </style>
 
     <script>
@@ -384,7 +372,7 @@ function change_ordered_color($box_id, $cmb)
                             let result = 110;
                             
                             
-                            $currentPrice.val(result);
+                            // $currentPrice.val(result);
                             $spinner.removeClass('spinner_show');
 
                         }, 3000);

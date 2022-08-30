@@ -99,7 +99,7 @@
         /**
          * Second Step
          */
-        $sale = absint($item['sale']);
+        $sale;
 
         $season_id = $item['current_season'];
         if (empty($season_id)) {
@@ -126,10 +126,6 @@
 
             $price_byn = (int)$new_price;
 
-        } else if (!empty($sale)) {
-            $price_byn_sale = $price_byn;
-            $price_sale     = get_current_price($price_byn_sale);
-            $price_byn      = (int)($price_byn * (100 - $sale) / 100);
         }
 
         $price = get_current_price($price_byn);
