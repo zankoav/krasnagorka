@@ -288,7 +288,7 @@ function change_ordered_color($box_id, $cmb)
     </script>
 
     <style>
-        .calculate-field .spinner {float:left;}
+        .calculate-field .spinner {float:initial;}
         .calculate-field .spinner.spinner_show {visibility: visible;}
         /* CMB2 Buttonset Field Styling. Add the code below in a file named buttonset_metafield.css ------------- */
         /* .cmb2-buttonset{ margin-right: 20px; }
@@ -308,11 +308,32 @@ function change_ordered_color($box_id, $cmb)
         /* CMB2 Buttonset Event. Add the code below in a file named buttonset_metafield.js ------------- */
         window.CMB2 = (function(window, document, $, undefined){
             'use strict';
-            // $(".cmb2-buttonset-label").click(function(){
-            //     var parent = $(this).parents('.cmb2-buttonset');
-            //     $('.cmb2-buttonset-label',parent).removeClass('selected');
-            //     $(this).addClass('selected');
-            // });
+            $(".js-calculate").click(function(){
+                const $parent = $(this).parents('.cmb-row');
+                const result = {};
+                $parent.find('input, select').each(function( index ) {
+                    const name = $(this).attr('name');
+                    const dateFrom = name.indexOf('[from]') > -1;
+                    const dateTo = name.indexOf('[to]') > -1;
+                    const calendarId = name.indexOf('[calendar]') > -1;
+                    let key;
+                    if(calendarId){
+                        key = 'calendarId';
+                    }
+                    if(dateFrom){
+                        key = 'dateFrom';
+                    }
+                    if(dateTo){
+                        key = 'dateTo';
+                    }
+
+                    if(key){
+                        result[key] = $(this).val();
+                    }
+                });
+
+                console.log('result', result);
+            });
         })(window, document, jQuery);
     </script>
 <?php
