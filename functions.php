@@ -317,15 +317,24 @@ function change_ordered_color($box_id, $cmb)
 
                 const $parent = $(this).parents('.inside.cmb-field-list');
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description');
+                const $inputEl = $(this).parent().parent().find('input');
                 const $spinner = $(this).parent().find('.spinner');
+                const $currentPrice;
                 const result = {};
                 $message.css({color:''}).empty();
                 $parent.find('input, select').each(function( index ) {
                     const name = $(this).attr('name');
+                    
                     if(name){
                         const dateFrom = name.indexOf('[from]') > -1;
                         const dateTo = name.indexOf('[to]') > -1;
                         const calendarId = name.indexOf('[calendar]') > -1;
+                        const oldPrice = name.indexOf('[old_price]') > -1;
+
+                        if(oldPrice){
+                            $currentPrice = $(this);
+                        }
+
                         let key;
                         if(calendarId){
                             key = 'calendarId';
@@ -364,8 +373,14 @@ function change_ordered_color($box_id, $cmb)
                 function calculate(data){
                     $spinner.addClass('spinner_show');
                     console.log('data', data);
+
                     setTimeout(() => {
+                        let result = 110;
+                        
+                        
+                        $$currentPrice.val(result);
                         $spinner.removeClass('spinner_show');
+
                     }, 3000);
                 }
             });
