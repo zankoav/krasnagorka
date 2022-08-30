@@ -308,6 +308,7 @@ function change_ordered_color($box_id, $cmb)
         /* CMB2 Buttonset Event. Add the code below in a file named buttonset_metafield.js ------------- */
         window.CMB2 = (function(window, document, $, undefined){
             'use strict';
+            console.log('init');
             $(".js-calculate").click(function(){
                 const empty_calendar = "Выберите календарь";
                 const empty_date_from = "Выберите дату заезда";
@@ -315,7 +316,6 @@ function change_ordered_color($box_id, $cmb)
                 const booking_unavailable = "Даты заняты";
 
                 const $parent = $(this).parents('.inside.cmb-field-list');
-                console.log('$parent', $parent);
                 const $message = $(this).parent().find('.cmb2-metabox-description');
                 const result = {};
                 $message.css({color:''});
