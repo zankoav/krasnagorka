@@ -288,6 +288,8 @@ function change_ordered_color($box_id, $cmb)
     </script>
 
     <style>
+        .calculate-field .spinner {float:left;}
+        .calculate-field .spinner.spinner_show {visibility: visible;}
         /* CMB2 Buttonset Field Styling. Add the code below in a file named buttonset_metafield.css ------------- */
         /* .cmb2-buttonset{ margin-right: 20px; }
         .cmb2-buttonset .state-default { background-color: #f5f5f5; background-image: none !important; border-color: #bfbfbf; border-image: none;
