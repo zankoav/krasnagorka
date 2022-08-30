@@ -366,7 +366,6 @@ function change_ordered_color($box_id, $cmb)
 
                     async function calculate(data){
                         $spinner.addClass('spinner_show');
-                        console.log('data', data);
                         const response = await fetch(
                             'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
                             {
@@ -377,7 +376,6 @@ function change_ordered_color($box_id, $cmb)
                                 body: JSON.stringify(data)
                             })
                         const responseData = await response.json();
-                        console.log('responseData', responseData);
                         if(responseData){
                             let result = responseData.accommodation_price;
                             $spinner.removeClass('spinner_show');
