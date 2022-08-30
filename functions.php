@@ -318,7 +318,7 @@ function change_ordered_color($box_id, $cmb)
                 const $parent = $(this).parents('.inside.cmb-field-list');
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description');
                 const result = {};
-                $message.css({color:''});
+                $message.css({color:''}).empty();
                 $parent.find('input, select').each(function( index ) {
                     console.log($(this));
                     const name = $(this).attr('name');
