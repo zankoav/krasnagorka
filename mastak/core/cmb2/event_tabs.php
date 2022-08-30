@@ -442,14 +442,14 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'    => __( ' Position', 'cmb2' ),
+            'name'    => __( ' Прощитать цену', 'cmb2' ),
             'id'      => 'calculate',
             'type'    => 'calculate',
             'options' => array(
-                "" => __("Default", 'cmb2'),
-                "left" => __("Left", 'cmb2'),
-                "center" => __("Center", 'cmb2'),
-                "right" => __("Right", 'cmb2')           
+                "empty_calendar" => __("Выберите календарь", 'cmb2'),
+                "empty_date_from" => __("Выберите дату заезда", 'cmb2'),
+                "empty_date_to" => __("Выберите дату выезда", 'cmb2'),
+                "booking_unavailable" => __("Даты заняты", 'cmb2')           
             ),
             'default' => 'none',
         ));
@@ -504,7 +504,7 @@
 
     function cmb2_render_calculate( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
-        $view = '<div class="calculate-field"><button type="button" class="js-calculate button-secondary">Расчитать</button><input type="hidden" name="GG"></div>';
+        $view = '<div class="calculate-field"><div><button type="button" class="js-calculate button-secondary">Расчитать</button><span class="spinner"></span></div><input type="hidden" name="GG"><p class="cmb2-metabox-description">Выберите к какому календарю соответствует Домик</p></div>';
 
         
 
