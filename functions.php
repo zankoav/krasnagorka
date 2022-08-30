@@ -273,7 +273,6 @@ function change_ordered_color($box_id, $cmb)
     </style>
     <script type="text/javascript">
         var orderedIds = JSON.parse('<?= $ids_json; ?>');
-        console.log('orderedIds', orderedIds);
         jQuery(document).ready(function($) {
             $('#cmb2-metabox-mastak_event_tab_type_8').find('.postbox').each(function(index, item) {
                 const state = orderedIds[index];
@@ -316,7 +315,6 @@ function change_ordered_color($box_id, $cmb)
             initCalculations();
 
             function initCalculations(){
-                console.log('init');
                 $(".js-calculate").click(function(){
                     const empty_calendar = "Выберите календарь";
                     const empty_date_from = "Выберите дату заезда";
