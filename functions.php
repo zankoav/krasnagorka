@@ -321,7 +321,6 @@ function change_ordered_color($box_id, $cmb)
                 const result = {};
                 $message.css({color:''}).empty();
                 $parent.find('input, select').each(function( index ) {
-                    console.log($(this));
                     const name = $(this).attr('name');
                     if(name){
                         const dateFrom = name.indexOf('[from]') > -1;
