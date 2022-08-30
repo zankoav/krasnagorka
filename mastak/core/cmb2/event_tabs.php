@@ -455,19 +455,23 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Текущая',
+            'id'           => 'old_price',
+            'type'         => 'text_small',
+            'before_field' => 'BYN',
+            'attributes' => array(
+                'readonly' => 'readonly',
+            )
+        ));
+
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Новая цена',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
         ));
-
-        $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая',
-            'id'           => 'old_price',
-            'type'         => 'text_small',
-            'before_field' => 'BYN',
-        ));
-
+        
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Скидка',
             'id'           => 'sale',
