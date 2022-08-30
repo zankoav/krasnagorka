@@ -319,11 +319,11 @@ function change_ordered_color($box_id, $cmb)
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description');
                 const $inputEl = $(this).parent().parent().find('input');
                 const $spinner = $(this).parent().find('.spinner');
-                const $currentPrice;
+                let $currentPrice;
                 const result = {};
                 $message.css({color:''}).empty();
                 $parent.find('input, select').each(function( index ) {
-                    const name = $(this).attr('name');
+                const name = $(this).attr('name');
                     
                     if(name){
                         const dateFrom = name.indexOf('[from]') > -1;
