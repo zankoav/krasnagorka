@@ -314,7 +314,7 @@ function change_ordered_color($box_id, $cmb)
                 const empty_date_to = "Выберите дату выезда";
                 const booking_unavailable = "Даты заняты";
 
-                const $parent = $(this).parent('.cmb-row');
+                const $parent = $(this).parents('.cmb-field-list');
                 console.log('$parent', $parent);
                 const $message = $(this).parent().find('.cmb2-metabox-description');
                 const result = {};
