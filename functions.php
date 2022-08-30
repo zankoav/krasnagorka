@@ -374,7 +374,7 @@ function change_ordered_color($box_id, $cmb)
                                 headers: {
                                     'Content-Type': 'application/json; charset=utf-8'
                                 },
-                                body: data
+                                body: JSON.stringify(data)
                             })
                         const responseData = await response.json();
                         console.log('responseData', responseData);
