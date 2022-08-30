@@ -309,8 +309,15 @@ function change_ordered_color($box_id, $cmb)
         window.CMB2 = (function(window, document, $, undefined){
             'use strict';
             $(".js-calculate").click(function(){
+                const empty_calendar = "Выберите календарь";
+                const empty_date_from = "Выберите дату заезда";
+                const empty_date_to = "Выберите дату выезда";
+                const booking_unavailable = "Даты заняты";
+
                 const $parent = $(this).parents('.cmb-row');
+                const $message = $(this).parent().find('.cmb2-metabox-description');
                 const result = {};
+                $message.css({color:''});
                 $parent.find('input, select').each(function( index ) {
                     const name = $(this).attr('name');
                     if(name){
@@ -334,7 +341,25 @@ function change_ordered_color($box_id, $cmb)
                     }
                 });
 
-                console.log('result', result);
+                let error;
+                
+                if(!result.calendarId){
+                    error = empty_calendar;
+                }else if(!result.dateFrom){
+                    error = empty_date_from;
+                }else if(!result.dateTo){
+                    error = empty_date_to;
+                }
+
+                if(error){
+                    $message.css({color:'red'}).html(error);
+                }else {
+                    calculate(result);
+                }
+
+                function calculate(data){
+                    console.log('data', data);
+                }
             });
         })(window, document, jQuery);
     </script>
