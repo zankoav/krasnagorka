@@ -310,8 +310,10 @@ function change_ordered_color($box_id, $cmb)
             'use strict';
             $(".js-calculate").click(function(){
                 const $parent = $(this).parents('.cmb-row');
+                console.log('$parent', $parent);
                 const result = {};
                 $parent.find('input, select').each(function( index ) {
+                    console.log('$this', $(this));
                     const name = $(this).attr('name');
                     const dateFrom = name.indexOf('[from]') > -1;
                     const dateTo = name.indexOf('[to]') > -1;
