@@ -378,7 +378,7 @@ function change_ordered_color($box_id, $cmb)
                         let result = 110;
                         
                         
-                        $$currentPrice.val(result);
+                        $currentPrice.val(result);
                         $spinner.removeClass('spinner_show');
 
                     }, 3000);
