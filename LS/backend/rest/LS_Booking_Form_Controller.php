@@ -299,9 +299,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 if(!$removeOrderIncrease){
                     $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
-                    // if($isAdminEvent){
-                    //     $daysUpperPersents = 0;
-                    // }
+                    if($isAdminEvent){
+                        $daysUpperPersents = 0;
+                    }
                     if(count($daysUpperPersents) > 0){    
                         foreach($daysUpperPersents as $day => $persent){
                             if(count($days) <= intval($day)){
