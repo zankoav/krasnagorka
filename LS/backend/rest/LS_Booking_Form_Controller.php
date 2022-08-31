@@ -299,9 +299,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 if(!$removeOrderIncrease){
                     $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
-                    if($isAdminEvent){
-                        $daysUpperPersents = [];
-                    }
                     if(count($daysUpperPersents) > 0){    
                         foreach($daysUpperPersents as $day => $persent){
                             if(count($days) <= intval($day)){
@@ -318,7 +315,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $houseMinPercent = $upperPercent;
                 }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
                     $basePriceWithoutUpper = $basePrice;
-                    $percentTotal -= $houseMinPercent;
+                    if(!$isAdminEvent){
+                        $percentTotal -= $houseMinPercent;
+                    }
+                    
                 }
 
                 $result['seasons_group'][$season->ID]['price_block'] = [
