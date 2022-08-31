@@ -124,30 +124,26 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
+        $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
+        $isTerem = $request['isTerem'];
+        $isAdminEvent = $request['is_admin_event'];
 
-        if($request['is_admin_event']){
+        if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
             $houseId = $house['id']; 
             $dateStart = date("Y-m-d", strtotime($request['dateFrom']));
             $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
-            if($house['terem']){
+            $isTerem = $house['terem'];
+            if($isTerem){
                 $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
             }else{
                 $peopleCount = (int) get_post_meta($houseId, "max_people", true);
             }
-
-            return [
-                'peopleCount' => $peopleCount,
-                'houseId' => $houseId,
-                'dateStart' => $dateStart,
-                'dateEnd' => $dateEnd,
-            ];
         }
 
        
         
-        $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
-        $isTerem = $request['isTerem'];
+       
         
         $smallAnimalCount = intval($request['smallAnimalCount']);
         $bigAnimalCount = intval($request['bigAnimalCount']);
@@ -303,6 +299,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 if(!$removeOrderIncrease){
                     $daysUpperPersents = self::getDaysUpperPersent($season->ID, $prefix.'_days_count_upper_'.$houseId);
+                    // if($isAdminEvent){
+                    //     $daysUpperPersents = 0;
+                    // }
                     if(count($daysUpperPersents) > 0){    
                         foreach($daysUpperPersents as $day => $persent){
                             if(count($days) <= intval($day)){
