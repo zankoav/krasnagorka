@@ -126,6 +126,48 @@ if (!isset($content_width)) {
     $content_width = 1200; 
 }
 
+function getHouseByCalendarId($calendarId){
+    $result = [];
+    $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1);
+
+    $result['terem'] = $isTeremRoom;
+
+    $houseQuery = new WP_Query;
+    $args = null;
+    if($isTeremRoom){
+        $args = array(
+            'post_type' => 'house',
+            'posts_per_page' => 1,
+            'meta_query' => array(
+                array(
+                    'key'     => 'mastak_house_is_it_terem',
+                    'value'   =>  'on',
+                    'compare' => '=',
+                )
+            )
+        );
+    }else{
+        $args = array(
+            'post_type' => 'house',
+            'posts_per_page' => 1,
+            'meta_query' => array(
+                array(
+                    'key'     => 'mastak_house_calendar',
+                    'value'   =>  'id="' . $calendarId . '"',
+                    'compare' => 'LIKE',
+                )
+            )
+        );
+    }
+    $houses = $houseQuery->query($args);
+    $houseId;
+    if(count($houses)){
+       $result['id'] = $houses[0]->ID;
+    }
+
+    return $result;
+}
+
 
 
 

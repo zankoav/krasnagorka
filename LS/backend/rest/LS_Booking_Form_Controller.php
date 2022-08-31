@@ -120,10 +120,32 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public static function calculateResult($request){
         $seasonsIntervals = [];
         $houseId = $request['house'] ?? $request['houseId'];
+        $calendarId = (int)$request['calendarId'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
-        $calendarId = (int)$request['calendarId'];
+
+        if($request['is_admin_event']){
+            $house = getHouseByCalendarId($calendarId);
+            $houseId = $house['id']; 
+            $dateStart = date("Y-m-d", strtotime($request['dateFrom']));
+            $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
+            if($house['terem']){
+                $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
+            }else{
+                $peopleCount = (int) get_post_meta($houseId, "max_people", true);
+            }
+
+            return [
+                'peopleCount' => $peopleCount,
+                'houseId' => $houseId,
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+            ];
+        }
+
+       
+        
         $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
         $isTerem = $request['isTerem'];
         
