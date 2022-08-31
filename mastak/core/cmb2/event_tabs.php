@@ -432,7 +432,7 @@
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Дата до',
             'id'   => 'to',
-            'desc' => 'Включительно',
+            'desc' => 'Включительно. Отличие от формы бронирования - тут нужно на один день указывать ранее',
             'type' => 'text_date',
             'attributes' => array(
                 'data-validation' => 'required',
