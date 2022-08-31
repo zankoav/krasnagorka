@@ -460,7 +460,7 @@
             'type'         => 'text_small',
             'before_field' => 'BYN',
             'attributes' => array(
-                // 'readonly' => 'readonly',
+                'readonly' => 'readonly',
             )
         ));
 

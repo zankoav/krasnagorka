@@ -419,7 +419,7 @@ function change_ordered_color($box_id, $cmb)
                             })
                         const responseData = await response.json();
                         if(responseData){
-                            let result = responseData.accommodation_price;
+                            $currentPrice.val(responseData.accommodation_price);
                             $spinner.removeClass('spinner_show');
                         }
                     }
