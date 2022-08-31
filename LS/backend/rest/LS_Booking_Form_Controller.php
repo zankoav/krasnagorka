@@ -131,8 +131,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
             $houseId = $house['id']; 
+            
             $dateStart = date("Y-m-d", strtotime($request['dateFrom']));
-            $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
+            $dateEnd = date("Y-m-d", strtotime('-1 day', strtotime($request['dateTo'])));
             $isTerem = $house['terem'];
             if($isTerem){
                 $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
@@ -141,9 +142,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
         }
 
-       
-        
-       
         
         $smallAnimalCount = intval($request['smallAnimalCount']);
         $bigAnimalCount = intval($request['bigAnimalCount']);
@@ -311,14 +309,17 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 
                 if($upperPercent){
                     $basePriceWithoutUpper = $basePrice;
-                    $percentTotal -= $upperPercent;
-                    $houseMinPercent = $upperPercent;
-                }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
-                    $basePriceWithoutUpper = $basePrice;
-                    if(!$isAdminEvent){
-                        $percentTotal -= $houseMinPercent;
+                    if(!$onlyBookingOrder['hide_upper']){
+                        $percentTotal -= $upperPercent;
+                        $houseMinPercent = $upperPercent;
                     }
                     
+                    
+                }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
+                    $basePriceWithoutUpper = $basePrice;
+                    if(!$onlyBookingOrder['hide_upper']){
+                        $percentTotal -= $houseMinPercent;
+                    }
                 }
 
                 $result['seasons_group'][$season->ID]['price_block'] = [
@@ -378,8 +379,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $deltaSale += $daysSale;
                 }
 
-                $percentTotal += $deltaSale;
-
+                if(!$isAdminEvent){
+                    $percentTotal += $deltaSale;
+                }
+    
                 $priceBlockTotal = round(
                     ($basePrice * (1 - $percentTotal / 100) ) * 
                     (empty($basePeopleCount) ? 1 : $basePeopleCount) * 
@@ -663,6 +666,29 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($dateStart == date("Y-m-d")){
             $data['enabled'] = true;
             $data['message'] = $isOrderWithDayInDayMessage;
+
+
+            $ordersRightQuery = new WP_Query;
+            $ordersRight = $ordersRightQuery->query(array(
+                'post_type' => 'sbc_orders',
+                'posts_per_page' => -1,
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'sbc_calendars',
+                        'terms' => [$cId]
+                    ]
+                ],
+                'meta_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'key'     => 'sbc_order_start',
+                        'value'   =>  $right[0],
+                        'type'      =>  'date',
+                        'compare' =>  '='   
+                    )
+                )
+            ));     
+            $data['hide_upper'] = count($ordersRight) > 0;
         }
 
         return $data;

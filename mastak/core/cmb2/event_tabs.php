@@ -432,7 +432,6 @@
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Дата до',
             'id'   => 'to',
-            'desc' => 'Включительно. Отличие от формы бронирования - тут нужно на один день указывать ранее',
             'type' => 'text_date',
             'attributes' => array(
                 'data-validation' => 'required',
@@ -442,7 +441,7 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'    => __( ' Прощитать цену', 'cmb2' ),
+            'name'    => __( ' Просчитать цену', 'cmb2' ),
             'id'      => 'calculate',
             'type'    => 'calculate',
             'options' => array(
@@ -458,10 +457,7 @@
             'name'         => 'Текущая',
             'id'           => 'old_price',
             'type'         => 'text_small',
-            'before_field' => 'BYN',
-            'attributes' => array(
-                'readonly' => 'readonly',
-            )
+            'before_field' => 'BYN'
         ));
 
 
