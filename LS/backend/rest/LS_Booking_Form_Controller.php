@@ -693,7 +693,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ));     
             $data['hide_upper'] = count($ordersRight) > 0;
 
-            Log::info('hide_upper', $data['hide_upper']);
         }
 
         return $data;
