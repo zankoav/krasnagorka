@@ -132,7 +132,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $house = getHouseByCalendarId($calendarId);
             $houseId = $house['id']; 
             
-            $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($request['dateFrom'])));
+            $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($request['dateFrom'])));
             $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
             $isTerem = $house['terem'];
             if($isTerem){
