@@ -322,6 +322,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 if($onlyBookingOrder['hide_upper']){
                     $houseMinPercent = null;
+                    $basePriceWithoutUpper = null;
                 }
 
                 $result['seasons_group'][$season->ID]['price_block'] = [
