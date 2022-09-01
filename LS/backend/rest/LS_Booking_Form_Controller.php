@@ -313,13 +313,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $percentTotal -= $upperPercent;
                         $houseMinPercent = $upperPercent;
                     }
-                    
-                    
                 }else if(!empty($houseMinDays) && !empty($houseMinPercent) && ($seasonDaysCount < $houseMinDays)){
                     $basePriceWithoutUpper = $basePrice;
                     if(!$onlyBookingOrder['hide_upper']){
                         $percentTotal -= $houseMinPercent;
                     }
+                }
+
+                if($onlyBookingOrder['hide_upper']){
+                    $houseMinPercent = 0;
                 }
 
                 $result['seasons_group'][$season->ID]['price_block'] = [
