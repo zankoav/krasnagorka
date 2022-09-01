@@ -133,7 +133,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $houseId = $house['id']; 
             
             $dateStart = date("Y-m-d", strtotime($request['dateFrom']));
-            $dateEnd = date("Y-m-d", strtotime('-1 day', strtotime($request['dateTo'])));
+            $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
             $isTerem = $house['terem'];
             if($isTerem){
                 $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
