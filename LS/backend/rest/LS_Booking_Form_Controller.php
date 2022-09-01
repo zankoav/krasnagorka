@@ -647,7 +647,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         ),
                         array(
                             'key'     => 'sbc_order_end',
-                            'value'   =>   date("Y-m-d", strtotime($dateEnd)),
+                            'value'   =>  $right[0],
                             'type'      =>  'date',
                             'compare' =>  '='   
                         )
@@ -682,7 +682,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'relation' => 'OR',
                     array(
                         'key'     => 'sbc_order_start',
-                        'value'   =>  $right[0],
+                        'value'   =>  date("Y-m-d", strtotime($dateEnd)),
                         'type'      =>  'date',
                         'compare' =>  '='   
                     )
