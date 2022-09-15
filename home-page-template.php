@@ -125,13 +125,6 @@
             <?= wpautop(get_option( 'mastak_home_appearance_options' )['mastak_home_big_text']);?>
         </div>
     </div>
-    
-    
-    <?php
-        // if (is_active_sidebar('home-content')) {
-        //     dynamic_sidebar('home-content');
-        // };
-    ?>
 </section>
 <?php
     get_template_part("mastak/views/reviews", "view");
