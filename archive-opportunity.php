@@ -18,7 +18,9 @@ get_template_part("mastak/views/header", "small-view");
         <div class="header-title">
             <h2 class="header-title__subtitle">ОТДЫХ В БРАСЛАВЕ</h2>
         </div>
-        <?= wpautop(get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_big_text']);?>
+        <div class="textwidget">
+            <?= wpautop(get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_big_text']);?>
+        </div>
     </div>
     <hr>
 	<?php
