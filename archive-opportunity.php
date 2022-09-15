@@ -22,12 +22,6 @@ get_template_part("mastak/views/header", "small-view");
             <?= wpautop(get_option( 'mastak_opportunities_appearance_options' )['mastak_opportunity_submenu_big_text']);?>
         </div>
     </div>
-    <hr>
-	<?php
-    if (is_active_sidebar('opportunities-content')) {
-        dynamic_sidebar('opportunities-content');
-    }
-    ?>
 </section>
 <?php
 get_template_part("mastak/views/reviews", "view");
