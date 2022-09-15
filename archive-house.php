@@ -19,6 +19,14 @@
         </div>
     </section>
     <div class="b-bgc-wrapper b-pb-25">
+        <div class="b-container content-text">
+            <div class="header-title">
+                <h2 class="header-title__subtitle">ПОШАГОВАЯ ИНСТРУКЦИЯ БРОНИРОВАНИЯ ДОМИКА</h2>
+            </div>
+            <div class="textwidget">
+                <?= wpautop(get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_big_text']);?>
+            </div>
+        </div>
         <?php
             if (is_active_sidebar('our-houses-content')) {
                 dynamic_sidebar('our-houses-content');
