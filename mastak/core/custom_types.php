@@ -747,6 +747,12 @@
             'type' => 'file',
         ));
 
+        $cmb_options->add_field(array(
+            'name' => 'Услуги текстовая область',
+            'id'   => $prefix . 'big_text',
+            'type' => 'wysiwyg'
+        ));
+
         $group_field_event = $cmb_options->add_field(array(
             'id'          => 'scope',
             'type'        => 'group',
