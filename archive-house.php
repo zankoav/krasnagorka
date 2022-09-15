@@ -27,11 +27,6 @@
                 <?= wpautop(get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_big_text']);?>
             </div>
         </div>
-        <?php
-            if (is_active_sidebar('our-houses-content')) {
-                dynamic_sidebar('our-houses-content');
-            }
-        ?>
     </div>
 <?php
     get_template_part("mastak/views/reviews", "view");
