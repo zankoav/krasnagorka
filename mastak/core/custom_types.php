@@ -1277,6 +1277,12 @@
             'type' => 'file',
         ));
 
+        $cmb_options->add_field(array(
+            'name' => 'Текстовая область',
+            'id'   => $prefix . 'big_text',
+            'type' => 'wysiwyg'
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'mastak_home_page');

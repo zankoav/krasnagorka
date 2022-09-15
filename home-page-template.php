@@ -117,10 +117,20 @@
 </section>
 
 <section class="b-bgc-wrapper">
+    <div class="b-container content-text b-pb-2">
+        <div class="header-title">
+            <p class="header-title__subtitle">"Красногорка"</p>
+        </div>
+        <div class="textwidget">
+            <?= wpautop(get_option( 'mastak_home_appearance_options' )['mastak_home_big_text']);?>
+        </div>
+    </div>
+    
+    
     <?php
-        if (is_active_sidebar('home-content')) {
-            dynamic_sidebar('home-content');
-        };
+        // if (is_active_sidebar('home-content')) {
+        //     dynamic_sidebar('home-content');
+        // };
     ?>
 </section>
 <?php
