@@ -94,12 +94,27 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 	<div class="b-light-line b-mt-3"></div>
 </div>
 <?php endif;?>
+
+<section class="b-container big-text">
+    <div class="big-text__container content-text">
+        <section class="header-title">
+            <h2 class="header-title__subtitle"><?=get_option( 'mastak_event_appearance_options' )['mastak_event_submenu_big_text_title']?></h2>
+        </section>
+        <div class="textwidget">
+            <?= wpautop(get_option( 'mastak_event_appearance_options' )['mastak_event_submenu_big_text']);?>
+        </div>
+    </div>
+    <div class="show-more">
+        <div class="show-more__button">
+            <div class="show-more__dote"></div>
+            <div class="show-more__dote"></div>
+            <div class="show-more__dote"></div>
+        </div>
+        <span class="show-more__title">Показать еще</span>
+    </div>
+</section>
+
 <?php
-
-if (is_active_sidebar('events-content')) {
-    dynamic_sidebar('events-content');
-}
-
 get_template_part("mastak/views/reviews", "view");
 get_template_part("mastak/views/footer", "view");
 get_footer('mastak');

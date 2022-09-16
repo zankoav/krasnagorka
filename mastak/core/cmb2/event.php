@@ -238,6 +238,18 @@
         ));
 
         $cmb_options->add_field(array(
+            'name' => __('Заголовок для тектовой области', 'krasnagorka'),
+            'id'   => $prefix . 'big_text_title',
+            'type' => 'text'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Текстовая область',
+            'id'   => $prefix . 'big_text',
+            'type' => 'wysiwyg'
+        ));
+
+        $cmb_options->add_field(array(
             'name'            => 'Скорость слайдера',
             'id'              => 'main_slider_delay',
             'description'     => __('В милисекундах (2000 = 2 сек)', 'krasnagorka'),
