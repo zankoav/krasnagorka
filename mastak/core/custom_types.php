@@ -1367,6 +1367,18 @@
             'type' => 'file',
         ));
 
+        $cmb_options->add_field(array(
+            'name' => 'Текстовая область для домов',
+            'id'   => $prefix . 'big_text_houses',
+            'type' => 'wysiwyg'
+        ));
+
+        $cmb_options->add_field(array(
+            'name' => 'Текстовая область для услуг',
+            'id'   => $prefix . 'big_text_opportunities',
+            'type' => 'wysiwyg'
+        ));
+
     }
 
     add_action('cmb2_admin_init', 'mastak_map_page');
