@@ -81,12 +81,6 @@
             </div>
         </div>
         <?php endif;?>
-
-        <?php
-            if (is_active_sidebar('prices-content') and ($current_season_id == $season_id)) {
-                dynamic_sidebar('prices-content');
-            }
-        ?>
     <?php endforeach; ?>
     <div class="seasons__added">
         <div class="js-accordion">
