@@ -73,10 +73,19 @@
 
             </div>
         </div>
+
+        <?php if($current_season_id == $season_id):?>
+            <div class="b-container content-text season-text">
+            <div class="textwidget">
+                <?= wpautop(get_option( 'mastak_price_appearance_options' )['mastak_price_submenu_big_text']);?>
+            </div>
+        </div>
+        <?php endif;?>
+
         <?php
-        if (is_active_sidebar('prices-content') and ($current_season_id == $season_id)) {
-            dynamic_sidebar('prices-content');
-        }
+            if (is_active_sidebar('prices-content') and ($current_season_id == $season_id)) {
+                dynamic_sidebar('prices-content');
+            }
         ?>
     <?php endforeach; ?>
     <div class="seasons__added">
