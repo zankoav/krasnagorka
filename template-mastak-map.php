@@ -49,11 +49,11 @@
                     sizes="<?= wp_get_attachment_image_sizes($schema_houses_id, $image_size_schema) ?>">
             </a>
             <div class="base-place__content">
-                <?php
-                    if (is_active_sidebar('map-content')) {
-                        dynamic_sidebar('map-content');
-                    };
-                ?>
+                <div class="big-text content-text">
+                    <div class="textwidget">
+                        <?= wpautop(get_option( 'mastak_map_appearance_options' )['mastak_map_big_text_houses']);?>
+                    </div>
+                </div>
             </div>
         </div>
         <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта услуг</h2>
@@ -66,11 +66,11 @@
                     sizes="<?= wp_get_attachment_image_sizes($schema_services_id, $image_size_schema) ?>">
             </a>
             <div class="base-place__content" style="padding-bottom:0">
-                <?php
-                    if (is_active_sidebar('map-2-content')) {
-                        dynamic_sidebar('map-2-content');
-                    };
-                ?>
+                <div class="big-text content-text">
+                    <div class="textwidget">
+                        <?= wpautop(get_option( 'mastak_map_appearance_options' )['mastak_map_big_text_opportunities']);?>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
