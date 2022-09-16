@@ -47,14 +47,22 @@ $subtitle = get_post_meta(get_the_ID(), 'page_posts_news_title', 1);
 		<div class="swiper-pagination opportunities__pagination"></div>
 	</div>
 </div>
+
+<?php 
+    $newsTitle = get_option( 'news_page_appearance_options' )['news_page_big_text_title'];
+    if(!empty($newsTitle)):?>
+        <div class="b-container content-text">
+            <div class="header-title">
+                <h2 class="header-title__subtitle"><?=$newsTitle?></h2>
+            </div>
+            <div class="textwidget">
+                <?= wpautop(get_option( 'news_page_appearance_options' )['news_page_big_text']);?>
+            </div>
+        </div>
+<?php endif ?>
+
 <?php
-
-if (is_active_sidebar('news-content')) {
-    dynamic_sidebar('news-content');
-}
-
 get_template_part("mastak/views/reviews", "view");
 get_template_part("mastak/views/footer", "view");
 get_footer('mastak');
-
 ?>
