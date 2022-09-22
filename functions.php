@@ -623,4 +623,8 @@ function kg_clear_orders()
     }
 }
 
+// ADD ROLE Once!
+add_role( 'basic_contributor', 'Менеджер по объектам',
+    [ 'read' => true ]
+);
 //END */
