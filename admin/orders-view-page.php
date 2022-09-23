@@ -45,12 +45,18 @@
         $status = get_post_meta($orderId, 'sbc_order_select', true);
         $calendars  = get_the_terms($orderId, 'sbc_calendars');
 
+        $calendarsNames = [];
+
+        foreach($calendars as $calendar){
+            $calendarsNames[] = $calendar->name;
+        }
+
         $result[] = [
             'id'        => $order->ID,
             'start'     => $start,
             'end'       => $end,
             'status'    => $status,
-            'calendars' => $calendars
+            'calendars' => $calendarsNames
         ];
     }
 
