@@ -84,30 +84,30 @@
     <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
     <p>Количество заказов: <b><?= count($orders);?></b></p>
 
-    <table class="table">
-  <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Дома</th>
-        <th scope="col">Дата заезда</th>
-        <th scope="col">Дата выезда</th>
-        <th scope="col">Комментарий</th>
-        <th scope="col">Статус заказа</th>
-    </tr>
-  </thead>
-  <tbody>
-         <?php foreach($result as $res): ?>
+    <table class="table table-bordered table-hover">
+        <thead>
             <tr>
-                <th scope="row"><?=$res['#']?></th>
-                <td><?=$res['calendars']?></td>
-                <td><?=$res['start']?></td>
-                <td><?=$res['end']?></td>
-                <td><?=$res['comment']?></td>
-                <td><?=$res['status']?></td>
+                <th scope="col">#</th>
+                <th scope="col">Дома</th>
+                <th scope="col">Дата заезда</th>
+                <th scope="col">Дата выезда</th>
+                <th scope="col">Комментарий</th>
+                <th scope="col">Статус заказа</th>
             </tr>
-        <?php endforeach;?>
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+                <?php foreach($result as $res): ?>
+                    <tr>
+                        <th scope="row"><?=$res['#']?></th>
+                        <td><?=$res['calendars']?></td>
+                        <td><?=$res['start']?></td>
+                        <td><?=$res['end']?></td>
+                        <td><?=$res['comment']?></td>
+                        <td><?=$res['status']?></td>
+                    </tr>
+                <?php endforeach;?>
+        </tbody>
+    </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
