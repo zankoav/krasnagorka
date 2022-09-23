@@ -40,8 +40,8 @@
     $number = 1;
 
     $statuses = [
-        'booked' => 'Оплачено',
-        'prepaid' => 'Предоплачено'
+        'booked' => 'Оплачен',
+        'prepaid' => 'Предоплачен'
     ];
 
     foreach($orders as $order){
