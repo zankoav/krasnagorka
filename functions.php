@@ -628,3 +628,5 @@ function kg_clear_orders()
 //     [ 'read' => true ]
 // );
 //END */
+
+require_once __DIR__ . '/menu/orders-menu-item.php';
