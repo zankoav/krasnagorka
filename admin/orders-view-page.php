@@ -1,7 +1,7 @@
 <?php 
     
     $dateStart = date("Y-m-d");
-    $dateEnd = date("Y-m-d", strtotime('+30 days', strtotime($dateStart)));
+    $dateEnd = date("Y-m-d", strtotime('+10 days', strtotime($dateStart)));
     $ordersQuery = new WP_Query;
     $orders = $ordersQuery->query(array(
         'post_type' => 'sbc_orders',
@@ -28,11 +28,6 @@
                 array(
                     'key' => 'sbc_order_select',
                     'value' => 'booked',
-                    'compare' => '='
-                ),
-                array(
-                    'key' => 'sbc_order_select',
-                    'value' => 'reserved',
                     'compare' => '='
                 )
             )
