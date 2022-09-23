@@ -32,7 +32,7 @@
                 )
             )
         ),
-        'orderby'  => [ 'sbc_order_start'=>'DESC' ]
+        'orderby'  => [ 'sbc_order_start'=>'ASC' ]
     ));
 
     $result = [];
