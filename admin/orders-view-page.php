@@ -84,7 +84,7 @@
     <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
     <p>Количество заказов: <b><?= count($orders);?></b></p>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" style="font-size:14px;">
         <thead>
             <tr>
                 <th scope="col">#</th>
