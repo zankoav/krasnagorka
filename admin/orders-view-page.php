@@ -43,7 +43,7 @@
         $end = get_post_meta($orderId, 'sbc_order_end', true);
         $end = date("d.m.Y", strtotime($start));
         $status = get_post_meta($orderId, 'sbc_order_select', true);
-        $calendars = get_post_meta($orderId, 'sbc_order_taxonomy_check', false);
+        $calendars  = get_the_terms($orderId, 'sbc_calendars');
 
         $result[] = [
             'id'        => $order->ID,
