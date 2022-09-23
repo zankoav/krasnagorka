@@ -84,7 +84,7 @@
     <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
     <p>Количество заказов: <b><?= count($orders);?></b></p>
 
-    <table class="table table-bordered table-striped table-hover">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -97,7 +97,7 @@
         </thead>
         <tbody>
                 <?php foreach($result as $res): ?>
-                    <tr>
+                    <tr class="<?= $res['status'] == 'Предоплачен' ? 'table-warning' : '';?>">
                         <th scope="row"><?=$res['#']?></th>
                         <td><?=$res['calendars']?></td>
                         <td><?=$res['start']?></td>
