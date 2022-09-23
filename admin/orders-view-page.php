@@ -59,19 +59,15 @@
 
         $result[] = [
             '#'         => $number,
-            'id'        => $order->ID,
+            'calendars' => $calendarsNames,
             'start'     => $start,
             'end'       => $end,
-            'status'    => $status,
             'comment'   => $comment,
-            'calendars' => $calendarsNames
+            'status'    => $status
         ];
 
         $number ++;
     }
-
-    $columns = array_keys($result[0])
-
 
 ?>
 
@@ -86,29 +82,25 @@
     <table class="table">
   <thead>
     <tr>
-        <?php foreach($columns as $column): ?>
-            <th scope="col"><?= $column;?></th>
-        <?php endforeach;?>
+        <th scope="col">#</th>
+        <th scope="col">Дома</th>
+        <th scope="col">Дата заезда</th>
+        <th scope="col">Дата выезда</th>
+        <th scope="col">Комментарий</th>
+        <th scope="col">Статус заказа</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+         <?php foreach($result as $res): ?>
+            <tr>
+                <th scope="row"><?=$res['#']?></th>
+                <td><?=$res['calendars']?></td>
+                <td><?=$res['start']?></td>
+                <td><?=$res['end']?></td>
+                <td><?=$res['comment']?></td>
+                <td><?=$res['status']?></td>
+            </tr>
+        <?php endforeach;?>
   </tbody>
 </table>
 </div>
