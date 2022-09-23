@@ -31,7 +31,8 @@
                     'compare' => '='
                 )
             )
-        )
+        ),
+        'orderby'  => [ 'sbc_order_start'=>'DESC' ]
     ));
 
     $result = [];
@@ -68,7 +69,7 @@
 ?>
 
 <script>
-    const orders = <?=json_encode($result);?>;
+    let orders = <?=json_encode($result);?>;
 </script>
 
 <div class="wrap">
