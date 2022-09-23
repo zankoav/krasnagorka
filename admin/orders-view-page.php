@@ -17,6 +17,19 @@
                 'key'     => 'sbc_order_start',
                 'value'   => $dateEnd,
                 'compare' => '<='
+            ),
+            array(
+                'relation' => 'OR',
+                array(
+                    'key' => 'sbc_order_select',
+                    'value' => 'prepaid',
+                    'compare' => '='
+                ),
+                array(
+                    'key' => 'sbc_order_select',
+                    'value' => 'booked',
+                    'compare' => '='
+                )
             )
         )
     ));
