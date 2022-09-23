@@ -25,5 +25,5 @@
 
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?></h1>
-    <p>Заказы с <?= $dateStart;?> - <?= $dateEnd;?></p>
+    <p>Заказы с <b><?= $dateStart;?></b> - <b><?= $dateEnd;?></b></p>
 </div>
