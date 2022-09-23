@@ -37,12 +37,14 @@
     $result = [];
 
     foreach($orders as $order){
+
         $orderId = $order->ID;
         $start = get_post_meta($orderId, 'sbc_order_start', true);
         $start = date("d.m.Y", strtotime($start));
         $end = get_post_meta($orderId, 'sbc_order_end', true);
         $end = date("d.m.Y", strtotime($start));
         $status = get_post_meta($orderId, 'sbc_order_select', true);
+        $comment = get_post_meta($orderId, 'sbc_order_desc', true);
         $calendars  = get_the_terms($orderId, 'sbc_calendars');
 
         $calendarsNames = [];
@@ -56,6 +58,7 @@
             'start'     => $start,
             'end'       => $end,
             'status'    => $status,
+            'comment '  => $comment,
             'calendars' => $calendarsNames
         ];
     }
