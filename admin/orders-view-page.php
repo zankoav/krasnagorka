@@ -106,7 +106,7 @@
                         <td><?=$res['calendars']?></td>
                         <td><?=$res['start']?></td>
                         <td><?=$res['end']?></td>
-                        <td><?=$res['comment']?></td>
+                        <td><pre><?=$res['comment']?></pre></td>
                         <td><?=$res['status']?></td>
                     </tr>
                 <?php endforeach;?>
