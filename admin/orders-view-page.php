@@ -29,6 +29,11 @@
                     'key' => 'sbc_order_select',
                     'value' => 'booked',
                     'compare' => '='
+                ),
+                array(
+                    'key' => 'sbc_order_select',
+                    'value' => 'reserved',
+                    'compare' => '='
                 )
             )
         )
