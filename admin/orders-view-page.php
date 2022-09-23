@@ -37,6 +37,8 @@
 
     $result = [];
 
+    $number = 1;
+
     foreach($orders as $order){
 
         $orderId = $order->ID;
@@ -50,30 +52,65 @@
 
         $calendarsNames = [];
 
+        
         foreach($calendars as $calendar){
             $calendarsNames[] = $calendar->name;
         }
 
         $result[] = [
+            '#'         => $number,
             'id'        => $order->ID,
             'start'     => $start,
             'end'       => $end,
             'status'    => $status,
-            'comment '  => $comment,
+            'comment'   => $comment,
             'calendars' => $calendarsNames
         ];
+
+        $number ++;
     }
 
+    $columns = array_keys($result[0])
 
 
 ?>
 
-<script>
-    let orders = <?=json_encode($result);?>;
-</script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?></h1>
     <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
     <p>Количество заказов: <b><?= count($orders);?></b></p>
+
+    <table class="table">
+  <thead>
+    <tr>
+        <?php foreach($columns as $column): ?>
+            <th scope="col"><?= $column;?></th>
+        <?php endforeach;?>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
