@@ -39,6 +39,11 @@
 
     $number = 1;
 
+    $statuses = [
+        'booked' => 'Оплачено',
+        'prepaid' => 'Предоплачено'
+    ];
+
     foreach($orders as $order){
 
         $orderId = $order->ID;
@@ -59,11 +64,11 @@
 
         $result[] = [
             '#'         => $number,
-            'calendars' => $calendarsNames,
+            'calendars' => implode(", ", $calendarsNames),
             'start'     => $start,
             'end'       => $end,
             'comment'   => $comment,
-            'status'    => $status
+            'status'    => $statuses[$status]
         ];
 
         $number ++;
