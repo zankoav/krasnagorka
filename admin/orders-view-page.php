@@ -1,7 +1,7 @@
 <?php 
     
     $dateStart = date("Y-m-d");
-    $dateEnd = date("Y-m-d", strtotime('+15 days', $dateStart));
+    $dateEnd = date("Y-m-d", strtotime('+15 days', strtotime($dateStart)));
     // $ordersQuery = new WP_Query;
     // $orders = $ordersQuery->query(array(
     //     'post_type' => 'sbc_orders',
