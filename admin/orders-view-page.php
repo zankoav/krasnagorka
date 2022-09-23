@@ -67,7 +67,7 @@
             'calendars' => implode(", ", $calendarsNames),
             'start'     => $start,
             'end'       => $end,
-            'comment'   => str_replace('\n', '<br>', $comment),
+            'comment'   => json_encode( $comment),
             'status'    => $statuses[$status]
         ];
 
