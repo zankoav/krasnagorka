@@ -25,5 +25,5 @@
 
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?> </h1>
-    <p>Даты: <?= $dateStart;?> - <?= $dateEnd;?></p>
+    <p>Даты: <?= date("d.m.Y", strtotime($dateStart))?> - <?= date("d.m.Y", strtotime($dateEnd))?></p>
 </div>
