@@ -102,14 +102,14 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Дома</th>
-                <th scope="col">Дата заезда</th>
-                <th scope="col">Дата выезда</th>
+                <th scope="col">Заезд</th>
+                <th scope="col">выезд</th>
                 <th scope="col">Комментарий</th>
                 <th scope="col">Контакты</th>
-                <th scope="col">Цена за питание</th>
+                <th scope="col">Питание</th>
                 <th scope="col">Оплачено</th>
                 <th scope="col">Общая стоимость</th>
-                <th scope="col">Статус заказа</th>
+                <th scope="col">Статус</th>
             </tr>
         </thead>
         <tbody>
