@@ -50,7 +50,7 @@
         $start = get_post_meta($orderId, 'sbc_order_start', true);
         $start = date("d.m.Y", strtotime($start));
         $end = get_post_meta($orderId, 'sbc_order_end', true);
-        $end = date("d.m.Y", strtotime($start));
+        $end = date("d.m.Y", strtotime($end));
         $status = get_post_meta($orderId, 'sbc_order_select', true);
         $comment = get_post_meta($orderId, 'sbc_order_desc', true);
         $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
