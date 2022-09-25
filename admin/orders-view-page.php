@@ -71,8 +71,8 @@
             'start'     => $start,
             'end'       => $end,
             'comment'   => $comment,
-            'food'   => $food ?? '-',
-            'prepaid'   => $prepaid,
+            'food'   => empty($food) ? 0 : $food,
+            'prepaid'   => empty($prepaid) ? 0 : $prepaid,
             'total_price'   => $total_price,
             'status'    => $statuses[$status]
         ];
