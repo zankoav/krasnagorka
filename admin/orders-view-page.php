@@ -97,38 +97,40 @@
     <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
     <p>Количество заказов: <b><?= count($orders);?></b></p>
 
-    <table class="table table-bordered table-hover" style="font-size: 14px;">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Дома</th>
-                <th scope="col">Заезд</th>
-                <th scope="col">Выезд</th>
-                <th scope="col">Комментарий</th>
-                <th scope="col">Контакты</th>
-                <th scope="col">Питание</th>
-                <th scope="col">Оплачено</th>
-                <th scope="col">Общая стоимость</th>
-                <th scope="col">Статус</th>
-            </tr>
-        </thead>
-        <tbody>
-                <?php foreach($result as $res): ?>
-                    <tr class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
-                        <th scope="row"><?=$res['#']?></th>
-                        <td><?=$res['calendars']?></td>
-                        <td><?=$res['start']?></td>
-                        <td><?=$res['end']?></td>
-                        <td><pre><?=$res['comment']?></pre></td>
-                        <td><?=$res['contact']?></td>
-                        <td><?=$res['food']?> <small class="text-secondary">руб.</small></td>
-                        <td><?=$res['prepaid']?> <small class="text-secondary">руб.</small></td>
-                        <td><?=$res['total_price']?> <small class="text-secondary">руб.</small></td>
-                        <td><?=$res['status']?></td>
-                    </tr>
-                <?php endforeach;?>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover" style="font-size: 14px;">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Дома</th>
+                    <th scope="col">Заезд</th>
+                    <th scope="col">Выезд</th>
+                    <th scope="col">Комментарий</th>
+                    <th scope="col">Контакты</th>
+                    <th scope="col">Питание</th>
+                    <th scope="col">Оплачено</th>
+                    <th scope="col">Общая стоимость</th>
+                    <th scope="col">Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <?php foreach($result as $res): ?>
+                        <tr class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
+                            <th scope="row"><?=$res['#']?></th>
+                            <td><?=$res['calendars']?></td>
+                            <td><?=$res['start']?></td>
+                            <td><?=$res['end']?></td>
+                            <td><pre><?=$res['comment']?></pre></td>
+                            <td><?=$res['contact']?></td>
+                            <td><?=$res['food']?> <small class="text-secondary">руб.</small></td>
+                            <td><?=$res['prepaid']?> <small class="text-secondary">руб.</small></td>
+                            <td><?=$res['total_price']?> <small class="text-secondary">руб.</small></td>
+                            <td><?=$res['status']?></td>
+                        </tr>
+                    <?php endforeach;?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
