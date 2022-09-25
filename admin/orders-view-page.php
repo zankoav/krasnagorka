@@ -53,6 +53,9 @@
         $end = date("d.m.Y", strtotime($start));
         $status = get_post_meta($orderId, 'sbc_order_select', true);
         $comment = get_post_meta($orderId, 'sbc_order_desc', true);
+        $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
+        $food = get_post_meta($orderId, 'sbc_order_food_price', true);
+        $total_price = get_post_meta($orderId, 'sbc_order_price', true);
         $calendars  = get_the_terms($orderId, 'sbc_calendars');
 
         $calendarsNames = [];
@@ -68,6 +71,9 @@
             'start'     => $start,
             'end'       => $end,
             'comment'   => $comment,
+            'food'   => $food ?? '-',
+            'prepaid'   => $prepaid,
+            'total_price'   => $total_price,
             'status'    => $statuses[$status]
         ];
 
