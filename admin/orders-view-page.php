@@ -121,9 +121,9 @@
                         <td><?=$res['end']?></td>
                         <td><pre><?=$res['comment']?></pre></td>
                         <td><?=$res['contact']?></td>
-                        <td><?=$res['food']?> руб.</td>
-                        <td><?=$res['prepaid']?> руб.</td>
-                        <td><?=$res['total_price']?> руб.</td>
+                        <td><?=$res['food']?> <small class="text-secondary">руб.</small></td>
+                        <td><?=$res['prepaid']?> <small class="text-secondary">руб.</small></td>
+                        <td><?=$res['total_price']?> <small class="text-secondary">руб.</small></td>
                         <td><?=$res['status']?></td>
                     </tr>
                 <?php endforeach;?>
