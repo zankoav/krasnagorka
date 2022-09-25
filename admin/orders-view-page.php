@@ -74,6 +74,9 @@
         $number ++;
     }
 
+
+    $today = date("d.m.Y", strtotime($dateStart));
+
 ?>
 
 
@@ -96,17 +99,25 @@
                 <th scope="col">Дата заезда</th>
                 <th scope="col">Дата выезда</th>
                 <th scope="col">Комментарий</th>
+                <th scope="col">Контакты</th>
+                <th scope="col">Цена за питание</th>
+                <th scope="col">Оплачено</th>
+                <th scope="col">Общая стоимость</th>
                 <th scope="col">Статус заказа</th>
             </tr>
         </thead>
         <tbody>
                 <?php foreach($result as $res): ?>
-                    <tr class="<?= $res['status'] == 'Предоплачен' ? 'table-warning' : '';?>">
+                    <tr class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
                         <th scope="row"><?=$res['#']?></th>
                         <td><?=$res['calendars']?></td>
                         <td><?=$res['start']?></td>
                         <td><?=$res['end']?></td>
                         <td><pre><?=$res['comment']?></pre></td>
+                        <td><?=$res['contact']?></td>
+                        <td><?=$res['food']?></td>
+                        <td><?=$res['prepaid']?></td>
+                        <td><?=$res['total_price']?></td>
                         <td><?=$res['status']?></td>
                     </tr>
                 <?php endforeach;?>
