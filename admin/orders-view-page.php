@@ -53,6 +53,8 @@
         $end = date("d.m.Y", strtotime($end));
         $status = get_post_meta($orderId, 'sbc_order_select', true);
         $comment = get_post_meta($orderId, 'sbc_order_desc', true);
+        $contactId = get_post_meta($orderId, 'sbc_order_client', true);
+        $contact = get_the_title($contactId);
         $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
         $food = get_post_meta($orderId, 'sbc_order_food_price', true);
         $total_price = get_post_meta($orderId, 'sbc_order_price', true);
@@ -71,6 +73,7 @@
             'start'     => $start,
             'end'       => $end,
             'comment'   => $comment,
+            'contact'   => $contact,
             'food'   => empty($food) ? 0 : $food,
             'prepaid'   => empty($prepaid) ? 0 : $prepaid,
             'total_price'   => $total_price,
