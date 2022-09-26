@@ -380,7 +380,7 @@ class AmoCrmFactory {
                 $task = new TaskModel();
                 $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_MEETING)
                     ->setText('Проверить Питание')
-                    ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                    ->setCompleteTill(mktime(date("H"), date("i") + 60))
                     ->setEntityType(EntityTypesInterface::LEADS)
                     ->setEntityId($lead->getId())
                     ->setDuration(1 * 60 * 60) // 1 час
