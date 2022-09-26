@@ -373,6 +373,26 @@ class AmoCrmFactory {
                 $taskId = self::addAmoCrmTask('Помочь клиенту определиться с заказом', $lead->getId());
                 update_post_meta($order->id, 'sbc_task_id', $taskId);
             }
+
+            if($order->foodPrice > 0){
+                    // Создадим задачу по питанию
+                $tasksCollection = new TasksCollection();
+                $task = new TaskModel();
+                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_MEETING)
+                    ->setText('Проверить Питание')
+                    ->setCompleteTill(mktime(date("H"), date("i") + 30))
+                    ->setEntityType(EntityTypesInterface::LEADS)
+                    ->setEntityId($lead->getId())
+                    ->setDuration(1 * 60 * 60) // 1 час
+                    ->setResponsibleUserId(2373844);
+                $tasksCollection->add($task);
+
+                try {
+                    $apiClient->tasks()->add($tasksCollection);
+                } catch (AmoCRMApiException $e) {
+                    Logger::log('Exceptions: ' . $e->getTitle() . ' <<< tasksCollection >>> ' . $e->getDescription());
+                }
+            }
            
         } catch (AmoCRMApiException $e) {
             throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}", 301);
