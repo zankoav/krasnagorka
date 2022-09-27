@@ -43,6 +43,18 @@
 
     function get_food_by_order_id($orderId){
         $result = [];
+        $breakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', true);
+        $lunch = get_post_meta($orderId, 'sbc_order_food_lunch', true);
+        $dinner = get_post_meta($orderId, 'sbc_order_food_dinner', true);
+        if(!empty($breakfast)){
+            $result[] = "Завтраки: $breakfast";
+        }
+        if(!empty($lunch)){
+            $result[] = "Обеды: $lunch";
+        }
+        if(!empty($dinner)){
+            $result[] = "Ужины: $dinner";
+        }
         implode("<br>",  $result);
     }
 
