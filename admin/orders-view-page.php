@@ -85,6 +85,7 @@
 
 
     $today = date("d.m.Y", strtotime($dateStart));
+    $tomorrow = date("d.m.Y", strtotime('+1 day', strtotime($today)));
 
 ?>
 
@@ -120,7 +121,7 @@
             <tbody>
                     <?php foreach($result as $res): ?>
                         <tr style="<?="background-color:" . $res['background']?>">
-                            <th style="background-color:<?= $res['start'] === $today ? '#a3fffa' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
+                            <th style="background-color:<?= in_array($res['start'], [$today, $tomorrow]) === $today ? '#2ae166' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
                             <td><?=$res['end']?></td>
