@@ -27,8 +27,18 @@
     $number = 1;
 
     $statuses = [
-        'booked' => 'Оплачен',
-        'prepaid' => 'Предоплачен'
+        'booked' => [
+            'title' => 'Оплачен',
+            'background' => '#e91e6350'
+        ],
+        'prepaid' => [
+            'title' => 'Предоплачен',
+            'background' => '#ffc10750'
+        ],
+        'reserved' => [
+            'title' => 'Зарезервирован',
+            'background' => '#65b2ed50'
+        ]
     ];
 
     foreach($orders as $order){
@@ -66,7 +76,8 @@
             'food'   => empty($food) ? 0 : $food,
             'prepaid'   => empty($prepaid) ? 0 : $prepaid,
             'total_price'   => $total_price,
-            'status'    => $statuses[$status]
+            'status'    => $statuses[$status]['title'],
+            'background'    => $statuses[$status]['background']
         ];
 
         $number ++;
@@ -108,8 +119,8 @@
             </thead>
             <tbody>
                     <?php foreach($result as $res): ?>
-                        <tr class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
-                            <th scope="row"><?=$res['#']?></th>
+                        <tr style="<?="background-color:" . $res['background']?>" class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
+                            <th style="background-color:<?= $res['start'] === $today ? '#04a89f50' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
                             <td><?=$res['end']?></td>
