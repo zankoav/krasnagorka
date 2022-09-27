@@ -55,7 +55,7 @@
         if(!empty($dinner)){
             $result[] = "Ужины: $dinner";
         }
-        implode("<br>",  $result);
+        return implode("<br>",  $result);
     }
 
     function get_additional_services_by_order_id($orderId){
