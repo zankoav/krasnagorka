@@ -29,15 +29,15 @@
     $statuses = [
         'booked' => [
             'title' => 'Оплачен',
-            'background' => '#e91e6310'
+            'background' => '#e91e6325'
         ],
         'prepaid' => [
             'title' => 'Предоплачен',
-            'background' => '#ffc10710'
+            'background' => '#ffc10725'
         ],
         'reserved' => [
             'title' => 'Зарезервирован',
-            'background' => '#65b2ed10'
+            'background' => '#65b2ed25'
         ]
     ];
 
