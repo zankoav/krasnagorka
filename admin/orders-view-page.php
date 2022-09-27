@@ -60,6 +60,28 @@
 
     function get_additional_services_by_order_id($orderId){
         $result = [];
+        
+        $houseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', true);
+        $houseBlack = get_post_meta($orderId, 'sbc_order_bath_house_black', true);
+        $smallAnimlas = get_post_meta($orderId, 'sbc_order_small_animlas_count', true);
+        $bigAnimlas = get_post_meta($orderId, 'sbc_order_big_animlas_count', true);
+        $babyBed = get_post_meta($orderId, 'sbc_order_baby_bed', true);
+
+        if(!empty($houseWhite)){
+            $result[] = "Бани по белому: $breakfast";
+        }
+        if(!empty($houseBlack)){
+            $result[] = "Бани по черному: $houseBlack";
+        }
+        if(!empty($smallAnimlas)){
+            $result[] = "Мелкие животные: $smallAnimlas";
+        }
+        if(!empty($bigAnimlas)){
+            $result[] = "Крупные животные: $bigAnimlas";
+        }
+        if($babyBed === 'on'){
+            $result[] = "Детская кроватка";
+        }
         return implode("<br>",  $result);
     }
 
