@@ -1255,12 +1255,12 @@ class Booking_Form_Controller extends WP_REST_Controller
                 $comment = $request['comment'];
             }
             
-            if(!empty($peopleCount)){
-                if(!empty($comment)){
-                    $comment = $comment . "\n";
-                }
-                $comment  = $comment . "Количество человек: $peopleCount";
-            }
+            // if(!empty($peopleCount)){
+            //     if(!empty($comment)){
+            //         $comment = $comment . "\n";
+            //     }
+            //     $comment  = $comment . "Количество человек: $peopleCount";
+            // }
 
             $babyBed = $request['babyBed'] == 'true';
             $bathHouseWhite = $request['bathHouseWhite'];
@@ -1346,48 +1346,48 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if($smallAnimalsCount > 0){
-                    $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
+                    // $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
                 }
 
                 if($bigAnimalsCount > 0){
-                    $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
+                    // $comment .= "\nСобаки крупных пород (высота в холке более 40 см): $bigAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_big_animlas_count', $bigAnimalsCount);
                 }
 
 
                 if($foodBreakfast > 0){
-                    $comment .= "\nЗавтраки: $foodBreakfast";
+                    // $comment .= "\nЗавтраки: $foodBreakfast";
                     update_post_meta($post_id, 'sbc_order_food_breakfast', $foodBreakfast);
                 }
 
                 if($foodLunch > 0){
-                    $comment .= "\nОбеды: $foodLunch";
+                    // $comment .= "\nОбеды: $foodLunch";
                     update_post_meta($post_id, 'sbc_order_food_lunch', $foodLunch);
                 }
 
                 if($foodDinner > 0){
-                    $comment .= "\nУжины: $foodDinner";
+                    // $comment .= "\nУжины: $foodDinner";
                     update_post_meta($post_id, 'sbc_order_food_dinner', $foodDinner);
                 }
 
                 if ($babyBed) {
-                    $comment .= "\nДетская кроватка: Да";
+                    // $comment .= "\nДетская кроватка: Да";
                     update_post_meta($post_id, 'sbc_order_baby_bed', 'on');
                 }
 
                 if (!empty($bathHouseWhite)) {
-                    $comment .= "\nКоличество сеансов бани по-белому: $bathHouseWhite";
+                    // $comment .= "\nКоличество сеансов бани по-белому: $bathHouseWhite";
                     update_post_meta($post_id, 'sbc_order_bath_house_white', $bathHouseWhite);
                 }
 
                 if (!empty($bathHouseBlack)) {
-                    $comment .= "\nКоличество сеансов бани по-черному: $bathHouseBlack";
+                    // $comment .= "\nКоличество сеансов бани по-черному: $bathHouseBlack";
                     update_post_meta($post_id, 'sbc_order_bath_house_black', $bathHouseBlack);
                 }
 
                 if ($childs > 0) {
-                    $comment .= "\nКоличество детей без спальных мест: $childs";
+                    // $comment .= "\nКоличество детей без спальных мест: $childs";
                     update_post_meta($post_id, 'sbc_order_childs', $childs);
                 }
 

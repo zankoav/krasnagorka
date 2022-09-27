@@ -176,7 +176,7 @@ class OrderFactory {
         wp_set_object_terms($order->id, [$order->calendarId], 'sbc_calendars');
 
         $comment = [
-            "Количество человек: {$order->peopleCount}"
+            // "Количество человек: {$order->peopleCount}"
         ];
 
         if(!empty($order->comment)){
@@ -184,47 +184,47 @@ class OrderFactory {
         }
 
         if($order->smallAnimalCount > 0){
-            $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalCount}";
+            // $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalCount}";
             update_post_meta($order->id, 'sbc_order_small_animlas_count', $order->smallAnimalCount);
         }
 
         if($order->bigAnimalCount > 0){
-            $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalCount}";
+            // $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalCount}";
             update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalCount);
         }
 
         if($order->foodBreakfast > 0){
-            $comment[] = "Завтраки: {$order->foodBreakfast}";
+            // $comment[] = "Завтраки: {$order->foodBreakfast}";
             update_post_meta($order->id, 'sbc_order_food_breakfast', $order->foodBreakfast);
         }
 
         if($order->foodLunch > 0){
-            $comment[] = "Обеды: {$order->foodLunch}";
+            // $comment[] = "Обеды: {$order->foodLunch}";
             update_post_meta($order->id, 'sbc_order_food_lunch', $order->foodLunch);
         }
 
         if($order->foodDinner > 0){
-            $comment[] = "Ужины: {$order->foodDinner}";
+            // $comment[] = "Ужины: {$order->foodDinner}";
             update_post_meta($order->id, 'sbc_order_food_dinner', $order->foodDinner);
         }
 
         if($order->babyBed){
-            $comment[] = "Детская кроватка: Да";
+            // $comment[] = "Детская кроватка: Да";
             update_post_meta($order->id, 'sbc_order_baby_bed', 'on');
         }
 
         if($order->bathHouseWhite > 0){
-            $comment[] = "Количество сеансов бани по-белому: {$order->bathHouseWhite}";
+            // $comment[] = "Количество сеансов бани по-белому: {$order->bathHouseWhite}";
             update_post_meta($order->id, 'sbc_order_bath_house_white', $order->bathHouseWhite);
         }
 
         if($order->bathHouseBlack > 0){
-            $comment[] = "Количество сеансов бани по-черному: {$order->bathHouseBlack}";
+            // $comment[] = "Количество сеансов бани по-черному: {$order->bathHouseBlack}";
             update_post_meta($order->id, 'sbc_order_bath_house_black', $order->bathHouseBlack);
         }
 
         if($order->childCount > 0){
-            $comment[] = "Количество детей без спальных мест: {$order->childCount}";
+            // $comment[] = "Количество детей без спальных мест: {$order->childCount}";
             update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
         }
 

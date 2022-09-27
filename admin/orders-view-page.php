@@ -107,7 +107,6 @@
 
         $calendarsNames = [];
 
-        
         foreach($calendars as $calendar){
             $calendarsNames[] = $calendar->name;
         }
