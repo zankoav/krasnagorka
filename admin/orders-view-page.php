@@ -121,7 +121,7 @@
             <tbody>
                     <?php foreach($result as $res): ?>
                         <tr style="<?="background-color:" . $res['background']?>">
-                            <th style="background-color:<?= in_array($res['start'], [$today, $tomorrow]) === $today ? '#2ae166' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
+                            <th style="background-color:<?= in_array($res['start'], [$today, $tomorrow]) ? '#2ae166' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
                             <td><?=$res['end']?></td>
