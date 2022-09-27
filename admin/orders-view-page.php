@@ -120,7 +120,7 @@
             <tbody>
                     <?php foreach($result as $res): ?>
                         <tr style="<?="background-color:" . $res['background']?>">
-                            <th style="background-color:<?= $res['start'] === $today ? '#04a89f50' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
+                            <th style="background-color:<?= $res['start'] === $today ? '#04a89f' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
                             <td><?=$res['end']?></td>
