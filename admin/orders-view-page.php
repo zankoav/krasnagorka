@@ -17,19 +17,6 @@
                 'key'     => 'sbc_order_start',
                 'value'   => $dateEnd,
                 'compare' => '<='
-            ),
-            array(
-                'relation' => 'OR',
-                array(
-                    'key' => 'sbc_order_select',
-                    'value' => 'prepaid',
-                    'compare' => '='
-                ),
-                array(
-                    'key' => 'sbc_order_select',
-                    'value' => 'booked',
-                    'compare' => '='
-                )
             )
         ),
         'orderby'  => [ 'sbc_order_start'=>'ASC' ]
@@ -58,6 +45,7 @@
         $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
         $food = get_post_meta($orderId, 'sbc_order_food_price', true);
         $total_price = get_post_meta($orderId, 'sbc_order_price', true);
+        $people = get_post_meta($orderId, 'sbc_order_count_people', true);
         $calendars  = get_the_terms($orderId, 'sbc_calendars');
 
         $calendarsNames = [];
@@ -72,6 +60,7 @@
             'calendars' => implode(", ", $calendarsNames),
             'start'     => $start,
             'end'       => $end,
+            'people'   => $people,
             'comment'   => $comment,
             'contact'   => $contact,
             'food'   => empty($food) ? 0 : $food,
@@ -108,6 +97,7 @@
                     <th scope="col">Дома</th>
                     <th scope="col">Заезд</th>
                     <th scope="col">Выезд</th>
+                    <th scope="col">Человек</th>
                     <th scope="col">Комментарий</th>
                     <th scope="col">Контакты</th>
                     <th scope="col">Питание</th>
@@ -123,6 +113,7 @@
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
                             <td><?=$res['end']?></td>
+                            <td><?=$res['people']?></td>
                             <td><pre><?=$res['comment']?></pre></td>
                             <td><?=$res['contact']?></td>
                             <td><?=$res['food']?> <small class="text-secondary">руб.</small></td>
