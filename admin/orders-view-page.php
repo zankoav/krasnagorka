@@ -119,7 +119,7 @@
             </thead>
             <tbody>
                     <?php foreach($result as $res): ?>
-                        <tr style="<?="background-color:" . $res['background']?>" class="<?= $res['start'] === $today ? 'table-warning' : '' ?>">
+                        <tr style="<?="background-color:" . $res['background']?>">
                             <th style="background-color:<?= $res['start'] === $today ? '#04a89f50' : '#ffffff' ?>" scope="row"><?=$res['#']?></th>
                             <td><?=$res['calendars']?></td>
                             <td><?=$res['start']?></td>
