@@ -1248,7 +1248,20 @@ class Booking_Form_Controller extends WP_REST_Controller
             $contactStatus = $request['contactStatus'];
             $childs = $request['childs'];
             $peopleCount = $request['peopleCount'];
-            $comment  = empty($request['comment']) ? "Количество человек: $peopleCount" : $request['comment']."\nКоличество человек: $peopleCount";
+            
+            $comment  = '';
+
+            if(!empty($request['comment'])){
+                $comment = $request['comment'];
+            }
+            
+            if(!empty($peopleCount)){
+                if(!empty($comment)){
+                    $comment = $comment . "\n";
+                }
+                $comment  = $comment . "Количество человек: $peopleCount";
+            }
+
             $babyBed = $request['babyBed'] == 'true';
             $bathHouseWhite = $request['bathHouseWhite'];
             $bathHouseBlack = $request['bathHouseBlack'];
