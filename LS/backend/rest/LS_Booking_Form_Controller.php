@@ -669,30 +669,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($dateStart == date("Y-m-d")){
             $data['enabled'] = true;
             $data['message'] = $isOrderWithDayInDayMessage;
-
-
-            $ordersRightQuery = new WP_Query;
-            $ordersRight = $ordersRightQuery->query(array(
-                'post_type' => 'sbc_orders',
-                'posts_per_page' => -1,
-                'tax_query' => [
-                    [
-                        'taxonomy' => 'sbc_calendars',
-                        'terms' => [$cId]
-                    ]
-                ],
-                'meta_query' => array(
-                    'relation' => 'OR',
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   =>  date("Y-m-d", strtotime($dateEnd)),
-                        'type'      =>  'date',
-                        'compare' =>  '='   
-                    )
-                )
-            ));     
-            $data['hide_upper'] = count($ordersRight) > 0;
-
+            $data['hide_upper'] = true;
         }
 
         return $data;
