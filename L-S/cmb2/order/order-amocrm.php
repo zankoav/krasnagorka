@@ -48,16 +48,23 @@ function order_amocrm_metabox() {
     $sbc_client->add_field(array(
         'name' => 'Webpay transaction ID',
         'id'   => 'sbc_webpay_transaction_id',
-        'type' => 'text_small',
-        // 'attributes' => array(
-        //     'readonly' => 'readonly'
-        // )
+        'type' => 'text_small'
     ));
 
     $sbc_client->add_field(array(
         'name' => 'Task ID',
         'id'   => 'sbc_task_id',
         'type' => 'text_small',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        )
+    ));
+    
+    $sbc_client->add_field(array(
+        'name' => 'Создать задачу в АМО',
+        'description' => 'Напомнить клиенту оплатить бронь, так как осталось мало времени (около 15 часов) до снятия брони',
+        'id'   => 'sbc_remind_task',
+        'type' => 'checkbox',
         'attributes' => array(
             'readonly' => 'readonly'
         )

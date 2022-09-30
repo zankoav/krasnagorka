@@ -530,6 +530,12 @@ function cron_add_clear_intervals($schedules)
         'interval' => 60 * 60 * 12,
         'display' => 'Раз в 12 часов'
     );
+
+    // регистрируем четверть дневного интервала
+    $schedules['quarter_day'] = array(
+        'interval' => 60 * 60 * 6,
+        'display' => 'Раз в 12 часов'
+    );
     return $schedules;
 }
 
@@ -539,6 +545,10 @@ function kg_clear_order()
     $time = time();
     if (!wp_next_scheduled('kg_clear_order_five_min_event')) {
         wp_schedule_event($time, 'five_min', 'kg_clear_order_five_min_event');
+    }
+
+    if (!wp_next_scheduled('kg_clear_order_quarter_day_min_event')) {
+        wp_schedule_event($time, 'quarter_day', 'kg_clear_order_quarter_day_min_event');
     }
 
     if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
@@ -622,6 +632,50 @@ function kg_clear_orders()
         wp_delete_post($order->ID, true);
     }
 }
+
+add_action('kg_clear_order_quarter_day_min_event', 'kg_add_remind');
+function kg_add_remind()
+{
+
+    $query = new WP_Query(
+        [
+            'post_type'  => 'sbc_orders',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                'relation' => 'AND',
+                array(
+                    'key'     => 'sbc_order_select',
+                    'value'   => 'reserved',
+                    'compare' => '='
+                ),
+                array(
+                    'key'     => 'sbc_remind_task',
+                    'value'   => 'on',
+                    'compare' => '!='
+                ),
+                array(
+                    'key'     => 'sbc_order_prepaid_source',
+                    'compare' => 'EXISTS'
+                )
+            ),
+            'date_query' => array(
+                array(
+                    'before'    => '1 day ago',
+                    'inclusive' => true
+                )
+            )
+        ]
+    );
+    $orders = $query->get_posts();
+
+    foreach ($orders as $order) {
+        $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
+        Booking_Form_Controller::createAmoCrmTask('Напомнить клиенту оплатить свою бронь осталось 15 часов', $leadId);
+        update_post_meta($order->ID, 'sbc_remind_task', 'on');
+    }
+}
+
+
 
 // ADD ROLE Once!
 // add_role( 'basic_contributor', 'Менеджер по объектам',
