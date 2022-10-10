@@ -534,7 +534,7 @@ function cron_add_clear_intervals($schedules)
     // регистрируем четверть дневного интервала
     $schedules['quarter_day'] = array(
         'interval' => 60 * 60 * 6,
-        'display' => 'Раз в 12 часов'
+        'display' => 'Раз в 6 часов'
     );
     return $schedules;
 }
@@ -667,11 +667,13 @@ function kg_add_remind()
         ]
     );
     $orders = $query->get_posts();
+    Log::info('orders count', count($orders));
 
     foreach ($orders as $order) {
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
         Booking_Form_Controller::createAmoCrmTask('Напомнить клиенту оплатить свою бронь осталось 15 часов', $leadId);
         update_post_meta($order->ID, 'sbc_remind_task', 'on');
+        Log::info('order ID on', $order->ID);
     }
 }
 
