@@ -688,34 +688,34 @@ function kg_add_remind()
 require_once __DIR__ . '/menu/orders-menu-item.php';
 
 
-$query111 = new WP_Query(
-    [
-        'post_type'  => 'sbc_orders',
-        'posts_per_page' => -1,
-        'meta_query' => array(
-            'relation' => 'AND',
-            array(
-                'key'     => 'sbc_order_select',
-                'value'   => 'reserved',
-                'compare' => '='
-            ),
-            // array(
-            //     'key'     => 'sbc_remind_task',
-            //     'value'   => 'on',
-            //     'compare' => '!='
-            // ),
-            array(
-                'key'     => 'sbc_order_prepaid_source',
-                'compare' => 'EXISTS'
-            )
-        ),
-        'date_query' => array(
-            array(
-                'before'    => '1 day ago',
-                'inclusive' => true
-            )
-        )
-    ]
-);
-$orders111 = $query111->get_posts();
-Log::info('!!! orders count', count($orders111));
+// $query111 = new WP_Query(
+//     [
+//         'post_type'  => 'sbc_orders',
+//         'posts_per_page' => -1,
+//         'meta_query' => array(
+//             'relation' => 'AND',
+//             array(
+//                 'key'     => 'sbc_order_select',
+//                 'value'   => 'reserved',
+//                 'compare' => '='
+//             ),
+//             array(
+//                 'key'     => 'sbc_remind_task',
+//                 'value'   => 'on',
+//                 'compare' => '!='
+//             ),
+//             array(
+//                 'key'     => 'sbc_order_prepaid_source',
+//                 'compare' => 'EXISTS'
+//             )
+//         ),
+//         'date_query' => array(
+//             array(
+//                 'before'    => '1 day ago',
+//                 'inclusive' => true
+//             )
+//         )
+//     ]
+// );
+// $orders111 = $query111->get_posts();
+// Log::info('!!! orders count', count($orders111));

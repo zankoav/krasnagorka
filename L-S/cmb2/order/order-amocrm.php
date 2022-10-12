@@ -64,10 +64,7 @@ function order_amocrm_metabox() {
         'name' => 'Создать задачу в АМО',
         'description' => 'Напомнить клиенту оплатить бронь, так как осталось мало времени (около 15 часов) до снятия брони',
         'id'   => 'sbc_remind_task',
-        'type' => 'checkbox',
-        'attributes' => array(
-            'readonly' => 'readonly'
-        )
+        'type' => 'checkbox'
     ));
 
 }
