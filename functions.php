@@ -699,15 +699,19 @@ $query111 = new WP_Query(
                 'value'   => 'reserved',
                 'compare' => '='
             ),
-            array(
-                'key'     => 'sbc_remind_task',
-                'value'   => 'on',
-                'compare' => '!='
-            )
+            // array(
+            //     'key'     => 'sbc_remind_task',
+            //     'value'   => 'on',
+            //     'compare' => '!='
+            // ),
+            // array(
+            //     'key'     => 'sbc_order_prepaid_source',
+            //     'compare' => 'EXISTS'
+            // )
         ),
         'date_query' => array(
             array(
-                'before'    => '3 hours ago',
+                'before'    => '1 day ago',
                 'inclusive' => true
             )
         )
