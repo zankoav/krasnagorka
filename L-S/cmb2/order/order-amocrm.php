@@ -61,10 +61,13 @@ function order_amocrm_metabox() {
     ));
     
     $sbc_client->add_field(array(
-        'name' => 'Создать задачу в АМО',
+        'name' => 'Задачи в АМОCrm',
         'description' => 'Напомнить клиенту оплатить бронь, так как осталось мало времени (около 15 часов) до снятия брони',
         'id'   => 'sbc_remind_task',
-        'type' => 'checkbox'
+        'type' => 'text',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        )
     ));
 
 }
