@@ -145,6 +145,17 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($accommodationPriceFieldValueModel);
 
+            // Количество человек
+            $peopleCountFieldValueModel = new TextCustomFieldValuesModel();
+            $peopleCountFieldValueModel->setFieldId(751423);
+            $peopleCountFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue(strval($order->peopleCount))
+                    )
+            );
+            $leadCustomFields->add($peopleCountFieldValueModel);
+
             // Event id
             $isEventOrder = empty($order->eventTabId) ? 'Нет' : 'Да';
             $isEventOrderFieldValueModel = new TextCustomFieldValuesModel();
@@ -209,6 +220,7 @@ class AmoCrmFactory {
             $notePrepaidType = $order->prepaidType ?? '-';
 
             $order->note[] = "Сумма: {$order->price} руб.";
+            $order->note[] = "Количество Человек: {$order->peopleCount}";
             $order->note[] = "Горящее предложение: {$isEventOrder}";
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
             $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
@@ -378,7 +390,7 @@ class AmoCrmFactory {
                     // Создадим задачу по питанию
                 $tasksCollection = new TasksCollection();
                 $task = new TaskModel();
-                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_MEETING)
+                $task->setTaskTypeId(TaskModel::TASK_TYPE_ID_CALL)
                     ->setText('Проверить Питание')
                     ->setCompleteTill(mktime(date("H"), date("i") + 60))
                     ->setEntityType(EntityTypesInterface::LEADS)
