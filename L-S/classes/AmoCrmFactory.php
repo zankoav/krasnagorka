@@ -223,6 +223,11 @@ class AmoCrmFactory {
             $order->note[] = "Количество Человек: {$order->peopleCount}";
             $order->note[] = "Горящее предложение: {$isEventOrder}";
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
+
+            $order->note[] = "Завтраки: {$order->foodBreakfast}";
+            $order->note[] = "Обеды: {$order->foodLunch}";
+            $order->note[] = "Ужины: {$order->foodDinner}";
+
             $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
             $order->note[] = "Домик: {$order->calendarName}";
             $order->note[] = "Паспорт №: {$order->contact->passport}";

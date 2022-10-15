@@ -666,13 +666,11 @@ function kg_add_remind()
         ]
     );
     $orders = $query->get_posts();
-    Log::info('orders count', count($orders));
 
     foreach ($orders as $order) {
         $leadId = get_post_meta($order->ID, 'sbc_lead_id', 1);
         Booking_Form_Controller::createAmoCrmTask('Напомнить клиенту оплатить свою бронь осталось 15 часов', $leadId);
         update_post_meta($order->ID, 'sbc_remind_task', 'Задача создана');
-        Log::info('order ID on', $order->ID);
     }
 }
 
