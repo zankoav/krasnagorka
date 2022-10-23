@@ -141,14 +141,42 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 <script>
-    const a = <?= json_encode($result)?>
+    const orders = <?= json_encode($result)?>
 </script>
 
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?></h1>
-    <p>Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
-    <p>Количество заказов: <b><?= count($orders);?></b></p>
-
+    <div class="mt-4 d-flex">
+        <div class="flex-grow-1">
+            <p class="my-0">Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
+            <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
+        </div>
+        <div class="container-filter">
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="col">
+                <label for="validationCustom01" class="form-label">С</label>
+                <input type="text" class="form-control" id="validationCustom01" required>
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+            <div class="col">
+                <label for="validationCustom02" class="form-label">По</label>
+                <input type="text" class="form-control" id="validationCustom02" required>
+                <div class="valid-feedback">
+                Looks good!
+                </div>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-primary">Найти</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-outline-secondary">По умолчанию</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    
     <div class="table-responsive">
         <table class="table table-bordered table-hover" style="font-size: 14px;">
             <thead>
