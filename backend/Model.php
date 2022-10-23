@@ -591,6 +591,7 @@ class Model
             $season = [];
             $season["id"] = $post->ID;
             $season["name"] = $post->post_title;
+            $season["order"] = get_post_meta($post->ID, "season_order", true);
             $season["current"] = $selectedSeasonId == null ? ($post->ID == $current_season_id) : ($post->ID == $selectedSeasonId);
             $housesResult = [];
 
