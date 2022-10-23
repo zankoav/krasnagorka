@@ -158,13 +158,15 @@
                     <th scope="col">Заезд</th>
                     <th scope="col">Выезд</th>
                     <th scope="col">Человек</th>
-                    <th scope="col">О питание</th>
+                    <th scope="col">О питании</th>
                     <th scope="col">Доп. сервисы</th>
                     <th scope="col">Комментарий</th>
                     <th scope="col">Контакты</th>
                     <th scope="col">Питание</th>
                     <th scope="col">Оплачено</th>
                     <th scope="col">Общая стоимость</th>
+                    <th scope="col">Общая стоимость</th>
+                    <th scope="col">Остаток</th>
                     <th scope="col">Статус</th>
                 </tr>
             </thead>
@@ -183,6 +185,7 @@
                             <td><?=$res['food']?> <small class="text-secondary">руб.</small></td>
                             <td><?=$res['prepaid']?> <small class="text-secondary">руб.</small></td>
                             <td><?=$res['total_price']?> <small class="text-secondary">руб.</small></td>
+                            <td><?=($res['total_price'] - $res['prepaid'])?> <small class="text-secondary">руб.</small></td>
                             <td><?=$res['status']?></td>
                         </tr>
                     <?php endforeach;?>
