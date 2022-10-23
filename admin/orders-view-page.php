@@ -152,27 +152,25 @@
             <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
         </div>
         <div class="container-filter">
-        <form class="row g-3 needs-validation" novalidate>
-            <div class="col">
-                <label for="validationCustom01" class="form-label">С</label>
-                <input type="text" class="form-control" id="validationCustom01" required>
-                <div class="valid-feedback">
-                Looks good!
+        <form class="row g-3 row-cols-auto needs-validation" novalidate>
+                <div class="col">
+                    <input type="text" placeholder="С" class="form-control" id="validationCustom01" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <label for="validationCustom02" class="form-label">По</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
-                <div class="valid-feedback">
-                Looks good!
+                <div class="col">
+                    <input type="text" placeholder="По" class="form-control" id="validationCustom02" required>
+                    <div class="valid-feedback">
+                    Looks good!
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-outline-primary">Найти</button>
-            </div>
-            <div class="col">
-                <button type="button" class="btn btn-outline-secondary">По умолчанию</button>
-            </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-primary">Найти</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-secondary">По умолчанию</button>
+                </div>
             </form>
         </div>
     </div>
