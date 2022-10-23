@@ -165,7 +165,6 @@
                     <th scope="col">Питание</th>
                     <th scope="col">Оплачено</th>
                     <th scope="col">Общая стоимость</th>
-                    <th scope="col">Общая стоимость</th>
                     <th scope="col">Остаток</th>
                     <th scope="col">Статус</th>
                 </tr>
