@@ -10,8 +10,8 @@ export default class HouseInfo extends LightningElement {
                 return { ...season }
             })
             .sort((s1, s2) => {
-                if (s1.order < s2.order) return -1
-                else if (s1.order > s2.order) return 1
+                if (s1.order > s2.order) return -1
+                else if (s1.order < s2.order) return 1
                 else return 0
             })
     }
