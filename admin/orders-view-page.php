@@ -166,10 +166,10 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-primary">Найти</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm">Найти</button>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-secondary">По умолчанию</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm">По умолчанию</button>
                 </div>
             </form>
         </div>
