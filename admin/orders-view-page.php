@@ -169,13 +169,13 @@
                 <div class="col-12 col-md">
                     <input type="date" placeholder="С" class="form-control form-control-sm" id="from" aria-describedby="validationServerFrom" required>
                     <div id="validationServerFrom" class="invalid-feedback">
-                        Укажите корректную дату
+                        Дата не верна
                     </div>
                 </div>
                 <div class="col-12 col-md">
                     <input type="date" placeholder="По" class="form-control form-control-sm" id="to" aria-describedby="validationServerTo" required>
                     <div id="validationServerTo" class="invalid-feedback">
-                        Укажите корректную дату
+                        Дата не верна
                     </div>
                 </div>
                 <div class="col">
