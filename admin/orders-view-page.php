@@ -150,7 +150,7 @@
     <div class="mt-4 d-flex g-2 g-lg-3 flex-wrap flex-md-nowrap">
         <div class="flex-grow-1">
             <p class="my-0">Даты: <b id="date-from"></b> - <b id="date-to"></b></p>
-            <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
+            <p class="my-0 mb-4">Количество заказов: <b id="order-count"></b></p>
         </div>
         <div class="container-filter">
             <style>
@@ -289,6 +289,7 @@
         function render(){
             $('#date-from').html(model.from)
             $('#date-to').html(model.to)
+            $('#order-count').html(model.orders.length)
         }
 
         render();
