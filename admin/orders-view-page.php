@@ -167,15 +167,15 @@
             </style>
             <form class="filter-row row g-3 row-cols-auto needs-validation" novalidate>
                 <div class="col">
-                    <input type="date" placeholder="С" class="form-control form-control-sm" id="from" required>
-                    <div class="valid-feedback">
-                    Looks good!
+                    <input type="date" placeholder="С" class="form-control form-control-sm" id="from" aria-describedby="validationServerFrom" required>
+                    <div id="validationServerFrom" class="invalid-feedback">
+                        Укажите корректную дату
                     </div>
                 </div>
                 <div class="col">
-                    <input type="date" placeholder="По" class="form-control form-control-sm" id="to" required>
-                    <div class="valid-feedback">
-                    Looks good!
+                    <input type="date" placeholder="По" class="form-control form-control-sm" id="to" aria-describedby="validationServerTo" required>
+                    <div id="validationServerTo" class="invalid-feedback">
+                        Укажите корректную дату
                     </div>
                 </div>
                 <div class="col">
@@ -193,9 +193,7 @@
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     const form = document.querySelector('.needs-validation');
                     form.addEventListener('submit', event => {
-                        const check = form.checkValidity();
-                        console.log(check);
-                        if (check) {
+                        if (form.checkValidity()) {
                             console.log('find!!!');
                         }
                         event.preventDefault()
