@@ -197,9 +197,13 @@
                     form.addEventListener('submit', event => {
                         clearAlert();
                         if (form.checkValidity()) {
-                            console.log('find!!!');
-                        }else if(){
-                            alert('Вторая дата должна быть позже первой', 'danger')
+                            const formData = new FormData(form);
+                            console.log('formData', formData);
+                            if(true ){
+                                alert('Вторая дата должна быть позже первой', 'danger')
+                            }else {
+                                console.log('find!!!');
+                            }
                         }
                         event.preventDefault()
                         event.stopPropagation()
