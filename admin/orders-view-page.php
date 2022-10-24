@@ -163,19 +163,16 @@
                     float: initial;
                     margin-bottom: 0;
                 }
-                .filter-input{
-                    min-width: 163px;
-                }
 
             </style>
             <form class="filter-row row g-2 g-lg-3 row-cols-auto needs-validation flex-wrap flex-md-nowrap mb-4" novalidate>
-                <div class="col-12 col-md filter-input">
+                <div class="col-12 col-md">
                     <input type="date" placeholder="С" class="form-control form-control-sm" id="from" aria-describedby="validationServerFrom" required>
                     <div id="validationServerFrom" class="invalid-feedback">
                         Укажите корректную дату
                     </div>
                 </div>
-                <div class="col-12 col-md filter-input">
+                <div class="col-12 col-md">
                     <input type="date" placeholder="По" class="form-control form-control-sm" id="to" aria-describedby="validationServerTo" required>
                     <div id="validationServerTo" class="invalid-feedback">
                         Укажите корректную дату
