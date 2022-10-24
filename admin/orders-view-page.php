@@ -197,8 +197,8 @@
                     form.addEventListener('submit', event => {
                         clearAlert();
                         if (form.checkValidity()) {
-                            const dateOne = new Date($('#from').val())
-                            const dateTwo = new Date($('#to').val())
+                            const dateOne = new Date(document.querySelector('#from').value)
+                            const dateTwo = new Date(document.querySelector('#to').value)
                             if(dateOne.getTime() >= dateTwo.getTime()){
                                 alert('Вторая дата должна быть позже первой', 'danger')
                             }else {
