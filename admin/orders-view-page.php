@@ -135,20 +135,21 @@
     $today = date("d.m.Y", strtotime($dateStart));
     $tomorrow = date("d.m.Y", strtotime('+1 day', strtotime($today)));
 
+    $model = [
+        'orders' => $result,
+        'from' => date("d.m.Y", strtotime($dateStart)),
+        'to' => date("d.m.Y", strtotime($dateEnd))
+    ];
 ?>
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
-<script>
-    const orders = <?= json_encode($result)?>
-</script>
-
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?></h1>
     <div class="mt-4 d-flex g-2 g-lg-3 flex-wrap flex-md-nowrap">
         <div class="flex-grow-1">
-            <p class="my-0">Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
+            <p class="my-0">Даты: <b id="date-from"></b> - <b id="date-to"></b></p>
             <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
         </div>
         <div class="container-filter">
@@ -281,4 +282,16 @@
     </div>
 </div>
 
+<script>
+    (()=>{
+        let model = <?= json_encode($model)?>
+
+        function render(){
+            $('#date-from').html(model.from)
+            $('#date-to').html(model.to)
+        }
+
+        render();
+    })()
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
