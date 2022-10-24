@@ -184,7 +184,9 @@
                 <div class="col">
                     <button type="button" class="btn btn-outline-secondary btn-sm filter-button filter-button__default">По умолчанию</button>
                 </div>
+                
             </form>
+            <div id="liveAlertPlaceholder"></div>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
                 (() => {
@@ -193,8 +195,11 @@
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     const form = document.querySelector('.needs-validation');
                     form.addEventListener('submit', event => {
+                        clearAlert();
                         if (form.checkValidity()) {
                             console.log('find!!!');
+                        }else if(){
+                            alert('Вторая дата должна быть позже первой', 'danger')
                         }
                         event.preventDefault()
                         event.stopPropagation()
@@ -202,10 +207,27 @@
                     }, false)
 
                     document.querySelector('.filter-button__default').addEventListener('click', event => {
-                        console.log('reset!!!')
                         form.reset()
+                        clearAlert();
                         form.classList.remove('was-validated')
                     })
+
+
+                    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+                    const clearAlert = () => {
+                        alertPlaceholder.innerHTML = '';
+                    }
+                    const alert = (message, type) => {
+                        const wrapper = document.createElement('div')
+                        wrapper.innerHTML = [
+                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                            `   <div>${message}</div>`,
+                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                            '</div>'
+                        ].join('')
+
+                        alertPlaceholder.append(wrapper)
+                    }
                 })()
             </script>
         </div>
