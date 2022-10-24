@@ -152,20 +152,20 @@
             <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
         </div>
         <div class="container-filter">
-        <style>
-            .filter-button{
-                height: 30px;
-            }
-            .filter-row.row{
-                border-bottom: 0;
-                flex-wrap: initial;
-                width: initial;
-                padding-bottom: initial;
-                float: initial;
-            }
+            <style>
+                .filter-button{
+                    height: 30px;
+                }
+                .filter-row.row{
+                    border-bottom: 0;
+                    flex-wrap: initial;
+                    width: initial;
+                    padding-bottom: initial;
+                    float: initial;
+                }
 
-        </style>
-        <form class="filter-row row g-3 row-cols-auto needs-validation" novalidate>
+            </style>
+            <form class="filter-row row g-3 row-cols-auto needs-validation" novalidate>
                 <div class="col">
                     <input type="date" placeholder="С" class="form-control form-control-sm" id="from" required>
                     <div class="valid-feedback">
@@ -179,12 +179,34 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-primary btn-sm filter-button">Найти</button>
+                    <button type="submit" class="btn btn-outline-primary btn-sm filter-button">Найти</button>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button">По умолчанию</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button filter-button__default">По умолчанию</button>
                 </div>
             </form>
+            <script>
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (() => {
+                    'use strict'
+
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    const form = document.querySelector('.needs-validation');
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            console.log('find!!!');
+                        }
+                        event.preventDefault()
+                        event.stopPropagation()
+                        form.classList.add('was-validated')
+                    }, false)
+
+                    document.querySelector('.filter-button__default').addEventListener('click', event => {
+                        console.log('reset!!!');
+                        form.reset();
+                    })
+                })()
+            </script>
         </div>
     </div>
     
