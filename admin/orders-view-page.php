@@ -197,9 +197,9 @@
                     form.addEventListener('submit', event => {
                         clearAlert();
                         if (form.checkValidity()) {
-                            const formData = new FormData(form);
-                            console.log('formData', formData);
-                            if(true ){
+                            const dateOne = new Date($('#from').val())
+                            const dateTwo = new Date($('#to').val())
+                            if(dateOne.getTime() >= dateTwo.getTime()){
                                 alert('Вторая дата должна быть позже первой', 'danger')
                             }else {
                                 console.log('find!!!');
