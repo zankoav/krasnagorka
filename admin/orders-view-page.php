@@ -193,7 +193,9 @@
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     const form = document.querySelector('.needs-validation');
                     form.addEventListener('submit', event => {
-                        if (!form.checkValidity()) {
+                        const check = form.checkValidity();
+                        console.log(check);
+                        if (check) {
                             console.log('find!!!');
                         }
                         event.preventDefault()
@@ -202,8 +204,9 @@
                     }, false)
 
                     document.querySelector('.filter-button__default').addEventListener('click', event => {
-                        console.log('reset!!!');
-                        form.reset();
+                        console.log('reset!!!')
+                        form.reset()
+                        form.classList.remove('was-validated')
                     })
                 })()
             </script>
