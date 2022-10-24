@@ -152,24 +152,37 @@
             <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
         </div>
         <div class="container-filter">
-        <form class="row g-3 row-cols-auto needs-validation" novalidate>
+        <style>
+            .filter-button{
+                height: 30px;
+            }
+            .filter-row.row{
+                border-bottom: 0;
+                flex-wrap: initial;
+                width: initial;
+                padding-bottom: initial;
+                float: initial;
+            }
+
+        </style>
+        <form class="filter-row row g-3 row-cols-auto needs-validation" novalidate>
                 <div class="col">
-                    <input type="text" placeholder="С" class="form-control" id="validationCustom01" required>
+                    <input type="date" placeholder="С" class="form-control form-control-sm" id="from" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
                 </div>
                 <div class="col">
-                    <input type="text" placeholder="По" class="form-control" id="validationCustom02" required>
+                    <input type="date" placeholder="По" class="form-control form-control-sm" id="to" required>
                     <div class="valid-feedback">
                     Looks good!
                     </div>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-primary btn-sm">Найти</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm filter-button">Найти</button>
                 </div>
                 <div class="col">
-                    <button type="button" class="btn btn-outline-secondary btn-sm">По умолчанию</button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm filter-button">По умолчанию</button>
                 </div>
             </form>
         </div>
