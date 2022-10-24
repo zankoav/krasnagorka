@@ -146,7 +146,7 @@
 
 <div class="wrap">
     <h1 class="wp-heading"><?= get_admin_page_title() ?></h1>
-    <div class="mt-4 d-flex">
+    <div class="mt-4 d-flex flex-nowrap flex-sm-wrap">
         <div class="flex-grow-1">
             <p class="my-0">Даты: <b><?= date("d.m.Y", strtotime($dateStart))?></b> - <b><?= date("d.m.Y", strtotime($dateEnd))?></b></p>
             <p class="my-0 mb-4">Количество заказов: <b><?= count($orders);?></b></p>
@@ -162,10 +162,11 @@
                     width: initial;
                     padding-bottom: initial;
                     float: initial;
+                    margin-bottom: 0;
                 }
 
             </style>
-            <form class="filter-row row g-3 row-cols-auto needs-validation" novalidate>
+            <form class="filter-row row g-3 row-cols-auto needs-validation flex-nowrap flex-sm-wrap" novalidate>
                 <div class="col">
                     <input type="date" placeholder="С" class="form-control form-control-sm" id="from" aria-describedby="validationServerFrom" required>
                     <div id="validationServerFrom" class="invalid-feedback">
