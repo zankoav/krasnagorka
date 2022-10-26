@@ -176,7 +176,7 @@
         <div class="swiper-wrapper main-slider__wrapper">
             <?php
                 $isFirst = true;
-                $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
+                $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
 
                 foreach ($main_slider as $m_slide) : ?>
                     <div class="swiper-slide main-slider__slide" data-swiper-autoplay="<?= $main_slider_delay; ?>">

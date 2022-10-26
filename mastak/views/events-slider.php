@@ -1,7 +1,7 @@
 <?php
     $special_events    = get_option('mastak_event_appearance_options')['special_events'];
     $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_delay'];
-    $size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop';
+    $size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
 ?>
 <section class="seson-slider">
     <div class="swiper-container main-slider">
