@@ -252,7 +252,8 @@
 
                     const sendRequest = (requestData) => {
                         console.log('requestData', requestData);
-
+                        
+                        requestData.action: 'load_orders',
                         $.ajax(ajaxurl, {
                             data: requestData,
                             method: 'post',
