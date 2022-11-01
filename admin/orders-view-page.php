@@ -256,6 +256,7 @@
                         requestData.action = 'load_orders',
                         $.ajax(ajaxurl, {
                             data: requestData,
+                            dataType: "json",
                             method: 'post',
                             success: function(response) {
                                 renderView(response);
