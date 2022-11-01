@@ -197,11 +197,14 @@
                     const form = document.querySelector('.needs-validation');
                     form.addEventListener('submit', event => {
                         clearAlert();
+                        const houndriedDayes = 1000 * 60 * 60 * 24 * 100;
                         if (form.checkValidity()) {
                             const dateOne = new Date(document.querySelector('#from').value)
                             const dateTwo = new Date(document.querySelector('#to').value)
                             if(dateOne.getTime() >= dateTwo.getTime()){
                                 alert('Вторая дата должна быть позже первой', 'danger')
+                            }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
+                                alert('Интервал не может превышать 100 дней', 'danger')
                             }else {
                                 console.log('find!!!');
                             }
