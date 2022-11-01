@@ -105,4 +105,8 @@ class Order {
         return $arr[$this->paymentMethod];
     }
 
+    public function isBabyBedMessage(){
+        return $this->babyBed ? 'Да' : 'Нет';
+    }
+
 }

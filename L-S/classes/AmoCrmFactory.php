@@ -224,9 +224,17 @@ class AmoCrmFactory {
             $order->note[] = "Горящее предложение: {$isEventOrder}";
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
 
+            $order->note[] = "Детская кроватка: {$order->isBabyBedMessage()}";
+
             $order->note[] = "Завтраки: {$order->foodBreakfast}";
             $order->note[] = "Обеды: {$order->foodLunch}";
             $order->note[] = "Ужины: {$order->foodDinner}";
+
+            $order->note[] = "Бани по белому: {$order->bathHouseWhite} кол-во";
+            $order->note[] = "Бани по Черному: {$order->bathHouseBlack} кол-во";
+
+            $order->note[] = "Мелкие животные: {$order->smallAnimalCount} кол-во";
+            $order->note[] = "Крупные животные: {$order->bigAnimalCount} кол-во";
 
             $order->note[] = "Стоимость проживания: {$order->accommodationPrice} руб.";
             $order->note[] = "Домик: {$order->calendarName}";

@@ -206,7 +206,8 @@
                             }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
                                 alert('Интервал не может превышать 100 дней', 'danger')
                             }else {
-                                console.log('find!!!');
+                                startSpinner();
+                                sendRequest({from: dateOne, to: dateTwo});
                             }
                         }
                         event.preventDefault()
@@ -215,9 +216,11 @@
                     }, false)
 
                     document.querySelector('.filter-button__default').addEventListener('click', event => {
-                        form.reset()
+                        form.reset();
                         clearAlert();
-                        form.classList.remove('was-validated')
+                        form.classList.remove('was-validated');
+                        startSpinner();
+                        sendRequest({default: true});
                     })
 
 
@@ -235,6 +238,18 @@
                         ].join('')
 
                         alertPlaceholder.append(wrapper)
+                    }
+
+                    const startSpinner = ()=>{
+                        console.log('spinner start ...');
+                    }
+
+                    const stopSpinner = ()=>{
+                        console.log('spinner stop ...');
+                    }
+
+                    const sendRequest = (requestData) => {
+                        console.log('requestData', requestData);
                     }
                 })()
             </script>
