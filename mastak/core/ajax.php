@@ -61,3 +61,16 @@
 
     add_action('wp_ajax_comments_action', 'comments_action');
     add_action('wp_ajax_nopriv_comments_action', 'comments_action');
+
+
+    function load_orders() {
+        echo json_encode([
+            'from' => $_POST['from'], 
+            'to' => $_POST['to'],
+            'default' => $_POST['default'],
+        ]);
+        wp_die();
+    }
+
+    add_action('wp_ajax_load_orders', 'load_orders');
+    add_action('wp_ajax_nopriv_load_orders', 'load_orders');

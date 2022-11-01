@@ -190,7 +190,7 @@
             <div id="liveAlertPlaceholder"></div>
             <script>
                 // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (() => {
+                (($) => {
                     'use strict'
 
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -252,8 +252,24 @@
 
                     const sendRequest = (requestData) => {
                         console.log('requestData', requestData);
+
+                        $.ajax(ajaxurl, {
+                            data: requestData,
+                            method: 'post',
+                            success: function(response) {
+                                renderView(response);
+                                stopSpinner();
+                            },
+                            error: function(x, y, z) {
+                                console.log('error', x);
+                            }
+                        });
                     }
-                })()
+
+                    const renderView = (response)=>{
+                        console.log('renderView', response);
+                    }
+                })(jQuery)
             </script>
         </div>
     </div>
