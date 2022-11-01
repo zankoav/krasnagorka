@@ -199,15 +199,17 @@
                         clearAlert();
                         const houndriedDayes = 1000 * 60 * 60 * 24 * 100;
                         if (form.checkValidity()) {
-                            const dateOne = new Date(document.querySelector('#from').value)
-                            const dateTwo = new Date(document.querySelector('#to').value)
+                            const dateOneValue = document.querySelector('#from').value;
+                            const dateTwoValue = document.querySelector('#to').value;
+                            const dateOne = new Date(dateOneValue)
+                            const dateTwo = new Date(dateTwoValue)
                             if(dateOne.getTime() >= dateTwo.getTime()){
                                 alert('Вторая дата должна быть позже первой', 'danger')
                             }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
                                 alert('Интервал не может превышать 100 дней', 'danger')
                             }else {
                                 startSpinner();
-                                sendRequest({from: dateOne, to: dateTwo});
+                                sendRequest({from: dateOneValue, to: dateTwoValue});
                             }
                         }
                         event.preventDefault()
