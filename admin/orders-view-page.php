@@ -193,6 +193,8 @@
                 (($) => {
                     'use strict'
 
+                    let model = <?= json_encode($model)?>
+
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     const form = document.querySelector('.needs-validation');
                     form.addEventListener('submit', event => {
@@ -259,7 +261,8 @@
                             dataType: "json",
                             method: 'post',
                             success: function(response) {
-                                renderView(response);
+                                model = response;
+                                render();
                                 stopSpinner();
                             },
                             error: function(x, y, z) {
@@ -268,9 +271,14 @@
                         });
                     }
 
-                    const renderView = (response)=>{
-                        console.log('renderView', response);
+                    function render(){
+                        $('#date-from').html(model.from)
+                        $('#date-to').html(model.to)
+                        $('#order-count').html(model.orders.length)
                     }
+
+                    render();
+
                 })(jQuery)
             </script>
         </div>
@@ -319,18 +327,4 @@
         </table>
     </div>
 </div>
-
-<script>
-    (($)=>{
-        let model = <?= json_encode($model)?>
-
-        function render(){
-            $('#date-from').html(model.from)
-            $('#date-to').html(model.to)
-            $('#order-count').html(model.orders.length)
-        }
-
-        render();
-    })(jQuery)
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
