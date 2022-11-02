@@ -210,7 +210,6 @@
                             }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
                                 alert('Интервал не может превышать 100 дней', 'danger')
                             }else {
-                                startSpinner();
                                 sendRequest({from: dateOneValue, to: dateTwoValue});
                             }
                         }
@@ -223,7 +222,6 @@
                         form.reset();
                         clearAlert();
                         form.classList.remove('was-validated');
-                        startSpinner();
                         sendRequest({default: true});
                     })
 
@@ -254,7 +252,7 @@
 
                     const sendRequest = (requestData) => {
                         console.log('requestData', requestData);
-
+                        startSpinner();
                         requestData.action = 'load_orders',
                         $.ajax(ajaxurl, {
                             data: requestData,
@@ -262,11 +260,12 @@
                             method: 'post',
                             success: function(response) {
                                 model = response;
-                                render();
                                 stopSpinner();
+                                render();
                             },
                             error: function(x, y, z) {
-                                console.log('error', x);
+                                stopSpinner();
+                                alert(x,'danger');
                             }
                         });
                     }
@@ -277,8 +276,8 @@
                         $('#order-count').html(model.orders.length)
                     }
 
-                    render();
-
+                    sendRequest({default: true});
+                    
                 })(jQuery)
             </script>
         </div>
