@@ -147,7 +147,7 @@ class AmoCrmFactory {
 
             // Количество человек
             $peopleCountFieldValueModel = new TextCustomFieldValuesModel();
-            $peopleCountFieldValueModel->setFieldId(751423);
+            $peopleCountFieldValueModel->setFieldId(751421);
             $peopleCountFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
