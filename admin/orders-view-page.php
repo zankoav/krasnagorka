@@ -274,15 +274,16 @@
                         $('#date-from').html(model.from)
                         $('#date-to').html(model.to)
                         $('#order-count').html(model.orders.length)
-                        // $('#orders').html(ordersView());
+                        $('#orders').html(ordersView());
                     }
 
 
 
                     function ordersView(){
-                        return model.orders.map(order => {
+                        return model.orders.map((order, index) => {
+                            const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
                             return `
-                                <div class="order">${order.calendars}</div>
+                                <div class="order" style="background:${order.background}; ${border}">№${index + 1}. ${order.calendars}</div>
                             `;
                         }).join('');
                     }
