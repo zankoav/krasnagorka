@@ -370,6 +370,11 @@
                 padding: 0 .75rem;
                 max-width: 75%;
                 flex: 1 0 75%;
+                display:flex;
+                max-width: initial;
+                margin-left: -0.75rem;
+                margin-right: -0.75rem;
+                flex-wrap: wrap;
             }
             .order__block-wrapper-added{
                 padding: 0 .75rem;
@@ -388,6 +393,14 @@
         }
         .order__block{
             margin-top: 20px;
+        }
+        @media (min-width:1280px) {
+            .order__block_main{
+                flex: 1 0 33.333%;
+                max-width: 33.333%;
+                padding-left:.75rem;
+                padding-right:.75rem;
+            }
         }
         .order-item__title{
             text-align: center;
@@ -431,7 +444,7 @@
             <div class="order__title">№1 Божья коровка</div>
             <div class="order__block-wrapper">
                 <div class="order__block-wrapper-main">
-                    <div class="order__block">
+                    <div class="order__block order__block_main">
                         <div class="order-item">
                             <div class="order-item__title">Бронь</div>
                             <div class="order-item__list">
@@ -454,7 +467,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="order__block">
+                    <div class="order__block order__block_main">
                         <div class="order-item">
                             <div class="order-item__title">Оплата</div>
                             <div class="order-item__list">
@@ -477,7 +490,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="order__block">
+                    <div class="order__block order__block_main">
                         <div class="order-item">
                             <div class="order-item__title">Питание</div>
                             <div class="order-item__list">
