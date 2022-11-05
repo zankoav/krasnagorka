@@ -43,227 +43,11 @@
                 
             </form>
             <div id="liveAlertPlaceholder"></div>
-            <script>
-                // Example starter JavaScript for disabling form submissions if there are invalid fields
-                (($) => {
-                    'use strict'
-
-                    let model;
-
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    const form = document.querySelector('.needs-validation');
-                    form.addEventListener('submit', event => {
-                        clearAlert();
-                        const houndriedDayes = 1000 * 60 * 60 * 24 * 100;
-                        if (form.checkValidity()) {
-                            const dateOneValue = document.querySelector('#from').value;
-                            const dateTwoValue = document.querySelector('#to').value;
-                            const dateOne = new Date(dateOneValue)
-                            const dateTwo = new Date(dateTwoValue)
-                            if(dateOne.getTime() >= dateTwo.getTime()){
-                                alert('Вторая дата должна быть позже первой', 'danger')
-                            }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
-                                alert('Интервал не может превышать 100 дней', 'danger')
-                            }else {
-                                sendRequest({from: dateOneValue, to: dateTwoValue});
-                            }
-                        }
-                        event.preventDefault()
-                        event.stopPropagation()
-                        form.classList.add('was-validated')
-                    }, false)
-
-                    document.querySelector('.filter-button__default').addEventListener('click', event => {
-                        form.reset();
-                        clearAlert();
-                        form.classList.remove('was-validated');
-                        sendRequest({default: true});
-                    })
-
-
-                    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-                    const clearAlert = () => {
-                        alertPlaceholder.innerHTML = '';
-                    }
-                    const alert = (message, type) => {
-                        const wrapper = document.createElement('div')
-                        wrapper.innerHTML = [
-                            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                            `   <div>${message}</div>`,
-                            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                            '</div>'
-                        ].join('')
-
-                        alertPlaceholder.append(wrapper)
-                    }
-
-                    const startSpinner = ()=>{
-                        $('#orders').html(`
-                            <div class="loader">
-                                <div class="loader__spinner"></div>
-                            </div>
-                        `);
-                    }
-
-                    const stopSpinner = ()=>{
-                        $('#orders').empty();
-                    }
-
-                    const sendRequest = (requestData) => {
-                        console.log('requestData', requestData);
-                        startSpinner();
-                        requestData.action = 'load_orders',
-                        $.ajax(ajaxurl, {
-                            data: requestData,
-                            dataType: "json",
-                            method: 'post',
-                            success: function(response) {
-                                model = response;
-                                stopSpinner();
-                                render();
-                            },
-                            error: function(x, y, z) {
-                                stopSpinner();
-                                alert(x,'danger');
-                            }
-                        });
-                    }
-
-                    function render(){
-                        $('#date-from').html(model.from)
-                        $('#date-to').html(model.to)
-                        $('#order-count').html(model.orders.length)
-                        $('#orders').html(ordersView());
-                    }
-
-                    function ordersView(){
-                        return model.orders.map((order, index) => {
-                            const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
-                            const comment = order.comment || '-';
-                            return `
-                                <div class="order" style="background:${order.background}; ${border}">
-                                    <div class="order__title">№${index + 1}. ${order.calendars}</div>
-                                    <div class="order__block-wrapper">
-                                        <div class="order__block-wrapper-main">
-                                            <div class="order__block order__block_main">
-                                                <div class="order-item">
-                                                    <div class="order-item__title">Бронь</div>
-                                                    <div class="order-item__list">
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Заезд:</div>
-                                                            <div class="order-item__list-item-value">${order.start}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Выезд:</div>
-                                                            <div class="order-item__list-item-value">${order.end}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Человек:</div>
-                                                            <div class="order-item__list-item-value">${order.people}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Статус:</div>
-                                                            <div class="order-item__list-item-value">${order.status}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="order__block order__block_main">
-                                                <div class="order-item">
-                                                    <div class="order-item__title">Оплата</div>
-                                                    <div class="order-item__list">
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Общая сумма:</div>
-                                                            <div class="order-item__list-item-value">${order.total_price} руб.</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Питание:</div>
-                                                            <div class="order-item__list-item-value">${order.food} руб.</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Оплачено:</div>
-                                                            <div class="order-item__list-item-value">${order.prepaid} руб.</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Остаток:</div>
-                                                            <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="order__block order__block_main">
-                                                <div class="order-item">
-                                                    <div class="order-item__title">Питание</div>
-                                                    <div class="order-item__list">
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Завтраки:</div>
-                                                            <div class="order-item__list-item-value">${order.foodBreakfast}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Обеды</div>
-                                                            <div class="order-item__list-item-value">${order.foodLunch}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Ужины:</div>
-                                                            <div class="order-item__list-item-value">${order.foodDinner}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="order__block order__block_contacts">
-                                                <div class="order-contact-line">
-                                                    <div class="order-contact-line__label">Контакт:</div>
-                                                    <div class="order-contact-line__value">${order.contact}</div>
-                                                </div>
-                                                <div class="order-contact-line">
-                                                    <div class="order-contact-line__label">Комментарий:</div>
-                                                    <div class="order-contact-line__value">${comment}</div>
-                                                </div>
-                                            </div>
-                                            <div class="order__line"></div>
-                                        </div>
-                                        <div class="order__block-wrapper-added">
-                                            <div class="order__block">
-                                                <div class="order-item">
-                                                    <div class="order-item__title">Дополнительные услуги</div>
-                                                    <div class="order-item__list">
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Бани по белому:</div>
-                                                            <div class="order-item__list-item-value">${order.services.bath_house_white}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Бани по черному:</div>
-                                                            <div class="order-item__list-item-value">${order.services.bath_house_black}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Мелкие животные:</div>
-                                                            <div class="order-item__list-item-value">${order.services.small_animlas_count}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Крупные животные:</div>
-                                                            <div class="order-item__list-item-value">${order.services.big_animlas_count}</div>
-                                                        </div>
-                                                        <div class="order-item__list-item">
-                                                            <div class="order-item__list-item-label">Детская кроватка:</div>
-                                                            <div class="order-item__list-item-value">${order.services.baby_bed}</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('');
-                    }
-
-                    startSpinner();
-                    sendRequest({default: true});
-
-                })(jQuery)
-            </script>
+            
+            
         </div>
     </div>
+    <div id="orders" class="orders"></div>
     <style>
         #orders {
             color: #212E35;
@@ -399,6 +183,224 @@
             100%{transform: rotate(360deg);}
         }
     </style>
-    <div id="orders" class="orders"></div>
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (($) => {
+            'use strict'
+
+            let model;
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const form = document.querySelector('.needs-validation');
+            form.addEventListener('submit', event => {
+                clearAlert();
+                const houndriedDayes = 1000 * 60 * 60 * 24 * 100;
+                if (form.checkValidity()) {
+                    const dateOneValue = document.querySelector('#from').value;
+                    const dateTwoValue = document.querySelector('#to').value;
+                    const dateOne = new Date(dateOneValue)
+                    const dateTwo = new Date(dateTwoValue)
+                    if(dateOne.getTime() >= dateTwo.getTime()){
+                        alert('Вторая дата должна быть позже первой', 'danger')
+                    }else if(dateTwo.getTime() - dateOne.getTime() > houndriedDayes) { //
+                        alert('Интервал не может превышать 100 дней', 'danger')
+                    }else {
+                        sendRequest({from: dateOneValue, to: dateTwoValue});
+                    }
+                }
+                event.preventDefault()
+                event.stopPropagation()
+                form.classList.add('was-validated')
+            }, false)
+
+            document.querySelector('.filter-button__default').addEventListener('click', event => {
+                form.reset();
+                clearAlert();
+                form.classList.remove('was-validated');
+                sendRequest({default: true});
+            })
+
+
+            const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+            const clearAlert = () => {
+                alertPlaceholder.innerHTML = '';
+            }
+            const alert = (message, type) => {
+                const wrapper = document.createElement('div')
+                wrapper.innerHTML = [
+                    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                    `   <div>${message}</div>`,
+                    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                    '</div>'
+                ].join('')
+
+                alertPlaceholder.append(wrapper)
+            }
+
+            const startSpinner = ()=>{
+                $('#orders').html(`
+                    <div class="loader">
+                        <div class="loader__spinner"></div>
+                    </div>
+                `);
+            }
+
+            const stopSpinner = ()=>{
+                $('#orders').empty();
+            }
+
+            const sendRequest = (requestData) => {
+                console.log('requestData', requestData);
+                startSpinner();
+                requestData.action = 'load_orders',
+                $.ajax(ajaxurl, {
+                    data: requestData,
+                    dataType: "json",
+                    method: 'post',
+                    success: function(response) {
+                        model = response;
+                        stopSpinner();
+                        render();
+                    },
+                    error: function(x, y, z) {
+                        stopSpinner();
+                        alert(x,'danger');
+                    }
+                });
+            }
+
+            function render(){
+                $('#date-from').html(model.from)
+                $('#date-to').html(model.to)
+                $('#order-count').html(model.orders.length)
+                $('#orders').html(ordersView());
+            }
+
+            function ordersView(){
+                return model.orders.map((order, index) => {
+                    const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
+                    const comment = order.comment || '-';
+                    return `
+                        <div class="order" style="background:${order.background}; ${border}">
+                            <div class="order__title">№${index + 1}. ${order.calendars}</div>
+                            <div class="order__block-wrapper">
+                                <div class="order__block-wrapper-main">
+                                    <div class="order__block order__block_main">
+                                        <div class="order-item">
+                                            <div class="order-item__title">Бронь</div>
+                                            <div class="order-item__list">
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Заезд:</div>
+                                                    <div class="order-item__list-item-value">${order.start}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Выезд:</div>
+                                                    <div class="order-item__list-item-value">${order.end}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Человек:</div>
+                                                    <div class="order-item__list-item-value">${order.people}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Статус:</div>
+                                                    <div class="order-item__list-item-value">${order.status}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order__block order__block_main">
+                                        <div class="order-item">
+                                            <div class="order-item__title">Оплата</div>
+                                            <div class="order-item__list">
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Общая сумма:</div>
+                                                    <div class="order-item__list-item-value">${order.total_price} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Питание:</div>
+                                                    <div class="order-item__list-item-value">${order.food} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Оплачено:</div>
+                                                    <div class="order-item__list-item-value">${order.prepaid} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Остаток:</div>
+                                                    <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order__block order__block_main">
+                                        <div class="order-item">
+                                            <div class="order-item__title">Питание</div>
+                                            <div class="order-item__list">
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Завтраки:</div>
+                                                    <div class="order-item__list-item-value">${order.foodBreakfast}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Обеды</div>
+                                                    <div class="order-item__list-item-value">${order.foodLunch}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Ужины:</div>
+                                                    <div class="order-item__list-item-value">${order.foodDinner}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="order__block order__block_contacts">
+                                        <div class="order-contact-line">
+                                            <div class="order-contact-line__label">Контакт:</div>
+                                            <div class="order-contact-line__value">${order.contact}</div>
+                                        </div>
+                                        <div class="order-contact-line">
+                                            <div class="order-contact-line__label">Комментарий:</div>
+                                            <div class="order-contact-line__value">${comment}</div>
+                                        </div>
+                                    </div>
+                                    <div class="order__line"></div>
+                                </div>
+                                <div class="order__block-wrapper-added">
+                                    <div class="order__block">
+                                        <div class="order-item">
+                                            <div class="order-item__title">Дополнительные услуги</div>
+                                            <div class="order-item__list">
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Бани по белому:</div>
+                                                    <div class="order-item__list-item-value">${order.services.bath_house_white}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Бани по черному:</div>
+                                                    <div class="order-item__list-item-value">${order.services.bath_house_black}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Мелкие животные:</div>
+                                                    <div class="order-item__list-item-value">${order.services.small_animlas_count}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Крупные животные:</div>
+                                                    <div class="order-item__list-item-value">${order.services.big_animlas_count}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Детская кроватка:</div>
+                                                    <div class="order-item__list-item-value">${order.services.baby_bed}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            startSpinner();
+            sendRequest({default: true});
+
+        })(jQuery)
+    </script>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
