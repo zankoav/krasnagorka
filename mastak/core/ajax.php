@@ -171,6 +171,25 @@
             $contact = get_the_title($contactId);
             $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
             $food = get_post_meta($orderId, 'sbc_order_food_price', true);
+            $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', true);
+            $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', true);
+            $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', true);
+            
+            $services = [];
+            $houseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', true);
+            $services['bath_house_white'] = empty($houseWhite) ?  0 : $houseWhite;
+
+            $houseBlack = get_post_meta($orderId, 'sbc_order_bath_house_black', true);
+            $services['bath_house_black'] = empty($houseBlack) ?  0 : $houseBlack;
+
+            $smallAnimlas = get_post_meta($orderId, 'sbc_order_small_animlas_count', true);
+            $services['small_animlas_count'] = empty($smallAnimlas) ?  0 : $smallAnimlas;
+
+            $bigAnimlas = get_post_meta($orderId, 'sbc_order_big_animlas_count', true);
+            $services['big_animlas_count'] = empty($bigAnimlas) ?  0 : $bigAnimlas;
+
+            $babyBed = get_post_meta($orderId, 'sbc_order_baby_bed', true);
+            $services['baby_bed'] = $babyBed === 'on' ? 'Да' : 'Нет';
             $total_price = get_post_meta($orderId, 'sbc_order_price', true);
             $people = get_post_meta($orderId, 'sbc_order_count_people', true);
             $calendars  = get_the_terms($orderId, 'sbc_calendars');
@@ -198,7 +217,8 @@
                 'status'    => $statuses[$status]['title'],
                 'background'    => $statuses[$status]['background'],
                 'foodInfo'    => $foodInfo,
-                'additionalServices'    => $additionalServices
+                'additionalServices'    => $additionalServices,
+                'services' => $services
             ];
     
             $number ++;
