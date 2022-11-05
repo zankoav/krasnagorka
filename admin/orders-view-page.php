@@ -401,6 +401,10 @@
                 padding-left:.75rem;
                 padding-right:.75rem;
             }
+            .order__block_contacts{
+                padding-left:.75rem;
+                padding-right:.75rem;
+            }
         }
         .order-item__title{
             text-align: center;
@@ -509,7 +513,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="order__block">
+                    <div class="order__block order__block_contacts">
                         <div class="order-contact-line">
                             <div class="order-contact-line__label">Контакт:</div>
                             <div class="order-contact-line__value">Купреев Александр Михайлович +375 33 381-77-99</div>
