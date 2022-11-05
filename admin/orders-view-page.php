@@ -339,8 +339,205 @@
     <style>
         #orders {
             display: none;
+            color: #212E35;
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
+        }
+        .order{
+            font-size: 12px;
+            margin: 1rem 0;
+            padding: .5rem .75rem 1.25rem;
+            box-shadow: 2px 4px 4px #999;
+        }
+        @media (min-width:1280px) {
+            .order{
+                margin: 1.5rem 0;
+                font-size: 14px;
+                padding: .75rem 1.5rem 1.25rem;
+            }
+        }
+        .order__title{
+            font-size: 16px;
+        }
+        @media (min-width:1280px) {
+            .order__block-wrapper{
+                display: flex;
+                max-width:initial;
+                margin-left: -0.75rem;
+                margin-right: -0.75rem;
+            }
+            .order__block-wrapper-main{
+                padding: 0 .75rem;
+                max-width: 75%;
+                flex: 1 0 75%;
+            }
+            .order__block-wrapper-added{
+                padding: 0 .75rem;
+                max-width: 25%;
+                flex: 1 0 25%;
+            }
+        }
+        .order__line{
+            border-bottom: 1px dashed #A7ACAF;
+            margin-top: 20px;
+        }
+        @media (min-width:1280px) {
+            .order__line{
+                display: none;
+            }
+        }
+        .order__block{
+            margin-top: 20px;
+        }
+        .order-item__title{
+            text-align: center;
+        }
+        @media (min-width:1280px) {
+            .order-item__title{
+                margin-bottom: .5rem;
+            }
+        }
+        .order-item__list-item{
+            display: flex;
+            margin-top: .5rem;
+            justify-content: space-between;
+            border-bottom: 1px dashed #A7ACAF;
+        }
+        @media (min-width:1280px) {
+            .order-item__list-item{
+                display: flex;
+                margin-top: .25rem;
+            }
+        }
+        .order-contact-line__label,.order-item__list-item-label{
+            color: #4D575C;
+        }
+        @media (min-width:1280px) {
+            .order-contact-line__label{
+                margin-right: .5rem;
+            }
+        }
+        @media (min-width:1280px) {
+            .order-contact-line{
+                display: flex;
+            }
+        }
+        .order-contact-line:last-child{
+            margin-top: .75rem;
         }
     </style>
-    <div id="orders" class="orders"></div>
+    <div id="orders" class="orders">
+        <div class="order" style="background:#E3F3FF; border:1px solid #009420;">
+            <div class="order__title">№1 Божья коровка</div>
+            <div class="order__block-wrapper">
+                <div class="order__block-wrapper-main">
+                    <div class="order__block">
+                        <div class="order-item">
+                            <div class="order-item__title">Бронь</div>
+                            <div class="order-item__list">
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Заезд:</div>
+                                    <div class="order-item__list-item-value">25.10.2022</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Выезд:</div>
+                                    <div class="order-item__list-item-value">25.10.2022</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Человек:</div>
+                                    <div class="order-item__list-item-value">4</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Статус:</div>
+                                    <div class="order-item__list-item-value">Зарезервирован</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order__block">
+                        <div class="order-item">
+                            <div class="order-item__title">Оплата</div>
+                            <div class="order-item__list">
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Общая сумма:</div>
+                                    <div class="order-item__list-item-value">280 руб.</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Питание:</div>
+                                    <div class="order-item__list-item-value">0 руб.</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Оплачено:</div>
+                                    <div class="order-item__list-item-value">0 руб.</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Остаток:</div>
+                                    <div class="order-item__list-item-value">280 руб.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order__block">
+                        <div class="order-item">
+                            <div class="order-item__title">Питание</div>
+                            <div class="order-item__list">
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Завтраки:</div>
+                                    <div class="order-item__list-item-value">1</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Обеды</div>
+                                    <div class="order-item__list-item-value">2</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Ужины:</div>
+                                    <div class="order-item__list-item-value">1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order__block">
+                        <div class="order-contact-line">
+                            <div class="order-contact-line__label">Контакт:</div>
+                            <div class="order-contact-line__value">Купреев Александр Михайлович +375 33 381-77-99</div>
+                        </div>
+                        <div class="order-contact-line">
+                            <div class="order-contact-line__label">Комментарий:</div>
+                            <div class="order-contact-line__value">Добрый день. Нас будет двое рыбаков.</div>
+                        </div>
+                    </div>
+                    <div class="order__line"></div>
+                </div>
+                <div class="order__block-wrapper-added">
+                    <div class="order__block">
+                        <div class="order-item">
+                            <div class="order-item__title">Дополнительные услуги</div>
+                            <div class="order-item__list">
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Бани по белому:</div>
+                                    <div class="order-item__list-item-value">1</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Бани по черному:</div>
+                                    <div class="order-item__list-item-value">1</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Мелкие животные:</div>
+                                    <div class="order-item__list-item-value">1</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Крупные животные:</div>
+                                    <div class="order-item__list-item-value">0</div>
+                                </div>
+                                <div class="order-item__list-item">
+                                    <div class="order-item__list-item-label">Детская кроватка:</div>
+                                    <div class="order-item__list-item-value">Да</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
