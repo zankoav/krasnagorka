@@ -274,7 +274,7 @@
                         $('#date-from').html(model.from)
                         $('#date-to').html(model.to)
                         $('#order-count').html(model.orders.length)
-                        $('#orders').html(ordersView());
+                        // $('#orders').html(ordersView());
                     }
 
 
@@ -344,6 +344,7 @@
         }
         .order{
             font-size: 12px;
+            border-radius: .5rem;
             margin: 1rem 0;
             padding: .5rem .75rem 1.25rem;
             box-shadow: 2px 4px 4px #999;
