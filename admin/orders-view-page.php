@@ -267,11 +267,15 @@
                     }
 
                     const startSpinner = ()=>{
-                        console.log('spinner start ...');
+                        $('#orders').html(`
+                            <div class="loader">
+                                <div class="loader__spinner"></div>
+                            </div>
+                        `);
                     }
 
                     const stopSpinner = ()=>{
-                        console.log('spinner stop ...');
+                        $('#orders').empty();
                     }
 
                     const sendRequest = (requestData) => {
@@ -473,7 +477,7 @@
     </div>
     <style>
         #orders {
-            display: none;
+            /* display: none; */
             color: #212E35;
             font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
@@ -576,6 +580,41 @@
         }
         .order-contact-line:last-child{
             margin-top: .75rem;
+        }
+        .loader{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            min-height: 240px;
+            width: 100%;
+        }
+        .loader__spinner{
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            opacity: 0;
+            border-radius: 50%;
+            border-width: 3px;
+            border-style: solid;
+            border-color: #A7ACAF transparent #A7ACAF #A7ACAF;
+            animation: rotate .8s linear infinite, fadeSpinner .3s .3s linear forwards;
+        }
+        @media (min-width:1280px) {
+            .loader__spinner{
+                width: 48px;
+                height: 48px;
+                border-width: 4px;
+            }
+        }
+        @keyframes rotate{
+            0%{transform: rotate(0);}
+            100%{transform: rotate(360deg);}
+        }
+
+        @keyframes fadeSpinner{
+            0%{opacity: 0;}
+            100%{opacity: 1;}
         }
     </style>
     <div id="orders" class="orders">
