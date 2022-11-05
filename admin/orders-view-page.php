@@ -48,7 +48,7 @@
                 (($) => {
                     'use strict'
 
-                    let model = <?= json_encode($model)?>
+                    let model;
 
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
                     const form = document.querySelector('.needs-validation');
