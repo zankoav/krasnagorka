@@ -381,12 +381,11 @@
             display: inline-block;
             width: 36px;
             height: 36px;
-            opacity: 0;
             border-radius: 50%;
             border-width: 3px;
             border-style: solid;
             border-color: #A7ACAF transparent #A7ACAF #A7ACAF;
-            animation: rotate .8s linear infinite, fadeSpinner .3s .3s linear forwards;
+            animation: rotate .8s linear infinite;
         }
         @media (min-width:1280px) {
             .loader__spinner{
@@ -398,11 +397,6 @@
         @keyframes rotate{
             0%{transform: rotate(0);}
             100%{transform: rotate(360deg);}
-        }
-
-        @keyframes fadeSpinner{
-            0%{opacity: 0;}
-            100%{opacity: 1;}
         }
     </style>
     <div id="orders" class="orders"></div>
