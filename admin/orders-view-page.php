@@ -98,6 +98,26 @@
         $contact = get_the_title($contactId);
         $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
         $food = get_post_meta($orderId, 'sbc_order_food_price', true);
+        $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', true);
+        $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', true);
+        $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', true);
+        
+        $services = [];
+        $houseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', true);
+        $services['bath_house_white'] = empty($houseWhite) ?  0 : $houseWhite;
+
+        $houseBlack = get_post_meta($orderId, 'sbc_order_bath_house_black', true);
+        $services['bath_house_black'] = empty($houseBlack) ?  0 : $houseBlack;
+
+        $smallAnimlas = get_post_meta($orderId, 'sbc_order_small_animlas_count', true);
+        $services['small_animlas_count'] = empty($smallAnimlas) ?  0 : $smallAnimlas;
+
+        $bigAnimlas = get_post_meta($orderId, 'sbc_order_big_animlas_count', true);
+        $services['big_animlas_count'] = empty($bigAnimlas) ?  0 : $bigAnimlas;
+
+        $babyBed = get_post_meta($orderId, 'sbc_order_baby_bed', true);
+        $services['baby_bed'] = $babyBed === 'on' ? 'Да' : 'Нет';
+
         $total_price = get_post_meta($orderId, 'sbc_order_price', true);
         $people = get_post_meta($orderId, 'sbc_order_count_people', true);
         $calendars  = get_the_terms($orderId, 'sbc_calendars');
@@ -120,12 +140,16 @@
             'comment'   => $comment,
             'contact'   => $contact,
             'food'   => empty($food) ? 0 : $food,
+            'foodBreakfast'   => empty($foodBreakfast) ? 0 : $foodBreakfast,
+            'foodLunch'   => empty($foodLunch) ? 0 : $foodLunch,
+            'foodDinner'   => empty($foodDinner) ? 0 : $foodDinner,
             'prepaid'   => empty($prepaid) ? 0 : $prepaid,
             'total_price'   => $total_price,
             'status'    => $statuses[$status]['title'],
             'background'    => $statuses[$status]['background'],
             'foodInfo'    => $foodInfo,
-            'additionalServices'    => $additionalServices
+            'additionalServices'    => $additionalServices,
+            'services' => $services
         ];
 
         $number ++;
@@ -277,13 +301,123 @@
                         $('#orders').html(ordersView());
                     }
 
-
-
                     function ordersView(){
                         return model.orders.map((order, index) => {
                             const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
+                            const comment = order.comment || '-';
                             return `
-                                <div class="order" style="background:${order.background}; ${border}">№${index + 1}. ${order.calendars}</div>
+                                <div class="order" style="background:${order.background}; ${border}">
+                                    <div class="order__title">№${index + 1}. ${order.calendars}</div>
+                                    <div class="order__block-wrapper">
+                                        <div class="order__block-wrapper-main">
+                                            <div class="order__block order__block_main">
+                                                <div class="order-item">
+                                                    <div class="order-item__title">Бронь</div>
+                                                    <div class="order-item__list">
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Заезд:</div>
+                                                            <div class="order-item__list-item-value">${order.start}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Выезд:</div>
+                                                            <div class="order-item__list-item-value">${order.end}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Человек:</div>
+                                                            <div class="order-item__list-item-value">${order.people}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Статус:</div>
+                                                            <div class="order-item__list-item-value">${order.status}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order__block order__block_main">
+                                                <div class="order-item">
+                                                    <div class="order-item__title">Оплата</div>
+                                                    <div class="order-item__list">
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Общая сумма:</div>
+                                                            <div class="order-item__list-item-value">${order.total_price} руб.</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Питание:</div>
+                                                            <div class="order-item__list-item-value">${order.food} руб.</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Оплачено:</div>
+                                                            <div class="order-item__list-item-value">${order.prepaid} руб.</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Остаток:</div>
+                                                            <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order__block order__block_main">
+                                                <div class="order-item">
+                                                    <div class="order-item__title">Питание</div>
+                                                    <div class="order-item__list">
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Завтраки:</div>
+                                                            <div class="order-item__list-item-value">${order.foodBreakfast}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Обеды</div>
+                                                            <div class="order-item__list-item-value">${order.foodLunch}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Ужины:</div>
+                                                            <div class="order-item__list-item-value">${order.foodDinner}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="order__block order__block_contacts">
+                                                <div class="order-contact-line">
+                                                    <div class="order-contact-line__label">Контакт:</div>
+                                                    <div class="order-contact-line__value">${order.contact}</div>
+                                                </div>
+                                                <div class="order-contact-line">
+                                                    <div class="order-contact-line__label">Комментарий:</div>
+                                                    <div class="order-contact-line__value">${comment}</div>
+                                                </div>
+                                            </div>
+                                            <div class="order__line"></div>
+                                        </div>
+                                        <div class="order__block-wrapper-added">
+                                            <div class="order__block">
+                                                <div class="order-item">
+                                                    <div class="order-item__title">Дополнительные услуги</div>
+                                                    <div class="order-item__list">
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Бани по белому:</div>
+                                                            <div class="order-item__list-item-value">${order.services.bath_house_white}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Бани по черному:</div>
+                                                            <div class="order-item__list-item-value">${order.services.bath_house_black}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Мелкие животные:</div>
+                                                            <div class="order-item__list-item-value">${order.services.small_animlas_count}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Крупные животные:</div>
+                                                            <div class="order-item__list-item-value">${order.services.big_animlas_count}</div>
+                                                        </div>
+                                                        <div class="order-item__list-item">
+                                                            <div class="order-item__list-item-label">Детская кроватка:</div>
+                                                            <div class="order-item__list-item-value">${order.services.baby_bed}</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             `;
                         }).join('');
                     }
