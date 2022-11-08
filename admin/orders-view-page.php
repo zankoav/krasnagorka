@@ -72,9 +72,10 @@
             font-size: 16px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         .order__star{
-            width: 30px;
+            width: 24px;
         }
         @media (min-width:1280px) {
             .order__block-wrapper{
@@ -289,8 +290,9 @@
                     return `
                         <div class="order" style="border:5px solid ${order.background};">
                             <div class="order__title">
-                                <span>№${index + 1}. ${order.calendars}<span>
-                                <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star"></div>
+                                <span>№${index + 1}. ${order.calendars}</span>
+                                <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star">
+                            </div>
                             <div class="order__block-wrapper">
                                 <div class="order__block-wrapper-main">
                                     <div class="order__block order__block_main">
