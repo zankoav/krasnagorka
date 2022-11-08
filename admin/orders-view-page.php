@@ -71,11 +71,11 @@
         .order__title{
             font-size: 16px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
         .order__star{
             width: 24px;
+            margin-right: 0.5rem;
         }
         @media (min-width:1280px) {
             .order__block-wrapper{
@@ -290,8 +290,8 @@
                     return `
                         <div class="order" style="border:5px solid ${order.background};">
                             <div class="order__title">
-                                <span>№${index + 1}. ${order.calendars}</span>
                                 ${isTodayOrTomorrow}
+                                <span>№${index + 1}. ${order.calendars}</span>
                             </div>
                             <div class="order__block-wrapper">
                                 <div class="order__block-wrapper-main">
