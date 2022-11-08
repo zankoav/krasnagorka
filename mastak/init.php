@@ -28,6 +28,7 @@
 	require __DIR__ . "/core/cmb2/Type_7.php";
 	require __DIR__ . "/core/cmb2/Type_8.php";
 	require __DIR__ . "/core/cmb2/Type_9.php";
+	require __DIR__ . "/core/cmb2/Type_10.php";
 
 	$kgCooke = new KGCookie();
 

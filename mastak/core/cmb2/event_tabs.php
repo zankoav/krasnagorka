@@ -30,8 +30,9 @@
                 'type_5' => __('Слайдер', 'cmb2'),
                 'type_6' => __('Видео (несколько)', 'cmb2'),
                 'type_7' => __('Иконка/Заголовок/Текст (несколько)', 'cmb2'),
-                'type_8' => __('Таблица Домов', 'cmb2'),
+                'type_8' => __('Горящие Предложения', 'cmb2'),
                 'type_9' => __('Таблица Акций', 'cmb2'),
+                'type_10' => __('Мероприятия', 'cmb2'),
             ),
             'attributes'       => array(
                 'data-validation' => 'required',
@@ -605,3 +606,122 @@
         ));
     }
 
+    function mastak_event_tab_type_10() {
+        $prefix = 'mastak_event_tab_type_10';
+
+        /**
+         * Sample metabox to demonstrate each field type included
+         */
+        $sbc_client = new_cmb2_box(array(
+            'id'           => $prefix,
+            'title'        => esc_html__('Таблица', 'krasnagorka'),
+            'object_types' => array('event_tab'), // Post type
+            'context'      => 'normal',
+            'priority'     => 'high',
+            'show_names'   => true, // Show field names on the left
+        ));
+
+        $group_field_event = $sbc_client->add_field(array(
+            'id'          => $prefix . '_items',
+            'type'        => 'group',
+            'description' => __('Можно добавлять любое количество домов', 'krasnagorka'),
+            // 'repeatable'  => false, // use false if you want non-repeatable group
+            'options'     => array(
+                'group_title'   => __('Дом {#}', 'krasnagorka'),
+                // since version 1.1.4, {#} gets replaced by row number
+                'add_button'    => __('Добавить Дом', 'krasnagorka'),
+                'remove_button' => __('Удалить Дом', 'krasnagorka'),
+                'sortable'      => true,
+                // beta
+                'closed'        => true, // true to have the groups closed by default
+            )
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'           => 'Календарь',
+            'desc'           => 'Выберите к какому календарю соответствует Домик',
+            'id'             => 'calendar',
+            // 'taxonomy'       => 'sbc_calendars', //Enter Taxonomy Slug
+            'type'           => 'select',
+            'options_cb'     => 'cmb2_get_term_options',
+            'get_terms_args' => array(
+                'taxonomy'   => 'sbc_calendars',
+                'hide_empty' => false,
+            ),
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата с',
+            'id'   => 'from',
+            'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Дата до',
+            'id'   => 'to',
+            'type' => 'text_date',
+            'attributes' => array(
+                'data-validation' => 'required',
+            ),
+            // 'timezone_meta_key' => 'wiki_test_timezone',
+            // 'date_format' => 'l jS \of F Y',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'    => __( ' Просчитать цену', 'cmb2' ),
+            'id'      => 'calculate',
+            'type'    => 'calculate',
+            'options' => array(
+                "empty_calendar" => __("Выберите календарь", 'cmb2'),
+                "empty_date_from" => __("Выберите дату заезда", 'cmb2'),
+                "empty_date_to" => __("Выберите дату выезда", 'cmb2'),
+                "booking_unavailable" => __("Даты заняты", 'cmb2')           
+            ),
+            'default' => 'none',
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Текущая',
+            'id'           => 'old_price',
+            'type'         => 'text_small',
+            'before_field' => 'BYN'
+        ));
+
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Новая цена',
+            'id'           => 'new_price',
+            'type'         => 'text_small',
+            'before_field' => 'BYN',
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Картинка',
+            'id'           => 'image',
+            'type'         => 'file',
+            'options'      => array(
+                'url' => false, // Hide the text input for the url
+            ),
+            'preview_size' => array(100, 100)
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Описание цены',
+            'id'   => 'sale_text',
+            'type' => 'text'
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Текст',
+            'id'   => 'description',
+            'type' => 'wysiwyg',
+        ));
+    }
