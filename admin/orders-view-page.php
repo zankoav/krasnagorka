@@ -285,13 +285,13 @@
 
             function ordersView(){
                 return model.orders.map((order, index) => {
-                    const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
+                    const isTodayOrTomorrow = [model.today, model.tomorrow].indexOf(order.start) > -1 ? '<img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star">' : '';
                     const comment = order.comment || '-'; 
                     return `
                         <div class="order" style="border:5px solid ${order.background};">
                             <div class="order__title">
                                 <span>№${index + 1}. ${order.calendars}</span>
-                                <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star">
+                                ${isTodayOrTomorrow}
                             </div>
                             <div class="order__block-wrapper">
                                 <div class="order__block-wrapper-main">
