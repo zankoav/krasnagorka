@@ -51,9 +51,10 @@
     <style>
         #orders {
             color: #212E35;
-            font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
         .order{
+            position: relative;
+            overflow: hidden;
             font-size: 12px;
             border-radius: .5rem;
             margin: 1rem 0;
@@ -69,6 +70,11 @@
         }
         .order__title{
             font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .order__star{
+            width: 30px;
         }
         @media (min-width:1280px) {
             .order__block-wrapper{
@@ -279,10 +285,12 @@
             function ordersView(){
                 return model.orders.map((order, index) => {
                     const border = [model.today, model.tomorrow].indexOf(order.start) > -1 ? 'border:1px solid #009420;' : '';
-                    const comment = order.comment || '-';
+                    const comment = order.comment || '-'; 
                     return `
-                        <div class="order" style="background:${order.background}; ${border}">
-                            <div class="order__title">№${index + 1}. ${order.calendars}</div>
+                        <div class="order" style="border:5px solid ${order.background};">
+                            <div class="order__title">
+                                <span>№${index + 1}. ${order.calendars}<span>
+                                <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star"></div>
                             <div class="order__block-wrapper">
                                 <div class="order__block-wrapper-main">
                                     <div class="order__block order__block_main">
