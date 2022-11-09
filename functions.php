@@ -605,8 +605,8 @@ function change_ordered_color_10($box_id, $cmb)
                     const $calculatePercent = $(this).find(`.calculate-percent`);
 
 
-                    $newPrice.on.('input',setSale);
-                    $oldPrice.on.('input',setSale);
+                    $newPrice.on('input',setSale);
+                    $oldPrice.on('input',setSale);
 
                     function setSale(){
                         const newPrice = $newPrice.val();
