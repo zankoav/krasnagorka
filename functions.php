@@ -604,6 +604,9 @@ function change_ordered_color_10($box_id, $cmb)
                     const $newPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_new_price`);
                     const $calculatePercent = $(this).find(`.calculate-percent`);
 
+                    console.log('$newPrice', $newPrice);
+                    console.log('$oldPrice', $oldPrice);
+
                     $newPrice.change(setSale);
                     $oldPrice.change(setSale);
 
