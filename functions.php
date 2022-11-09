@@ -612,10 +612,7 @@ function change_ordered_color_10($box_id, $cmb)
                         const oldPrice = parseInt($oldPrice.val());
 
                         if(!isNaN(oldPrice) && !isNaN(newPrice)){
-                            console.log('newPrice', newPrice);
-                            console.log('oldPrice', oldPrice);
-                            console.log('$calculatePercent', $calculatePercent);
-                            $calculatePercent.val(parseInt(100 - newPrice * 100 / oldPrice));
+                            $calculatePercent.html(parseInt(100 - newPrice * 100 / oldPrice) + ' %');
                         }
                     }
 
