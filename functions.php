@@ -609,8 +609,8 @@ function change_ordered_color_10($box_id, $cmb)
                     $oldPrice.on('input',setSale);
 
                     function setSale(){
-                        const newPrice = $newPrice.val();
-                        const oldPrice = $oldPrice.val();
+                        const newPrice = parseInt($newPrice.val());
+                        const oldPrice = parseInt($oldPrice.val());
 
                         console.log('newPrice', newPrice);
                         console.log('oldPrice', oldPrice);
