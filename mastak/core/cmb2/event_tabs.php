@@ -503,7 +503,7 @@
     add_action( 'cmb2_render_calculate', 'cmb2_render_calculate', 10, 5 );
 
     function cmb2_render_cpercent( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
-        $view = '<div class="calculate-field calculate-percent">Hello world</div>';
+        $view = '<div class="calculate-field calculate-percent"></div>';
         $view .= $field_type_object->_desc( true );
         echo $view;
     }
@@ -689,7 +689,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'    => __( 'Процент', 'cmb2' ),
+            'name'    => __( 'Скидка', 'cmb2' ),
             'id'      => 'cpercent',
             'type'    => 'cpercent'
         ));

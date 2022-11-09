@@ -494,8 +494,8 @@ function change_ordered_color_10($box_id, $cmb)
     </style>
 
     <style>
-        .cpercent {
-            background-color: green !important;
+        .calculate-percent {
+            padding: 5px 0;
         }
     </style>
 
@@ -598,10 +598,27 @@ function change_ordered_color_10($box_id, $cmb)
             initInputHandler();
 
             function initInputHandler(){
-                console.log('initInputHandler');
+                $('#mastak_event_tab_type_10_items_repeat').find('.cmb-repeatable-grouping').each(function (index) {
+                    
+                    const $oldPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_old_price`);
+                    const $newPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_new_price`);
+                    const $calculatePercent = $(this).find(`.calculate-percent`);
+
+                    $($oldPrice, $newPrice).change(setSale);
+
+                    function setSale(){
+                        const newPrice = $newPrice.val();
+                        const oldPrice = $oldPrice.val();
+
+                        if(!isNaN(oldPrice) && !isNaN(newPrice)){
+                            $calculatePercent.val(parseInt(100 - newPrice * 100 / oldPrice));
+                        }
+                    }
+
+                    setSale();
+
+                })
             }
-
-
         })(window, document, jQuery);
     </script>
 <?php
