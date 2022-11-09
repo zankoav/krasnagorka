@@ -604,7 +604,6 @@ function change_ordered_color_10($box_id, $cmb)
                     const $newPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_new_price`);
                     const $calculatePercent = $(this).find(`.calculate-percent`);
 
-
                     $newPrice.on('input',setSale);
                     $oldPrice.on('input',setSale);
 
@@ -612,10 +611,10 @@ function change_ordered_color_10($box_id, $cmb)
                         const newPrice = parseInt($newPrice.val());
                         const oldPrice = parseInt($oldPrice.val());
 
-                        console.log('newPrice', newPrice);
-                        console.log('oldPrice', oldPrice);
-
                         if(!isNaN(oldPrice) && !isNaN(newPrice)){
+                            console.log('newPrice', newPrice);
+                            console.log('oldPrice', oldPrice);
+                            console.log('$calculatePercent', $calculatePercent);
                             $calculatePercent.val(parseInt(100 - newPrice * 100 / oldPrice));
                         }
                     }
