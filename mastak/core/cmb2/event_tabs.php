@@ -496,34 +496,19 @@
     function cmb2_render_calculate( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
         $view = '<div class="calculate-field"><div><button type="button" class="js-calculate button-secondary">Расчитать</button><span class="spinner"></span></div><input type="hidden" name="GG"><p class="cmb2-metabox-description"></p></div>';
-
-        
-
-
-
-
-
-
-
-        // $buttonset = '<div class="cmb2-buttonset">';	
-        // $conditional_value =(isset($field->args['attributes']['data-conditional-value'])?'data-conditional-value="' .esc_attr($field->args['attributes']['data-conditional-value']).'"':'');
-        // $conditional_id =(isset($field->args['attributes']['data-conditional-id'])?' data-conditional-id="'.esc_attr($field->args['attributes']['data-conditional-id']).'"':'');
-        // $default_value = $field->args['attributes']['default'];  
-    
-        // foreach ( $field->options() as $value => $item ) {
-        //     $selected_input = ($value === ($escaped_value==''?$default_value:$escaped_value )) ? 'checked="checked"' : '';
-        //     $selected_label = ($value === ($escaped_value==''?$default_value:$escaped_value )) ? ' selected' : '';		
-        //     $buttonset .= '<input '.$conditional_value.$conditional_id.' type="radio" id="' .$field->args['_name'] . esc_attr( $value ) . '" name="' . $field->args['_name'] . '" value="' . esc_attr( $value ) . '" ' . $selected_input . ' class="cmb2-buttonset-item">
-        //     <label class="cmb2-buttonset-label state-default'.$selected_label.'" for="' .$field->args['_name'] . esc_attr( $value ) . '"><span class="buttonset-text">' . esc_html( $item ) . '</span></label>';
-        // }
-        
-        // $buttonset .= '</div>';
-        // $buttonset .= $field_type_object->_desc( true );
         $view .= $field_type_object->_desc( true );
         echo $view;
     }
     
     add_action( 'cmb2_render_calculate', 'cmb2_render_calculate', 10, 5 );
+
+    function cmb2_render_cpercent( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+        $view = '<div class="calculate-field calculate-percent">Hello world</div>';
+        $view .= $field_type_object->_desc( true );
+        echo $view;
+    }
+    
+    add_action( 'cmb2_render_cpercent', 'cmb2_render_cpercent', 10, 6 );
 
     function mastak_event_tab_type_9() {
         $prefix = 'mastak_event_tab_type_9';
@@ -701,6 +686,12 @@
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'    => __( 'Процент', 'cmb2' ),
+            'id'      => 'cpercent',
+            'type'    => 'cpercent'
         ));
 
         $sbc_client->add_group_field($group_field_event, array(

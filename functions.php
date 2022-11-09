@@ -493,13 +493,22 @@ function change_ordered_color_10($box_id, $cmb)
         .calculate-field .spinner.spinner_show {visibility: visible;}
     </style>
 
+    <style>
+        .cpercent {
+            background-color: green !important;
+        }
+    </style>
+
     <script>
         /* CMB2 Buttonset Event. Add the code below in a file named buttonset_metafield.js ------------- */
         window.CMB2 = (function(window, document, $, undefined){
             'use strict';
 
             $('.cmb-add-group-row').click(function(){
-                setTimeout(initCalculations, 500);
+                setTimeout(()=>{
+                    initCalculations();
+                    initInputHandler();
+                }, 500);
             });
 
             initCalculations();
@@ -585,6 +594,14 @@ function change_ordered_color_10($box_id, $cmb)
                     }
                 });
             }
+
+            initInputHandler();
+
+            function initInputHandler(){
+                console.log('initInputHandler');
+            }
+
+
         })(window, document, jQuery);
     </script>
 <?php
