@@ -333,6 +333,12 @@ function change_ordered_color($box_id, $cmb)
         .calculate-field .spinner.spinner_show {visibility: visible;}
     </style>
 
+    <style>
+        .calculate-percent {
+            padding: 5px 0;
+        }
+    </style>
+
     <script>
         /* CMB2 Buttonset Event. Add the code below in a file named buttonset_metafield.js ------------- */
         window.CMB2 = (function(window, document, $, undefined){
@@ -424,6 +430,33 @@ function change_ordered_color($box_id, $cmb)
                         }
                     }
                 });
+            }
+
+            initInputHandler();
+
+            function initInputHandler(){
+                $('#mastak_event_tab_type_10_items_repeat').find('.cmb-repeatable-grouping').each(function (index) {
+                    
+                    const $oldPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_old_price`);
+                    const $newPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_new_price`);
+                    const $calculatePercent = $(this).find(`.calculate-percent`);
+
+                    $newPrice.on('input', setSale);
+                    $oldPrice.on('input', setSale);
+
+                    function setSale(){
+                        const newPrice = parseInt($newPrice.val());
+                        const oldPrice = parseInt($oldPrice.val());
+                        if(!isNaN(oldPrice) && !isNaN(newPrice)){
+                            $calculatePercent.html(parseInt(100 - newPrice * 100 / oldPrice) + ' %');
+                        }else{
+                            $calculatePercent.empty();
+                        }
+                    }
+
+                    setSale();
+
+                })
             }
         })(window, document, jQuery);
     </script>

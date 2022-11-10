@@ -470,6 +470,12 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'    => __( 'Скидка', 'cmb2' ),
+            'id'      => 'cpercent',
+            'type'    => 'cpercent'
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Картинка',
             'id'           => 'image',
             'type'         => 'file',
