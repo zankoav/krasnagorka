@@ -435,10 +435,10 @@ function change_ordered_color($box_id, $cmb)
             initInputHandler();
 
             function initInputHandler(){
-                $('#mastak_event_tab_type_10_items_repeat').find('.cmb-repeatable-grouping').each(function (index) {
+                $('#mastak_event_tab_type_8_items_repeat').find('.cmb-repeatable-grouping').each(function (index) {
                     
-                    const $oldPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_old_price`);
-                    const $newPrice = $(this).find(`#mastak_event_tab_type_10_items_${index}_new_price`);
+                    const $oldPrice = $(this).find(`#mastak_event_tab_type_8_items_${index}_old_price`);
+                    const $newPrice = $(this).find(`#mastak_event_tab_type_8_items_${index}_new_price`);
                     const $calculatePercent = $(this).find(`.calculate-percent`);
 
                     $newPrice.on('input', setSale);
