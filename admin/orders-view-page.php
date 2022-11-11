@@ -49,6 +49,9 @@
     </div>
     <div id="orders" class="orders"></div>
     <style>
+        .fw-bold {
+            font-weight: 700;
+        }
         #orders {
             color: #212E35;
         }
@@ -291,13 +294,13 @@
                         <div class="order" style="border:5px solid ${order.background};">
                             <div class="order__title">
                                 ${isTodayOrTomorrow}
-                                <span>№${index + 1}. ${order.calendars}</span>
+                                <span class="fw-bold">№${index + 1}. ${order.calendars}</span>
                             </div>
                             <div class="order__block-wrapper">
                                 <div class="order__block-wrapper-main">
                                     <div class="order__block order__block_main">
                                         <div class="order-item">
-                                            <div class="order-item__title">Бронь</div>
+                                            <div class="order-item__title fw-bold">Бронь</div>
                                             <div class="order-item__list">
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Заезд:</div>
@@ -320,7 +323,7 @@
                                     </div>
                                     <div class="order__block order__block_main">
                                         <div class="order-item">
-                                            <div class="order-item__title">Оплата</div>
+                                            <div class="order-item__title fw-bold">Оплата</div>
                                             <div class="order-item__list">
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Общая сумма:</div>
@@ -334,7 +337,7 @@
                                                     <div class="order-item__list-item-label">Оплачено:</div>
                                                     <div class="order-item__list-item-value">${order.prepaid} руб.</div>
                                                 </div>
-                                                <div class="order-item__list-item">
+                                                <div class="order-item__list-item fw-bold">
                                                     <div class="order-item__list-item-label">Остаток:</div>
                                                     <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
                                                 </div>
@@ -343,7 +346,7 @@
                                     </div>
                                     <div class="order__block order__block_main">
                                         <div class="order-item">
-                                            <div class="order-item__title">Питание</div>
+                                            <div class="order-item__title fw-bold">Питание</div>
                                             <div class="order-item__list">
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Завтраки:</div>
@@ -362,11 +365,11 @@
                                     </div>
                                     <div class="order__block order__block_contacts">
                                         <div class="order-contact-line">
-                                            <div class="order-contact-line__label">Контакт:</div>
+                                            <div class="order-contact-line__label fw-bold">Контакт:</div>
                                             <div class="order-contact-line__value">${order.contact}</div>
                                         </div>
                                         <div class="order-contact-line">
-                                            <div class="order-contact-line__label">Комментарий:</div>
+                                            <div class="order-contact-line__labelfw-bold ">Комментарий:</div>
                                             <div class="order-contact-line__value">${comment}</div>
                                         </div>
                                     </div>
@@ -375,7 +378,7 @@
                                 <div class="order__block-wrapper-added">
                                     <div class="order__block">
                                         <div class="order-item">
-                                            <div class="order-item__title">Дополнительные услуги</div>
+                                            <div class="order-item__title fw-bold">Дополнительные услуги</div>
                                             <div class="order-item__list">
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Бани по белому:</div>
