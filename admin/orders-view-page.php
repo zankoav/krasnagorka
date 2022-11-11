@@ -369,7 +369,7 @@
                                             <div class="order-contact-line__value">${order.contact}</div>
                                         </div>
                                         <div class="order-contact-line">
-                                            <div class="order-contact-line__labelfw-bold ">Комментарий:</div>
+                                            <div class="order-contact-line__label fw-bold">Комментарий:</div>
                                             <div class="order-contact-line__value">${comment}</div>
                                         </div>
                                     </div>
