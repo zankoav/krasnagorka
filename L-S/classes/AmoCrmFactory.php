@@ -51,6 +51,11 @@ use AmoCRM\Models\CustomFieldsValues\PriceCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\PriceCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\PriceCustomFieldValueModel;
 
+
+use AmoCRM\Models\CustomFieldsValues\CheckboxCustomFieldValuesModel;
+use AmoCRM\Models\CustomFieldsValues\ValueCollections\CheckboxCustomFieldValueCollection;
+use AmoCRM\Models\CustomFieldsValues\ValueModels\CheckboxCustomFieldValueModel;
+
 use AmoCRM\Collections\CustomFieldsValuesCollection;
 
 use AmoCRM\Collections\CatalogElementsCollection;
@@ -157,13 +162,12 @@ class AmoCrmFactory {
             $leadCustomFields->add($peopleCountFieldValueModel);
 
             // Event id
-            $isEventOrder = empty($order->eventTabId) ? 'Нет' : 'Да';
-            $isEventOrderFieldValueModel = new TextCustomFieldValuesModel();
-            $isEventOrderFieldValueModel->setFieldId(760125);
+            $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
+            $isEventOrderFieldValueModel->setFieldId(760957);
             $isEventOrderFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue($isEventOrder)
+                (new CheckboxCustomFieldValueCollection())
+                    ->add((new CheckboxCustomFieldValueModel())
+                            ->setValue(!empty($order->eventTabId))
                     )
             );
             $leadCustomFields->add($isEventOrderFieldValueModel);
@@ -218,6 +222,7 @@ class AmoCrmFactory {
                 ->link($lead, $links);
 
             $notePrepaidType = $order->prepaidType ?? '-';
+            $isEventOrder = empty($order->eventTabId) ? 'Нет' : 'Да';
 
             $order->note[] = "Сумма: {$order->price} руб.";
             $order->note[] = "Количество Человек: {$order->peopleCount}";
