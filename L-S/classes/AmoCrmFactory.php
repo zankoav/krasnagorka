@@ -95,7 +95,6 @@ class AmoCrmFactory {
             
             $lead->setName($leadName);
             $lead->setStatusId($stageId);
-            $lead->setPrice($order->price);
             $lead->setTags((new TagsCollection())
                     ->add(
                         (new TagModel())
@@ -104,84 +103,43 @@ class AmoCrmFactory {
                     )
             );
 
+            // Total Price
+            $lead->setPrice($order->price);
+
             $leadCustomFields = new CustomFieldsValuesCollection();
 
-            // Order ID
-            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
-            $orderIdFieldValueModel->setFieldId(639191);
-            $orderIdFieldValueModel->setValues(
-                (new NumericCustomFieldValueCollection())
-                    ->add((new NumericCustomFieldValueModel())
-                            ->setValue($order->id)
-                    )
-            );
-            $leadCustomFields->add($orderIdFieldValueModel);
-
-            // Order Type
-            $typeFieldValueModel = new TextCustomFieldValuesModel();
-            $typeFieldValueModel->setFieldId(640633);
-            $typeFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->type)
-                    )
-            );
-            $leadCustomFields->add($typeFieldValueModel);
-
-            // Order food price
+            // Order food price 
             $foodPriceFieldValueModel = new TextCustomFieldValuesModel();
-            $foodPriceFieldValueModel->setFieldId(759627);
+            $foodPriceFieldValueModel->setFieldId(760959);
             $foodPriceFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue(strval($order->foodPrice))
+                            ->setValue($order->foodPrice)
                     )
             );
             $leadCustomFields->add($foodPriceFieldValueModel);
 
             // Order accommodation price
-            $accommodationPriceFieldValueModel = new TextCustomFieldValuesModel();
-            $accommodationPriceFieldValueModel->setFieldId(759629);
+            $accommodationPriceFieldValueModel = new NumericCustomFieldValuesModel();
+            $accommodationPriceFieldValueModel->setFieldId(760961);
             $accommodationPriceFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue(strval($order->accommodationPrice))
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->accommodationPrice)
                     )
             );
             $leadCustomFields->add($accommodationPriceFieldValueModel);
 
-            // Количество человек
-            $peopleCountFieldValueModel = new TextCustomFieldValuesModel();
-            $peopleCountFieldValueModel->setFieldId(751421);
-            $peopleCountFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue(strval($order->peopleCount))
+            // Order prepaid price
+            $subpriceFieldValueModel = new NumericCustomFieldValuesModel();
+            $subpriceFieldValueModel->setFieldId(282777);
+            $subpriceFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->subprice)
                     )
             );
-            $leadCustomFields->add($peopleCountFieldValueModel);
-
-            // Event id
-            $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
-            $isEventOrderFieldValueModel->setFieldId(760957);
-            $isEventOrderFieldValueModel->setValues(
-                (new CheckboxCustomFieldValueCollection())
-                    ->add((new CheckboxCustomFieldValueModel())
-                            ->setValue(!empty($order->eventTabId))
-                    )
-            );
-            $leadCustomFields->add($isEventOrderFieldValueModel);
-
-            // Comment
-            $commentFieldValueModel = new TextCustomFieldValuesModel();
-            $commentFieldValueModel->setFieldId(357377);
-            $commentFieldValueModel->setValues(
-                (new TextCustomFieldValueCollection())
-                    ->add((new TextCustomFieldValueModel())
-                            ->setValue($noteStr)
-                    )
-            );
-            $leadCustomFields->add($commentFieldValueModel);
+            $leadCustomFields->add($subpriceFieldValueModel);
 
             // Date From
             $dateFromFieldValueModel = new DateCustomFieldValuesModel();
@@ -202,6 +160,184 @@ class AmoCrmFactory {
             $dateToModelCollection->add($dateToModel);
             $dateToFieldValueModel->setValues($dateToModelCollection);
             $leadCustomFields->add($dateToFieldValueModel);
+
+            // Order people count
+            $peopleCountFieldValueModel = new NumericCustomFieldValuesModel();
+            $peopleCountFieldValueModel->setFieldId(760963);
+            $peopleCountFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->peopleCount)
+                    )
+            );
+            $leadCustomFields->add($peopleCountFieldValueModel);
+
+
+            // Order food breakfast count
+            $foodBreakfastFieldValueModel = new NumericCustomFieldValuesModel();
+            $foodBreakfastFieldValueModel->setFieldId(760937);
+            $foodBreakfastFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->foodBreakfast)
+                    )
+            );
+            $leadCustomFields->add($foodBreakfastFieldValueModel);
+
+            
+            // Order food lunch count
+            $foodLunchFieldValueModel = new NumericCustomFieldValuesModel();
+            $foodLunchFieldValueModel->setFieldId(760939);
+            $foodLunchFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->foodLunch)
+                    )
+            );
+            $leadCustomFields->add($foodLunchFieldValueModel);
+
+            // Order food dinner count
+            $foodDinnerFieldValueModel = new NumericCustomFieldValuesModel();
+            $foodDinnerFieldValueModel->setFieldId(760941);
+            $foodDinnerFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->foodDinner)
+                    )
+            );
+            $leadCustomFields->add($foodDinnerFieldValueModel);
+
+            // Order bath house white count
+            $bathHouseWhiteFieldValueModel = new NumericCustomFieldValuesModel();
+            $bathHouseWhiteFieldValueModel->setFieldId(760943);
+            $bathHouseWhiteFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->bathHouseWhite)
+                    )
+            );
+            $leadCustomFields->add($bathHouseWhiteFieldValueModel);
+
+            // Order bath house black count
+            $bathHouseBlackFieldValueModel = new NumericCustomFieldValuesModel();
+            $bathHouseBlackFieldValueModel->setFieldId(760945);
+            $bathHouseBlackFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->bathHouseBlack)
+                    )
+            );
+            $leadCustomFields->add($bathHouseBlackFieldValueModel);
+            
+            // Order small animal count
+            $smallAnimalCountFieldValueModel = new NumericCustomFieldValuesModel();
+            $smallAnimalCountFieldValueModel->setFieldId(760947);
+            $smallAnimalCountFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->smallAnimalCount)
+                    )
+            );
+            $leadCustomFields->add($smallAnimalCountFieldValueModel);
+
+            // Order big animal count
+            $bigAnimalCountFieldValueModel = new NumericCustomFieldValuesModel();
+            $bigAnimalCountFieldValueModel->setFieldId(760949);
+            $bigAnimalCountFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->bigAnimalCount)
+                    )
+            );
+            $leadCustomFields->add($bigAnimalCountFieldValueModel);
+
+            // Order child count without bed
+            $childCountFieldValueModel = new NumericCustomFieldValuesModel();
+            $childCountFieldValueModel->setFieldId(760965);
+            $childCountFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->childCount)
+                    )
+            );
+            $leadCustomFields->add($childCountFieldValueModel);
+            
+            // Order baby bed
+            $babyBedFieldValueModel = new CheckboxCustomFieldValuesModel();
+            $babyBedFieldValueModel->setFieldId(760951);
+            $babyBedFieldValueModel->setValues(
+                (new CheckboxCustomFieldValueCollection())
+                    ->add((new CheckboxCustomFieldValueModel())
+                            ->setValue($order->babyBed)
+                    )
+            );
+            $leadCustomFields->add($babyBedFieldValueModel);
+            
+             // Comment
+             $commentFieldValueModel = new TextCustomFieldValuesModel();
+             $commentFieldValueModel->setFieldId(357377);
+             $commentFieldValueModel->setValues(
+                 (new TextCustomFieldValueCollection())
+                     ->add((new TextCustomFieldValueModel())
+                             ->setValue($noteStr)
+                     )
+             );
+             $leadCustomFields->add($commentFieldValueModel);
+            
+            // Order prepaid percentage
+            $prepaidTypePercentageFieldValueModel = new NumericCustomFieldValuesModel();
+            $prepaidTypePercentageFieldValueModel->setFieldId(760953);
+            $prepaidTypePercentageFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->prepaidType)
+                    )
+            );
+            $leadCustomFields->add($prepaidTypePercentageFieldValueModel);
+
+            // Order payment method
+            $paymentMethodFieldValueModel = new SelectCustomFieldValuesModel();
+            $paymentMethodFieldValueModel->setFieldId(760955);
+            $paymentMethodFieldValueModel->setValues(
+                (new SelectCustomFieldValueCollection())
+                    ->add((new SelectCustomFieldValueModel())
+                            ->setValue($order->getPaymentMethod())
+                    )
+            );
+            $leadCustomFields->add($paymentMethodFieldValueModel);
+
+            // Is fire order
+            $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
+            $isEventOrderFieldValueModel->setFieldId(760957);
+            $isEventOrderFieldValueModel->setValues(
+                (new CheckboxCustomFieldValueCollection())
+                    ->add((new CheckboxCustomFieldValueModel())
+                            ->setValue(!empty($order->eventTabId))
+                    )
+            );
+            $leadCustomFields->add($isEventOrderFieldValueModel);
+            
+            // Order Type
+            $typeFieldValueModel = new TextCustomFieldValuesModel();
+            $typeFieldValueModel->setFieldId(640633);
+            $typeFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue($order->type)
+                    )
+            );
+            $leadCustomFields->add($typeFieldValueModel);
+
+            // Order ID
+            $orderIdFieldValueModel = new NumericCustomFieldValuesModel();
+            $orderIdFieldValueModel->setFieldId(639191);
+            $orderIdFieldValueModel->setValues(
+                (new NumericCustomFieldValueCollection())
+                    ->add((new NumericCustomFieldValueModel())
+                            ->setValue($order->id)
+                    )
+            );
+            $leadCustomFields->add($orderIdFieldValueModel);
 
             $lead->setCustomFieldsValues($leadCustomFields);
 

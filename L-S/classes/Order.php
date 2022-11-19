@@ -98,7 +98,7 @@ class Order {
     public function getPaymentMethod(){
         $arr = [
             null => '-',
-            self::METHOD_OFFICE => 'Оффис',
+            self::METHOD_OFFICE => 'В офисе',
             self::METHOD_CARD => 'Картой',
             self::METHOD_CARD_LAYTER => 'Картой позже',
         ];
