@@ -130,17 +130,6 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($accommodationPriceFieldValueModel);
 
-            // Order prepaid price
-            $subpriceFieldValueModel = new NumericCustomFieldValuesModel();
-            $subpriceFieldValueModel->setFieldId(282777);
-            $subpriceFieldValueModel->setValues(
-                (new NumericCustomFieldValueCollection())
-                    ->add((new NumericCustomFieldValueModel())
-                            ->setValue($order->prepaid)
-                    )
-            );
-            $leadCustomFields->add($subpriceFieldValueModel);
-
             // Date From
             $dateFromFieldValueModel = new DateCustomFieldValuesModel();
             $dateFromFieldValueModel->setFieldId(66211);
