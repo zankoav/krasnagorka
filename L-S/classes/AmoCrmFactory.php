@@ -136,7 +136,7 @@ class AmoCrmFactory {
             $subpriceFieldValueModel->setValues(
                 (new NumericCustomFieldValueCollection())
                     ->add((new NumericCustomFieldValueModel())
-                            ->setValue($order->subprice)
+                            ->setValue($order->prepaid)
                     )
             );
             $leadCustomFields->add($subpriceFieldValueModel);
@@ -372,7 +372,7 @@ class AmoCrmFactory {
             $order->note[] = "Ужины: {$order->foodDinner}";
 
             $order->note[] = "Бани по белому: {$order->bathHouseWhite} кол-во";
-            $order->note[] = "Бани по Черному: {$order->bathHouseBlack} кол-во";
+            $order->note[] = "Бани по черному: {$order->bathHouseBlack} кол-во";
 
             $order->note[] = "Мелкие животные: {$order->smallAnimalCount} кол-во";
             $order->note[] = "Крупные животные: {$order->bigAnimalCount} кол-во";

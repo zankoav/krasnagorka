@@ -71,6 +71,7 @@ class Order {
     public int $leadId;
 
     public int $price;
+    public ?int $prepaid;
     public int $subprice;
     
     public int $foodPrice;
