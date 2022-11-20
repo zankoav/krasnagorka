@@ -275,12 +275,12 @@ class AmoCrmFactory {
             
             // Order prepaid percentage
             if($order->prepaidType != null){
-                $prepaidTypePercentageFieldValueModel = new NumericCustomFieldValuesModel();
-                $prepaidTypePercentageFieldValueModel->setFieldId(760953);
+                $prepaidTypePercentageFieldValueModel = new SelectCustomFieldValuesModel();
+                $prepaidTypePercentageFieldValueModel->setFieldId(429245);
                 $prepaidTypePercentageFieldValueModel->setValues(
-                    (new NumericCustomFieldValueCollection())
-                        ->add((new NumericCustomFieldValueModel())
-                                ->setValue($order->prepaidType)
+                    (new SelectCustomFieldValueCollection())
+                        ->add((new SelectCustomFieldValueModel())
+                                ->setValue($order->prepaidType . '%')
                         )
                 );
                 $leadCustomFields->add($prepaidTypePercentageFieldValueModel);
