@@ -1344,7 +1344,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if (!empty($accommodationPrice)) {
-                    update_post_meta($post_id, 'sbc_order_prepaid', $accommodationPrice);
+                    update_post_meta($post_id, 'sbc_order_accommodation_price', $accommodationPrice);
                 }
 
                 if (!empty($foodPrice)) {
