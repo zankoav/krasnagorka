@@ -170,6 +170,7 @@
             $contactId = get_post_meta($orderId, 'sbc_order_client', true);
             $contact = get_the_title($contactId);
             $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
+            $accommodationPrice = get_post_meta($orderId, 'sbc_order_accommodation_price', true);
             $food = get_post_meta($orderId, 'sbc_order_food_price', true);
             $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', true);
             $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', true);
@@ -192,6 +193,7 @@
             $services['baby_bed'] = $babyBed === 'on' ? 'Да' : 'Нет';
             $total_price = get_post_meta($orderId, 'sbc_order_price', true);
             $people = get_post_meta($orderId, 'sbc_order_count_people', true);
+            $childrenCount = get_post_meta($orderId, 'sbc_order_childs', true);
             $calendars  = get_the_terms($orderId, 'sbc_calendars');
     
             $foodInfo = ajax_get_food_by_order_id($orderId);
@@ -209,12 +211,14 @@
                 'start'     => $start,
                 'end'       => $end,
                 'people'   => $people,
+                'childrenCount'   => empty($childrenCount) ? 0 : $childrenCount,
                 'comment'   => $comment,
                 'contact'   => $contact,
                 'food'   => empty($food) ? 0 : $food,
                 'foodBreakfast'   => empty($foodBreakfast) ? 0 : $foodBreakfast,
                 'foodLunch'   => empty($foodLunch) ? 0 : $foodLunch,
                 'foodDinner'   => empty($foodDinner) ? 0 : $foodDinner,
+                'accommodationPrice'   => empty($accommodationPrice) ? 0 : $accommodationPrice,
                 'prepaid'   => empty($prepaid) ? 0 : $prepaid,
                 'total_price'   => $total_price,
                 'status'    => $statuses[$status]['title'],

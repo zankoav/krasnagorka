@@ -315,6 +315,10 @@
                                                     <div class="order-item__list-item-value">${order.people}</div>
                                                 </div>
                                                 <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Детей без спального места:</div>
+                                                    <div class="order-item__list-item-value">${order.childrenCount}</div>
+                                                </div>
+                                                <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Статус:</div>
                                                     <div class="order-item__list-item-value">${order.status}</div>
                                                 </div>
@@ -332,6 +336,10 @@
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Питание:</div>
                                                     <div class="order-item__list-item-value">${order.food} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Проживание:</div>
+                                                    <div class="order-item__list-item-value">${order.accomodation} руб.</div>
                                                 </div>
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Оплачено:</div>
