@@ -1264,6 +1264,11 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $foodPrice = $request['foodPrice'];
             $accommodationPrice = $request['accommodationPrice'];
+            $prepaidPercent = 0;
+            if(!empty($request['prepaidPercent'])){
+                $tempArray = explode("%", $request['prepaidPercent']);
+                $prepaidPercent = intval($tempArray[0]);
+            }
             $prepaidPercent = intval($request['prepaidPercent']);
             
             $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
