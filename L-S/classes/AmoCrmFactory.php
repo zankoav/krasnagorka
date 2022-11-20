@@ -274,26 +274,30 @@ class AmoCrmFactory {
              $leadCustomFields->add($commentFieldValueModel);
             
             // Order prepaid percentage
-            $prepaidTypePercentageFieldValueModel = new NumericCustomFieldValuesModel();
-            $prepaidTypePercentageFieldValueModel->setFieldId(760953);
-            $prepaidTypePercentageFieldValueModel->setValues(
-                (new NumericCustomFieldValueCollection())
-                    ->add((new NumericCustomFieldValueModel())
-                            ->setValue($order->prepaidType)
-                    )
-            );
-            $leadCustomFields->add($prepaidTypePercentageFieldValueModel);
-
+            if($order->prepaidType != null){
+                $prepaidTypePercentageFieldValueModel = new NumericCustomFieldValuesModel();
+                $prepaidTypePercentageFieldValueModel->setFieldId(760953);
+                $prepaidTypePercentageFieldValueModel->setValues(
+                    (new NumericCustomFieldValueCollection())
+                        ->add((new NumericCustomFieldValueModel())
+                                ->setValue($order->prepaidType)
+                        )
+                );
+                $leadCustomFields->add($prepaidTypePercentageFieldValueModel);
+            }
+            
             // Order payment method
-            $paymentMethodFieldValueModel = new SelectCustomFieldValuesModel();
-            $paymentMethodFieldValueModel->setFieldId(760955);
-            $paymentMethodFieldValueModel->setValues(
-                (new SelectCustomFieldValueCollection())
-                    ->add((new SelectCustomFieldValueModel())
-                            ->setValue($order->getPaymentMethod())
-                    )
-            );
-            $leadCustomFields->add($paymentMethodFieldValueModel);
+            if($order->getPaymentMethod() != '-'){
+                $paymentMethodFieldValueModel = new SelectCustomFieldValuesModel();
+                $paymentMethodFieldValueModel->setFieldId(760955);
+                $paymentMethodFieldValueModel->setValues(
+                    (new SelectCustomFieldValueCollection())
+                        ->add((new SelectCustomFieldValueModel())
+                                ->setValue($order->getPaymentMethod())
+                        )
+                );
+                $leadCustomFields->add($paymentMethodFieldValueModel);
+            }
 
             // Is fire order
             $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
