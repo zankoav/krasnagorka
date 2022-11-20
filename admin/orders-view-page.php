@@ -339,7 +339,7 @@
                                                 </div>
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Проживание:</div>
-                                                    <div class="order-item__list-item-value">${order.accomodation} руб.</div>
+                                                    <div class="order-item__list-item-value">${order.accommodationPrice} руб.</div>
                                                 </div>
                                                 <div class="order-item__list-item">
                                                     <div class="order-item__list-item-label">Оплачено:</div>
