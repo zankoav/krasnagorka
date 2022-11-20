@@ -1256,11 +1256,16 @@ class Booking_Form_Controller extends WP_REST_Controller
             // }
 
             $babyBed = $request['babyBed'] == 'true';
-            $bathHouseWhite = $request['bathHouseWhite'];
-            $bathHouseBlack = $request['bathHouseBlack'];
-            $foodBreakfast = intval($request['foodBreakfast']);
-            $foodLunch = intval($request['foodLunch']);
-            $foodDinner = intval($request['foodDinner']);
+            $bathHouseWhite = intval($request['bathHouseWhite'] ?? 0);
+            $bathHouseBlack = intval($request['bathHouseBlack'] ?? 0 );
+            $foodBreakfast = intval($request['foodBreakfast'] ?? 0);
+            $foodLunch = intval($request['foodLunch'] ?? 0);
+            $foodDinner = intval($request['foodDinner'] ?? 0);
+
+            $foodPrice = $request['foodPrice'];
+            $accommodationPrice = $request['accommodationPrice'];
+            $prepaidPercent = intval($request['prepaidPercent']);
+            
             $smallAnimalsCount = intval($request['smallAnimalCount'] ?? 0);
             $bigAnimalsCount = intval($request['bigAnimalCount'] ?? 0);
             $client   = $this->get_client_by_meta(['meta_key' => 'sbc_client_phone', 'meta_value' => $contactPhone]);
@@ -1338,6 +1343,14 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                 }
 
+                if (!empty($accommodationPrice)) {
+                    update_post_meta($post_id, 'sbc_order_prepaid', $accommodationPrice);
+                }
+
+                if (!empty($foodPrice)) {
+                    update_post_meta($post_id, 'sbc_order_food_price', $foodPrice);
+                }
+
                 if($smallAnimalsCount > 0){
                     // $comment .= "\nКошки и собаки мелких пород (высота в холке до 40 см): $smallAnimalsCount";
                     update_post_meta($post_id, 'sbc_order_small_animlas_count', $smallAnimalsCount);
@@ -1400,9 +1413,18 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_lead_id', $leadId);
                 }
 
+                if (!empty($prepaidPercent)) {
+                    update_post_meta($post_id, 'sbc_order_prepaid_percantage', $prepaidPercent);
+                }
+
                 $paymentMethod  = $request['paymentMethod'];
                 if (!empty($paymentMethod)) {
-                    update_post_meta($post_id, 'sbc_order_payment_method', $paymentMethod);
+                    $methods = [
+                        'Картой' => 'card',
+                        'Картой позже' => 'card_layter',
+                        'В офисе' => 'office'
+                    ];
+                    update_post_meta($post_id, 'sbc_order_payment_method', $methods[$paymentMethod]);
                 }
 
                 $prepaidType  = $request['prepaidType'];

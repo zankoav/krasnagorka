@@ -23,7 +23,7 @@ function sbc_order_payment_metabox() {
         'options' => array(
             'card'  => __('Картой', 'krasnagorka'),
             'card_layter' => __('Картой позже', 'krasnagorka'),
-            'office' => __('В оффисе', 'krasnagorka')
+            'office' => __('В офисе', 'krasnagorka')
         )
     ));
 
