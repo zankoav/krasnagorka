@@ -289,7 +289,7 @@ class AmoCrmFactory {
             // Order payment method
             if($order->getPaymentMethod() != '-'){
                 $paymentMethodFieldValueModel = new SelectCustomFieldValuesModel();
-                $paymentMethodFieldValueModel->setFieldId(760955);
+                $paymentMethodFieldValueModel->setFieldId(70309);
                 $paymentMethodFieldValueModel->setValues(
                     (new SelectCustomFieldValueCollection())
                         ->add((new SelectCustomFieldValueModel())
