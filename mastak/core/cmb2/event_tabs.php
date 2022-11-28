@@ -671,7 +671,7 @@
             'name' => 'Число спальных мест',
             'id'   => 'peopleCount',
             'type'             => 'select',
-            'default'          => 0,
+            'default'          => 'people_max',
             'options_cb'       => 'people_counts_options',
         ) );
 
@@ -732,10 +732,16 @@
         ));
     }
 
+    function people_max( $field_args, $field ) {
+        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
+        $calendar = $items[$field->group->index]['calendar'];
+        $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
+        return $maxCount;
+    }
+
     function people_counts_options( $field ) {
         $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
         $calendar = $items[$field->group->index]['calendar'];
         $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
-        Log::info('rr', range(0, $maxCount));
         return range(0, $maxCount);
     }
