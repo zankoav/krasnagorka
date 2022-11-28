@@ -671,7 +671,7 @@
             'name' => 'Число спальных мест',
             'id'   => 'peopleCount',
             'type'             => 'select',
-            'default'          => '0',
+            'default'          => 0,
             'options_cb'       => 'people_counts_options',
         ) );
 
@@ -735,10 +735,6 @@
     function people_counts_options( $field ) {
         $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
         $calendar = $items[$field->group->index]['calendar'];
-        Log::info('calendar', $calendar);
-        $options = [];
-        $options['0'] = 0;
-        $options['1'] = 1;
-        $options['2'] = 2;
-        return $options;
+        $maxCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
+        return range(0, $maxCount)
     }
