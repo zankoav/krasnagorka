@@ -733,7 +733,7 @@
     }
 
     function people_counts_options( $field) {
-        Log::info('object', (array)$field);
+        Log::info('group object_id', $field->group->object_id);
         $options = [];
         $options['0'] = 0;
         $options['1'] = 1;
