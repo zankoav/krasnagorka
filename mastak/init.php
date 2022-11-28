@@ -65,6 +65,9 @@
             case 'type_9':
                 $tab = new Type_9( absint( $id ) );
                 break;
+            case 'type_10':
+                $tab = new Type_10( absint( $id ) );
+                break;
 			default:
 				break;
 		}
