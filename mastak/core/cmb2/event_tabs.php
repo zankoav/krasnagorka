@@ -732,8 +732,8 @@
         ));
     }
 
-    function people_counts_options($arg) {
-        Log::info('arg', $arg);
+    function people_counts_options( $field) {
+        Log::info('object_id', $field->object_id);
         $options = [];
         $options['0'] = 0;
         $options['1'] = 1;
