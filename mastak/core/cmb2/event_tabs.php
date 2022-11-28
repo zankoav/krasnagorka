@@ -1,4 +1,5 @@
 <?php
+    use Ls\Wp\Log as Log;
 
     add_action('cmb2_admin_init', 'mastak_event_tab_tabs');
 
@@ -731,7 +732,8 @@
         ));
     }
 
-    function people_counts_options() {
+    function people_counts_options($arg) {
+        Log::info('arg', $arg);
         $options = [];
         $options['0'] = 0;
         $options['1'] = 1;
