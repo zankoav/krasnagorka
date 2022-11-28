@@ -732,8 +732,7 @@
         ));
     }
 
-    function people_counts_options( $field_args, $field) {
-        Log::info('field_args', $field_args);
+    function people_counts_options( $field, $field) {
         Log::info('field', $field);
         $options = [];
         $options['0'] = 0;
