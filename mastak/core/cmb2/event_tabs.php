@@ -734,7 +734,8 @@
 
     function people_counts_options( $field ) {
         Log::info('field', $field->object_id);
-        Log::info('args', $field->args);
+        Log::info('cmb_id', $field->cmb_id);
+        Log::info('group_id', $field->group->id());
         // $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
 
         // Log::info('items', $items);
