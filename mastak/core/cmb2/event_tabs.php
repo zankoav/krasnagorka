@@ -737,7 +737,7 @@
         Log::info('data', $field->get_data());
         // $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
 
-        Log::info('items', $items);
+        // Log::info('items', $items);
         $options = [];
         $options['0'] = 0;
         $options['1'] = 1;
