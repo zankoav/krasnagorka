@@ -667,6 +667,14 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Число спальных мест',
+            'id'   => 'peopleCount',
+            'type'             => 'select',
+            'default'          => '0',
+            'options_cb'       => 'people_counts_options',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'    => __( ' Просчитать цену', 'cmb2' ),
             'id'      => 'calculate',
             'type'    => 'calculate',
@@ -721,4 +729,12 @@
             'id'   => 'description',
             'type' => 'wysiwyg',
         ));
+    }
+
+    function people_counts_options() {
+        $options = [];
+        $options['0'] = 0;
+        $options['1'] = 1;
+        $options['2'] = 2;
+        return $options;
     }
