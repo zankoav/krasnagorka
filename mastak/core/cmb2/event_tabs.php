@@ -788,7 +788,6 @@
         foreach ($period as $key => $value) {
             $days[] = $value->format('Y-m-d');    
         }
-        Log::info('$days', $days);
         return count($days);
     }
 
@@ -810,6 +809,8 @@
             $days[] = $value->format('Y-m-d');    
         }
 
-        return range(0, count($days));
+        Log::info('пп', $days);
+        $maxValue = count($days);
+        return range(0, $maxValue);
     }
 
