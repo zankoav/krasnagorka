@@ -489,6 +489,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 }
             }
 
+            if($isAdminEvent){
+                $foodTripleSale = 0; 
+            }
+
             $result['food'] = [
                 'breakfast' => [
                     'total_price' => $foodBreakfastPrice * $foodBreakfastCount,
