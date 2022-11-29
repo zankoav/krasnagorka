@@ -135,10 +135,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($request['dateFrom'])));
             $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
             $isTerem = $house['terem'];
-            if($isTerem){
-                $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
-            }else{
-                $peopleCount = (int) get_post_meta($houseId, "max_people", true);
+
+            if(isset($request['peopleCount'])){
+                $peopleCount = (int)$request['peopleCount'];
+            }else {
+                if($isTerem){
+                    $peopleCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
+                }else{
+                    $peopleCount = (int) get_post_meta($houseId, "max_people", true);
+                }
             }
         }
 
