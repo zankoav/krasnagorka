@@ -783,8 +783,11 @@
             new DateInterval('P1D'),
             $dateEndDT->modify( '+1 day' )
         );
-        Log::info('period', $period);
-        return 0;
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
+        return count($days);
     }
 
     function food_counts_options( $field ) {
@@ -799,7 +802,17 @@
             new DateInterval('P1D'),
             $dateEndDT->modify( '+1 day' )
         );
-        Log::info('period', $period);
-        return count($period);
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
+
+        return range(0, count($days));
     }
 
