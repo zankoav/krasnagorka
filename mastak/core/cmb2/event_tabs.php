@@ -772,14 +772,34 @@
 
     function food_max( $field_args, $field ) {
         $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $item = $items[$field->group->index];
-        Log::info('item', $item);
+        $from = $items[$field->group->index]['from'];
+        $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($from)));
+        $to = $items[$field->group->index]['to'];
+        $dateEnd = date("Y-m-d", strtotime($to));
+        $dateEndDT = new DateTime($dateEnd);
+
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+        Log::info('period', $period);
         return 0;
     }
 
     function food_counts_options( $field ) {
-        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $calendar = $items[$field->group->index];
-        return [0, 1];
+        $from = $items[$field->group->index]['from'];
+        $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($from)));
+        $to = $items[$field->group->index]['to'];
+        $dateEnd = date("Y-m-d", strtotime($to));
+        $dateEndDT = new DateTime($dateEnd);
+
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+        Log::info('period', $period);
+        return count($period);
     }
 
