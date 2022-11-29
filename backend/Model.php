@@ -235,7 +235,9 @@ class Model
             $maxCount = 99;
         }
         $sandbox = get_webpay_sandbox();
-        $pageBannerSrc = get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
+        $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
+        
+        get_the_post_thumbnail_url(get_the_ID(), wp_is_mobile() ? 'header_tablet_p' : 'header_laptop_hd');
         $weather       = $this->getWeather();
 
         $selectedSeasonId = null;
