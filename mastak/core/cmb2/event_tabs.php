@@ -783,10 +783,12 @@
             new DateInterval('P1D'),
             $dateEndDT->modify( '+1 day' )
         );
+
         $days = [];
         foreach ($period as $key => $value) {
             $days[] = $value->format('Y-m-d');    
         }
+        Log::info('$days', $days);
         return count($days);
     }
 
@@ -797,11 +799,6 @@
         $dateEnd = date("Y-m-d", strtotime($to));
         $dateEndDT = new DateTime($dateEnd);
 
-        $period = new DatePeriod(
-            new DateTime($dateStart),
-            new DateInterval('P1D'),
-            $dateEndDT->modify( '+1 day' )
-        );
         $period = new DatePeriod(
             new DateTime($dateStart),
             new DateInterval('P1D'),
