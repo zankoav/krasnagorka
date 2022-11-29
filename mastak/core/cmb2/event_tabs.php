@@ -700,6 +700,22 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Баня по черному',
+            'id'   => 'bath_house_black',
+            'type'             => 'select',
+            'default'          => 0,
+            'options'       => range(0, 25)
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Баня по белому',
+            'id'   => 'bath_house_white',
+            'type'             => 'select',
+            'default'          => 0,
+            'options'       => range(0, 25)
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'    => __( ' Просчитать цену', 'cmb2' ),
             'id'      => 'calculate',
             'type'    => 'calculate',
