@@ -810,7 +810,6 @@
             $days[] = $value->format('Y-m-d');    
         }
 
-        Log::info('пп', $days);
         $maxValue = count($days);
         return range(0, $maxValue);
     }
