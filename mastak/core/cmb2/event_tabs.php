@@ -671,7 +671,7 @@
             'name' => 'Число спальных мест',
             'id'   => 'peopleCount',
             'type'             => 'select',
-            'default'          => 'people_max',
+            'default'          => 0,
             'options_cb'       => 'people_counts_options',
         ) );
 
@@ -679,7 +679,7 @@
             'name' => 'Завтраки',
             'id'   => 'food_breakfast',
             'type'             => 'select',
-            'default'          => 'food_max',
+            'default'          => 0,
             'options_cb'       => 'food_counts_options',
         ) );
 
@@ -687,7 +687,7 @@
             'name' => 'Обеды',
             'id'   => 'food_lunch',
             'type'             => 'select',
-            'default'          => 'food_max',
+            'default'          => 0,
             'options_cb'       => 'food_counts_options',
         ) );
 
@@ -695,7 +695,7 @@
             'name' => 'Ужины',
             'id'   => 'food_dinner',
             'type'             => 'select',
-            'default'          => 'food_max',
+            'default'          => 0,
             'options_cb'       => 'food_counts_options',
         ) );
 
@@ -772,39 +772,11 @@
         ));
     }
 
-    function people_max( $field_args, $field ) {
-        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $calendar = $items[$field->group->index]['calendar'];
-        $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
-        return $maxCount;
-    }
-
     function people_counts_options( $field ) {
         $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
         $calendar = $items[$field->group->index]['calendar'];
         $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
         return range(0, $maxCount);
-    }
-
-    function food_max( $field_args, $field ) {
-        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $from = $items[$field->group->index]['from'];
-        $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($from)));
-        $to = $items[$field->group->index]['to'];
-        $dateEnd = date("Y-m-d", strtotime($to));
-        $dateEndDT = new DateTime($dateEnd);
-
-        $period = new DatePeriod(
-            new DateTime($dateStart),
-            new DateInterval('P1D'),
-            $dateEndDT->modify( '+1 day' )
-        );
-
-        $days = [];
-        foreach ($period as $key => $value) {
-            $days[] = $value->format('Y-m-d');    
-        }
-        return count($days);
     }
 
     function food_counts_options( $field ) {
