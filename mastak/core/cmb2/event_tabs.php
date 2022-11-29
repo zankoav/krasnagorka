@@ -792,6 +792,7 @@
     }
 
     function food_counts_options( $field ) {
+        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
         $from = $items[$field->group->index]['from'];
         $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($from)));
         $to = $items[$field->group->index]['to'];
