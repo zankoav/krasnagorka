@@ -128,10 +128,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $isTerem = $request['isTerem'];
         $isAdminEvent = $request['is_admin_event'];
 
-        Log::info('peopleCount', $request['peopleCount']);
-        Log::info('bathHouseWhite', $request['bathHouseWhite']);
-        Log::info('bathHouseBlack', $request['bathHouseBlack']);
-        Log::info('foodBreakfast', $request['foodBreakfast']);
         if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
             $houseId = $house['id']; 
