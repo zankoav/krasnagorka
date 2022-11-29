@@ -676,6 +676,30 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Завтраки',
+            'id'   => 'food_breakfast',
+            'type'             => 'select',
+            'default'          => 'food_max',
+            'options_cb'       => 'food_counts_options',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Обеды',
+            'id'   => 'food_lunch',
+            'type'             => 'select',
+            'default'          => 'food_max',
+            'options_cb'       => 'food_counts_options',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Ужины',
+            'id'   => 'food_dinner',
+            'type'             => 'select',
+            'default'          => 'food_max',
+            'options_cb'       => 'food_counts_options',
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'    => __( ' Просчитать цену', 'cmb2' ),
             'id'      => 'calculate',
             'type'    => 'calculate',
@@ -745,3 +769,17 @@
         $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
         return range(0, $maxCount);
     }
+
+    function food_max( $field_args, $field ) {
+        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
+        $item = $items[$field->group->index];
+        Log::info('item', $item);
+        return 0;
+    }
+
+    function food_counts_options( $field ) {
+        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
+        $calendar = $items[$field->group->index];
+        return [0, 1];
+    }
+
