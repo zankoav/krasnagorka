@@ -668,35 +668,35 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name' => 'Число спальных мест',
+            'name' => 'Минимальное число спальных мест',
             'id'   => 'peopleCount',
             'type'             => 'select',
-            'default'          => 0,
-            'options_cb'       => 'people_counts_options',
+            'default'          => 1,
+            'options'       => [1,2,3,4,5,6,7,8],
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Завтраки',
             'id'   => 'food_breakfast',
-            'type'             => 'select',
-            'default'          => 0,
-            'options_cb'       => 'food_counts_options',
+            'type' => 'checkbox'
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Обеды',
             'id'   => 'food_lunch',
-            'type'             => 'select',
-            'default'          => 0,
-            'options_cb'       => 'food_counts_options',
+            'type' => 'checkbox'
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Ужины',
             'id'   => 'food_dinner',
-            'type'             => 'select',
-            'default'          => 0,
-            'options_cb'       => 'food_counts_options',
+            'type' => 'checkbox'
+        ) );
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => '3х-разовое питание',
+            'id'   => 'food_full',
+            'type' => 'checkbox'
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
@@ -771,34 +771,3 @@
             'type' => 'wysiwyg',
         ));
     }
-
-    function people_counts_options( $field ) {
-        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $calendar = $items[$field->group->index]['calendar'];
-        $maxCount = (int) get_term_meta($calendar, 'kg_calendars_persons_count', 1);
-        return range(0, $maxCount);
-    }
-
-    function food_counts_options( $field ) {
-        $items = get_post_meta( $field->object_id, 'mastak_event_tab_type_10_items', true );
-        $from = $items[$field->group->index]['from'];
-        $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($from)));
-        $to = $items[$field->group->index]['to'];
-        $dateEnd = date("Y-m-d", strtotime($to));
-        $dateEndDT = new DateTime($dateEnd);
-
-        $period = new DatePeriod(
-            new DateTime($dateStart),
-            new DateInterval('P1D'),
-            $dateEndDT->modify( '+1 day' )
-        );
-
-        $days = [];
-        foreach ($period as $key => $value) {
-            $days[] = $value->format('Y-m-d');    
-        }
-
-        $maxValue = count($days);
-        return range(0, $maxValue);
-    }
-
