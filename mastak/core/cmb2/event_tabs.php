@@ -716,7 +716,7 @@
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'    => __( ' Просчитать цену', 'cmb2' ),
+            'name'    => 'Просчитать цену за одного человека',
             'id'      => 'calculate',
             'type'    => 'calculate',
             'options' => array(
@@ -729,7 +729,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая',
+            'name'         => 'Текущая за 1 человека',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN'
@@ -737,7 +737,7 @@
 
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Новая цена',
+            'name'         => 'Новая цена за 1 человека',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',

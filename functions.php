@@ -569,10 +569,12 @@ function change_ordered_color_10($box_id, $cmb)
                             const calendarId = name.indexOf('[calendar]') > -1;
                             const oldPrice = name.indexOf('[old_price]') > -1;
 
-                            const peopleCount = name.indexOf('[peopleCount]') > -1;
+                            const peopleCount = 1;
                             const food_breakfast = name.indexOf('[food_breakfast]') > -1;
                             const food_lunch = name.indexOf('[food_lunch]') > -1;
                             const food_dinner = name.indexOf('[food_dinner]') > -1;
+                            const food_full = name.indexOf('[food_full]') > -1;
+
                             const bath_house_black = name.indexOf('[bath_house_black]') > -1;
                             const bath_house_white = name.indexOf('[bath_house_white]') > -1;
 
@@ -583,34 +585,45 @@ function change_ordered_color_10($box_id, $cmb)
                             let key;
                             if(calendarId){
                                 key = 'calendarId';
+                                result[key] = $(this).val();;
                             }
                             if(dateFrom){
                                 key = 'dateFrom';
+                                result[key] = $(this).val();;
                             }
                             if(dateTo){
                                 key = 'dateTo';
+                                result[key] = $(this).val();;
                             }
 
                             if(peopleCount){
                                 key = 'peopleCount';
+                                result[key] = 1;
                             }
-                            if(food_breakfast){
+                            if(food_breakfast && $(this).is(':checked')){
                                 key = 'foodBreakfast';
+                                result[key] = 1;
                             }
-                            if(food_lunch){
+                            if(food_lunch && $(this).is(':checked')){
                                 key = 'foodLunch';
+                                result[key] = 1;
                             }
-                            if(food_dinner){
+                            if(food_dinner && $(this).is(':checked')){
                                 key = 'foodDinner';
+                                result[key] = 1;
+                            }
+                            if(food_full && $(this).is(':checked')){
+                                key = 'foodFull';
+                                result['foodBreakfast'] = 1;
+                                result['foodLunch'] = 1;
+                                result['foodDinner'] = 1;
                             }
                             if(bath_house_black){
                                 key = 'bathHouseBlack';
+                                result[key] = $(this).val();
                             }
                             if(bath_house_white){
                                 key = 'bathHouseWhite';
-                            }
-
-                            if(key){
                                 result[key] = $(this).val();
                             }
                         }
