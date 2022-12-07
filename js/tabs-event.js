@@ -1,4 +1,6 @@
-jQuery(document).ready(function ($) {
+jQuery(document).on('ready', function () {
+    const $ = jQuery
+    console.log('ready')
     $('#cmb2-metabox-mastak_event_tab_type_10')
         .find('.postbox')
         .each(function (index, item) {
@@ -178,4 +180,5 @@ jQuery(document).ready(function ($) {
                 })
         }
     })(window, document, jQuery)
+    console.log('complete')
 })
