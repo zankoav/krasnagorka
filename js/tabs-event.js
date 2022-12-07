@@ -34,8 +34,8 @@ jQuery(document).on('ready', function () {
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description')
                 const $spinner = $(this).parent().find('.spinner')
 
-                const from = $('.mastak_event_tab_type_10_from').val()
-                const to = $('.mastak_event_tab_type_10_to').val()
+                const from = $('#mastak_event_tab_type_10_from').val()
+                const to = $('#mastak_event_tab_type_10_to').val()
 
                 let $currentPrice
                 const result = {
