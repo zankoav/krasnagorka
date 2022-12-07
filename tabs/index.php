@@ -1,3 +1,3 @@
 <?php
-// require_once('./events-tab.php');
+    require __DIR__ . '/events-tab.php';
 ?>
