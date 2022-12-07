@@ -1,3 +1,3 @@
 <?php
-require_once('./events-tab.php');
+// require_once('./events-tab.php');
 ?>
