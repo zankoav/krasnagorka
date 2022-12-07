@@ -953,4 +953,3 @@ function kg_add_remind()
 require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';
 
-Log::info('Test', zankoav());
