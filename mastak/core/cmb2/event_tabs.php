@@ -706,6 +706,14 @@
             'options'       => [1,2,3,4,5,6,7,8],
         ) );
 
+        $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Группа',
+            'id'   => 'group',
+            'show_option_none' => true,
+            'type'             => 'select',
+            'options'       => ['I','II','III','IV','V','VI','VII','VIII','IX', 'X'],
+        ) );
+
         // $sbc_client->add_group_field($group_field_event, array(
         //     'name' => 'Завтраки',
         //     'id'   => 'food_breakfast',
@@ -760,7 +768,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая за 1 человека',
+            'name'         => 'Текущая за одного человека',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN'
@@ -768,7 +776,7 @@
 
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Новая цена за 1 человека',
+            'name'         => 'Новая цена за одного человека',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
