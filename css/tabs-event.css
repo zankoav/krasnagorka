@@ -13,3 +13,13 @@
 .bgc-expired {
   background-color: #72777c !important;
 }
+
+.calculate-field .spinner {
+  float: initial;
+}
+.calculate-field .spinner.spinner_show {
+  visibility: visible;
+}
+.calculate-percent {
+  padding: 5px 0;
+}
