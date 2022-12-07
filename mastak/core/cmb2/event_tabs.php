@@ -647,6 +647,13 @@
             )
         ));
 
+        
+        $postId = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : false);
+        if ($postId) {
+            $food = get_post_meta($postId, 'mastak_event_tab_type_10_food', 1);
+            Log::info('$food', $food);
+        }
+
 
         $group_field_event = $sbc_client->add_field(array(
             'id'          => $prefix . '_items',
@@ -708,6 +715,9 @@
             ),
             'default' => 'none',
         ));
+
+
+        
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Текущая за одного человека',
