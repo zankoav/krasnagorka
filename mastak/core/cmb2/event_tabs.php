@@ -680,24 +680,6 @@
             ),
         ));
 
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Дата с',
-        //     'id'   => 'from',
-        //     'type' => 'text_date',
-        //     'attributes' => array(
-        //         'data-validation' => 'required',
-        //     )
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Дата до',
-        //     'id'   => 'to',
-        //     'type' => 'text_date',
-        //     'attributes' => array(
-        //         'data-validation' => 'required',
-        //     )
-        // ) );
-
         $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Минимальное число спальных мест',
             'id'   => 'peopleCount',
@@ -713,46 +695,6 @@
             'type'             => 'select',
             'options'       => ['I','II','III','IV','V','VI','VII','VIII','IX', 'X'],
         ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Завтраки',
-        //     'id'   => 'food_breakfast',
-        //     'type' => 'checkbox'
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Обеды',
-        //     'id'   => 'food_lunch',
-        //     'type' => 'checkbox'
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Ужины',
-        //     'id'   => 'food_dinner',
-        //     'type' => 'checkbox'
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => '3х-разовое питание',
-        //     'id'   => 'food_full',
-        //     'type' => 'checkbox'
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Баня по черному',
-        //     'id'   => 'bath_house_black',
-        //     'type'             => 'select',
-        //     'default'          => 0,
-        //     'options'       => range(0, 25)
-        // ) );
-
-        // $sbc_client->add_group_field($group_field_event, array(
-        //     'name' => 'Баня по белому',
-        //     'id'   => 'bath_house_white',
-        //     'type'             => 'select',
-        //     'default'          => 0,
-        //     'options'       => range(0, 25)
-        // ) );
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'    => 'Просчитать цену за одного человека',
@@ -774,7 +716,6 @@
             'before_field' => 'BYN'
         ));
 
-
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Новая цена за одного человека',
             'id'           => 'new_price',
@@ -793,7 +734,7 @@
             'id'           => 'image',
             'type'         => 'file',
             'options'      => array(
-                'url' => false, // Hide the text input for the url
+                'url' => false,
             ),
             'preview_size' => array(100, 100)
         ));
