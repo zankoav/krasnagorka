@@ -15,7 +15,7 @@ jQuery(document).on('ready', function () {
     window.CMB2 = (function (window, document, $, undefined) {
         'use strict'
 
-        $('.cmb-add-group-row').click(function () {
+        $('.cmb-add-group-row').on('click', function () {
             setTimeout(() => {
                 initCalculations()
                 initInputHandler()
@@ -25,7 +25,7 @@ jQuery(document).on('ready', function () {
         initCalculations()
 
         function initCalculations() {
-            $('.js-calculate').click(function () {
+            $('.js-calculate').on('click', function () {
                 const empty_calendar = 'Выберите календарь'
                 const empty_date_from = 'Выберите дату заезда'
                 const empty_date_to = 'Выберите дату выезда'
