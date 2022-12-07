@@ -2,7 +2,7 @@ jQuery(document).on('ready', function () {
     const $ = jQuery
     $('#cmb2-metabox-mastak_event_tab_type_10')
         .find('.postbox')
-        .each(function (index, item) {
+        .each(function (index) {
             const state = orderedIds[index]
             const id = `#mastak_event_tab_type_10_items_${index}_calendar`
             const $calendar = $(this).find(id)
@@ -29,21 +29,25 @@ jQuery(document).on('ready', function () {
                 const empty_calendar = 'Выберите календарь'
                 const empty_date_from = 'Выберите дату заезда'
                 const empty_date_to = 'Выберите дату выезда'
-                const booking_unavailable = 'Даты заняты'
 
                 const $parent = $(this).parents('.inside.cmb-field-list')
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description')
-                const $inputEl = $(this).parent().parent().find('input')
                 const $spinner = $(this).parent().find('.spinner')
+
+                const from = $('.mastak_event_tab_type_10_from').val()
+                const to = $('.mastak_event_tab_type_10_to').val()
+
                 let $currentPrice
-                const result = { is_admin_event: true }
+                const result = {
+                    is_admin_event: true,
+                    dateFrom: from,
+                    dateTo: to
+                }
                 $message.css({ color: '' }).empty()
                 $parent.find('input, select').each(function (index) {
                     const name = $(this).attr('name')
 
                     if (name) {
-                        const dateFrom = name.indexOf('[from]') > -1
-                        const dateTo = name.indexOf('[to]') > -1
                         const calendarId = name.indexOf('[calendar]') > -1
                         const oldPrice = name.indexOf('[old_price]') > -1
 
@@ -63,14 +67,6 @@ jQuery(document).on('ready', function () {
                         let key
                         if (calendarId) {
                             key = 'calendarId'
-                            result[key] = $(this).val()
-                        }
-                        if (dateFrom) {
-                            key = 'dateFrom'
-                            result[key] = $(this).val()
-                        }
-                        if (dateTo) {
-                            key = 'dateTo'
                             result[key] = $(this).val()
                         }
 
