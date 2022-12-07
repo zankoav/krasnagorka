@@ -51,7 +51,9 @@ function vortal_wp_mail_from_name($email_from)
 add_action('admin_enqueue_scripts', 'load_admin_style');
 function load_admin_style()
 {
-    wp_enqueue_style('admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0');
+    $uri = get_template_directory_uri();
+    wp_enqueue_style('admin_css', $uri  . '/admin-style.css', false, '1.0.0');
+    wp_enqueue_style('events_tab_css', $uri  . '/css/tabs-event.css', false, '1.0.0');
 }
 
 
@@ -705,8 +707,6 @@ function kg_add_remind()
         update_post_meta($order->ID, 'sbc_remind_task', 'Задача создана');
     }
 }
-
-
 
 // ADD ROLE Once!
 // add_role( 'basic_contributor', 'Менеджер по объектам',

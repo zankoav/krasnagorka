@@ -1,0 +1,15 @@
+.bgc-reserved {
+  background-color: #c7dff1 !important;
+}
+
+.bgc-prepaid {
+  background-color: #ffecb5 !important;
+}
+
+.bgc-booked {
+  background-color: #fdb7ce !important;
+}
+
+.bgc-expired {
+  background-color: #72777c !important;
+}

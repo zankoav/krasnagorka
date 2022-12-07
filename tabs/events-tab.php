@@ -1,6 +1,6 @@
 <?php
 
-function change_ordered_color_10($box_id, $cmb)
+function event_tab_order_settings($box_id, $cmb)
 {
     $post_id = $_GET['post'];
     if (empty($post_id) || $box_id != 'mastak_event_tab_type_10') {
@@ -24,23 +24,6 @@ function change_ordered_color_10($box_id, $cmb)
 
     $ids_json = json_encode($ids);
 ?>
-    <style>
-        .bgc-reserved {
-            background-color: #c7dff1 !important;
-        }
-
-        .bgc-prepaid {
-            background-color: #ffecb5 !important;
-        }
-
-        .bgc-booked {
-            background-color: #fdb7ce !important;
-        }
-
-        .bgc-expired {
-            background-color: #72777c !important;
-        }
-    </style>
     <script type="text/javascript">
         var orderedIds = JSON.parse('<?= $ids_json; ?>');
         jQuery(document).ready(function($) {
@@ -233,4 +216,4 @@ function change_ordered_color_10($box_id, $cmb)
 <?php
 }
 
-add_action('cmb2_after_form', 'change_ordered_color_10', 10, 3);
+add_action('cmb2_after_form', 'event_tab_order_settings', 10, 3);
