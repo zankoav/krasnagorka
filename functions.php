@@ -53,9 +53,9 @@ function load_admin_style()
 {
     $uri = get_template_directory_uri();
     wp_enqueue_style('admin_css', $uri  . '/admin-style.css', false, '1.0.0');
-
+    
     wp_enqueue_style('events_tab_css', $uri  . '/css/tabs-event.css', false, '1.0.0');
-    wp_enqueue_style('events_tab_js', $uri  . '/js/tabs-event.js', false, '1.0.0');
+    wp_enqueue_script( 'events_tab_js',uri . 'js/fullcalendar.min.js', array( 'jquery' ), false, true );
 }
 
 
