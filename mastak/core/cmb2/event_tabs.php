@@ -650,8 +650,13 @@
         
         $postId = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : false);
         if ($postId) {
-            $food = get_post_meta($postId, 'mastak_event_tab_type_10_food', 1);
-            Log::info('$food', $food);
+            $foods = get_post_meta($postId, 'mastak_event_tab_type_10_food', 1);
+            if(!empty($foods)){
+                foreach ((array)$foods as $food) {
+                    Log::info('food!', $food);
+                }
+            }
+            
         }
 
 
