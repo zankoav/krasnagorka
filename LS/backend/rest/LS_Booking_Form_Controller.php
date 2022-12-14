@@ -127,6 +127,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
         $isTerem = $request['isTerem'];
         $isAdminEvent = $request['is_admin_event'];
+        $intervallId = $request['intervallId'];
+        
+        
+        
+
 
         if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
@@ -134,6 +139,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             
             $dateStart = date("Y-m-d", strtotime('+1 day', strtotime($request['dateFrom'])));
             $dateEnd = date("Y-m-d", strtotime($request['dateTo']));
+            
+            if(!empty($intervallId)){
+                $dateStart = get_post_meta($intervallId, "season_from", true);
+                $dateEnd = get_post_meta($intervallId, "season_to", true);
+            }
+
             $isTerem = $house['terem'];
 
             if(isset($request['peopleCount'])){

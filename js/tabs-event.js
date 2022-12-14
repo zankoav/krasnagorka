@@ -45,8 +45,7 @@ jQuery(document).on('ready', function () {
                 $message.css({ color: '' }).empty()
 
                 if (!$spinner.hasClass('spinner_show')) {
-                    console.log('result', result)
-                    // calculate(result)
+                    calculate(result)
                 }
 
                 async function calculate(data) {
