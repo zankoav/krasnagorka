@@ -614,22 +614,30 @@
         ));
 
         $sbc_client->add_field(array(
-            'name' => 'Дата с',
-            'id'   => $prefix . '_from',
-            'type' => 'text_date',
-            'attributes' => array(
-                'data-validation' => 'required',
-            )
+            'name' => 'Сезонный интервал',
+            'id'   => $prefix . '_interval',
+            'type'             => 'select',
+            'options_cb'       => 'show_interval_options',
         ));
 
-        $sbc_client->add_field(array(
-            'name' => 'Дата до',
-            'id'   => $prefix . '_to',
-            'type' => 'text_date',
-            'attributes' => array(
-                'data-validation' => 'required',
-            )
-        ));
+
+        // $sbc_client->add_field(array(
+        //     'name' => 'Дата с',
+        //     'id'   => $prefix . '_from',
+        //     'type' => 'text_date',
+        //     'attributes' => array(
+        //         'data-validation' => 'required',
+        //     )
+        // ));
+
+        // $sbc_client->add_field(array(
+        //     'name' => 'Дата до',
+        //     'id'   => $prefix . '_to',
+        //     'type' => 'text_date',
+        //     'attributes' => array(
+        //         'data-validation' => 'required',
+        //     )
+        // ));
 
         $sbc_client->add_field(array(
             'name' => 'Питание',
@@ -765,4 +773,30 @@
             'id'   => 'description',
             'type' => 'wysiwyg',
         ));
+    }
+
+    function show_interval_options() {
+
+        $query = new WP_Query(array(
+            'post_type'      => 'season_interval',
+            'posts_per_page' => -1,
+            'post_status' => array("publish"),
+            'meta_query' => [
+                [
+                    'key'     => 'season_from',
+                    'value'   => date("Y-m-d"),
+                    'type'    => 'DATE',
+                    'compare' => '<='
+                    
+                ]
+            ]
+        ));
+
+        $intervals = [];
+        $posts = $query->get_posts();
+        foreach ($posts as $post) {
+            $intervals[$post->ID] = $post->post_title;
+        }
+
+        return $intervals;
     }
