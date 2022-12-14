@@ -38,33 +38,20 @@
 
     global $currency_name;
     $teremItemsIds = array(18,19,20,21,22,23,24,25,26,27,28,29);
+
+    $items = $tab->getItems();
+    $interval = $tab->getInterval();
+    $from =  $interval[0];
+    $to =  $interval[1];
+
 ?>
 <div class="accordion-mixed__content-inner">
     <?php 
-    $items = $tab->getItems();
 
-    // function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc', 'new_price'=>'asc') ){
-    //     usort( $array, function( $a, $b ) use ( $args ){
-    //         $res = 0;
+    echo $from ;
+    echo $to ;
     
-    //         $a = (object) $a;
-    //         $b = (object) $b;
-    
-    //         foreach( $args as $k => $v ){
-    //             if( $a->$k == $b->$k ) continue;
-    
-    //             $res = ( $a->$k < $b->$k ) ? -1 : 1;
-    //             if( $v=='desc' ) $res= -$res;
-    //             break;
-    //         }
-    
-    //         return $res;
-    //     } );
-    
-    //     return $array;
-    // }
-    
-    // $items = sort_nested_arrays($items);
+
 
     foreach ($items as $item) :
 

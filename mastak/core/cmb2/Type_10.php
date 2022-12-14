@@ -27,6 +27,14 @@
 			return $items;
 		}
 
+        public function getInterval(){
+            $result = [
+                get_post_meta($this->id, "season_from", true),
+                get_post_meta($this->id, "season_to", true),
+            ];
+            return $result;
+        }
+
         private function initHouses($items){
             foreach($items as &$item){
                 $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
