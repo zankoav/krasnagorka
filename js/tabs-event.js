@@ -25,52 +25,48 @@ jQuery(document).on('ready', function () {
         initCalculations()
 
         function initCalculations() {
-            $('#mastak_event_tab_type_10')
-                .$('.js-calculate')
-                .on('click', function () {
+            $('#mastak_event_tab_type_10 .js-calculate').on('click', function () {
+                const $parent = $(this).parents('.cmb-row.cmb-repeatable-grouping')
+                const $currentPrice = $parent.find("[name$='[old_price]']")
+                const $message = $(this).parent().parent().find('.cmb2-metabox-description')
+                const $spinner = $(this).parent().find('.spinner')
 
+                const intervallId = $('#mastak_event_tab_type_10_interval').val()
+                const calendarId = $parent.find("[name$='[calendar]']").val()
 
-                    const $parent = $(this).parents('.cmb-row.cmb-repeatable-grouping');
-                    const $currentPrice = $parent.find("[name$='[old_price]']");
-                    const $message = $(this).parent().parent().find('.cmb2-metabox-description')
-                    const $spinner = $(this).parent().find('.spinner')
+                const result = {
+                    is_admin_event: true,
+                    peopleCount: 1,
+                    intervallId: intervallId,
+                    calendarId: calendarId
+                }
 
-                    const intervallId = $('#mastak_event_tab_type_10_interval').val()
-                    const calendarId = $parent.find("[name$='[calendar]']").val();
+                $message.css({ color: '' }).empty()
 
-                    const result = {
-                        is_admin_event: true,
-                        peopleCount: 1,
-                        intervallId: intervallId,
-                        calendarId: calendarId
-                    }
+                if (!$spinner.hasClass('spinner_show')) {
+                    console.log('result', result)
+                    // calculate(result)
+                }
 
-                    $message.css({ color: '' }).empty()
-
-                    if (!$spinner.hasClass('spinner_show')) {
-                        console.log('result', result);
-                        // calculate(result)
-                    }
-
-                    async function calculate(data) {
-                        $spinner.addClass('spinner_show')
-                        const response = await fetch(
-                            'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
-                            {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json; charset=utf-8'
-                                },
-                                body: JSON.stringify(data)
-                            }
-                        )
-                        const responseData = await response.json()
-                        if (responseData) {
-                            $currentPrice.val(responseData.total_price)
-                            $spinner.removeClass('spinner_show')
+                async function calculate(data) {
+                    $spinner.addClass('spinner_show')
+                    const response = await fetch(
+                        'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            },
+                            body: JSON.stringify(data)
                         }
+                    )
+                    const responseData = await response.json()
+                    if (responseData) {
+                        $currentPrice.val(responseData.total_price)
+                        $spinner.removeClass('spinner_show')
                     }
-                })
+                }
+            })
         }
 
         // initInputHandler()
