@@ -789,7 +789,8 @@
                     'compare' => '>'
                     
                 ]
-            ]
+            ],
+            'orderby'  => [ 'season_from'=>'ASC' ]
         ));
 
         $intervals = [];
