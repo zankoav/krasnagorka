@@ -620,25 +620,6 @@
             'options_cb'       => 'show_interval_options',
         ));
 
-
-        // $sbc_client->add_field(array(
-        //     'name' => 'Дата с',
-        //     'id'   => $prefix . '_from',
-        //     'type' => 'text_date',
-        //     'attributes' => array(
-        //         'data-validation' => 'required',
-        //     )
-        // ));
-
-        // $sbc_client->add_field(array(
-        //     'name' => 'Дата до',
-        //     'id'   => $prefix . '_to',
-        //     'type' => 'text_date',
-        //     'attributes' => array(
-        //         'data-validation' => 'required',
-        //     )
-        // ));
-
         $sbc_client->add_field(array(
             'name' => 'Питание',
             'id'   => $prefix . '_food',
@@ -733,14 +714,14 @@
         
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая за одного человека',
+            'name'         => 'Текущая за одного человека, без питания',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN'
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Новая цена за одного человека',
+            'name'         => 'Новая цена за одного человека, без питания',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',

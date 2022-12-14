@@ -18,7 +18,7 @@ jQuery(document).on('ready', function () {
         $('.cmb-add-group-row').on('click', function () {
             setTimeout(() => {
                 initCalculations()
-                initInputHandler()
+                // initInputHandler()
             }, 500)
         })
 
@@ -28,99 +28,28 @@ jQuery(document).on('ready', function () {
             $('#mastak_event_tab_type_10')
                 .$('.js-calculate')
                 .on('click', function () {
-                    const empty_calendar = 'Выберите календарь'
-                    const empty_date_from = 'Выберите дату заезда'
-                    const empty_date_to = 'Выберите дату выезда'
 
-                    const $parent = $(this).parents('.inside.cmb-field-list')
+
+                    const $parent = $(this).parents('.cmb-row.cmb-repeatable-grouping');
+                    const $currentPrice = $parent.find("[name$='[old_price]']");
                     const $message = $(this).parent().parent().find('.cmb2-metabox-description')
                     const $spinner = $(this).parent().find('.spinner')
 
-                    const from = $('#mastak_event_tab_type_10_from').val()
-                    const to = $('#mastak_event_tab_type_10_to').val()
+                    const intervallId = $('#mastak_event_tab_type_10_interval').val()
+                    const calendarId = $parent.find("[name$='[calendar]']").val();
 
-                    let $currentPrice
                     const result = {
                         is_admin_event: true,
-                        dateFrom: from,
-                        dateTo: to
+                        peopleCount: 1,
+                        intervallId: intervallId,
+                        calendarId: calendarId
                     }
+
                     $message.css({ color: '' }).empty()
-                    $parent.find('input, select').each(function (index) {
-                        const name = $(this).attr('name')
 
-                        if (name) {
-                            const calendarId = name.indexOf('[calendar]') > -1
-                            const oldPrice = name.indexOf('[old_price]') > -1
-
-                            const peopleCount = 1
-                            const food_breakfast = name.indexOf('[food_breakfast]') > -1
-                            const food_lunch = name.indexOf('[food_lunch]') > -1
-                            const food_dinner = name.indexOf('[food_dinner]') > -1
-                            const food_full = name.indexOf('[food_full]') > -1
-
-                            const bath_house_black = name.indexOf('[bath_house_black]') > -1
-                            const bath_house_white = name.indexOf('[bath_house_white]') > -1
-
-                            if (oldPrice) {
-                                $currentPrice = $(this)
-                            }
-
-                            let key
-                            if (calendarId) {
-                                key = 'calendarId'
-                                result[key] = $(this).val()
-                            }
-
-                            if (peopleCount) {
-                                key = 'peopleCount'
-                                result[key] = 1
-                            }
-                            if (food_breakfast && $(this).is(':checked')) {
-                                key = 'foodBreakfast'
-                                result[key] = 1
-                            }
-                            if (food_lunch && $(this).is(':checked')) {
-                                key = 'foodLunch'
-                                result[key] = 1
-                            }
-                            if (food_dinner && $(this).is(':checked')) {
-                                key = 'foodDinner'
-                                result[key] = 1
-                            }
-                            if (food_full && $(this).is(':checked')) {
-                                key = 'foodFull'
-                                result['foodBreakfast'] = 1
-                                result['foodLunch'] = 1
-                                result['foodDinner'] = 1
-                            }
-                            if (bath_house_black) {
-                                key = 'bathHouseBlack'
-                                result[key] = $(this).val()
-                            }
-                            if (bath_house_white) {
-                                key = 'bathHouseWhite'
-                                result[key] = $(this).val()
-                            }
-                        }
-                    })
-
-                    let error
-
-                    if (!result.calendarId) {
-                        error = empty_calendar
-                    } else if (!result.dateFrom) {
-                        error = empty_date_from
-                    } else if (!result.dateTo) {
-                        error = empty_date_to
-                    }
-
-                    if (error) {
-                        $message.css({ color: '#b32d2e;' }).html(error)
-                    } else {
-                        if (!$spinner.hasClass('spinner_show')) {
-                            calculate(result)
-                        }
+                    if (!$spinner.hasClass('spinner_show')) {
+                        console.log('result', result);
+                        // calculate(result)
                     }
 
                     async function calculate(data) {
@@ -144,7 +73,7 @@ jQuery(document).on('ready', function () {
                 })
         }
 
-        initInputHandler()
+        // initInputHandler()
 
         function initInputHandler() {
             $('#mastak_event_tab_type_10_items_repeat')
