@@ -129,10 +129,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $isAdminEvent = $request['is_admin_event'];
         $intervallId = $request['intervallId'];
         
-        
-        
-
-
         if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
             $houseId = $house['id']; 
