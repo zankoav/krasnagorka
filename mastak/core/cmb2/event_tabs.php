@@ -786,7 +786,7 @@
                     'key'     => 'season_from',
                     'value'   => date("Y-m-d"),
                     'type'    => 'DATE',
-                    'compare' => '<='
+                    'compare' => '>'
                     
                 ]
             ]
