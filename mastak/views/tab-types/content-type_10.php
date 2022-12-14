@@ -41,7 +41,7 @@
 ?>
 <div class="accordion-mixed__content-inner">
     <?php 
-    // $items = $tab->getItems();
+    $items = $tab->getItems();
 
     // function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc', 'new_price'=>'asc') ){
     //     usort( $array, function( $a, $b ) use ( $args ){
