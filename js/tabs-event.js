@@ -17,6 +17,7 @@ jQuery(document).on('ready', function () {
 
         $('.cmb-add-group-row').on('click', function () {
             setTimeout(() => {
+                $('#mastak_event_tab_type_10 .js-calculate').off('click')
                 initCalculations()
                 // initInputHandler()
             }, 500)
