@@ -19,7 +19,7 @@ jQuery(document).on('ready', function () {
             setTimeout(() => {
                 $('#mastak_event_tab_type_10 .js-calculate').off('click')
                 initCalculations()
-                // initInputHandler()
+                initInputHandler()
             }, 500)
         })
 
@@ -70,7 +70,7 @@ jQuery(document).on('ready', function () {
             })
         }
 
-        // initInputHandler()
+        initInputHandler()
 
         function initInputHandler() {
             $('#mastak_event_tab_type_10_items_repeat')
