@@ -31,7 +31,7 @@ function register_variant() {
         'hierarchical'       => false,
         'menu_position'      => 4,
         'menu_icon'          => 'dashicons-welcome-learn-more',
-        'supports'           => array('title', 'editor', 'thumbnail')
+        'supports'           => array('title')
     ));
 }
 
@@ -55,7 +55,7 @@ function variant_metabox() {
     $sbc_variant->add_field( array(
         'name'             => esc_html__( 'Питание', 'sbc' ),
         'id'               => $prefix . '_food',
-        'type'             => 'radio',
+        'type'             => 'multicheck',
         'options'          => array(
             'breakfast'  => 'Завтраки',
             'lunch'   => 'Обеды',
