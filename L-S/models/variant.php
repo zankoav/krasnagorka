@@ -19,16 +19,25 @@ function register_variant() {
             'menu_name'          => 'Пакет услуг',
             'items_archive'      => 'Пакет услуг архив',
         ),
-        'public'             => true,
-        'publicly_queryable' => true,
-        'show_ui'            => true,
-        'show_in_menu'       => true,
-        'show_in_nav_menus'  => true,
-        'query_var'          => true,
+        'public'              => false,
+        'publicly_queryable'  => true,
+        // зависит от public
+        'exclude_from_search' => true,
+        // зависит от public
+        'show_ui'             => true,
+        // зависит от public
+        'show_in_menu'        => null,
+        // показывать ли в меню адмнки
+        'show_in_admin_bar'   => null,
+        // по умолчанию значение show_in_menu
+        'show_in_nav_menus'   => false,
+        // зависит от public
+        'show_in_rest'        => null,
         'rewrite'            => array('slug' => 'variant', 'with_front' => false),
         'capability_type'    => 'post',
-        'has_archive'        => true,
-        'hierarchical'       => false,
+        'has_archive'         => false,
+        'rewrite'             => false,
+        'query_var'           => true,
         'menu_position'      => 4,
         'menu_icon'          => 'dashicons-welcome-learn-more',
         'supports'           => array('title')
