@@ -2,9 +2,6 @@
 
 if (!defined('ABSPATH')) { exit; }
 
-class 
-
-
 function register_variant() {
     register_post_type('variant', array(
         'labels'             => array(
