@@ -620,8 +620,8 @@
             'options_cb'       => 'show_interval_options',
         ));
 
-        $$sbc_client->add_field(array(
-            'name' => 'Сезонный интервал',
+        $sbc_client->add_field(array(
+            'name' => 'Пакеты услуг',
             'id'   => $prefix . '_variants',
             'type'             => 'multicheck',
             'options_cb'       => 'show_variants_options',
