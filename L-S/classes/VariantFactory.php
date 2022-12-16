@@ -8,8 +8,8 @@ class VariantFactory {
     public static function getVaraintById($id, $settings = []){
         
         $variant = new Variant();
-        // $variant->id = $id;
-        // $variant->title = get_post_title($id);
+        $variant->id = $id;
+        $variant->title = get_the_title($id);
         // $food = get_post_meta($id, 'variant_food', 1);
         // if($food) {
         //     $variant->breakfast = $food['breakfast'] ?? false;
