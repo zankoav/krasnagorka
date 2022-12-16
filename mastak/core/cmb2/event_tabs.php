@@ -714,14 +714,16 @@
         
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая за одного человека, без питания',
+            'name'         => 'Текущая цена',
+            'description'  => 'Только проживание за одного человека',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN'
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Новая цена за одного человека, без питания',
+            'name'         => 'Новая цена ',
+            'description'  => 'Только проживание за одного человека',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
