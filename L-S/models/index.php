@@ -1,4 +1,4 @@
 <?php
 if (!defined('ABSPATH')) { exit; }
 
-require __DIR__ . '/variant.php';
+// require __DIR__ . '/variant.php';

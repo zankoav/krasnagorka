@@ -12,7 +12,7 @@ require __DIR__ . '/L-S/utils/index.php';
 require __DIR__ . '/L-S/setup.php';
 require __DIR__ . '/L-S/cmb2/index.php';
 require __DIR__ . '/L-S/widgets/index.php';
-// require __DIR__ . '/L-S/models/index.php';
+require __DIR__ . '/L-S/models/index.php';
 
 // Factory
 require __DIR__ . '/L-S/classes/index.php';
