@@ -740,7 +740,9 @@
         $query = new WP_Query(array(
             'post_type'      => 'variant',
             'posts_per_page' => -1,
-            'post_status' => array("publish")
+            'post_status' => array("publish"),
+            'orderby' => 'post_title',
+            'order' => 'ASC'
         ));
 
         $variants = [];
