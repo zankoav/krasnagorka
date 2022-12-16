@@ -737,12 +737,18 @@
     }
 
     function show_variants_options() {
-        $variants = [
-            '1' => 'one',
-            '100' => 'hundread'
-        ];
-        
+        $query = new WP_Query(array(
+            'post_type'      => 'variant',
+            'posts_per_page' => -1,
+            'post_status' => array("publish")
+        ));
 
+        $variants = [];
+        $posts = $query->get_posts();
+        foreach ($posts as $post) {
+            $variants[$post->ID] = $post->post_title;
+        }
+    
         return $variants;
     }
 
