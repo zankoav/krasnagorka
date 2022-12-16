@@ -47,13 +47,11 @@ function register_variant() {
 add_action('init', 'register_variant');
 
 function variant_metabox() {
-    $prefix = 'variant_';
-
     /**
      * Sample metabox to demonstrate each field type included
      */
     $sbc_variant = new_cmb2_box(array(
-        'id'           => $prefix . 'data',
+        'id'           => 'variant_data',
         'title'        => esc_html__('Настройка пакета услуг', 'krasnagorka'),
         'object_types' => array('variant'), // Post type
         'context'      => 'normal',
@@ -63,7 +61,7 @@ function variant_metabox() {
 
     $sbc_variant->add_field( array(
         'name'             => esc_html__( 'Питание', 'sbc' ),
-        'id'               => $prefix . '_food',
+        'id'               => 'variant_food',
         'type'             => 'multicheck',
         'options'          => array(
             'breakfast'  => 'Завтраки',
@@ -74,15 +72,22 @@ function variant_metabox() {
 
     $sbc_variant->add_field( array(
         'name'             => esc_html__( 'Бани по белому', 'sbc' ),
-        'id'               => $prefix . '_white_bath',
+        'id'               => 'variant_white_bath',
         'type'             => 'checkbox'
     ) );
 
     $sbc_variant->add_field( array(
         'name'             => esc_html__( 'Бани по черному', 'sbc' ),
-        'id'               => $prefix . '_черному_bath',
+        'id'               => 'variant_черному_bath',
         'type'             => 'checkbox'
     ) );
+
+    $sbc_variant->add_field(array(
+        'name' => 'Скидка на пакетный тур',
+        'id'   => 'variant_sale',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
 }
 
 add_action('cmb2_admin_init', 'variant_metabox');
