@@ -623,7 +623,7 @@
         $sbc_client->add_field(array(
             'name' => 'Пакеты услуг',
             'id'   => $prefix . '_variants',
-            'type'             => 'multicheck',
+            'type'             => 'multicheck_inline',
             'options_cb'       => 'show_variants_options',
         ));
 
