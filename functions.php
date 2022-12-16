@@ -721,7 +721,7 @@ require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';
 
 try{
-    $variant = null;//VariantFactory::getVaraintById(25123, get_option('mastak_booking_appearance_options'));
+    $variant = VariantFactory::getVaraintById(25123, get_option('mastak_booking_appearance_options'));
     Log::info('gg', $variant);
 }catch(Exception $e){
     Log::error('error', $e);
