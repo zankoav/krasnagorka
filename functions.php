@@ -1,7 +1,6 @@
 <?php
 
 use Ls\Wp\Log as Log;
-use LsFactory\VariantFactory as VariantFactory; 
 
 if (!defined('ABSPATH')) { exit; }
 
@@ -720,11 +719,3 @@ function kg_add_remind()
 
 require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';
-
-try{
-    $opt123 = get_option('mastak_booking_appearance_options');
-    $variant = VariantFactory::getVaraintById(25122, $opt123);
-    Log::info('gg', $variant);
-}catch(Exception $e){
-    Log::error('error', $e);
-}
