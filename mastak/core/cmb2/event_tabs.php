@@ -620,34 +620,12 @@
             'options_cb'       => 'show_interval_options',
         ));
 
-        $sbc_client->add_field(array(
-            'name' => 'Питание',
-            'id'   => $prefix . '_food',
-            'type'    => 'multicheck',
-            'options' => array(
-                'food_empty' => 'Без питания',
-                'food_breakfast' => 'Завтраки',
-                'food_lunch' => 'Обеды',
-                'food_dinner' => 'Ужины',
-                'food_breakfast_lunch' => 'Завтраки и обеды',
-                'food_breakfast_dinner' => 'Завтраки и ужины',
-                'food_lunch_dinner' => 'Обеды и ужины',
-                'food_full' => '3-х разовое питание',
-            )
+        $$sbc_client->add_field(array(
+            'name' => 'Сезонный интервал',
+            'id'   => $prefix . '_variants',
+            'type'             => 'multicheck',
+            'options_cb'       => 'show_variants_options',
         ));
-
-        
-        $postId = isset($_GET['post']) ? $_GET['post'] : (isset($_POST['post_ID']) ? $_POST['post_ID'] : false);
-        if ($postId) {
-            $foods = get_post_meta($postId, 'mastak_event_tab_type_10_food', 1);
-            if(!empty($foods)){
-                foreach ((array)$foods as $food) {
-                    Log::info('food!', $food);
-                }
-            }
-            
-        }
-
 
         $group_field_event = $sbc_client->add_field(array(
             'id'          => $prefix . '_items',
@@ -756,6 +734,16 @@
             'id'   => 'description',
             'type' => 'wysiwyg',
         ));
+    }
+
+    function show_variants_options() {
+        $variants = [
+            '1' => 'one',
+            '100' => 'hundread'
+        ];
+        
+
+        return $variants;
     }
 
     function show_interval_options() {
