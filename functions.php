@@ -722,4 +722,4 @@ require_once __DIR__ . '/tabs/index.php';
 
 
 
-// Log::info('gg', VariantFactory::getVaraintById(25123, get_option('mastak_booking_appearance_options')));
+Log::info('gg', get_option('mastak_booking_appearance_options'));
