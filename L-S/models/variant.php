@@ -2,6 +2,8 @@
 
 if (!defined('ABSPATH')) { exit; }
 
+class 
+
 
 function register_variant() {
     register_post_type('variant', array(
@@ -78,7 +80,7 @@ function variant_metabox() {
 
     $sbc_variant->add_field( array(
         'name'             => esc_html__( 'Бани по черному', 'sbc' ),
-        'id'               => 'variant_черному_bath',
+        'id'               => 'variant_black_bath',
         'type'             => 'checkbox'
     ) );
 
