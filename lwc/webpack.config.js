@@ -12,7 +12,8 @@ module.exports = (env) => {
     const publicPath = IS_DEV ? '' : '/wp-content/themes/krasnagorka/src/'
     const settins = {
         entry: {
-            booking: './frontend/booking.js'
+            booking: './frontend/booking.js',
+            tab_events: './frontend/tab_events.js'
         },
         optimization: {
             minimize: true,
@@ -73,7 +74,7 @@ module.exports = (env) => {
                                 additionalData: (content, loaderContext) => {
                                     // const { resourcePath, rootContext } = loaderContext;
                                     // const relativePath = path.relative(rootContext, resourcePath);
-                                    return content;
+                                    return content
                                 }
                             }
                         }
@@ -102,10 +103,16 @@ module.exports = (env) => {
                 template: './frontend/booking.pug',
                 chunks: ['booking']
             }),
+            new HtmlWebpackPlugin({
+                title: 'Tab Events',
+                filename: `tab-events.html`,
+                template: './frontend/tab_events.pug',
+                chunks: ['tab_events']
+            }),
             new LWCWebpackPlugin(),
             new webpack.DefinePlugin({
                 DEBUG_MODE: true
-            }),
+            })
         ],
         resolve: {
             alias: {
