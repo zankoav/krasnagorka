@@ -8,6 +8,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     {
         $namespace = 'krasnagorka/v1';
 
+        register_rest_route($namespace, '/ls/event-tab/', [
+            array(
+                'methods'             => 'GET',
+                'callback'            => array($this, 'event_tab')
+            ),
+        ]);
+
         register_rest_route($namespace, '/ls/house/', [
             array(
                 'methods'             => 'GET',
@@ -40,6 +47,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function current_season_permissions_check($request)
     {
         return true;
+    }
+
+    /**
+     * addres wordpress/wp-json/krasnagorka/v1/ls/event-tab/?tabId=5  
+    */ 
+    public function event_tab($request){
+        $tabId = $request['tabId'];
+        return new WP_REST_Response(['Welcome to the rest', $tabId], 200); 
     }
 
     public function order_house($request)
