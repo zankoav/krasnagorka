@@ -1,5 +1,6 @@
 <?php
     use Ls\Wp\Log as Log;
+    use LsFactory\VariantFactory as VariantFactory; 
 
 	class Type_10 extends BaseMeta {
 
@@ -50,8 +51,9 @@
             $result = [];
             $variants = get_post_meta($this->id, 'mastak_event_tab_type_10_variants', 1);
             if(!empty($variants)){
+                $opts = get_option('mastak_booking_appearance_options');
                 foreach((array) $variants as $variant){
-                    $result[] =  $variant;
+                    $result[] = VariantFactory::getVaraintById($variant, $opts);
                 }
             }   
             return $result;
