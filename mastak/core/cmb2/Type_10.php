@@ -11,6 +11,15 @@
 			$this->id = $tab_id;
 		}
 
+        public function getData(){
+            return [
+                'id' => $this->id,
+                'interval' => $this->getInterval(),
+                'items' => $this->getItems(),
+                'variants' => $this->getVariants()
+            ];
+        }
+
 		public function getId(){
 			return $this->id;
 		}
@@ -28,10 +37,23 @@
 		}
 
         public function getInterval(){
+            $intervalId = get_post_meta($this->id, 'mastak_event_tab_type_10_interval', 1);
             $result = [
-                get_post_meta($this->id, "season_from", true),
-                get_post_meta($this->id, "season_to", true),
+                'id' => $intervalId,
+                'from' => get_post_meta($intervalId, "season_from", 1),
+                'to' => get_post_meta($intervalId, "season_to", 1)
             ];
+            return $result;
+        }
+
+        public function getVariants(){
+            $result = [];
+            $variants = get_post_meta($this->id, 'mastak_event_tab_type_10_variants', 1);
+            if(!empty($variants)){
+                foreach((array) $variants as $variant){
+                    $result[] =  $variant;
+                }
+            }   
             return $result;
         }
 
