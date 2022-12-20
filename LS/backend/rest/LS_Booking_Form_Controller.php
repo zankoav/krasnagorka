@@ -58,7 +58,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $resutl = [
             'interval_id' => get_post_meta($tabId, 'mastak_event_tab_type_10_interval', 1)
             'variants_id' => get_post_meta($tabId, 'mastak_event_tab_type_10_variants', 1)
-        ]
+        ];
         return new WP_REST_Response(['Welcome to the rest', $tabId], 200); 
     }
 
