@@ -1,4 +1,5 @@
 <?php
+    namespace Mastak;
 
 	class BaseMeta {
 		public function __construct( $post_id ) {

@@ -1,5 +1,6 @@
 <?php
 use Ls\Wp\Log as Log;
+use Mastak\Type_10 as Type_10;
 
 class LS_Booking_Form_Controller extends WP_REST_Controller
 {
@@ -53,7 +54,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
      * addres wordpress/wp-json/krasnagorka/v1/ls/event-tab/?tabId=5  
     */ 
     public function event_tab($request){
-        $tabId = $request['tabId'];
+        $tabId = absint($request['tabId']);
+        $tab = new Type_10($tabId);
+        $resutl = [
+            'interval_id' => get_post_meta($tabId, 'mastak_event_tab_type_10_interval', 1)
+            'variants_id' => get_post_meta($tabId, 'mastak_event_tab_type_10_variants', 1)
+        ]
         return new WP_REST_Response(['Welcome to the rest', $tabId], 200); 
     }
 

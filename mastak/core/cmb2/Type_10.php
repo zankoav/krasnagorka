@@ -1,4 +1,5 @@
 <?php
+    namespace Mastak;
     use Ls\Wp\Log as Log;
 
 	class Type_10 extends BaseMeta {
