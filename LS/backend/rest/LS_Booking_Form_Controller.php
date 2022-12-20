@@ -1,6 +1,5 @@
 <?php
 use Ls\Wp\Log as Log;
-use Mastak\Type_10 as Type_10;
 
 class LS_Booking_Form_Controller extends WP_REST_Controller
 {
