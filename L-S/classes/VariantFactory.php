@@ -2,6 +2,8 @@
 namespace LsFactory;
 
 use LsFactory\Variant;
+use Ls\Wp\Log as Log;
+
 
 class VariantFactory {
 
@@ -12,6 +14,7 @@ class VariantFactory {
         $variant->title = get_the_title($id);
         $food = get_post_meta($id, 'variant_food', 1);
         if($food) {
+            Log::info('food', $food);
             $variant->breakfast = $food['breakfast'] ?? false;
             $variant->lunch = $food['lunch'] ?? false;
             $variant->dinner = $food['dinner'] ?? false;
