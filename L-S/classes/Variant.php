@@ -11,7 +11,6 @@ class Variant {
 
     public string $title;
 
-    public bool $default = false;
     public bool $breakfast = false;
     public bool $lunch = false;
     public bool $dinner = false;
