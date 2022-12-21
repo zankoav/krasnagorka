@@ -627,6 +627,13 @@
             'options_cb'       => 'show_variants_options',
         ));
 
+        $sbc_client->add_field(array(
+            'name' => 'Пакет услуг по умолчанию',
+            'id'   => $prefix . '_variant_by_default',
+            'type'             => 'select',
+            'options_cb'       => 'show_variants_options',
+        ));
+
         $group_field_event = $sbc_client->add_field(array(
             'id'          => $prefix . '_items',
             'type'        => 'group',
