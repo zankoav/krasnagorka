@@ -56,7 +56,7 @@
                 $opts = get_option('mastak_booking_appearance_options');
                 foreach((array) $variants as $variant){
                     $variant = VariantFactory::getVaraintById($variant, $opts);
-                    $variant->default = $variant == $variantByDefault;
+                    $variant->default = ($variant == $variantByDefault);
                     if($variant->default){
                         $isFirstDefault = false;
                     }
