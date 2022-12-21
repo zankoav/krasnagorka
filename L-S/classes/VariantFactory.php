@@ -15,9 +15,9 @@ class VariantFactory {
         $food = get_post_meta($id, 'variant_food', 1);
         if($food) {
             Log::info('food', $food);
-            $variant->breakfast = array_key_exists('breakfast', $food) ?? false;
-            $variant->lunch = array_key_exists('lunch', $food) ?? false;
-            $variant->dinner = array_key_exists('dinner', $food) ?? false;
+            $variant->breakfast = array_key_exists('breakfast', $food);
+            $variant->lunch = array_key_exists('lunch', $food);
+            $variant->dinner = array_key_exists('dinner', $food);
         }
         $variant->whiteBath = get_post_meta($id, 'variant_white_bath', 1) == 'on';
         $variant->blackBath = get_post_meta($id, 'variant_black_bath', 1) == 'on';
