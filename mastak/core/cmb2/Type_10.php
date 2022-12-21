@@ -14,11 +14,24 @@
 
         public function getData(){
             $variantByDefault = get_post_meta($this->id, 'mastak_event_tab_type_10_variant_by_default', 1);
-
+            $items = $this->getItems();
+            $calendars = [];
+            foreach($items as $item){
+                $calendars[] = [
+                    'calendar' => intval($item['calendar']),
+                    'house' => intval($item['house']),
+                    'image' => $item['image'],
+                    'new_price' => intval($item['new_price']),
+                    'min_people' => intval($item['peopleCount']),
+                    'content' => $item['description'],
+                    'price_description' => $item['sale_text'],
+                    'group' => $item['group'] ?? null,
+                ];
+            }
             return [
                 'id' => $this->id,
                 'interval' => $this->getInterval(),
-                'calendars' => $this->getItems(),
+                'calendars' => $calendars,
                 'variants' => $this->getVariants(),
                 'variant_default'=> $variantByDefault
             ];
@@ -47,6 +60,20 @@
                 'from' => get_post_meta($intervalId, "season_from", 1),
                 'to' => get_post_meta($intervalId, "season_to", 1)
             ];
+
+            $dateEndDT = new DateTime($result['to']);
+            $period = new DatePeriod(
+                new DateTime($result['from']),
+                new DateInterval('P1D'),
+                $dateEndDT->modify( '+1 day' )
+            );
+    
+            $days = [];
+            foreach ($period as $key => $value) {
+                $days[] = $value->format('Y-m-d');    
+            }
+            $result['days'] = $days;
+            
             return $result;
         }
 
