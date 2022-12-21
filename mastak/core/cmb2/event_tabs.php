@@ -664,7 +664,7 @@
             'id'   => 'peopleCount',
             'type'             => 'select',
             'default'          => 1,
-            'options'       => [1,2,3,4,5,6,7,8],
+            'options'       => [1=>1,2=>2,3=>3,4=>4,5=>5,6=>6,7=>7,8=>8],
         ) );
 
         $sbc_client->add_group_field($group_field_event, array(
