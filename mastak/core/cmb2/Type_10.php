@@ -13,11 +13,14 @@
 		}
 
         public function getData(){
+            $variantByDefault = get_post_meta($this->id, 'mastak_event_tab_type_10_variant_by_default', 1);
+
             return [
                 'id' => $this->id,
                 'interval' => $this->getInterval(),
                 'calendars' => $this->getItems(),
-                'variants' => $this->getVariants()
+                'variants' => $this->getVariants(),
+                'variant_default'=> $variantByDefault
             ];
         }
 
@@ -50,20 +53,10 @@
         public function getVariants(){
             $result = [];
             $variants = get_post_meta($this->id, 'mastak_event_tab_type_10_variants', 1);
-            $variantByDefault = get_post_meta($this->id, 'mastak_event_tab_type_10_variant_by_default', 1);
-            $isFirstDefault = true;
             if(!empty($variants)){
                 $opts = get_option('mastak_booking_appearance_options');
                 foreach((array) $variants as $variant){
-                    $variant = VariantFactory::getVaraintById($variant, $opts);
-                    $variant->default = ($variant == $variantByDefault);
-                    if($variant->default){
-                        $isFirstDefault = false;
-                    }
-                    $result[] = $variant;
-                }
-                if($isFirstDefault){
-                    $variants[0]->default = true;
+                    $result[] = VariantFactory::getVaraintById($variant, $opts);
                 }
             }   
             return $result;
