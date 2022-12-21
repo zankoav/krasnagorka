@@ -14,7 +14,6 @@ class VariantFactory {
         $variant->title = get_the_title($id);
         $food = get_post_meta($id, 'variant_food', 1);
         if($food) {
-            Log::info('food', $food);
             $variant->breakfast = in_array('breakfast', $food);
             $variant->lunch = in_array('lunch', $food);
             $variant->dinner = in_array('dinner', $food);
