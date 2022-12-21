@@ -16,7 +16,7 @@
             return [
                 'id' => $this->id,
                 'interval' => $this->getInterval(),
-                'items' => $this->getItems(),
+                'calendars' => $this->getItems(),
                 'variants' => $this->getVariants()
             ];
         }
