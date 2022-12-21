@@ -15,22 +15,28 @@
         public function getData(){
             $variantByDefault = get_post_meta($this->id, 'mastak_event_tab_type_10_variant_by_default', 1);
             $items = $this->getItems();
+            $interval = $this->getInterval();
             $calendars = [];
             foreach($items as $item){
-                $calendars[] = [
-                    'calendar' => intval($item['calendar']),
-                    'house' => intval($item['house']),
-                    'image' => $item['image'],
-                    'new_price' => intval($item['new_price']),
-                    'min_people' => intval($item['peopleCount']),
-                    'content' => $item['description'],
-                    'price_description' => $item['sale_text'],
-                    'group' => $item['group'] ?? null,
-                ];
+                $calendarId = intval($item['calendar']);
+                $dateStart = $interval['from'];
+                $dateEnd = $interval['to'];
+                if(Booking_Form_Controller::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)){
+                    $calendars[] = [
+                        'calendar' => $calendarId,
+                        'house' => intval($item['house']),
+                        'image' => $item['image'],
+                        'new_price' => intval($item['new_price']),
+                        'min_people' => intval($item['peopleCount']),
+                        'content' => $item['description'],
+                        'price_description' => $item['sale_text'],
+                        'group' => $item['group'] ?? null,
+                    ];
+                }
             }
             return [
                 'id' => $this->id,
-                'interval' => $this->getInterval(),
+                'interval' => $interval,
                 'calendars' => $calendars,
                 'variants' => $this->getVariants(),
                 'variant_default'=> $variantByDefault
@@ -73,7 +79,7 @@
                 $days[] = $value->format('Y-m-d');    
             }
             $result['days'] = $days;
-            
+
             return $result;
         }
 

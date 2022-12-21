@@ -600,7 +600,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             if (!empty($calendarId)) {
                 $result['status'] = false;
 
-                if ($isHouse && $this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
+                if ($isHouse && self::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
                     $eventTabId = $request['eventTabId'];
                     $totalPrice = null;
                 
@@ -1003,7 +1003,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $dateStart = date("Y-m-d", $request['dateStart']);
             $dateEnd = date("Y-m-d", $request['dateEnd']);
 
-            if ($this->isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
+            if (self::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)) {
 
                 $clientId = $this->initClient($request);
 
@@ -1218,7 +1218,7 @@ class Booking_Form_Controller extends WP_REST_Controller
 
             $result = false;
             foreach($kalendars as $kalendar){
-                $result = $this->isAvailableOrder($kalendar, $dateFrom, $dateTo, $orderId);
+                $result = self::isAvailableOrder($kalendar, $dateFrom, $dateTo, $orderId);
                 if(!$result) {
                     break;
                 }
@@ -1570,7 +1570,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
-    private function isAvailableOrder($calendarId, $dateStart, $dateEnd, $orderIdFromCrm)
+    public static function isAvailableOrder($calendarId, $dateStart, $dateEnd, $orderIdFromCrm)
     {
         $result = false;
 
