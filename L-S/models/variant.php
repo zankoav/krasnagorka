@@ -59,33 +59,41 @@ function variant_metabox() {
     ));
 
     $sbc_variant->add_field( array(
-        'name'             => esc_html__( 'Питание', 'sbc' ),
-        'id'               => 'variant_food',
-        'type'             => 'multicheck',
-        'options'          => array(
-            'breakfast'  => 'Завтраки',
-            'lunch'   => 'Обеды',
-            'dinner'   => 'Ужины',
-        )
-    ) );
-
-    $sbc_variant->add_field( array(
-        'name'             => esc_html__( 'Бани по белому', 'sbc' ),
-        'id'               => 'variant_white_bath',
-        'type'             => 'checkbox'
-    ) );
-
-    $sbc_variant->add_field( array(
-        'name'             => esc_html__( 'Бани по черному', 'sbc' ),
-        'id'               => 'variant_black_bath',
-        'type'             => 'checkbox'
+        'name'             => esc_html__( 'Ежедневное', 'sbc' ),
+        'id'               => 'variant_per_day',
+        'type'             => 'title'
     ) );
 
     $sbc_variant->add_field(array(
-        'name' => 'Скидка на пакетный тур',
-        'id'   => 'variant_sale',
+        'name' => 'Цена в день',
+        'id'   => 'variant_price_per_day',
         'type'         => 'text_money',
         'before_field' => 'BYN'
+    ));
+
+    $sbc_variant->add_field(array(
+        'name' => 'Описание услуги',
+        'id'   => 'variant_description_per_day',
+        'type'         => 'textarea'
+    ));
+
+    $sbc_variant->add_field( array(
+        'name'             => esc_html__( 'Разовое', 'sbc' ),
+        'id'               => 'variant_single',
+        'type'             => 'title'
+    ) );
+
+    $sbc_variant->add_field(array(
+        'name' => 'Цена разовая',
+        'id'   => 'variant_price_single',
+        'type'         => 'text_money',
+        'before_field' => 'BYN'
+    ));
+
+    $sbc_variant->add_field(array(
+        'name' => 'Описание услуги',
+        'id'   => 'variant_description_single',
+        'type'         => 'textarea'
     ));
 }
 

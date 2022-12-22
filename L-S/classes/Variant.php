@@ -11,11 +11,9 @@ class Variant {
 
     public string $title;
 
-    public bool $breakfast = false;
-    public bool $lunch = false;
-    public bool $dinner = false;
-    public bool $whiteBath = false;
-    public bool $blackBath = false;
-    public int $sale = 0;
-    public int $price = 0;
+    public int $pricePerDay = 0;
+    public string $descriptionPerDay;
+
+    public int $priceSingle = 0;
+    public string $descriptionSingle;
 }
