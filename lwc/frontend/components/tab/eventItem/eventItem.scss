@@ -16,8 +16,8 @@
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
         @include lg {
-            max-width: 216px;
-            flex: 1 0 216px;
+            max-width: 300px;
+            flex: 1 0 300px;
             border-top-right-radius: 0;
             border-bottom-left-radius: 0.5rem;
         }
