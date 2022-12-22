@@ -24,8 +24,8 @@
                 if(Booking_Form_Controller::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)){
                     $calendars[] = [
                         'calendar' => $calendarId,
-                        'calendarName' => $item['calendarName'],
-                        'maxPeople' => intval($item['maxPeople']),
+                        'calendar_name' => $item['calendarName'],
+                        'max_people' => intval($item['maxPeople']),
                         'house' => intval($item['house']),
                         'image' => $item['image'],
                         'new_price' => intval($item['new_price']),
