@@ -24,6 +24,8 @@
                 if(Booking_Form_Controller::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)){
                     $calendars[] = [
                         'calendar' => $calendarId,
+                        'calendarName' => $item['calendarName'],
+                        'maxPeople' => intval($item['maxPeople']),
                         'house' => intval($item['house']),
                         'image' => $item['image'],
                         'new_price' => intval($item['new_price']),
@@ -98,9 +100,9 @@
         private function initHouses($items){
             foreach($items as &$item){
                 $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
-                $item['calendarName'] = get_term_meta($item['calendar'], 'kg_calendars_terem', 1);
+                $item['maxPeople'] = get_term_meta($item['calendar'], 'kg_calendars_persons_count', 1);
                 $term = get_term_by( 'id', $item['calendar'], 'sbc_calendars');
-                $item['maxPeople'] = $term->name;
+                $item['calendarName'] = $term->name;
             }
             return $items;
         }
