@@ -98,6 +98,9 @@
         private function initHouses($items){
             foreach($items as &$item){
                 $item['house'] = $this->getHouseIdByCalendarId($item['calendar']);
+                $item['calendarName'] = get_term_meta($item['calendar'], 'kg_calendars_terem', 1);
+                $term = get_term_by( 'id', $item['calendar'], 'sbc_calendars');
+                $item['maxPeople'] = $term->name;
             }
             return $items;
         }
