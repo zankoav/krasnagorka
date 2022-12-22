@@ -65,16 +65,16 @@ function variant_metabox() {
     ) );
 
     $sbc_variant->add_field(array(
+        'name' => 'Описание услуги',
+        'id'   => 'variant_description_per_day',
+        'type'         => 'textarea_small'
+    ));
+
+    $sbc_variant->add_field(array(
         'name' => 'Цена в день',
         'id'   => 'variant_price_per_day',
         'type'         => 'text_money',
         'before_field' => 'BYN'
-    ));
-
-    $sbc_variant->add_field(array(
-        'name' => 'Описание услуги',
-        'id'   => 'variant_description_per_day',
-        'type'         => 'textarea_small'
     ));
 
     $sbc_variant->add_field( array(
@@ -84,17 +84,18 @@ function variant_metabox() {
     ) );
 
     $sbc_variant->add_field(array(
+        'name' => 'Описание услуги',
+        'id'   => 'variant_description_single',
+        'type'         => 'textarea_small'
+    ));
+
+    $sbc_variant->add_field(array(
         'name' => 'Цена разовая',
         'id'   => 'variant_price_single',
         'type'         => 'text_money',
         'before_field' => 'BYN'
     ));
 
-    $sbc_variant->add_field(array(
-        'name' => 'Описание услуги',
-        'id'   => 'variant_description_single',
-        'type'         => 'textarea_small'
-    ));
 }
 
 add_action('cmb2_admin_init', 'variant_metabox');
