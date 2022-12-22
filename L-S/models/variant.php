@@ -74,7 +74,7 @@ function variant_metabox() {
     $sbc_variant->add_field(array(
         'name' => 'Описание услуги',
         'id'   => 'variant_description_per_day',
-        'type'         => 'textarea'
+        'type'         => 'textarea_small'
     ));
 
     $sbc_variant->add_field( array(
@@ -93,7 +93,7 @@ function variant_metabox() {
     $sbc_variant->add_field(array(
         'name' => 'Описание услуги',
         'id'   => 'variant_description_single',
-        'type'         => 'textarea'
+        'type'         => 'textarea_small'
     ));
 }
 
