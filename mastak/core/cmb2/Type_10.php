@@ -78,7 +78,7 @@
     
             $days = [];
             foreach ($period as $key => $value) {
-                $days[] = $value->format('Y-m-d');    
+                $days[] = $value->format('d.m.Y');    
             }
             $result['days'] = $days;
 
