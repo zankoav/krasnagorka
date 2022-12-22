@@ -1,6 +1,9 @@
 <template lwc:render-mode="light">
     <div class="line">
-        <div class="line__left">{title}</div>
+        <div class="line__left">
+            <div class="line__left-title">{title}</div>
+            <tab-tooltip class="line__left-tooltip" if:true={tooltip} value={tooltip}></tab-tooltip>
+        </div>
         <div class="line__right"><slot></slot></div>
     </div>
 </template>

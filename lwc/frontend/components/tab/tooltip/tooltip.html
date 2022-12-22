@@ -1,0 +1,9 @@
+<template lwc:render-mode="light">
+    <div class={computedElementClass} tabindex="0" onmouseover={handleMouseOver} onclick={handleClick}>
+        <svg class="tooltip__svg">
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle">?</text>
+        </svg>
+        <span class="tooltip__arrow" onmouseover={stopEvent}></span>
+        <div class="tooltip__content" data-value={value} onmouseover={stopEvent} onclick={stopEvent}></div>
+    </div>
+</template>

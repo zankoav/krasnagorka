@@ -5,22 +5,29 @@
         </div>
         <div class="event-item__content">
             <div class="event-item__content-editor editor"></div>
-            <tab-line class="event-item__line" title="Заезд"><span class="event-item__line-value">{dateFrom}</span></tab-line>
-            <tab-line class="event-item__line" title="Выезд"><span class="event-item__line-value">{dateTo}</span></tab-line>
+            <div class="event-item__date-mobile">
+                <tab-line class="event-item__line" title="Заезд"><span class="event-item__line-value">{dateFrom}</span></tab-line>
+                <tab-line class="event-item__line" title="Выезд"><span class="event-item__line-value">{dateTo}</span></tab-line>
+            </div>
+            <div class="event-item__date-desktop">
+                <tab-line class="event-item__line" title="Даты"><span class="event-item__line-value">{dateFrom} - {dateTo}</span></tab-line>
+            </div>
+
             <tab-line class="event-item__line" title="Аппортаменты">
                 <tab-select onchange={apportomentsHandler} options={apportomentsOptions}></tab-select>
             </tab-line>
             <tab-line class="event-item__line" title="Количество человек">
                 <tab-select onchange={peopleHandler} options={peopleOptions}></tab-select>
             </tab-line>
-            <tab-line class="event-item__line" title="Пакет">
+            <tab-line class="event-item__line" title="Пакет" tooltip={variantTooltip}>
                 <tab-select onchange={variantsHandler} options={variantsOptions}></tab-select>
             </tab-line>
-            <tab-line class="event-item__line" title="Цена">
+            <tab-line class="event-item__line event-item__line_price" title="Цена">
                 <span class="event-item__price">{price}</span>
             </tab-line>
         </div>
         <div class="event-item__order">
+            <span class="event-item__order-price">{price}</span>
             <a href={href} target="_blank" class="event-item__order-button">забронировать</a>
         </div>
     </div>

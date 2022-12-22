@@ -8,6 +8,7 @@
 
     @include lg {
         display: flex;
+        font-size: 16px;
     }
 
     &__image-wrapper {
@@ -17,7 +18,8 @@
         @include lg {
             max-width: 216px;
             flex: 1 0 216px;
-            height: 100%;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 0.5rem;
         }
     }
 
@@ -49,10 +51,25 @@
         border-top: 1px dashed #eeeeee;
 
         @include lg {
-            max-width: 170px;
-            flex: 1 0 170px;
+            max-width: 200px;
+            flex: 1 0 200px;
             border-top: 0;
             border-left: 1px dashed #eeeeee;
+            flex-direction: column;
+        }
+    }
+
+    &__date-desktop {
+        display: none;
+        @include lg {
+            display: block;
+        }
+    }
+
+    &__date-mobile {
+        display: block;
+        @include lg {
+            display: none;
         }
     }
 
@@ -69,6 +86,13 @@
     &__line {
         display: block;
         margin: 0.5rem 0;
+        height: 32px;
+
+        &_price {
+            @include lg {
+                display: none;
+            }
+        }
     }
 
     &__line-value {
@@ -77,11 +101,29 @@
 
     &__price {
         color: $RED;
-        font-weight: bold;
+        font-weight: 700;
         &:after {
             content: " руб.";
             color: $GRAY_6;
             font-size: 0.75em;
+        }
+    }
+
+    &__order-price {
+        display: none;
+
+        @include lg {
+            display: inline-block;
+            color: $RED;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 24px;
+
+            &:after {
+                content: " руб.";
+                color: $GRAY_6;
+                font-size: 0.75em;
+            }
         }
     }
 }

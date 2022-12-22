@@ -11,15 +11,15 @@ export default class EventItem extends LightningElement {
     selectedVar
 
     get img() {
-        return this.group.items[0].image
+        return this.selectedItem.image
     }
 
     get dateFrom() {
-        return this.group.days.from
+        return this.group.days.days.at(0)
     }
 
     get dateTo() {
-        return this.group.days.to
+        return this.group.days.days.at(-1)
     }
 
     get href() {
@@ -75,6 +75,12 @@ export default class EventItem extends LightningElement {
                 selected: item.id == this.selectedVar
             }
         })
+    }
+
+    get variantTooltip() {
+        return [this.selectedVariant.descriptionPerDay, this.selectedVariant.descriptionSingle]
+            .filter((item) => !!item)
+            .join(', ')
     }
 
     connectedCallback() {

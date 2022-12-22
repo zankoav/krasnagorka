@@ -1,0 +1,126 @@
+@import "./../../../common/mixins";
+
+.tooltip {
+    outline: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: help;
+    border-radius: 50%;
+    font-weight: 400;
+
+    animation: fadeOut 0.3s linear;
+    transition: background-color 0.3s, color 0.3s;
+
+    &__svg {
+        width: 16px;
+        height: 16px;
+        transition: fill 0.3s;
+    }
+
+    &_small {
+        background: #eeeeee;
+        font-size: 12px;
+        line-height: 16px;
+        width: 16px;
+        height: 16px;
+    }
+    &_small &__svg {
+        fill: #808080;
+    }
+
+    &_large {
+        background: #eeeeee;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 16px;
+        width: 86px;
+        height: 40px;
+        border-radius: 32px;
+    }
+    &_large &__svg {
+        fill: #212e35;
+    }
+
+    &:focus {
+        background: #80d3dd;
+        color: #ffffff;
+    }
+    &:focus &__svg {
+        fill: white;
+    }
+
+    &__button-unfocused {
+        background: #ffffff;
+    }
+
+    &::after {
+        content: "";
+        border-radius: 50%;
+        position: absolute;
+        width: 16px;
+        height: 32px;
+        margin-top: -24px;
+        visibility: hidden;
+    }
+
+    &__arrow {
+        display: inline-block;
+        position: absolute;
+        cursor: default;
+        border: 8px solid transparent;
+        border-top: 8px solid rgba(33, 46, 53, 0.1);
+        visibility: hidden;
+        z-index: 999999;
+    }
+
+    &__content {
+        padding: 12px;
+        position: absolute;
+        visibility: hidden;
+        cursor: default;
+        color: #80828a;
+        user-select: text;
+
+        letter-spacing: 0.02em;
+        line-height: 14px;
+        font-size: 12px;
+        font-weight: 300;
+        text-align: left;
+
+        background: #ffffff;
+        box-shadow: 0px 0px 16px rgba(33, 46, 53, 0.2);
+        border-radius: 12px;
+        z-index: 999998;
+        left: -1000px;
+    }
+
+    &:hover &__content,
+    &:hover &__arrow,
+    &:focus &__content,
+    &:focus &__arrow,
+    &:hover::after,
+    &:focus::after {
+        visibility: visible;
+        animation: fadeOut 0.2s linear;
+    }
+
+    @media (min-width: 768px) {
+        &__content {
+            line-height: 16px;
+            font-size: 14px;
+        }
+    }
+}
+
+@mixin keyframes() {
+    @keyframes fadeOut {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}

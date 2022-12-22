@@ -5,4 +5,14 @@
     justify-content: space-between;
     align-items: center;
     color: $GRAY_1;
+    height: 100%;
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__left-tooltip {
+        margin-left: 0.5rem;
+    }
 }
