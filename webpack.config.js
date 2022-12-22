@@ -237,7 +237,7 @@ function initHtmlPugs() {
                 title: pugs[page].title,
                 filename: `${page}.html`,
                 chunks: [page, 'common'],
-                template: path.resolve(__dirname, 'assets/templates') + `/${page}.pug`,
+                template: path.resolve(__dirname, 'assets/templates') + `/${page}.pug`
             })
         )
     }

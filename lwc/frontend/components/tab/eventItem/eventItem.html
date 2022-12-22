@@ -1,0 +1,27 @@
+<template lwc:render-mode="light">
+    <div class="event-item">
+        <div class="event-item__image-wrapper">
+            <img class="event-item__image" src={img} alt="Мероприятие" />
+        </div>
+        <div class="event-item__content">
+            <div class="event-item__content-editor editor"></div>
+            <tab-line class="event-item__line" title="Заезд"><span class="event-item__line-value">{dateFrom}</span></tab-line>
+            <tab-line class="event-item__line" title="Выезд"><span class="event-item__line-value">{dateTo}</span></tab-line>
+            <tab-line class="event-item__line" title="Аппортаменты">
+                <tab-select onchange={apportomentsHandler} options={apportomentsOptions}></tab-select>
+            </tab-line>
+            <tab-line class="event-item__line" title="Количество человек">
+                <tab-select onchange={peopleHandler} options={peopleOptions}></tab-select>
+            </tab-line>
+            <tab-line class="event-item__line" title="Пакет">
+                <tab-select onchange={variantsHandler} options={variantsOptions}></tab-select>
+            </tab-line>
+            <tab-line class="event-item__line" title="Цена">
+                <span class="event-item__price">{price}</span>
+            </tab-line>
+        </div>
+        <div class="event-item__order">
+            <a href={href} target="_blank" class="event-item__order-button">забронировать</a>
+        </div>
+    </div>
+</template>

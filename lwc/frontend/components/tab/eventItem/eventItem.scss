@@ -1,0 +1,87 @@
+@import "./../../../common/mixins";
+
+.event-item {
+    background: $WHITE;
+    box-shadow: 0px 4px 4px rgba($BLACK, 0.25);
+    border-radius: 0.5rem;
+    font-size: 14px;
+
+    @include lg {
+        display: flex;
+    }
+
+    &__image-wrapper {
+        overflow: hidden;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        @include lg {
+            max-width: 216px;
+            flex: 1 0 216px;
+            height: 100%;
+        }
+    }
+
+    &__image {
+        max-width: 100%;
+        display: block;
+        object-fit: cover;
+
+        @include lg {
+            height: 100%;
+        }
+    }
+
+    &__content {
+        padding: 0.5rem 0.75rem;
+        color: $GRAY_1;
+
+        @include lg {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+        }
+    }
+
+    &__order {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        border-top: 1px dashed #eeeeee;
+
+        @include lg {
+            max-width: 170px;
+            flex: 1 0 170px;
+            border-top: 0;
+            border-left: 1px dashed #eeeeee;
+        }
+    }
+
+    &__order-button {
+        display: inline-block;
+        background-color: $RED;
+        border-radius: 0.25rem;
+        text-align: center;
+        color: $WHITE;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+    }
+
+    &__line {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    &__line-value {
+        font-weight: 600;
+    }
+
+    &__price {
+        color: $RED;
+        font-weight: bold;
+        &:after {
+            content: " руб.";
+            color: $GRAY_6;
+            font-size: 0.75em;
+        }
+    }
+}

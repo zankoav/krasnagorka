@@ -1,5 +1,14 @@
 @import "./../../../common/mixins";
 
+@include editor();
+
 .event-app {
-    color: $GREEN;
+    &__item {
+        display: block;
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }

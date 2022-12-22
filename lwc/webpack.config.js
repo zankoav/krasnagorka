@@ -117,7 +117,8 @@ module.exports = (env) => {
         resolve: {
             alias: {
                 lwc: require.resolve('@lwc/engine'),
-                img: path.join(__dirname, '/assets/img')
+                img: path.join(__dirname, '/assets/img'),
+                core: path.join(__dirname, '/frontend/core')
             }
         }
     }

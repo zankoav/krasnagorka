@@ -20,7 +20,88 @@ $PRIMARY_2: #95e0e9;
 $PRIMARY_3: #3782c8;
 $PRIMARY_10: #2a3959;
 $RED: #d0021b;
-$RED_2: #ED123D;
+$RED_2: #ed123d;
 $GREEN: #009f18;
 
-// Sizes
+// EDITOR START:
+@mixin editor() {
+    .editor {
+        line-height: 1.5;
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: .5rem;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: .5rem;
+        }
+        h3 {
+            font-size: 1.17em;
+            margin-bottom: .5rem;
+        }
+        h5 {
+            font-size: 0.83em;
+            margin-bottom: .5rem;
+        }
+        h6 {
+            font-size: 0.75em;
+            margin-bottom: .5rem;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 700 !important;
+        }
+
+        p {
+            display: block;
+            margin-bottom: .5rem;
+            margin-top: .5rem;
+        }
+
+        ul {
+            display: block;
+            list-style-type: disc;
+            margin-bottom: 1em;
+            padding-left: 40px;
+        }
+
+        ol {
+            display: block;
+            list-style-type: decimal;
+            margin-bottom: 1em;
+            padding-left: 40px;
+        }
+
+        b,
+        strong {
+            font-weight: 700;
+        }
+
+        i {
+            font-style: italic;
+        }
+
+        a {
+            color: $PRIMARY;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid $GRAY_7;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: left;
+        }
+    }
+}
+// EDITOR END;

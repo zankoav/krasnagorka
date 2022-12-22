@@ -1,0 +1,35 @@
+<template lwc:render-mode="light">
+    <div class="select" tabindex="0" onblur={closeHandler}>
+        <template if:true={disabled}>
+            <div class={selectBlockCss}>
+                <div if:true={label} class="select__label">{label}</div>
+                <div class="select__value">{value}</div>
+            </div>
+        </template>
+        <template if:false={disabled}>
+            <div class={selectBlockCss} onclick={toggleHandler}>
+                <div if:true={label} class="select__label">{label}</div>
+                <div class="select__value">{value}</div>
+                <div if:true={required} class="select__required"></div>
+                <div class="select__arrow"></div>
+            </div>
+        </template>
+        <div class="select__options-wrapper">
+            <div if:true={isOpen} class="select__options">
+                <template for:each={options} for:item="option">
+                    <div
+                        if:true={option.selected}
+                        key={option.id}
+                        onclick={chooseOption}
+                        class="select__option select__option_selected"
+                        data-value={option.id}>
+                        {option.name}
+                    </div>
+                    <div if:false={option.selected} key={option.id} onclick={chooseOption} class="select__option" data-value={option.id}>
+                        {option.name}
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

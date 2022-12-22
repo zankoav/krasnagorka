@@ -1,5 +1,9 @@
 <template lwc:render-mode="light">
     <div class="event-app">
-        App Events
+        <template if:true={groups.length}>
+            <template for:each={groups} for:item="group">
+                <tab-event-item class="event-app__item" key={group.id} group={group}></tab-event-item>
+            </template>
+        </template>
     </div>
 </template>
