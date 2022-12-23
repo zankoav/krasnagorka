@@ -196,6 +196,16 @@ class Model
             'variantId'     => $variantId,
             'people'        => $people,
             'objId'         => $objId,
+            'mainContent'   => [
+                "contractOffer" => $this->baseModel['contract_offer']
+            ],
+            "footerBottom"  => $this->getFooterBottom(),
+            'mainMenu'      => $this->getMainMenu(),
+            'weather'       => $this->getWeather(),
+            'currencies'    => $this->getCurrencies(),
+            'pageTitle'     => get_the_title(),
+            'pageBannerSrc' => get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'],
+            'popupContacts' => $this->getPopupContacts(),
         ];
         return $result;
     }
