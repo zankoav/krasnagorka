@@ -181,195 +181,199 @@ class Model
 
     public function getBookingModel()
     {
-        $bookingSettings = get_option('mastak_booking_appearance_options');
-        $showPrice = $bookingSettings['booking_price_show'] == 'on';
-        $showPayments = false;
+        if(isset($_GET['eventId'])){
+            $result = ['Hello world'];
+        }else{
+            $bookingSettings = get_option('mastak_booking_appearance_options');
+            $showPrice = $bookingSettings['booking_price_show'] == 'on';
+            $showPayments = false;
 
-        if($showPrice){
-            $showPayments = $bookingSettings['booking_payments_show'] == 'on';
-            $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
-            $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
-            $prepaidOptions = [
-                [
-                    "label"=> "100%",
-                    "value"=> 100
-                ]
-            ];
-
-            if(isset($prepaidPercantage)){
-                $prepaidOptions[] = [
-                    "label"=> $prepaidPercantage . '%',
-                    "value"=> $prepaidPercantage
-                ];
-            }
-        }
-        
-        $bookingId = $_GET['booking'];
-        $eventTabId = $_GET['eventTabId'];
-        $dateFrom  = $_GET['from'];
-        $dateTo    = $_GET['to'];
-        $teremRoom = $_GET['terem'];
-        $calendarId = $_GET['calendarId'];
-        $title     = null;
-        $type      = null;
-
-        if (isset($bookingId)) {
-
-            $post = get_post($bookingId);
-            if (!empty($post) and ($post->post_type === 'house' or $post->post_type === 'event')) {
-                $title = str_replace("\"", "\\\"", $post->post_title);
-                if ($post->post_type === 'house') {
-                    $type = 'Домик:';
-                } else if ($post->post_type === 'event') {
-                    $type = 'Акция:';
-                }
-            }
-        }
-
-        $maxCount = 99;
-        if (!empty($calendarId)) {
-            $maxCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
-        }
-
-        if ($maxCount == 0) {
-            $maxCount = 99;
-        }
-        $sandbox = get_webpay_sandbox();
-        $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
-        
-        $weather       = $this->getWeather();
-
-        $selectedSeasonId = null;
-        if (!empty($dateFrom) and !empty($dateTo)) {
-            $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
-        }
-        $textFullCard =  !empty($bookingSettings['text_full_card']) ? $bookingSettings['text_full_card'] : '';
-        $textPartCard =  !empty($bookingSettings['text_part_card']) ? $bookingSettings['text_part_card'] : '';
-        $textFullLaterCard =  !empty($bookingSettings['text_full_later_card']) ? $bookingSettings['text_full_later_card'] : '';
-        $textPartLaterCard =  !empty($bookingSettings['text_part_later_card']) ? $bookingSettings['text_part_later_card'] : '';
-        $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
-        $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
-
-        $result        = [
-            'id'                => $calendarId,
-            'admin'             => $showPrice,
-            'webpaySandbox'     => $sandbox,
-            'payment'           => $showPayments,
-            'paymentMethod'     => $showPayments ? 'card' : '',
-            'prepaidType'       => $showPayments ? 100 : '',
-            'textFullCard'          => $textFullCard,
-            'textPartCard'          => $textPartCard,
-            'textFullLaterCard'     => $textFullLaterCard,
-            'textPartLaterCard'     => $textPartLaterCard,
-            'textFullOffice'        => $textFullOffice,
-            'textPartOffice'        => $textPartOffice,
-            'minPrice'          => $minPrepaidPrice,
-            'prepaidOptions'    => $prepaidOptions,
-            'maxCount'      => $maxCount,
-            'houses'        => $this->getHouses(),
-            'calendars'     => $this->getCalendars($calendarId),
-            'mainMenu'      => $this->getMainMenu(),
-            'seasons'       => $this->getAllSeasons($selectedSeasonId),
-            'weather'       => $weather,
-            'currencies'    => $this->getCurrencies(),
-            'pageTitle'     => get_the_title(),
-            'pageBannerSrc' => $pageBannerSrc,
-            'popupContacts' => $this->getPopupContacts(),
-            'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
-            'mainContent'   => [
-                "title"         => $title,
-                "type"          => $type,
-                "contractOffer" => $this->baseModel['contract_offer']
-            ],
-            "footerBottom"  => $this->getFooterBottom(),
-            "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
-            "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
-            "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
-            
-            "foodBreakfastPrice" => !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0,
-            "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
-            "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
-            "foodAvailable" => $bookingSettings['food_available'] == 'on',
-            "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
-        ];
-
-        if (!empty($dateFrom) and !empty($dateTo)) {
-            $result['dateFrom'] = $dateFrom;
-            $result['dateTo']   = $dateTo;
-        }
-
-        if (!empty($eventTabId)) {
-            $result['eventTabId'] = $eventTabId;
-        }
-
-        if (!empty($teremRoom)) {
-            $result['mainContent']['title'] = $teremRoom;
-        }
-
-        if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
-
-            $result['pay'] = false;
-            $result['house'] = [
-                'calendarId' => $calendarId
-            ];
-            $_eventTabId = $result['eventTabId'];
-            $_dateFrom = $result['dateFrom'];
-            $_dateTo = $result['dateTo'];
-
-            $result['price'] = $this->getPriceFromEvent(
-                $_eventTabId,
-                $calendarId,
-                $_dateFrom,
-                $_dateTo
-            );
-
-            $result['total'] = [
-                "accommodation" =>  intval($result['price']),
-                "total_price" => intval($result['price']),
-                "only_booking_order" => [
-                    "message" => "!!! Message",
-                    "enabled" => false
-                ]
-            ];
-
-            $result['eventTabMessageInfo'] = 'При заказе горящего предложения, вы не можете изменить объект и даты проживания';
-
-            if ($result['pay']) {
-                $SecretKey = '2091988';
-                $wsb_seed = strtotime("now");
-                $wsb_storeid = $sandbox['wsb_storeid'];
-                $wsb_order_num = "gg-1";
-                $wsb_test = $sandbox['wsb_test'];
-                $wsb_currency_id = 'BYN';
-                $wsb_total = $result['price'];
-                $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $SecretKey);
-
-                $result['webpay'] = [
-                    "names" => [
-                        '*scart'
-                    ],
-                    "values" => [
-                        'wsb_storeid' => $wsb_storeid,
-                        'wsb_store' => 'ИП Терещенко Иван Игоревич',
-                        'wsb_order_num' => $wsb_order_num,
-                        'wsb_currency_id' => $wsb_currency_id,
-                        'wsb_version' => "2",
-                        'wsb_language_id' => "russian",
-                        'wsb_seed' => $wsb_seed,
-                        'wsb_test' => $wsb_test,
-                        'wsb_signature' => $wsb_signature,
-                        'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
-                        'wsb_invoice_item_quantity[0]' => '1',
-                        'wsb_invoice_item_price[0]' => $wsb_total,
-                        'wsb_total' => $wsb_total,
-                        'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
-                        'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
+            if($showPrice){
+                $showPayments = $bookingSettings['booking_payments_show'] == 'on';
+                $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
+                $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
+                $prepaidOptions = [
+                    [
+                        "label"=> "100%",
+                        "value"=> 100
                     ]
                 ];
+
+                if(isset($prepaidPercantage)){
+                    $prepaidOptions[] = [
+                        "label"=> $prepaidPercantage . '%',
+                        "value"=> $prepaidPercantage
+                    ];
+                }
+            }
+            
+            $bookingId = $_GET['booking'];
+            $eventTabId = $_GET['eventTabId'];
+            $dateFrom  = $_GET['from'];
+            $dateTo    = $_GET['to'];
+            $teremRoom = $_GET['terem'];
+            $calendarId = $_GET['calendarId'];
+            $title     = null;
+            $type      = null;
+
+            if (isset($bookingId)) {
+
+                $post = get_post($bookingId);
+                if (!empty($post) and ($post->post_type === 'house' or $post->post_type === 'event')) {
+                    $title = str_replace("\"", "\\\"", $post->post_title);
+                    if ($post->post_type === 'house') {
+                        $type = 'Домик:';
+                    } else if ($post->post_type === 'event') {
+                        $type = 'Акция:';
+                    }
+                }
             }
 
-            if (isset($_GET['clear'])) {
-                $this->tryToClearOrder($_GET['clear']);
+            $maxCount = 99;
+            if (!empty($calendarId)) {
+                $maxCount = (int) get_term_meta($calendarId, 'kg_calendars_persons_count', 1);
+            }
+
+            if ($maxCount == 0) {
+                $maxCount = 99;
+            }
+            $sandbox = get_webpay_sandbox();
+            $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
+            
+            $weather       = $this->getWeather();
+
+            $selectedSeasonId = null;
+            if (!empty($dateFrom) and !empty($dateTo)) {
+                $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
+            }
+            $textFullCard =  !empty($bookingSettings['text_full_card']) ? $bookingSettings['text_full_card'] : '';
+            $textPartCard =  !empty($bookingSettings['text_part_card']) ? $bookingSettings['text_part_card'] : '';
+            $textFullLaterCard =  !empty($bookingSettings['text_full_later_card']) ? $bookingSettings['text_full_later_card'] : '';
+            $textPartLaterCard =  !empty($bookingSettings['text_part_later_card']) ? $bookingSettings['text_part_later_card'] : '';
+            $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
+            $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
+
+            $result        = [
+                'id'                => $calendarId,
+                'admin'             => $showPrice,
+                'webpaySandbox'     => $sandbox,
+                'payment'           => $showPayments,
+                'paymentMethod'     => $showPayments ? 'card' : '',
+                'prepaidType'       => $showPayments ? 100 : '',
+                'textFullCard'          => $textFullCard,
+                'textPartCard'          => $textPartCard,
+                'textFullLaterCard'     => $textFullLaterCard,
+                'textPartLaterCard'     => $textPartLaterCard,
+                'textFullOffice'        => $textFullOffice,
+                'textPartOffice'        => $textPartOffice,
+                'minPrice'          => $minPrepaidPrice,
+                'prepaidOptions'    => $prepaidOptions,
+                'maxCount'      => $maxCount,
+                'houses'        => $this->getHouses(),
+                'calendars'     => $this->getCalendars($calendarId),
+                'mainMenu'      => $this->getMainMenu(),
+                'seasons'       => $this->getAllSeasons($selectedSeasonId),
+                'weather'       => $weather,
+                'currencies'    => $this->getCurrencies(),
+                'pageTitle'     => get_the_title(),
+                'pageBannerSrc' => $pageBannerSrc,
+                'popupContacts' => $this->getPopupContacts(),
+                'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
+                'mainContent'   => [
+                    "title"         => $title,
+                    "type"          => $type,
+                    "contractOffer" => $this->baseModel['contract_offer']
+                ],
+                "footerBottom"  => $this->getFooterBottom(),
+                "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
+                "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
+                "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
+                
+                "foodBreakfastPrice" => !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0,
+                "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
+                "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
+                "foodAvailable" => $bookingSettings['food_available'] == 'on',
+                "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
+            ];
+
+            if (!empty($dateFrom) and !empty($dateTo)) {
+                $result['dateFrom'] = $dateFrom;
+                $result['dateTo']   = $dateTo;
+            }
+
+            if (!empty($eventTabId)) {
+                $result['eventTabId'] = $eventTabId;
+            }
+
+            if (!empty($teremRoom)) {
+                $result['mainContent']['title'] = $teremRoom;
+            }
+
+            if (!empty($result['eventTabId']) and !empty($calendarId) and !empty($result['dateFrom']) and !empty($result['dateTo'])) {
+
+                $result['pay'] = false;
+                $result['house'] = [
+                    'calendarId' => $calendarId
+                ];
+                $_eventTabId = $result['eventTabId'];
+                $_dateFrom = $result['dateFrom'];
+                $_dateTo = $result['dateTo'];
+
+                $result['price'] = $this->getPriceFromEvent(
+                    $_eventTabId,
+                    $calendarId,
+                    $_dateFrom,
+                    $_dateTo
+                );
+
+                $result['total'] = [
+                    "accommodation" =>  intval($result['price']),
+                    "total_price" => intval($result['price']),
+                    "only_booking_order" => [
+                        "message" => "!!! Message",
+                        "enabled" => false
+                    ]
+                ];
+
+                $result['eventTabMessageInfo'] = 'При заказе горящего предложения, вы не можете изменить объект и даты проживания';
+
+                if ($result['pay']) {
+                    $SecretKey = '2091988';
+                    $wsb_seed = strtotime("now");
+                    $wsb_storeid = $sandbox['wsb_storeid'];
+                    $wsb_order_num = "gg-1";
+                    $wsb_test = $sandbox['wsb_test'];
+                    $wsb_currency_id = 'BYN';
+                    $wsb_total = $result['price'];
+                    $wsb_signature = sha1($wsb_seed . $wsb_storeid . $wsb_order_num . $wsb_test . $wsb_currency_id . $wsb_total . $SecretKey);
+
+                    $result['webpay'] = [
+                        "names" => [
+                            '*scart'
+                        ],
+                        "values" => [
+                            'wsb_storeid' => $wsb_storeid,
+                            'wsb_store' => 'ИП Терещенко Иван Игоревич',
+                            'wsb_order_num' => $wsb_order_num,
+                            'wsb_currency_id' => $wsb_currency_id,
+                            'wsb_version' => "2",
+                            'wsb_language_id' => "russian",
+                            'wsb_seed' => $wsb_seed,
+                            'wsb_test' => $wsb_test,
+                            'wsb_signature' => $wsb_signature,
+                            'wsb_invoice_item_name[0]' => $result['mainContent']['title'],
+                            'wsb_invoice_item_quantity[0]' => '1',
+                            'wsb_invoice_item_price[0]' => $wsb_total,
+                            'wsb_total' => $wsb_total,
+                            'wsb_cancel_return_url' => "https://krasnagorka.by?order=$wsb_order_num",
+                            'wsb_return_url' => "https://krasnagorka.by/booking-form?order=$wsb_order_num",
+                        ]
+                    ];
+                }
+
+                if (isset($_GET['clear'])) {
+                    $this->tryToClearOrder($_GET['clear']);
+                }
             }
         }
 
