@@ -179,25 +179,31 @@ class Model
         ];
     }
 
+    private function getEventModel(){
+        // ?eventId=25105&eventTabId=24793&calendarId=9&people=3&var=25118&obj=8783
+        $objId = $_GET['obj'];
+        $eventTabId = $_GET['eventTabId'];
+        $eventId  = $_GET['eventId'];
+        $calendarId = $_GET['calendarId'];
+        $variantId = $_GET['var'];
+        $people = $_GET['people'];
+
+        $result = [
+            'event'         => true,
+            'eventTabId'    => $eventTabId,
+            'eventId'       => $eventId,
+            'calendarId'    => $calendarId,
+            'variantId'     => $variantId,
+            'people'        => $people,
+            'objId'         => $objId,
+        ];
+        return $result;
+    }
+
     public function getBookingModel()
     {
         if(!empty($_GET['eventId']) and !empty($_GET['eventTabId'])){
-
-            $objId = $_GET['obj'];
-            $eventTabId = $_GET['eventTabId'];
-            $eventId  = $_GET['eventId'];
-            $calendarId = $_GET['calendarId'];
-            $variantId = $_GET['var'];
-            $people = $_GET['people'];
-
-            $result = [
-                'eventTabId' => $eventTabId,
-                'eventId' => $eventId,
-                'calendarId' => $calendarId,
-                'variantId' => $variantId,
-                'people' => $people,
-                'objId' => $objId,
-            ];
+            $result = $this->getEventModel();
         }else{
             $bookingSettings = get_option('mastak_booking_appearance_options');
             $showPrice = $bookingSettings['booking_price_show'] == 'on';
@@ -275,12 +281,14 @@ class Model
                 'payment'           => $showPayments,
                 'paymentMethod'     => $showPayments ? 'card' : '',
                 'prepaidType'       => $showPayments ? 100 : '',
+
                 'textFullCard'          => $textFullCard,
                 'textPartCard'          => $textPartCard,
                 'textFullLaterCard'     => $textFullLaterCard,
                 'textPartLaterCard'     => $textPartLaterCard,
                 'textFullOffice'        => $textFullOffice,
                 'textPartOffice'        => $textPartOffice,
+
                 'minPrice'          => $minPrepaidPrice,
                 'prepaidOptions'    => $prepaidOptions,
                 'maxCount'      => $maxCount,
