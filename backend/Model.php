@@ -181,7 +181,7 @@ class Model
 
     public function getBookingModel()
     {
-        if(isset($_GET['eventId'])){
+        if(isset($_GET['eventId'], $_GET['eventTabId'])){
             $result = ['Hello world'];
         }else{
             $bookingSettings = get_option('mastak_booking_appearance_options');
@@ -376,7 +376,6 @@ class Model
                 }
             }
         }
-
         return json_encode($result);
     }
 
