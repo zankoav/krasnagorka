@@ -182,7 +182,7 @@ class Model
     public function getBookingModel()
     {
         if(!empty($_GET['eventId']) and !empty($_GET['eventTabId'])){
-            
+
             $objId = $_GET['obj'];
             $eventTabId = $_GET['eventTabId'];
             $eventId  = $_GET['eventId'];
@@ -196,6 +196,7 @@ class Model
                 'calendarId' => $calendarId,
                 'variantId' => $variantId,
                 'people' => $people,
+                'objId' => $objId,
             ];
         }else{
             $bookingSettings = get_option('mastak_booking_appearance_options');
