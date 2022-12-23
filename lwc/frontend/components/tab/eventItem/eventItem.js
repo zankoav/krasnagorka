@@ -23,7 +23,7 @@ export default class EventItem extends LightningElement {
     }
 
     get href() {
-        return `https://krasnagorka.by/booking-form/?eventId=${this.group.eventId}&eventTabId=${this.group.eventTabId}&calendarId=${this.selectedApportament}&people=${this.selectedPeople}&variant=${this.selectedVar}`
+        return `https://krasnagorka.by/booking-form/?eventId=${this.group.eventId}&eventTabId=${this.group.eventTabId}&calendarId=${this.selectedApportament}&people=${this.selectedPeople}&var=${this.selectedVar}&obj=${this.selectedItem.house}`
     }
 
     get price() {

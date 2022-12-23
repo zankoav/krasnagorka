@@ -181,8 +181,22 @@ class Model
 
     public function getBookingModel()
     {
-        if(isset($_GET['eventId'], $_GET['eventTabId'])){
-            $result = ['Hello world'];
+        if(!empty($_GET['eventId']) and !empty($_GET['eventTabId'])){
+            
+            $objId = $_GET['obj'];
+            $eventTabId = $_GET['eventTabId'];
+            $eventId  = $_GET['eventId'];
+            $calendarId = $_GET['calendarId'];
+            $variantId = $_GET['var'];
+            $people = $_GET['people'];
+
+            $result = [
+                'eventTabId' => $eventTabId,
+                'eventId' => $eventId,
+                'calendarId' => $calendarId,
+                'variantId' => $variantId,
+                'people' => $people,
+            ];
         }else{
             $bookingSettings = get_option('mastak_booking_appearance_options');
             $showPrice = $bookingSettings['booking_price_show'] == 'on';
