@@ -5,11 +5,12 @@ import './eventApp.scss'
 export default class EventApp extends LightningElement {
     static renderMode = 'light'
 
-    @api tabId
+    @api eventId
+    @api eventTabId
     groups = []
 
     async connectedCallback() {
-        const response = await eventAppByTabId(this.tabId)
+        const response = await eventAppByTabId(this.eventTabId)
 
         if (response) {
             const tempGroups = {
@@ -55,7 +56,8 @@ export default class EventApp extends LightningElement {
                 group.variants.forEach((variant, index) => {
                     variant.selected = variant.id == group.variant_default
                 })
-                group.eventId = this.tabId
+                group.eventTabId = this.eventTabId
+                group.eventId = this.eventId
             })
         }
     }
