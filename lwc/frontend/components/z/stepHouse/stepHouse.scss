@@ -10,12 +10,16 @@
     &__event {
         margin-top: 1rem;
         border-top: 1px solid #f7f7f7;
+        border-bottom: 1px solid #f7f7f7;
         padding: 1.5rem 0;
+
+        @include lg {
+            border-bottom: 0;
+        }
     }
 
     &__event-title {
         margin-bottom: 0.5rem;
-        text-align: center;
         text-transform: uppercase;
         color: $GRAY_2;
     }
