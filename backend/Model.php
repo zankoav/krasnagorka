@@ -337,10 +337,9 @@ class Model
             $_dateTo = $result['dateTo'];
 
             if(!empty($eventId) && !empty($eventTabId)){
-                // $tab = new Type_10($eventTabId);
-                // $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
-                $result['price'] = 0;
-                // $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
+                $tab = new Type_10($eventTabId);
+                $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
+                $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
             }else{
                 $result['price'] = $this->getPriceFromEvent(
                     $_eventTabId,
