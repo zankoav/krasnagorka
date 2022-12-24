@@ -364,6 +364,10 @@ class Model
 
             $result['eventTabMessageInfo'] = 'При заказе горящего предложения, вы не можете изменить объект и даты проживания';
 
+            if(!empty($eventId) && !empty($eventTabId)){
+                $result['eventTabMessageInfo'] = '';
+            }
+
             if ($result['pay']) {
                 $SecretKey = '2091988';
                 $wsb_seed = strtotime("now");
