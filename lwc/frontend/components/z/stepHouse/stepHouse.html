@@ -54,10 +54,9 @@
                             </div>
                             <div if:true={settings.eventId} class="step-house__event">
                                 <h3 class="step-house__event-title">{settings.eventModel.title}</h3>
-                                <div class="step-house__event-content">
-                                    <p>Пакет: <span class="step-house__event-variant">{settings.eventModel.variant}</span></p>
-                                    <p>{eventOpportunities}</p>
-                                </div>
+                                <tab-line class="step-house__event-variant" title="Пакет" tooltip={eventOpportunities}>
+                                    <span class="step-house__event-variant-value">{settings.eventModel.variant}</span>
+                                </tab-line>
                             </div>
                             <div if:true={showEventMessageInfo} class="step-house__event-info">
                                 <span class="step-house__event-info-start">!</span>{settings.eventTabMessageInfo}
