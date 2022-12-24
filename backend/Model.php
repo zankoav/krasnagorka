@@ -345,7 +345,7 @@ class Model
                 $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
                 $result['eventModel'] = [
                     'id' => $eventId,
-                    'title' => get_the_title($eventId);
+                    'title' => get_the_title($eventId),
                     'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle]
                 ];
             }else{
