@@ -459,11 +459,7 @@ class Model
 
     public function getBookingModel()
     {
-        if(!empty($_GET['eventId']) and !empty($_GET['eventTabId'])){
-            $result = $this->getEventModel();
-        }else{
-            $result = $this->baseBookingModel();
-        }
+        $result = $this->baseBookingModel();
         return json_encode($result);
     }
 
