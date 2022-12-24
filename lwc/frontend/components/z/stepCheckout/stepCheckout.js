@@ -44,7 +44,11 @@ export default class StepCheckout extends LightningElement {
     }
 
     get showPayment() {
-        return this.isPayment && !this.settings.eventTabId
+        let result = this.isPayment && !this.settings.eventTabId
+        if (this.isPayment && this.settings.eventId) {
+            result = true
+        }
+        return result
     }
 
     get isPayment() {
