@@ -7,8 +7,14 @@
         padding: 24px 32px 32px;
     }
 
+    &__event {
+        margin-top: 1rem;
+        border-top: 1px solid #f7f7f7;
+        padding: 1.5rem 0;
+    }
+
     &__event-title {
-        margin: 1rem 0;
+        margin-bottom: 0.5rem;
         text-align: center;
         text-transform: uppercase;
         color: $GRAY_2;
