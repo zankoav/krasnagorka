@@ -4,8 +4,14 @@ import './decodingPrice.scss'
 export default class DecodingPrice extends LightningElement {
     @api settings
 
-    get subTitle(){
-        return this.settings.total?.accommodation ? 'Проживание по горящему туру': 'Проживание';
+    get subTitle() {
+        let result = 'Проживание'
+        if (this.settings.eventId) {
+            result = 'Мероприятие'
+        } else if (this.settings.total?.accommodation) {
+            result = 'Проживание по горящему туру'
+        }
+        return result
     }
 
     get displayServices() {

@@ -343,6 +343,11 @@ class Model
                 $tab = new Type_10($eventTabId);
                 $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
                 $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
+                $result['eventModel'] = [
+                    'id' => $eventId,
+                    'title' => get_the_title($eventId);
+                    'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle]
+                ];
             }else{
                 $result['price'] = $this->getPriceFromEvent(
                     $_eventTabId,

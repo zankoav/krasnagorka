@@ -44,7 +44,7 @@
                                     <div class="step-house__booking-from" data-date="Дата выезда:">{dateEnd}</div>
                                 </div>
                             </div>
-                            <div class="step-house__sales">
+                            <div if:false={settings.eventId} class="step-house__sales">
                                 <template for:each={settings.house.daysSales} for:item="item">
                                     <span key={item.sale} class="step-house__item-sale"
                                         >от <span class="step-house__item-number">{item.dayes}</span> ночей скидка
@@ -52,28 +52,37 @@
                                     </span>
                                 </template>
                             </div>
+                            <div if:true={settings.eventId} class="step-house__event">
+                                <h3 class="step-house__event-title">{settings.eventModel.title}</h3>
+                                <div class="step-house__event-content">
+                                    В мероприятие входит: {eventOpportunities}
+                                </div>
+                            </div>
                             <div if:true={showEventMessageInfo} class="step-house__event-info">
-                                <span class="step-house__event-info-start">!</span>{settings.eventTabMessageInfo}</div>
+                                <span class="step-house__event-info-start">!</span>{settings.eventTabMessageInfo}
+                            </div>
                         </div>
                         <div class="step-house__col">
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
 
-                    <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
-                    <div class="step-house__row">
-                        <template if:true={settings.seasonsLoading}>
-                            <z-loader class="step-house__season-loading"></z-loader>
-                        </template>
-                        <template if:false={settings.seasonsLoading}>
-                            <div class="step-house__col">
-                                <z-house-info onchangeseason={seasonsChange} settings={settings}></z-house-info>
-                            </div>
-                            <div class="step-house__col">
-                                <z-season-details season={currentSeason} house={settings.house} settings={settings}></z-season-details>
-                            </div>
-                        </template>
-                    </div>
+                    <tempalte if:false={settings.eventId}>
+                        <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
+                        <div class="step-house__row">
+                            <template if:true={settings.seasonsLoading}>
+                                <z-loader class="step-house__season-loading"></z-loader>
+                            </template>
+                            <template if:false={settings.seasonsLoading}>
+                                <div class="step-house__col">
+                                    <z-house-info onchangeseason={seasonsChange} settings={settings}></z-house-info>
+                                </div>
+                                <div class="step-house__col">
+                                    <z-season-details season={currentSeason} house={settings.house} settings={settings}></z-season-details>
+                                </div>
+                            </template>
+                        </div>
+                    </tempalte>
                 </template>
             </template>
         </div>

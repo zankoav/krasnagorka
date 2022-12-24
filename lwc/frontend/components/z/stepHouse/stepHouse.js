@@ -20,8 +20,12 @@ export default class StepHouse extends LightningElement {
         return this.settings.seasons.find((season) => season.current)
     }
 
-    get showEventMessageInfo(){
+    get showEventMessageInfo() {
         return this.settings.eventTabId && this.settings.eventTabMessageInfo
+    }
+
+    get eventOpportunities() {
+        return settings.eventModel.content.filter((item) => !!item).join(', ')
     }
 
     connectedCallback() {
@@ -54,9 +58,9 @@ export default class StepHouse extends LightningElement {
 
         const count = parseInt(house.peopleMaxCount)
         const counts = Array.from(Array(count), (_, i) => i + 1).map((it) => {
-            let selected = false;
-            if(this.settings.people && this.settings.people == it){
-                selected = true;
+            let selected = false
+            if (this.settings.people && this.settings.people == it) {
+                selected = true
             }
             return {
                 id: it,
