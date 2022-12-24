@@ -73,7 +73,7 @@ export default class Admin extends LightningElement {
             passport: null,
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
-            calendars: [...this.model.calendars],
+            calendars: this.model.calendars ? [...this.model.calendars] : null,
             menu: BASE_MENU,
             babyBed: false,
             babyBedPrice: this.model.babyBedPrice,
@@ -209,7 +209,7 @@ export default class Admin extends LightningElement {
             .add(1, 'days')
             .format('YYYY-MM-DD')
         const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
-        const calendarId = this.settings.calendars.find(item => item.selected).id
+        const calendarId = this.settings.calendars.find((item) => item.selected).id
         const isTerem = this.settings.house.isTerem
         const babyBed = this.settings.babyBed
         const bathHouseWhite = this.settings.bathHouseWhite
