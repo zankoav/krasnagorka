@@ -327,7 +327,7 @@ class AmoCrmFactory {
             $isEventVariantOrderFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue(!empty($order->eventVariant()))
+                            ->setValue($order->eventVariant())
                     )
             );
             $leadCustomFields->add($isEventVariantOrderFieldValueModel);
