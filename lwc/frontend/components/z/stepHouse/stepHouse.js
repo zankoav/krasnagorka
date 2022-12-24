@@ -54,9 +54,13 @@ export default class StepHouse extends LightningElement {
 
         const count = parseInt(house.peopleMaxCount)
         const counts = Array.from(Array(count), (_, i) => i + 1).map((it) => {
+            let selected = false;
+            if(this.settings.people && this.settings.people == it){
+                selected = true;
+            }
             return {
                 id: it,
-                selected: false,
+                selected: selected,
                 name: it
             }
         })

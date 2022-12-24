@@ -278,7 +278,6 @@ class Model
             'textPartLaterCard'     => $textPartLaterCard,
             'textFullOffice'        => $textFullOffice,
             'textPartOffice'        => $textPartOffice,
-
             'minPrice'          => $minPrepaidPrice,
             'prepaidOptions'    => $prepaidOptions,
             'maxCount'      => $maxCount,
@@ -320,6 +319,10 @@ class Model
 
         if (!empty($eventId)) {
             $result['eventId'] = $eventId;
+        }
+
+        if (!empty($people)) {
+            $result['people'] = $people;
         }
 
         if (!empty($teremRoom)) {
