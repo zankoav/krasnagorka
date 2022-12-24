@@ -25,7 +25,7 @@ export default class StepHouse extends LightningElement {
     }
 
     get eventOpportunities() {
-        return settings.eventModel.content.filter((item) => !!item).join(', ')
+        return this.settings.eventModel.content.filter((item) => !!item).join(', ')
     }
 
     connectedCallback() {
