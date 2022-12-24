@@ -660,8 +660,8 @@ class Model
                 }
             }
         }else {
-            // $tab = new Type_10($eventTabId);
-            // $freshPrice = $tab->getId();
+            $tab = new Type_10($eventTabId);
+            $freshPrice = $tab->getId();
         }
         return $freshPrice;
     }
