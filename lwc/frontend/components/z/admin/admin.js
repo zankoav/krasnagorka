@@ -223,6 +223,8 @@ export default class Admin extends LightningElement {
         const foodLunch = parseInt(this.settings.foodLunch || 0)
         const foodDinner = parseInt(this.settings.foodDinner || 0)
         const eventTabId = this.settings.eventTabId
+        const eventId = this.settings.eventId
+        const variantId = this.settings.eventModel?.variantId
 
         const hash = JSON.stringify({
             house,
@@ -239,7 +241,9 @@ export default class Admin extends LightningElement {
             foodBreakfast,
             foodLunch,
             foodDinner,
-            eventTabId
+            eventTabId,
+            eventId,
+            variantId
         })
 
         const activeStep = this.settings.menu.find((step) => step.active).value
