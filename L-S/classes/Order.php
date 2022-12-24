@@ -52,6 +52,8 @@ class Order {
     public int $peopleCount;
 
     public ?string $eventTabId;
+    public ?string $eventId;
+    public ?string $variantId;
     public array $note;
     public bool $isTerem = false;
     public string $calendarName;
@@ -75,6 +77,14 @@ class Order {
     
     public int $foodPrice;
     public int $accommodationPrice;
+
+    public function eventVariant(){
+        $result = null;
+        if(!empty($this->variantId)){
+            $result = get_the_title($this->variantId);
+        }
+        return $result;
+    }
 
     public function getHouseLink(){
         $calendars  = get_the_terms($this->id, 'sbc_calendars');

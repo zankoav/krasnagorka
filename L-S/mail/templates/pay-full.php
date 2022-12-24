@@ -1,7 +1,7 @@
 <?php
 	$order = $args['order'];
     $created = get_the_date("d.m.Y", $order->id);
-    $eventTitle = !empty($order['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+    $eventTitle = $order['eventMainTitle'];
 
 
 ?>

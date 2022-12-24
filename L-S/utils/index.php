@@ -51,7 +51,13 @@ function get_order_data($orderId){
     $start = get_post_meta($orderId, 'sbc_order_start', 1);
     $end = get_post_meta($orderId, 'sbc_order_end', 1);
     $price = get_post_meta($orderId, 'sbc_order_price', 1);
+
+    // fire event
     $eventTabId = get_post_meta($orderId, 'sbc_order_is_event', 1);
+
+    // event
+    $eventTitle = get_post_meta($orderId, 'sbc_order_event_title', 1);
+
     $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
     $calendars  = get_the_terms($orderId, 'sbc_calendars');
     $client = get_post_meta($orderId, 'sbc_order_client', 1);
@@ -89,12 +95,21 @@ function get_order_data($orderId){
     if(!empty($paymentMethod) and !empty($prepaidPercantage)){
         $subprice = intval($price * $prepaidPercantage / 100);
     }
-        
+
+    $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+    if(!empty($eventTitle)){
+        $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по мероприятию';
+    }else if(!empty($eventTabId)){
+        $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению';
+    }
+    
     return [
         'orderId' => $orderId,
         'created' => $created,
         'babyBed' => $babyBed == 'on',
         'eventTabId' => $eventTabId == 'on',
+        'eventTitle' => $eventTitle,
+        'eventMainTitle' => $eventMainTitle,
         'bathHouseWhite' => $bathHouseWhite,
         'bathHouseBlack' => $bathHouseBlack,
         'smallAnimalsCount' => $smallAnimalsCount,

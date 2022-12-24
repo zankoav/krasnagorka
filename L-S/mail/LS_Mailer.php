@@ -46,6 +46,16 @@ class LS_Mailer {
         return $result;
     }
 
+    private static function getSubject($data){
+        $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+        if(!empty($data['eventTitle'])){
+            $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по мероприятию';
+        }else if(!empty($data['eventTabId'])){
+            $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению';
+        }
+        return $result;
+    }
+
     private static function generateCheck($checkType, $data){
         $babyBed = '';
         $bathHouseWhite = '';
@@ -112,7 +122,7 @@ class LS_Mailer {
             </tr>";
         }
 
-        $eventTitle = !empty($data['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+        $eventTitle = self::getSubject($data);
 
         $result = "<style type='text/css'>
         .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}

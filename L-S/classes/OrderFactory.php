@@ -23,6 +23,8 @@ class OrderFactory {
         $order->paymentMethod = $data['paymentMethod'];
         $order->prepaidType = $data['prepaidType'];
         $order->eventTabId = $data['eventTabId'];
+        $order->eventId = $data['eventId'];
+        $order->variantId = $data['variantId'];
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
@@ -160,7 +162,14 @@ class OrderFactory {
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
-        if(!empty($order->eventTabId)){
+        if(!empty($order->eventTabId) and !empty($order->eventId)){
+            
+            $eventTheTitle = get_the_title($order->eventId);
+            $variantTitle = get_the_title($order->variantId);
+            update_post_meta($order->id, 'sbc_order_event_title', $eventTheTitle);
+            update_post_meta($order->id, 'sbc_order_event_variant', $variantTitle);
+
+        }else if(!empty($order->eventTabId)){
             update_post_meta($order->id, 'sbc_order_is_event', 'on');
         }
 

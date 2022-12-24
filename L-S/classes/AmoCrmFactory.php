@@ -300,15 +300,37 @@ class AmoCrmFactory {
             }
 
             // Is fire order
-            $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
-            $isEventOrderFieldValueModel->setFieldId(760957);
-            $isEventOrderFieldValueModel->setValues(
+            $isEventFireOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
+            $isEventFireOrderFieldValueModel->setFieldId(760957);
+            $isEventFireOrderFieldValueModel->setValues(
                 (new CheckboxCustomFieldValueCollection())
                     ->add((new CheckboxCustomFieldValueModel())
                             ->setValue(!empty($order->eventTabId))
                     )
             );
+            $leadCustomFields->add($isEventFireOrderFieldValueModel);
+
+            // Is event order
+            $isEventOrderFieldValueModel = new CheckboxCustomFieldValuesModel();
+            $isEventOrderFieldValueModel->setFieldId(761273);
+            $isEventOrderFieldValueModel->setValues(
+                (new CheckboxCustomFieldValueCollection())
+                    ->add((new CheckboxCustomFieldValueModel())
+                            ->setValue(!empty($order->eventId))
+                    )
+            );
             $leadCustomFields->add($isEventOrderFieldValueModel);
+
+            // Variant of event
+            $isEventVariantOrderFieldValueModel = new TextCustomFieldValuesModel();
+            $isEventVariantOrderFieldValueModel->setFieldId(761275);
+            $isEventVariantOrderFieldValueModel->setValues(
+                (new TextCustomFieldValueCollection())
+                    ->add((new TextCustomFieldValueModel())
+                            ->setValue(!empty($order->eventVariant()))
+                    )
+            );
+            $leadCustomFields->add($isEventVariantOrderFieldValueModel);
             
             // Order Type
             $typeFieldValueModel = new TextCustomFieldValuesModel();
@@ -351,11 +373,23 @@ class AmoCrmFactory {
                 ->link($lead, $links);
 
             $notePrepaidType = $order->prepaidType ?? '-';
-            $isEventOrder = empty($order->eventTabId) ? 'Нет' : 'Да';
+
+            $isFireOrder = 'Нет';
+            $isEventOrder = 'Нет';
+            
+            if(!empty($order->eventTabId) and !empty($order->eventId)){
+                $isEventOrder = 'Да';
+            }else if(!empty($order->eventTabId)){
+                $isFireOrder = 'Да';
+            }
+
+            $eventVariant = $order->eventVariant() ?? '-';
 
             $order->note[] = "Сумма: {$order->price} руб.";
             $order->note[] = "Количество Человек: {$order->peopleCount}";
-            $order->note[] = "Горящее предложение: {$isEventOrder}";
+            $order->note[] = "Горящее предложение: {$isFireOrder}";
+            $order->note[] = "Мероприятие: {$isEventOrder}";
+            $order->note[] = "Пакет: {$eventVariant}";
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
 
             $order->note[] = "Детская кроватка: {$order->isBabyBedMessage()}";

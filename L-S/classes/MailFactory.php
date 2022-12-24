@@ -56,6 +56,16 @@ class MailFactory {
         }
     }
 
+    private static function getSubject(Order $order){
+        $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+        if(!empty($order->eventTabId) and !empty($order->eventId)){
+            $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по мероприятию';
+        }else if(!empty($order->eventTabId)){
+            $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению';
+        }
+        return $result;
+    }
+
     private static function initMail(Order $order){
 
         $mail = (object)[];
@@ -72,7 +82,7 @@ class MailFactory {
                 throw new MailException('Incorrect order type and method', 402);
             }
         } else {
-            $mail->subject = $eventTitle = !empty($order->eventTabId) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+            $mail->subject = self::getSubject($order);
             $mail->checkType =  $order->prepaidType === 100 ? 'pay-full' : 'pay-partial';
             $mail->templatePath = "L-S/mail/templates/{$mail->checkType}";
         } 
@@ -156,7 +166,7 @@ class MailFactory {
             </tr>";
         }
 
-        $eventTitle = !empty($order->eventTabId) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+        $eventTitle = self::getSubject($order);
 
         $result = "<style type='text/css'>
         .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}

@@ -108,6 +108,30 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => 'Информация по мероприятию',
+        'id'   => 'sbc_order_event_id',
+        'type' => 'title'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => 'Мероприятие',
+        'id'   => 'sbc_order_event_title',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
+        'name' => 'Пакет',
+        'id'   => 'sbc_order_event_variant',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'type' => 'text'
+    ) );
+
+    $sbc_order->add_field( array(
         'name' => esc_html__( 'Дата заезда', 'sbc' ),
         'id'   => 'sbc_order_start',
         'type' => 'text_date',

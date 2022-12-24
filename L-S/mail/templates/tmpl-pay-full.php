@@ -1,6 +1,6 @@
 <?php
 	$order = $args['data'];
-    $eventTitle = !empty($order['eventTabId']) ? 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению' : 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
+    $eventTitle = $order['eventMainTitle'];
 
 ?>
 <table bgcolor="#f8f8f8" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%"
