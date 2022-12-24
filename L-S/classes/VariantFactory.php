@@ -7,7 +7,7 @@ use Ls\Wp\Log as Log;
 
 class VariantFactory {
 
-    public static function getVaraintById($id, $settings = []){
+    public static function getVaraintById($id){
         
         $variant = new Variant();
         $variant->id = $id;

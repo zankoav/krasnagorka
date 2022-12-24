@@ -45,6 +45,37 @@
             ];
         }
 
+        public function getSelectedCalendar($calendarId, $variantId){
+            $variant = VariantFactory::getVaraintById($variantId);
+            $result = [
+                'variant' => $variant;
+            ];
+            $interval = $this->getInterval();
+            $result['interval'] = $interval; 
+            $items = $this->getItems();
+            foreach($items as $item){
+                if($calendarId == intval($item['calendar'])){
+                    $dateStart = $interval['from'];
+                    $dateEnd = $interval['to'];
+
+                    $result['calendar'] = [
+                        'calendar' => $calendarId,
+                        'calendar_name' => $item['calendarName'],
+                        'max_people' => intval($item['maxPeople']),
+                        'house' => intval($item['house']),
+                        'image' => $item['image'],
+                        'new_price' => intval($item['new_price']),
+                        'min_people' => intval($item['peopleCount']),
+                        'content' => $item['description'],
+                        'price_description' => $item['sale_text'],
+                        'group' => $item['group'] ?? null,
+                    ];
+                    break;
+                }
+            }
+            return $result;
+        }
+
 		public function getId(){
 			return $this->id;
 		}
@@ -89,9 +120,8 @@
             $result = [];
             $variants = get_post_meta($this->id, 'mastak_event_tab_type_10_variants', 1);
             if(!empty($variants)){
-                $opts = get_option('mastak_booking_appearance_options');
                 foreach((array) $variants as $variant){
-                    $result[] = VariantFactory::getVaraintById($variant, $opts);
+                    $result[] = VariantFactory::getVaraintById($variant);
                 }
             }   
             return $result;

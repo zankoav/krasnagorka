@@ -179,87 +179,6 @@ class Model
         ];
     }
 
-    private function getEventModel(){
-
-        $bookingSettings = get_option('mastak_booking_appearance_options');
-        $showPrice = $bookingSettings['booking_price_show'] == 'on';
-        $showPayments = false;
-
-        if($showPrice){
-            $showPayments = $bookingSettings['booking_payments_show'] == 'on';
-            $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
-            $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
-            $prepaidOptions = [
-                [
-                    "label"=> "100%",
-                    "value"=> 100
-                ]
-            ];
-
-            if(isset($prepaidPercantage)){
-                $prepaidOptions[] = [
-                    "label"=> $prepaidPercantage . '%',
-                    "value"=> $prepaidPercantage
-                ];
-            }
-        }
-
-        // ?eventId=25105&eventTabId=24793&calendarId=9&people=3&var=25118&obj=8783
-        $objId = $_GET['obj'];
-        $eventTabId = $_GET['eventTabId'];
-        $eventId  = $_GET['eventId'];
-        $calendarId = $_GET['calendarId'];
-        $variantId = $_GET['var'];
-        $people = $_GET['people'];
-
-        $textFullCard =  !empty($bookingSettings['text_full_card']) ? $bookingSettings['text_full_card'] : '';
-        $textPartCard =  !empty($bookingSettings['text_part_card']) ? $bookingSettings['text_part_card'] : '';
-        $textFullLaterCard =  !empty($bookingSettings['text_full_later_card']) ? $bookingSettings['text_full_later_card'] : '';
-        $textPartLaterCard =  !empty($bookingSettings['text_part_later_card']) ? $bookingSettings['text_part_later_card'] : '';
-        $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
-        $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
-
-
-        $result = [
-            'event'         => true,
-            'eventTabId'    => $eventTabId,
-            'eventId'       => $eventId,
-            'calendarId'    => $calendarId,
-            'variantId'     => $variantId,
-            'people'        => $people,
-            'objId'         => $objId,
-
-            'textFullCard'          => $textFullCard,
-            'textPartCard'          => $textPartCard,
-            'textFullLaterCard'     => $textFullLaterCard,
-            'textPartLaterCard'     => $textPartLaterCard,
-            'textFullOffice'        => $textFullOffice,
-            'textPartOffice'        => $textPartOffice,
-
-            'mainContent'   => [
-                "contractOffer" => $this->baseModel['contract_offer']
-            ],
-            "footerBottom"  => $this->getFooterBottom(),
-            'mainMenu'      => $this->getMainMenu(),
-            'weather'       => $this->getWeather(),
-            'currencies'    => $this->getCurrencies(),
-            'pageTitle'     => get_the_title(),
-            'pageBannerSrc' => get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'],
-            'popupContacts' => $this->getPopupContacts(),
-            
-            "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
-            "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
-            "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
-            
-            "foodBreakfastPrice" => !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0,
-            "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
-            "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
-            "foodAvailable" => $bookingSettings['food_available'] == 'on',
-            "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
-        ];
-        return $result;
-    }
-
     public function baseBookingModel(){
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = $bookingSettings['booking_price_show'] == 'on';
@@ -304,7 +223,6 @@ class Model
             $dateFrom  = get_post_meta($intervalId, "season_from", 1);
             $dateTo    = get_post_meta($intervalId, "season_to", 1);
         }
-
         
         $title     = null;
         $type      = null;
@@ -333,7 +251,7 @@ class Model
         $sandbox = get_webpay_sandbox();
         $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
         
-        $weather       = $this->getWeather();
+        $weather = $this->getWeather();
 
         $selectedSeasonId = null;
         if (!empty($dateFrom) and !empty($dateTo)) {
@@ -418,13 +336,21 @@ class Model
             $_dateFrom = $result['dateFrom'];
             $_dateTo = $result['dateTo'];
 
-            $result['price'] = $this->getPriceFromEvent(
-                $_eventTabId,
-                $calendarId,
-                $_dateFrom,
-                $_dateTo,
-                $eventId
-            );
+            if(!empty($eventId) && !empty($eventTabId)){
+                $tab = new Type_10($eventTabId);
+                $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
+                $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * 
+                (count($selectedCalendar['interval']['days']) - 1) * $people + 
+                $selectedCalendar['variant']->priceSingle;
+            }else{
+                $result['price'] = $this->getPriceFromEvent(
+                    $_eventTabId,
+                    $calendarId,
+                    $_dateFrom,
+                    $_dateTo
+                );
+            }
+            
 
             $result['total'] = [
                 "accommodation" =>  intval($result['price']),
@@ -646,22 +572,17 @@ class Model
         exit();
     }
 
-    private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd, $eventId)
+    private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd)
     {
         $freshPrice = null;
-        if(empty($eventId)){
-            $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
-            foreach ($tabHouses as $tabHouse) {
-                $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
-                $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-                if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                    $freshPrice = $tabHouse['new_price'];
-                    break;
-                }
+        $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
+        foreach ($tabHouses as $tabHouse) {
+            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+            if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
+                $freshPrice = $tabHouse['new_price'];
+                break;
             }
-        }else {
-            $tab = new Type_10($eventTabId);
-            $freshPrice = $tab->getId();
         }
         return $freshPrice;
     }
