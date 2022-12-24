@@ -62,6 +62,7 @@ export default class Admin extends LightningElement {
             phone: getCookie('kg_phone') || '',
             email: getCookie('kg_email') || '',
             people: this.model.people,
+            eventId: this.model.eventId,
             counts: null,
             childCounts: null,
             dateStart: this.model.dateFrom
