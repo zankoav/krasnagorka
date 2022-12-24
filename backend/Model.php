@@ -346,6 +346,7 @@ class Model
                 $result['eventModel'] = [
                     'id' => $eventId,
                     'title' => get_the_title($eventId),
+                    'variant' => $selectedCalendar['variant']->title,
                     'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle]
                 ];
             }else{
