@@ -48,7 +48,7 @@
         public function getSelectedCalendar($calendarId, $variantId){
             $variant = VariantFactory::getVaraintById($variantId);
             $result = [
-                'variant' => $variant;
+                'variant' => $variant
             ];
             $interval = $this->getInterval();
             $result['interval'] = $interval; 
