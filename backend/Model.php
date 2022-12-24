@@ -290,6 +290,22 @@ class Model
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
         $calendarId = $_GET['calendarId'];
+
+        if(isset($_GET['obj'])){
+            $bookingId = $_GET['obj'];
+        }
+
+        $eventId  = $_GET['eventId'];
+        $variantId = $_GET['var'];
+        $people = $_GET['people'];
+
+        if(!empty($eventId) && !empty($eventTabId)){
+            $intervalId = get_post_meta($eventTabId, 'mastak_event_tab_type_10_interval', 1);
+            $dateFrom  = get_post_meta($intervalId, "season_from", 1);
+            $dateTo    = get_post_meta($intervalId, "season_to", 1);
+        }
+
+        
         $title     = null;
         $type      = null;
 
@@ -384,6 +400,10 @@ class Model
             $result['eventTabId'] = $eventTabId;
         }
 
+        if (!empty($eventId)) {
+            $result['eventId'] = $eventId;
+        }
+
         if (!empty($teremRoom)) {
             $result['mainContent']['title'] = $teremRoom;
         }
@@ -402,7 +422,8 @@ class Model
                 $_eventTabId,
                 $calendarId,
                 $_dateFrom,
-                $_dateTo
+                $_dateTo,
+                $eventId
             );
 
             $result['total'] = [
@@ -625,17 +646,22 @@ class Model
         exit();
     }
 
-    private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd)
+    private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd, $eventId)
     {
-        $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
         $freshPrice = null;
-        foreach ($tabHouses as $tabHouse) {
-            $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
-            $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
-            if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $freshPrice = $tabHouse['new_price'];
-                break;
+        if(empty($eventId)){
+            $tabHouses = get_post_meta($eventTabId, 'mastak_event_tab_type_8_items', 1);
+            foreach ($tabHouses as $tabHouse) {
+                $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
+                $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
+                if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
+                    $freshPrice = $tabHouse['new_price'];
+                    break;
+                }
             }
+        }else {
+            // $tab = new Type_10($eventTabId);
+            // $freshPrice = $tab->getId();
         }
         return $freshPrice;
     }
