@@ -141,6 +141,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $dateEnd = $request['dateEnd'];
         $peopleCount = (int)$request['peopleCount'];
         $eventTabId = $request['eventTabId'] != null ? intval($request['eventTabId']) : null;
+        $eventId = intval($request['eventId']);
+        $variantId = intval($request['variantId']);
         $isTerem = $request['isTerem'];
         $isAdminEvent = $request['is_admin_event'];
         $intervallId = $request['intervallId'];
@@ -202,6 +204,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          */
         $onlyBookingOrder = self::isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem); 
 
+        if(!empty($eventId)){
+            $onlyBookingOrder = false;
+        }
+
         $result = [
             'total_price' => 0,
             'days_count' => count($days),
@@ -211,7 +217,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         ];
 
         if($eventTabId != null and $eventTabId != 0){
-            $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd);
+            if(!empty($eventId)){
+                $tab = new Type_10($eventTabId);
+                $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
+                $result['total_price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $peopleCount + $selectedCalendar['variant']->priceSingle;
+            }else{
+                $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd);
+            }
             $result['accommodation'] = $result['total_price'];
         }else{
             $houseDaysSales = get_post_meta($houseId, 'sale_days', 1);
