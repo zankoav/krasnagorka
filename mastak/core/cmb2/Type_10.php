@@ -25,10 +25,11 @@
 
                 if(empty($item['image'])){
                     foreach ($kalendars as $kalendar){
-                        // if(str_contains($kalendar['calendar'], 'id="'.$calendarId.'"')){
-                            $item['image'] = 'id="'.$calendarId.'"';//$kalendar['picture'];
-                            // break;
-                        // }
+                        $calendarTeremId = getCalendarId($kalendar['calendar']);
+                        if($calendarTeremId == $calendarId){
+                            $item['image'] = $kalendar['picture'];
+                            break;
+                        }
                     }
                 }
                 
