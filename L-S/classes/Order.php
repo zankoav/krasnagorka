@@ -81,7 +81,7 @@ class Order {
     public function eventVariant(){
         $result = null;
         if(!empty($this->variantId)){
-            $title = get_the_title($id);
+            $title = get_the_title($this->variantId);
             $per_day = get_post_meta($this->variantId, 'variant_description_per_day', 1);
             $single = get_post_meta($this->variantId, 'variant_description_single', 1);
             $result = [
