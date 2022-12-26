@@ -41,9 +41,9 @@ export default class Admin extends LightningElement {
 
     connectedCallback() {
         if (this.model.eventId) {
-            BASE_MENU = BASE_MENU.filter(
-                (item) => item.value != 'food' || item.value != 'additional_services'
-            )
+            BASE_MENU = BASE_MENU.filter((item) => {
+                return ['food', 'additional_services'].indexOf(item.value) == -1
+            })
         }
         this.settings = {
             webpaySandbox: this.model.webpaySandbox,
