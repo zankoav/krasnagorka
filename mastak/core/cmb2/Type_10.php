@@ -19,11 +19,11 @@
             $calendars = [];
             $terem_options = get_option('mastak_terem_appearance_options');
             $kalendars = $terem_options['kalendar'];
-
             foreach($items as $item){
                 $calendarId = intval($item['calendar']);
+                $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1);
 
-                if(empty($item['image'])){
+                if(empty($item['image']) and $isTeremRoom){
                     foreach ($kalendars as $kalendar){
                         $calendarTeremId = getCalendarId($kalendar['calendar']);
                         if($calendarTeremId == $calendarId){
@@ -31,6 +31,8 @@
                             break;
                         }
                     }
+                }else if(empty($item['image'])){
+                    $item['image'] = get_the_post_thumbnail_url($item['house'], 'calendar-thumb');
                 }
                 
                 $dateStart = $interval['from'];
