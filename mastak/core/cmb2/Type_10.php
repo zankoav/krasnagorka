@@ -19,16 +19,16 @@
             $calendars = [];
             $terem_options = get_option('mastak_terem_appearance_options');
             $kalendars = $terem_options['kalendar'];
-            
+
             foreach($items as $item){
                 $calendarId = intval($item['calendar']);
 
                 if(empty($item['image'])){
                     foreach ($kalendars as $kalendar){
-                        if(str_contains($kalendar['calendar'], 'id="'.$calendarId.'"')){
-                            $item['image'] = $kalendar['picture'];
-                            break;
-                        }
+                        // if(str_contains($kalendar['calendar'], 'id="'.$calendarId.'"')){
+                            $item['image'] = 'id="'.$calendarId.'"';//$kalendar['picture'];
+                            // break;
+                        // }
                     }
                 }
                 
