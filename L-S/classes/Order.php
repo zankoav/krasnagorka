@@ -81,7 +81,17 @@ class Order {
     public function eventVariant(){
         $result = null;
         if(!empty($this->variantId)){
-            $result = get_the_title($this->variantId);
+            $title = get_the_title($id);
+            $per_day = get_post_meta($this->variantId, 'variant_description_per_day', 1);
+            $single = get_post_meta($this->variantId, 'variant_description_single', 1);
+            $result = [
+                'id' => $this->variantId,
+                'title' => $title,
+                'description' => $per_day
+            ];
+            if(!empty($single)){
+                $result['description'] = empty($per_day) ? $single : "$per_day, $single";
+            }
         }
         return $result;
     }

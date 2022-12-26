@@ -321,16 +321,55 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($isEventOrderFieldValueModel);
 
-            // Variant of event
-            $isEventVariantOrderFieldValueModel = new TextCustomFieldValuesModel();
-            $isEventVariantOrderFieldValueModel->setFieldId(761275);
-            $isEventVariantOrderFieldValueModel->setValues(
+            // Event id 
+            $eventIdOrderFieldValueModel = new TextCustomFieldValuesModel();
+            $eventIdOrderFieldValueModel->setFieldId(761301);
+            $eventIdOrderFieldValueModel->setValues(
                 (new TextCustomFieldValueCollection())
                     ->add((new TextCustomFieldValueModel())
-                            ->setValue($order->eventVariant())
+                            ->setValue($order->eventId)
                     )
             );
-            $leadCustomFields->add($isEventVariantOrderFieldValueModel);
+            $leadCustomFields->add($eventIdOrderFieldValueModel);
+
+            
+
+            $eventVariant = $order->eventVariant();
+            if(!empty($eventVariant)){
+
+                // Variant title of event
+                $isEventVariantTitleOrderFieldValueModel = new TextCustomFieldValuesModel();
+                $isEventVariantTitleOrderFieldValueModel->setFieldId(761275);
+                $isEventVariantTitleOrderFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                                ->setValue($eventVariant['title'])
+                        )
+                );
+                $leadCustomFields->add($isEventVariantTitleOrderFieldValueModel);
+
+                // Variant description of event
+                $isEventVariantDescriptionOrderFieldValueModel = new TextCustomFieldValuesModel();
+                $isEventVariantDescriptionOrderFieldValueModel->setFieldId(761299);
+                $isEventVariantDescriptionOrderFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                                ->setValue($eventVariant['description'])
+                        )
+                );
+                $leadCustomFields->add($isEventVariantDescriptionOrderFieldValueModel);
+
+                // Variant id of event
+                $isEventVariantIdOrderFieldValueModel = new TextCustomFieldValuesModel();
+                $isEventVariantIdOrderFieldValueModel->setFieldId(761297);
+                $isEventVariantIdOrderFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                                ->setValue($order->variantId)
+                        )
+                );
+                $leadCustomFields->add($isEventVariantIdOrderFieldValueModel);
+            }
             
             // Order Type
             $typeFieldValueModel = new TextCustomFieldValuesModel();
@@ -378,18 +417,20 @@ class AmoCrmFactory {
             $isEventOrder = 'Нет';
             
             if(!empty($order->eventTabId) and !empty($order->eventId)){
-                $isEventOrder = 'Да';
+                $isEventOrder = get_the_title($order->eventId);
             }else if(!empty($order->eventTabId)){
                 $isFireOrder = 'Да';
             }
 
-            $eventVariant = $order->eventVariant() ?? '-';
-
             $order->note[] = "Сумма: {$order->price} руб.";
             $order->note[] = "Количество Человек: {$order->peopleCount}";
             $order->note[] = "Горящее предложение: {$isFireOrder}";
-            $order->note[] = "Мероприятие: {$isEventOrder}";
-            $order->note[] = "Пакет: {$eventVariant}";
+            if(!empty($eventVariant)){
+                $order->note[] = "Мероприятие: {$isEventOrder}";
+                $order->note[] = "Пакет: " . $eventVariant['title'];
+                $order->note[] = "Описание пакета: " . $eventVariant['description'];
+            }
+            
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";
 
             $order->note[] = "Детская кроватка: {$order->isBabyBedMessage()}";
