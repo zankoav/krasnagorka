@@ -141,18 +141,21 @@
             justify-content: space-between;
             border-bottom: 1px dashed #A7ACAF;
         }
+
+        .order-item__list-item.order-item__list-item_column{
+            border-bottom: 0;
+            flex-direction: column;
+        }
+
         @media (min-width:1280px) {
             .order-item__list-item{
                 display: flex;
                 margin-top: .25rem;
             }
         }
+
         .order-contact-line__label,.order-item__list-item-label{
             color: #4D575C;
-        }
-
-        .order-item__list-item-label{
-            margin-right: 0.25rem;
         }
 
         @media (min-width:1280px) {
@@ -309,7 +312,7 @@
                                         <div class="order-item__list-item-label">Пакет:</div>
                                         <div class="order-item__list-item-value">${order.variantTitle}</div>
                                     </div>
-                                    <div class="order-item__list-item">
+                                    <div class="order-item__list-item order-item__list-item_column">
                                         <div class="order-item__list-item-label">Описание пакета:</div>
                                         <div class="order-item__list-item-value">${order.variantDescription}</div>
                                     </div>
