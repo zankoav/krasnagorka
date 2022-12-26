@@ -32,7 +32,7 @@
                         }
                     }
                 }else if(empty($item['image'])){
-                    $item['image'] = get_the_post_thumbnail_url($item['house'], 'calendar-thumb');
+                    $item['image'] = get_the_post_thumbnail_url($item['house']);
                 }
                 
                 $dateStart = $interval['from'];
