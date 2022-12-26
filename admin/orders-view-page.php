@@ -299,6 +299,7 @@
                     const isTodayOrTomorrow = [model.today, model.tomorrow].indexOf(order.start) > -1 ? '<img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star">' : '';
                     const comment = order.comment || '-'; 
                     let foodSectionOrEvent;
+                    let additionalServices = '';
                     if(order.eventTitle){
                         foodSectionOrEvent = `
                             <div class="order-item">
@@ -339,6 +340,33 @@
                                 </div>
                             </div>
                         `;
+                        additionalServices = `
+                            <div class="order-item">
+                                <div class="order-item__title fw-bold">Дополнительные услуги</div>
+                                <div class="order-item__list">
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Бани по белому:</div>
+                                        <div class="order-item__list-item-value">${order.services.bath_house_white}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Бани по черному:</div>
+                                        <div class="order-item__list-item-value">${order.services.bath_house_black}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Мелкие животные:</div>
+                                        <div class="order-item__list-item-value">${order.services.small_animlas_count}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Крупные животные:</div>
+                                        <div class="order-item__list-item-value">${order.services.big_animlas_count}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Детская кроватка:</div>
+                                        <div class="order-item__list-item-value">${order.services.baby_bed}</div>
+                                    </div>
+                                </div>
+                            </div>
+                         `;
                     }
                     return `
                         <div class="order" style="border:5px solid ${order.background};">
@@ -419,31 +447,7 @@
                                 </div>
                                 <div class="order__block-wrapper-added">
                                     <div class="order__block">
-                                        <div class="order-item">
-                                            <div class="order-item__title fw-bold">Дополнительные услуги</div>
-                                            <div class="order-item__list">
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Бани по белому:</div>
-                                                    <div class="order-item__list-item-value">${order.services.bath_house_white}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Бани по черному:</div>
-                                                    <div class="order-item__list-item-value">${order.services.bath_house_black}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Мелкие животные:</div>
-                                                    <div class="order-item__list-item-value">${order.services.small_animlas_count}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Крупные животные:</div>
-                                                    <div class="order-item__list-item-value">${order.services.big_animlas_count}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Детская кроватка:</div>
-                                                    <div class="order-item__list-item-value">${order.services.baby_bed}</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        ${additionalServices}
                                     </div>
                                 </div>
                             </div>
