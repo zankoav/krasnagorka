@@ -305,7 +305,7 @@ class AmoCrmFactory {
             $isEventFireOrderFieldValueModel->setValues(
                 (new CheckboxCustomFieldValueCollection())
                     ->add((new CheckboxCustomFieldValueModel())
-                            ->setValue(!empty($order->eventTabId))
+                            ->setValue(!empty($order->eventTabId) and empty($order->eventId))
                     )
             );
             $leadCustomFields->add($isEventFireOrderFieldValueModel);
@@ -316,7 +316,7 @@ class AmoCrmFactory {
             $isEventOrderFieldValueModel->setValues(
                 (new CheckboxCustomFieldValueCollection())
                     ->add((new CheckboxCustomFieldValueModel())
-                            ->setValue(!empty($order->eventId) and empty($order->eventId))
+                            ->setValue(!empty($order->eventId))
                     )
             );
             $leadCustomFields->add($isEventOrderFieldValueModel);

@@ -37,23 +37,27 @@ export default class BookingForm extends LightningElement {
     @track errorImage = ERROR
 
     get isHouseStep() {
-        return this.settings.menu[0].active
+        return this.activeMenuValue == 'house'
     }
 
     get isFoodStep() {
-        return this.settings.menu[1].active
+        return this.activeMenuValue == 'food'
     }
 
     get isAdditionalServicesStep() {
-        return this.settings.menu[2].active
+        return this.activeMenuValue == 'additional_services'
     }
 
     get isContactStep() {
-        return this.settings.menu[3].active
+        return this.activeMenuValue == 'contacts'
     }
 
     get isCheckoutStep() {
-        return this.settings.menu[4].active
+        return this.activeMenuValue == 'checkout'
+    }
+
+    get activeMenuValue() {
+        return this.settings.menu.find((step) => step.active).value
     }
 
     get orderedSuccessData() {
