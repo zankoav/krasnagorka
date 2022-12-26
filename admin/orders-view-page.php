@@ -290,6 +290,48 @@
                 return model.orders.map((order, index) => {
                     const isTodayOrTomorrow = [model.today, model.tomorrow].indexOf(order.start) > -1 ? '<img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/star.svg" alt="star" class="order__star">' : '';
                     const comment = order.comment || '-'; 
+                    let foodSectionOrEvent;
+                    if(order.eventTitle){
+                        foodSectionOrEvent = `
+                            <div class="order-item">
+                                <div class="order-item__title fw-bold">Мероприятие</div>
+                                <div class="order-item__list">
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Название:</div>
+                                        <div class="order-item__list-item-value">${order.eventTitle}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Пакет:</div>
+                                        <div class="order-item__list-item-value">${order.variantTitle}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Описание пакета:</div>
+                                        <div class="order-item__list-item-value">${order.variantDescription}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }else{
+                        foodSectionOrEvent = `
+                            <div class="order-item">
+                                <div class="order-item__title fw-bold">Питание</div>
+                                <div class="order-item__list">
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Завтраки:</div>
+                                        <div class="order-item__list-item-value">${order.foodBreakfast}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Обеды</div>
+                                        <div class="order-item__list-item-value">${order.foodLunch}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Ужины:</div>
+                                        <div class="order-item__list-item-value">${order.foodDinner}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
                     return `
                         <div class="order" style="border:5px solid ${order.background};">
                             <div class="order__title">
@@ -326,50 +368,10 @@
                                         </div>
                                     </div>
                                     <div class="order__block order__block_main">
-                                        <div class="order-item">
-                                            <div class="order-item__title fw-bold">Оплата</div>
-                                            <div class="order-item__list">
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Общая сумма:</div>
-                                                    <div class="order-item__list-item-value">${order.total_price} руб.</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Питание:</div>
-                                                    <div class="order-item__list-item-value">${order.food} руб.</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Проживание:</div>
-                                                    <div class="order-item__list-item-value">${order.accommodationPrice} руб.</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Оплачено:</div>
-                                                    <div class="order-item__list-item-value">${order.prepaid} руб.</div>
-                                                </div>
-                                                <div class="order-item__list-item fw-bold">
-                                                    <div class="order-item__list-item-label">Остаток:</div>
-                                                    <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        ${foodSectionOrEvent}
                                     </div>
                                     <div class="order__block order__block_main">
-                                        <div class="order-item">
-                                            <div class="order-item__title fw-bold">Питание</div>
-                                            <div class="order-item__list">
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Завтраки:</div>
-                                                    <div class="order-item__list-item-value">${order.foodBreakfast}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Обеды</div>
-                                                    <div class="order-item__list-item-value">${order.foodLunch}</div>
-                                                </div>
-                                                <div class="order-item__list-item">
-                                                    <div class="order-item__list-item-label">Ужины:</div>
-                                                    <div class="order-item__list-item-value">${order.foodDinner}</div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="order__block order__block_contacts">
                                         <div class="order-contact-line">
