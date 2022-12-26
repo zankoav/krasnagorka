@@ -368,10 +368,34 @@
                                         </div>
                                     </div>
                                     <div class="order__block order__block_main">
-                                        ${foodSectionOrEvent}
+                                        <div class="order-item">
+                                            <div class="order-item__title fw-bold">Оплата</div>
+                                            <div class="order-item__list">
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Общая сумма:</div>
+                                                    <div class="order-item__list-item-value">${order.total_price} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Питание:</div>
+                                                    <div class="order-item__list-item-value">${order.food} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Проживание:</div>
+                                                    <div class="order-item__list-item-value">${order.accommodationPrice} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item">
+                                                    <div class="order-item__list-item-label">Оплачено:</div>
+                                                    <div class="order-item__list-item-value">${order.prepaid} руб.</div>
+                                                </div>
+                                                <div class="order-item__list-item fw-bold">
+                                                    <div class="order-item__list-item-label">Остаток:</div>
+                                                    <div class="order-item__list-item-value">${order.total_price - order.prepaid} руб.</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="order__block order__block_main">
-                                        
+                                        ${foodSectionOrEvent}
                                     </div>
                                     <div class="order__block order__block_contacts">
                                         <div class="order-contact-line">
