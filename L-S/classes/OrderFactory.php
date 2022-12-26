@@ -163,11 +163,8 @@ class OrderFactory {
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
         if(!empty($order->eventTabId) and !empty($order->eventId)){
-            
-            $eventTheTitle = get_the_title($order->eventId);
-            $variantTitle = get_the_title($order->variantId);
-            update_post_meta($order->id, 'sbc_order_event_title', $eventTheTitle);
-            update_post_meta($order->id, 'sbc_order_event_variant', $variantTitle);
+            update_post_meta($order->id, 'sbc_order_event_id', $order->eventId);
+            update_post_meta($order->id, 'sbc_order_event_variant_id', $order->variantId);
 
         }else if(!empty($order->eventTabId)){
             update_post_meta($order->id, 'sbc_order_is_event', 'on');

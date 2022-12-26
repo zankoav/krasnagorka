@@ -109,26 +109,30 @@ function sbc_order_info_metabox() {
 
     $sbc_order->add_field( array(
         'name' => 'Информация по мероприятию',
-        'id'   => 'sbc_order_event_id',
+        'id'   => 'sbc_order_event_title',
         'type' => 'title'
     ) );
 
     $sbc_order->add_field( array(
         'name' => 'Мероприятие',
-        'id'   => 'sbc_order_event_title',
+        'id'   => 'sbc_order_event_id',
+        'type'             => 'select',
+        'options_cb'       => 'show_events_options',
+        'show_option_none' => true,
         'attributes' => array(
             'readonly' => 'readonly'
         ),
-        'type' => 'text'
     ) );
 
     $sbc_order->add_field( array(
         'name' => 'Пакет',
-        'id'   => 'sbc_order_event_variant',
+        'id'   => 'sbc_order_event_variant_id',
+        'type'             => 'select',
+        'options_cb'       => 'show_variants_options',
+        'show_option_none' => true,
         'attributes' => array(
             'readonly' => 'readonly'
         ),
-        'type' => 'text'
     ) );
 
     $sbc_order->add_field( array(
@@ -274,3 +278,19 @@ function sbc_order_info_metabox() {
 }
 
 add_action( 'cmb2_admin_init', 'sbc_order_info_metabox' );
+
+function show_events_options() {
+
+    $query = new WP_Query(array(
+        'post_type'      => 'event',
+        'posts_per_page' => -1
+    ));
+
+    $events = [];
+    $posts   = $query->get_posts();
+    foreach ($posts as $post) {
+        $events[$post->ID] = $post->post_title;
+    }
+
+    return $events;
+}

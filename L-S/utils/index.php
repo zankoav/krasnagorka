@@ -56,7 +56,8 @@ function get_order_data($orderId){
     $eventTabId = get_post_meta($orderId, 'sbc_order_is_event', 1);
 
     // event
-    $eventTitle = get_post_meta($orderId, 'sbc_order_event_title', 1);
+    $eventTitleId = get_post_meta($orderId, 'sbc_order_event_id', 1);
+    $eventTitle = get_the_title($eventTitleId);
 
     $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
     $calendars  = get_the_terms($orderId, 'sbc_calendars');
