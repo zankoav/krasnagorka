@@ -44,6 +44,7 @@ export default class Admin extends LightningElement {
             BASE_MENU = BASE_MENU.filter((item) => {
                 return ['food', 'additional_services'].indexOf(item.value) == -1
             })
+            console.log('BASE_MENU', BASE_MENU);
         }
         this.settings = {
             webpaySandbox: this.model.webpaySandbox,
