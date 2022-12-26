@@ -150,6 +150,11 @@
         .order-contact-line__label,.order-item__list-item-label{
             color: #4D575C;
         }
+
+        .order-item__list-item-label{
+            margin-right: 0.25rem;
+        }
+
         @media (min-width:1280px) {
             .order-contact-line__label{
                 margin-right: .5rem;
