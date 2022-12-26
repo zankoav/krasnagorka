@@ -17,8 +17,21 @@
             $items = $this->getItems();
             $interval = $this->getInterval();
             $calendars = [];
+            $terem_options = get_option('mastak_terem_appearance_options');
+            $kalendars = $terem_options['kalendar'];
+            
             foreach($items as $item){
                 $calendarId = intval($item['calendar']);
+
+                if(empty($item['image'])){
+                    foreach ($kalendars as $kalendar){
+                        if(str_contains($kalendar['calendar'], 'id="'.$calendarId.'"')){
+                            $item['image'] = $kalendar['picture'];
+                            break;
+                        }
+                    }
+                }
+                
                 $dateStart = $interval['from'];
                 $dateEnd = $interval['to'];
                 if(Booking_Form_Controller::isAvailableOrder($calendarId, $dateStart, $dateEnd, false)){
