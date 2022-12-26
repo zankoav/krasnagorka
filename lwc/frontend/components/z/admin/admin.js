@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc'
 import { getCookie } from 'z/utils'
 import './admin.scss'
 
-const BASE_MENU = [
+let BASE_MENU = [
     {
         label: 'Выбор Домика',
         value: 'house',
@@ -40,6 +40,11 @@ export default class Admin extends LightningElement {
     @track settings
 
     connectedCallback() {
+        if (this.model.eventId) {
+            BASE_MENU = BASE_MENU.filter(
+                (item) => item.value != 'food' || item.value != 'additional_services'
+            )
+        }
         this.settings = {
             webpaySandbox: this.model.webpaySandbox,
             admin: this.model.admin,
