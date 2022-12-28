@@ -85,7 +85,7 @@ export default class EventItem extends LightningElement {
 
     connectedCallback() {
         console.log('group', this.group)
-        this.selectedApportament = this.group.items[0].calendar
+        this.selectedApportament =  this.group.items.find((item) => item.selected).calendar
         this.selectedVar = this.group.variant_default
         this.selectedPeople = this.selectedItem.min_people
     }

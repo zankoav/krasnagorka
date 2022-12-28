@@ -13,7 +13,7 @@ export default class EventApp extends LightningElement {
         const response = await eventAppByTabId(this.eventTabId)
 
         if (response) {
-            const tempGroups = {
+            let tempGroups = {
                 other: {
                     id: 'other',
                     items: []
@@ -41,7 +41,7 @@ export default class EventApp extends LightningElement {
                 }
             }
 
-            this.groups = Object.values(tempGroups).sort((a, b) => {
+            this.groups = Object.values(tempGroups).filter(group => group.items.length).sort((a, b) => {
                 if (a.items.length > b.items.length) {
                     return -1
                 } else {
