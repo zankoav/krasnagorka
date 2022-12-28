@@ -352,9 +352,10 @@ class Model
                     'title' => get_the_title($eventId),
                     'variant' => $selectedCalendar['variant']->title,
                     'variantId' => $selectedCalendar['variant']->id,
-                    'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle],
-                    'dateFrom' => $dFrom
+                    'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle]
+                    
                 ];
+                $result['dateFrom'] = $dFrom;
 
             }else{
                 $result['price'] = $this->getPriceFromEvent(
