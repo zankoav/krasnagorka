@@ -345,7 +345,7 @@ class Model
                 $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
 
                 $dFrom = new DateTime($result['dateFrom']);
-                $dFrom = $dFrom->modify('-1 day');
+                $dFrom = $dFrom->modify('-1 day')->format('Y-m-d');
 
                 $result['eventModel'] = [
                     'id' => $eventId,
