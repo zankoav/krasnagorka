@@ -108,9 +108,13 @@
                 'to' => get_post_meta($intervalId, "season_to", 1)
             ];
 
+            $dFrom = new DateTime($result['from']);
+            $dFrom = $dFrom->modify('-1 day');
+            $result['from'] = $dFrom;
+
             $dateEndDT = new DateTime($result['to']);
             $period = new DatePeriod(
-                new DateTime($result['from']),
+                $dFrom,
                 new DateInterval('P1D'),
                 $dateEndDT->modify( '+1 day' )
             );
