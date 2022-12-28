@@ -104,6 +104,14 @@ class Order {
         return getHouseLinkByShortCode($calendarShortCode);
     }
 
+    public function getEventLink(){
+        return  get_permalink( $this->eventId );
+    }
+
+    public function getEventTitle(){
+        return  get_the_title( $this->eventId );
+    }
+
     public function isBookedOnly(){
         return (
             $this->paymentMethod === null && 

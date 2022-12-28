@@ -92,6 +92,11 @@
                                         href="<?= $order['calendarLink'] ?>">
                                         <?= $order['calendarName'] ?>
                                     </a></div>
+                                <?php if(!empty($order['eventId'])):?>
+                                    <div>Мероприятие: <a style="color: #1498c6; text-decoration: underline;" href=<?=$order['eventLink']?>><?= $order['eventTitle'] ?></a></div>
+                                    <div>Пакет: <?= $order['variantTitle'] ?></div>
+                                    <div style="color:#999;"><?= $order['variantDescription'] ?></div>
+                                <?php endif;?>
                             </td>
                         </tr>
                         <tr>

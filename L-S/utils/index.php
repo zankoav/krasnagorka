@@ -57,7 +57,30 @@ function get_order_data($orderId){
 
     // event
     $eventTitleId = get_post_meta($orderId, 'sbc_order_event_id', 1);
-    $eventTitle = get_the_title($eventTitleId);
+    $eventTitle;
+    $eventLink;
+    $variantId;
+    $variantTitle;
+    $variantDescription;
+
+    if(!empty($eventTitleId)){
+        $eventTitle = get_the_title($eventTitleId);
+        $eventLink = get_permalink( $eventTitleId );
+    
+        $variantId = get_post_meta($orderId, 'sbc_order_event_id', 1);
+
+        $per_day = get_post_meta($variantId, 'variant_description_per_day', 1);
+        $single = get_post_meta($variantId, 'variant_description_single', 1);
+
+        $variantDescription = $per_day;
+        $variantTitle = get_the_title($variantId);
+                
+        if(!empty($single)){
+            $variantDescription  = empty($per_day) ? $single : "$per_day, $single";
+        }
+    }
+    
+
 
     $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
     $calendars  = get_the_terms($orderId, 'sbc_calendars');
@@ -110,6 +133,10 @@ function get_order_data($orderId){
         'babyBed' => $babyBed == 'on',
         'eventTabId' => $eventTabId == 'on',
         'eventTitle' => $eventTitle,
+        'eventLink' => $eventLink,
+        'eventId' => $eventTitleId,
+        'variantTitle' => $variantTitle,
+        'variantDescription' => $variantDescription,
         'eventMainTitle' => $eventMainTitle,
         'bathHouseWhite' => $bathHouseWhite,
         'bathHouseBlack' => $bathHouseBlack,

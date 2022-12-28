@@ -78,6 +78,14 @@
 										href="<?= $order->getHouseLink() ?>">
 										<?= $order->calendarName ?>
 									</a></div>
+                                <?php if(!empty($order->eventId)):?>
+                                    <div>Мероприятие: <a style="color: #1498c6; text-decoration: underline;" href=<?=$order->getEventLink()?>><?= $order->getEventTitle() ?></a></div>
+                                    <?php
+                                        $variant = $order->eventVariant();
+                                    ?>
+                                    <div>Пакет: <?= $variant['title'] ?></div>
+                                    <div style="color:#999;"><?= $variant['description'] ?></div>
+                                <?php endif;?>
 							</td>
 						</tr>
 						<tr>

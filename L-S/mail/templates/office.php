@@ -84,10 +84,15 @@
 								style="padding: 0 30px 20px;color:#000;font:400 14px/21px 'arial' , 'helvetica' , sans-serif">
 								<div style="font-size:18px;text-decoration: underline;margin-bottom:5px;">
 									Информация об объектах размещения:</div>
-								<div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;"
-										href=<?=$order->getHouseLink()?>>
-										<?= $order->calendarName ?>
-									</a></div>
+								<div>Объект размещения: <a style="color: #1498c6; text-decoration: underline;" href=<?=$order->getHouseLink()?>><?= $order->calendarName ?></a></div>
+                                <?php if(!empty($order->eventId)):?>
+                                    <div>Мероприятие: <a style="color: #1498c6; text-decoration: underline;" href=<?=$order->getEventLink()?>><?= $order->getEventTitle() ?></a></div>
+                                    <?php
+                                        $variant = $order->eventVariant();
+                                    ?>
+                                    <div>Пакет: <?= $variant['title'] ?></div>
+                                    <div style="color:#999;"><?= $variant['description'] ?></div>
+                                <?php endif;?>
 							</td>
 						</tr>
 						<tr>
