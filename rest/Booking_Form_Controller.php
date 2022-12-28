@@ -1344,7 +1344,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if (!empty($eventId)) {
-                    update_post_meta($post_id, 'sbc_order_is_event', $eventId);
+                    update_post_meta($post_id, 'sbc_order_event_id', $eventId);
                 }
 
                 if (!empty($variantId)) {
@@ -1354,7 +1354,7 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if (!empty($totalPrice)) {
                     update_post_meta($post_id, 'sbc_order_price', $totalPrice);
                 }
-                
+
                 if (!empty($havePayed)) {
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                 }
