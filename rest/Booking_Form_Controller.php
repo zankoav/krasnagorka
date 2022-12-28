@@ -1247,15 +1247,13 @@ class Booking_Form_Controller extends WP_REST_Controller
             if(!empty($request['comment'])){
                 $comment = $request['comment'];
             }
-            
-            // if(!empty($peopleCount)){
-            //     if(!empty($comment)){
-            //         $comment = $comment . "\n";
-            //     }
-            //     $comment  = $comment . "Количество человек: $peopleCount";
-            // }
 
             $babyBed = $request['babyBed'] == 'true';
+
+            $isFireEvent = $request['isFireEvent'] == 'true';
+            $eventId = $request['eventId'];
+            $variantId = $request['variantId'];
+
             $bathHouseWhite = intval($request['bathHouseWhite'] ?? 0);
             $bathHouseBlack = intval($request['bathHouseBlack'] ?? 0 );
             $foodBreakfast = intval($request['foodBreakfast'] ?? 0);
@@ -1341,9 +1339,22 @@ class Booking_Form_Controller extends WP_REST_Controller
                     update_post_meta($post_id, 'sbc_order_end', $dateTo);
                 }
 
+                if ($isFireEvent) {
+                    update_post_meta($post_id, 'sbc_order_is_event', 'on');
+                }
+
+                if (!empty($eventId)) {
+                    update_post_meta($post_id, 'sbc_order_is_event', $eventId);
+                }
+
+                if (!empty($variantId)) {
+                    update_post_meta($post_id, 'sbc_order_event_variant_id', $variantId);
+                }
+
                 if (!empty($totalPrice)) {
                     update_post_meta($post_id, 'sbc_order_price', $totalPrice);
                 }
+                
                 if (!empty($havePayed)) {
                     update_post_meta($post_id, 'sbc_order_prepaid', $havePayed);
                 }

@@ -67,7 +67,7 @@ function get_order_data($orderId){
         $eventTitle = get_the_title($eventTitleId);
         $eventLink = get_permalink( $eventTitleId );
     
-        $variantId = get_post_meta($orderId, 'sbc_order_event_id', 1);
+        $variantId = get_post_meta($orderId, 'sbc_order_event_variant_id', 1);
 
         $per_day = get_post_meta($variantId, 'variant_description_per_day', 1);
         $single = get_post_meta($variantId, 'variant_description_single', 1);
