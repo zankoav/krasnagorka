@@ -10,8 +10,21 @@
 <script>
     (($) => {
         $('.button-tg').on('click', function(){
-            sendMessage('Всем привет от <b>Краснагорки</b>');
+            sendMessage(template());
         });
+
+        const template = () => {
+            return `
+                <a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-300x420.jpg"></a>
+                <b>ПИЛИГРИМ</b>
+                Скидка: <b>30 %</b>
+                Цена: <b>100 руб.</b> <s>120 руб.</s>
+                <p>Уютный домик на двоих около причала со всем необходимым: мини-туалет, мини-душ, мини-спальня, мини-кухня, мини-терраса :)</p>
+                c 06.01 по 08.01
+                <a href="https://krasnagorka.by/booking-form/?eventTabId=10654&booking=12979&calendarId=43&from=2023-01-06&to=2023-01-08">Забронировать</a>
+            `;
+        }
+        
 
         const tg ={
             token: '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
