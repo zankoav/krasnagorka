@@ -10,7 +10,7 @@
 <script>
     (($) => {
         $('.button-tg').on('click', function(){
-            sendMessage('Всем привет');
+            sendMessage('Всем привет от <b>Краснагорки</b>');
         });
 
         const tg ={
@@ -20,7 +20,7 @@
 
 
         function sendMessage(text){ 
-            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}`; // The url to request
+            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML`; // The url to request
             const xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
