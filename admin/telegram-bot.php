@@ -10,7 +10,7 @@
 <script>
     (($) => {
         $('.button-tg').on('click', function(){
-            sendMessage('Всем привет от <b>Краснагорки</b>');
+            sendMessage('&#127960; Всем привет от <b>Краснагорки</b>');
         });
 
         const tg ={
