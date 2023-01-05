@@ -159,7 +159,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'from' => date("d.m.Y", strtotime($dateFrom)),
                 'to' => date("d.m.Y", strtotime($dateTo))
             ],
-            'sale': intval(100 - ($newPrice * 100) / $oldPrice)
+            'sale' => intval(100 - ($newPrice * 100) / $oldPrice)
         ];
         
         return new WP_REST_Response( $result, 200);
