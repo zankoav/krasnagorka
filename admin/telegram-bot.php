@@ -48,7 +48,7 @@
 
         const template = () => {
             return `
-                <a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-300x420.jpg"></a>
+                <a href="https%3A%2F%2Fkrasnagorka.by%2Fwp-content%2Fuploads%2F2020%2F05%2FIMG_8678-2-300x420.jpg"></a>
                 <b>ПИЛИГРИМ</b>
                 Скидка: <b>30 %</b>
                 Цена: <b>100 руб.</b> <s>120 руб.</s>
