@@ -13,7 +13,7 @@
 
         const tg ={
             token: '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
-            chat_id: '1001716089662'
+            chat_id: '-1001716089662'
         };
 
 
