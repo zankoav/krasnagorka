@@ -27,7 +27,7 @@
             price: {
                 old: 390,
                 new: 310
-            }
+            },
             order_link: 'https://krasnagorka.by/booking-form/?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202',
             description: 'Комфортный, уютный домик на троих с собственной барбекю зоной и шикарным видом на лес и озеро. Расположен вдали от остальных домов.'
         };
