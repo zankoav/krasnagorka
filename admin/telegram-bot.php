@@ -10,7 +10,7 @@
 
 <script>
     (($) => {
-        
+
         const tg ={
             token: '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
             chat_id: '1001716089662'
@@ -25,8 +25,8 @@
                 'content-type': 'application/json'
             },
             data: {
-                chat_id: tg.chat_id
-                text: 'Required',
+                chat_id: tg.chat_id,
+                text: 'Hello',
                 parse_mode: 'HTML'
             }
         };
