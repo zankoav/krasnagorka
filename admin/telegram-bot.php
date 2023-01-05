@@ -53,7 +53,7 @@
 Выезд: <b>08.01.2022</b>
 Скидка: <b>30%</b>
 Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>\n
-<a href="https://krasnagorka.by/booking-form/?`) + encodeURIComponent('eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202') + encodeURI("><b>ЗАБРОНИРОВАТЬ</b></a>");
+<a href="https://krasnagorka.by/booking-form/?`) + encodeURIComponent('eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202"') + encodeURI("><b>ЗАБРОНИРОВАТЬ</b></a>");
         }        
         
 
