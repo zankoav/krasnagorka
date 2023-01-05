@@ -47,7 +47,7 @@
         });
 
         const template = () => {
-            return `<b>ПИЛИГРИМ</b>`;
+            return `<b>ПИЛИГРИМ</b>\nСкидка: <b>30 %</b>`;
         }
         
 
@@ -55,10 +55,13 @@
         
 
         function sendMessage(text){ 
+            // const url = `https://api.telegram.org/bot${tg.token}/sendMessage
             const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML`; // The url to request
-            const xht = new XMLHttpRequest();
-            xht.open("GET", url);
-            xht.send();
+            fetch(url);
+
+            // const xht = new XMLHttpRequest();
+            // xht.open("GET", url);
+            // xht.send();
         }
     })(jQuery);
 </script>
