@@ -16,18 +16,19 @@
             chat_id: '1001716089662'
         };
 
+
+
         const options = {
             method: 'POST',
             url: `https://api.telegram.org/bot${tg.token}/sendMessage`,
-            headers: {
-                accept: 'application/json',
-                // 'User-Agent': 'Telegram Bot SDK - (https://github.com/irazasyed/telegram-bot-sdk)',
-                'content-type': 'application/json'
-            },
+            headers: {accept: 'application/json', 'content-type': 'application/json'},
             data: {
                 chat_id: tg.chat_id,
                 text: 'Hello',
-                parse_mode: 'HTML'
+                parse_mode: 'HTML',
+                disable_web_page_preview: false,
+                disable_notification: false,
+                reply_to_message_id: null
             }
         };
 
@@ -36,12 +37,12 @@
             // sendMessage(template());
 
             axios.request(options)
-            .then(function (response) {
-                console.log(response.data);
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
+                .then(function (response) {
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    console.error(error);
+                });
 
         });
 
