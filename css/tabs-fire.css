@@ -1,0 +1,32 @@
+.bgc-reserved {
+  background-color: #c7dff1 !important;
+}
+
+.bgc-prepaid {
+  background-color: #ffecb5 !important;
+}
+
+.bgc-booked {
+  background-color: #fdb7ce !important;
+}
+
+.bgc-expired {
+  background-color: #72777c !important;
+}
+
+.calculate-field .spinner {
+  float: initial;
+}
+.calculate-field .spinner.spinner_show {
+  visibility: visible;
+}
+.calculate-percent {
+  padding: 5px 0;
+}
+
+.telegram-field .spinner {
+  float: initial;
+}
+.telegram-field .spinner.spinner_show {
+  visibility: visible;
+}

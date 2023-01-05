@@ -421,6 +421,18 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'    => __( 'Опубликовать в телеграм', 'cmb2' ),
+            'id'      => 'telegram_post',
+            'type'    => 'telegram_post',
+            'options' => array(
+                "empty_calendar" => __("Выберите календарь", 'cmb2'),
+                "empty_date_from" => __("Выберите дату заезда", 'cmb2'),
+                "empty_date_to" => __("Выберите дату выезда", 'cmb2'),
+                "booking_unavailable" => __("Даты заняты", 'cmb2')           
+            ),
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Дата с',
             'id'   => 'from',
             'type' => 'text_date',
@@ -498,6 +510,15 @@
             'type' => 'wysiwyg',
         ));
     }
+
+    function cmb2_render_telegram_post( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+		
+        $view = '<div class="telegram-field"><div><button type="button" class="js-telegram button-secondary">Опубликовать</button><span class="spinner"></span></div><input type="hidden" name="TG"><p class="cmb2-metabox-description"></p></div>';
+        $view .= $field_type_object->_desc( true );
+        echo $view;
+    }
+    
+    add_action( 'cmb2_render_telegram_post', 'cmb2_render_telegram_post', 10, 6 );
 
 
     function cmb2_render_calculate( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
