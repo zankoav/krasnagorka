@@ -5,10 +5,11 @@ jQuery(document).on('ready', function () {
 
         // Set background color for events
         $(document).on('ready', function () {
+            console.log('ready to work')
+
             $('#cmb2-metabox-mastak_event_tab_type_8')
                 .find('.postbox')
                 .each(function (index) {
-                    console.log('index', index)
                     const state = orderedIds[index]
                     const id = `#mastak_event_tab_type_8_items_${index}_calendar`
                     const $calendar = $(this).find(id)
