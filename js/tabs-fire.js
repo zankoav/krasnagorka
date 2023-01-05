@@ -203,14 +203,14 @@ jQuery(document).on('ready', function () {
                     if (!$spinner.hasClass('spinner_show')) {
                         console.log('result', result)
 
-                        const data = await getData(result);
+                        const data = await getData(result)
                         console.log('data', data)
                         // sendMessage(data);
                     }
                 }
 
                 async function getData(tabItem) {
-                    // $spinner.addClass('spinner_show')
+                    $spinner.addClass('spinner_show')
                     // const response = await fetch(
                     //     'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
                     //     {
