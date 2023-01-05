@@ -47,11 +47,10 @@
         });
         const template = () => {
             return encodeURI(`
-<a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/"><b>ПИЛИГРИМ</b></a>\n
-Комфортный, уютный домик на троих с собственной барбекю зоной и шикарным видом на лес и озеро. Расположен вдали от остальных домов.\n
-Заезд: <b>06.01.2022</b>
-Выезд: <b>08.01.2022</b>
-Скидка: <b>30%</b>
+⚡️ Горящее предложение ⚡️ <a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/"><b>Пилигрим</b></a> ⚡️\n
+📌 Комфортный, уютный домик на троих с собственной барбекю зоной и шикарным видом на лес и озеро. Расположен вдали от остальных домов.\n
+📆 Даты: <b>06.01.2022</b> - <b>08.01.2022</b>
+❤️ Скидка: <b>30%</b>
 Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>\n
 <a href="https://krasnagorka.by/booking-form/?`) + encodeURIComponent('eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202"') + encodeURI("><b>ЗАБРОНИРОВАТЬ</b></a>");
         }        
@@ -63,11 +62,6 @@
             let xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
-
-            // url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`;
-            // xht = new XMLHttpRequest();
-            // xht.open("GET", url);
-            // xht.send();
         }
     })(jQuery);
 </script>
