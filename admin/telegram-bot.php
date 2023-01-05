@@ -47,7 +47,7 @@
         });
         const template = () => {
             return encodeURI(`
-<a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-320x240.jpg"></a>
+<a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-320x240.jpg">  </a>
 <a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/"><b>ПИЛИГРИМ</b></a>
 Скидка: <i>30%</i>
 Комфортный, уютный домик на троих с собственной барбекю зоной и шикарным видом на лес и озеро. Расположен вдали от остальных домов.
