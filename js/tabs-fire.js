@@ -148,34 +148,66 @@ jQuery(document).on('ready', function () {
 
         function initTelegram() {
             $('#mastak_event_tab_type_8 .js-telegram').on('click', async function () {
-                // const $parent = $(this).parents('.cmb-row.cmb-repeatable-grouping')
-                // const $currentPrice = $parent.find("[name$='[old_price]']")
-                // const $message = $(this).parent().parent().find('.cmb2-metabox-description')
-                // const $spinner = $(this).parent().find('.spinner')
+                const $parent = $(this).parents('.inside.cmb-field-list')
+                const $message = $(this).parent().parent().find('.cmb2-metabox-description')
+                const $spinner = $(this).parent().find('.spinner')
 
-                // const intervallId = $('#mastak_event_tab_type_10_interval').val()
-                // const calendarId = $parent.find("[name$='[calendar]']").val()
+                const result = {}
+                $message.css({ color: '' }).empty()
+                $parent.find('input, select').each(function (index) {
+                    const name = $(this).attr('name')
 
-                // const result = {
-                //     is_admin_event: true,
-                //     peopleCount: 1,
-                //     intervallId: intervallId,
-                //     calendarId: calendarId
-                // }
+                    if (name) {
+                        const dateFrom = name.indexOf('[from]') > -1
+                        const dateTo = name.indexOf('[to]') > -1
+                        const calendarId = name.indexOf('[calendar]') > -1
+                        const oldPrice = name.indexOf('[old_price]') > -1
+                        const newPrice = name.indexOf('[new_price]') > -1
 
-                // $message.css({ color: '' }).empty()
+                        let key
+                        if (calendarId) {
+                            key = 'calendarId'
+                        }
+                        if (dateFrom) {
+                            key = 'dateFrom'
+                        }
+                        if (dateTo) {
+                            key = 'dateTo'
+                        }
+                        if (oldPrice) {
+                            key = 'oldPrice'
+                        }
+                        if (newPrice) {
+                            key = 'newPrice'
+                        }
 
-                // if (!$spinner.hasClass('spinner_show')) {
-                //     calculate(result)
-                // }
+                        if (key) {
+                            result[key] = $(this).val()
+                        }
+                    }
+                })
 
-                let tabItem = {}
-                console.log('tabItem', tabItem)
+                let error
 
-                const data = await getData(tabItem)
-                console.log('data', data)
+                if (!result.calendarId) {
+                    error = empty_calendar
+                } else if (!result.dateFrom) {
+                    error = empty_date_from
+                } else if (!result.dateTo) {
+                    error = empty_date_to
+                }
 
-                // sendMessage(data);
+                if (error) {
+                    $message.css({ color: '#b32d2e;' }).html(error)
+                } else {
+                    if (!$spinner.hasClass('spinner_show')) {
+                        console.log('result', result)
+
+                        const data = await getData(result);
+                        console.log('data', data)
+                        // sendMessage(data);
+                    }
+                }
 
                 async function getData(tabItem) {
                     // $spinner.addClass('spinner_show')
