@@ -52,7 +52,7 @@
 Заезд: <b>06.01.2022</b>
 Выезд: <b>08.01.2022</b>
 Скидка: <b>30%</b>
-Стоимость: <b>310 руб.</b> <s>390.00 руб.</s> 
+Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>
 <a href="https://krasnagorka.by/booking-form/?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202"><b>Забронировать</b></a>
 `);
         }
@@ -62,7 +62,11 @@
 
         function sendMessage(text){ 
             const photo = 'https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-320x240.jpg';
-            const url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&caption=${text}&parse_mode=HTML&disable_web_page_preview=1&photo=${photo}`;
+            const url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&photo=${photo}`;
+            const xht = new XMLHttpRequest();
+            xht.open("GET", url);
+            xht.send();
+            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`;
             const xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
