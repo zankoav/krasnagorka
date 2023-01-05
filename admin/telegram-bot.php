@@ -13,7 +13,7 @@
 
         const tg ={
             token: '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
-            chat_id: '-1001716089662'
+            chat_id: '1001716089662'
         };
 
 
@@ -34,39 +34,38 @@
 
 
         $('.button-tg').on('click', function(){
-            // sendMessage(template());
+            sendMessage(template());
 
-            axios.request(options)
-                .then(function (response) {
-                    console.log(response.data);
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
+            // axios.request(options)
+            //     .then(function (response) {
+            //         console.log(response.data);
+            //     })
+            //     .catch(function (error) {
+            //         console.error(error);
+            //     });
 
         });
 
-        // const template = () => {
-        //     return `
-        //         <a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-300x420.jpg"></a>
-        //         <b>ПИЛИГРИМ</b>
-        //         Скидка: <b>30 %</b>
-        //         Цена: <b>100 руб.</b> <s>120 руб.</s>
-        //         <p>Уютный домик на двоих около причала со всем необходимым: мини-туалет, мини-душ, мини-спальня, мини-кухня, мини-терраса :)</p>
-        //         c 06.01 по 08.01
-        //         <a href="https://krasnagorka.by/booking-form/?eventTabId=10654&booking=12979&calendarId=43&from=2023-01-06&to=2023-01-08">Забронировать</a>
-        //     `;
-        // }
+        const template = () => {
+            return `
+                <a href="https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-300x420.jpg"></a>
+                <b>ПИЛИГРИМ</b>
+                Скидка: <b>30 %</b>
+                Цена: <b>100 руб.</b> <s>120 руб.</s>
+                <p>Уютный домик на двоих около причала со всем необходимым: мини-туалет, мини-душ, мини-спальня, мини-кухня, мини-терраса :)</p>
+                c 06.01 по 08.01
+            `;
+        }
         
 
         
         
 
-        // function sendMessage(text){ 
-        //     const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML`; // The url to request
-        //     const xht = new XMLHttpRequest();
-        //     xht.open("GET", url);
-        //     xht.send();
-        // }
+        function sendMessage(text){ 
+            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML`; // The url to request
+            const xht = new XMLHttpRequest();
+            xht.open("GET", url);
+            xht.send();
+        }
     })(jQuery);
 </script>
