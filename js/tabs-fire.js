@@ -4,21 +4,18 @@ jQuery(document).on('ready', function () {
         'use strict'
 
         // Set background color for events
-        $(document).on('ready', function () {
-            console.log('ready to work')
-
-            $('#cmb2-metabox-mastak_event_tab_type_8')
-                .find('.postbox')
-                .each(function (index) {
-                    const state = orderedIds[index]
-                    const id = `#mastak_event_tab_type_8_items_${index}_calendar`
-                    const $calendar = $(this).find(id)
-                    if (state && $calendar[0] && $calendar[0].value == state.calendar) {
-                        $(this).addClass(`bgc-${state.status}`)
-                        $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`)
-                    }
-                })
-        })
+        $('#cmb2-metabox-mastak_event_tab_type_8')
+            .find('.postbox')
+            .each(function (index) {
+                const state = orderedIds[index]
+                const id = `#mastak_event_tab_type_8_items_${index}_calendar`
+                const $calendar = $(this).find(id)
+                console.log('state', index);
+                if (state && $calendar[0] && $calendar[0].value == state.calendar) {
+                    $(this).addClass(`bgc-${state.status}`)
+                    $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`)
+                }
+            })
 
         // START calculate process
         $('.cmb-add-group-row').on('click', function () {
