@@ -205,29 +205,23 @@ jQuery(document).on('ready', function () {
 
                         const data = await getData(result)
                         console.log('data', data)
-                        // sendMessage(data);
+                        // sendMessage(data)
                     }
                 }
 
                 async function getData(tabItem) {
                     $spinner.addClass('spinner_show')
-                    // const response = await fetch(
-                    //     'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/',
-                    //     {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             'Content-Type': 'application/json; charset=utf-8'
-                    //         },
-                    //         body: JSON.stringify(data)
-                    //     }
-                    // )
-                    // const responseData = await response.json()
-                    // if (responseData) {
-                    //     $currentPrice.val(responseData.total_price)
-                    //     $spinner.removeClass('spinner_show')
-                    // }
-
-                    return Promise.resolve({ name: 'ok' })
+                    const response = await fetch(
+                        'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/telegram/',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json; charset=utf-8'
+                            },
+                            body: JSON.stringify(tabItem)
+                        }
+                    )
+                    return await response.json()
                 }
 
                 const template = (data) => {
@@ -248,6 +242,8 @@ jQuery(document).on('ready', function () {
                     xht.send()
                     if (xhr.status != 200) {
                         alert(xhr.status + ': ' + xhr.statusText)
+                    }else{
+                        $spinner.removeClass('spinner_show')
                     }
                 }
             })

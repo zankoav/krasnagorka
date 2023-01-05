@@ -30,6 +30,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
+        register_rest_route($namespace, '/ls/telegram/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'telegram'),
+                'permission_callback' => array($this, 'telegram_permissions_check')
+            ),
+        ]);
+
         register_rest_route($namespace, '/ls/current-season/', [
             array(
                 'methods'             => 'POST',
@@ -40,6 +48,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function calculate_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function telegram_permissions_check($request)
     {
         return true;
     }
@@ -125,6 +138,31 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function current_season($request){
         $selectedSeasonId = Model::getSelectedSeasonId($request['dateStart']);
         return new WP_REST_Response( ['seasonId' => $selectedSeasonId], 200);
+    }
+
+    public function telegram($request)
+    {
+        $calendarId = intval($request['calendarId']);
+        $dateFrom = $request['dateFrom'];
+        $dateTo = $request['dateTo'];
+
+        $oldPrice = intval($request['oldPrice']);
+        $newPrice = intval($request['newPrice']);
+
+        
+        $result = [
+            'tg' => [
+                'token' => '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
+                'chat_id' => '1001716089662'
+            ],
+            'date' => [
+                'from' => date("d.m.Y", strtotime($dateFrom)),
+                'to' => date("d.m.Y", strtotime($dateTo))
+            ],
+            'sale': intval(100 - ($newPrice * 100) / $oldPrice)
+        ];
+        
+        return new WP_REST_Response( $result, 200);
     }
 
     public function calculate($request)
