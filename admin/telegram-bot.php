@@ -53,25 +53,22 @@
 Выезд: <b>08.01.2022</b>
 Скидка: <b>30%</b>
 Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>\n
-<a href="https://krasnagorka.by/booking-form/?eventTabId=10654%26booking=9486"><b>ЗАБРОНИРОВАТЬ</b></a>
+<a href="https://krasnagorka.by/booking-form/?eventTabId=10654%26booking=9486%26calendarId=19%26from=2023-01-06%26to=2023-01-08%26terem=Терем%202"><b>ЗАБРОНИРОВАТЬ</b></a>
 `);
-        }
-
-    //?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202
-        
+        }        
         
 
         function sendMessage(text){ 
             const photo = 'https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-320x240.jpg';
-            let url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&photo=${photo}`;
+            let url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&photo=${photo}&caption=${text}&parse_mode=HTML`;
             let xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
 
-            url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`;
-            xht = new XMLHttpRequest();
-            xht.open("GET", url);
-            xht.send();
+            // url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`;
+            // xht = new XMLHttpRequest();
+            // xht.open("GET", url);
+            // xht.send();
         }
     })(jQuery);
 </script>
