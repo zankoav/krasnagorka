@@ -21,7 +21,7 @@
             url: `https://api.telegram.org/bot${tg.token}/sendMessage`,
             headers: {
                 accept: 'application/json',
-                'User-Agent': 'Telegram Bot SDK - (https://github.com/irazasyed/telegram-bot-sdk)',
+                // 'User-Agent': 'Telegram Bot SDK - (https://github.com/irazasyed/telegram-bot-sdk)',
                 'content-type': 'application/json'
             },
             data: {
