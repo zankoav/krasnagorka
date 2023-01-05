@@ -53,14 +53,14 @@
 c 06.01 по 08.01
             `);
         }
-        
 
         
         
 
         function sendMessage(text){ 
+            const photo = 'https://krasnagorka.by/wp-content/uploads/2020/05/IMG_8678-2-320x240.jpg';
             // const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`; // The url to request
-            const url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&caption=${text}&parse_mode=HTML&disable_web_page_preview=1`; // The url to request
+            const url = `https://api.telegram.org/bot${tg.token}/sendPhoto?chat_id=-${tg.chat_id}&caption=${text}&parse_mode=HTML&disable_web_page_preview=1&photo=${photo}`; // The url to request
             const xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
