@@ -47,7 +47,7 @@
         });
         const template = () => {
             return encodeURI(`
-<a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/">ПИЛИГРИМ</a>
+<a href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/"><b>ПИЛИГРИМ</b></a>
 Скидка: <i>30%</i>
 Комфортный, уютный домик на троих с собственной барбекю зоной и шикарным видом на лес и озеро. Расположен вдали от остальных домов.
 c 06.01 по 08.01
@@ -60,8 +60,7 @@ c 06.01 по 08.01
 
         function sendMessage(text){ 
             // const url = `https://api.telegram.org/bot${tg.token}/sendMessage
-            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML`; // The url to request
-
+            const url = `https://api.telegram.org/bot${tg.token}/sendMessage?chat_id=-${tg.chat_id}&text=${text}&parse_mode=HTML&disable_web_page_preview=1`; // The url to request
             const xht = new XMLHttpRequest();
             xht.open("GET", url);
             xht.send();
