@@ -52,8 +52,8 @@
 Заезд: <b>06.01.2022</b>
 Выезд: <b>08.01.2022</b>
 Скидка: <b>30%</b>
-Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>
-<a href="https://krasnagorka.by/booking-form/?eventTabId=10654"><b>ЗАБРОНИРОВАТЬ</b></a>
+Стоимость: <b>310 руб.</b> <s>390.00 руб.</s>\n
+<a href="https://krasnagorka.by/booking-form/?eventTabId=10654%26booking=9486"><b>ЗАБРОНИРОВАТЬ</b></a>
 `);
         }
 
