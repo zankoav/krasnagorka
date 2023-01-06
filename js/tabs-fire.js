@@ -152,7 +152,7 @@ jQuery(document).on('ready', function () {
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description')
                 const $spinner = $(this).parent().find('.spinner')
 
-                const result = {}
+                const result = { postId: postId }
                 $message.css({ color: '' }).empty()
                 $parent.find('input, select').each(function (index) {
                     const name = $(this).attr('name')
@@ -242,7 +242,7 @@ jQuery(document).on('ready', function () {
                     xht.send()
                     if (xhr.status != 200) {
                         alert(xhr.status + ': ' + xhr.statusText)
-                    }else{
+                    } else {
                         $spinner.removeClass('spinner_show')
                     }
                 }

@@ -26,6 +26,7 @@ function fire_tab_order_settings($box_id, $cmb)
 ?>
     <script type="text/javascript">
         var orderedIds = JSON.parse('<?= $ids_json; ?>');
+        var postId = JSON.parse('<?= $_GET['post']; ?>');
     </script>
 <?php
 }
