@@ -152,10 +152,20 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $index = intval($request['index']);
         $tabId = $request['postId'];
 
+        $tabItems = get_post_meta($tabId, 'mastak_event_tab_type_8_items', 1);
+        $tabItem = $tabItems[$index];
+
         $house = getHouseByCalendarId($calendarId);
-        $house['photo'] = get_the_post_thumbnail_url($house['id'], 'houses_last_iphone_5');
+        if(empty($tabItem['image'])){
+            $house['photo'] = get_the_post_thumbnail_url($house['id'], 'houses_last_iphone_5');
+        }else {
+            $house['photo'] = $tabItem['image'];
+        }
         $house['link'] = get_the_permalink($house['id']);
         $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
+
+        $description = $tabItem["description"];//wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true));
+        
 
         $result = [
             'tg' => [
@@ -177,7 +187,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'new' => $newPrice
             ],
             'order_link'=> 'https://krasnagorka.by/booking-form/?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202',
-            'description'=> '',
+            'description'=> $description,
             'temp' => $house
         ];
         
