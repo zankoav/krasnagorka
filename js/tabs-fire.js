@@ -148,6 +148,11 @@ jQuery(document).on('ready', function () {
 
         function initTelegram() {
             $('#mastak_event_tab_type_8 .js-telegram').on('click', async function () {
+                const empty_calendar = 'Выберите календарь'
+                const empty_date_from = 'Выберите дату заезда'
+                const empty_date_to = 'Выберите дату выезда'
+                const empty_tg_description = 'Заполните текст для Телеграма'
+
                 const $parent = $(this).parents('.inside.cmb-field-list')
                 const $message = $(this).parent().parent().find('.cmb2-metabox-description')
                 const $spinner = $(this).parent().find('.spinner')
@@ -163,6 +168,7 @@ jQuery(document).on('ready', function () {
                         const calendarId = name.indexOf('[calendar]') > -1
                         const oldPrice = name.indexOf('[old_price]') > -1
                         const newPrice = name.indexOf('[new_price]') > -1
+                        const tgDescription = name.indexOf('[tg_description]') > -1
                         const indexName = name == 'TG'
 
                         let key
@@ -184,6 +190,9 @@ jQuery(document).on('ready', function () {
                         if (indexName) {
                             key = 'index'
                         }
+                        if (tgDescription) {
+                            key = 'tg_description'
+                        }
 
                         if (key) {
                             result[key] = $(this).val()
@@ -199,6 +208,8 @@ jQuery(document).on('ready', function () {
                     error = empty_date_from
                 } else if (!result.dateTo) {
                     error = empty_date_to
+                } else if (!result.tg_description) {
+                    error = empty_tg_description
                 }
 
                 if (error) {
@@ -238,9 +249,9 @@ jQuery(document).on('ready', function () {
                 function sendMessage(data) {
                     const text = tgTemplate(data)
                     let url = `https://api.telegram.org/bot${data.tg.token}/sendPhoto?chat_id=-${data.tg.chat_id}&photo=${data.photo}&caption=${text}&parse_mode=HTML`
-                    let xht = new XMLHttpRequest()
-                    xht.open('GET', url)
-                    xht.send()
+                    let xhr = new XMLHttpRequest()
+                    xhr.open('GET', url)
+                    xhr.send()
                     $spinner.removeClass('spinner_show')
                     if (xhr.status != 200) {
                         $spinner.removeClass('spinner_show')
