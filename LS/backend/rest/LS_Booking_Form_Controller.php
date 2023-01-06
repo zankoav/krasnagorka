@@ -156,17 +156,26 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $tabItem = $tabItems[$index];
 
         $house = getHouseByCalendarId($calendarId);
+        $houseId = $house['id'];
         if(empty($tabItem['image'])){
-            $house['photo'] = get_the_post_thumbnail_url($house['id'], 'houses_last_iphone_5');
+            $house['photo'] = get_the_post_thumbnail_url($houseId, 'houses_last_iphone_5');
         }else {
             $house['photo'] = $tabItem['image'];
         }
-        $house['link'] = get_the_permalink($house['id']);
+        $house['link'] = get_the_permalink($houseId);
         $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
 
         $description = $tabItem["tg_description"];
-        
 
+        $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
+        $orderDateTo = date("Y-m-d", strtotime($dateFrom));
+
+        $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo"
+        if($house['terem'] == 'on'){
+            $calendarTitle = $house['calendar'];
+            $orderLink. = "&terem=$calendarTitle";
+        }
+        
         $result = [
             'tg' => [
                 'token' => '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
@@ -186,7 +195,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'old' => $oldPrice,
                 'new' => $newPrice
             ],
-            'order_link'=> 'https://krasnagorka.by/booking-form/?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202',
+            'order_link'=> $orderLink,
             'description'=> $description,
             'temp' => $house
         ];
