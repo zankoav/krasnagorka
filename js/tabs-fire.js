@@ -243,7 +243,7 @@ jQuery(document).on('ready', function () {
 📆 Даты: <b>${data.date.from}</b> - <b>${data.date.to}</b>\n
 ❤️ Скидка: <b>${data.sale}%</b>\n
 💰 Стоимость: <b>${data.price.new} руб.</b> <s>${data.price.old} руб.</s>\n
-👉🏻 <a href="${data.order_link}"><b>ЗАБРОНИРОВАТЬ</b></a>`)
+👉🏻 <a href="${data.order_link}"><b>ЗАБРОНИРОВАТЬ</b></a>\n`)
                 }
 
                 function sendMessage(data) {
