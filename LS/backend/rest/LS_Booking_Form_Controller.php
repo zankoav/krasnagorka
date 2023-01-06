@@ -158,7 +158,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $house = getHouseByCalendarId($calendarId);
         $houseId = $house['id'];
         if(empty($tabItem['image'])){
-            $house['photo'] = get_the_post_thumbnail_url($houseId, 'houses_last_iphone_5');
+            $house['photo'] = get_the_post_thumbnail_url($houseId, 'full');
         }else {
             $house['photo'] = $tabItem['image'];
         }
