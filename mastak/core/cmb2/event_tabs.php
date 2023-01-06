@@ -505,6 +505,12 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name' => 'Текст для Телеграма',
+            'id'   => 'tg_description',
+            'type' => 'textarea',
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name' => 'Текст',
             'id'   => 'description',
             'type' => 'wysiwyg',

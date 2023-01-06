@@ -164,7 +164,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $house['link'] = get_the_permalink($house['id']);
         $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
 
-        $description = $tabItem["description"];//wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true));
+        $description = $tabItem["tg_description"];
         
 
         $result = [
