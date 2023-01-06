@@ -197,8 +197,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'new' => $newPrice
             ],
             'order_link'=> $orderLink,
-            'description'=> $description,
-            'temp' => $house
+            'description'=> $description
         ];
         
         return new WP_REST_Response( $result, 200);

@@ -205,11 +205,8 @@ jQuery(document).on('ready', function () {
                     $message.css({ color: '#b32d2e;' }).html(error)
                 } else {
                     if (!$spinner.hasClass('spinner_show')) {
-                        console.log('result', result)
-
                         const data = await getData(result)
-                        console.log('data', data)
-                        // sendMessage(data)
+                        sendMessage(data)
                     }
                 }
 
