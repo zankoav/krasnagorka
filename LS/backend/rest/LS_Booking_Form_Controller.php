@@ -167,14 +167,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $description = $tabItem["tg_description"];
 
-        $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
-        $orderDateTo = date("Y-m-d", strtotime($dateFrom));
+        // $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
+        // $orderDateTo = date("Y-m-d", strtotime($dateFrom));
 
-        $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo";
-        if($house['terem'] == 'on'){
-            $calendarTitle = $house['calendar'];
-            $orderLink. = "&terem=$calendarTitle";
-        }
+        // $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo";
+        
+        // if($house['terem'] == 'on'){
+        //     $calendarTitle = $house['calendar'];
+        //     $orderLink. = "&terem=$calendarTitle";
+        // }
         
         $result = [
             'tg' => [
@@ -195,7 +196,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'old' => $oldPrice,
                 'new' => $newPrice
             ],
-            'order_link'=> $orderLink,
+            'order_link'=> 'ff',//$orderLink,
             'description'=> $description,
             'temp' => $house
         ];
