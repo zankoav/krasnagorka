@@ -155,9 +155,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $house = getHouseByCalendarId($calendarId);
         $house['photo'] = wp_get_attachment_image_url(get_the_post_thumbnail($house['id']), 'houses_last_iphone_5');
         $house['link'] = get_the_permalink($house['id']);
-        $house['title'] = get_the_title($house['id']);
+        $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
 
-        
         $result = [
             'tg' => [
                 'token' => '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
@@ -166,7 +165,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'photo' => $house['photo'],
             'house' => [
                 'link' => $house['link'],
-                'calendar'=> $house['title']
+                'calendar'=> $house['calendar']
             ],
             'date' => [
                 'from' => date("d.m.Y", strtotime($dateFrom)),
