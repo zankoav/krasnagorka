@@ -241,9 +241,8 @@ jQuery(document).on('ready', function () {
                     let xht = new XMLHttpRequest()
                     xht.open('GET', url)
                     xht.send()
+                    $spinner.removeClass('spinner_show')
                     if (xhr.status != 200) {
-                        alert(xhr.status + ': ' + xhr.statusText)
-                    } else {
                         $spinner.removeClass('spinner_show')
                     }
                 }
