@@ -149,26 +149,34 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $oldPrice = intval($request['oldPrice']);
         $newPrice = intval($request['newPrice']);
 
-        $index = $request['index'];
+        $index = intval($request['index']);
         $tabId = $request['postId'];
-        
+
+        $house = getHouseByCalendarId($calendarId);
+
         
         $result = [
             'tg' => [
                 'token' => '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
                 'chat_id' => '1001716089662'
             ],
+            'photo' => '',
+            'house' => [
+                'link' => 'https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/',
+                'calendar'=> 'Пилигрим'
+            ],
             'date' => [
                 'from' => date("d.m.Y", strtotime($dateFrom)),
                 'to' => date("d.m.Y", strtotime($dateTo))
             ],
+            'sale' => intval(100 - ($newPrice * 100) / $oldPrice),
             'price' => [
                 'old' => $oldPrice,
                 'new' => $newPrice
             ],
-            'sale' => intval(100 - ($newPrice * 100) / $oldPrice),
-            'tabId' => $tabId,
-            'index' => $index,
+            'order_link'=> 'https://krasnagorka.by/booking-form/?eventTabId=10654&booking=9486&calendarId=19&from=2023-01-06&to=2023-01-08&terem=Терем%202',
+            'description'=> '',
+            'temp' => $house
         ];
         
         return new WP_REST_Response( $result, 200);
