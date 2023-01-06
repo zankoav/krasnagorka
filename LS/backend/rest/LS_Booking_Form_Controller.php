@@ -149,6 +149,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $oldPrice = intval($request['oldPrice']);
         $newPrice = intval($request['newPrice']);
 
+        $index = $request['index'];
         $tabId = $request['postId'];
         
         
