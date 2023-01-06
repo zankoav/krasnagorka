@@ -163,6 +163,7 @@ jQuery(document).on('ready', function () {
                         const calendarId = name.indexOf('[calendar]') > -1
                         const oldPrice = name.indexOf('[old_price]') > -1
                         const newPrice = name.indexOf('[new_price]') > -1
+                        const indexName = name == 'TG'
 
                         let key
                         if (calendarId) {
@@ -179,6 +180,9 @@ jQuery(document).on('ready', function () {
                         }
                         if (newPrice) {
                             key = 'newPrice'
+                        }
+                        if (indexName) {
+                            key = 'index'
                         }
 
                         if (key) {

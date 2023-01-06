@@ -167,7 +167,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'new' => $newPrice
             ],
             'sale' => intval(100 - ($newPrice * 100) / $oldPrice),
-            'tabId' => $tabId
+            'tabId' => $tabId,
+            'index' => $index,
         ];
         
         return new WP_REST_Response( $result, 200);
