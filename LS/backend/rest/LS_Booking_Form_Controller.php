@@ -172,10 +172,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo";
         
-        // if($house['terem'] == 'on'){
-        //     $calendarTitle = $house['calendar'];
-        //     $orderLink. = "&terem=$calendarTitle";
-        // }
+        if($house['terem'] == 'on'){
+            $calendarTitle = $house['calendar'];
+            $orderLink .= "&terem=$calendarTitle";
+        }
         
         $result = [
             'tg' => [
