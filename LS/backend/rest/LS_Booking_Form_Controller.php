@@ -153,7 +153,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $tabId = $request['postId'];
 
         $house = getHouseByCalendarId($calendarId);
-        $house['photo'] = wp_get_attachment_image_url(get_the_post_thumbnail($house['id']), 'houses_last_iphone_5');
+        $house['photo'] = wp_get_attachment_image_url(get_the_post_thumbnail($house['id']));
         $house['link'] = get_the_permalink($house['id']);
         $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
 
