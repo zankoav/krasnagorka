@@ -225,7 +225,7 @@ jQuery(document).on('ready', function () {
                     return await response.json()
                 }
 
-                const template = (data) => {
+                function tgTemplate(data) {
                     return encodeURIComponent(`
 ⚡️ <b>Горящее предложение</b> ⚡️ <a href="${data.house.link}"><b>${data.house.calendar}</b></a> ⚡️\n
 📌 ${data.description}\n
@@ -236,7 +236,7 @@ jQuery(document).on('ready', function () {
                 }
 
                 function sendMessage(data) {
-                    const text = template(data)
+                    const text = tgTemplate(data)
                     let url = `https://api.telegram.org/bot${data.tg.token}/sendPhoto?chat_id=-${data.tg.chat_id}&photo=${data.photo}&caption=${text}&parse_mode=HTML`
                     let xht = new XMLHttpRequest()
                     xht.open('GET', url)
