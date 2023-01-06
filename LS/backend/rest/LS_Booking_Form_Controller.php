@@ -153,6 +153,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $tabId = $request['postId'];
 
         $house = getHouseByCalendarId($calendarId);
+        $house['photo'] = wp_get_attachment_image_url(get_the_post_thumbnail($house['id']), 'houses_last_iphone_5');
+        $house['link'] = get_the_permalink($house['id']);
+        $house['title'] = get_the_title($house['id']);
 
         
         $result = [
@@ -160,10 +163,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'token' => '5949739525:AAED7FFZliBqmxkBuFb0RfFhi271dh7YJIs',
                 'chat_id' => '1001716089662'
             ],
-            'photo' => '',
+            'photo' => $house['photo'],
             'house' => [
-                'link' => 'https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/',
-                'calendar'=> 'Пилигрим'
+                'link' => $house['link'],
+                'calendar'=> $house['title']
             ],
             'date' => [
                 'from' => date("d.m.Y", strtotime($dateFrom)),
