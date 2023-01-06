@@ -159,7 +159,7 @@ jQuery(document).on('ready', function () {
 
                 const result = { postId: postId }
                 $message.css({ color: '' }).empty()
-                $parent.find('input, select').each(function (index) {
+                $parent.find('input, select, textarea').each(function (index) {
                     const name = $(this).attr('name')
 
                     if (name) {
