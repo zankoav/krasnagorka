@@ -170,7 +170,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
         $orderDateTo = date("Y-m-d", strtotime($dateFrom));
 
-        $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo"
+        $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo";
         if($house['terem'] == 'on'){
             $calendarTitle = $house['calendar'];
             $orderLink. = "&terem=$calendarTitle";
