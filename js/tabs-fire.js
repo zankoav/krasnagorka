@@ -240,6 +240,7 @@ jQuery(document).on('ready', function () {
                     return encodeURIComponent(`
 ⚡️ <b>Горящее предложение</b> ⚡️ <a href="${data.house.link}"><b>${data.house.calendar}</b></a> ⚡️\n
 📌 ${data.description}\n
+👨‍👩‍👧‍👦 Вместимость: <b>${data.house.sale_text}</b>\n
 📆 Даты: <b>${data.date.from}</b> - <b>${data.date.to}</b>\n
 ❤️ Скидка: <b>${data.sale}%</b>\n
 💰 Стоимость: <b>${data.price.new} руб.</b> <s>${data.price.old} руб.</s>\n
@@ -247,6 +248,9 @@ jQuery(document).on('ready', function () {
                 }
 
                 function sendMessage(data) {
+                    if (data.house.is_terem) {
+                        data.house.calendar = data.house.calendar.replace(' ', ' №')
+                    }
                     const text = tgTemplate(data)
                     let url = `https://api.telegram.org/bot${data.tg.token}/sendPhoto?chat_id=-${data.tg.chat_id}&photo=${data.photo}&caption=${text}&parse_mode=HTML`
                     let xhr = new XMLHttpRequest()

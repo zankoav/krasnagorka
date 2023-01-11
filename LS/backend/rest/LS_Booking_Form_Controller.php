@@ -166,6 +166,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $house['calendar'] = get_term( $calendarId, 'sbc_calendars' )->name;
 
         $description = $tabItem["tg_description"];
+        $saleText = $tabItem["sale_text"];
 
         $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
         $orderDateTo = date("Y-m-d", strtotime($dateFrom));
@@ -184,6 +185,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ],
             'photo' => $house['photo'],
             'house' => [
+                'is_terem'=> $house['terem'],
+                'sale_text'=> $saleText,
                 'link' => $house['link'],
                 'calendar'=> $house['calendar']
             ],
