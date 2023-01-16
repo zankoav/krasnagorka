@@ -87,7 +87,7 @@
                                 </div>
                                 <a href="<?= get_the_permalink(); ?>" target="_blank"
                                    class="booking-houses__image-wrapper">
-                                    <img class="booking-houses__image" src="<?= $kalendar['picture']; ?>"
+                                    <img class="booking-houses__image" data-id="<?=$kalendar['picture_id']?>" src="<?= $kalendar['picture']; ?>"
                                          alt="<?= $kalendar['title']; ?>">
                                 </a>
                                 <div class="booking-houses__header">
