@@ -981,7 +981,7 @@
         /**
          * Booking sizes
          */
-        add_image_size( 'calendar-thumb', 330, 100, array( 'center', 'center' ) );
+        add_image_size( 'calendar-thumb', 726, 220, array( 'center', 'center' ) );
 
         /**
          * Opportunities sizes
