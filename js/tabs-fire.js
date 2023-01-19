@@ -29,7 +29,7 @@ jQuery(document).on('ready', function () {
         initCalculations()
 
         function initCalculations() {
-            $('.js-calculate').on('click', function () {
+            $('#mastak_event_tab_type_8 .js-calculate').on('click', function () {
                 const empty_calendar = 'Выберите календарь'
                 const empty_date_from = 'Выберите дату заезда'
                 const empty_date_to = 'Выберите дату выезда'
