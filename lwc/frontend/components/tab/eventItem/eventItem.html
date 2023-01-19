@@ -23,11 +23,11 @@
                 <tab-select onchange={variantsHandler} options={variantsOptions}></tab-select>
             </tab-line>
             <tab-line class="event-item__line event-item__line_price" title="Цена">
-                <span class="event-item__price">{price}</span>
+                <span class="event-item__price">{price}</span> <span if:true={oldPrice} class="event-item__price event-item__price_old"><s>{oldPrice}</s></span>
             </tab-line>
         </div>
         <div class="event-item__order">
-            <span class="event-item__order-price">{price}</span>
+            <span class="event-item__order-price">{price}</span> <span if:true={oldPrice} class="event-item__order-price event-item__order-price_old"><s>{oldPrice}</s></span>
             <a href={href} target="_blank" class="event-item__order-button">забронировать</a>
         </div>
     </div>

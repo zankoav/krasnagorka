@@ -26,9 +26,25 @@ export default class EventItem extends LightningElement {
         return `https://krasnagorka.by/booking-form/?eventId=${this.group.eventId}&eventTabId=${this.group.eventTabId}&calendarId=${this.selectedApportament}&people=${this.selectedPeople}&var=${this.selectedVar}&obj=${this.selectedItem.house}`
     }
 
+    get oldPrice() {
+        let result = null
+        let price = this.selectedItem.new_price ? this.selectedItem.old_price : null
+        if (price) {
+            result =
+                (price + this.selectedVariant.pricePerDay) *
+                    (this.group.days.days.length - 1) *
+                    this.selectedPeople +
+                this.selectedVariant.priceSingle
+        }
+        return result
+    }
+
     get price() {
+        let price = this.selectedItem.new_price
+            ? this.selectedItem.new_price
+            : this.selectedItem.old_price
         return (
-            (this.selectedItem.new_price + this.selectedVariant.pricePerDay) *
+            (price + this.selectedVariant.pricePerDay) *
                 (this.group.days.days.length - 1) *
                 this.selectedPeople +
             this.selectedVariant.priceSingle
@@ -85,7 +101,7 @@ export default class EventItem extends LightningElement {
 
     connectedCallback() {
         console.log('group', this.group)
-        this.selectedApportament =  this.group.items.find((item) => item.selected).calendar
+        this.selectedApportament = this.group.items.find((item) => item.selected).calendar
         this.selectedVar = this.group.variant_default
         this.selectedPeople = this.selectedItem.min_people
     }

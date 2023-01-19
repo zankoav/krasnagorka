@@ -103,10 +103,17 @@
     &__price {
         color: $RED;
         font-weight: 700;
+        font-size: 16px;
         &:after {
             content: " руб.";
             color: $GRAY_6;
             font-size: 0.75em;
+        }
+
+        &_old{
+            color: $GRAY_6;
+            font-size: 14px;
+            margin-left: 0.25rem;
         }
     }
 
@@ -124,6 +131,15 @@
                 content: " руб.";
                 color: $GRAY_6;
                 font-size: 0.75em;
+            }
+
+            &_old {
+                color: $GRAY_6;
+                margin-top: -1rem;
+                font-size: 18px;
+                &:after {
+                    text-decoration: none;
+                }
             }
         }
     }
