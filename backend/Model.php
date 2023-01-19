@@ -342,7 +342,8 @@ class Model
             if(!empty($eventId) && !empty($eventTabId)){
                 $tab = new Type_10($eventTabId);
                 $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
-                $result['price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
+                $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
+                $result['price'] = ($price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
 
                 $dFrom = new DateTime($result['dateFrom']);
                 $dFrom = $dFrom->modify('-1 day')->format('Y-m-d');

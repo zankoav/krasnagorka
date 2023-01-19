@@ -300,7 +300,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if(!empty($eventId)){
                 $tab = new Type_10($eventTabId);
                 $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
-                $result['total_price'] = ($selectedCalendar['calendar']['new_price'] + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $peopleCount + $selectedCalendar['variant']->priceSingle;
+                $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
+                $result['total_price'] = ( $price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $peopleCount + $selectedCalendar['variant']->priceSingle;
             }else{
                 $result['total_price'] = self::getEventTotalPrice($eventTabId, $calendarId, $dateStart, $dateEnd);
             }
