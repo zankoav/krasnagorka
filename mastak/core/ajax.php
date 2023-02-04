@@ -187,8 +187,8 @@
                 'custom'=> 'Индивидуальный подбор питания'
             ];
             $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', true);
-            $foodVariant = !empty($foodVariants[$foodVariant]) ? '-' : $foodVariants[$foodVariant];
-            
+            $foodVariant = empty($foodVariants[$foodVariant]) ? '-' : $foodVariants[$foodVariant];
+
             $services = [];
             $houseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', true);
             $services['bath_house_white'] = empty($houseWhite) ?  0 : $houseWhite;
