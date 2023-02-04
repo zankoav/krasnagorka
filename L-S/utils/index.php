@@ -104,6 +104,22 @@ function get_order_data($orderId){
     $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', 1) ?? 0;
     $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', 1) ?? 0;
     $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', 1) ?? 0;
+    $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', 1);
+
+    $foodVariants = [
+        'breakfast'=> 'Завтраки',
+        'full'=> 'Полный пансион',
+        'no_food'=> 'Без питания',
+        'custom'=> 'Индивидуальный подбор питания'
+    ];
+    
+    if(!empty($foodVariant)){
+        $foodVariant = $foodVariants[$foodVariant];
+    }else if(!empty($foodBreakfast) or !empty($foodLunch) or !empty($foodDinner)){
+        $foodVariant = 'Индивидуальный';
+    }else{
+        $foodVariant = 'Без питания';
+    }
 
     $calendarSlug = $calendars[0]->slug;
     $calendarId = $calendars[0]->term_id;
@@ -145,6 +161,7 @@ function get_order_data($orderId){
         'foodBreakfast' => intval($foodBreakfast),
         'foodLunch' => intval($foodLunch),
         'foodDinner' => intval($foodDinner),
+        'foodVariant' => $foodVariant,
         'from' => date("d.m.Y", strtotime($start)),
         'to' => date("d.m.Y", strtotime($end)),
         'price' => $price,
