@@ -612,7 +612,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             $foodVariant = $request['foodVariant'];
             $foodPackageSale = 0;
-            if(!empty($foodVariant) and $foodVariant != 'custom'){
+            if(!empty($foodVariant) and $foodVariant != 'custom' and $foodVariant != 'no_food'){
                 $foodTripleSale = 0;
                 $foodPackageSale = !empty($bookingSettings["food_package_".$foodVariant."_sale"]) ? intval($bookingSettings["food_package_".$foodVariant."_sale"]) : 0;
             }
