@@ -190,7 +190,7 @@
             if(!empty($foodVariant)){
                 $foodVariant = $foodVariants[$foodVariant];
             }else if(!empty($food)){
-                $foodVariant = 'Индивидуальный подбор питания';
+                $foodVariant = 'Индивидуальный';
             }else{
                 $foodVariant = 'Без питания';
             }
