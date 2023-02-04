@@ -5,6 +5,57 @@ export default class StepFood extends LightningElement {
     @api settings
     @track error
 
+    get isCustom() {
+        return (
+            this.settings.foodVariant == 'custom' ||
+            !this.variants.find((item) => item.value == this.settings.foodVariant)
+        )
+    }
+
+    get variants() {
+        let result = []
+
+        if (this.settings.foodPackageBreakfastAvailable) {
+            result.push({
+                label: 'Завтраки',
+                value: 'breakfast',
+                postfix: `${this.settings.foodPackageBreakfastSale}%`,
+                description: this.settings.foodPackageBreakfastDescription,
+                selected: this.settings.foodVariant == 'breakfast'
+            })
+        }
+
+        if (this.settings.foodPackageFullAvailable) {
+            result.push({
+                label: 'Полный пансион',
+                value: 'full',
+                postfix: `${this.settings.foodPackageFullSale}%`,
+                description: this.settings.foodPackageFullDescription,
+                selected: this.settings.foodVariant == 'full'
+            })
+        }
+
+        result.push({
+            label: 'Без питания',
+            value: 'no_food',
+            selected: this.settings.foodVariant == 'no_food'
+        })
+
+        result.push({
+            label: 'Подобрать питание индивидуально',
+            value: 'custom',
+            selected: this.settings.foodVariant == 'custom'
+        })
+
+        if (!result.find((item) => item.value == this.settings.foodVariant)) {
+            result = result.map((item) => {
+                return { ...item, selected: item.value == 'custom' }
+            })
+        }
+
+        return result
+    }
+
     get foodAvailable() {
         return (
             this.settings.foodAvailable &&
@@ -57,6 +108,10 @@ export default class StepFood extends LightningElement {
         })
     }
 
+    connectedCallback() {
+        this.changeVariantHandler({ detail: this.settings.foodVariant })
+    }
+
     foodChange(event) {
         const count = parseInt(event.detail)
         const name = event.target.getAttribute('data-name')
@@ -64,6 +119,18 @@ export default class StepFood extends LightningElement {
             new CustomEvent('update', {
                 detail: {
                     [name]: count
+                },
+                bubbles: true,
+                composed: true
+            })
+        )
+    }
+
+    changeVariantHandler(event) {
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    foodVariant: event.detail
                 },
                 bubbles: true,
                 composed: true

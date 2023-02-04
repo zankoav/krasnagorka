@@ -1,4 +1,10 @@
 export const UTILS = {
+    foodVariants: {
+        breakfast: 'Завтраки',
+        full: 'Полный пансион',
+        no_food: 'Без питания',
+        custom: 'Индивидуальный подбор питания'
+    },
     configToString: function (config) {
         let arr = []
         for (let nextClassName in config) {

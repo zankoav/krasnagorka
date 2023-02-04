@@ -2,9 +2,6 @@
     <div class="decoding-price">
         <div class="decoding-price__list">
             <div class="decoding-price__subtitle">{subTitle}</div>
-            <template if:true={settings.eventTabId}>
-
-            </template>
             <template if:false={settings.eventTabId}>
                 <template for:each={seasons} for:item="season">
                     <z-decoding-price-line class="decoding-price__item" key={season.season_id} season={season}></z-decoding-price-line>
@@ -79,6 +76,9 @@
                     </div>
                     <div if:true={settings.total.food.sale} class="decoding-price__baby-bed">
                         Скидка за трехразовое питание: <z-number-value num={settings.total.food.sale} value="руб"></z-number-value>
+                    </div>
+                    <div if:true={settings.total.food.packageSale} class="decoding-price__baby-bed">
+                        Скидка на пакет питания: <z-number-value num={settings.total.food.packageSale} value="%"></z-number-value>
                     </div>
                     <div class="decoding-price__baby-bed">
                         Итого: <z-number-value num={settings.total.food.total_price} value="руб"></z-number-value>

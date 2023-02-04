@@ -44,7 +44,6 @@ export default class Admin extends LightningElement {
             BASE_MENU = BASE_MENU.filter((item) => {
                 return ['food', 'additional_services'].indexOf(item.value) == -1
             })
-            console.log('BASE_MENU', BASE_MENU);
         }
         this.settings = {
             webpaySandbox: this.model.webpaySandbox,
@@ -94,6 +93,17 @@ export default class Admin extends LightningElement {
             foodAvailable: this.model.foodAvailable,
             foodNotAvailableText: this.model.foodNotAvailableText,
             foodTripleSalePrice: this.model.foodTripleSalePrice,
+
+            foodPackageBreakfastAvailable: this.model.foodPackageBreakfastAvailable,
+            foodPackageBreakfastSale: this.model.foodPackageBreakfastSale,
+            foodPackageBreakfastDescription: this.model.foodPackageBreakfastDescription,
+
+            foodPackageFullAvailable: this.model.foodPackageFullAvailable,
+            foodPackageFullSale: this.model.foodPackageFullSale,
+            foodPackageFullDescription: this.model.foodPackageFullDescription,
+
+            foodVariant: this.model.eventId ? 'no_food' : this.model.foodVariant,
+
             baby_bed_available: this.model.baby_bed_available,
             total: this.model.total
         }
@@ -130,10 +140,53 @@ export default class Admin extends LightningElement {
             event.detail.bathHouseBlack !== undefined ||
             event.detail.foodBreakfast !== undefined ||
             event.detail.foodLunch !== undefined ||
-            event.detail.foodDinner !== undefined
+            event.detail.foodDinner !== undefined ||
+            event.detail.foodVariant !== undefined
         ) {
+            if (event.detail.foodVariant == 'custom' || event.detail.foodVariant == 'no_food') {
+                this.updateSettingsOnly({ foodDinner: 0, foodLunch: 0, foodBreakfast: 0 })
+            }
+
+            if (event.detail.foodVariant == 'breakfast') {
+                const peopleCount = this.settings.counts?.find((c) => c.selected)?.name
+                const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY')
+                const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY')
+                const days = dateEnd.diff(dateStart, 'days')
+                this.updateSettingsOnly({
+                    foodBreakfast: peopleCount * days,
+                    foodDinner: 0,
+                    foodLunch: 0
+                })
+            }
+
+            if (event.detail.foodVariant == 'full') {
+                const peopleCount = this.settings.counts?.find((c) => c.selected)?.name
+                const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY')
+                const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY')
+                const days = dateEnd.diff(dateStart, 'days')
+                const total = peopleCount * days
+                this.updateSettingsOnly({
+                    foodBreakfast: total,
+                    foodDinner: total,
+                    foodLunch: total
+                })
+            }
+
             if (event.detail.dateStart || event.detail.dateEnd) {
-                this.updateSettingsOnly({ babyBed: false })
+                this.updateSettingsOnly({
+                    babyBed: false,
+                    foodDinner: 0,
+                    foodLunch: 0,
+                    foodBreakfast: 0
+                })
+            }
+
+            if (event.detail.counts) {
+                this.updateSettingsOnly({
+                    foodDinner: 0,
+                    foodLunch: 0,
+                    foodBreakfast: 0
+                })
             }
 
             if (this.settings.eventTabId) {
@@ -229,6 +282,7 @@ export default class Admin extends LightningElement {
         const foodLunch = parseInt(this.settings.foodLunch || 0)
         const foodDinner = parseInt(this.settings.foodDinner || 0)
         const eventTabId = this.settings.eventTabId
+        const foodVariant = this.settings.foodVariant
         const eventId = this.settings.eventId
         const variantId = this.settings.eventModel?.variantId
 
@@ -247,6 +301,7 @@ export default class Admin extends LightningElement {
             foodBreakfast,
             foodLunch,
             foodDinner,
+            foodVariant,
             eventTabId,
             eventId,
             variantId

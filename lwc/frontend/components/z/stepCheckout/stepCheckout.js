@@ -1,10 +1,19 @@
 import { LightningElement, track, api } from 'lwc'
 // import {getCookie, setCookie} from 'z/utils';
+import { UTILS } from 'core/utils'
 import './stepCheckout.scss'
 
 // const MAX_AGE = 3600 * 24 * 100;
 export default class StepCheckout extends LightningElement {
     @api settings
+
+    get foodPackage() {
+        return UTILS.foodVariants[this.settings.foodVariant]
+    }
+
+    get showFoodPackage() {
+        return !this.settings.eventId
+    }
 
     get calendar() {
         return this.settings.calendars.find((c) => c.selected)

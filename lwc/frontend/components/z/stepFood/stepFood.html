@@ -1,28 +1,46 @@
 <template>
     <div class="step-food">
         <div if:true={foodAvailable} class="step-food__body">
-            <div class="step-food__help-text step-food__help-text_pb_10">Количество выбранных завтраков/обедов/ужинов = количеству порций, которые необходимы всей вашей компании в течение периода проживания.</div>
-            <div if:true={settings.foodBreakfastPrice} class="step-food__group">
-                <z-select data-name="foodBreakfast" label="Количество порций завтраков" onchange={foodChange} options={breakfastOptions}></z-select>
-                <div class="step-food__description">
-                    Стоимость одного завтрака <span class="number-value" data-after="руб">{settings.foodBreakfastPrice}</span> с человека
+            <z-radio-buttons view="column" class="step-food__variants" onradiochange={changeVariantHandler} options={variants}></z-radio-buttons>
+
+            <template if:true={isCustom}>
+                <div class="step-food__help-text step-food__help-text_pb_10">
+                    Количество выбранных завтраков/обедов/ужинов = количеству порций, которые необходимы всей вашей компании в течение периода
+                    проживания.
                 </div>
-            </div>
-            <div if:true={settings.foodLunchPrice} class="step-food__group">
-                <z-select data-name="foodLunch" label="Количество порций обедов" onchange={foodChange} options={lunchOptions}></z-select>
-                <div class="step-food__description">
-                    Стоимость одного обеда <span class="number-value" data-after="руб">{settings.foodLunchPrice}</span> с человека
+                <div if:true={settings.foodBreakfastPrice} class="step-food__group">
+                    <z-select
+                        data-name="foodBreakfast"
+                        label="Количество порций завтраков"
+                        onchange={foodChange}
+                        options={breakfastOptions}></z-select>
+                    <div class="step-food__description">
+                        Стоимость одного завтрака <span class="number-value" data-after="руб">{settings.foodBreakfastPrice}</span> с человека
+                    </div>
                 </div>
-            </div>
-            <div if:true={settings.foodDinnerPrice} class="step-food__group">
-                <z-select data-name="foodDinner" label="Количество порций ужинов" onchange={foodChange} options={dinnerOptions}></z-select>
-                <div class="step-food__description">
-                    Стоимость одного ужина <span class="number-value" data-after="руб">{settings.foodDinnerPrice}</span> с человека
+                <div if:true={settings.foodLunchPrice} class="step-food__group">
+                    <z-select data-name="foodLunch" label="Количество порций обедов" onchange={foodChange} options={lunchOptions}></z-select>
+                    <div class="step-food__description">
+                        Стоимость одного обеда <span class="number-value" data-after="руб">{settings.foodLunchPrice}</span> с человека
+                    </div>
                 </div>
-            </div>
-            <template if:true={settings.foodTripleSalePrice}>
-                <div class="step-food__help-text">При заказе трёхразового питания (завтрак, обед, ужин) <span class="step-food__sale">СКИДКА</span>: <z-number-value num={settings.foodTripleSalePrice} value="руб"></z-number-value> в сутки.</div>
-                <div class="step-food__help-text-added">Обращаем ваше внимание, что при заказе питания онлайн вам необходимо дополнительно сообщить даты, в которые вы хотели бы воспользоваться данной услугой. Укажите это в комментарии к бонированию (на следующем этапе).</div>
+                <div if:true={settings.foodDinnerPrice} class="step-food__group">
+                    <z-select data-name="foodDinner" label="Количество порций ужинов" onchange={foodChange} options={dinnerOptions}></z-select>
+                    <div class="step-food__description">
+                        Стоимость одного ужина <span class="number-value" data-after="руб">{settings.foodDinnerPrice}</span> с человека
+                    </div>
+                </div>
+                <template if:true={settings.foodTripleSalePrice}>
+                    <div class="step-food__help-text">
+                        При заказе трёхразового питания (завтрак, обед, ужин) <span class="step-food__sale">СКИДКА</span>:
+                        <z-number-value num={settings.foodTripleSalePrice} value="руб"></z-number-value> в сутки.
+                    </div>
+                </template>
+
+                <div class="step-food__help-text-added">
+                    Обращаем ваше внимание, что при заказе питания онлайн вам необходимо дополнительно сообщить даты, в которые вы хотели бы
+                    воспользоваться данной услугой. Укажите это в комментарии к бонированию (на следующем этапе).
+                </div>
             </template>
         </div>
         <div if:false={foodAvailable} class="step-food__body step-food__body_empty">{settings.foodNotAvailableText}</div>

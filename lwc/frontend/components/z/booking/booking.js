@@ -110,6 +110,7 @@ export default class BookingForm extends LightningElement {
             foodBreakfast: this.settings.foodBreakfast || 0,
             foodLunch: this.settings.foodLunch || 0,
             foodDinner: this.settings.foodDinner || 0,
+            foodVariant: this.settings.foodVariant,
             eventTabId: this.settings.eventTabId,
             eventId: this.settings.eventId,
             variantId: this.settings.eventModel?.variantId

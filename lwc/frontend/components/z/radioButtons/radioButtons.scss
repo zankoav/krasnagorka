@@ -3,6 +3,10 @@
 .radio-buttons {
     display: flex;
 
+    &_column {
+        flex-direction: column;
+    }
+
     &__item {
         border: 1px solid $GRAY_8;
         border-right: 0;
@@ -19,5 +23,35 @@
             border-bottom-left-radius: 4px;
             border-top-left-radius: 4px;
         }
+
+        &_column {
+            border: 0 !important;
+            box-shadow: initial !important;
+            flex-grow: initial !important;
+            margin-bottom: 0.5rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__item-column {
+        .radio-button {
+            padding: 0.5rem 0;
+            justify-content: flex-start;
+        }
+    }
+
+    &__item-column-postfix {
+        color: $RED_2;
+        font-weight: 700;
+        margin-left: .5rem;
+    }
+
+    &__item-description {
+        margin-left: 1.5rem;
+        font-size: 12px;
+        color: #808080;
     }
 }

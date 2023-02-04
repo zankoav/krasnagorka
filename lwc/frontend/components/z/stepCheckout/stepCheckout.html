@@ -19,6 +19,7 @@
                 {settings.bigAnimalCount}
             </p>
 
+            <p if:true={showFoodPackage} class="step-checkout__item" data-label="Пакет питания:">{foodPackage}</p>
             <p if:true={settings.foodBreakfast} class="step-checkout__item" data-label="Завтраки:">{settings.foodBreakfast}</p>
             <p if:true={settings.foodLunch} class="step-checkout__item" data-label="Обеды:">{settings.foodLunch}</p>
             <p if:true={settings.foodDinner} class="step-checkout__item" data-label="Ужины:">{settings.foodDinner}</p>

@@ -7,6 +7,11 @@
         padding: 24px 32px 32px;
     }
 
+    &__variants {
+        margin-bottom: .5rem;
+        display: block;
+    }
+
     &__description {
         margin-top: 0.25rem;
         font-size: 14px;
@@ -18,28 +23,28 @@
         padding-top: 1rem;
         border-top: 1px solid #f7f7f7;
 
-        &_pb_10{
+        &_pb_10 {
             padding-top: 0;
             padding-bottom: 1rem;
-            border-top: 0
+            border-top: 0;
         }
     }
 
-    &__sale{
+    &__sale {
         color: $RED_2;
         text-transform: uppercase;
         font-weight: 700;
         display: inline-block;
     }
 
-    &__help-text-added{
+    &__help-text-added {
         color: $GRAY_4;
         font-size: 14px;
         padding-bottom: 1.5rem;
-        padding-top: .5rem;
+        padding-top: 0.5rem;
 
-        &::before{
-            content: '*';
+        &::before {
+            content: "*";
             color: $RED_2;
             margin-right: 4px;
         }

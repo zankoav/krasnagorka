@@ -1,0 +1,13 @@
+<template>
+    <div class="radio-buttons radio-buttons_column">
+        <template for:each={options} for:item="item">
+            <div key={item.value} class="radio-buttons__item radio-buttons__item_column">
+                <z-radio-button class="radio-buttons__item-column" item={item}></z-radio-button>
+                <p if:true={item.postfix} class="radio-buttons__item-description">
+                    Скидка на питание: <span class="radio-buttons__item-column-postfix">{item.postfix}</span>
+                </p>
+                <p if:true={item.description} class="radio-buttons__item-description">{item.description}</p>
+            </div>
+        </template>
+    </div>
+</template>
