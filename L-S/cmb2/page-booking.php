@@ -261,8 +261,8 @@ function cmb2_booking_page() {
         'type' => 'select',
         'options' => array(
             'breakfast'  => __('Завтраки', 'krasnagorka'),
-            'full' => __('Полный пансионат', 'krasnagorka'),
-            'custom' => __('Подробная настройка', 'krasnagorka')
+            'full' => __('Полный пансион', 'krasnagorka'),
+            'custom' => __('Подобрать питание индивидуально', 'krasnagorka')
         )
     ));
 
