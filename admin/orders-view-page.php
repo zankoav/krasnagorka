@@ -326,6 +326,10 @@
                                 <div class="order-item__title fw-bold">Питание</div>
                                 <div class="order-item__list">
                                     <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Пакет питания:</div>
+                                        <div class="order-item__list-item-value">${order.foodVariant}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
                                         <div class="order-item__list-item-label">Завтраки:</div>
                                         <div class="order-item__list-item-value">${order.foodBreakfast}</div>
                                     </div>

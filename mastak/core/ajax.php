@@ -179,6 +179,15 @@
             $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', true);
             $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', true);
             $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', true);
+
+            $foodVariants = [
+                'breakfast'=> 'Завтраки',
+                'full'=> 'Полный пансион',
+                'no_food'=> 'Без питания',
+                'custom'=> 'Индивидуальный подбор питания'
+            ];
+            $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', true);
+            $foodVariant = !empty($foodVariants[$foodVariant]) ? '-' : $foodVariants[$foodVariant];
             
             $services = [];
             $houseWhite = get_post_meta($orderId, 'sbc_order_bath_house_white', true);
@@ -222,6 +231,7 @@
                 'foodBreakfast'   => empty($foodBreakfast) ? 0 : $foodBreakfast,
                 'foodLunch'   => empty($foodLunch) ? 0 : $foodLunch,
                 'foodDinner'   => empty($foodDinner) ? 0 : $foodDinner,
+                'foodVariant'   => $foodVariant,
                 'accommodationPrice'   => empty($accommodationPrice) ? 0 : $accommodationPrice,
                 'prepaid'   => empty($prepaid) ? 0 : $prepaid,
                 'total_price'   => $total_price,
