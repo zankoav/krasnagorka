@@ -69,6 +69,7 @@ class Order {
     public int $foodBreakfast;
     public int $foodLunch;
     public int $foodDinner;
+    public ?string $foodVariant;
 
     public int $leadId;
 
@@ -135,6 +136,20 @@ class Order {
 
     public function isBabyBedMessage(){
         return $this->babyBed ? 'Да' : 'Нет';
+    }
+
+    public function getFoodVariant(){
+        $arr = [
+            'breakfast'=> 'Завтраки',
+            'full'=> 'Полный пансион',
+            'no_food'=> 'Без питания',
+            'custom'=> 'Индивидуальный подбор питания'
+        ];
+        $result = $arr[$this->foodVariant];
+        if(empty($result)){
+            $result = null;
+        }
+        return $result;
     }
 
 }

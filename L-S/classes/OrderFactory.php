@@ -40,6 +40,7 @@ class OrderFactory {
         $order->foodBreakfast = intval($data['foodBreakfast']);
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
+        $order->foodVariant = $data['foodVariant'];
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         
@@ -212,6 +213,11 @@ class OrderFactory {
         if($order->foodDinner > 0){
             // $comment[] = "Ужины: {$order->foodDinner}";
             update_post_meta($order->id, 'sbc_order_food_dinner', $order->foodDinner);
+        }
+
+        if(!empty($order->foodVariant)){
+            // $comment[] = "Вариант питания: {$order->foodVariant}";
+            update_post_meta($order->id, 'sbc_order_food_variant', $order->foodVariant);
         }
 
         if($order->babyBed){
