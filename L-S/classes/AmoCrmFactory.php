@@ -196,6 +196,17 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($foodDinnerFieldValueModel);
 
+            // Order food variant
+            $foodVariantFieldValueModel = new SelectCustomFieldValuesModel();
+            $foodVariantFieldValueModel->setFieldId(761481);
+            $foodVariantFieldValueModel->setValues(
+                (new SelectCustomFieldValueCollection())
+                    ->add((new SelectCustomFieldValueModel())
+                            ->setValue($order->getFoodVariant())
+                    )
+            );
+            $leadCustomFields->add($foodVariantFieldValueModel);
+
             // Order bath house white count
             $bathHouseWhiteFieldValueModel = new NumericCustomFieldValuesModel();
             $bathHouseWhiteFieldValueModel->setFieldId(760943);
@@ -438,6 +449,7 @@ class AmoCrmFactory {
             $order->note[] = "Завтраки: {$order->foodBreakfast}";
             $order->note[] = "Обеды: {$order->foodLunch}";
             $order->note[] = "Ужины: {$order->foodDinner}";
+            $order->note[] = "Пакет питания: {$order->getFoodVariant()}";
 
             $order->note[] = "Бани по белому: {$order->bathHouseWhite} кол-во";
             $order->note[] = "Бани по черному: {$order->bathHouseBlack} кол-во";

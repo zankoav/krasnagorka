@@ -143,11 +143,15 @@ class Order {
             'breakfast'=> 'Завтраки',
             'full'=> 'Полный пансион',
             'no_food'=> 'Без питания',
-            'custom'=> 'Индивидуальный подбор питания'
+            'custom'=> 'Индивидуальный'
         ];
-        $result = $arr[$this->foodVariant];
-        if(empty($result)){
-            $result = null;
+
+        $result = 'Без питания';
+
+        if(!empty($this->foodVariant)){
+            $result = $arr[$this->foodVariant];
+        }else if( !empty($foodBreakfast) or !empty($foodLunch) or !empty($foodDinner)){
+            $result = 'Индивидуальный';
         }
         return $result;
     }
