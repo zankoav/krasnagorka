@@ -237,19 +237,19 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Открыть пакет питания полный пансионат',
+        'name' => 'Открыть пакет питания полный пансион',
         'id'   => 'food_package_full_available',
         'type' => 'checkbox'
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Описание на пакет (полный пансионат)',
+        'name' => 'Описание на пакет (полный пансион)',
         'id'   => 'food_package_full_description',
         'type' => 'textarea_small'
     ));
 
     $cmb_options->add_field(array(
-        'name' => 'Скидка на питание (полный пансионат)',
+        'name' => 'Скидка на питание (полный пансион)',
         'id'   => 'food_package_full_sale',
         'type' => 'text_small',
         'before_field' => '%'
