@@ -217,6 +217,55 @@ function cmb2_booking_page() {
         'type' => 'textarea_small'
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Открыть пакет питания завтраки',
+        'id'   => 'food_package_breakfast_available',
+        'type' => 'checkbox'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Описание на пакет (завтраки)',
+        'id'   => 'food_package_breakfast_description',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Скидка на пакет (завтраки)',
+        'id'   => 'food_package_breakfast_sale',
+        'type' => 'text_small',
+        'before_field' => '%'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Открыть пакет питания полный пансионат',
+        'id'   => 'food_package_full_available',
+        'type' => 'checkbox'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Описание на пакет (полный пансионат)',
+        'id'   => 'food_package_full_description',
+        'type' => 'textarea_small'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Скидка на питание (полный пансионат)',
+        'id'   => 'food_package_full_sale',
+        'type' => 'text_small',
+        'before_field' => '%'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'По умолчанию',
+        'id'   => 'food_package_default',
+        'type' => 'select',
+        'options' => array(
+            'breakfast'  => __('Завтраки', 'krasnagorka'),
+            'full' => __('Полный пансионат', 'krasnagorka'),
+            'custom' => __('Подробная настройка', 'krasnagorka')
+        )
+    ));
+
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');
