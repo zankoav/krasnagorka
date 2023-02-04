@@ -620,7 +620,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                             'bathHouseBlack' => $request['bathHouseBlack'],
                             'foodBreakfast' => $request['foodBreakfast'],
                             'foodLunch' => $request['foodLunch'],
-                            'foodDinner' => $request['foodDinner']
+                            'foodDinner' => $request['foodDinner'],
+                            'foodVariant' => $request['foodVariant']
                         ]);
                         $totalPrice = $priceData['total_price'];
                     }
@@ -649,7 +650,8 @@ class Booking_Form_Controller extends WP_REST_Controller
                         "prepaidType" => $request['prepaidType'],
                         'foodBreakfast' => $request['foodBreakfast'],
                         'foodLunch' => $request['foodLunch'],
-                        'foodDinner' => $request['foodDinner']
+                        'foodDinner' => $request['foodDinner'],
+                        'foodVariant' => $request['foodVariant']
                     ]);
                     $result['status'] = $response['status'] === 'success';
                     $result['redirect'] = $response['redirect'];
@@ -1259,6 +1261,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $foodBreakfast = intval($request['foodBreakfast'] ?? 0);
             $foodLunch = intval($request['foodLunch'] ?? 0);
             $foodDinner = intval($request['foodDinner'] ?? 0);
+            $foodVariant = $request['foodVariant'];
 
             $foodPrice = $request['foodPrice'];
             $accommodationPrice = $request['accommodationPrice'];
@@ -1391,6 +1394,10 @@ class Booking_Form_Controller extends WP_REST_Controller
                 if($foodDinner > 0){
                     // $comment .= "\nУжины: $foodDinner";
                     update_post_meta($post_id, 'sbc_order_food_dinner', $foodDinner);
+                }
+
+                if(!empty($foodVariant)){
+                    update_post_meta($post_id, 'sbc_order_food_variant', $foodVariant);
                 }
 
                 if ($babyBed) {
