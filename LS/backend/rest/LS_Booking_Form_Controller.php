@@ -610,6 +610,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $foodTripleSale = 0; 
             }
 
+            $foodVariant = $request['foodVariant'];
+            $foodPackageSale = 0;
+            if(!empty($foodVariant) and $foodVariant != 'custom'){
+                $foodTripleSale = 0;
+                $foodPackageSale = !empty($bookingSettings["food_package_".$foodVariant."_sale"]) ? intval($bookingSettings["food_package_".$foodVariant."_sale"]) : 0;
+            }
+
             $result['food'] = [
                 'breakfast' => [
                     'total_price' => $foodBreakfastPrice * $foodBreakfastCount,
@@ -626,8 +633,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'price' => $foodDinnerPrice,
                     'count' => $foodDinnerCount
                 ],
-                'total_price' => $foodBreakfastPrice * $foodBreakfastCount + $foodLunchPrice * $foodLunchCount + $foodDinnerPrice * $foodDinnerCount - $foodTripleSale, 
-                'sale' => $foodTripleSale
+                'total_price' => (100 - $foodPackageSale) / 100 * ($foodBreakfastPrice * $foodBreakfastCount + $foodLunchPrice * $foodLunchCount + $foodDinnerPrice * $foodDinnerCount - $foodTripleSale), 
+                'sale' => $foodTripleSale,
+                'packageSale' => $foodPackageSale,
             ];
 
             $result['total_price'] += $result['food']['total_price'];
