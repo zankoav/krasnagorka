@@ -305,7 +305,18 @@ class Model
             "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
             "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
             "foodAvailable" => $bookingSettings['food_available'] == 'on',
-            "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
+            "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? '',
+
+            "foodPackageBreakfastAvailable" => $bookingSettings['food_package_breakfast_available'] == 'on',
+            "foodPackageBreakfastSale" => !empty($bookingSettings['food_package_breakfast_sale']) ? intval($bookingSettings['food_package_breakfast_sale']) : 0,
+            "foodPackageBreakfastDescription" => $bookingSettings['food_package_breakfast_description'],
+
+            "foodPackageFullAvailable" => $bookingSettings['food_package_full_available'] == 'on',
+            "foodPackageFullSale" => !empty($bookingSettings['food_package_full_sale']) ? intval($bookingSettings['food_package_full_sale']) : 0,
+            "foodPackageFullDescription" => $bookingSettings['food_package_full_description'],
+
+            "foodVariant" => $bookingSettings['food_package_default'],
+
         ];
 
         if (!empty($dateFrom) and !empty($dateTo)) {
