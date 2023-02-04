@@ -189,7 +189,7 @@
             $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', true);
             if(!empty($foodVariant)){
                 $foodVariant = $foodVariants[$foodVariant];
-            }else if(!empty($food)){
+            }else if(!empty($food) or !empty($foodBreakfast) or !empty($foodLunch) or !empty($foodDinner)){
                 $foodVariant = 'Индивидуальный';
             }else{
                 $foodVariant = 'Без питания';
