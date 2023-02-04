@@ -275,6 +275,18 @@ function sbc_order_info_metabox() {
         'type' => 'text'
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Пакет питания', 'sbc' ),
+        'id'   => 'sbc_order_food_variant',
+        'type'             => 'select',
+        'options'          => array(
+            'breakfast'  => __('Завтраки', 'krasnagorka'),
+            'full' => __('Полный пансион', 'krasnagorka'),
+            'no_food' => __('Без питания', 'krasnagorka'),
+            'custom' => __('Подобрать питание индивидуально', 'krasnagorka')
+        )
+    ) );
+
 }
 
 add_action( 'cmb2_admin_init', 'sbc_order_info_metabox' );
