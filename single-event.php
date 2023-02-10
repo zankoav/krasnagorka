@@ -40,7 +40,7 @@
     <section class="b-container">
         <p class="header-description"><?= $description ?></p>
         <style>
-            .css-focused-link:focus {
+            .css-focused-link:focus, .css-focused-link:visited {
                 color: #1498c6;
             }
         </style>
