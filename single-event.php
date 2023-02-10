@@ -5,6 +5,8 @@
     }
 
     get_header('mastak');
+    $options = get_option('mastak_theme_options');
+    $telegram       = $options['mastak_theme_options_telegram'];
     $price_byn      = (int)get_post_meta(get_the_ID(), "mastak_event_price", true);
     $price          = get_current_price($price_byn);
     $price_subtitle = get_post_meta(get_the_ID(), "mastak_event_price_subtitle", true);
@@ -37,6 +39,15 @@
     </section>
     <section class="b-container">
         <p class="header-description"><?= $description ?></p>
+        <p class="header-description" style="margin-top: 1rem;margin-bottom: 2rem;">
+            Следи за горящими предложениями на телеграм канале 
+            <a href=<?=$telegram?> target="_blank">База отдыха «Красногорка» 
+                <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/social/telegram.svg" 
+                    alt="icon-telegram" 
+                    class="phone-item__icon phone-item__icon--small phone-item__icon--telegram" 
+                    style="position:initial;display:inline-block;margin-left: 8px;margin-bottom: -6px;">
+        </a>
+</p>
     </section>
     <div class="b-container b-p-sm-0">
         <div class="accordion-mixed <?= $accordion ? 'accordion-mixed_open' : '' ?>">
