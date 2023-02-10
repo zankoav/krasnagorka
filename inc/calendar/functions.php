@@ -108,6 +108,7 @@
 				'start'  => $start,
 				'end'    => $end,
 				'allDay' => true,
+                'event_icon' => 'love',
 				'color'  => $color
 			);
 		endwhile;
