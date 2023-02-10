@@ -39,9 +39,14 @@
     </section>
     <section class="b-container">
         <p class="header-description"><?= $description ?></p>
+        <style>
+            .css-focused-link:focus {
+                color: #1498c6;
+            }
+        </style>
         <p class="header-description" style="margin-top: -1rem;margin-bottom: 2rem;">
             Следи за горящими предложениями на телеграм канале 
-            <a href=<?=$telegram?> target="_blank">База отдыха «Красногорка» 
+            <a href=<?=$telegram?> class="css-focused-link" target="_blank">База отдыха «Красногорка» 
                 <img src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/social/telegram.svg" 
                     alt="icon-telegram" 
                     class="phone-item__icon phone-item__icon--small phone-item__icon--telegram" 
