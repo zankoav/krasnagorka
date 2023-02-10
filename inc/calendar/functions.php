@@ -108,7 +108,7 @@
 				'start'  => $start,
 				'end'    => $end,
 				'allDay' => true,
-                'event_icon' => 'love',
+                'event_icon' => $color == '#65b2ed' ? 'love' : null,
 				'color'  => $color
 			);
 		endwhile;
