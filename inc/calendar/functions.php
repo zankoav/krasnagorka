@@ -120,7 +120,7 @@
     add_action( 'rest_api_init', function () {
 		register_rest_route( 'happy-events', '/(?P<slug>[a-z0-9\-]+)', [
 			'methods'  => 'GET',
-			'callback' => 'app_get_post',
+			'callback' => 'app_get_happy_events',
 		] );
 	} );
 
