@@ -10,7 +10,7 @@ const message_1 = 'Нельзя бронировать прошлые даты',
     message_4 = 'Выберите свободную дату'
 
 let $ = jQuery
-let events, jsFromDate, jsToDate, $calendar
+let events, jsFromDate, jsToDate, $calendar, happyEvents
 
 export default class Calendar extends LightningElement {
     @api settings
@@ -48,6 +48,8 @@ export default class Calendar extends LightningElement {
         events = null
         const response = await fetch(`https://krasnagorka.by/wp-json/calendars/${calendarSlug}`)
         events = await response.json()
+        const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
+        happyEvents = await happyEventsResponse.json()
         this.loading = false
         await skip()
         this.template.querySelector('.calendar__content').innerHTML = this.getTemplate()
@@ -65,8 +67,8 @@ export default class Calendar extends LightningElement {
             events: events,
             eventAfterAllRender: () => {
                 this.updateStyle()
-                const table = document.querySelector('#calendar table');
-                table.className = 'main-table';
+                const table = document.querySelector('#calendar table')
+                table.className = 'main-table'
                 if (jsFromDate) {
                     const element = document.querySelector(
                         `.fc-widget-content[data-date="${jsFromDate.d}"]`
@@ -91,6 +93,7 @@ export default class Calendar extends LightningElement {
                 }
                 fillCells()
                 addInOutDelimiters(events)
+                addEventsIcons()
             },
             dayClick: function (date, jsEvent, view) {
                 if (step.settings.eventTabId) {
@@ -120,12 +123,14 @@ export default class Calendar extends LightningElement {
                     checkDateRange(events, jsFromDate.d, d)
                 ) {
                     $(jsToDate.el).removeClass('cell-range').empty()
+                    addEventsIcons()
                     jsToDate = { d: d, el: cell }
                     $(jsToDate.el).addClass('cell-range')
 
                     fillCells()
                 } else if (jsToDate && jsToDate.d === d) {
                     $(jsToDate.el).removeClass('cell-range').empty()
+                    addEventsIcons()
                     jsToDate = null
                     fillCells()
                 } else if (jsFromDate && jsFromDate.d > d) {
@@ -174,6 +179,23 @@ export default class Calendar extends LightningElement {
             }
         })
 
+        function addEventsIcons() {
+            for (let event of happyEvents.items) {
+                const eventDayElement = $calendar[0].querySelector(
+                    `.fc-day[data-date="${event.date}"]`
+                )
+                if (eventDayElement) {
+                    let iconElement = eventDayElement.querySelector('.fc-day-event__icon')
+                    if (!iconElement) {
+                        iconElement = document.createElement('img')
+                        iconElement.setAttribute('src', `${happyEvents.icon_path}${event.icon}.svg`)
+                        iconElement.setAttribute('class', 'fc-day-event__icon')
+                        eventDayElement?.appendChild(iconElement)
+                    }
+                }
+            }
+        }
+
         function addInOutDelimiters() {
             for (let event of events) {
                 const elementStart = $calendar[0].querySelector(
@@ -220,6 +242,14 @@ export default class Calendar extends LightningElement {
                         margin-right: ${targetMargin}px;
                         border-top-right-radius: 5px;
                         border-bottom-right-radius: 5px;
+                    }
+                    .fc-day-event__icon{
+                        position: absolute;
+                        bottom: 4px;
+                        left: 4px;
+                        width: 16px;
+                        height: 16px;
+                        object-fit: contain;
                     }`
         this.calendarStyle.appendChild(document.createTextNode(css))
         head.appendChild(this.calendarStyle)
