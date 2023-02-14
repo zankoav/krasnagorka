@@ -129,43 +129,43 @@
             "icon_path" => "https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/",
             "items" => []
         ];
-		// $args  = array(
-		// 	'post_type'      => 'event_tab',
-		// 	'post_status'    => array( 'publish' ),
-		// 	'posts_per_page' => -1,
-        //     'meta_query' => array(
-        //         array(
-        //             'key'     => 'tab_type',
-        //             'value'   => 'type_10',
-        //             'compare' => '='
-        //         )
-        //     )
-		// );
-		// $query = new WP_Query( $args );
-		// if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
+		$args  = array(
+			'post_type'      => 'event_tab',
+			'post_status'    => array( 'publish' ),
+			'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key'     => 'tab_type',
+                    'value'   => 'type_10',
+                    'compare' => '='
+                )
+            )
+		);
+		$query = new WP_Query( $args );
+		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
 
-        //     $intervalId  = get_post_meta( get_the_ID(), 'mastak_event_tab_type_10_interval', true );
-        //     $icon    = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_icon', true );
-        //     $start  = get_post_meta(  $intervalId, 'season_from', true );
-		// 	$end    = get_post_meta(  $intervalId, 'season_to', true );
+            $intervalId  = get_post_meta( get_the_ID(), 'mastak_event_tab_type_10_interval', true );
+            $icon    = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_icon', true );
+            $start  = get_post_meta(  $intervalId, 'season_from', true );
+			$end    = get_post_meta(  $intervalId, 'season_to', true );
 
-        //     $dateTo = new DateTime($end);
+            $dateTo = new DateTime($end);
 
-        //     $period = new DatePeriod(
-        //         new DateTime($start),
-        //         new DateInterval('P1D'),
-        //         $dateTo->modify('+1 day')
-        //     );
+            $period = new DatePeriod(
+                new DateTime($start),
+                new DateInterval('P1D'),
+                $dateTo->modify('+1 day')
+            );
     
-        //     foreach ($period as $key => $value) {
-        //         $result['items'][] = array(
-        //             'date'  => $value->format('Y-m-d'),
-        //             'icon'  => $icon
-        //         ); 
-        //     }			
-		// endwhile;
-		// 	wp_reset_postdata();
-		// endif;
+            foreach ($period as $key => $value) {
+                $result['items'][] = array(
+                    'date'  => $value->format('Y-m-d'),
+                    'icon'  => $icon
+                ); 
+            }			
+		endwhile;
+			wp_reset_postdata();
+		endif;
 
 		return $result;
     }
