@@ -118,7 +118,7 @@
 	}
 
     add_action( 'rest_api_init', function () {
-		register_rest_route( 'happyevents', '/', [
+		register_rest_route( 'happy/v1', '/events/', [
 			'methods'  => 'GET',
 			'callback' => 'app_get_happy_events',
 		] );
