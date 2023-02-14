@@ -118,13 +118,13 @@
 	}
 
     add_action( 'rest_api_init', function () {
-		register_rest_route( 'happy-events', '/(?P<slug>[a-z0-9\-]+)', [
+		register_rest_route( 'happy-events', '/', [
 			'methods'  => 'GET',
 			'callback' => 'app_get_happy_events',
 		] );
 	} );
 
-    function app_get_happy_events( $data ) {
+    function app_get_happy_events() {
         $result  = [
             "icon_path" => "https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/",
             "items" => []
