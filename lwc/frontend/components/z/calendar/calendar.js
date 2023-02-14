@@ -181,16 +181,18 @@ export default class Calendar extends LightningElement {
 
         function addEventsIcons() {
             for (let event of happyEvents.items) {
-                const eventDayElement = $calendar[0].querySelector(
-                    `.fc-day[data-date="${event.date}"]`
-                )
-                if (eventDayElement) {
-                    let iconElement = eventDayElement.querySelector('.fc-day-event__icon')
-                    if (!iconElement) {
-                        iconElement = document.createElement('img')
-                        iconElement.setAttribute('src', `${happyEvents.icon_path}${event.icon}.svg`)
-                        iconElement.setAttribute('class', 'fc-day-event__icon')
-                        eventDayElement?.appendChild(iconElement)
+                if(event.icon){
+                    const eventDayElement = $calendar[0].querySelector(
+                        `.fc-day[data-date="${event.date}"]`
+                    )
+                    if (eventDayElement) {
+                        let iconElement = eventDayElement.querySelector('.fc-day-event__icon')
+                        if (!iconElement) {
+                            iconElement = document.createElement('img')
+                            iconElement.setAttribute('src', `${happyEvents.icon_path}${event.icon}.svg`)
+                            iconElement.setAttribute('class', 'fc-day-event__icon')
+                            eventDayElement?.appendChild(iconElement)
+                        }
                     }
                 }
             }
