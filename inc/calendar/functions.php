@@ -150,9 +150,9 @@
 			$end    = get_post_meta(  $intervalId, 'season_to', true );
 
             $dateTo = new DateTime($end);
-
+            $dateFrom = new DateTime($start)
             $period = new DatePeriod(
-                new DateTime($start),
+                $dateFrom->modify('-1 day'),
                 new DateInterval('P1D'),
                 $dateTo->modify('+1 day')
             );
