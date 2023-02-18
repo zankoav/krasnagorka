@@ -54,6 +54,7 @@ $bookingModel = $model->getBookingModel();
     <script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js' id='fullcalendar-js'></script>
     <script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js' id='ru-js'></script>
     <script src="<?= $assets->js('booking'); ?>"></script>
+    <script src="<?= $assets->js('cookie'); ?>"></script>
 </body>
 
 </html>

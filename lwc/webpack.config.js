@@ -12,6 +12,7 @@ module.exports = (env) => {
     const publicPath = IS_DEV ? '' : '/wp-content/themes/krasnagorka/src/'
     const settins = {
         entry: {
+            cookie: './frontend/cookie.js',
             booking: './frontend/booking.js',
             tab_events: './frontend/tab_events.js'
         },
@@ -97,6 +98,12 @@ module.exports = (env) => {
             ]
         },
         plugins: [
+            new HtmlWebpackPlugin({
+                title: 'Cookie page',
+                filename: `cookie.html`,
+                template: './frontend/cookie.pug',
+                chunks: ['cookie']
+            }),
             new HtmlWebpackPlugin({
                 title: 'Booking page',
                 filename: `booking.html`,
