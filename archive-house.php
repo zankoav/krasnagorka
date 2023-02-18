@@ -22,7 +22,7 @@
     <div class="b-bgc-wrapper b-pb-25">
         <div class="b-container content-text">
             <div class="header-title">
-                <h2 class="header-title__subtitle"><?=$subtitle_2 ?>ПОШАГОВАЯ ИНСТРУКЦИЯ БРОНИРОВАНИЯ ДОМИКА</h2>
+                <h2 class="header-title__subtitle"><?=$subtitle_2 ?></h2>
             </div>
             <div class="textwidget">
                 <?= wpautop(get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_big_text']);?>
