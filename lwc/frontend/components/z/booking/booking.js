@@ -35,6 +35,43 @@ export default class BookingForm extends LightningElement {
     @track loading
     @track okImage = OK
     @track errorImage = ERROR
+    orderValidateProcess = false
+
+    connectedCallback() {
+        if (this.settings.dateStart && this.settings.dateEnd) {
+            this.loading = true
+            this.orderValidateProcess = true
+
+            const calendar = this.settings.calendars.find((c) => c.selected)
+
+            fetch('https://krasnagorka.by/wp-json/krasnagorka/v1/ls/check-order/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify({
+                    dateStart: this.settings.dateStart,
+                    dateEnd: this.settings.dateEnd,
+                    calendarId: calendar?.id
+                })
+            })
+                .then((data) => data.json())
+                .then((data) => {
+                    this.loading = false
+                    this.orderValidateProcess = false
+
+                    if (data.error) {
+                        this.showError()
+                    } else if (!data.available) {
+                        this.showOps(data.message)
+                    }
+                })
+        }
+    }
+
+    get loadingMessage() {
+        return this.orderValidateProcess ? 'Загрузка данных ...' : 'Бронирую...'
+    }
 
     get isHouseStep() {
         return this.activeMenuValue == 'house'
@@ -206,6 +243,19 @@ export default class BookingForm extends LightningElement {
             new CustomEvent('update', {
                 detail: {
                     orderedError: true
+                },
+                bubbles: true,
+                composed: true
+            })
+        )
+    }
+
+    showOps(message) {
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail: {
+                    orderedOps: true,
+                    orderedOpsMessage: message
                 },
                 bubbles: true,
                 composed: true
