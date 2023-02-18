@@ -6,6 +6,7 @@
     get_header('mastak');
     get_template_part("mastak/views/header", "small-view");
     $subtitle_1 = get_option('mastak_houses_appearance_options')['subtitle_1'];
+    $subtitle_2 = get_option('mastak_houses_appearance_options')['subtitle_2'];
 
 ?>
     <section class="b-pb-25 b-bgc-wrapper">
@@ -21,7 +22,7 @@
     <div class="b-bgc-wrapper b-pb-25">
         <div class="b-container content-text">
             <div class="header-title">
-                <h2 class="header-title__subtitle">ПОШАГОВАЯ ИНСТРУКЦИЯ БРОНИРОВАНИЯ ДОМИКА</h2>
+                <h2 class="header-title__subtitle"><?=$subtitle_2 ?>ПОШАГОВАЯ ИНСТРУКЦИЯ БРОНИРОВАНИЯ ДОМИКА</h2>
             </div>
             <div class="textwidget">
                 <?= wpautop(get_option( 'mastak_houses_appearance_options' )['mastak_house_submenu_big_text']);?>

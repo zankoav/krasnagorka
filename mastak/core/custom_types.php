@@ -862,6 +862,13 @@
         ));
 
         $cmb_options->add_field(array(
+            'name' => __('Подзаголовок', 'krasnagorka'),
+            'desc' => __('Под списком домов', 'krasnagorka'),
+            'id'   => 'subtitle_2',
+            'type' => 'text'
+        ));
+
+        $cmb_options->add_field(array(
             'name' => 'Текстовая область',
             'id'   => $prefix . 'big_text',
             'type' => 'wysiwyg'
