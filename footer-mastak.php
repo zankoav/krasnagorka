@@ -1,4 +1,5 @@
 <?php wp_footer();
+global $assets;
 if (is_page_template('reviews-page-template.php')) : ?>
     <script>
         var commentOffset = 20;

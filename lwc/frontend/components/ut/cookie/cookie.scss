@@ -2,7 +2,7 @@
 
 .cookie {
     position: fixed;
-    bottom: 2rem;
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 9999999;
@@ -11,9 +11,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid #1498c6;
+        border-top: 1px solid #1498c6;
+        border-bottom: 1px solid #1498c6;
         background-color: #fff;
-        border-radius: 12px;
         padding: 1rem;
     }
 
@@ -34,11 +34,11 @@
         background-color: $RED_2;
         font-weight: bold;
         border-radius: 8px;
-        padding: .5rem 2rem;
+        padding: 0.5rem 2rem;
         font-size: 16px;
 
         @include sm {
-            padding: .5rem 2rem;
+            padding: 0.5rem 2rem;
             font-size: 18px;
         }
     }
