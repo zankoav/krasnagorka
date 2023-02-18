@@ -45,6 +45,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'current_season_permissions_check')
             ),
         ]);
+
+        register_rest_route($namespace, '/ls/check-order/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'check_order'),
+                'permission_callback' => array($this, 'check_order_permissions_check')
+            ),
+        ]);
+    }
+
+    public function check_order_permissions_check($request)
+    {
+        return true;
     }
 
     public function calculate_permissions_check($request)
@@ -60,6 +73,83 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function current_season_permissions_check($request)
     {
         return true;
+    }
+
+    public function check_order($request){
+        $calendarId = $request['calendarId'];
+        $dateStart = $request['dateStart'];
+        $dateEnd = $request['dateEnd'];
+        $toDay = date("Y-m-d");
+
+        if (empty($calendarId) or empty($dateStart) or empty($dateEnd)) {
+            return new WP_REST_Response(['error' => 'Invalid data'], 400); 
+        }
+
+        $result = [
+            'available' => true
+        ];
+
+        if($toDay >= $dateStart){
+            $result['available'] = false;
+            $result['message'] = 'Упс! Устаревшая бронь :(';
+            return new WP_REST_Response($result, 200); 
+        }
+
+        $ordersQuery = new WP_Query;
+        $orders = $ordersQuery->query(array(
+            'post_type' => 'sbc_orders',
+            'posts_per_page' => -1,
+            'tax_query' => [
+                [
+                    'taxonomy' => 'sbc_calendars',
+                    'terms' => [$calendarId]
+                ]
+            ],
+            'meta_query' => array(
+                array(
+                    'key'     => 'sbc_order_end',
+                    'value'   => $dateStart,
+                    'compare' => '>=',
+                )
+            )
+        ));
+
+        $parseResult = [];
+
+        foreach ($orders  as $item) {
+            $orderId = $item->ID;
+            $start = get_post_meta($orderId, 'sbc_order_start', true);
+            $startTime = strtotime($start);
+            $start = date('Y-m-d', $startTime);
+            $end = get_post_meta($orderId, 'sbc_order_end', true);
+            $endTime = strtotime($end);
+            $end = date('Y-m-d', $endTime);
+            $parseResult[] = [$start, $end, $orderId];
+        }
+        
+        foreach ($parseResult as $r) {
+            $from = $r[0];
+            $to = $r[1];
+            $orId = $r[2];
+
+            if ($dateStart >= $from and $dateStart < $to) {
+                $result['available'] = false;
+            }
+
+            if ($dateEnd > $from and $dateEnd <= $to) {
+                $result['available'] = false;
+            }
+
+            if ($dateStart < $from and $dateEnd > $to) {
+                $result['available'] = false;
+            }
+        }   
+
+        if(!$result['available']){
+            $result['message'] = 'Упс! Бронь уже занята :(';
+        }
+        
+        return new WP_REST_Response($result, 200); 
     }
 
     /**
