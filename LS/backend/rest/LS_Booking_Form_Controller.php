@@ -169,7 +169,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $saleText = $tabItem["sale_text"];
 
         $orderDateFrom = date("Y-m-d", strtotime($dateFrom));
-        $orderDateTo = date("Y-m-d", strtotime($dateFrom));
+        $orderDateTo = date("Y-m-d", strtotime($dateTo));
 
         $orderLink = "https://krasnagorka.by/booking-form/?eventTabId=$tabId&booking=$houseId&calendarId=$calendarId&from=$orderDateFrom&to=$orderDateTo";
         
