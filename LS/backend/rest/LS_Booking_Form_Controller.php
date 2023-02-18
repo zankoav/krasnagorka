@@ -77,8 +77,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public function check_order($request){
         $calendarId = $request['calendarId'];
-        $dateStart = $request['dateStart'];
-        $dateEnd = $request['dateEnd'];
+        $dateStart = date("Y-m-d", strtotime($request['dateStart']));
+        $dateEnd =  date("Y-m-d", strtotime($request['dateEnd']));
         $toDay = date("Y-m-d");
 
         if (empty($calendarId) or empty($dateStart) or empty($dateEnd)) {
