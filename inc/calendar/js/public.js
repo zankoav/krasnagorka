@@ -294,7 +294,7 @@ jQuery(document).ready(async function ($) {
                         for (let event of happyEvents?.items) {
                             console.log('event', event)
                             if (event.icon) {
-                                const eventDayElement = $calendar.querySelector(
+                                const eventDayElement = $calendar.find(
                                     `.fc-day[data-date="${event.date}"]`
                                 )
                                 console.log('eventDayElement', eventDayElement)
