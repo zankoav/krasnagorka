@@ -291,12 +291,12 @@ jQuery(document).ready(async function ($) {
                     })
 
                     function addEventsIcons() {
-                        console.log('happyEvents', happyEvents)
                         for (let event of happyEvents?.items) {
                             if (event.icon) {
                                 const eventDayElement = $calendar.querySelector(
                                     `.fc-day[data-date="${event.date}"]`
                                 )
+                                console.log('eventDayElement', eventDayElement)
                                 if (eventDayElement) {
                                     let iconElement =
                                         eventDayElement.querySelector('.fc-day-event__icon')
