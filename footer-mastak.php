@@ -483,6 +483,15 @@ if (is_page_template('reviews-page-template.php')) : ?>
     .cell-range {
         background-color: rgb(188, 232, 241);
     }
+
+    .fc-day-event__icon{
+        position: absolute;
+        bottom: 4px;
+        left: 4px;
+        width: 16px;
+        height: 16px;
+        object-fit: contain;
+    }
 </style>
 <script>
     jQuery(document).ready(function() {

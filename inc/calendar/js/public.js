@@ -3,7 +3,7 @@ const message_1 = "Нельзя бронировать прошлые даты",
     message_3 = "В интервале бронирования не должно быть занятых дат",
     message_4 = "Выберите свободную дату";
 
-jQuery(document).ready(function ($) {
+jQuery(document).ready(async function ($) {
     var targetMargin,
         scriptFullCalendar,
         scriptLocalCalendar,
@@ -16,6 +16,9 @@ jQuery(document).ready(function ($) {
         jsFromDate,
         jsToDate,
         currentCalendarId;
+
+    const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
+    const happyEvents = await happyEventsResponse.json()
 
     $(".booking-houses__calendars-all-button").on("click", function (event) {
         event.preventDefault();
@@ -222,6 +225,7 @@ jQuery(document).ready(function ($) {
 
                             fillCells();
                             addInOutDelimiters(events);
+                            addEventsIcons()
                         },
                         dayClick: function (date, jsEvent, view) {
                             setDate();
@@ -259,6 +263,7 @@ jQuery(document).ready(function ($) {
                                     $(jsToDate.el)
                                         .removeClass("cell-range")
                                         .empty();
+                                    addEventsIcons()
                                     jsToDate = { d: d, el: this };
                                     $(jsToDate.el).addClass("cell-range");
 
@@ -267,6 +272,7 @@ jQuery(document).ready(function ($) {
                                     $(jsToDate.el)
                                         .removeClass("cell-range")
                                         .empty();
+                                    addEventsIcons()
                                     jsToDate = null;
                                     fillCells();
                                 } else if (jsFromDate && jsFromDate.d > d) {
@@ -333,6 +339,25 @@ jQuery(document).ready(function ($) {
                             }
                         }
                     });
+
+                    function addEventsIcons() {
+                        for (let event of happyEvents?.items) {
+                            if(event.icon){
+                                const eventDayElement = $calendar.querySelector(
+                                    `.fc-day[data-date="${event.date}"]`
+                                )
+                                if (eventDayElement) {
+                                    let iconElement = eventDayElement.querySelector('.fc-day-event__icon')
+                                    if (!iconElement) {
+                                        iconElement = document.createElement('img')
+                                        iconElement.setAttribute('src', `${happyEvents.icon_path}${event.icon}.svg`)
+                                        iconElement.setAttribute('class', 'fc-day-event__icon')
+                                        eventDayElement?.appendChild(iconElement)
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                     function initFrom(d, el) {
                         var a = new moment(Date.now());
