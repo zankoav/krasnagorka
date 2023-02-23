@@ -24,6 +24,9 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 <style>
     .terem-wrapper .terem-calendars{
         display: none;
+        background: #fff;
+        padding: 2rem;
+        
     }
 </style>
 <div class="terem-wrapper">
@@ -150,8 +153,107 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
         </div>
     </div>
 <?php if($isTerem):?>
-    <div class="terem-calendars">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus facilis qui natus nobis corrupti laborum hic excepturi? Molestiae alias numquam dolorum aspernatur, quo asperiores suscipit aperiam impedit, veritatis tempore fuga!
+    <div class="terem-calendars booking-houses">
+        <?php 
+            $terem_options = get_option('mastak_terem_appearance_options');
+            $kalendars     = $terem_options['kalendar'];
+            foreach ($kalendars as $kalendar) : ?>
+            <div class="booking-houses__wrapper booking-houses__wrapper_terem">
+                <div class="booking-houses__item">
+                    <div class="booking-houses__header">
+                        <h2 class="booking-houses__title our-house__title"><?= $kalendar['title']; ?></h2>
+                    </div>
+                    <a href="<?= get_the_permalink(); ?>" target="_blank"
+                        class="booking-houses__image-wrapper">
+                        <img class="booking-houses__image" data-id="<?=$kalendar['picture_id']?>" src="<?= wp_get_attachment_image_url( $kalendar['picture_id'], 'calendar-thumb', false );?>"
+                                alt="<?= $kalendar['title']; ?>">
+                    </a>
+                    <div class="booking-houses__header">
+                        <p class="booking-houses__description">
+                            <?php if (!empty($kalendar['min_people'])): ?>
+                                <span class="booking-houses__description-item"
+                                        data-info="<?= $kalendar['min_people']; ?>"><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="<?= CORE_PATH ?>assets/icons/min-01.svg"
+                                            alt="icon">x</span>
+                            <?php endif;
+                                if (!empty($kalendar['max_people'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['max_people']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/max-01.svg"
+                                                alt="icon">x</span>
+                                <?php endif;
+                                if (!empty($kalendar['double_bed'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['double_bed']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/double-king-size-bed.svg"
+                                                alt="icon">x</span>
+                                <?php endif;
+                                if (!empty($kalendar['single_bed'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['single_bed']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/single-king-size-bed.svg"
+                                                alt="icon">x</span>
+                                <?php endif;
+                                if (!empty($kalendar['toilet_and_shower'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['toilet_and_shower']; ?>">
+                                        <img class="apartment__icon apartment__icon_mr--4px"
+                                                src="<?= CORE_PATH ?>assets/icons/toilet.svg"
+                                                alt="icon">
+                                        <img class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/shower.svg"
+                                                alt="icon">
+                                        x</span>
+                                <?php endif;
+                                if (!empty($kalendar['toilet'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['toilet']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/toilet.svg"
+                                                alt="icon">x</span>
+                                <?php endif;
+                                if (!empty($kalendar['bed_rooms'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['bed_rooms']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/br-01.svg"
+                                                alt="icon">x</span>
+                                <?php endif;
+                                if (!empty($kalendar['triple_bed'])):?>
+                                    <span class="booking-houses__description-item"
+                                            data-info="<?= $kalendar['triple_bed']; ?>"><img
+                                                class="apartment__icon apartment__icon_mr-4px"
+                                                src="<?= CORE_PATH ?>assets/icons/triple-bed.svg"
+                                                alt="icon">x</span>
+                                <?php endif; ?>
+                        </p>
+                    </div>
+                    <?php 
+                        $calendarTeremId = getCalendarId($kalendar['calendar']);
+                    ?>
+                    <div class="booking-houses__calendars">
+                        <div class="booking-houses__calendars-inner">
+                            <a href="#" data-calendar='<?= $kalendar['calendar']; ?>'
+                                class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                Показать календарь
+                            </a>
+                        </div>
+                        <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?=$calendarTeremId;?>&terem=<?= $kalendar['title']; ?>"
+                            data-name="<?= $kalendar['title']; ?>"
+                            data-id="<?=get_the_ID();?>"
+                            data-cd="<?= $calendarTeremId;?>"
+                            target="_blank"
+                            class="is-terem-js our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
+                            забронировать
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </div>
 <?php endif;?>
