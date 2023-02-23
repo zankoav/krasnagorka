@@ -24,9 +24,6 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 <style>
     .terem-wrapper .terem-calendars{
         display: none;
-        background: #fff;
-        padding: 2rem;
-        
     }
 </style>
 <div class="terem-wrapper">
