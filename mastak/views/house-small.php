@@ -25,6 +25,11 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
     .terem-wrapper .terem-calendars{
         display: none;
     }
+
+    .terem-wrapper .booking-houses__wrapper{
+        align-self: flex-start;
+    }
+
 </style>
 <div class="terem-wrapper">
 <?php endif;?>
@@ -121,6 +126,9 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                         </a>
                         <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray b-ml-2">
                             занятость номеров
+                        </a>
+                        <a href="javascript:void(0);" class="our-house__button our-house__button-numbers our-house__button--gray b-ml-2">
+                            номера
                         </a>
                     <?php else : ?>
                         <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" data-cd="<?= $calendarId; ?>" class="our-house__button b-ml-2" target="_blank">
@@ -252,5 +260,10 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
             </div>
         <?php endforeach; ?>
     </div>
+    <script>
+        jQuery('.our-house__button-numbers').on('click', function(){
+            jQuery('.terem-calendars').slideToggle();
+        })
+    </script>
 </div>
 <?php endif;?>
