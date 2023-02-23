@@ -260,10 +260,5 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
             </div>
         <?php endforeach; ?>
     </div>
-    <script>
-        jQuery('.our-house__button-numbers').on('click', function(){
-            jQuery('.terem-calendars').slideToggle();
-        })
-    </script>
 </div>
 <?php endif;?>
