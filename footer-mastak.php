@@ -299,6 +299,9 @@ if (is_page_template('reviews-page-template.php')) : ?>
 
     jQuery('.our-house__button-numbers').on('click', function(){
         jQuery('.terem-calendars').slideToggle();
+        if ($(this).is(':visible')){
+            $(this).css('display','flex');
+        }
     });
 
 
