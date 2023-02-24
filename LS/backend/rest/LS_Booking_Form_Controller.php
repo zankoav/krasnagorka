@@ -89,7 +89,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'available' => true
         ];
 
-        if($toDay >= $dateStart){
+        if($toDay > $dateStart){
             $result['available'] = false;
             $result['message'] = 'Упс! Устаревшая бронь :(';
             return new WP_REST_Response($result, 200); 
