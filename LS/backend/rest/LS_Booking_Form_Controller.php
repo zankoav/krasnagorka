@@ -374,7 +374,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
          */
         $onlyBookingOrder = self::isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem); 
 
-        if(!empty($eventId)){
+        if(empty($eventId) and !empty($eventTabId)){
             $onlyBookingOrder = false;
         }
 
