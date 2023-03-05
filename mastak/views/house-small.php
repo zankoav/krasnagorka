@@ -3,7 +3,7 @@
 $isTerem    = get_post_meta(get_the_ID(), "mastak_house_is_it_terem", true);
 $targetOpen = get_post_meta(get_the_ID(), "new_page", true) ? '_blank' : '_self';
 $icon_id    = get_post_thumbnail_id();
-$size       = wp_is_mobile() ? 'houses_last_iphone_5' : 'houses_last_laptop';
+$size       = 'header_tablet_p';
 
 if (!$isTerem) {
     $calendarShortCode =  get_post_meta(get_the_ID(), "mastak_house_calendar", true);
