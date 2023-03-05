@@ -269,6 +269,12 @@ if (!defined('ABSPATH')) {
 		}
 	</style>
 
+    <style>
+        .css-focused-link, .css-focused-link:focus, .css-focused-link:visited {
+            color: #1498c6;
+        }
+    </style>
+
 	<style>
 		.added-info-price{
 			margin-top:8px;
