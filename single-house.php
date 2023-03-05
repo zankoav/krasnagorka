@@ -260,7 +260,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                                 $calendarTeremId = getCalendarId($kalendar['calendar']);
                                                 ?>
                                                 <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?= $calendarTeremId; ?>&terem=<?= $kalendar['title']; ?>" data-name="<?= $kalendar['title']; ?>" data-cd="<?= $calendarTeremId; ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="is-terem-js our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
-                                                    забронировать
+                                                    забронировать/рассчитать
                                                 </a>
                                             </div>
                                         </div>
@@ -355,7 +355,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             </p>
                         </div>
                         <?php if (!$isTerem) : ?>
-                            <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="house-booking__button">забронировать
+                            <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="house-booking__button">забронировать/рассчитать
                             </a>
                         <?php endif; ?>
                     </footer>
