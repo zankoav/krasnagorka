@@ -7436,7 +7436,7 @@ button.swiper-pagination-bullet {
   }
   .table-tab-col:nth-child(3) {
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
   }
 }
 @media (min-width: 1024px) {
