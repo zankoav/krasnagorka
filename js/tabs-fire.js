@@ -10,6 +10,11 @@ jQuery(document).on('ready', function () {
                 const state = orderedIds[index]
                 const id = `#mastak_event_tab_type_8_items_${index}_calendar`
                 const $calendar = $(this).find(id)
+                const title = $($calendar[0]).find('option:selected').text();
+                if(title){
+                    $(this).find('.cmb-group-title span').text(title);
+                    console.log('title', title);
+                }
                 if (state && $calendar[0] && $calendar[0].value == state.calendar) {
                     $(this).addClass(`bgc-${state.status}`)
                     $(this).find('.cmb-group-title').addClass(`bgc-${state.status}`)
