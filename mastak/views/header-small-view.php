@@ -463,12 +463,10 @@
         <div class="main-slide__slide-img-wrapper">
             <?php if(!wp_is_mobile()):?>
             <?php
-                $image_size     = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
+                $image_size     = 'header_laptop_hd';
                 $slide_image_id = apply_filters("mastak_header_small_view_image", null); ?>
             <img class="object-fit-img"
-                 src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>"
-                 srcset="<?= wp_get_attachment_image_srcset($slide_image_id, $image_size) ?>"
-                 sizes="<?= wp_get_attachment_image_sizes($slide_image_id, $image_size) ?>">
+                 src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>">
             <?php else:?>
             <canvas id="canvas"></canvas>
             <?php endif;?>
