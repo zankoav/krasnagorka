@@ -3684,7 +3684,7 @@ a {
   font-weight: 900;
 }
 body {
-  font-family: Avenir_Next_Regular, sans-serif;
+  font-family: AvenirNextCyr-Regular, sans-serif;
 }
 .b-bgc-wrapper {
   background-color: #f7f7f7;
@@ -5454,7 +5454,7 @@ button.swiper-pagination-bullet {
   }
 }
 .opportunity__title {
-  font-family: Avenir_Next_Regular, sans-serif;
+  font-family: AvenirNextCyr-Regular, sans-serif;
   font-size: 18px;
   font-weight: 900;
   color: #4a4a4a;
@@ -6001,7 +6001,7 @@ button.swiper-pagination-bullet {
 }
 @media (min-width: 1280px) {
   .contacts-form__title {
-    font-family: Avenir_Next_Regular, sans-serif;
+    font-family: AvenirNextCyr-Regular, sans-serif;
     font-size: 14px;
     margin-bottom: 1rem;
   }
@@ -6083,7 +6083,7 @@ button.swiper-pagination-bullet {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  font-family: Avenir_Next_Regular, sans-serif;
+  font-family: AvenirNextCyr-Regular, sans-serif;
 }
 .contacts-form__submit {
   text-decoration: none;
@@ -7686,7 +7686,7 @@ div.wpcf7 .more-questions__item--full-width .ajax-loader {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  font-family: Avenir_Next_Regular, sans-serif;
+  font-family: AvenirNextCyr-Regular, sans-serif;
 }
 .more-questions__submit {
   text-decoration: none;
@@ -7906,7 +7906,7 @@ div.wpcf7 .more-questions__item--full-width .ajax-loader {
   color: #fff;
   overflow: hidden;
   padding: 4rem 0;
-  font-family: Avenir_Next_Regular, sans-serif;
+  font-family: AvenirNextCyr-Regular, sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
