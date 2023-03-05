@@ -156,7 +156,7 @@
                         <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from))?>&to=<?=date("Y-m-d", strtotime($to))?><?= $teremName;?>" 
                             class="our-house__button" 
                             target="_blank">
-                            забронировать/рассчитать
+                            забронировать / рассчитать
                         </a>
                     </div>
                 <?php else:?>

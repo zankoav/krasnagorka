@@ -78,7 +78,7 @@
                     <a href="/booking-form/?booking=<?= get_the_ID() ?>"
                        target="_blank"
                        data-event="<?= get_the_title(); ?>" 
-                       class="house-booking__button">забронировать/рассчитать
+                       class="house-booking__button">забронировать / рассчитать
                     </a>
                 <?php endif; ?>
             </footer>

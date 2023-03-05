@@ -122,7 +122,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 
                     <?php if ($isTerem) : ?>
                         <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button b-ml-2">
-                            забронировать/рассчитать
+                            забронировать / рассчитать
                         </a>
                         <a href="<?= get_the_permalink() . '?employment'; ?>" target="<?= $targetOpen; ?>" class="our-house__button our-house__button--gray b-ml-2">
                             занятость номеров
@@ -132,7 +132,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                         </a>
                     <?php else : ?>
                         <a href="/booking-form/?booking=<?= get_the_ID(); ?>&calendarId=<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" data-cd="<?= $calendarId; ?>" class="our-house__button b-ml-2" target="_blank">
-                            забронировать/рассчитать
+                            забронировать / рассчитать
                         </a>
                         <a href="#" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>' class="our-house__button our-house__button--green booking-houses__calendars-button b-ml-2">
                             Показать календарь
@@ -151,7 +151,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                         <div class="booking-houses__calendars-inner"></div>
                     </div>
                     <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?= $calendarId; ?>" data-cd="<?= $calendarId; ?>" data-name="<?= get_the_title(); ?>" data-id="<?= get_the_ID(); ?>" class="our-house__button our-house__button_media_xs" target="_blank">
-                        забронировать/рассчитать
+                        забронировать / рассчитать
                     </a>
                 </div>
             <?php endif; ?>
@@ -254,7 +254,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                                 data-cd="<?= $calendarTeremId;?>"
                                 target="_blank"
                                 class="is-terem-js our-house__button our-house__button-hidden our-house__button_mt_15">
-                                забронировать/рассчитать
+                                забронировать / рассчитать
                             </a>
                         </div>
                     </div>
