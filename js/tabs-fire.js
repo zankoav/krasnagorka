@@ -13,7 +13,6 @@ jQuery(document).on('ready', function () {
                 const title = $($calendar[0]).find('option:selected').text();
                 if(title){
                     $(this).find('.cmb-group-title span').text(title);
-                    console.log('title', title);
                 }
                 if (state && $calendar[0] && $calendar[0].value == state.calendar) {
                     $(this).addClass(`bgc-${state.status}`)
