@@ -146,6 +146,7 @@
 
             $intervalId  = get_post_meta( get_the_ID(), 'mastak_event_tab_type_10_interval', true );
             $icon    = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_icon', true );
+            $description  = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_description', true );
             $start  = get_post_meta(  $intervalId, 'season_from', true );
 			$end    = get_post_meta(  $intervalId, 'season_to', true );
 
@@ -160,7 +161,8 @@
             foreach ($period as $key => $value) {
                 $result['items'][] = array(
                     'date'  => $value->format('Y-m-d'),
-                    'icon'  => $icon
+                    'icon'  => $icon,
+                    'description' => $description
                 ); 
             }			
 		endwhile;

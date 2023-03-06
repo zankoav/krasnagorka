@@ -671,6 +671,12 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Описание иконки мероприятия',
+            'id'   => $prefix . '_description',
+            'type'    => 'textarea_small'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => 'Пакеты услуг',
             'id'   => $prefix . '_variants',
             'type'             => 'multicheck_inline',
