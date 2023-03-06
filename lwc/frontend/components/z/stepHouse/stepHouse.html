@@ -1,6 +1,6 @@
 <template>
     <div class="step-house">
-        <div class="step-house__body">
+        <div class="step-house__body" onhappyevents={handlerHappyEvents} onhappyeventsrange={handlerHappyEventsRange}>
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
                 <z-select
@@ -60,6 +60,16 @@
                             </div>
                             <div if:true={showEventMessageInfo} class="step-house__event-info">
                                 <span class="step-house__event-info-start">!</span>{settings.eventTabMessageInfo}
+                            </div>
+
+                            <div class="step-house__happy-event" if:true={happyEvents.length}>
+                                <div class="step-house__delimeter step-house__delimeter_small">МЕРОПРИЯТИЯ</div>
+                                <template for:each={happyEvents} for:item="happyEvent">
+                                    <div key={happyEvent.index} class="step-house__happy-event-item">
+                                        <img class="step-house__happy-event-icon" src={happyEvent.img} alt="icon" />
+                                        <span class="step-house__happy-event-description">{happyEvent.description}</span>
+                                    </div>
+                                </template>
                             </div>
                         </div>
                         <div class="step-house__col">

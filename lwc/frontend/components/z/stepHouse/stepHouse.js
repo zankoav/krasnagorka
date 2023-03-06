@@ -8,6 +8,35 @@ export default class StepHouse extends LightningElement {
     @track bookingImg = IMG_BOOKING
     @track error
 
+    happyEventsObj
+    happyEventsObjRange
+
+    get happyEvents() {
+        let result = []
+
+        if (this.happyEventsObj && this.happyEventsObjRange) {
+            const iconPath = this.happyEventsObj.icon_path
+            const items = this.happyEventsObj.items.filter(
+                (item) =>
+                    item.date >= this.happyEventsObjRange.start &&
+                    item.date <= this.happyEventsObjRange.end
+            )
+
+            for (const item of items) {
+                const isNewItem = result.find((it) => it.icon === item.icon)
+                if (!isNewItem && item.description) {
+                    result.push({
+                        index: `${item.date}`,
+                        icon: item.icon,
+                        img: `${iconPath}${item.icon}.svg`,
+                        description: item.description
+                    })
+                }
+            }
+        }
+        return result
+    }
+
     get dateStart() {
         return this.settings.dateStart ? this.settings.dateStart.replace(/-/g, '.') : '—'
     }
@@ -183,12 +212,12 @@ export default class StepHouse extends LightningElement {
         } else if (!this.settings.dateEnd) {
             this.error = 'Выберите дату выезда'
         } else {
-            let newMenu;
-            if(this.settings.eventId){
+            let newMenu
+            if (this.settings.eventId) {
                 newMenu = this.settings.menu.map((it) => {
                     return { ...it, active: it.value === 'contacts' }
                 })
-            }else{
+            } else {
                 newMenu = this.settings.menu.map((it) => {
                     return { ...it, active: it.value === 'food' }
                 })
@@ -203,5 +232,13 @@ export default class StepHouse extends LightningElement {
                 })
             )
         }
+    }
+
+    handlerHappyEvents(event) {
+        this.happyEventsObj = event.detail
+    }
+
+    handlerHappyEventsRange(event) {
+        this.happyEventsObjRange = event.detail
     }
 }

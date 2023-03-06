@@ -50,6 +50,15 @@ export default class Calendar extends LightningElement {
         events = await response.json()
         const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
         happyEvents = await happyEventsResponse.json()
+        if (happyEvents) {
+            this.dispatchEvent(
+                new CustomEvent('happyevents', {
+                    detail: happyEvents,
+                    bubbles: true,
+                    composed: true
+                })
+            )
+        }
         this.loading = false
         await skip()
         this.template.querySelector('.calendar__content').innerHTML = this.getTemplate()
@@ -65,7 +74,21 @@ export default class Calendar extends LightningElement {
                 right: 'next'
             },
             events: events,
+            viewRender: function (view, element) {
+                const dates = $(element).find('[data-date]')
+                const start = dates[0].getAttribute('data-date')
+                const end = dates[dates.length - 1].getAttribute('data-date')
+                step.dispatchEvent(
+                    new CustomEvent('happyeventsrange', {
+                        detail: { start, end },
+                        bubbles: true,
+                        composed: true
+                    })
+                )
+            },
             eventAfterAllRender: () => {
+                // console.log('jsEvent', jsEvent)
+                // console.log('view', view)
                 this.updateStyle()
                 const table = document.querySelector('#calendar table')
                 table.className = 'main-table'
@@ -181,7 +204,7 @@ export default class Calendar extends LightningElement {
 
         function addEventsIcons() {
             for (let event of happyEvents.items) {
-                if(event.icon){
+                if (event.icon) {
                     const eventDayElement = $calendar[0].querySelector(
                         `.fc-day[data-date="${event.date}"]`
                     )
@@ -189,7 +212,10 @@ export default class Calendar extends LightningElement {
                         let iconElement = eventDayElement.querySelector('.fc-day-event__icon')
                         if (!iconElement) {
                             iconElement = document.createElement('img')
-                            iconElement.setAttribute('src', `${happyEvents.icon_path}${event.icon}.svg`)
+                            iconElement.setAttribute(
+                                'src',
+                                `${happyEvents.icon_path}${event.icon}.svg`
+                            )
                             iconElement.setAttribute('class', 'fc-day-event__icon')
                             eventDayElement?.appendChild(iconElement)
                         }
