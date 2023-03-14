@@ -374,4 +374,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 <?php endwhile;
 endif; // end of the loop.
 ?>
+<script>
+alert('Welcome');
+</script>
 <?php get_footer('mastak'); ?>
