@@ -1,4 +1,6 @@
 <?php
+    use Ls\Wp\Log as Log;
+
 
 	add_action( 'load-edit.php', 'custom_load_edit', 1 );
 
@@ -169,6 +171,7 @@
 			wp_reset_postdata();
 		endif;
 
+        Log:info('Result', $result);
 		return $result;
     }
 
