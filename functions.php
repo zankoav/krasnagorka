@@ -583,6 +583,6 @@ function app_get_happy_events() {
         wp_reset_postdata();
     endif;
 
-    Log:info('Result', 1);
+    Log::info('Result', $result);
     return $result;
 }
