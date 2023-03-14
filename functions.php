@@ -1,7 +1,5 @@
 <?php
 
-use Ls\Wp\Log as Log;
-
 if (!defined('ABSPATH')) { exit; }
 
 // START
@@ -582,7 +580,5 @@ function app_get_happy_events() {
     endwhile;
         wp_reset_postdata();
     endif;
-
-    Log::info('Result', $result);
     return $result;
 }
