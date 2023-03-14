@@ -49,7 +49,6 @@
 
     .footer-bottom__payments{
         display: block;
-        background-color: #fff;
         width: 100%;
         object-fit: contain;
         padding: .5rem 0;
