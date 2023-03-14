@@ -248,6 +248,6 @@
         </div>
     </div>
     <div class="b-container pb-1">
-        <img class="footer-bottom__payments" src="https://krasnagorka.by/wp-content/uploads/2022/05/image_2022-05-26_09-51-49.png" alt="payment systems">
+        <img class="footer-bottom__payments" src="https://krasnagorka.by/wp-content/uploads/2023/03/HORIZONTAL-WHITE.png" alt="payment systems">
     </div>
 </footer>
