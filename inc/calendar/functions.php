@@ -117,62 +117,6 @@
 		return $rest;
 	}
 
-    add_action( 'rest_api_init', function () {
-		register_rest_route( 'happy/v1', '/events/', [
-			'methods'  => 'GET',
-			'callback' => 'app_get_happy_events',
-		] );
-	} );
-
-    function app_get_happy_events() {
-        $result  = [
-            "icon_path" => "https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/",
-            "items" => []
-        ];
-		$args  = array(
-			'post_type'      => 'event_tab',
-			'post_status'    => array( 'publish' ),
-			'posts_per_page' => -1,
-            'meta_query' => array(
-                array(
-                    'key'     => 'tab_type',
-                    'value'   => 'type_10',
-                    'compare' => '='
-                )
-            )
-		);
-		$query = new WP_Query( $args );
-		if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
-
-            $intervalId  = get_post_meta( get_the_ID(), 'mastak_event_tab_type_10_interval', true );
-            $icon    = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_icon', true );
-            $description  = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_description', true );
-            $start  = get_post_meta(  $intervalId, 'season_from', true );
-			$end    = get_post_meta(  $intervalId, 'season_to', true );
-
-            $dateTo = new DateTime($end);
-            $dateFrom = new DateTime($start);
-            $period = new DatePeriod(
-                $dateFrom->modify('-1 day'),
-                new DateInterval('P1D'),
-                $dateTo->modify('+1 day')
-            );
-    
-            foreach ($period as $key => $value) {
-                $result['items'][] = array(
-                    'date'  => $value->format('Y-m-d'),
-                    'icon'  => $icon,
-                    'description' => $description
-                ); 
-            }			
-		endwhile;
-			wp_reset_postdata();
-		endif;
-
-        Log:info('Result', $result);
-		return $result;
-    }
-
 
 // Add Shortcode
 	function sbc_disaply_calendar( $atts ) {
