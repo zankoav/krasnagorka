@@ -1,6 +1,4 @@
 <?php
-    use Ls\Wp\Log as Log;
-
 
 	add_action( 'load-edit.php', 'custom_load_edit', 1 );
 
