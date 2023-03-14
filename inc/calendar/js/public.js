@@ -3,9 +3,6 @@ const message_1 = 'Нельзя бронировать прошлые даты',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
     message_4 = 'Выберите свободную дату';
 
-    console.log('Hello');
-    alert('Welcome');
-
 jQuery(document).ready(async function ($) {
     var targetMargin,
         scriptFullCalendar,
