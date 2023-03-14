@@ -38,7 +38,6 @@ use Ls\Wp\Log as Log;
 		wp_enqueue_script( 'fullcalendar',CALENDAR_ROOT_URI . 'js/fullcalendar.min.js', array( 'jquery' ), false, true );
         wp_enqueue_script( 'fullcalendar_locale',CALENDAR_ROOT_URI . 'js/ru.js', array( 'jquery', 'moment' ), false, true );
         wp_enqueue_script( 'public_calendar',CALENDAR_ROOT_URI . 'js/public.js', array( 'jquery' ), false, true );
-        Log::info('public_calendar', true);
 	}
 
 	if(!is_admin()){
