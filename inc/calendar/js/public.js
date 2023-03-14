@@ -16,11 +16,13 @@ jQuery(document).ready(async function ($) {
         jsFromDate,
         jsToDate,
         currentCalendarId
-    
+
+    alert('Hello')
+
     const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
-    
+
     const happyEvents = await happyEventsResponse.json()
-    alert('happyEvents ' + happyEvents?.items?.length);
+    alert('happyEvents ' + happyEvents?.items?.length)
 
     $('.booking-houses__calendars-all-button').on('click', function (event) {
         event.preventDefault()
