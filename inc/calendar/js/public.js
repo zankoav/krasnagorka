@@ -1,7 +1,10 @@
 const message_1 = 'Нельзя бронировать прошлые даты',
     message_2 = 'Дата выезда должна быть позже даты заезда',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
-    message_4 = 'Выберите свободную дату'
+    message_4 = 'Выберите свободную дату';
+
+    console.log('Hello');
+    alert('Welcome');
 
 jQuery(document).ready(async function ($) {
     var targetMargin,
@@ -16,7 +19,6 @@ jQuery(document).ready(async function ($) {
         jsFromDate,
         jsToDate,
         currentCalendarId
-
 
     const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
 
