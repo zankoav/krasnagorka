@@ -1535,6 +1535,7 @@
 
     require_once __DIR__ . '/cmb2/terem.php';
     require_once __DIR__ . '/cmb2/season.php';
+    require_once __DIR__ . '/cmb2/package.php';
     require_once __DIR__ . '/cmb2/event.php';
     require_once __DIR__ . '/cmb2/event_tabs.php';
     require_once __DIR__ . '/cmb2/calendars.php';
