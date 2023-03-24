@@ -58,6 +58,10 @@ function load_admin_style()
 
     wp_enqueue_style('fires_tab_css', $uri  . '/css/tabs-fire.css', false, '1.0.0');
     wp_enqueue_script( 'fires_tab_js', $uri . '/js/tabs-fire.js', array( 'jquery' ), false, true );
+
+    wp_enqueue_style('package_css', $uri  . '/css/package-link.css', false, '1.0.0');
+    wp_enqueue_script( 'package_js', $uri . '/js/package-link.js', array( 'jquery' ), false, true );
+
 }
 
 

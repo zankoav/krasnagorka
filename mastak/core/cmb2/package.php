@@ -87,4 +87,19 @@ function cmb_package()
 			'required'    => 'required'
 		)
 	));
+
+    $cmb_package->add_field(array(
+        'name'    => __( 'Копировать ссылку на форму бронирования', 'krasnagorka' ),
+        'id'      => 'package_source',
+        'type'    => 'package_link'
+    ));
 }
+
+function cmb2_render_package_link_func( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
+		
+    $view = '<div class="package-link"><button type="button" class="js-package-link button-secondary" data-id="'.$object_id.'">Копировать ссылку</button></div>';
+    $view .= $field_type_object->_desc( true );
+    echo $view;
+}
+
+add_action( 'cmb2_render_package_link', 'cmb2_render_package_link_func', 10, 5 );
