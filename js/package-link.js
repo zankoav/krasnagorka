@@ -4,7 +4,15 @@ jQuery(document).on('ready', function () {
         'use strict'
 
         $('.js-package-link').on('click', function () {
-            console.log('123', 123);
+            const packageId = $(this).attr('data-id')
+            navigator.clipboard
+                .writeText(`https://krasnagorka.by/booking-form/?package=${packageId}`)
+                .then(() => {
+                    console.log('copied')
+                })
+                .catch((err) => {
+                    console.log('Something went wrong', err)
+                })
         })
     })(window, document, jQuery)
 })
