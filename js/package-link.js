@@ -6,7 +6,7 @@ jQuery(document).on('ready', function () {
         $('.js-package-link').on('click', function () {
             const packageId = $(this).attr('data-id')
             navigator.clipboard
-                .writeText(`https://krasnagorka.by/booking-form/?package=${packageId}`)
+                .writeText(`https://krasnagorka.by/booking-form/?package-id=${packageId}`)
                 .then(() => {
                     console.log('copied')
                 })

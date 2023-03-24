@@ -1,6 +1,6 @@
 <?php
-    /**ssh krasnago@93.125.99.61
-     * ssh krasnago@93.125.99.61
+    /**
+     * 
      *
      * Template Name: Booking (redesign)
      *
