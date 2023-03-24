@@ -97,7 +97,7 @@ function cmb_package()
 
 function cmb2_render_package_link_func( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
-    $view = '<div class="package-link"><button type="button" class="js-package-link button-secondary" data-id="'.$object_id.'">Копировать ссылку</button></div>';
+    $view = '<div class="package-link"><button type="button" class="js-package-link button-secondary" data-id="'.$object_id.'">Копировать ссылку</button><div><a targe="_blank" href="https://krasnagorka.by/booking-form/?package-id='.$object_id.'">https://krasnagorka.by/booking-form/?package-id='.$object_id.'</a></div>';
     $view .= $field_type_object->_desc( true );
     echo $view;
 }
