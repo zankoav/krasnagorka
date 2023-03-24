@@ -72,7 +72,7 @@ function cmb_package()
 		'name'            => 'Начало пакетного тура',
 		'id'              => 'package_start',
 		'description'     => __('Дата включительно', 'krasnagorka'),
-		'type'            => 'date',
+		'type'            => 'text_date',
 		'attributes'      => array(
 			'required'    => 'required'
 		)
@@ -82,7 +82,7 @@ function cmb_package()
 		'name'            => 'Конец пакетного тура',
 		'id'              => 'package_end',
 		'description'     => __('Дата включительно', 'krasnagorka'),
-		'type'            => 'date',
+		'type'            => 'text_date',
 		'attributes'      => array(
 			'required'    => 'required'
 		)
