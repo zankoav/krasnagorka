@@ -436,6 +436,26 @@ if (!defined('ABSPATH')) {
 		})(window, document, 'script', 'dataLayer', 'GTM-KDZSH92');
 	</script>
 
+    <?php if(is_post_type_archive( 'house' )) :?>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": "Дом на браславских озерах",
+                "image": [ “https://krasnagorka.by/wp-content/uploads/2022/12/nashi-doma-m.jpeg"
+                ],
+                "description": "В Вашем распоряжении мангальная зона, катамараны, настольный теннис, бильярд, спортивные площадки и много других развлечений, и, конечно, пляж и чистейшее озеро",
+                "offers": {
+                    "@type": "AggregateOffer",
+                    "offerCount": "8",
+                    "lowPrice": "28.00",
+                    "highPrice": "40.00",
+                    "priceCurrency": "BYN"
+                }
+            }
+        </script>
+    <?php endif;?>
+
 </head>
 <?php $bg_gray =
 	(is_page_template("template-mastak-prices.php")
