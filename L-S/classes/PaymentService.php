@@ -31,15 +31,51 @@ class PaymentService {
         }
     }
 
-    public function getLinkForRegisterDo() {
-        $amount = 99;
-        $orderNumber = 1999;
-        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
-    }
+    // public function getLinkForRegisterDo1() {
+    //     $amount = 99;
+    //     $orderNumber = 1999;
+    //     return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
+    // }
 
-    public function getInitRegisterDo() {
-        return file_get_contents($this->getLinkForRegisterDo());
-    }
+    // public function getLinkForRegisterDo() {
+    //     return ;
+    // }
+
+    // public function getInitRegisterDo() {
+    //     return file_get_contents($this->getLinkForRegisterDo());
+    // }
+
+    public function initRegisterDo($headers = array())
+        {
+            $amount = 99;
+            $orderNumber = 2999;
+
+            $data = [
+                'password' => $this->password,
+                'userName' =>$this->username,
+                'amount' => $amount,
+                'language' => 'ru',
+                'orderNumber' => $orderNumber,
+                'returnUrl' => $this->return_url,
+                'pageView' => $this->device_type
+            ];
+
+            $ch = curl_init();
+            curl_setopt_array($ch, array(
+                CURLOPT_HTTPHEADER => $headers,
+                CURLOPT_VERBOSE => true,
+                CURLOPT_SSL_VERIFYHOST => false,
+                CURLOPT_SSL_VERIFYPEER => false,
+                CURLOPT_URL => "{$this->base_link}register.do",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => $data,
+            ));
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            return $response;
+        }
 
 
 
