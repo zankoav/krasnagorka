@@ -586,3 +586,7 @@ function app_get_happy_events() {
     endif;
     return $result;
 }
+
+
+$hello = new PaymentService();
+Log::info('ok', $hello);

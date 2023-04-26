@@ -421,4 +421,47 @@ add_action('cmb2_admin_init', function () {
         'type' => 'file'
     ));
 
+
+    $cmb_options->add_field(array(
+        'name' => __('Настройки Альфа-Банк API', 'krasnagorka'),
+        'id'   => 'alpha_bank_settings_title',
+        'type' => 'title'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Включить Alpha Bank оплату',
+        'id'   => 'alpha_bank_settings_enabled',
+        'type' => 'checkbox'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Включить PROD',
+        'id'   => 'alpha_bank_settings_production_enabled',
+        'type' => 'checkbox'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Username PROD',
+        'id'   => 'alpha_bank_settings_username_prod',
+        'type' => 'text'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Password PROD',
+        'id'   => 'alpha_bank_settings_password_prod',
+        'type' => 'text'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Username SANDBOX',
+        'id'   => 'alpha_bank_settings_username_sandbox',
+        'type' => 'text'
+    ));
+
+    $cmb_options->add_field(array(
+        'name' => 'Password SANDBOX',
+        'id'   => 'alpha_bank_settings_password_sandbox',
+        'type' => 'text'
+    ));
+
 });
