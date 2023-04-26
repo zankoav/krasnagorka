@@ -7,8 +7,8 @@ use Ls\Wp\Log as Log;
 
 class PaymentService {
 
-    private string $username;
-    private string $password;
+    private string? $username;
+    private string? $password;
     private bool $is_enable;
     private bool $is_production;
 
@@ -16,15 +16,13 @@ class PaymentService {
         $settings = get_option('mastak_theme_options');
         $this->is_enable = $settings['alpha_bank_settings_enabled'] == 'on';
         if($this->is_enable){
-            Log::info('is_enable',true);
             $this->is_production = $settings['alpha_bank_settings_production_enabled'] == 'on';
-            // $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
-            // $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
-        }else{
-            Log::info('is_enable',false);
+            $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
+            $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
+            
         }
 
-        
+        Log::info('this',(array)$this);
     }
 
 
