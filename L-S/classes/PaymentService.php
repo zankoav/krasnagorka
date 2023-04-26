@@ -15,8 +15,8 @@ class PaymentService {
     public bool $is_enable;
     public bool $is_production;
 
-    const SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
-    const PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private static $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private static $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
@@ -25,7 +25,7 @@ class PaymentService {
             $this->is_production = $settings['alpha_bank_settings_production_enabled'] == 'on';
             $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
-            $this->base_link = $this->is_production ? self::PROD_LINK : self::SANDBOX_LINK;
+            $this->base_link = $this->is_production ? $this->PROD_LINK : $this->SANDBOX_LINK;
             $this->return_url = $settings['alpha_bank_settings_return_url'];
             $this->device_type = wp_is_mobile() ? 'DESKTOP' : 'MOBILE';
         }
