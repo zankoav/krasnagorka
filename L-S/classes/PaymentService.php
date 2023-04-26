@@ -8,20 +8,20 @@ use LsFactory\Order;
 
 public class PaymentService {
 
-    private string $username;
-    private string $password;
-    private bool $is_enable;
-    private bool $is_production;
+    // private string $username;
+    // private string $password;
+    // private bool $is_enable;
+    // private bool $is_production;
 
-    public function __construct(){
-        $settings = get_option('mastak_theme_options');
-        $this->is_enable = $settings['alpha_bank_settings_enabled'] == 'on';
-        if($this->is_enable){
-            $this->is_production = $settings['alpha_bank_settings_production_enabled'] == 'on';
-            $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
-            $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
-        }
-    }
+    // public function __construct(){
+    //     $settings = get_option('mastak_theme_options');
+    //     $this->is_enable = $settings['alpha_bank_settings_enabled'] == 'on';
+    //     if($this->is_enable){
+    //         $this->is_production = $settings['alpha_bank_settings_production_enabled'] == 'on';
+    //         $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
+    //         $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
+    //     }
+    // }
 
 
 
