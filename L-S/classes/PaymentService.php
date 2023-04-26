@@ -21,7 +21,7 @@ class PaymentService {
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
         }
 
-        Log::info('ok', $this);
+        Log::info('ok', json_encode($this));
     }
 
 
