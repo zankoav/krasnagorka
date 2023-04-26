@@ -596,4 +596,4 @@ $hello_link = $hello->getLinkForRegisterDo();
 $hello_response = $hello->getInitRegisterDo();
 
 Log::info('link', $hello_link);
-Log::info('response', $hello_response);
+// Log::info('response', $hello_response);
