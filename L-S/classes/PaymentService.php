@@ -74,7 +74,7 @@ class PaymentService {
             $response = curl_exec($ch);
             curl_close($ch);
 
-            return json_decode($response);
+            return json_decode($response, JSON_UNESCAPED_UNICODE);
         }
 
 
