@@ -31,11 +31,11 @@ class PaymentService {
         }
     }
 
-    public function getLinkForRegisterDo() {
-        $amount = 99;
-        $orderNumber = 1009;
-        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}"
-    }
+    // public function getLinkForRegisterDo() {
+    //     $amount = 99;
+    //     $orderNumber = 1009;
+    //     return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}"
+    // }
 
 
 
