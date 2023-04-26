@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) { exit; }
 
 use LsFactory\PaymentService as PaymentService;
+use Ls\Wp\Log as Log;
 
 // START
 
@@ -593,4 +594,4 @@ function app_get_happy_events() {
 $hello = new PaymentService();
 $hello_url = $hello->getLinkForRegisterDo();
 
-// Log::info('link', $hello);
+Log::info('link', $hello_url);
