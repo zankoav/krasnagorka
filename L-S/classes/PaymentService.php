@@ -31,11 +31,11 @@ class PaymentService {
         }
     }
 
-    // public function getLinkForRegisterDo1() {
-    //     $amount = 99;
-    //     $orderNumber = 1999;
-    //     return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
-    // }
+    public function getLinkForRegisterDo1() {
+        $amount = 99;
+        $orderNumber = 1999;
+        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
+    }
 
     // public function getLinkForRegisterDo() {
     //     return ;
@@ -66,10 +66,10 @@ class PaymentService {
                 CURLOPT_VERBOSE => true,
                 CURLOPT_SSL_VERIFYHOST => false,
                 CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_URL => "{$this->base_link}register.do",
+                CURLOPT_URL => $this->getLinkForRegisterDo1(),
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POST => true,
-                CURLOPT_POSTFIELDS => $data,
+                CURLOPT_POST => false,
+                // CURLOPT_POSTFIELDS => $data,
             ));
             $response = curl_exec($ch);
             curl_close($ch);
