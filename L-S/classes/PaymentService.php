@@ -10,7 +10,7 @@ class PaymentService {
     public ?string $return_url;
     public ?string $username;
     public ?string $password;
-    public string $base_link;
+    public ?string $base_link;
     public ?string $device_type;
     public bool $is_enable;
     public bool $is_production;
@@ -31,12 +31,12 @@ class PaymentService {
         }
     }
 
-    public function getLinkForRegisterDo() {
+    // public function getLinkForRegisterDo() {
         // $amount = 99;
         // $orderNumber = 1009;
         // return "gg";
         // return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}"
-    }
+    // }
 
 
 
