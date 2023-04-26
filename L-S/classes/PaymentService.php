@@ -48,7 +48,7 @@ class PaymentService {
     public function initRegisterDo($headers = array())
         {
             $amount = 99;
-            $orderNumber = 3999;
+            $orderNumber = 4000;
 
             $data = [
                 'password' => $this->password,
@@ -74,7 +74,7 @@ class PaymentService {
             $response = curl_exec($ch);
             curl_close($ch);
 
-            return $response;
+            return json_decode($response);
         }
 
 
