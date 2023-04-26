@@ -15,8 +15,8 @@ class PaymentService {
     public bool $is_enable;
     public bool $is_production;
 
-    private static $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
-    private static $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
