@@ -592,4 +592,4 @@ function app_get_happy_events() {
 
 $hello = new PaymentService();
 
-// Log::info('link', $hello->getLinkForRegisterDo());
+Log::info('link', $hello->getLinkForRegisterDo());

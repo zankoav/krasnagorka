@@ -10,13 +10,13 @@ class PaymentService {
     public ?string $return_url;
     public ?string $username;
     public ?string $password;
-    public ?string $base_link;
+    public string $base_link;
     public ?string $device_type;
     public bool $is_enable;
     public bool $is_production;
 
-    private $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
-    private $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private string $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private string $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
