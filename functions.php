@@ -2,6 +2,8 @@
 
 if (!defined('ABSPATH')) { exit; }
 
+use LsFactory\VariantFactory as VariantFactory;
+
 // START
 
 require __DIR__ . '/vendor/autoload.php';
