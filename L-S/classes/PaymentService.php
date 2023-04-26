@@ -7,10 +7,10 @@ use Ls\Wp\Log as Log;
 
 class PaymentService {
 
-    private ?string $username;
-    private ?string $password;
-    private bool $is_enable;
-    private bool $is_production;
+    public ?string $username;
+    public ?string $password;
+    public bool $is_enable;
+    public bool $is_production;
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
@@ -21,7 +21,7 @@ class PaymentService {
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
         }
 
-        Log::info('this',(array)$this);
+        Log::info('this',$this);
     }
 
 
