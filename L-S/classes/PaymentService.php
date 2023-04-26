@@ -48,7 +48,7 @@ class PaymentService {
     public function initRegisterDo($headers = array())
         {
             $amount = 99;
-            $orderNumber = 5100;
+            $orderNumber = 51000;
 
             $data = [
                 'password' => $this->password,
