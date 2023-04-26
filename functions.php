@@ -593,4 +593,4 @@ function app_get_happy_events() {
 $hello = new PaymentService();
 $hello_url = $hello->getLinkForRegisterDo();
 
-Log::info('link', $hello_url);
+Log::info('link', ['gg' => $hello_url]);
