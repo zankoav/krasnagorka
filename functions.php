@@ -588,5 +588,5 @@ function app_get_happy_events() {
 }
 
 
-$hello = new PaymentService();
-Log::info('ok', $hello);
+// $hello = new PaymentService();
+// Log::info('ok', $hello);
