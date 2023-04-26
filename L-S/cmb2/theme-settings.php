@@ -464,4 +464,10 @@ add_action('cmb2_admin_init', function () {
         'type' => 'text'
     ));
 
+    $cmb_options->add_field(array(
+        'name' => 'Url для возврата',
+        'id'   => 'alpha_bank_settings_return_url',
+        'type' => 'text_url'
+    ));
+
 });

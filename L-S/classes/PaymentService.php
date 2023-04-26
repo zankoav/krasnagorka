@@ -7,10 +7,16 @@ use Ls\Wp\Log as Log;
 
 class PaymentService {
 
+    public ?string $return_url;
     public ?string $username;
     public ?string $password;
+    public ?string $base_link;
+    public ?string $device_type;
     public bool $is_enable;
     public bool $is_production;
+
+    const SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    const PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
@@ -19,9 +25,16 @@ class PaymentService {
             $this->is_production = $settings['alpha_bank_settings_production_enabled'] == 'on';
             $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
+            $this->base_link = $this->is_production ? self::PROD_LINK : self::SANDBOX_LINK;
+            $this->return_url = $settings['alpha_bank_settings_return_url'];
+            $this->device_type = wp_is_mobile() ? 'DESKTOP' : 'MOBILE';
         }
+    }
 
-        Log::info('this',$this);
+    public function getLinkForRegisterDo() {
+        $amount = 99;
+        $orderNumber = 1009;
+        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}"
     }
 
 
@@ -127,3 +140,6 @@ class PaymentService {
     // }
 
 }
+
+
+// use LsFactory\PaymentService as PaymentService;
