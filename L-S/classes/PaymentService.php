@@ -27,7 +27,7 @@ class PaymentService {
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
             $this->base_link = $this->is_production ? $this->PROD_LINK : $this->SANDBOX_LINK;
             $this->return_url = $settings['alpha_bank_settings_return_url'];
-            $this->device_type = wp_is_mobile() ? 'DESKTOP' : 'MOBILE';
+            $this->device_type = wp_is_mobile() ? 'MOBILE' : 'DESKTOP';
         }
     }
 
@@ -35,6 +35,10 @@ class PaymentService {
         $amount = 99;
         $orderNumber = 1009;
         return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
+    }
+
+    public function getInitRegisterDo() {
+        return file_get_contents($this->getLinkForRegisterDo());
     }
 
 
