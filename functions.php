@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) { exit; }
 
-use LsFactory\VariantFactory as VariantFactory;
+use LsFactory\PaymentService as PaymentService;
 
 // START
 
@@ -590,4 +590,4 @@ function app_get_happy_events() {
 }
 
 
-// $hello = new PaymentService();
+$hello = new PaymentService();
