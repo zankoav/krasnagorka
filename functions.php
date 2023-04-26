@@ -588,4 +588,4 @@ function app_get_happy_events() {
 }
 
 
-$hello = new PaymentService();
+// $hello = new PaymentService();

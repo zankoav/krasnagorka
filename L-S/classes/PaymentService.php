@@ -3,7 +3,7 @@
 namespace LsFactory;
 
 use LsFactory\Order;
-use Ls\Wp\Log as Log;
+// use Ls\Wp\Log as Log;
 
 public class PaymentService {
 
@@ -21,7 +21,7 @@ public class PaymentService {
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
         }
 
-        Log::info('ok', $this);
+        // Log::info('ok', $this);
     }
 
 
