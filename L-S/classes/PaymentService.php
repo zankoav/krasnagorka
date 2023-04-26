@@ -20,6 +20,8 @@ public class PaymentService {
             $this->username = $this->is_production ? $settings['alpha_bank_settings_username_prod'] : $settings['alpha_bank_settings_username_sandbox'];
             $this->password = $this->is_production ? $settings['alpha_bank_settings_password_prod'] : $settings['alpha_bank_settings_password_sandbox'];
         }
+
+        Log::info('ok', $this);
     }
 
 
