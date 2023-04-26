@@ -3,9 +3,9 @@
 namespace LsFactory;
 
 use LsFactory\Order;
-// use Ls\Wp\Log as Log;
+use Ls\Wp\Log as Log;
 
-public class PaymentService {
+class PaymentService {
 
     // private string $username;
     // private string $password;
