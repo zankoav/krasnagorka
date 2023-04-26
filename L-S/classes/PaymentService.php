@@ -33,7 +33,7 @@ class PaymentService {
 
     public function getLinkForRegisterDo1() {
         $amount = 99;
-        $orderNumber = 2999;
+        $orderNumber = 9191;
         return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
     }
 
@@ -47,18 +47,18 @@ class PaymentService {
 
     public function initRegisterDo($headers = array())
         {
-            $amount = 99;
-            $orderNumber = 51000;
+            // $amount = 99;
+            // $orderNumber = 51000;
 
-            $data = [
-                'password' => $this->password,
-                'userName' =>$this->username,
-                'amount' => $amount,
-                'language' => 'ru',
-                'orderNumber' => $orderNumber,
-                'returnUrl' => $this->return_url,
-                'pageView' => $this->device_type
-            ];
+            // $data = [
+            //     'password' => $this->password,
+            //     'userName' =>$this->username,
+            //     'amount' => $amount,
+            //     'language' => 'ru',
+            //     'orderNumber' => $orderNumber,
+            //     'returnUrl' => $this->return_url,
+            //     'pageView' => $this->device_type
+            // ];
 
             $ch = curl_init();
             curl_setopt_array($ch, array(
@@ -74,7 +74,7 @@ class PaymentService {
             $response = curl_exec($ch);
             curl_close($ch);
 
-            return json_decode($response, JSON_UNESCAPED_UNICODE);
+            return json_decode($response, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         }
 
 
