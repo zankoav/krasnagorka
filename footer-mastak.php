@@ -401,7 +401,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
     }
 </script>
 <!-- Код CallTracking -->
-<script async src="//app.call-tracking.by/scripts/calltracking.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>
+<script async src="//app.call-tracking.by/scripts/phones.js?8827b1a7-3494-4e5e-abe2-d46e6c2f1728"></script>
 <style>
     .button-animation {
         animation: buttonShake .8s;
