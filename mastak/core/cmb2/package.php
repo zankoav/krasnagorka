@@ -99,6 +99,32 @@ function cmb_package()
 		)
 	));
 
+    $cmb_package->add_field(array(
+        'name'            => 'Минимальное количество человек',
+        'id'              => 'package_people_min',
+        'description'     => __('Минимальное количество человек', 'krasnagorka'),
+        'type'            => 'text',
+        'attributes'      => array(
+            'type'    => 'number',
+            'pattern' => '\d*',
+        ),
+        'sanitization_cb' => 'absint',
+        'escape_cb'       => 'absint',
+    ));
+
+    $cmb_package->add_field(array(
+        'name'            => 'Минимальное количество ночей',
+        'id'              => 'package_night_min',
+        'description'     => __('Минимальное количество ночей', 'krasnagorka'),
+        'type'            => 'text',
+        'attributes'      => array(
+            'type'    => 'number',
+            'pattern' => '\d*',
+        ),
+        'sanitization_cb' => 'absint',
+        'escape_cb'       => 'absint',
+    ));
+
     $group_field_event = $cmb_package->add_field(array(
         'id'          => 'package_services',
         'type'        => 'group',
