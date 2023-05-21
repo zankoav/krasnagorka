@@ -93,41 +93,41 @@ function cmb_package()
 		'id'              => 'package_price',
 		'description'     => __('Стоимость за человека/ночь', 'krasnagorka'),
         'type'         => 'text_money',
-		'before_field' => 'BYN'
+		'before_field' => 'BYN',
 		'attributes'      => array(
 			'required'    => 'required'
 		)
 	));
 
-    // $group_field_event = $cmb_package->add_field(array(
-    //     'id'          => 'package_services',
-    //     'type'        => 'group',
-    //     'description' => __('Можно добавлять любое количество разных услуг', 'krasnagorka'),
-    //     // 'repeatable'  => false, // use false if you want non-repeatable group
-    //     'options'     => array(
-    //         'group_title'   => __('Услуга {#}', 'krasnagorka'),
-    //         // since version 1.1.4, {#} gets replaced by row number
-    //         'add_button'    => __('Добавить Услугу', 'krasnagorka'),
-    //         'remove_button' => __('Удалить Услугу', 'krasnagorka'),
-    //         'sortable'      => true,
-    //         // beta
-    //         'closed'        => true, // true to have the groups closed by default
-    //     ),
-    // ));
+    $group_field_event = $cmb_package->add_field(array(
+        'id'          => 'package_services',
+        'type'        => 'group',
+        'description' => __('Можно добавлять любое количество разных услуг', 'krasnagorka'),
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'   => __('Услуга {#}', 'krasnagorka'),
+            // since version 1.1.4, {#} gets replaced by row number
+            'add_button'    => __('Добавить Услугу', 'krasnagorka'),
+            'remove_button' => __('Удалить Услугу', 'krasnagorka'),
+            'sortable'      => true,
+            // beta
+            'closed'        => true, // true to have the groups closed by default
+        ),
+    ));
 
-    // $cmb_package->add_group_field($group_field_event, array(
-    //     'name' => 'Услуга',
-    //     'id'   => 'service',
-    //     'type'             => 'select',
-    //     'default'          => 1,
-    //     'options'       => [
-    //         1=>"Питание полный пансионат без 1-го обеда",
-    //         2=>"Квадрациклы",
-    //         3=>"Кедровая бочка",
-    //         4=>"Канатная дорога",
-    //         5=>"Баня"
-    //     ]
-    // ));
+    $cmb_package->add_group_field($group_field_event, array(
+        'name' => 'Услуга',
+        'id'   => 'service',
+        'type'             => 'select',
+        'default'          => 1,
+        'options'       => [
+            1=>"Питание полный пансионат без 1-го обеда",
+            2=>"Квадрациклы",
+            3=>"Кедровая бочка",
+            4=>"Канатная дорога",
+            5=>"Баня"
+        ]
+    ));
 
     $cmb_package->add_field(array(
         'name'    => __( 'Копировать ссылку на форму бронирования', 'krasnagorka' ),
