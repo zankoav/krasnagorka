@@ -23,6 +23,7 @@ require __DIR__ . '/L-S/mail/LS_Mailer.php';
 
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
+require __DIR__ . '/backend/ModelImpl.php';
 require __DIR__ . '/backend/Model.php';
 
 $assets = new Assets();

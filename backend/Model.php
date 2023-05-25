@@ -23,9 +23,9 @@ use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 
-use LsModel\ModelImpl as ModelImpl;
+// use LsModel\ModelImpl as ModelImpl;
 
-class Model extends ModelImpl
+class Model 
 {
 
     //  // ok
