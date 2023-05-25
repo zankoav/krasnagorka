@@ -107,4 +107,54 @@ class ModelImpl
             'eur' => get_option('eur_currency')
         ];
     }
+
+    public function getWeather()
+    {
+
+        $weatherStr = get_option('krasnagorka_weather');
+
+        if (!empty($weatherStr)) {
+            $weatherArray = json_decode($weatherStr, true);
+            if ($weatherArray['day'] != date('w')) {
+                return $this->updateWeather();
+            } else {
+                return $weatherArray;
+            }
+        } else {
+            return $this->updateWeather();
+        }
+        return $this->updateWeather();
+    }
+
+    private function updateWeather()
+    {
+        $api     = "https://api.darksky.net/forecast/81b61e0936068afa7f3b5d5443c9f690/55.773202,27.072710?lang=ru&exclude=minutely,hourly,flags,alerts&units=auto";
+        $weather = json_decode(file_get_contents($api), true);
+        $result  = [];
+        if (!empty($weather) and isset($weather["daily"]) and isset($weather["daily"]["data"])) {
+
+            $days   = $weather["daily"]["data"];
+            $result = [
+                'day'         => date('w', $days[1]["time"]),
+                'temperature' => round($days[1]["temperatureMax"]),
+                'icon'        => "https://darksky.net/images/weather-icons/" . $days[1]["icon"] . ".png",
+                'description' => $days[1]["summary"],
+                'firstDay'    => [
+                    'day'  => $this->DAYS[date('w', $days[2]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[2]["icon"] . ".png"
+                ],
+                'secondDay'   => [
+                    'day'  => $this->DAYS[date('w', $days[3]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[3]["icon"] . ".png"
+                ],
+                'thirdDay'    => [
+                    'day'  => $this->DAYS[date('w', $days[4]["time"])],
+                    'icon' => "https://darksky.net/images/weather-icons/" . $days[4]["icon"] . ".png"
+                ]
+            ];
+        }
+        update_option('krasnagorka_weather', json_encode($result));
+        return $result;
+    }
+
 }
