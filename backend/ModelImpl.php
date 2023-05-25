@@ -18,8 +18,12 @@ abstract class ModelImpl
 
     public function getModel(){
         $model = $this->createModel();
-        $model['scenario'] = $this->scenario();
+        $model['scenario']      = $this->scenario();
+        $model['mainMenu']      = $this->getMainMenu();
+        $model['footerBottom']  = $this->getFooterBottom();
         $model['popupContacts'] = $this->getPopupContacts();
+        $model['weather']       = [];
+        $model['currencies']    = $this->getCurrencies();
         return json_encode($model);
     }
 

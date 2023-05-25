@@ -133,10 +133,7 @@ class BaseModel extends ModelImpl
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
-            'mainMenu'      => $this->getMainMenu(),
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
-            'weather'       => [],
-            'currencies'    => $this->getCurrencies(),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
             'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
@@ -145,7 +142,6 @@ class BaseModel extends ModelImpl
                 "type"          => $type,
                 "contractOffer" => $this->themeOptions['contract_offer']
             ],
-            "footerBottom"  => $this->getFooterBottom(),
             "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
             "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
             "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
