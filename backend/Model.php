@@ -314,7 +314,7 @@ class Model extends ModelImpl
                 ]
             ]
         );
-        $intervalsQuery = new WP_Query;
+        $intervalsQuery = new \WP_Query;
         $intervals = $intervalsQuery->query($firstSeasonIntervalParams);
         if(count($intervals) > 0){
             $id = get_post_meta($intervals[0]->ID,'season_id', 1);
@@ -475,7 +475,7 @@ class Model extends ModelImpl
             'Терем 12'=>29
         ];
 
-        $queryHouse = new WP_Query(array(
+        $queryHouse = new \WP_Query(array(
             'post_type'      => 'house',
             'posts_per_page' => -1
         ));
@@ -483,7 +483,7 @@ class Model extends ModelImpl
         $houses = $queryHouse->get_posts();
 
 
-        $query = new WP_Query(array(
+        $query = new \WP_Query(array(
             'post_type'      => 'season',
             'posts_per_page' => -1
         ));
