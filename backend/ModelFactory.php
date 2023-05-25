@@ -10,7 +10,7 @@ class ModelFactory
 
     public static function getBookingModel(){
         $model = new Model();
-        return 'GG';//$model->getBookingModel();
+        return $model->getBookingModel();
     }
 
 }
