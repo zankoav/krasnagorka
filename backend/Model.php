@@ -29,15 +29,15 @@ class Model extends ModelImpl
 {
 
     //  // ok
-    private $themeOptions;
+    // private $themeOptions;
     //  // ok
-    private $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    // private $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
      // ok
-    public function __construct()
-    {
-        $this->themeOptions = get_option('mastak_theme_options');
-    }
+    // public function __construct()
+    // {
+    //     $this->themeOptions = get_option('mastak_theme_options');
+    // }
 
     // ok
     public function getPopupContacts()

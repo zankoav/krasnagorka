@@ -6,13 +6,13 @@ use Ls\Wp\Log as Log;
 
 class ModelImpl
 {
-    // protected $themeOptions;
-    // protected $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    protected $themeOptions;
+    protected $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
-    // public function __construct()
-    // {
-    //     $this->themeOptions = get_option('mastak_theme_options');
-    // }
+    public function __construct()
+    {
+        $this->themeOptions = get_option('mastak_theme_options');
+    }
 
     // public function getPopupContacts()
     // {
