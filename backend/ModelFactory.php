@@ -3,9 +3,6 @@ namespace LsModel;
 
 use Ls\Wp\Log as Log;
 
-// use LsModel\Model as Model;
-// use LsModel\ModelImpl as ModelImpl;
-
 
 class ModelFactory
 {

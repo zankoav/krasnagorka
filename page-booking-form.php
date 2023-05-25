@@ -5,7 +5,6 @@ use LsModel\ModelFactory as ModelFactory;
 if (!defined('ABSPATH')) {
     exit;
 }
-// $model  = new Model();
 
 $bookingModel = ModelFactory::getBookingModel();
 ?>
