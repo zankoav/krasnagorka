@@ -28,7 +28,7 @@ class ModelFactory
             $model = new BaseModel();
         }
         
-        return $model->getBookingModel();
+        return $model->getModel();
     }
 
 }

@@ -3,15 +3,25 @@ namespace LsModel;
 
 use Ls\Wp\Log as Log;
 
-class ModelImpl
+abstract class ModelImpl
 {
     protected $themeOptions;
     protected $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+
+    abstract protected function scenario();
+    abstract protected function createModel();
 
     public function __construct()
     {
         $this->themeOptions = get_option('mastak_theme_options');
     }
+
+    protected function getModel(){
+        $model = $this->createModel();
+        $model['scenario'] = $this->scenario();
+        $model['popupContacts'] = $this->getPopupContacts();
+        return json_encode($model);
+    };
 
     public function getPopupContacts()
     {

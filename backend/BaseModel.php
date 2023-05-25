@@ -27,11 +27,11 @@ use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 class BaseModel extends ModelImpl
 {
 
-    public function scenario(){
+    protected function scenario(){
         return 'Basic';
     }
 
-    public function baseBookingModel(){
+    protected function createModel(){
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = $bookingSettings['booking_price_show'] == 'on';
         $showPayments = false;
@@ -115,7 +115,6 @@ class BaseModel extends ModelImpl
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
         $result        = [
-            'scenario'          => $this->scenario(),
             'id'                => $calendarId,
             'admin'             => $showPrice,
             'webpaySandbox'     => $sandbox,
@@ -140,7 +139,6 @@ class BaseModel extends ModelImpl
             'currencies'    => $this->getCurrencies(),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
-            'popupContacts' => $this->getPopupContacts(),
             'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
             'mainContent'   => [
                 "title"         => $title,
@@ -284,12 +282,6 @@ class BaseModel extends ModelImpl
             }
         }
         return $result;
-    }
-
-    public function getBookingModel()
-    {
-        $result = $this->baseBookingModel();
-        return json_encode($result);
     }
 
     public static function getSelectedSeasonId($dateFrom){
