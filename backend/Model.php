@@ -1,4 +1,5 @@
 <?php
+namespace LsModel;
 
 /**
  * Created by PhpStorm.

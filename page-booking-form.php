@@ -3,8 +3,8 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-$model  = new Model();
-$bookingModel = $model->getBookingModel();
+// $model  = new Model();
+$bookingModel = ModelFactory::GET_BOOKING_MODEL();
 ?>
 <!doctype html>
 <html lang="en">
