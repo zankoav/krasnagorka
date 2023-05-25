@@ -4,7 +4,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 // $model  = new Model();
-$bookingModel = ModelFactory::GET_BOOKING_MODEL();
+
+$bookingModel = ModelFactory::getBookingModel();
 ?>
 <!doctype html>
 <html lang="en">
