@@ -111,6 +111,7 @@ class BaseModel extends ModelImpl
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
         $result        = [
+            'scenario'          => 'Base',
             'id'                => $calendarId,
             'admin'             => $showPrice,
             'webpaySandbox'     => $sandbox,
