@@ -21,7 +21,7 @@ abstract class ModelImpl
         $model['scenario'] = $this->scenario();
         $model['popupContacts'] = $this->getPopupContacts();
         return json_encode($model);
-    };
+    }
 
     public function getPopupContacts()
     {
