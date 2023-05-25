@@ -1,4 +1,5 @@
 <?php
+namespace LsModel;
 
 use Ls\Wp\Log as Log;
 
