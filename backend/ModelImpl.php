@@ -16,7 +16,7 @@ abstract class ModelImpl
         $this->themeOptions = get_option('mastak_theme_options');
     }
 
-    protected function getModel(){
+    public function getModel(){
         $model = $this->createModel();
         $model['scenario'] = $this->scenario();
         $model['popupContacts'] = $this->getPopupContacts();
