@@ -26,7 +26,10 @@ use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 
 class BaseModel extends ModelImpl
 {
-    private static $SCENARIO = 'Basic';
+
+    public function sceario(){
+        return 'Basic'
+    }
 
     public function baseBookingModel(){
         $bookingSettings = get_option('mastak_booking_appearance_options');
@@ -112,7 +115,7 @@ class BaseModel extends ModelImpl
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
         $result        = [
-            'scenario'          => self::SCENARIO,
+            'scenario'          => $this->sceario,
             'id'                => $calendarId,
             'admin'             => $showPrice,
             'webpaySandbox'     => $sandbox,
