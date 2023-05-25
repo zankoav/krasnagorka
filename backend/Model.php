@@ -100,8 +100,6 @@ class Model extends ModelImpl
         $sandbox = get_webpay_sandbox();
         $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
         
-        $weather = $this->getWeather();
-
         $selectedSeasonId = null;
         if (!empty($dateFrom) and !empty($dateTo)) {
             $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
@@ -134,7 +132,7 @@ class Model extends ModelImpl
             'calendars'     => $this->getCalendars($calendarId),
             'mainMenu'      => $this->getMainMenu(),
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
-            'weather'       => $weather,
+            'weather'       => [],
             'currencies'    => $this->getCurrencies(),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
@@ -441,15 +439,6 @@ class Model extends ModelImpl
         } catch (AmoCRMApiException $e) {
             Logger::log("AmoCRMApiException:" . $e->getMessage());
         }
-    }
-
-    private function redirect_to_404()
-    {
-        global $wp_query;
-        $wp_query->set_404();
-        status_header(404);
-        get_template_part(404);
-        exit();
     }
 
     private function getPriceFromEvent($eventTabId, $calendarId, $dateStart, $dateEnd)

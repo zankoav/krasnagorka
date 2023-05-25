@@ -27,7 +27,6 @@ require __DIR__ . '/backend/ModelImpl.php';
 require __DIR__ . '/backend/Model.php';
 
 $assets = new Assets();
-$model  = new Model();
 
 require __DIR__ . '/token_actions.php';
 require __DIR__ . '/inc/calendar/init.php';

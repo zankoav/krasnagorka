@@ -3,6 +3,7 @@
 if (!defined('ABSPATH')) {
     exit;
 }
+$model  = new Model();
 $bookingModel = $model->getBookingModel();
 ?>
 <!doctype html>
