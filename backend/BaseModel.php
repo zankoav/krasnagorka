@@ -28,7 +28,7 @@ class BaseModel extends ModelImpl
 {
 
     public function sceario(){
-        return 'Basic'
+        return 'Basic';
     }
 
     public function baseBookingModel(){
