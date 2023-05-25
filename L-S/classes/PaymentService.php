@@ -16,7 +16,7 @@ class PaymentService {
     public bool $is_production;
 
     private string $SANDBOX_LINK = 'https://abby.rbsuat.com/payment/rest/';
-    private string $PROD_LINK = 'https://abby.rbsuat.com/payment/rest/';
+    private string $PROD_LINK = 'https://ecom.alfabank.by/payment/rest/';
 
     public function __construct(){
         $settings = get_option('mastak_theme_options');
@@ -31,29 +31,30 @@ class PaymentService {
         }
     }
 
-    public function getLinkForRegisterDo() {
-        $amount = 99;
-        $orderNumber = 9191;
-        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$orderNumber}&returnUrl={$this->return_url}&pageView={$this->device_type}";
+    public function getLinkForRegisterDo(Order $order) {
+        $amount = $order->price * 100;
+        return "{$this->base_link}register.do?password={$this->password}&userName={$this->username}&amount={$amount}&language=ru&orderNumber={$order->id}&returnUrl={$this->return_url}&pageView={$this->device_type}";
     }
 
-    public function initRegisterDo($headers = array())
+    // formUrl
+    // orderId
+
+    // errorCode
+
+    public function initRegisterDo(Order $order)
         {
             $ch = curl_init();
             curl_setopt_array($ch, array(
-                CURLOPT_HTTPHEADER => $headers,
+                CURLOPT_HTTPHEADER => [],
                 CURLOPT_VERBOSE => true,
                 CURLOPT_SSL_VERIFYHOST => false,
                 CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_URL => $this->getLinkForRegisterDo(),
+                CURLOPT_URL => $this->getLinkForRegisterDo($order),
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_POST => false,
             ));
             $response = curl_exec($ch);
             curl_close($ch);
-
-            // formUrl
-            // orderId
 
             return json_decode($response, true);
         }

@@ -4,7 +4,7 @@ namespace LsModel;
 
 use Ls\Wp\Log as Log;
 
-public class ModelImpl
+class ModelImpl
 {
     // protected $themeOptions;
     // protected $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
