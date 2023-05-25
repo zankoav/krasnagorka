@@ -24,7 +24,7 @@ use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 
-class Model extends ModelImpl
+class BaseModel extends ModelImpl
 {
 
     public function baseBookingModel(){
