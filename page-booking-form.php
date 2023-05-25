@@ -1,5 +1,7 @@
 <?php
 
+use LsModel\ModelFactory as ModelFactory;
+
 if (!defined('ABSPATH')) {
     exit;
 }
