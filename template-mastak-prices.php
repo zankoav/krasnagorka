@@ -24,6 +24,10 @@
 
 <div class="seasons">
     <?php foreach ($seasons as $season_id => $season_title) :
+        $hide_season = get_post_meta($season_id, "hide_season_checkbox", true);
+        if($hide_season == 'on'){
+            continue;
+        }
         $order_data = get_post_meta($season_id, "season_order", true);
         $season_order = -1*(int)(empty($order_data) ? 0 : $order_data);
         ?>

@@ -134,6 +134,12 @@ function mastak_season()
 		'object_types' => array('season'), // Post type
 	));
 
+    $cmb_season->add_field(array(
+        'name' => 'Скрыть сезон на странице Цен',
+        'id'   =>  'hide_season_checkbox',
+        'type'            => 'checkbox',
+    ));
+
 	foreach ($houses as $house_id => $house_title) {
 		$cmb_season->add_field(array(
 			'name' => $house_title,
