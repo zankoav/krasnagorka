@@ -890,7 +890,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         ];
 
 
-        if($dateStart == date("Y-m-d") && $data['enabled']){
+        if($dateStart == date("Y-m-d") && !$data['enabled']){
             // $data['enabled'] = true;
             // $data['message'] = $isOrderWithDayInDayMessage;
             $data['hide_upper'] = true;
