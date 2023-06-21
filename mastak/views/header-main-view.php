@@ -310,7 +310,7 @@
                             <span>&deg;C</span>
                         </p>
                     </div>
-                    <ul class="menu-bottom__days">
+                    <ul style="display:none" class="menu-bottom__days">
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[2]["weekday"]; ?></p>
                             <img src="<?= $weather[2]["icon"]; ?>" alt="weather"
