@@ -554,13 +554,13 @@
                             <div class="menu-bottom__date">
                                 <span><?= date('j'); ?></span><?= get_current_month_rus(); ?></div>
                         </div>
-                        <div class="menu-bottom__details-sunny">
+                        <div style="display:none" class="menu-bottom__details-sunny">
                             <img class="menu-bottom__sunny-icon"
                                  src="<?= $weather[1]["icon"]; ?>"
                                  alt="sunny">
                             <div class="menu-bottom__sunny"><?= $weather[1]["text"]; ?></div>
                         </div>
-                        <p class="menu-bottom__degrees"><?= $weather[1]["temp"]; ?>
+                        <p style="display:none" class="menu-bottom__degrees"><?= $weather[1]["temp"]; ?>
                             <span>&deg;C</span>
                         </p>
                     </div>
