@@ -10,9 +10,9 @@ jQuery(document).on('ready', function () {
                 const state = orderedIds[index]
                 const id = `#mastak_event_tab_type_8_items_${index}_calendar`
                 const $calendar = $(this).find(id)
-                const title = $($calendar[0]).find('option:selected').text();
-                if(title){
-                    $(this).find('.cmb-group-title').text(title);
+                const title = $($calendar[0]).find('option:selected').text()
+                if (title) {
+                    $(this).find('.cmb-group-title').text(title)
                 }
                 if (state && $calendar[0] && $calendar[0].value == state.calendar) {
                     $(this).addClass(`bgc-${state.status}`)
@@ -165,6 +165,7 @@ jQuery(document).on('ready', function () {
                 $message.css({ color: '' }).empty()
                 $parent.find('input, select, textarea').each(function (index) {
                     const name = $(this).attr('name')
+                    const className = $(this).attr('class')
 
                     if (name) {
                         const dateFrom = name.indexOf('[from]') > -1
@@ -173,7 +174,6 @@ jQuery(document).on('ready', function () {
                         const oldPrice = name.indexOf('[old_price]') > -1
                         const newPrice = name.indexOf('[new_price]') > -1
                         const tgDescription = name.indexOf('[tg_description]') > -1
-                        const indexName = name == 'TG'
 
                         let key
                         if (calendarId) {
@@ -191,16 +191,16 @@ jQuery(document).on('ready', function () {
                         if (newPrice) {
                             key = 'newPrice'
                         }
-                        if (indexName) {
-                            key = 'index'
-                        }
                         if (tgDescription) {
                             key = 'tg_description'
                         }
-
                         if (key) {
                             result[key] = $(this).val()
                         }
+                    }
+
+                    if (className == 'TG') {
+                        result.index = $(this).val()
                     }
                 })
 

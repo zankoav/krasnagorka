@@ -519,7 +519,7 @@
 
     function cmb2_render_telegram_post( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
-        $view = '<div class="telegram-field"><div><button type="button" class="js-telegram button-secondary">Опубликовать</button><span class="spinner"></span></div><input type="hidden" name="TG" value="'.$field->group->index.'"><p class="cmb2-metabox-description"></p></div>';
+        $view = '<div class="telegram-field"><div><button type="button" class="js-telegram button-secondary">Опубликовать</button><span class="spinner"></span></div><input type="hidden" class="TG" value="'.$field->group->index.'"><p class="cmb2-metabox-description"></p></div>';
         $view .= $field_type_object->_desc( true );
         echo $view;
     }
@@ -529,7 +529,7 @@
 
     function cmb2_render_calculate( $field, $escaped_value, $object_id, $object_type, $field_type_object ) {
 		
-        $view = '<div class="calculate-field"><div><button type="button" class="js-calculate button-secondary">Расчитать</button><span class="spinner"></span></div><input type="hidden"><p class="cmb2-metabox-description"></p></div>';
+        $view = '<div class="calculate-field"><div><button type="button" class="js-calculate button-secondary">Расчитать</button><span class="spinner"></span></div><input type="hidden" class="GG"><p class="cmb2-metabox-description"></p></div>';
         $view .= $field_type_object->_desc( true );
         echo $view;
     }
