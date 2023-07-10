@@ -290,13 +290,24 @@ class PackageModel extends ModelImpl
     }
 
     private function getPackageValue(){
+
+        $services = get_post_meta($this->packageId,'package_services', 1);
+        $servicesFormatted = [];
+
+        foreach ((array) $services as $key => $entry) {
+            if (isset($entry['service'])) {
+                $servicesFormatted[] = $entry['service'];
+            }
+        }
+        
         return [
             "id" => $this->packageId,
             "startDate" => get_post_meta($this->packageId,'package_start', 1),
             "endDate" => get_post_meta($this->packageId,'package_end', 1),
-            "pricePeoplePerNight" => get_post_meta($this->packageId,'package_price', 1),
-            "minPeople" => get_post_meta($this->packageId,'package_people_min', 1),
-            "minNight" => get_post_meta($this->packageId,'package_night_min', 1)
+            "pricePeoplePerNight" => floatval(get_post_meta($this->packageId,'package_price', 1)),
+            "minPeople" => intval(get_post_meta($this->packageId,'package_people_min', 1)),
+            "minNight" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
+            "services" => $servicesFormatted
         ];
     }
 
