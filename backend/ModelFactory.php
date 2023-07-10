@@ -29,6 +29,7 @@ class ModelFactory
             'publish' === get_post_status( $packageId )
         ){
             $model = new PackageModel();
+            $model->setPackageId($packageId);
         }else{
             $model = new BaseModel();
         }
