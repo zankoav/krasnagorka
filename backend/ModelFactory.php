@@ -22,11 +22,15 @@ class ModelFactory
     public static function getBookingModel(){
 
         $model;
-        if(false){
 
-        }else{ 
-            $model = new BaseModel();
+        if( isset($_GET['package-id']) && 
+            'publish' === get_post_status( $_GET['package-id'] )
+        ){
+            $packageId = $_GET['package-id'];
+            Log::info('package-id', $packageId);
         }
+
+        $model = new BaseModel();
         
         return $model->getModel();
     }
