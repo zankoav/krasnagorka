@@ -23,15 +23,16 @@ class ModelFactory
 
         $model;
 
-        if( isset($_GET['package-id']) && 
-            'publish' === get_post_status( $_GET['package-id'] )
+        $packageId = $_GET['package-id'];
+
+        if( isset($packageId) && 
+            'publish' === get_post_status( $packageId )
         ){
-            $packageId = $_GET['package-id'];
-            Log::info('package-id', $packageId);
+            $model = new PackageModel();
+        }else{
+            $model = new BaseModel();
         }
 
-        $model = new BaseModel();
-        
         return $model->getModel();
     }
 
