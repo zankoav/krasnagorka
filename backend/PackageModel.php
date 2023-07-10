@@ -282,17 +282,22 @@ class PackageModel extends ModelImpl
             if (isset($_GET['clear'])) {
                 $this->tryToClearOrder($_GET['clear']);
             }
-
-            $result['package'] = [
-                "id" => $this->packageId,
-                "startDate" => get_post_meta($this->packageId,'package_start', 1),
-                "endDate" => get_post_meta($this->packageId,'package_end', 1),
-                "pricePeoplePerNight" => get_post_meta($this->packageId,'package_price', 1),
-                "minPeople" => get_post_meta($this->packageId,'package_people_min', 1),
-                "minNight" => get_post_meta($this->packageId,'package_night_min', 1)
-            ];
         }
+
+        $result['package'] = $this->getPackageValue();
+
         return $result;
+    }
+
+    private function getPackageValue(){
+        return [
+            "id" => $this->packageId,
+            "startDate" => get_post_meta($this->packageId,'package_start', 1),
+            "endDate" => get_post_meta($this->packageId,'package_end', 1),
+            "pricePeoplePerNight" => get_post_meta($this->packageId,'package_price', 1),
+            "minPeople" => get_post_meta($this->packageId,'package_people_min', 1),
+            "minNight" => get_post_meta($this->packageId,'package_night_min', 1)
+        ];
     }
 
     public static function getSelectedSeasonId($dateFrom){
