@@ -28,9 +28,11 @@ class PackageModel extends ModelImpl
 {
 
     private $packageId;
+    private $package;
 
     public function setPackageId($packageId){
         $this->packageId = $packageId;
+        $this->package = $this->getPackageValue();
     }
 
     protected function scenario(){
@@ -139,6 +141,7 @@ class PackageModel extends ModelImpl
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
+            'package' => $packages,
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
@@ -284,8 +287,6 @@ class PackageModel extends ModelImpl
             }
         }
 
-        $result['package'] = $this->getPackageValue();
-
         return $result;
     }
 
@@ -306,7 +307,7 @@ class PackageModel extends ModelImpl
         foreach ((array) $calendars as $key => $entry) {
             if (isset($entry['calendar']) && isset($entry['package_price'])) {
                 $calendarsFormatted[] = [
-                    "id" => $entry['calendar'],
+                    "id" => intval($entry['calendar']),
                     "price_person_night" => floatval($entry['package_price'])
                 ];
             }
@@ -374,18 +375,29 @@ class PackageModel extends ModelImpl
     private function getCalendars($calendarId)
     {
         $terms = get_terms(['taxonomy' => 'sbc_calendars']);
+        
+        $packageCalendars = array_map(function($val){
+            return $val['id'];
+        }, $this->package['calendars']);
+
         $result = [];
         foreach ($terms as $term) {
 
+            if(! in_array($term->term_id, $packageCalendars)){
+                continue;
+            }
+
             $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
+           
+            if (!$isAvailable) {
+                continue;
+            }
+
             $isTeremRoom = get_term_meta($term->term_id, 'kg_calendars_terem', 1);
             $isDeprecateBabyBed = get_term_meta($term->term_id, 'kg_calendars_deprecate_baby_bed', 1);
             $isDeprecateAnimals = get_term_meta($term->term_id, 'kg_calendars_deprecate_animals', 1);
             $maxChild = get_term_meta($term->term_id, 'kg_calendars_max_child', 1);
 
-            if (!$isAvailable) {
-                continue;
-            }
             $selected = $calendarId == $term->term_id;
             $result[] = [
                 'id' => $term->term_id,
