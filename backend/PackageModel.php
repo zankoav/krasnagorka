@@ -299,15 +299,27 @@ class PackageModel extends ModelImpl
                 $servicesFormatted[] = $entry['service'];
             }
         }
+
+        $calendars = get_post_meta($this->packageId,'package_calendars', 1);
+        $calendarsFormatted = [];
+
+        foreach ((array) $calendars as $key => $entry) {
+            if (isset($entry['calendar']) && isset($entry['package_price'])) {
+                $calendarsFormatted[] = [
+                    "id" => $entry['calendar'],
+                    "price_person_night" => floatval($entry['package_price'])
+                ];
+            }
+        }
         
         return [
             "id" => $this->packageId,
             "startDate" => get_post_meta($this->packageId,'package_start', 1),
             "endDate" => get_post_meta($this->packageId,'package_end', 1),
-            "pricePeoplePerNight" => floatval(get_post_meta($this->packageId,'package_price', 1)),
             "minPeople" => intval(get_post_meta($this->packageId,'package_people_min', 1)),
             "minNight" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
-            "services" => $servicesFormatted
+            "services" => $servicesFormatted,
+            "calendars" => $calendarsFormatted,
         ];
     }
 
