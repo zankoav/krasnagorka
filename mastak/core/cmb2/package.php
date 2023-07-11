@@ -88,17 +88,6 @@ function cmb_package()
 		)
 	));
 
-	$cmb_package->add_field(array(
-		'name'            => 'Стоимость за человека/ночь',
-		'id'              => 'package_price',
-		'description'     => __('Стоимость за человека/ночь', 'krasnagorka'),
-        'type'         => 'text_money',
-		'before_field' => 'BYN',
-		'attributes'      => array(
-			'required'    => 'required'
-		)
-	));
-
     $cmb_package->add_field(array(
         'name'            => 'Минимальное количество человек',
         'id'              => 'package_people_min',
@@ -153,6 +142,48 @@ function cmb_package()
             4=>"Канатная дорога",
             5=>"Баня"
         ]
+    ));
+
+    $group_field_calendar = $cmb_package->add_field(array(
+        'id'          => 'package_calendars',
+        'type'        => 'group',
+        'description' => __('Можно добавлять любое количество объектов бронирования', 'krasnagorka'),
+        // 'repeatable'  => false, // use false if you want non-repeatable group
+        'options'     => array(
+            'group_title'   => __('Объект бронирования {#}', 'krasnagorka'),
+            // since version 1.1.4, {#} gets replaced by row number
+            'add_button'    => __('Добавить Объект бронирования', 'krasnagorka'),
+            'remove_button' => __('Удалить Объект бронирования', 'krasnagorka'),
+            'sortable'      => true,
+            // beta
+            'closed'        => true, // true to have the groups closed by default
+        )
+    ));
+
+    $cmb_package->add_group_field($group_field_calendar, array(
+        'name' => 'Объекты бронирования',
+        'id'   => 'calendar',
+        'desc'           => 'Выберите календарь',
+        'type'           => 'select',
+        'options_cb'     => 'cmb2_get_term_options',
+        'get_terms_args' => array(
+            'taxonomy'   => 'sbc_calendars',
+            'hide_empty' => false,
+        ),
+        'attributes' => array(
+            'data-validation' => 'required'
+        )
+    ));
+
+    $cmb_package->add_group_field($group_field_calendar, array(
+        'name'            => 'Стоимость за человека/ночь',
+		'id'              => 'package_price',
+		'description'     => __('Стоимость за человека/ночь', 'krasnagorka'),
+        'type'         => 'text_money',
+		'before_field' => 'BYN',
+		'attributes'      => array(
+			'required'    => 'required'
+		)
     ));
 
     $cmb_package->add_field(array(
