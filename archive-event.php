@@ -55,7 +55,7 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 		<div class="swiper-pagination opportunities__pagination"></div>
 	</div>
 </div>
-<?php if(false):?>
+
 <?php get_template_part("mastak/views/events", "slider"); ?>
 
 <section class="b-container header-title">
@@ -93,7 +93,7 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 <div class="b-container">
 	<div class="b-light-line b-mt-3"></div>
 </div>
-<?php endif;?>
+
 
 <section class="b-container big-text">
     <div class="big-text__container content-text">
