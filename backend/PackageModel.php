@@ -141,7 +141,7 @@ class PackageModel extends ModelImpl
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
-            'package' => $package,
+            'package' => $this->package,
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
