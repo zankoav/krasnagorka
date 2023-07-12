@@ -3,13 +3,15 @@
         <div class="step-house__body" onhappyevents={handlerHappyEvents} onhappyeventsrange={handlerHappyEventsRange}>
             <z-loader if:true={loading}></z-loader>
             <template if:false={loading}>
-                <z-select
-                    if:false={settings.house}
-                    class="step-house__select"
-                    required
-                    label="Выберите Домик"
-                    onchange={calendarChange}
-                    options={settings.calendars}></z-select>
+                <templte if:false={settings.house}>
+                    <h4 if:true={settings.package} class="step-house__subtitle">{settings.package.title}</h4>
+                    <z-select
+                        class="step-house__select"
+                        required
+                        label="Выберите Домик"
+                        onchange={calendarChange}
+                        options={settings.calendars}></z-select>
+                </templte>
                 <template if:true={settings.house}>
                     <div class="step-house__row">
                         <div class="step-house__col">

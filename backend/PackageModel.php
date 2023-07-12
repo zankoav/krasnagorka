@@ -141,7 +141,7 @@ class PackageModel extends ModelImpl
             'maxCount'      => $maxCount,
             'houses'        => $this->getHouses(),
             'calendars'     => $this->getCalendars($calendarId),
-            'package' => $packages,
+            'package' => $package,
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
@@ -315,6 +315,7 @@ class PackageModel extends ModelImpl
         
         return [
             "id" => $this->packageId,
+            "title" => get_the_title($this->packageId),
             "startDate" => get_post_meta($this->packageId,'package_start', 1),
             "endDate" => get_post_meta($this->packageId,'package_end', 1),
             "minPeople" => intval(get_post_meta($this->packageId,'package_people_min', 1)),
@@ -375,7 +376,7 @@ class PackageModel extends ModelImpl
     private function getCalendars($calendarId)
     {
         $terms = get_terms(['taxonomy' => 'sbc_calendars']);
-        
+
         $packageCalendars = array_map(function($val){
             return $val['id'];
         }, $this->package['calendars']);

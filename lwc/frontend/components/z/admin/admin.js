@@ -70,6 +70,7 @@ export default class Admin extends LightningElement {
             eventId: this.model.eventId,
             eventModel: this.model.eventModel,
             counts: null,
+            package: this.model.package,
             childCounts: null,
             dateStart: this.model.dateFrom
                 ? new moment(this.model.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY')
