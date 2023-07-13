@@ -306,8 +306,9 @@ class PackageModel extends ModelImpl
 
         foreach ((array) $calendars as $key => $entry) {
             if (isset($entry['calendar']) && isset($entry['package_price'])) {
-                $calendarsFormatted[] = [
-                    "id" => intval($entry['calendar']),
+                $calendarId = intval($entry['calendar']);
+                $calendarsFormatted[$calendarId] = [
+                    "id" => $calendarId,
                     "price_person_night" => floatval($entry['package_price']),
                     "min_people" => intval($entry['package_people_min'])
                 ];
@@ -377,9 +378,7 @@ class PackageModel extends ModelImpl
     {
         $terms = get_terms(['taxonomy' => 'sbc_calendars']);
 
-        $packageCalendars = array_map(function($val){
-            return $val['id'];
-        }, $this->package['calendars']);
+        $packageCalendars = array_keys($this->package['calendars']);
 
         $result = [];
         foreach ($terms as $term) {

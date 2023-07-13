@@ -70,7 +70,6 @@ export default class Admin extends LightningElement {
             eventId: this.model.eventId,
             eventModel: this.model.eventModel,
             counts: null,
-            package: this.model.package,
             childCounts: null,
             dateStart: this.model.dateFrom
                 ? new moment(this.model.dateFrom, 'YYYY-MM-DD').format('DD-MM-YYYY')
@@ -82,6 +81,7 @@ export default class Admin extends LightningElement {
             passport: null,
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
+            package: this.model.package,
             calendars: this.model.calendars ? [...this.model.calendars] : null,
             menu: BASE_MENU,
             babyBed: false,
