@@ -12,7 +12,7 @@ export default class StepHouse extends LightningElement {
     happyEventsObjRange
 
     get showPriceInfo(){
-        return !this.settings.eventId || !this.settings.package;
+        return !this.settings.eventId && !this.settings.package;
     }
 
     get showPackageInfo(){
