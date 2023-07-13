@@ -308,7 +308,7 @@ class PackageModel extends ModelImpl
             if (isset($entry['calendar']) && isset($entry['package_price'])) {
                 $calendarsFormatted[] = [
                     "id" => intval($entry['calendar']),
-                    "price_person_night" => floatval($entry['package_price'])
+                    "price_person_night" => floatval($entry['package_price']),
                     "min_people" => intval($entry['package_people_min'])
                 ];
             }
