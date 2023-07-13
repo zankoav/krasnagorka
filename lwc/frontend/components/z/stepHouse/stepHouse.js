@@ -86,7 +86,8 @@ export default class StepHouse extends LightningElement {
         })
 
         const count = parseInt(house.peopleMaxCount)
-        const counts = Array.from(Array(count), (_, i) => i + 1).map((it) => {
+
+        let counts = Array.from(Array(count), (_, i) => i + 1).map((it) => {
             let selected = false
             if (this.settings.people && this.settings.people == it) {
                 selected = true
@@ -97,6 +98,9 @@ export default class StepHouse extends LightningElement {
                 name: it
             }
         })
+
+        let minPeople = this.settings.package?.calendars[id].min_people || 0
+        counts = counts.filter((item) => item.id >= minPeople)
 
         let maxChild = newCalendars.find((c) => c.selected).maxChild
         maxChild = maxChild > 0 ? maxChild + 1 : 1
