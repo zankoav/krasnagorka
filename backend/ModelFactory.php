@@ -25,9 +25,13 @@ class ModelFactory
 
         $packageId = $_GET['package-id'];
         $endDate;
-        
+
         if(isset($packageId)){
             $endDate = get_post_meta($packageId, 'package_end', 1);
+            Log::info('ok', [
+                'tommorow' => strtotime("+1 day"),
+                'endDate' => strtotime($endDate),
+            ]);
         }
         
         if(     
