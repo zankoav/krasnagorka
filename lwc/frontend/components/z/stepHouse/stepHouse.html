@@ -78,8 +78,11 @@
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
+                    <tempalte if:true={showPackageInfo}>
+                        <div class="step-house__delimeter">ТУР: {settings.package.title}</div>
+                    </tempalte>
 
-                    <tempalte if:false={settings.eventId}>
+                    <tempalte if:true={showPriceInfo}>
                         <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
                         <div class="step-house__row">
                             <template if:true={settings.seasonsLoading}>
