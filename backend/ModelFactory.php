@@ -24,7 +24,7 @@ class ModelFactory
         $model;
 
         $packageId = $_GET['package-id'];
-        $endDate
+        $endDate;
         if(isset($packageId)){
             $endDate = get_post_meta($packageId, 'package_end', 1);
             $today = date("Y-m-d");
