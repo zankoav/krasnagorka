@@ -309,6 +309,7 @@ class PackageModel extends ModelImpl
                 $calendarsFormatted[] = [
                     "id" => intval($entry['calendar']),
                     "price_person_night" => floatval($entry['package_price'])
+                    "min_people" => intval($entry['package_people_min'])
                 ];
             }
         }
@@ -316,10 +317,9 @@ class PackageModel extends ModelImpl
         return [
             "id" => $this->packageId,
             "title" => get_the_title($this->packageId),
-            "startDate" => get_post_meta($this->packageId,'package_start', 1),
-            "endDate" => get_post_meta($this->packageId,'package_end', 1),
-            "minPeople" => intval(get_post_meta($this->packageId,'package_people_min', 1)),
-            "minNight" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
+            "start_date" => get_post_meta($this->packageId,'package_start', 1),
+            "end_date" => get_post_meta($this->packageId,'package_end', 1),
+            "min_night" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
             "services" => $servicesFormatted,
             "calendars" => $calendarsFormatted,
         ];
