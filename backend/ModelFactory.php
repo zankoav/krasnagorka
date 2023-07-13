@@ -24,8 +24,17 @@ class ModelFactory
         $model;
 
         $packageId = $_GET['package-id'];
-
-        if( isset($packageId) && 
+        $endDate
+        if(isset($packageId)){
+            $endDate = get_post_meta($packageId, 'package_end', 1);
+            $today = date("Y-m-d");
+            Log::info('ok', [
+                "packageEndDate"=>$endDate,
+                "today"=>$today
+            ]);
+        }
+        
+        if( isset($endDate, $packageId) && 
             'publish' === get_post_status( $packageId )
         ){
             $model = new PackageModel();
