@@ -29,8 +29,8 @@ class ModelFactory
             $endDate = get_post_meta($packageId, 'package_end', 1);
             $today = date("Y-m-d");
             Log::info('ok', [
-                "packageEndDate"=>$endDate,
-                "today"=>$today
+                "packageEndDate"=>strtotime($endDate),
+                "today"=>strtotime($today)
             ]);
         }
         
