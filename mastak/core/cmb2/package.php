@@ -89,19 +89,6 @@ function cmb_package()
 	));
 
     $cmb_package->add_field(array(
-        'name'            => 'Минимальное количество человек',
-        'id'              => 'package_people_min',
-        'description'     => __('Минимальное количество человек', 'krasnagorka'),
-        'type'            => 'text',
-        'attributes'      => array(
-            'type'    => 'number',
-            'pattern' => '\d*',
-        ),
-        'sanitization_cb' => 'absint',
-        'escape_cb'       => 'absint',
-    ));
-
-    $cmb_package->add_field(array(
         'name'            => 'Минимальное количество ночей',
         'id'              => 'package_night_min',
         'description'     => __('Минимальное количество ночей', 'krasnagorka'),
@@ -137,7 +124,7 @@ function cmb_package()
         'default'          => 1,
         'options'       => [
             1=>"Питание полный пансионат без 1-го обеда",
-            2=>"Квадрациклы",
+            2=>"Квадроциклы",
             3=>"Кедровая бочка",
             4=>"Канатная дорога",
             5=>"Баня"
@@ -184,6 +171,19 @@ function cmb_package()
 		'attributes'      => array(
 			'required'    => 'required'
 		)
+    ));
+
+    $cmb_package->add_group_field($group_field_calendar, array(
+        'name'            => 'Минимальное количество человек',
+        'id'              => 'package_people_min',
+        'description'     => __('Минимальное количество человек', 'krasnagorka'),
+        'type'            => 'text',
+        'attributes'      => array(
+            'type'    => 'number',
+            'pattern' => '\d*',
+        ),
+        'sanitization_cb' => 'absint',
+        'escape_cb'       => 'absint',
     ));
 
     $cmb_package->add_field(array(

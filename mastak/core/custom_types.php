@@ -1477,6 +1477,9 @@
         $term_options = array();
         if ( ! empty( $terms ) ) {
             foreach ( $terms as $term ) {
+                if(in_array( $term->name,  ["Кроватка", "кроватка 2", "Кроватка 3", "Приозёрный", "Ресторан"])){
+                    continue;
+                }
                 $term_options[ $term->term_id ] = $term->name;
             }
         }
