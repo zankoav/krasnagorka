@@ -1,5 +1,7 @@
 <?php
 use Ls\Wp\Log as Log;
+use LsModel\BaseModel as BaseModel;
+
 
 class LS_Booking_Form_Controller extends WP_REST_Controller
 {
