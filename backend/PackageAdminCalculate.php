@@ -10,7 +10,9 @@ class PackageAdminCalculate extends CalculateImpl
     }
 
     protected function calculate($request){
-        return null;
+        return [
+            'total_price' => 100
+        ];
     }
 
 }

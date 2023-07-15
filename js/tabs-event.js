@@ -68,6 +68,7 @@ jQuery(document).on('ready', function () {
                     )
                     const responseData = await response.json()
                     if (responseData) {
+                        console.log('responseData', responseData);
                         $currentPrice.val(responseData.total_price)
                         $spinner.removeClass('spinner_show')
                     }
