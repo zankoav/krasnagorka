@@ -23,7 +23,7 @@ class PackageAdminCalculate extends CalculateImpl
         return [
             'is_terem' => $isTeremRoom,
             'calendar_id' => $calendarId,
-            'total_price' => $basePrice
+            'total_price' => floatval($basePrice)
         ];
     }
 
