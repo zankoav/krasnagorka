@@ -325,7 +325,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             if(!empty($intervallId)){
                 $dateStart = get_post_meta($intervallId, "season_from", true);
-                $dateStart = date("Y-m-d", strtotime('+1 day', strtotime( $dateStart)));
+                $dateStart = date("Y-m-d", strtotime( $dateStart));
                 $dateEnd = get_post_meta($intervallId, "season_to", true);
                 $dateEnd = date("Y-m-d", strtotime($dateEnd));
             }
