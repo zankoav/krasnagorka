@@ -196,7 +196,7 @@ class BaseModel extends ModelImpl
             $_dateTo = $result['dateTo'];
 
             if(!empty($eventId) && !empty($eventTabId)){
-                $tab = new Type_10($eventTabId);
+                $tab = new \Type_10($eventTabId);
                 $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
                 $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
                 $result['price'] = ($price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
