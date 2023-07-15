@@ -767,7 +767,7 @@
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Текущая цена',
-            'description'  => 'Только проживание за одного человека',
+            'description'  => 'Только проживание за одного человека/ночь',
             'id'           => 'old_price',
             'type'         => 'text_small',
             'before_field' => 'BYN'
@@ -775,7 +775,7 @@
 
         $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Новая цена ',
-            'description'  => 'Только проживание за одного человека',
+            'description'  => 'Только проживание за одного человека/ночь',
             'id'           => 'new_price',
             'type'         => 'text_small',
             'before_field' => 'BYN',
