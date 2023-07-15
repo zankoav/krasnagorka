@@ -1,6 +1,7 @@
 <?php
 use Ls\Wp\Log as Log;
 use LsModel\BaseModel as BaseModel;
+use LsCalculate\PackageAdminCalculate as PackageAdminCalculate;
 
 
 class LS_Booking_Form_Controller extends WP_REST_Controller
@@ -305,6 +306,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public static function calculateResult($request){
+
+        $response;
+
+        $isAdminEvent = $request['is_admin_event'];
+        $intervallId = $request['intervallId'];
+
+        if($isAdminEvent && isset($intervallId)){
+            $calculateModel = new PackageAdminCalculate();
+            $response = $calculateModel->response($request);
+            return new WP_REST_Response( $response, 200);
+        }
+
+
         $seasonsIntervals = [];
         $houseId = $request['house'] ?? $request['houseId'];
         $calendarId = (int)$request['calendarId'];
@@ -315,8 +329,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $eventId = intval($request['eventId']);
         $variantId = intval($request['variantId']);
         $isTerem = $request['isTerem'];
-        $isAdminEvent = $request['is_admin_event'];
-        $intervallId = $request['intervallId'];
         
         if($isAdminEvent){
             $house = getHouseByCalendarId($calendarId);
