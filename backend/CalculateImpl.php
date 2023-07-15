@@ -8,7 +8,7 @@ abstract class CalculateImpl
     abstract protected function scenario();
     abstract protected function calculate($data);
 
-    protected function response($request){
+    public function response($request){
         return [
             'scenario' => $this->scenario(),
             'result' => $this->calculate($request)
