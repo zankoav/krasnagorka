@@ -19,8 +19,9 @@ class PackageAdminCalculate extends CalculateImpl
         $seasonId = get_post_meta($intervallId, 'season_id', true);
         $keyPrice = "room_price_$calendarId";
         if(!$isTeremRoom){
-            $houseId = getHouseByCalendarId($calendarId)['id'];
-            $keyPrice = "house_price_$houseId"
+            $house = getHouseByCalendarId($calendarId);
+            $houseId = $house['id'];
+            $keyPrice = "house_price_$houseId";
         }
         $basePrice = get_post_meta($seasonId, $keyPrice, true);
         return [
