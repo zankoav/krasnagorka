@@ -17,8 +17,11 @@ class PackageAdminCalculate extends CalculateImpl
 
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $seasonId = get_post_meta($intervallId, 'season_id', true);
-        $keyPrice = $isTeremRoom ? 'room_price_' : 'house_price_';
-        $keyPrice .= $calendarId;
+        $keyPrice = "room_price_$calendarId";
+        if(!$isTeremRoom){
+            $houseId = getHouseByCalendarId($calendarId)['id'];
+            $keyPrice = "house_price_$houseId"
+        }
         $basePrice = get_post_meta($seasonId, $keyPrice, true);
         return [
             'is_terem' => $isTeremRoom,
