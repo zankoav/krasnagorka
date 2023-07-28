@@ -118,10 +118,10 @@ class PackageCalculate extends CalculateImpl
         }
 
         $price = $daysCount * $peopleCount * $price_person_night;
-
+        $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
         return [
             'error' => $error,
-            'baby_bed_available' => LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom),
+            'baby_bed_available' => $babyBedAvailable,
             'services' => $servicesFormatted,
             'accommodation' => $price,
             'total_price' => $price
