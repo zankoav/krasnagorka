@@ -26,15 +26,6 @@ class PackageCalculate extends CalculateImpl
         $foodDinner = $request['foodDinner'];
         $foodLunch = $request['foodLunch'];
 
-        $services = get_post_meta($packageId,'package_services', 1);
-        $servicesFormatted = [];
-
-        foreach ((array) $services as $key => $entry) {
-            if (isset($entry['service'])) {
-                $servicesFormatted[] = $entry['service'];
-            }
-        }
-
         $min_night = intval(get_post_meta($packageId,'package_night_min', 1));
 
         $calendars = get_post_meta($packageId,'package_calendars', 1);
@@ -43,19 +34,10 @@ class PackageCalculate extends CalculateImpl
         $price_person_night;
 
         foreach ((array) $calendars as $key => $entry) {
-            if (isset($entry['calendar']) && isset($entry['package_price'])) {
-                $calendarId = intval($entry['calendar']);
-                $calendarsFormatted[$calendarId] = [
-                    "id" => $calendarId,
-                    "price_person_night" => floatval($entry['package_price']),
-                    "min_people" => intval($entry['package_people_min'])
-                ];
-
-                if($calendarId == intval($entry['calendar'])){
-                    $min_people = intval($entry['package_people_min']);
-                    $price_person_night = floatval($entry['package_price']);
-                    break;
-                }
+            if($calendarId == intval($entry['calendar'])){
+                $min_people = intval($entry['package_people_min']);
+                $price_person_night = floatval($entry['package_price']);
+                break;
             }
         }
 
@@ -70,20 +52,50 @@ class PackageCalculate extends CalculateImpl
         $daysCount = iterator_count($period);
 
 
-        // $peopleCount = 1;
-        // $days = 1;
-        // $calendarId = (int)$request['calendarId'];
-        // $intervallId = $request['intervallId'];
+        $services = get_post_meta($packageId,'package_services', 1);
+        $servicesFormatted = [];
 
-        // $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
-        // $seasonId = get_post_meta($intervallId, 'season_id', true);
-        // $keyPrice = "room_price_$calendarId";
-        // if(!$isTeremRoom){
-        //     $house = getHouseByCalendarId($calendarId);
-        //     $houseId = $house['id'];
-        //     $keyPrice = "house_price_$houseId";
-        // }
-        // $basePrice = get_post_meta($seasonId, $keyPrice, true);
+        foreach ((array) $services as $key => $entry) {
+            if (isset($entry['service'])) {
+                if($entry['service'] == '1'){
+                    $servicesFormatted[] = [
+                        'id' => '1',
+                        'count' => intval($peopleCount * (2 + ($daysCount - 1 ) * 3))
+                    ];
+                }
+
+                if($entry['service'] == '2'){
+                    $servicesFormatted[] = [
+                        'id' => '2',
+                        'count' => intval($peopleCount * $daysCount * 0.25)
+                    ];
+                }
+
+                if($entry['service'] == '3'){
+                    $servicesFormatted[] = [
+                        'id' => '3',
+                        'count' => intval(intval($daysCount / 2) * $peopleCount)
+                    ];
+                }
+
+                if($entry['service'] == '4'){
+                    $servicesFormatted[] = [
+                        'id' => '4',
+                        'count' => intval(intval($daysCount / 2) * $peopleCount)
+                    ];
+                }
+
+                if($entry['service'] == '5'){
+                    $servicesFormatted[] = [
+                        'id' => '5',
+                        'count' => intval($daysCount / 2),
+                        'hours' => $peopleCount < 4 ? 1 : 2
+                    ];
+                }
+            }
+        }
+        
+        
         $error = false;
 
         if($peopleCount < $min_people){
@@ -102,7 +114,7 @@ class PackageCalculate extends CalculateImpl
             'min_night' => $min_night,
             'min_people' => $min_people,
             'price_person_night' => $price_person_night,
-            'servicesFormatted' => $servicesFormatted,
+            'services' => $servicesFormatted,
             'accommodation' => $price,
             'total_price' => $price
         ];
