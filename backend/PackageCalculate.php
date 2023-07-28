@@ -16,6 +16,7 @@ class PackageCalculate extends CalculateImpl
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
         $houseId = $request['house'];
+        $babyBed = $request['babyBed'];
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $peopleCount = $request['peopleCount'];
 
@@ -118,7 +119,6 @@ class PackageCalculate extends CalculateImpl
         }
 
         $accomodationPrice = $daysCount * $peopleCount * $price_person_night;
-        $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
 
         $result = [
             'error' => $error,
@@ -126,6 +126,12 @@ class PackageCalculate extends CalculateImpl
             'accommodation' => $accomodationPrice,
             'total_price' => $accomodationPrice
         ];
+        
+        $babyBedAvailable = false;
+
+        if($babyBed){
+            $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
+        }
 
         if($babyBedAvailable){
             $bookingSettings = get_option('mastak_booking_appearance_options');
