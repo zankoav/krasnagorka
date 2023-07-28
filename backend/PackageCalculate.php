@@ -90,9 +90,10 @@ class PackageCalculate extends CalculateImpl
                 }
 
                 if($entry['service'] == '5'){
+                    $seanseCount = $peopleCount < 4 ? 1 : 2;
                     $servicesFormatted[] = [
                         'id' => '5',
-                        'title' => "Количество сеансов по {$peopleCount < 4 ? 1 : 2}ч.",
+                        'title' => "Количество сеансов по $seanseCount ч.",
                         'count' => intval($daysCount / 2)
                     ];
                 }
