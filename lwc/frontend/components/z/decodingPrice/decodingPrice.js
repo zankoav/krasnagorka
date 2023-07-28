@@ -4,9 +4,19 @@ import './decodingPrice.scss'
 export default class DecodingPrice extends LightningElement {
     @api settings
 
+    get showSeasonsDecoding(){
+        return !this.settings.eventTabId && this.settings.scenario !== 'Package';
+    }
+
+    get showPackageDecoding(){
+        return this.settings.scenario === 'Package';
+    }
+
     get subTitle() {
         let result = 'Проживание'
-        if (this.settings.eventId) {
+        if(this.settings.scenario === 'Package'){
+            result = 'Проживание по пакетному туру'
+        }else if (this.settings.eventId) {
             result = 'Мероприятие'
         } else if (this.settings.total?.accommodation) {
             result = 'Проживание по горящему туру'

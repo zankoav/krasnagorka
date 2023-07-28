@@ -117,7 +117,7 @@ export default class BookingForm extends LightningElement {
     }
 
     isPayment() {
-        return this.settings.payment && !this.settings.total.only_booking_order.enabled
+        return this.settings.payment && !this.settings.total.only_booking_order?.enabled
     }
 
     async bookingOrder() {

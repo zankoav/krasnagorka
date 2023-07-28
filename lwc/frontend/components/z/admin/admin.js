@@ -44,10 +44,17 @@ export default class Admin extends LightningElement {
             BASE_MENU = BASE_MENU.filter((item) => {
                 return ['food', 'additional_services'].indexOf(item.value) == -1
             })
+        } else if (this.model.package?.services?.find((item) => item == '1')) {
+            BASE_MENU = BASE_MENU.filter((item) => {
+                return ['food'].indexOf(item.value) == -1
+            })
         }
+
         this.settings = {
             webpaySandbox: this.model.webpaySandbox,
             admin: this.model.admin,
+            scenario: this.model.scenario,
+            package: this.model.package,
             payment: this.model.payment,
             prepaidType: this.model.prepaidType,
             paymentMethod: this.model.paymentMethod,
@@ -81,7 +88,6 @@ export default class Admin extends LightningElement {
             passport: null,
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
-            package: this.model.package,
             calendars: this.model.calendars ? [...this.model.calendars] : null,
             menu: BASE_MENU,
             babyBed: false,
@@ -286,6 +292,8 @@ export default class Admin extends LightningElement {
         const foodVariant = this.settings.foodVariant
         const eventId = this.settings.eventId
         const variantId = this.settings.eventModel?.variantId
+        const scenario = this.settings.scenario
+        const packageId = this.settings.package?.id
 
         const hash = JSON.stringify({
             house,
@@ -305,7 +313,9 @@ export default class Admin extends LightningElement {
             foodVariant,
             eventTabId,
             eventId,
-            variantId
+            variantId,
+            scenario,
+            packageId
         })
 
         const activeStep = this.settings.menu.find((step) => step.active).value
@@ -335,7 +345,11 @@ export default class Admin extends LightningElement {
 
             this.updateSettingsOnly({ totalPriceLoading: false })
 
-            if (data) {
+            if (data.scenario === 'Package') {
+                this.updateSettingsOnly({
+                    total: { ...data.result }
+                })
+            } else {
                 this.updateSettingsOnly({
                     total: data
                 })

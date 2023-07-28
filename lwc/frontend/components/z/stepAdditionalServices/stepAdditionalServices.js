@@ -21,6 +21,14 @@ export default class StepAdditionalServices extends LightningElement {
         return `Домашние животные`
     }
 
+    get showBathHouses() {
+        let result = true
+        if (this.settings.package?.services?.find((item) => item == '5')) {
+            result = false
+        }
+        return result
+    }
+
     get bathHouseWhite() {
         return !!this.settings.bathHouseWhite
     }
@@ -38,7 +46,7 @@ export default class StepAdditionalServices extends LightningElement {
 
     get showAnimalsService() {
         let result = false
-        if (this.settings.total?.accommodation) {
+        if (this.settings.total?.accommodation && this.settings.scenario != 'Package') {
             result = false
         } else {
             result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
@@ -197,9 +205,16 @@ export default class StepAdditionalServices extends LightningElement {
     }
 
     backButtonHandler() {
-        const newMenu = this.settings.menu.map((it) => {
-            return { ...it, active: it.value === 'food' }
-        })
+        let newMenu
+        if (this.settings.package?.services?.find((item) => item == '1')) {
+            newMenu = this.settings.menu.map((it) => {
+                return { ...it, active: it.value === 'house' }
+            })
+        } else {
+            newMenu = this.settings.menu.map((it) => {
+                return { ...it, active: it.value === 'food' }
+            })
+        }
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {

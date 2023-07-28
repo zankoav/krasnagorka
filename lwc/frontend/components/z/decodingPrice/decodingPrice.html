@@ -2,9 +2,16 @@
     <div class="decoding-price">
         <div class="decoding-price__list">
             <div class="decoding-price__subtitle">{subTitle}</div>
-            <template if:false={settings.eventTabId}>
+            <template if:true={showSeasonsDecoding}>
                 <template for:each={seasons} for:item="season">
                     <z-decoding-price-line class="decoding-price__item" key={season.season_id} season={season}></z-decoding-price-line>
+                </template>
+            </template>
+            <template if:true={showPackageDecoding}>
+                <template for:each={settings.total.services} for:item="service">
+                    <div key={service.id} class="decoding-price__service">
+                        {service.title} <z-number-value num={service.count} value="шт."> </z-number-value>
+                    </div>
                 </template>
             </template>
             <div class="decoding-price__baby-bed">

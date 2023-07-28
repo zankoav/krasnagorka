@@ -11,12 +11,16 @@ export default class StepHouse extends LightningElement {
     happyEventsObj
     happyEventsObjRange
 
-    get showPriceInfo(){
-        return !this.settings.eventId && !this.settings.package;
+    get showPriceInfo() {
+        return !this.settings.eventId && !this.settings.package
     }
 
-    get showPackageInfo(){
-        return this.settings.package;
+    get showDaylySales() {
+        return !this.settings.eventId && this.settings.scenario !== 'Package'
+    }
+
+    get showPackageInfo() {
+        return this.settings.package
     }
 
     get happyEvents() {
@@ -228,6 +232,10 @@ export default class StepHouse extends LightningElement {
             if (this.settings.eventId) {
                 newMenu = this.settings.menu.map((it) => {
                     return { ...it, active: it.value === 'contacts' }
+                })
+            } else if (this.settings.package?.services?.find((item) => item == '1')) {
+                newMenu = this.settings.menu.map((it) => {
+                    return { ...it, active: it.value === 'additional_services' }
                 })
             } else {
                 newMenu = this.settings.menu.map((it) => {

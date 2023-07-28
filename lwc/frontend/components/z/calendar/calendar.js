@@ -7,7 +7,8 @@ import { skip } from 'z/utils'
 const message_1 = 'Нельзя бронировать прошлые даты',
     message_2 = 'Дата выезда должна быть позже даты заезда',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
-    message_4 = 'Выберите свободную дату'
+    message_4 = 'Выберите свободную дату',
+    message_5 = 'Выберите свободную дату из интервала пакетного тура'
 
 let $ = jQuery
 let events, jsFromDate, jsToDate, $calendar, happyEvents
@@ -64,10 +65,16 @@ export default class Calendar extends LightningElement {
         this.template.querySelector('.calendar__content').innerHTML = this.getTemplate()
         $calendar = $('#calendar')
         const step = this
+        let defaultDate = jsFromDate ? jsFromDate.d : undefined
+        if (this.settings.scenario === 'Package') {
+            defaultDate = new moment(this.settings.package.start_date, 'MM/DD/YYYY').format(
+                'YYYY-MM-DD'
+            )
+        }
         $calendar.fullCalendar({
             height: 380,
             locale: 'ru',
-            defaultDate: jsFromDate ? jsFromDate.d : undefined,
+            defaultDate: defaultDate,
             header: {
                 left: 'prev',
                 center: 'title',
@@ -78,6 +85,7 @@ export default class Calendar extends LightningElement {
                 const dates = $(element).find('[data-date]')
                 const start = dates[0].getAttribute('data-date')
                 const end = dates[dates.length - 1].getAttribute('data-date')
+
                 step.dispatchEvent(
                     new CustomEvent('happyeventsrange', {
                         detail: { start, end },
@@ -85,10 +93,23 @@ export default class Calendar extends LightningElement {
                         composed: true
                     })
                 )
+
+                if (step.settings.scenario === 'Package') {
+                    const startDate = jQuery.fullCalendar
+                        .moment(step.settings.package.start_date, 'MM/DD/YYYY')
+                        .format('YYYY-MM-DD')
+                    const endDate = jQuery.fullCalendar
+                        .moment(step.settings.package.end_date, 'MM/DD/YYYY')
+                        .format('YYYY-MM-DD')
+                    $(dates).each((index, date) => {
+                        const strDate = date.getAttribute('data-date')
+                        if (strDate < startDate || strDate > endDate) {
+                            date.style.backgroundColor = '#eee'
+                        }
+                    })
+                }
             },
             eventAfterAllRender: () => {
-                // console.log('jsEvent', jsEvent)
-                // console.log('view', view)
                 this.updateStyle()
                 const table = document.querySelector('#calendar table')
                 table.className = 'main-table'
@@ -125,7 +146,10 @@ export default class Calendar extends LightningElement {
                 const d = date.format('YYYY-MM-DD')
                 const cell = this
                 if (!jsFromDate) {
-                    initFrom(d, cell)
+                    initFrom(d, cell, {
+                        scenario: step.settings.scenario,
+                        package: step.settings.package
+                    })
                 } else if (jsFromDate && jsFromDate.d === d) {
                     clearAll()
                     fillCells()
@@ -133,7 +157,10 @@ export default class Calendar extends LightningElement {
                     jsFromDate &&
                     !jsToDate &&
                     jsFromDate.d < d &&
-                    checkDateRange(events, jsFromDate.d, d)
+                    checkDateRange(events, jsFromDate.d, d, {
+                        scenario: step.settings.scenario,
+                        package: step.settings.package
+                    })
                 ) {
                     jsToDate = { d: d, el: cell }
                     $(jsToDate.el).addClass('cell-range')
@@ -143,7 +170,10 @@ export default class Calendar extends LightningElement {
                     jsToDate &&
                     jsToDate.d !== d &&
                     jsFromDate.d < d &&
-                    checkDateRange(events, jsFromDate.d, d)
+                    checkDateRange(events, jsFromDate.d, d, {
+                        scenario: step.settings.scenario,
+                        package: step.settings.package
+                    })
                 ) {
                     $(jsToDate.el).removeClass('cell-range').empty()
                     addEventsIcons()
@@ -306,13 +336,29 @@ const delimeterToView = `<div class="date-delimiter date-delimiter_to">
                                 <div class="date-delimiter__line"></div>
                             </div>`
 
-function initFrom(d, el) {
+function initFrom(d, el, options = {}) {
     var a = new moment(Date.now())
+    if (d < a.format('YYYY-MM-DD')) {
+        showMessage(message_1)
+        return
+    }
+
+    if (options.scenario === 'Package') {
+        const startDate = jQuery.fullCalendar
+            .moment(options.package.start_date, 'MM/DD/YYYY')
+            .format('YYYY-MM-DD')
+        const endDate = jQuery.fullCalendar
+            .moment(options.package.end_date, 'MM/DD/YYYY')
+            .format('YYYY-MM-DD')
+        if (d < startDate || d > endDate) {
+            showMessage(message_5)
+            return
+        }
+    }
+
     if (d >= a.format('YYYY-MM-DD') && checkStartDate(events, d)) {
         jsFromDate = { d: d, el: el }
         $(jsFromDate.el).addClass('cell-range')
-    } else if (d < a.format('YYYY-MM-DD')) {
-        showMessage(message_1)
     }
 }
 
@@ -361,8 +407,18 @@ function checkStartDate(events, startDate) {
     return result
 }
 
-function checkDateRange(events, startDate, endDate) {
+function checkDateRange(events, startDate, endDate, options = {}) {
     var result = true
+
+    if (options.scenario === 'Package') {
+        const endPackageDate = jQuery.fullCalendar
+            .moment(options.package.end_date, 'MM/DD/YYYY')
+            .format('YYYY-MM-DD')
+        if (endPackageDate < endDate) {
+            showMessage(message_5)
+            return false
+        }
+    }
 
     for (var i = 0; i < events.length; i++) {
         var event = events[i]

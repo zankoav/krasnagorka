@@ -46,7 +46,7 @@
                                     <div class="step-house__booking-from" data-date="Дата выезда:">{dateEnd}</div>
                                 </div>
                             </div>
-                            <div if:false={settings.eventId} class="step-house__sales">
+                            <div if:true={showDaylySales} class="step-house__sales">
                                 <template for:each={settings.house.daysSales} for:item="item">
                                     <span key={item.sale} class="step-house__item-sale"
                                         >от <span class="step-house__item-number">{item.dayes}</span> ночей скидка
@@ -78,9 +78,9 @@
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
-                    <tempalte if:true={showPackageInfo}>
+                    <!-- <tempalte if:true={showPackageInfo}>
                         <div class="step-house__delimeter">ТУР: {settings.package.title}</div>
-                    </tempalte>
+                    </tempalte> -->
 
                     <tempalte if:true={showPriceInfo}>
                         <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
