@@ -77,7 +77,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '3',
                         'title' => 'Количество сеансов в кедровой бочке',
-                        'count' => intval(intval($daysCount / 2) * $peopleCount)
+                        'count' => intval($daysCount / 2) * $peopleCount
                     ];
                 }
 
@@ -85,7 +85,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '4',
                         'title' => 'Количество сеансов на канатной дороге',
-                        'count' => intval(intval($daysCount / 2) * $peopleCount)
+                        'count' => intval($daysCount / 2) * $peopleCount
                     ];
                 }
 
@@ -115,10 +115,6 @@ class PackageCalculate extends CalculateImpl
 
         return [
             'error' => $error,
-            'daysCount' => $daysCount,
-            'min_night' => $min_night,
-            'min_people' => $min_people,
-            'price_person_night' => $price_person_night,
             'services' => $servicesFormatted,
             'accommodation' => $price,
             'total_price' => $price
