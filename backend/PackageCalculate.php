@@ -59,11 +59,11 @@ class PackageCalculate extends CalculateImpl
             }
         }
 
-        $dateEndDT = new DateTime($dateEnd);
+        $dateEndDT = new \DateTime($dateEnd);
 
-        $period = new DatePeriod(
-            new DateTime($dateStart),
-            new DateInterval('P1D'),
+        $period = new \DatePeriod(
+            new \DateTime($dateStart),
+            new \DateInterval('P1D'),
             $dateEndDT->modify( '+1 day' )
         );
 
