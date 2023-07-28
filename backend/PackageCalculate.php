@@ -10,6 +10,66 @@ class PackageCalculate extends CalculateImpl
     }
 
     protected function calculate($request){
+
+        $packageId = $request['packageId'];
+        $calendarId = $request['calendarId'];
+        $dateStart = $request['dateStart'];
+        $dateEnd = $request['dateEnd'];
+        $house = $request['house'];
+        $peopleCount = $request['peopleCount'];
+
+        $babyBed = $request['babyBed'];
+        $smallAnimalCount = $request['smallAnimalCount'];
+        $bigAnimalCount = $request['bigAnimalCount'];
+        
+        $foodBreakfast = $request['foodBreakfast'];
+        $foodDinner = $request['foodDinner'];
+        $foodLunch = $request['foodLunch'];
+
+        $services = get_post_meta($packageId,'package_services', 1);
+        $servicesFormatted = [];
+
+        foreach ((array) $services as $key => $entry) {
+            if (isset($entry['service'])) {
+                $servicesFormatted[] = $entry['service'];
+            }
+        }
+
+        $min_night = intval(get_post_meta($packageId,'package_night_min', 1));
+
+        $calendars = get_post_meta($packageId,'package_calendars', 1);
+        $calendarsFormatted = [];
+        $min_people;
+        $price_person_night;
+
+        foreach ((array) $calendars as $key => $entry) {
+            if (isset($entry['calendar']) && isset($entry['package_price'])) {
+                $calendarId = intval($entry['calendar']);
+                $calendarsFormatted[$calendarId] = [
+                    "id" => $calendarId,
+                    "price_person_night" => floatval($entry['package_price']),
+                    "min_people" => intval($entry['package_people_min'])
+                ];
+
+                if($calendarId == intval($entry['calendar'])){
+                    $min_people = intval($entry['package_people_min']);
+                    $price_person_night = floatval($entry['package_price']);
+                    break;
+                }
+            }
+        }
+
+        $dateEndDT = new DateTime($dateEnd);
+
+        $period = new DatePeriod(
+            new DateTime($dateStart),
+            new DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+
+        $daysCount = iterator_count($period);
+
+
         // $peopleCount = 1;
         // $days = 1;
         // $calendarId = (int)$request['calendarId'];
@@ -25,8 +85,12 @@ class PackageCalculate extends CalculateImpl
         // }
         // $basePrice = get_post_meta($seasonId, $keyPrice, true);
         return [
-            // 'is_terem' => $isTeremRoom,
-            // 'calendar_id' => $calendarId,
+            'daysCount' => $daysCount,
+            'min_night' => $min_night,
+            'min_people' => $min_people,
+            'min_people' => $min_people,
+            'price_person_night' => $price_person_night,
+            'servicesFormatted' => $servicesFormatted,
             'accommodation' => 1000,
             'total_price' => 1000
         ];
