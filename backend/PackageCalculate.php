@@ -15,7 +15,8 @@ class PackageCalculate extends CalculateImpl
         $calendarId = $request['calendarId'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
-        $house = $request['house'];
+        $houseId = $request['house'];
+        $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $peopleCount = $request['peopleCount'];
 
         $babyBed = $request['babyBed'];
@@ -48,6 +49,11 @@ class PackageCalculate extends CalculateImpl
             new \DateInterval('P1D'),
             $dateEndDT->modify( '+1 day' )
         );
+
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');    
+        }
 
         $daysCount = iterator_count($period);
 
@@ -115,6 +121,7 @@ class PackageCalculate extends CalculateImpl
 
         return [
             'error' => $error,
+            'baby_bed_available' => LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom),
             'services' => $servicesFormatted,
             'accommodation' => $price,
             'total_price' => $price
