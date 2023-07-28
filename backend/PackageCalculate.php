@@ -84,15 +84,27 @@ class PackageCalculate extends CalculateImpl
         //     $keyPrice = "house_price_$houseId";
         // }
         // $basePrice = get_post_meta($seasonId, $keyPrice, true);
+        $error = false;
+
+        if($peopleCount < $min_people){
+            $error = 'Хакеры!!! Минимальное количество человек';
+        }
+
+        if($daysCount < $min_night){
+            $error = 'Хакеры!!! Минимальное количество ночей';
+        }
+
+        $price = $daysCount * $peopleCount * $price_person_night;
+
         return [
+            'error' => $error,
             'daysCount' => $daysCount,
             'min_night' => $min_night,
             'min_people' => $min_people,
-            'min_people' => $min_people,
             'price_person_night' => $price_person_night,
             'servicesFormatted' => $servicesFormatted,
-            'accommodation' => 1000,
-            'total_price' => 1000
+            'accommodation' => $price,
+            'total_price' => $price
         ];
     }
 
