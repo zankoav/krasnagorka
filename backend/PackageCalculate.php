@@ -117,15 +117,33 @@ class PackageCalculate extends CalculateImpl
             $error = 'Хакеры!!! Минимальное количество ночей';
         }
 
-        $price = $daysCount * $peopleCount * $price_person_night;
+        $accomodationPrice = $daysCount * $peopleCount * $price_person_night;
         $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
-        return [
+
+        $result = [
             'error' => $error,
-            'baby_bed_available' => $babyBedAvailable,
             'services' => $servicesFormatted,
-            'accommodation' => $price,
-            'total_price' => $price
+            'accommodation' => $accomodationPrice,
+            'total_price' => $accomodationPrice
         ];
+
+        if($babyBedAvailable){
+            $bookingSettings = get_option('mastak_booking_appearance_options');
+            $babyBedPrice = intval($bookingSettings['baby_bed_price']);
+            $babyBedTotalPrice = $babyBedPrice * $daysCount;
+
+            $result['baby_bed_available'] = $babyBedAvailable;
+            $result['baby_bed'] = [
+                'total_price' => $babyBedTotalPrice,
+                'price' => $babyBedPrice,
+                'days' => $daysCount,
+                'discount' => 0
+            ];
+
+            $result['total_price'] += $babyBedTotalPrice;
+        }
+        
+        return $result;
     }
 
 }
