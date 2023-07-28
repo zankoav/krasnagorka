@@ -126,27 +126,27 @@ class PackageCalculate extends CalculateImpl
             'accommodation' => $accomodationPrice,
             'total_price' => $accomodationPrice
         ];
-        
-        $babyBedAvailable = false;
 
-        if($babyBed){
-            $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
-        }
+        $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
 
         if($babyBedAvailable){
-            $bookingSettings = get_option('mastak_booking_appearance_options');
-            $babyBedPrice = intval($bookingSettings['baby_bed_price']);
-            $babyBedTotalPrice = $babyBedPrice * $daysCount;
-
             $result['baby_bed_available'] = $babyBedAvailable;
-            $result['baby_bed'] = [
-                'total_price' => $babyBedTotalPrice,
-                'price' => $babyBedPrice,
-                'days' => $daysCount,
-                'discount' => 0
-            ];
 
-            $result['total_price'] += $babyBedTotalPrice;
+            if($babyBed){
+                $bookingSettings = get_option('mastak_booking_appearance_options');
+
+                $babyBedPrice = intval($bookingSettings['baby_bed_price']);
+                $babyBedTotalPrice = $babyBedPrice * $daysCount;
+                
+                $result['baby_bed'] = [
+                    'total_price' => $babyBedTotalPrice,
+                    'price' => $babyBedPrice,
+                    'days' => $daysCount,
+                    'discount' => 0
+                ];
+    
+                $result['total_price'] += $babyBedTotalPrice;
+            }
         }
         
         return $result;
