@@ -27,6 +27,7 @@ class PackageCalculate extends CalculateImpl
         return [
             // 'is_terem' => $isTeremRoom,
             // 'calendar_id' => $calendarId,
+            'accommodation' => 1000,
             'total_price' => 1000
         ];
     }
