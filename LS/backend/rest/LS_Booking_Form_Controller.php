@@ -2,6 +2,7 @@
 use Ls\Wp\Log as Log;
 use LsModel\BaseModel as BaseModel;
 use LsCalculate\PackageAdminCalculate as PackageAdminCalculate;
+use LsCalculate\PackageCalculate as PackageCalculate;
 
 
 class LS_Booking_Form_Controller extends WP_REST_Controller
@@ -301,7 +302,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
     public function calculate($request)
     {
-        $result = self::calculateResult($request);
+        $scenario = $request['scenario'];
+        $result = null;
+
+        if($scenario === 'Package'){
+            $calculateModel = new PackageCalculate();
+            $result = $calculateModel->response($request);
+        }else {
+            $result = self::calculateResult($request);
+        }
+
         return new WP_REST_Response( $result, 200);
     }
 

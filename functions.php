@@ -24,6 +24,7 @@ require __DIR__ . '/L-S/mail/LS_Mailer.php';
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/CalculateImpl.php';
+require __DIR__ . '/backend/PackageCalculate.php';
 require __DIR__ . '/backend/PackageAdminCalculate.php';
 require __DIR__ . '/backend/ModelImpl.php';
 require __DIR__ . '/backend/BaseModel.php';
