@@ -60,6 +60,7 @@ class PackageCalculate extends CalculateImpl
                 if($entry['service'] == '1'){
                     $servicesFormatted[] = [
                         'id' => '1',
+                        'title' => 'Количество приемов пищи',
                         'count' => intval($peopleCount * (2 + ($daysCount - 1 ) * 3))
                     ];
                 }
@@ -67,6 +68,7 @@ class PackageCalculate extends CalculateImpl
                 if($entry['service'] == '2'){
                     $servicesFormatted[] = [
                         'id' => '2',
+                        'title' => 'Количество сеансов на квадроцикле',
                         'count' => intval($peopleCount * $daysCount * 0.25)
                     ];
                 }
@@ -74,6 +76,7 @@ class PackageCalculate extends CalculateImpl
                 if($entry['service'] == '3'){
                     $servicesFormatted[] = [
                         'id' => '3',
+                        'title' => 'Количество сеансов в кедровой бочке',
                         'count' => intval(intval($daysCount / 2) * $peopleCount)
                     ];
                 }
@@ -81,6 +84,7 @@ class PackageCalculate extends CalculateImpl
                 if($entry['service'] == '4'){
                     $servicesFormatted[] = [
                         'id' => '4',
+                        'title' => 'Количество сеансов на канатной дороге',
                         'count' => intval(intval($daysCount / 2) * $peopleCount)
                     ];
                 }
@@ -88,8 +92,8 @@ class PackageCalculate extends CalculateImpl
                 if($entry['service'] == '5'){
                     $servicesFormatted[] = [
                         'id' => '5',
-                        'count' => intval($daysCount / 2),
-                        'hours' => $peopleCount < 4 ? 1 : 2
+                        'title' => "Количество сеансов по {$peopleCount < 4 ? 1 : 2}ч.",
+                        'count' => intval($daysCount / 2)
                     ];
                 }
             }
