@@ -65,10 +65,11 @@ class PackageCalculate extends CalculateImpl
         foreach ((array) $services as $key => $entry) {
             if (isset($entry['service'])) {
                 if($entry['service'] == '1'){
+                    $countFood = (2 + ($daysCount - 1 ) * 3);
                     $servicesFormatted[] = [
                         'id' => '1',
-                        'title' => 'Количество приемов пищи',
-                        'count' => intval($peopleCount * (2 + ($daysCount - 1 ) * 3))
+                        'title' => "Количество приемов пищи {$countFood} на 1 чел.",
+                        'count' => intval(2 + ($daysCount - 1 ) * 3)
                     ];
                 }
 
@@ -100,7 +101,7 @@ class PackageCalculate extends CalculateImpl
                     $seanseCount = $peopleCount < 4 ? 1 : 2;
                     $servicesFormatted[] = [
                         'id' => '5',
-                        'title' => "Количество сеансов по {$seanseCount}ч.",
+                        'title' => "Количество сеансов ({$seanseCount}ч.) бани ",
                         'count' => intval($daysCount / 2)
                     ];
                 }
