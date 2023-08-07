@@ -782,7 +782,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Текущая цена',
+            'name'         => 'Текущая цена для детей',
             'description'  => 'Только проживание за одного ребенка/ночь',
             'id'           => 'old_price_child',
             'type'         => 'text_small',
@@ -790,7 +790,7 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
-            'name'         => 'Новая цена ',
+            'name'         => 'Новая цена для детей',
             'description'  => 'Только проживание за одного ребенка/ночь',
             'id'           => 'new_price_child',
             'type'         => 'text_small',
