@@ -782,6 +782,22 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Текущая цена',
+            'description'  => 'Только проживание за одного ребенка/ночь',
+            'id'           => 'old_price_child',
+            'type'         => 'text_small',
+            'before_field' => 'BYN'
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Новая цена ',
+            'description'  => 'Только проживание за одного ребенка/ночь',
+            'id'           => 'new_price_child',
+            'type'         => 'text_small',
+            'before_field' => 'BYN',
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'    => __( 'Скидка', 'cmb2' ),
             'id'      => 'cpercent',
             'type'    => 'cpercent'
