@@ -782,6 +782,12 @@
         ));
 
         $sbc_client->add_group_field($group_field_event, array(
+            'name'         => 'Включить цену для детей',
+            'id'           => 'enabled_child',
+            'type'         => 'checkbox'
+        ));
+
+        $sbc_client->add_group_field($group_field_event, array(
             'name'         => 'Текущая цена для детей',
             'description'  => 'Только проживание за одного ребенка/ночь',
             'id'           => 'old_price_child',
