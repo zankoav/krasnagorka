@@ -8,7 +8,8 @@ const message_1 = 'Нельзя бронировать прошлые даты',
     message_2 = 'Дата выезда должна быть позже даты заезда',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
     message_4 = 'Выберите свободную дату',
-    message_5 = 'На эти даты пакетный тур не доступен'
+    message_5 = 'На эти даты пакетный тур не доступен',
+    message_6 = 'Минимальное количество ночей '
 
 let $ = jQuery
 let events, jsFromDate, jsToDate, $calendar, happyEvents
@@ -418,7 +419,17 @@ function checkDateRange(events, startDate, endDate, options = {}) {
             showMessage(message_5)
             return false
         }
+
+        const startDateMoment = moment(startDate)
+        const endDateMoment = moment(endDate)
+
+        const nights = endDateMoment.diff(startDateMoment, 'days');
+        if(nights < options.package.min_night){
+            showMessage(`${message_6} ${options.package.min_night}`)
+            return false
+        }
     }
+    
 
     for (var i = 0; i < events.length; i++) {
         var event = events[i]

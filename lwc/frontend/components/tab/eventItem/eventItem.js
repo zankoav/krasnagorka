@@ -1,4 +1,6 @@
 import { LightningElement, api } from 'lwc'
+import { UTILS } from 'core/utils'
+
 import './eventItem.scss'
 
 export default class EventItem extends LightningElement {
@@ -7,6 +9,7 @@ export default class EventItem extends LightningElement {
     @api group
 
     selectedPeople
+    selectedChild
     selectedApportament
     selectedVar
 
@@ -23,18 +26,67 @@ export default class EventItem extends LightningElement {
     }
 
     get href() {
-        return `https://krasnagorka.by/booking-form/?eventId=${this.group.eventId}&eventTabId=${this.group.eventTabId}&calendarId=${this.selectedApportament}&people=${this.selectedPeople}&var=${this.selectedVar}&obj=${this.selectedItem.house}`
+        return `https://krasnagorka.by/booking-form/?eventId=${this.group.eventId}&eventTabId=${this.group.eventTabId}&calendarId=${this.selectedApportament}&people=${this.selectedPeople}&var=${this.selectedVar}&obj=${this.selectedItem.house}&child=${this.selectedChild}`
+    }
+
+    get priceFromOnePeople() {
+        let price = this.selectedItem.new_price
+            ? this.selectedItem.new_price
+            : this.selectedItem.old_price
+
+        return (
+            (price + this.selectedVariant.pricePerDay) * (this.group.days.days.length - 1) +
+            this.selectedVariant.priceSingle / this.selectedPeople
+        )
+    }
+
+    get oldPriceFromOnePeople() {
+        let price = this.selectedItem.new_price ? this.selectedItem.old_price : null
+        return (
+            (price + this.selectedVariant.pricePerDay) * (this.group.days.days.length - 1) +
+            this.selectedVariant.priceSingle / this.selectedPeople
+        )
+    }
+
+    get priceFromOneChild() {
+        let result = 0
+        if (this.selectedChild) {
+            let price = this.selectedItem.new_price_child
+                ? this.selectedItem.new_price_child
+                : this.selectedItem.old_price_child
+            result = (price + this.selectedVariant.pricePerDay) * (this.group.days.days.length - 1)
+        }
+        return result
+    }
+
+    get oldPriceFromOneChild() {
+        let result = null
+        let price = this.selectedItem.new_price_child ? this.selectedItem.old_price_child : null
+        if (price) {
+            result = (price + this.selectedVariant.pricePerDay) * (this.group.days.days.length - 1)
+        }
+        return result
     }
 
     get oldPrice() {
         let result = null
         let price = this.selectedItem.new_price ? this.selectedItem.old_price : null
+        let childPrice = this.selectedItem.new_price_child
+            ? this.selectedItem.old_price_child
+            : null
         if (price) {
             result =
                 (price + this.selectedVariant.pricePerDay) *
                     (this.group.days.days.length - 1) *
                     this.selectedPeople +
                 this.selectedVariant.priceSingle
+
+            if (childPrice) {
+                result +=
+                    (childPrice + this.selectedVariant.pricePerDay) *
+                    (this.group.days.days.length - 1) *
+                    this.selectedChild
+            }
         }
         return result
     }
@@ -43,12 +95,21 @@ export default class EventItem extends LightningElement {
         let price = this.selectedItem.new_price
             ? this.selectedItem.new_price
             : this.selectedItem.old_price
-        return (
+
+        let childPrice = this.selectedItem.new_price_child
+            ? this.selectedItem.new_price_child
+            : this.selectedItem.old_price_child
+
+        price =
             (price + this.selectedVariant.pricePerDay) *
                 (this.group.days.days.length - 1) *
                 this.selectedPeople +
+            (childPrice + this.selectedVariant.pricePerDay) *
+                (this.group.days.days.length - 1) *
+                this.selectedChild +
             this.selectedVariant.priceSingle
-        )
+
+        return UTILS.normalizePrice(price)
     }
 
     get selectedVariant() {
@@ -68,6 +129,20 @@ export default class EventItem extends LightningElement {
                 id: i,
                 name: i,
                 selected: i == this.selectedPeople
+            })
+        }
+        return result
+    }
+
+    get childOptions() {
+        const min = 0
+        const max = this.selectedItem.max_people - this.selectedPeople
+        const result = []
+        for (let i = min; i < max + 1; i++) {
+            result.push({
+                id: i,
+                name: i,
+                selected: i == this.selectedChild
             })
         }
         return result
@@ -104,6 +179,7 @@ export default class EventItem extends LightningElement {
         this.selectedApportament = this.group.items.find((item) => item.selected).calendar
         this.selectedVar = this.group.variant_default
         this.selectedPeople = this.selectedItem.min_people
+        this.selectedChild = 0
     }
 
     renderedCallback() {
@@ -111,12 +187,18 @@ export default class EventItem extends LightningElement {
     }
 
     peopleHandler(event) {
-        this.selectedPeople = event.detail
+        this.selectedPeople = parseInt(event.detail)
+        this.selectedChild = 0
+    }
+
+    childHandler(event) {
+        this.selectedChild = parseInt(event.detail)
     }
 
     apportomentsHandler(event) {
         this.selectedApportament = event.detail
         this.selectedPeople = this.selectedItem.min_people
+        this.selectedChild = 0
     }
 
     variantsHandler(event) {

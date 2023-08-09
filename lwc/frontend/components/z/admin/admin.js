@@ -75,6 +75,7 @@ export default class Admin extends LightningElement {
             email: getCookie('kg_email') || '',
             people: this.model.people,
             eventId: this.model.eventId,
+            eventChilds: this.model.eventChilds,
             eventModel: this.model.eventModel,
             counts: null,
             childCounts: null,

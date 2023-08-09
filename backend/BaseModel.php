@@ -57,6 +57,7 @@ class BaseModel extends ModelImpl
         
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
+        $eventChilds = $_GET['child'];
         $dateFrom  = $_GET['from'];
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
@@ -171,6 +172,9 @@ class BaseModel extends ModelImpl
 
         if (!empty($eventTabId)) {
             $result['eventTabId'] = $eventTabId;
+        }
+        if (!empty($eventChilds)) {
+            $result['eventChilds'] = $eventChilds;
         }
 
         if (!empty($eventId)) {

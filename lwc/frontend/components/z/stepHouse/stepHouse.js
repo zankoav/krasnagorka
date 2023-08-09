@@ -15,6 +15,24 @@ export default class StepHouse extends LightningElement {
         return !this.settings.eventId && !this.settings.package
     }
 
+    get peopleCountLabel(){
+        let result = "Количество человек"
+        if(this.settings.eventId){
+            result = "Количество взрослых"
+        }
+        return result;
+    }
+
+    get eventChilds() {
+        return [
+            {
+                id: this.settings.eventChilds,
+                selected: true,
+                name: this.settings.eventChilds
+            }
+        ]
+    }
+
     get showDaylySales() {
         return !this.settings.eventId && this.settings.scenario !== 'Package'
     }

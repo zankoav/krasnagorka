@@ -52,11 +52,12 @@
         border-top: 1px dashed #eeeeee;
 
         @include lg {
-            max-width: 200px;
-            flex: 1 0 200px;
+            max-width: 300px;
+            flex: 1 0 300px;
             border-top: 0;
             border-left: 1px dashed #eeeeee;
             flex-direction: column;
+            align-items: stretch;
         }
     }
 
@@ -82,6 +83,11 @@
         color: $WHITE;
         padding: 0.5rem 1rem;
         font-weight: 600;
+
+        @include lg {
+            align-self: center;
+            margin-top: auto;
+        }
     }
 
     &__line {
@@ -94,10 +100,33 @@
                 display: none;
             }
         }
+
+        &_desktop {
+            display: none;
+
+            @include lg {
+                display: block;
+                margin: 0.25rem 0;
+            }
+        }
     }
 
     &__line-value {
         font-weight: 600;
+    }
+
+    &__order-title {
+        display: none;
+
+        @include lg {
+            display: block;
+            text-align: center;
+            font-weight: 600;
+            font-size: 20px;
+            color: #4a4a4a;
+            margin-bottom: 1rem;
+
+        }
     }
 
     &__price {
@@ -110,7 +139,7 @@
             font-size: 0.75em;
         }
 
-        &_old{
+        &_old {
             color: $GRAY_6;
             font-size: 14px;
             margin-left: 0.25rem;

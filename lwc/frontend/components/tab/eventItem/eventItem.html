@@ -16,19 +16,49 @@
             <tab-line class="event-item__line" title="Обьект размещения">
                 <tab-select onchange={apportomentsHandler} options={apportomentsOptions}></tab-select>
             </tab-line>
-            <tab-line class="event-item__line" title="Количество человек">
+            <tab-line class="event-item__line" title="Количество взрослых">
                 <tab-select onchange={peopleHandler} options={peopleOptions}></tab-select>
+            </tab-line>
+            <tab-line if:true={selectedItem.enabled_child} class="event-item__line" title="Количество детей (до 12 лет)">
+                <tab-select onchange={childHandler} options={childOptions}></tab-select>
             </tab-line>
             <tab-line class="event-item__line" title="Пакет" tooltip={variantTooltip}>
                 <tab-select onchange={variantsHandler} options={variantsOptions}></tab-select>
             </tab-line>
-            <tab-line class="event-item__line event-item__line_price" title="Цена">
-                <span class="event-item__price">{price}</span> <span if:true={oldPrice} class="event-item__price event-item__price_old"><s>{oldPrice}</s></span>
+            <tab-line class="event-item__line event-item__line_price" title="Цена за взрослого">
+                <span class="event-item__price">{priceFromOnePeople}</span>
+                <span if:true={oldPriceFromOnePeople} class="event-item__price event-item__price_old"><s>{oldPriceFromOnePeople}</s></span>
+            </tab-line>
+            <template if:true={priceFromOneChild}>
+                <tab-line if:true={selectedItem.enabled_child} class="event-item__line event-item__line_price" title="Цена за ребенка">
+                    <span class="event-item__price">{priceFromOneChild}</span>
+                    <span if:true={oldPriceFromOneChild} class="event-item__price event-item__price_old"><s>{oldPriceFromOneChild}</s></span>
+                </tab-line>
+            </template>
+            <tab-line class="event-item__line event-item__line_price" title="Всего">
+                <span class="event-item__price">{price}</span>
+                <span if:true={oldPrice} class="event-item__price event-item__price_old"><s>{oldPrice}</s></span>
             </tab-line>
         </div>
         <div class="event-item__order">
-            <span class="event-item__order-price">{price}</span> <span if:true={oldPrice} class="event-item__order-price event-item__order-price_old"><s>{oldPrice}</s></span>
+            <h4 class="event-item__order-title">Стоимость</h4>
+            <tab-line class="event-item__line event-item__line_desktop" title="Цена за взрослого">
+                <span class="event-item__price">{priceFromOnePeople}</span>
+                <span if:true={oldPriceFromOnePeople} class="event-item__price event-item__price_old"><s>{oldPriceFromOnePeople}</s></span>
+            </tab-line>
+            <template if:true={priceFromOneChild}>
+                <tab-line if:true={selectedItem.enabled_child} class="event-item__line event-item__line_desktop" title="Цена за ребенка">
+                    <span class="event-item__price">{priceFromOneChild}</span>
+                    <span if:true={oldPriceFromOneChild} class="event-item__price event-item__price_old"><s>{oldPriceFromOneChild}</s></span>
+                </tab-line>
+            </template>
+            <tab-line class="event-item__line event-item__line_desktop" title="Всего">
+                <span class="event-item__price">{price}</span>
+                <span if:true={oldPrice} class="event-item__price event-item__price_old"><s>{oldPrice}</s></span>
+            </tab-line>
             <a href={href} target="_blank" class="event-item__order-button">забронировать</a>
+            <!-- <span class="event-item__order-price">{price}</span> -->
+            <!-- <span if:true={oldPrice} class="event-item__order-price event-item__order-price_old"><s>{oldPrice}</s></span> -->
         </div>
     </div>
 </template>

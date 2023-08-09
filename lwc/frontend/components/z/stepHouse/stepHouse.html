@@ -28,11 +28,20 @@
                             <z-select
                                 class="step-house__select step-house__counts"
                                 required
-                                label="Количество человек"
+                                label={peopleCountLabel}
                                 disabled={settings.eventId}
                                 onchange={countChange}
                                 options={settings.counts}></z-select>
-
+                            <template if:true={settings.eventChilds}>
+                                <z-select
+                                    if:true={settings.eventId}
+                                    class="step-house__select step-house__counts"
+                                    required
+                                    label="Количество детей (до 12 лет)"
+                                    disabled={settings.eventId}
+                                    onchange={countChange}
+                                    options={eventChilds}></z-select>
+                            </template>
                             <z-select
                                 class="step-house__select"
                                 label="Детей без спального места"
