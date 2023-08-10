@@ -53,7 +53,7 @@ class ModelFactory
                     strtotime("+1 day") < strtotime($endDate) && 
                     'publish' === get_post_status( $packageId );
         
-        return $result
+        return $result;
     }
 
 }
