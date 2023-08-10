@@ -29,6 +29,7 @@ require __DIR__ . '/backend/PackageAdminCalculate.php';
 require __DIR__ . '/backend/ModelImpl.php';
 require __DIR__ . '/backend/BaseModel.php';
 require __DIR__ . '/backend/PackageModel.php';
+require __DIR__ . '/backend/FierModel.php';
 require __DIR__ . '/backend/EventModel.php';
 require __DIR__ . '/backend/ModelFactory.php';
 

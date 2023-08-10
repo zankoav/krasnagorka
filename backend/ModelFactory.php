@@ -35,6 +35,8 @@ class ModelFactory
             $model->setPackageId($packageId);
         }else if(isset($eventTabId, $eventId)){
             $model = new EventModel();
+        }else if(isset($eventTabId)){
+            $model = new FierModel();
         }else{
             $model = new BaseModel();
         }
