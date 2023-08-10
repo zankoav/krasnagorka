@@ -23,25 +23,37 @@ class ModelFactory
 
         $model;
 
+        // Package ID
         $packageId = $_GET['package-id'];
-        $endDate;
 
-        if(isset($packageId)){
-            $endDate = get_post_meta($packageId, 'package_end', 1);
-        }
-        
-        if(     
-            isset($endDate, $packageId) && 
-            strtotime("+1 day") < strtotime($endDate) && 
-            'publish' === get_post_status( $packageId )
-        ){
+        // Event ID
+        $eventTabId = $_GET['eventTabId'];
+        $eventId  = $_GET['eventId'];
+
+        if(self::availablePackageModel($packageId)){
             $model = new PackageModel();
             $model->setPackageId($packageId);
+        }else if(isset($eventTabId, $eventId)){
+            $model = new EventModel();
         }else{
             $model = new BaseModel();
         }
 
         return $model->getModel();
+    }
+
+    private static function availablePackageModel($packageId){
+        $endDate;
+
+        if(isset($packageId)){
+            $endDate = get_post_meta($packageId, 'package_end', 1);
+        }
+
+        $result =   isset($endDate, $packageId) && 
+                    strtotime("+1 day") < strtotime($endDate) && 
+                    'publish' === get_post_status( $packageId );
+        
+        return $result
     }
 
 }

@@ -24,11 +24,11 @@ use AmoCRM\Models\CustomFieldsValues\NumericCustomFieldValuesModel;
 use AmoCRM\Models\CustomFieldsValues\ValueCollections\NumericCustomFieldValueCollection;
 use AmoCRM\Models\CustomFieldsValues\ValueModels\NumericCustomFieldValueModel;
 
-class BaseModel extends ModelImpl
+class EventModel extends ModelImpl
 {
 
     protected function scenario(){
-        return 'Basic';
+        return 'Event';
     }
 
     protected function createModel(){
@@ -57,6 +57,7 @@ class BaseModel extends ModelImpl
         
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
+        $eventChilds = $_GET['child'];
         $dateFrom  = $_GET['from'];
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
@@ -171,6 +172,9 @@ class BaseModel extends ModelImpl
 
         if (!empty($eventTabId)) {
             $result['eventTabId'] = $eventTabId;
+        }
+        if (!empty($eventChilds)) {
+            $result['eventChilds'] = $eventChilds;
         }
 
         if (!empty($eventId)) {
