@@ -228,6 +228,7 @@ class EventModel extends ModelImpl
                     'price_people' => $pricePeople,
                     'price_child' => $priceChild,
                     'childs' => $eventChilds,
+                    'people' => $people,
                     'title' => get_the_title($eventId),
                     'variant' => $selectedCalendar['variant']->title,
                     'variantId' => $selectedCalendar['variant']->id,
