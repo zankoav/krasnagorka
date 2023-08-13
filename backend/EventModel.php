@@ -69,7 +69,7 @@ class EventModel extends ModelImpl
 
         $eventId  = $_GET['eventId'];
         $variantId = $_GET['var'];
-        $people = $_GET['people'];
+        $people = intval($_GET['people']);
 
         if(!empty($eventId) && !empty($eventTabId)){
             $intervalId = get_post_meta($eventTabId, 'mastak_event_tab_type_10_interval', 1);
@@ -219,7 +219,7 @@ class EventModel extends ModelImpl
                     ) 
                     : 0;
 
-                $priceChild = $priceChild + $selectedCalendar['variant']->pricePerDay;
+                $priceChild = ($priceChild + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
                 $result['price'] += $priceChild * $eventChilds;
 
                 $result['eventModel'] = [
