@@ -310,6 +310,10 @@
                                         <div class="order-item__list-item-value">${order.eventTitle}</div>
                                     </div>
                                     <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Количество детей (до 12 лет):</div>
+                                        <div class="order-item__list-item-value">${order.eventChilds}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
                                         <div class="order-item__list-item-label">Пакет:</div>
                                         <div class="order-item__list-item-value">${order.variantTitle}</div>
                                     </div>

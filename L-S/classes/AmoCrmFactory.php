@@ -453,9 +453,9 @@ class AmoCrmFactory {
             $isFireOrder = 'Нет';
             $isEventOrder = 'Нет';
             
-            if(!empty($order->eventTabId) and !empty($order->eventId)){
+            if($order->scenario == 'Event'){
                 $isEventOrder = get_the_title($order->eventId);
-            }else if(!empty($order->eventTabId)){
+            }else if($order->scenario == 'Fier'){
                 $isFireOrder = 'Да';
             }
 
@@ -464,6 +464,7 @@ class AmoCrmFactory {
             $order->note[] = "Горящее предложение: {$isFireOrder}";
             if(!empty($eventVariant)){
                 $order->note[] = "Мероприятие: {$isEventOrder}";
+                $order->note[] = "Количество детей (до 12 лет): {$order->eventChilds}";
                 $order->note[] = "Пакет: " . $eventVariant['title'];
                 $order->note[] = "Описание пакета: " . $eventVariant['description'];
             }

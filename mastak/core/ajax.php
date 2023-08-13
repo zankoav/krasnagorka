@@ -164,6 +164,7 @@
             $start = get_post_meta($orderId, 'sbc_order_start', true);
 
             $eventId = get_post_meta($orderId, 'sbc_order_event_id', true);
+            $scenario = get_post_meta($orderId, 'sbc_order_scenario', true);
             $variantId = get_post_meta($orderId, 'sbc_order_event_variant_id', true);
 
             $start = date("d.m.Y", strtotime($start));
@@ -224,6 +225,11 @@
                 $calendarsNames[] = $calendar->name;
             }
 
+            $eventChilds;
+            if($scenario === 'Event'){
+                $eventChilds = get_post_meta($orderId, 'sbc_order_childs', true);
+            }
+
             $itemOrder = [
                 '#'         => $number,
                 'calendars' => implode(", ", $calendarsNames),
@@ -248,8 +254,11 @@
                 'services' => $services
             ];
 
-            if(!empty($eventId)){
+            if(!empty($eventChilds)){
+                $itemOrder['eventChilds'] = $eventChilds;
+            }
 
+            if(!empty($eventId)){
                 $per_day = get_post_meta($variantId, 'variant_description_per_day', 1);
                 $single = get_post_meta($variantId, 'variant_description_single', 1);
 
