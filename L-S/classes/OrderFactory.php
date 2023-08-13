@@ -15,6 +15,8 @@ class OrderFactory {
         $order = new Order();
 
         $order->type = Order::TYPE_RESERVED;
+        
+        $order->scenario = $data['scenario'];
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
         $order->dateEnd = $data['dateEnd'];
@@ -44,24 +46,48 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         
-        $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
-        
-        $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
-            array_merge(
-                (array)$order, 
-                ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
-            )
-        );
-
-        $order->price = $calculatedResult['total_price'];
-
-        if(isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])){
-            $order->foodPrice = $calculatedResult['food']['total_price'];
-        }else{
+        if($order->scenario === 'Event'){
             $order->foodPrice = 0;
-        }
+            $order->accommodationPrice = 0;
+            $order->eventChilds = $data['eventModel']['childs'];
 
-        $order->accommodationPrice = !empty($order->eventTabId) ? $calculatedResult['accommodation'] : $calculatedResult['accommodation_price'];
+            $tab = new \Type_10($order->eventTabId);
+            $selectedCalendar = $tab->getSelectedCalendar($order->calendarId, $order->variantId  );
+            $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
+            $totalPrice = ($price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $order->peopleCount + $selectedCalendar['variant']->priceSingle;
+
+            $enabled_child = $selectedCalendar['calendar']['enabled_child'];
+            $priceChild = $enabled_child ? 
+                (
+                    empty($selectedCalendar['calendar']['new_price_child']) ? 
+                    $selectedCalendar['calendar']['old_price_child'] : 
+                    $selectedCalendar['calendar']['new_price_child']
+                ) 
+                : 0;
+
+            $priceChild = ($priceChild + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
+            $totalPrice += $priceChild * $order->eventChilds;
+            $order->price = $totalPrice;
+
+        }else{
+            $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
+            $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
+                array_merge(
+                    (array)$order, 
+                    ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
+                )
+            );
+    
+            $order->price = $calculatedResult['total_price'];
+    
+            if(isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])){
+                $order->foodPrice = $calculatedResult['food']['total_price'];
+            }else{
+                $order->foodPrice = 0;
+            }
+    
+            $order->accommodationPrice = !empty($order->eventTabId) ? $calculatedResult['accommodation'] : $calculatedResult['accommodation_price'];
+        }
         
         if(!empty($order->prepaidType)){
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
@@ -171,6 +197,8 @@ class OrderFactory {
             update_post_meta($order->id, 'sbc_order_is_event', 'on');
         }
 
+        update_post_meta($order->id, 'sbc_order_scenario', $order->scenario);
+        update_post_meta($order->id, 'sbc_order_event_child', $order->scenario);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);

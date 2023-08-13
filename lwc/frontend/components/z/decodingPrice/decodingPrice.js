@@ -1,27 +1,25 @@
-import { LightningElement, track, api } from 'lwc'
+import BaseElement from 'base/baseElement'
 import './decodingPrice.scss'
 
-export default class DecodingPrice extends LightningElement {
-    @api settings
-
-    get showSeasonsDecoding(){
-        return !this.settings.eventTabId && this.settings.scenario !== 'Package';
-    }
-
-    get showPackageDecoding(){
-        return this.settings.scenario === 'Package';
+export default class DecodingPrice extends BaseElement {
+    get showSeasonsDecoding() {
+        return !this.settings.eventTabId && this.isPackage
     }
 
     get subTitle() {
         let result = 'Проживание'
-        if(this.settings.scenario === 'Package'){
+        if (this.isPackage) {
             result = 'Проживание по пакетному туру'
-        }else if (this.settings.eventId) {
+        } else if (this.isEvent) {
             result = 'Мероприятие'
-        } else if (this.settings.total?.accommodation) {
+        } else if (this.isFier) {
             result = 'Проживание по горящему туру'
         }
         return result
+    }
+
+    get otherScenarios() {
+        return !this.isPackage && !this.isEvent
     }
 
     get displayServices() {

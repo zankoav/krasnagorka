@@ -51,7 +51,10 @@ class Order {
      */
     public int $peopleCount;
 
+   
+    public ?string $scenario;
     public ?string $eventTabId;
+    public ?int $eventChilds;
     public ?string $eventId;
     public ?string $variantId;
     public array $note;

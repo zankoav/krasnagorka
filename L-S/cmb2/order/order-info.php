@@ -24,6 +24,15 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => esc_html__( 'Сценарий', 'sbc' ),
+        'id'   => 'sbc_order_scenario',
+        'type' => 'text',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        )
+    ));
+
+    $sbc_order->add_field( array(
         'name'      	=> __( 'Клиент', 'sbc' ),
         'id'               => 'sbc_order_client',
         'type'      	=> 'post_search_ajax',
@@ -123,6 +132,15 @@ function sbc_order_info_metabox() {
             'readonly' => 'readonly'
         ),
     ) );
+
+    $sbc_order->add_field( array(
+        'name' => esc_html__( 'Количество детей на мероприятии (до 12 лет)', 'sbc' ),
+        'id'   => 'sbc_order_event_child',
+        'type' => 'text',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        )
+    ));
 
     $sbc_order->add_field( array(
         'name' => 'Пакет',
