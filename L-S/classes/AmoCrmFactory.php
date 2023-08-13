@@ -261,7 +261,20 @@ class AmoCrmFactory {
                     )
             );
             $leadCustomFields->add($childCountFieldValueModel);
-            
+
+
+            if($order->eventChilds != null){
+                // Order event child count
+                $eventChildCountFieldValueModel = new NumericCustomFieldValuesModel();
+                $eventChildCountFieldValueModel->setFieldId(763255);
+                $eventChildCountFieldValueModel->setValues(
+                    (new NumericCustomFieldValueCollection())
+                        ->add((new NumericCustomFieldValueModel())
+                                ->setValue($order->eventChilds)
+                        )
+                );
+                $leadCustomFields->add($eventChildCountFieldValueModel);
+            }
             // Order baby bed
             $babyBedFieldValueModel = new CheckboxCustomFieldValuesModel();
             $babyBedFieldValueModel->setFieldId(760951);
@@ -308,6 +321,19 @@ class AmoCrmFactory {
                         )
                 );
                 $leadCustomFields->add($paymentMethodFieldValueModel);
+            }
+
+            // Order scenario
+            if(!empty($order->scenario)){
+                $scenarioFieldValueModel = new SelectCustomFieldValuesModel();
+                $scenarioFieldValueModel->setFieldId(763253);
+                $scenarioFieldValueModel->setValues(
+                    (new SelectCustomFieldValueCollection())
+                        ->add((new SelectCustomFieldValueModel())
+                                ->setValue($order->scenario)
+                        )
+                );
+                $leadCustomFields->add($scenarioFieldValueModel);
             }
 
             // Is fire order

@@ -58,9 +58,9 @@ class MailFactory {
 
     private static function getSubject(Order $order){
         $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
-        if(!empty($order->eventTabId) and !empty($order->eventId)){
+        if($order->scenario == 'Event'){
             $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по мероприятию';
-        }else if(!empty($order->eventTabId)){
+        }else if($order->scenario == 'Fier'){
             $result = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению';
         }
         return $result;
@@ -109,6 +109,7 @@ class MailFactory {
         $foodBreakfast = '';
         $foodLunch = '';
         $foodDinner = '';
+        $eventChields = '';
 
         if($order->foodBreakfast > 0){
             $foodBreakfast = "<tr>
@@ -168,6 +169,22 @@ class MailFactory {
 
         $eventTitle = self::getSubject($order);
 
+        if($order->scenario == 'Event' && $order->eventChilds > 0){
+            $eventChields = "<tr>
+                    <td>Число взрослых:</td>
+                    <td class='f-b'>{$order->peopleCount}</td>
+                </tr>
+                <tr>
+                    <td>Число детей (до 12 лет):</td>
+                    <td class='f-b'>{$order->eventChilds}</td>
+                </tr>";
+        }else {
+            $eventChields = "<tr>
+                <td>Число гостей:</td>
+                <td class='f-b'>{$order->peopleCount}</td>
+                </tr>";
+        }
+
         $result = "<style type='text/css'>
         .title{padding-bottom: 8pt;padding-top: 12pt;font-size: 20pt;}
         .f-b{font-weight: bold;}
@@ -219,10 +236,7 @@ class MailFactory {
         <td>Контактный номер телефона:</td>
         <td class='f-b'>{$order->contact->phone}</td>
         </tr>
-        <tr>
-        <td>Число гостей:</td>
-        <td class='f-b'>{$order->peopleCount}</td>
-        </tr>
+        ".$eventChields."
         ".$babyBed."
         ".$bathHouseWhite."
         ".$bathHouseBlack."

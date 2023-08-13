@@ -105,6 +105,9 @@ function get_order_data($orderId){
     $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', 1) ?? 0;
     $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', 1) ?? 0;
     $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', 1);
+    $scenario = get_post_meta($orderId, 'sbc_order_scenario', 1);
+    $scenario = get_post_meta($orderId, 'sbc_order_scenario', 1);
+    $eventChilds = intval(get_post_meta($orderId, 'sbc_order_event_child', 1));
 
     $foodVariants = [
         'breakfast'=> 'Завтраки',
@@ -170,6 +173,8 @@ function get_order_data($orderId){
         'fio' => $fio[0],
         'leadId' => $leadId,
         'peopleCount' => $peopleCount,
+        'eventChilds' => $eventChilds,
+        'scenario' => $scenario,
         'phone' => $phone,
         'email' => $email,
         'paymentMethod' => $paymentMethod,

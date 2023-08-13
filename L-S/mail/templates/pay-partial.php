@@ -99,7 +99,14 @@
 									<div>Контактный номер телефона: <strong>
 										<?= $order->contact->phone ?>
 										</strong></div>
-									<div>Число гостей: <strong><?= $order->peopleCount ?></strong></div>
+                                    <?php if($order->scenario === 'Event') :?>
+                                        <div>Количество взрослых: <strong><?= $order->peopleCount ?></strong></div>
+                                        <?php if($order->eventChilds > 0):?>
+                                            <div>Количество детей (до 12 лет): <strong><?= $order->eventChilds ?></strong></div>
+                                        <?php endif;?>
+                                    <?php else :?>
+                                        <div>Число гостей: <strong><?= $order->peopleCount ?></strong></div>
+                                    <?php endif;?>
                                     <?php if($order->babyBed):?>
                                         <div>Детская кроватка: <strong>Да</strong></div>
                                     <?php endif;?>
