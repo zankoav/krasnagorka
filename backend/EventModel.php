@@ -57,7 +57,7 @@ class EventModel extends ModelImpl
         
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
-        $eventChilds = $_GET['child'];
+        $eventChilds = intval($_GET['child']);
         $dateFrom  = $_GET['from'];
         $dateTo    = $_GET['to'];
         $teremRoom = $_GET['terem'];
@@ -205,9 +205,29 @@ class EventModel extends ModelImpl
                 $dFrom = new \DateTime($result['dateFrom']);
                 $dFrom = $dFrom->modify('-1 day')->format('Y-m-d');
 
+                
+                $pricePeople = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
+                $pricePeople = ($pricePeople + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
+                $pricePeople += $selectedCalendar['variant']->priceSingle / $people;
+
+                $enabled_child = $selectedCalendar['calendar']['enabled_child'];
+                $priceChild = $enabled_child ? 
+                    (
+                        empty($selectedCalendar['calendar']['new_price_child']) ? 
+                        $selectedCalendar['calendar']['old_price_child'] : 
+                        $selectedCalendar['calendar']['new_price_child']
+                    ) 
+                    : 0;
+
+                $priceChild = $priceChild + $selectedCalendar['variant']->pricePerDay;
+                $result['price'] += $priceChild * $eventChilds;
+
                 $result['eventModel'] = [
                     'id' => $eventId,
-                    'childs' => intval($eventChilds),
+                    'enabled_child' => $enabled_child,
+                    'price_people' => $pricePeople,
+                    'price_child' => $priceChild,
+                    'childs' => $eventChilds,
                     'title' => get_the_title($eventId),
                     'variant' => $selectedCalendar['variant']->title,
                     'variantId' => $selectedCalendar['variant']->id,
