@@ -173,9 +173,6 @@ class EventModel extends ModelImpl
         if (!empty($eventTabId)) {
             $result['eventTabId'] = $eventTabId;
         }
-        if (!empty($eventChilds)) {
-            $result['eventChilds'] = $eventChilds;
-        }
 
         if (!empty($eventId)) {
             $result['eventId'] = $eventId;
@@ -210,6 +207,7 @@ class EventModel extends ModelImpl
 
                 $result['eventModel'] = [
                     'id' => $eventId,
+                    'childs' => intval($eventChilds),
                     'title' => get_the_title($eventId),
                     'variant' => $selectedCalendar['variant']->title,
                     'variantId' => $selectedCalendar['variant']->id,
