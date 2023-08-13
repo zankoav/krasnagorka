@@ -32,7 +32,7 @@
                                 disabled={settings.eventId}
                                 onchange={countChange}
                                 options={settings.counts}></z-select>
-                            <template if:true={settings.eventChilds}>
+                            <template if:true={showChilds}>
                                 <z-select
                                     if:true={settings.eventId}
                                     class="step-house__select step-house__counts"
