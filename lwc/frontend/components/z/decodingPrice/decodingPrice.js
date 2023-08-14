@@ -1,9 +1,13 @@
-import BaseElement from 'base/baseElement'
+import BaseBookingElement from 'base/baseBookingElement'
 import './decodingPrice.scss'
 
-export default class DecodingPrice extends BaseElement {
+export default class DecodingPrice extends BaseBookingElement {
     get showSeasonsDecoding() {
         return !this.settings.eventTabId && this.isPackage
+    }
+
+    get showEventChilds() {
+        return this.settings.eventModel.childs
     }
 
     get subTitle() {

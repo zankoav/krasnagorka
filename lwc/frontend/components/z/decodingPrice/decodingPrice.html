@@ -6,7 +6,7 @@
                 <div class="decoding-price__baby-bed">
                     Цена за взрослого <z-number-value num={settings.eventModel.price_people} value="руб"></z-number-value>
                 </div>
-                <div class="decoding-price__baby-bed">
+                <div if:true={showEventChilds} class="decoding-price__baby-bed">
                     Цена за ребенка (до 12 лет) <z-number-value num={settings.eventModel.price_child} value="руб"></z-number-value>
                 </div>
                 <div class="decoding-price__baby-bed">Итого: <z-number-value num={houseTotalPrice} value="руб"> </z-number-value></div>

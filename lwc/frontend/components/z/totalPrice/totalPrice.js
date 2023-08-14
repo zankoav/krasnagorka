@@ -1,9 +1,12 @@
-import { LightningElement, api, track } from 'lwc'
+import BaseBookingElement from 'base/baseBookingElement'
 import './totalPrice.scss'
 
-export default class TotalPrice extends LightningElement {
-    @api settings
-    @track isOpenTotalPrice
+export default class TotalPrice extends BaseBookingElement {
+    isOpenTotalPrice
+
+    get totalPrice() {
+        return this.currencyModel(this.settings.total.total_price);
+    }
 
     get classNameMore() {
         return this.isOpenTotalPrice

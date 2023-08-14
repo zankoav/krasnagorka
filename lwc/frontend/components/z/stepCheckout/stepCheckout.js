@@ -1,10 +1,9 @@
 import { UTILS } from 'core/utils'
-import BaseElement from 'base/baseElement'
+import BaseBookingElement from 'base/baseBookingElement'
 import './stepCheckout.scss'
 
 // const MAX_AGE = 3600 * 24 * 100;
-export default class StepCheckout extends BaseElement {
-
+export default class StepCheckout extends BaseBookingElement {
     get foodPackage() {
         return UTILS.foodVariants[this.settings.foodVariant]
     }

@@ -125,7 +125,7 @@
                                     <?php if($order->bigAnimalCount > 0):?>
                                         <div>Собаки крупных пород (высота в холке более 40 см): <strong><?=$order->bigAnimalCount?></strong></div>
                                     <?php endif;?>
-                                    <?php if(!empty($order->foodVariant)):?>
+                                    <?php if(!empty($order->foodVariant) && $order->scenario != 'Event'):?>
                                         <div>Пакет питания: <strong><?=$order->getFoodVariant()?></strong></div>
                                     <?php endif;?>
                                     <?php if($order->foodBreakfast > 0):?>

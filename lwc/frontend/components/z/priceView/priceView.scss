@@ -1,0 +1,21 @@
+.price-view {
+    font-weight: 700;
+    font-size: 16px;
+    color: #ed123d;
+
+    &__penny {
+        font-weight: 300;
+        font-size: 12px;
+    }
+
+    &__delimeter {
+        font-weight: 300;
+    }
+
+    &__currency {
+        font-weight: 300;
+        font-size: 12px;
+        color: #b4afb5;
+        margin-left: 4px;
+    }
+}
