@@ -7,6 +7,14 @@ use Ls\Wp\Log as Log;
 
 // START
 
+function currencyModel($value){
+    $valueArr = explode('.', number_format($value, 2, '.', ''));
+    return [
+        'rub' => $valueArr[0],
+        'penny' => $valueArr[1]
+    ];
+}
+
 require __DIR__ . '/vendor/autoload.php';
 
 require __DIR__ . '/L-S/utils/index.php';
