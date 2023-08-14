@@ -227,7 +227,7 @@
 
             $eventChilds;
             if($scenario === 'Event'){
-                $eventChilds = get_post_meta($orderId, 'sbc_order_childs', true);
+                $eventChilds = get_post_meta($orderId, 'sbc_order_event_child', true);
             }
 
             $itemOrder = [
@@ -254,16 +254,14 @@
                 'services' => $services
             ];
 
-            if(!empty($eventChilds)){
-                $itemOrder['eventChilds'] = $eventChilds;
-            }
+            
 
             if(!empty($eventId)){
                 $per_day = get_post_meta($variantId, 'variant_description_per_day', 1);
                 $single = get_post_meta($variantId, 'variant_description_single', 1);
 
                 $itemOrder['variantDescription'] = $per_day;
-
+                $itemOrder['eventChilds'] = $eventChilds ?? 0;
                 $itemOrder['eventTitle'] = get_the_title($eventId);
                 $itemOrder['variantTitle'] = get_the_title($variantId);
                 

@@ -460,6 +460,7 @@ class AmoCrmFactory {
             }
 
             $order->note[] = "Сумма: {$order->price} руб.";
+            $order->note[] = "Сценарий: {$order->scenario}";
             $order->note[] = "Количество Человек: {$order->peopleCount}";
             $order->note[] = "Горящее предложение: {$isFireOrder}";
             if(!empty($eventVariant)){

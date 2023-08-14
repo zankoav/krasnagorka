@@ -1251,6 +1251,8 @@ class Booking_Form_Controller extends WP_REST_Controller
             }
 
             $babyBed = $request['babyBed'] == 'true';
+            $eventChilds = $request['eventChilds'];
+            $scenario = $request['scenario'];
 
             $isFireEvent = $request['isFireEvent'] == 'true';
             $eventId = $request['eventId'];
@@ -1344,6 +1346,14 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if ($isFireEvent) {
                     update_post_meta($post_id, 'sbc_order_is_event', 'on');
+                }
+                
+                if (!empty($eventChilds)) {
+                    update_post_meta($post_id, 'sbc_order_event_child', $eventChilds);
+                }
+
+                if (!empty($scenario)) {
+                    update_post_meta($post_id, 'sbc_order_scenario', $scenario);
                 }
 
                 if (!empty($eventId)) {
