@@ -31,7 +31,7 @@ export default class StepHouse extends LightningElement {
     }
 
     get showChilds() {
-        return this.settings.scenario === 'Event'
+        return this.settings.scenario === 'Event' && this.settings.eventModel.enabled_child
     }
 
     get showDaylySales() {
