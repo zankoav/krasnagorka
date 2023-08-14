@@ -45,6 +45,7 @@ class OrderFactory {
         $order->foodVariant = $data['foodVariant'];
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
+        $order->eventChilds = 0;
         
         if($order->scenario === 'Event'){
             $order->foodPrice = 0;
@@ -198,9 +199,7 @@ class OrderFactory {
         }
 
         update_post_meta($order->id, 'sbc_order_scenario', $order->scenario);
-        if($order->scenario === 'Event'){
-            update_post_meta($order->id, 'sbc_order_event_child', $order->eventChilds);
-        }
+        update_post_meta($order->id, 'sbc_order_event_child', $order->eventChilds);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
         update_post_meta($order->id, 'sbc_order_start', $order->dateStart);
