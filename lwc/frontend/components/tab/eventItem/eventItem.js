@@ -121,7 +121,14 @@ export default class EventItem extends LightningElement {
     }
 
     get peopleOptions() {
-        const min = this.selectedItem.min_people
+        let min = this.selectedItem.min_people
+
+        if (this.selectedPeople < min && this.selectedChild > 0) {
+            min -= this.selectedChild
+            if(min < 1){
+                min = 1;
+            }
+        }
         const max = this.selectedItem.max_people
         const result = []
         for (let i = min; i < max + 1; i++) {
@@ -136,7 +143,7 @@ export default class EventItem extends LightningElement {
 
     get childOptions() {
         const min = 0
-        const max = this.selectedItem.max_people - this.selectedPeople
+        const max = this.selectedItem.max_people - 1
         const result = []
         for (let i = min; i < max + 1; i++) {
             result.push({
@@ -175,7 +182,6 @@ export default class EventItem extends LightningElement {
     }
 
     connectedCallback() {
-        console.log('group', this.group)
         this.selectedApportament = this.group.items.find((item) => item.selected).calendar
         this.selectedVar = this.group.variant_default
         this.selectedPeople = this.selectedItem.min_people
@@ -188,11 +194,24 @@ export default class EventItem extends LightningElement {
 
     peopleHandler(event) {
         this.selectedPeople = parseInt(event.detail)
-        this.selectedChild = 0
+        if (this.selectedChild + this.selectedPeople > this.selectedItem.max_people) {
+            this.selectedChild = this.selectedItem.max_people - this.selectedPeople
+        } else if (this.selectedChild + this.selectedPeople < this.selectedItem.min_people) {
+            this.selectedChild = this.selectedItem.min_people - this.selectedPeople
+        }
     }
 
     childHandler(event) {
         this.selectedChild = parseInt(event.detail)
+        if (this.selectedChild + this.selectedPeople > this.selectedItem.max_people) {
+            this.selectedPeople = this.selectedItem.max_people - this.selectedChild
+        } else if (this.selectedChild + this.selectedPeople < this.selectedItem.min_people) {
+            this.selectedPeople = this.selectedItem.min_people - this.selectedChild
+            if(this.selectedPeople < 1){
+                this.selectedPeople = 1;
+            }
+        }
+        
     }
 
     apportomentsHandler(event) {
