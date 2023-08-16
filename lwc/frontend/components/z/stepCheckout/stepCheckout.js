@@ -9,7 +9,7 @@ export default class StepCheckout extends BaseBookingElement {
     }
 
     get showFoodPackage() {
-        return !this.settings.eventId
+        return !this.settings.eventId && !this.isPackage
     }
 
     get eventChildCount() {
