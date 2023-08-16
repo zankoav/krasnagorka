@@ -6,6 +6,7 @@ use LsFactory\ContactFactory;
 
 use LsFactory\Order;
 use LsFactory\OrderException;
+use LsCalculate\PackageCalculate as PackageCalculate;
 
 
 class OrderFactory {
