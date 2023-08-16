@@ -306,6 +306,17 @@ function sbc_order_info_metabox() {
         )
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => 'Пакетный тур',
+        'id'   => 'sbc_order_package_id',
+        'type'             => 'select',
+        'options_cb'       => 'show_packages_options',
+        'show_option_none' => true,
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+    ) );
+
 }
 
 add_action( 'cmb2_admin_init', 'sbc_order_info_metabox' );

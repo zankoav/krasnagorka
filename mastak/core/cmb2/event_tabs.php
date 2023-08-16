@@ -850,6 +850,24 @@
         return $variants;
     }
 
+    function show_packages_options() {
+        $query = new WP_Query(array(
+            'post_type'      => 'package',
+            'posts_per_page' => -1,
+            'post_status' => array("publish"),
+            'orderby' => 'post_title',
+            'order' => 'ASC'
+        ));
+
+        $packages = [];
+        $posts = $query->get_posts();
+        foreach ($posts as $post) {
+            $packages[$post->ID] = $post->post_title;
+        }
+    
+        return $packages;
+    }
+
     function show_interval_options() {
 
         $query = new WP_Query(array(

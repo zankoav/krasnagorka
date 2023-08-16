@@ -369,6 +369,29 @@ class AmoCrmFactory {
             );
             $leadCustomFields->add($eventIdOrderFieldValueModel);
 
+            if($order->scenario === 'Package'){
+                // Package id 
+                $packageIdOrderFieldValueModel = new TextCustomFieldValuesModel();
+                $packageIdOrderFieldValueModel->setFieldId(763261);
+                $packageIdOrderFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                                ->setValue($order->package['id'])
+                        )
+                );
+                $leadCustomFields->add($packageIdOrderFieldValueModel);
+
+                $packageTitleOrderFieldValueModel = new TextCustomFieldValuesModel();
+                $packageTitleOrderFieldValueModel->setFieldId(763263);
+                $packageTitleOrderFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())
+                                ->setValue($order->package['title'])
+                        )
+                );
+                $leadCustomFields->add($packageTitleOrderFieldValueModel);
+            }
+
             
 
             $eventVariant = $order->eventVariant();
@@ -468,6 +491,15 @@ class AmoCrmFactory {
                 $order->note[] = "Количество детей (до 12 лет): {$order->eventChilds}";
                 $order->note[] = "Пакет: " . $eventVariant['title'];
                 $order->note[] = "Описание пакета: " . $eventVariant['description'];
+            }
+
+            if($order->scenario === 'Package'){
+                $order->note[] = "Пакетный тур: ". $order->package['title'];
+                $packageServicesStr = '';
+                foreach($order->getPackageServices() as $service){
+                    $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
+                }
+                $order->note[] = "В пакетный тур включено:\n". $packageServicesStr;
             }
             
             $order->note[] = "Стоимость питания: {$order->foodPrice} руб.";

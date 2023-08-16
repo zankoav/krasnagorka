@@ -213,6 +213,11 @@ class OrderFactory {
         }
 
         update_post_meta($order->id, 'sbc_order_scenario', $order->scenario);
+
+        if($order->scenario === 'Package'){
+            update_post_meta($order->id, 'sbc_order_package_id', $order->package['id']);
+        }
+        
         update_post_meta($order->id, 'sbc_order_event_child', $order->eventChilds);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
