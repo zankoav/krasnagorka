@@ -15,18 +15,10 @@ class PackageCalculate extends CalculateImpl
         $calendarId = $request['calendarId'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
-        $houseId = $request['house'];
+        $houseId = $request['house'] ?? $request['houseId'];
         $babyBed = $request['babyBed'];
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
-        $peopleCount = $request['peopleCount'];
-
-        $babyBed = $request['babyBed'];
-        $smallAnimalCount = $request['smallAnimalCount'];
-        $bigAnimalCount = $request['bigAnimalCount'];
-        
-        $foodBreakfast = $request['foodBreakfast'];
-        $foodDinner = $request['foodDinner'];
-        $foodLunch = $request['foodLunch'];
+        $peopleCount = $request['peopleCount'] ?? $request['count'];
 
         $min_night = intval(get_post_meta($packageId,'package_night_min', 1));
 
