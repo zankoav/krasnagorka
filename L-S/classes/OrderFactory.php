@@ -79,14 +79,14 @@ class OrderFactory {
             $data['peopleCount'] = $data['count'];
             $result = $calculateModel->response(
                 array_merge(
-                    (array)$order, 
+                    $data, 
                     ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
                 )
             );
             $order->foodPrice = 0;
             $order->package = $result['result'];
             Log::info('package', $result['result']);
-            $order->accommodationPrice = 0;
+            $order->accommodationPrice = $result['result']['total_price'];
             $order->price = $result['result']['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
