@@ -77,6 +77,7 @@ class OrderFactory {
             $data['house'] = $data['houseId'];
             $data['peopleCount'] = $data['count'];
             $result = $calculateModel->response($data);
+            Log::info('result', $result);
             $order->foodPrice = 0;
             $order->accommodationPrice = 0;
             $order->price = $result['result']['total_price'];
