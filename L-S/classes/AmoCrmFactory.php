@@ -497,7 +497,11 @@ class AmoCrmFactory {
                 $order->note[] = "Пакетный тур: ". $order->package['title'];
                 $packageServicesStr = '';
                 foreach($order->getPackageServices() as $service){
-                    $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
+                    if($service['id'] == '1'){
+                        $packageServicesStr .= $service['title']."\n";
+                    }else{
+                        $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
+                    }
                 }
                 $order->note[] = "В пакетный тур включено:\n". $packageServicesStr;
             }
