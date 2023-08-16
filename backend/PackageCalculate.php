@@ -15,10 +15,10 @@ class PackageCalculate extends CalculateImpl
         $calendarId = $request['calendarId'];
         $dateStart = $request['dateStart'];
         $dateEnd = $request['dateEnd'];
-        $houseId = $request['house'] ?? $request['houseId'];
+        $houseId = $request['house'];
         $babyBed = $request['babyBed'];
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
-        $peopleCount = $request['peopleCount'] ?? $request['count'];
+        $peopleCount = $request['peopleCount'];
 
         $min_night = intval(get_post_meta($packageId,'package_night_min', 1));
 

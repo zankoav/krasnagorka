@@ -74,6 +74,8 @@ class OrderFactory {
             $order->price = $totalPrice;
         }else if ($order->scenario === 'Package'){
             $calculateModel = new PackageCalculate();
+            $data['house'] = $data['houseId'];
+            $data['peopleCount'] = $data['count'];
             $result = $calculateModel->response($data);
             $order->foodPrice = 0;
             $order->accommodationPrice = 0;
