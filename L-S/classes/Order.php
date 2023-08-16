@@ -142,6 +142,14 @@ class Order {
         return $this->babyBed ? 'Да' : 'Нет';
     }
 
+    public function getPackageTitle(){
+        return $this->package['title'];
+    }
+
+    public function getPackageServices(){
+        return $this->package['services'];
+    }
+
     public function getFoodVariant(){
         $arr = [
             'breakfast'=> 'Завтраки',

@@ -23,6 +23,7 @@ class PackageCalculate extends CalculateImpl
         $min_night = intval(get_post_meta($packageId,'package_night_min', 1));
 
         $calendars = get_post_meta($packageId,'package_calendars', 1);
+        $title = get_the_title($packageId);
         $calendarsFormatted = [];
         $min_people;
         $price_person_night;
@@ -118,6 +119,8 @@ class PackageCalculate extends CalculateImpl
             'only_booking_order' => [
                 'enabled' => false
             ],
+            'title' => $title,
+            'id'=> $packageId,
             'services' => $servicesFormatted,
             'accommodation' => $accomodationPrice,
             'total_price' => $accomodationPrice
