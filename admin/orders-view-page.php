@@ -309,7 +309,6 @@
                                         <div class="order-item__list-item-value">${order.packageTitle}</div>
                                     </div>
                                     <div class="order-item__list-item">
-                                        <div class="order-item__list-item-label">В пакетный тур включено:</div>
                                         <div class="order-item__list-item-value">${order.packageData}</div>
                                     </div>
                                 </div>
