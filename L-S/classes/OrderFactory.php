@@ -79,7 +79,7 @@ class OrderFactory {
            
             $result = $calculateModel->response($data);
             Log::info('Package result', $result);
-            $order->price = $result['total_price'];
+            $order->price = $result['result']['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
             $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
