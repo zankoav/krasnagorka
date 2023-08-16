@@ -77,12 +77,8 @@ class OrderFactory {
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($data['dateStart'])));
             $data['house'] = $data['houseId'];
             $data['peopleCount'] = $data['count'];
-            $result = $calculateModel->response(
-                array_merge(
-                    $data, 
-                    ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
-                )
-            );
+            $data['dateStart'] = $tempDateStart->modify('+1 day')->format('Y-m-d');
+            $result = $calculateModel->response($data);
             $order->foodPrice = 0;
             $order->package = $result['result'];
             Log::info('package', $result['result']);
