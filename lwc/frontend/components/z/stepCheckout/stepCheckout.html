@@ -4,6 +4,7 @@
             <h3 class="step-checkout__title">Ваш заказ</h3>
             <p class="step-checkout__item" data-label="Домик:">{calendar.name}</p>
             <p if:true={isEvent} class="step-checkout__item" data-label="Мероприятие:">{settings.eventModel.title}</p>
+            <p if:true={isPackage} class="step-checkout__item" data-label="Пакетный тур:">{settings.package.title}</p>
             <p class="step-checkout__item" data-label="Количество человек:">{peopleCount}</p>
             <p if:true={eventChildCount} class="step-checkout__item" data-label="Количество детей (до 12 лет):">{eventChildCount}</p>
             <p if:true={childCount} class="step-checkout__item" data-label="Количество детей без спальных мест:">{childCount}</p>

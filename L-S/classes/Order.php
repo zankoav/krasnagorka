@@ -58,6 +58,7 @@ class Order {
     public ?string $eventId;
     public ?string $variantId;
     public array $note;
+    public ?array $package;
     public bool $isTerem = false;
     public string $calendarName;
     public string $comment;

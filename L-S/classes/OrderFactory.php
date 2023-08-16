@@ -74,11 +74,18 @@ class OrderFactory {
             $order->price = $totalPrice;
         }else if ($order->scenario === 'Package'){
             $calculateModel = new PackageCalculate();
+            $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
             $data['house'] = $data['houseId'];
             $data['peopleCount'] = $data['count'];
-            $result = $calculateModel->response($data);
-            Log::info('result', $result);
+            $result = $calculateModel->response(
+                array_merge(
+                    (array)$order, 
+                    ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
+                )
+            );
             $order->foodPrice = 0;
+            $order->package = $result['result'];
+            Log::info('package', $result['result']);
             $order->accommodationPrice = 0;
             $order->price = $result['result']['total_price'];
         }else{
