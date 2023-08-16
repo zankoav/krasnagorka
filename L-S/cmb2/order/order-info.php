@@ -317,6 +317,15 @@ function sbc_order_info_metabox() {
         ),
     ) );
 
+    $sbc_order->add_field( array(
+        'name' => 'Пакетный тур сервисы',
+        'id'   => 'sbc_order_package_data',
+        'type'             => 'textarea',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+    ) );
+
 }
 
 add_action( 'cmb2_admin_init', 'sbc_order_info_metabox' );

@@ -81,7 +81,6 @@ class OrderFactory {
             $result = $calculateModel->response($data);
             $order->foodPrice = 0;
             $order->package = $result['result'];
-            Log::info('package', $result['result']);
             $order->accommodationPrice = $result['result']['total_price'];
             $order->price = $result['result']['total_price'];
         }else{
@@ -216,6 +215,15 @@ class OrderFactory {
 
         if($order->scenario === 'Package'){
             update_post_meta($order->id, 'sbc_order_package_id', $order->package['id']);
+            $packageServicesStr = "В пакетный тур включено:\n";
+            foreach($order->getPackageServices() as $service){
+                if($service['id'] == '1'){
+                    $packageServicesStr .= $service['title']."\n";
+                }else{
+                    $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
+                }
+            }
+            update_post_meta($order->id, 'sbc_order_package_data', $packageServicesStr);
         }
         
         update_post_meta($order->id, 'sbc_order_event_child', $order->eventChilds);

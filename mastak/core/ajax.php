@@ -233,6 +233,7 @@
             $itemOrder = [
                 '#'         => $number,
                 'calendars' => implode(", ", $calendarsNames),
+                'scenario'     => $scenario,
                 'start'     => $start,
                 'end'       => $end,
                 'people'   => $people,
@@ -254,6 +255,11 @@
                 'services' => $services
             ];
 
+            if($scenario === 'Package'){
+                $packageId = get_post_meta($orderId, 'sbc_order_package_id', true);
+                $itemOrder['packageTitle'] = get_the_title($packageId);
+                $itemOrder['packageData'] = get_post_meta($orderId, 'sbc_order_package_data', true);
+            }
             
 
             if(!empty($eventId)){

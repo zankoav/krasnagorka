@@ -268,7 +268,6 @@
             }
 
             const sendRequest = (requestData) => {
-                console.log('requestData', requestData);
                 startSpinner();
                 requestData.action = 'load_orders',
                 $.ajax(ajaxurl, {
@@ -300,7 +299,23 @@
                     const comment = order.comment || '-'; 
                     let foodSectionOrEvent;
                     let additionalServices = '';
-                    if(order.eventTitle){
+                    if(order.scenario == 'Package'){
+                        foodSectionOrEvent = `
+                            <div class="order-item">
+                                <div class="order-item__title fw-bold">Пакетный тур</div>
+                                <div class="order-item__list">
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">Название:</div>
+                                        <div class="order-item__list-item-value">${order.packageTitle}</div>
+                                    </div>
+                                    <div class="order-item__list-item">
+                                        <div class="order-item__list-item-label">В пакетный тур включено:</div>
+                                        <div class="order-item__list-item-value">${order.packageData}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }else if(order.eventTitle){
                         foodSectionOrEvent = `
                             <div class="order-item">
                                 <div class="order-item__title fw-bold">Мероприятие</div>
