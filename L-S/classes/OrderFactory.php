@@ -73,7 +73,10 @@ class OrderFactory {
             $order->accommodationPrice = 0;
         }else if ($order->scenario === 'Package'){
             $calculateModel = new PackageCalculate();
+
+           
             $result = $calculateModel->response($data);
+            \Log::info('Package result', $result);
             $order->price = $result['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
