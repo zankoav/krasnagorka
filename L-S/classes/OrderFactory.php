@@ -74,7 +74,7 @@ class OrderFactory {
             $order->price = $totalPrice;
         }else if ($order->scenario === 'Package'){
             $calculateModel = new PackageCalculate();
-            $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
+            $tempDateStart = new \DateTime(date("Y-m-d", strtotime($data['dateStart'])));
             $data['house'] = $data['houseId'];
             $data['peopleCount'] = $data['count'];
             $result = $calculateModel->response(
