@@ -23,12 +23,6 @@ require __DIR__ . '/L-S/cmb2/index.php';
 require __DIR__ . '/L-S/widgets/index.php';
 require __DIR__ . '/L-S/models/index.php';
 
-// Factory
-require __DIR__ . '/L-S/classes/index.php';
-
-
-require __DIR__ . '/L-S/mail/LS_Mailer.php';
-
 require __DIR__ . '/backend/Logger.php';
 require __DIR__ . '/backend/Assets.php';
 require __DIR__ . '/backend/CalculateImpl.php';
@@ -40,6 +34,10 @@ require __DIR__ . '/backend/PackageModel.php';
 require __DIR__ . '/backend/FierModel.php';
 require __DIR__ . '/backend/EventModel.php';
 require __DIR__ . '/backend/ModelFactory.php';
+
+// Factory
+require __DIR__ . '/L-S/classes/index.php';
+require __DIR__ . '/L-S/mail/LS_Mailer.php';
 
 $assets = new Assets();
 

@@ -69,7 +69,11 @@ class OrderFactory {
             $priceChild = ($priceChild + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
             $totalPrice += $priceChild * $order->eventChilds;
             $order->price = $totalPrice;
-
+            $order->accommodationPrice = 0;
+        }else if ($order->scenario === 'Package'){
+            $calculateModel = new PackageCalculate();
+            $result = $calculateModel->response($request);
+            $order->price = $result['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
             $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
