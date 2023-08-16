@@ -3,6 +3,8 @@ namespace LsFactory;
 
 use LsFactory\ContactException;
 use LsFactory\ContactFactory;
+use Ls\Wp\Log as Log;
+
 
 use LsFactory\Order;
 use LsFactory\OrderException;
@@ -76,7 +78,7 @@ class OrderFactory {
 
            
             $result = $calculateModel->response($data);
-            \Log::info('Package result', $result);
+            Log::info('Package result', $result);
             $order->price = $result['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
