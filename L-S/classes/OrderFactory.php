@@ -72,13 +72,11 @@ class OrderFactory {
             $priceChild = ($priceChild + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
             $totalPrice += $priceChild * $order->eventChilds;
             $order->price = $totalPrice;
-            $order->accommodationPrice = 0;
         }else if ($order->scenario === 'Package'){
             $calculateModel = new PackageCalculate();
-
-           
             $result = $calculateModel->response($data);
-            Log::info('Package result', $result);
+            $order->foodPrice = 0;
+            $order->accommodationPrice = 0;
             $order->price = $result['result']['total_price'];
         }else{
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
