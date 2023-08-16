@@ -123,6 +123,9 @@ class PackageCalculate extends CalculateImpl
 
         $result = [
             'error' => $error,
+            'only_booking_order' => [
+                'enabled' => false
+            ],
             'services' => $servicesFormatted,
             'accommodation' => $accomodationPrice,
             'total_price' => $accomodationPrice

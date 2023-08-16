@@ -9,7 +9,7 @@
                 <div if:true={showEventChilds} class="decoding-price__baby-bed">
                     Цена за ребенка (до 12 лет) <z-number-value num={settings.eventModel.price_child} value="руб"></z-number-value>
                 </div>
-                <div class="decoding-price__baby-bed">Итого: <z-number-value num={houseTotalPrice} value="руб"> </z-number-value></div>
+                <div class="decoding-price__baby-bed">Итого: <z-price-view price={houseTotalPrice}></z-price-view></div>
             </template>
             <template if:true={isPackage}>
                 <div class="decoding-price__subtitle">{subTitle}</div>
@@ -18,7 +18,7 @@
                         {service.title} <z-number-value num={service.count} value="шт."> </z-number-value>
                     </div>
                 </template>
-                <div class="decoding-price__baby-bed">Итого: <z-number-value num={houseTotalPrice} value="руб"> </z-number-value></div>
+                <div class="decoding-price__baby-bed">Итого: <z-price-view price={houseTotalPrice}></z-price-view></div>
             </template>
             <template if:true={otherScenarios}>
                 <div class="decoding-price__subtitle">{subTitle}</div>
@@ -28,7 +28,7 @@
                     </template>
                 </template>
                 <div class="decoding-price__baby-bed">
-                    Итого: <z-number-value num={houseTotalPrice} value="руб"> </z-number-value>
+                    Итого: <z-price-view price={houseTotalPrice}></z-price-view>
                     <span if:true={settings.total.day_sale_next} class="decoding-price__sale"
                         >При выборе от <span class="decoding-price__number">{settings.total.day_sale_next.dayesNumber}</span> дней, ваша скидка будет
                         <span class="decoding-price__percent"> -{settings.total.day_sale_next.sale}%</span>
@@ -107,9 +107,7 @@
             </template>
         </div>
         <div class="decoding-price__description">
-            <div class="decoding-price__final-sum">
-                Итоговая стоимость:<span class="decoding-price__total-number number-value" data-after="руб">{settings.total.total_price}</span>
-            </div>
+            <div class="decoding-price__final-sum">Итоговая стоимость: <z-price-view price={totalPrice}></z-price-view></div>
         </div>
     </div>
 </template>

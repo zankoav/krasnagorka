@@ -6,6 +6,10 @@ export default class DecodingPrice extends BaseBookingElement {
         return !this.settings.eventTabId && this.isPackage
     }
 
+    get totalPrice() {
+        return this.currencyModel(this.settings.total.total_price)
+    }
+
     get showEventChilds() {
         return this.settings.eventModel.childs
     }
@@ -95,6 +99,8 @@ export default class DecodingPrice extends BaseBookingElement {
             }
         }
 
-        return total
+        console.log('this.currencyModel(total)', this.currencyModel(total));
+
+        return this.currencyModel(total)
     }
 }

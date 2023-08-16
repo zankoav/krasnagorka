@@ -1,9 +1,9 @@
-import { LightningElement, api, track } from 'lwc'
+import BaseBookingElement from 'base/baseBookingElement'
+
 import './stepAdditionalServices.scss'
 
-export default class StepAdditionalServices extends LightningElement {
-    @api settings
-    @track error
+export default class StepAdditionalServices extends BaseBookingElement {
+    error
 
     get babyBedLabel() {
         return `Добавить детскую кроватку (${this.settings.babyBedPrice} BYN / ночь)`
@@ -46,7 +46,9 @@ export default class StepAdditionalServices extends LightningElement {
 
     get showAnimalsService() {
         let result = false
-        if (this.settings.total?.accommodation && this.settings.scenario != 'Package') {
+        if (this.isPackage) {
+            result = false
+        } else if (this.settings.total?.accommodation) {
             result = false
         } else {
             result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals

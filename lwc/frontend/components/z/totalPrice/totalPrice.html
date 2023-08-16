@@ -4,7 +4,7 @@
         <template if:true={settings.total}>
             <div class="total-price">
                 <div class="total-price__container">
-                    <div class="total-price__title">Итого: <z-price-view rub={totalPrice.rub} penny={totalPrice.penny}></z-price-view></div>
+                    <div class="total-price__title">Итого: <z-price-view price={totalPrice}></z-price-view></div>
                     <div class={classNameMore} onclick={tooglePrice}>см. расшифровку</div>
                 </div>
                 <div class="total-price__warning" if:true={onlyBookingEnabled}>
