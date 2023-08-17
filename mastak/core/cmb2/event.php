@@ -124,7 +124,7 @@
 
         $sbc_client->add_field(array(
             'name' => 'Ссылка для кнопки забронировать',
-            'id'   => $prefix .'_link',
+            'id'   => $prefix .'link',
             'type' => 'text_url'
         ));
     }
