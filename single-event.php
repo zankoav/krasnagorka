@@ -77,6 +77,7 @@
                        class="house-booking__button">забронировать / рассчитать
                     </a>
                 <?php elseif (!empty($linkTothirdPart)): ?>
+                    <span></span>
                     <a href="<?= $linkTothirdPart ?>"
                        target="_blank" 
                        class="house-booking__button">забронировать / рассчитать
