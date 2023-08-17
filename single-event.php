@@ -19,6 +19,7 @@
     $date_end    = get_post_meta(get_the_ID(), "mastak_event_date_finish", true);
     $description = get_post_meta(get_the_ID(), "mastak_event_description", true);
     $subtitle    = get_post_meta(get_the_ID(), "mastak_event_subtitle", true);
+    $linkTothirdPart    = get_post_meta(get_the_ID(), "mastak_event_link", true);
     $dateCurrent = time();
     $dateAgree   = $dateCurrent < (int)$date_end;
 
@@ -73,6 +74,11 @@
                     <a href="/booking-form/?booking=<?= get_the_ID() ?>"
                        target="_blank"
                        data-event="<?= get_the_title(); ?>" 
+                       class="house-booking__button">забронировать / рассчитать
+                    </a>
+                <?php elseif (!empty($linkTothirdPart)): ?>
+                    <a href="<?= $linkTothirdPart ?>"
+                       target="_blank" 
                        class="house-booking__button">забронировать / рассчитать
                     </a>
                 <?php endif; ?>

@@ -354,6 +354,9 @@ export default class Admin extends LightningElement {
                 this.updateSettingsOnly({
                     total: data
                 })
+
+                console.log('data', data);
+
             }
         }
     }

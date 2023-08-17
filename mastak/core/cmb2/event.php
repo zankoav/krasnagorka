@@ -121,6 +121,12 @@
             'id'   => 'new_page',
             'type' => 'checkbox'
         ));
+
+        $sbc_client->add_field(array(
+            'name' => 'Ссылка для кнопки забронировать',
+            'id'   => $prefix .'_link',
+            'type' => 'text_url'
+        ));
     }
 
     add_action('cmb2_admin_init', 'mastak_event_metabox');
