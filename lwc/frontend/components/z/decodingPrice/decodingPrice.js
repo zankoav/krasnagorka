@@ -3,7 +3,7 @@ import './decodingPrice.scss'
 
 export default class DecodingPrice extends BaseBookingElement {
     get showSeasonsDecoding() {
-        return !this.settings.eventTabId && this.isPackage
+        return !this.settings.eventTabId && !this.isPackage
     }
 
     get totalPrice() {
