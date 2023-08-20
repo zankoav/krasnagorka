@@ -156,7 +156,7 @@
                                                 data-currency="<?= $currency_name; ?>"
                                                 data-byn="<?= $service_byn; ?>"><?= $service_price; ?>
                                             </span> <?= $service_subtitle ?>
-                                        <?php endif; :?>
+                                        <?php endif;?>
                                     </td>
                                 </tr>
                                 <?php
