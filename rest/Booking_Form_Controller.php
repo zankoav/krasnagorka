@@ -1257,6 +1257,7 @@ class Booking_Form_Controller extends WP_REST_Controller
             $isFireEvent = $request['isFireEvent'] == 'true';
             $eventId = $request['eventId'];
             $variantId = $request['variantId'];
+            $packageId = $request['packageId'];
 
             $bathHouseWhite = intval($request['bathHouseWhite'] ?? 0);
             $bathHouseBlack = intval($request['bathHouseBlack'] ?? 0 );
@@ -1354,6 +1355,10 @@ class Booking_Form_Controller extends WP_REST_Controller
 
                 if (!empty($scenario)) {
                     update_post_meta($post_id, 'sbc_order_scenario', $scenario);
+                }
+
+                if (!empty($packageId)) {
+                    update_post_meta($post_id, 'sbc_order_package_id', $packageId);
                 }
 
                 if (!empty($eventId)) {
