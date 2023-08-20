@@ -108,21 +108,55 @@
 
                                 $service_price    = get_current_price($service_byn);
                                 $service_subtitle = get_post_meta($service_id, "mastak_opportunity_price_subtitle", true);
+                                
+                                if('Питание' == $service_title){
+                                    $bookingSettings = get_option('mastak_booking_appearance_options');
+
+                                    $service_food_breackfast_byn = intval($bookingSettings['food_breakfast_price']);
+                                    $service_food_breackfast_price    = get_current_price($service_food_breackfast_byn);
+
+                                    $service_food_lunch_byn = intval($bookingSettings['food_lunch_price']);
+                                    $service_food_lunch_price    = get_current_price($service_food_lunch_byn);
+
+                                    $service_food_dinner_byn = intval($bookingSettings['food_dinner_price']);
+                                    $service_food_dinner_price    = get_current_price($service_food_dinner_byn);
+                                }
 
                                 ?>
                                 <tr class="<?= $index_services == $service_count ? "" : "prices__row"; ?>">
                                     <td class="prices__name prices__name_size_50per">
                                         <a class="prices__link" href="<?= get_permalink($service_id); ?>"
-                                           target="_blank">
-                                            <?= $service_title; ?>
-                                        </a>
+                                           target="_blank"><?= $service_title; ?></a>
                                     </td>
                                     <td class="prices__value prices__value_active">
-                            <span class="house-booking__price-per-men js-currency"
-                                  data-currency="<?= $currency_name; ?>"
-                                  data-byn="<?= $service_byn; ?>">
-                                <?= $service_price; ?>
-                            </span> <?= $service_subtitle ?>
+                                        <?php if('Питание' == $service_title):?> 
+                                            <div class="house-booking__price-per-men-wrapp">
+                                                Завтрак
+                                                <span class="house-booking__price-per-men js-currency"
+                                                    data-currency="<?= $currency_name; ?>"
+                                                    data-byn="<?= $service_food_breackfast_byn; ?>"><?= $service_food_breackfast_price; ?>
+                                                </span> <?= $service_subtitle ?>
+                                            </div> 
+                                            <div class="house-booking__price-per-men-wrapp">
+                                                Обед
+                                                <span class="house-booking__price-per-men js-currency"
+                                                    data-currency="<?= $currency_name; ?>"
+                                                    data-byn="<?= $service_food_lunch_byn; ?>"><?= $service_food_lunch_price; ?>
+                                                </span> <?= $service_subtitle ?>
+                                            </div> 
+                                            <div class="house-booking__price-per-men-wrapp">
+                                                Ужин
+                                                <span class="house-booking__price-per-men js-currency"
+                                                    data-currency="<?= $currency_name; ?>"
+                                                    data-byn="<?= $service_food_dinner_byn; ?>"><?= $service_food_dinner_price; ?>
+                                                </span> <?= $service_subtitle ?>
+                                            </div> 
+                                        <?php else :?>
+                                            <span class="house-booking__price-per-men js-currency"
+                                                data-currency="<?= $currency_name; ?>"
+                                                data-byn="<?= $service_byn; ?>"><?= $service_price; ?>
+                                            </span> <?= $service_subtitle ?>
+                                        <?php endif; :?>
                                     </td>
                                 </tr>
                                 <?php
