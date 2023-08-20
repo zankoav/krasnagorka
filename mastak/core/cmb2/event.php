@@ -117,6 +117,12 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => 'Не показывать в старых акциях',
+            'id'   => $prefix . 'hide_older',
+            'type' => 'checkbox'
+        ));
+
+        $sbc_client->add_field(array(
             'name' => 'Открывать в новой вкладке',
             'id'   => 'new_page',
             'type' => 'checkbox'

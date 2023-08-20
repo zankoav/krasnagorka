@@ -81,6 +81,10 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
             );
             while ($query_last->have_posts()) {
                 $query_last->the_post();
+                $isHideOldEvent = get_post_meta(get_the_ID(), 'mastak_event_hide_older' , 1);
+                if($isHideOldEvent == 'on'){
+                    continue;
+                }
                 get_template_part('mastak/views/single/single', 'last-events');
             }
             ?>
