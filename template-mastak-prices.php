@@ -131,21 +131,21 @@
                                     <td class="prices__value prices__value_active">
                                         <?php if('Питание' == $service_title):?> 
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
-                                                <span style="display: inline-block;width: 50px;">Завтрак</span>
+                                                <span>Завтрак</span>
                                                 <span class="house-booking__price-per-men js-currency"
                                                     data-currency="<?= $currency_name; ?>"
                                                     data-byn="<?= $service_food_breackfast_byn; ?>"><?= $service_food_breackfast_price; ?>
                                                 </span> <?= $service_subtitle ?>
                                             </div> 
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
-                                            <span style="display: inline-block;width: 50px;">Обед</span>
+                                            <span>Обед</span>
                                                 <span class="house-booking__price-per-men js-currency"
                                                     data-currency="<?= $currency_name; ?>"
                                                     data-byn="<?= $service_food_lunch_byn; ?>"><?= $service_food_lunch_price; ?>
                                                 </span> <?= $service_subtitle ?>
                                             </div> 
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
-                                                <span style="display: inline-block;width: 50px;">Ужин</span>
+                                                <span>Ужин</span>
                                                 <span class="house-booking__price-per-men js-currency"
                                                     data-currency="<?= $currency_name; ?>"
                                                     data-byn="<?= $service_food_dinner_byn; ?>"><?= $service_food_dinner_price; ?>
