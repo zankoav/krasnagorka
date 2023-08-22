@@ -63,7 +63,13 @@
                 </div>
             <?php endfor; ?>
             <footer class="house-booking">
-                <?php if (isset($price) and !empty($price) and $dateAgree): ?>
+                <?php if (!empty($linkTothirdPart)): ?>
+                    <span></span>
+                    <a href="<?= $linkTothirdPart ?>"
+                       target="_blank" 
+                       class="house-booking__button">забронировать / рассчитать
+                    </a>
+                <?php elseif (isset($price) and !empty($price) and $dateAgree): ?>
                     <?php if ($price != 0): ?>
                         <p class="house-booking__info house-booking__info_event">
                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
@@ -74,12 +80,6 @@
                     <a href="/booking-form/?booking=<?= get_the_ID() ?>"
                        target="_blank"
                        data-event="<?= get_the_title(); ?>" 
-                       class="house-booking__button">забронировать / рассчитать
-                    </a>
-                <?php elseif (!empty($linkTothirdPart)): ?>
-                    <span></span>
-                    <a href="<?= $linkTothirdPart ?>"
-                       target="_blank" 
                        class="house-booking__button">забронировать / рассчитать
                     </a>
                 <?php endif; ?>
