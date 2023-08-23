@@ -52,7 +52,7 @@ class PackageCalculate extends CalculateImpl
         $weekendsStr = get_post_meta($packageId,'package_weekends', 1);
         $weekends = [];
         if(!empty($weekendsStr)){
-            $weekends = explode(PHP_EOL, $weekendsStr);
+            $weekends = preg_split('/\r\n|\r|\n/', $weekendsStr);
         }
 
         Log::info('one', $weekends[0]);
