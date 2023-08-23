@@ -52,7 +52,7 @@ class PackageCalculate extends CalculateImpl
         $weekendsStr = get_post_meta($packageId,'package_weekends', 1);
         $weekends = [];
         if(!empty($weekendsStr)){
-            $weekends = explode('\n', $weekendsStr);
+            $weekends = explode('\r\n', $weekendsStr);
         }
 
         Log::info('weekends', $weekends);
