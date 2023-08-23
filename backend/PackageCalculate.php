@@ -55,8 +55,6 @@ class PackageCalculate extends CalculateImpl
             $weekends = preg_split('/\r\n|\r|\n/', $weekendsStr);
         }
 
-        Log::info('one', $weekends[0]);
-
         foreach ($period as $key => $value) {
             $day = $value->format('Y-m-d'); 
            
