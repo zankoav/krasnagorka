@@ -55,7 +55,7 @@ class PackageCalculate extends CalculateImpl
             $weekends = explode('\r\n', $weekendsStr);
         }
 
-        Log::info('weekends', $weekends);
+        Log::info('weekendsStr', $weekendsStr);
 
         foreach ($period as $key => $value) {
             $day = $value->format('Y-m-d'); 
