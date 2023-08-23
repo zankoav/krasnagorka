@@ -88,6 +88,13 @@ function cmb_package()
 		)
 	));
 
+	$cmb_package->add_field(array(
+		'name'            => 'Выходные дни пакетного тура',
+		'id'              => 'package_weekends',
+		'description'     => __('Список дат в формате 2023-01-31', 'krasnagorka'),
+		'type'            => 'textarea'
+	));
+
     $cmb_package->add_field(array(
         'name'            => 'Минимальное количество ночей',
         'id'              => 'package_night_min',
@@ -163,14 +170,19 @@ function cmb_package()
     ));
 
     $cmb_package->add_group_field($group_field_calendar, array(
-        'name'            => 'Стоимость за человека/ночь',
+        'name'            => 'Стоимость за человека/ночь будни',
 		'id'              => 'package_price',
-		'description'     => __('Стоимость за человека/ночь', 'krasnagorka'),
+		'description'     => __('Стоимость за человека/ночь будни', 'krasnagorka'),
         'type'         => 'text_money',
-		'before_field' => 'BYN',
-		'attributes'      => array(
-			'required'    => 'required'
-		)
+		'before_field' => 'BYN'
+    ));
+
+    $cmb_package->add_group_field($group_field_calendar, array(
+        'name'            => 'Стоимость за человека/ночь выходные',
+		'id'              => 'package_price_weekend',
+		'description'     => __('Стоимость за человека/ночь выходные', 'krasnagorka'),
+        'type'         => 'text_money',
+		'before_field' => 'BYN'
     ));
 
     $cmb_package->add_group_field($group_field_calendar, array(

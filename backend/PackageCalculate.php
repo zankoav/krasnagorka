@@ -27,11 +27,13 @@ class PackageCalculate extends CalculateImpl
         $calendarsFormatted = [];
         $min_people;
         $price_person_night;
+        $price_person_night_weekend;
 
         foreach ((array) $calendars as $key => $entry) {
             if($calendarId == intval($entry['calendar'])){
                 $min_people = intval($entry['package_people_min']);
                 $price_person_night = floatval($entry['package_price']);
+                $price_person_night_weekend = floatval($entry['package_price_weekend']);
                 break;
             }
         }
@@ -44,12 +46,31 @@ class PackageCalculate extends CalculateImpl
             $dateEndDT->modify( '+1 day' )
         );
 
-        $days = [];
-        foreach ($period as $key => $value) {
-            $days[] = $value->format('Y-m-d');    
+        $daysWorkday = [];
+        $daysWeekend = [];
+
+        $weekendsStr = get_post_meta($packageId,'package_weekends', 1);
+        $weekends = [];
+        if(!empty($weekendsStr)){
+            $weekends = explode('\n', $weekendsStr);
         }
 
-        $daysCount = iterator_count($period);
+        Log::info('weekends', $weekends);
+
+        foreach ($period as $key => $value) {
+            $day = $value->format('Y-m-d'); 
+            Log::info('day', $day);
+            if(in_array($day, $weekends)){
+                $daysWeekend[] = $day;
+            }else{
+                $daysWorkday[] = $day;  
+            }
+        }
+
+        $daysWeekendCount = count($daysWeekend);
+        $daysWorkdayCount = count($daysWorkday);
+        $totalDays = $daysWeekendCount + $daysWorkdayCount;
+
 
 
         $services = get_post_meta($packageId,'package_services', 1);
@@ -58,11 +79,11 @@ class PackageCalculate extends CalculateImpl
         foreach ((array) $services as $key => $entry) {
             if (isset($entry['service'])) {
                 if($entry['service'] == '1'){
-                    $countFood = (2 + ($daysCount - 1 ) * 3);
+                    $countFood = (2 + ($totalDays - 1 ) * 3);
                     $servicesFormatted[] = [
                         'id' => '1',
-                        'title' => "Количество приемов пищи {$countFood} на 1 чел.",
-                        'count' => intval(2 + ($daysCount - 1 ) * 3)
+                        'title' => "Количество приемов пищи на 1 чел.",
+                        'count' => intval(2 + ($totalDays - 1 ) * 3)
                     ];
                 }
 
@@ -70,7 +91,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '2',
                         'title' => 'Количество сеансов на квадроцикле',
-                        'count' => intval($peopleCount * $daysCount * 0.25)
+                        'count' => intval($peopleCount * $totalDays * 0.25)
                     ];
                 }
 
@@ -78,7 +99,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '3',
                         'title' => 'Количество сеансов в кедровой бочке',
-                        'count' => intval($daysCount / 2) * $peopleCount
+                        'count' => intval($totalDays / 2) * $peopleCount
                     ];
                 }
 
@@ -86,7 +107,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '4',
                         'title' => 'Количество сеансов на канатной дороге',
-                        'count' => intval($daysCount / 2) * $peopleCount
+                        'count' => intval($totalDays / 2) * $peopleCount
                     ];
                 }
 
@@ -95,7 +116,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '5',
                         'title' => "Количество сеансов ({$seanseCount}ч.) бани ",
-                        'count' => intval($daysCount / 2)
+                        'count' => intval($totalDays / 2)
                     ];
                 }
             }
@@ -112,7 +133,8 @@ class PackageCalculate extends CalculateImpl
             $error = 'Хакеры!!! Минимальное количество ночей';
         }
 
-        $accomodationPrice = $daysCount * $peopleCount * $price_person_night;
+        $accomodationPrice = $daysWeekendCount * $peopleCount * $price_person_night_weekend;
+        $accomodationPrice += $daysWorkdayCount * $peopleCount * $price_person_night;
 
         $result = [
             'error' => $error,
