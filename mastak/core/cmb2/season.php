@@ -150,7 +150,10 @@ function mastak_season()
 			'name' => __("$house_title (Базовая стоимость в день)", 'krasnagorka'),
 			'id'   =>  'house_price_' . $house_id,
 			'type'         => 'text_money',
-			'before_field' => 'BYN'
+			'before_field' => 'BYN',
+            'attributes' => array(
+                'type' => 'number',
+            )
 		));
 		$cmb_season->add_field(array(
 			'name' => "$house_title (мин. кол-во людей)",
