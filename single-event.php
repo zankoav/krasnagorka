@@ -64,7 +64,13 @@
             <?php endfor; ?>
             <footer class="house-booking">
                 <?php if (!empty($linkTothirdPart)): ?>
-                    <span></span>
+                    <?php if ($price != 0): ?>
+                        <p class="house-booking__info house-booking__info_event">
+                            <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>"
+                              data-byn="<?= $price_byn; ?>"><?= $price; ?></span>
+                            <span class="opportunity__price-subtitle opportunity__price-subtitle_event"><?= $price_subtitle ?></span>
+                        </p>
+                    <?php endif; ?>
                     <a href="<?= $linkTothirdPart ?>"
                        target="_blank" 
                        class="house-booking__button">забронировать / рассчитать
