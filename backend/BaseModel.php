@@ -493,6 +493,9 @@ class BaseModel extends ModelImpl
 
             foreach($calendarsFromTerem as $room_name => $room_id){
                 $roomPrice = get_post_meta($post->ID, "room_price_$room_id", true);
+                $roomPrice = str_replace(",",".", $roomPrice);
+                $roomPrice = floatval($roomPrice);
+
                 $roomMinPeople = get_post_meta($post->ID, "room_min_people_$room_id", true);
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
@@ -532,7 +535,8 @@ class BaseModel extends ModelImpl
 
             foreach ($houses as $house) {
                 $housePrice = get_post_meta($post->ID, "house_price_$house->ID", true);
-
+                $housePrice = str_replace(",",".", $housePrice);
+                $housePrice = floatval($housePrice);
                 $houseMinPeople = get_post_meta($post->ID, "house_min_people_$house->ID", true);
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
