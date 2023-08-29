@@ -2,6 +2,74 @@ import BaseBookingElement from 'base/baseBookingElement'
 import './decodingPrice.scss'
 
 export default class DecodingPrice extends BaseBookingElement {
+    get priceChild() {
+        return this.currencyModel(this.settings.eventModel.price_child)
+    }
+
+    get pricePeople() {
+        return this.currencyModel(this.settings.eventModel.price_people)
+    }
+
+    get babyBedPrice() {
+        return this.currencyModel(this.settings.total.baby_bed.price)
+    }
+
+    get babyBedTotalPrice() {
+        return this.currencyModel(this.settings.total.baby_bed.total_price)
+    }
+
+    get bathHouseBlackPrice() {
+        return this.currencyModel(this.settings.total.bath_house_black.price)
+    }
+
+    get bathHouseBlackTotalPrice() {
+        return this.currencyModel(this.settings.total.bath_house_black.total_price)
+    }
+
+    get bathHouseWhitePrice() {
+        return this.currencyModel(this.settings.total.bath_house_white.price)
+    }
+
+    get bathHouseWhiteTotalPrice() {
+        return this.currencyModel(this.settings.total.bath_house_white.total_price)
+    }
+
+    get foodBreakfastPrice() {
+        return this.currencyModel(this.settings.total.food.breakfast.price)
+    }
+
+    get foodBreakfastTotalPrice() {
+        return this.currencyModel(this.settings.total.food.breakfast.total_price)
+    }
+
+    get foodLunchPrice() {
+        return this.currencyModel(this.settings.total.food.lunch.price)
+    }
+
+    get foodLunchTotalPrice() {
+        return this.currencyModel(this.settings.total.food.lunch.total_price)
+    }
+
+    get foodLunchTotalPrice() {
+        return this.currencyModel(this.settings.total.food.lunch.total_price)
+    }
+
+    get foodDinnerPrice() {
+        return this.currencyModel(this.settings.total.food.dinner.price)
+    }
+
+    get foodDinnerTotalPrice() {
+        return this.currencyModel(this.settings.total.food.dinner.total_price)
+    }
+
+    get foodTotalPrice() {
+        return this.currencyModel(this.settings.total.food.total_price)
+    }
+
+    get foodSale() {
+        return this.currencyModel(this.settings.total.food.sale)
+    }
+
     get showSeasonsDecoding() {
         return !this.settings.eventTabId && !this.isPackage
     }
@@ -75,7 +143,7 @@ export default class DecodingPrice extends BaseBookingElement {
         if (this.settings.total.bath_house_white?.total_price) {
             total += this.settings.total.bath_house_white?.total_price
         }
-        return total
+        return this.currencyModel(total)
     }
 
     get houseTotalPrice() {

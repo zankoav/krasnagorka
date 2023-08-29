@@ -4,10 +4,10 @@
             <template if:true={isEvent}>
                 <div class="decoding-price__subtitle">{subTitle}</div>
                 <div class="decoding-price__baby-bed">
-                    Цена за взрослого <z-number-value num={settings.eventModel.price_people} value="руб"></z-number-value>
+                    Цена за взрослого <z-price-view price={pricePeople}></z-price-view>
                 </div>
                 <div if:true={showEventChilds} class="decoding-price__baby-bed">
-                    Цена за ребенка (до 12 лет) <z-number-value num={settings.eventModel.price_child} value="руб"></z-number-value>
+                    Цена за ребенка (до 12 лет) <z-price-view price={priceChild}></z-price-view>
                 </div>
                 <div class="decoding-price__baby-bed">Итого: <z-price-view price={houseTotalPrice}></z-price-view></div>
             </template>
@@ -40,68 +40,72 @@
                 <div if:true={settings.total.baby_bed} class="decoding-price__baby-bed">
                     <div class="decoding-price__baby-bed-title">Детская кроватка</div>
                     <span if:true={settings.total.baby_bed.discount} class="decoding-price-line__sign decoding-price-line__sign_ml_none">(</span>
-                    <z-number-value num={settings.total.baby_bed.price} value="руб"></z-number-value>
+                    <z-price-view price={babyBedPrice}></z-price-view>
                     <span if:true={settings.total.baby_bed.discount} class="decoding-price-line__sign">-</span>
                     <z-number-value if:true={settings.total.baby_bed.discount} num={settings.total.baby_bed.discount} value="%"></z-number-value>
                     <span if:true={settings.total.baby_bed.discount} class="decoding-price-line__sign">)</span>
                     <span class="decoding-price-line__sign">*</span>
                     <z-number-value num={settings.total.baby_bed.days} value="ночь"></z-number-value>
                     <span class="decoding-price-line__sign">=</span>
-                    <z-number-value num={settings.total.baby_bed.total_price} value="руб"></z-number-value>
+                    <z-price-view price={babyBedTotalPrice}></z-price-view>
                 </div>
                 <div if:true={settings.total.bath_house_black} class="decoding-price__baby-bed">
                     <div class="decoding-price__baby-bed-title">Баня по-черному</div>
-                    <z-number-value num={settings.total.bath_house_black.price} value="руб"></z-number-value>
+                    <z-price-view price={bathHouseBlackPrice}></z-price-view>
                     <span class="decoding-price-line__sign">*</span>
                     <z-number-value num={settings.total.bath_house_black.count} value="сеанс"></z-number-value>
                     <span class="decoding-price-line__sign">=</span>
-                    <z-number-value num={settings.total.bath_house_black.total_price} value="руб"></z-number-value>
+                    <z-price-view price={bathHouseBlackTotalPrice}></z-price-view>
                 </div>
                 <div if:true={settings.total.bath_house_white} class="decoding-price__baby-bed">
                     <div class="decoding-price__baby-bed-title">Баня по-белому</div>
-                    <z-number-value num={settings.total.bath_house_white.price} value="руб"></z-number-value>
+                    <z-price-view price={bathHouseWhitePrice}></z-price-view>
                     <span class="decoding-price-line__sign">*</span>
                     <z-number-value num={settings.total.bath_house_white.count} value="сеанс"></z-number-value>
                     <span class="decoding-price-line__sign">=</span>
-                    <z-number-value num={settings.total.bath_house_white.total_price} value="руб"></z-number-value>
+                    <z-price-view price={bathHouseWhiteTotalPrice}></z-price-view>
                 </div>
-                <div class="decoding-price__baby-bed">Итого: <z-number-value num={addedServicesTotalPrice} value="руб"></z-number-value></div>
+                <div class="decoding-price__baby-bed">
+                    Итого:
+                    <z-price-view price={addedServicesTotalPrice}></z-price-view>
+                </div>
             </template>
             <template if:true={settings.total.food}>
                 <template if:true={displayFood}>
                     <div class="decoding-price__subtitle">Питание</div>
                     <div if:true={settings.total.food.breakfast.total_price} class="decoding-price__baby-bed">
                         <div class="decoding-price__baby-bed-title">Завтраки</div>
-                        <z-number-value num={settings.total.food.breakfast.price} value="руб"></z-number-value>
+                        <z-price-view price={foodBreakfastPrice}></z-price-view>
                         <span class="decoding-price-line__sign">*</span>
                         <z-number-value num={settings.total.food.breakfast.count} value="шт"></z-number-value>
                         <span class="decoding-price-line__sign">=</span>
-                        <z-number-value num={settings.total.food.breakfast.total_price} value="руб"></z-number-value>
+                        <z-price-view price={foodBreakfastTotalPrice}></z-price-view>
                     </div>
                     <div if:true={settings.total.food.lunch.total_price} class="decoding-price__baby-bed">
                         <div class="decoding-price__baby-bed-title">Обеды</div>
-                        <z-number-value num={settings.total.food.lunch.price} value="руб"></z-number-value>
+                        <z-price-view price={foodLunchPrice}></z-price-view>
                         <span class="decoding-price-line__sign">*</span>
                         <z-number-value num={settings.total.food.lunch.count} value="шт"></z-number-value>
                         <span class="decoding-price-line__sign">=</span>
-                        <z-number-value num={settings.total.food.lunch.total_price} value="руб"></z-number-value>
+                        <z-price-view price={foodLunchTotalPrice}></z-price-view>
                     </div>
                     <div if:true={settings.total.food.dinner.total_price} class="decoding-price__baby-bed">
                         <div class="decoding-price__baby-bed-title">Ужины</div>
-                        <z-number-value num={settings.total.food.dinner.price} value="руб"></z-number-value>
+                        <z-price-view price={foodDinnerPrice}></z-price-view>
                         <span class="decoding-price-line__sign">*</span>
                         <z-number-value num={settings.total.food.dinner.count} value="шт"></z-number-value>
                         <span class="decoding-price-line__sign">=</span>
-                        <z-number-value num={settings.total.food.dinner.total_price} value="руб"></z-number-value>
+                        <z-price-view price={foodDinnerTotalPrice}></z-price-view>
                     </div>
                     <div if:true={settings.total.food.sale} class="decoding-price__baby-bed">
-                        Скидка за трехразовое питание: <z-number-value num={settings.total.food.sale} value="руб"></z-number-value>
+                        Скидка за трехразовое питание: <z-price-view price={foodSale}></z-price-view>
                     </div>
                     <div if:true={settings.total.food.packageSale} class="decoding-price__baby-bed">
                         Скидка на пакет питания: <z-number-value num={settings.total.food.packageSale} value="%"></z-number-value>
                     </div>
                     <div class="decoding-price__baby-bed">
-                        Итого: <z-number-value num={settings.total.food.total_price} value="руб"></z-number-value>
+                        Итого:
+                        <z-price-view price={foodTotalPrice}></z-price-view>
                     </div>
                 </template>
             </template>

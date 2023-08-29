@@ -6,7 +6,7 @@
         <div class="decoding-price-line__item-sum">
             <template if:true={needBreakets}><span class="decoding-price-line__sign decoding-price-line__sign_ml_none">(</span></template>
 
-            <z-number-value num={price} value="руб"></z-number-value>
+            <z-price-view price={price}></z-price-view>
 
             <template if:true={season.price_block.base_price_without_upper}>
                 <span class="decoding-price-line__sign">+</span><z-number-value num={season.price_block.min_percent} value="%"></z-number-value>
@@ -29,7 +29,7 @@
                 ><z-number-value num={season.price_block.base_people_count} value="чел"></z-number-value>
             </template>
 
-            <span class="decoding-price-line__sign">=</span><z-number-value num={season.price_block.total} value="руб"></z-number-value>
+            <span class="decoding-price-line__sign">=</span><z-price-view price={priceBlockTotal}></z-price-view>
         </div>
         <span if:true={season.price_block.people_sale_next} class="decoding-price-line__item-sale"
             >При выборе от <span class="decoding-price-line__item-number">{season.price_block.people_sale_next.people}</span> человек можно получить
@@ -41,7 +41,7 @@
                 ><span class="decoding-price-line__sign decoding-price-line__sign_ml_none">(</span></template
             >
 
-            <z-number-value num={season.price_block.small_animals_price} value="руб"></z-number-value>
+            <z-price-view price={priceBlockSmallAnimalsPrice}></z-price-view>
 
             <template if:true={season.price_block.days_sale}>
                 <span class="decoding-price-line__sign">-</span> <z-number-value num={season.price_block.days_sale} value="%"></z-number-value>
@@ -53,7 +53,7 @@
             <span class="decoding-price-line__sign">*</span
             ><z-number-value num={season.price_block.small_animals_count} value="мелких животных"></z-number-value>
 
-            <span class="decoding-price-line__sign">=</span><z-number-value num={season.price_block.small_animals_total} value="руб"></z-number-value>
+            <span class="decoding-price-line__sign">=</span><z-price-view price={priceBlockSmallAnimalsTotalPrice}></z-price-view>
         </div>
 
         <div if:true={season.price_block.big_animals_total} class="decoding-price-line__item-sum">
@@ -61,7 +61,7 @@
                 ><span class="decoding-price-line__sign decoding-price-line__sign_ml_none">(</span></template
             >
 
-            <z-number-value num={season.price_block.big_animals_price} value="руб"></z-number-value>
+            <z-price-view price={priceBlockBigAnimalsPrice}></z-price-view>
 
             <template if:true={season.price_block.days_sale}>
                 <span class="decoding-price-line__sign">-</span> <z-number-value num={season.price_block.days_sale} value="%"></z-number-value>
@@ -73,7 +73,8 @@
             <span class="decoding-price-line__sign">*</span
             ><z-number-value num={season.price_block.big_animals_count} value="крупных животных"></z-number-value>
 
-            <span class="decoding-price-line__sign">=</span><z-number-value num={season.price_block.big_animals_total} value="руб"></z-number-value>
+            <span class="decoding-price-line__sign">=</span>
+            <z-price-view price={priceBlockBigAnimalsTotalPrice}></z-price-view>
         </div>
     </div>
 </template>
