@@ -182,7 +182,7 @@ class BaseModel extends ModelImpl
                 "contractOffer" => $this->themeOptions['contract_offer']
             ],
             "babyBedPrice" => $babyBeadPrice,
-            "bathHouseBlackPrice" => $bathHouseWhitePrice,
+            "bathHouseBlackPrice" => $bathHouseBlackPrice,
             "bathHouseWhitePrice" => $bathHouseWhitePrice,
             
             "foodBreakfastPrice" => $foodBreakfastPrice,
