@@ -5,16 +5,16 @@ import './stepAdditionalServices.scss'
 export default class StepAdditionalServices extends BaseBookingElement {
     error
 
-    get babyBedLabel() {
-        return `Добавить детскую кроватку (${this.settings.babyBedPrice} BYN / ночь)`
+    get bathHouseBlackPrice() {
+        return this.currencyModel(this.settings.bathHouseBlackPrice)
     }
 
-    get bathHouseBlackLabel() {
-        return `Баня по-черному (${this.settings.bathHouseBlackPrice} BYN / 2 часа)`
+    get bathHouseWhitePrice() {
+        return this.currencyModel(this.settings.bathHouseWhitePrice)
     }
 
-    get bathHouseWhiteLabel() {
-        return `Баня по-белому (${this.settings.bathHouseWhitePrice} BYN / 2 часа)`
+    get babyBedPrice() {
+        return this.currencyModel(this.settings.babyBedPrice)
     }
 
     get animalsLabel() {

@@ -10,7 +10,7 @@
                     class="step-additional-services__input step-additional-services__input_left"
                     name="babyBed" />
                 <label for="babyBed" class="step-additional-services__label">
-                    {babyBedLabel}
+                    Добавить детскую кроватку <z-price-view price={babyBedPrice}></z-price-view> за ночь
                     <div class="step-additional-services__label-warning">
                         Внимание! При изменении дат бронирования, эта услуга может быть недоступна
                     </div>
@@ -26,7 +26,9 @@
                             checked={bathHouseBlack}
                             class="step-additional-services__input step-additional-services__input_left"
                             name="bathHouseBlack" />
-                        <label for="bathHouseBlack" class="step-additional-services__label">{bathHouseBlackLabel}</label>
+                        <label for="bathHouseBlack" class="step-additional-services__label">
+                            Баня по-черному <z-price-view price={bathHouseBlackPrice}></z-price-view> за 2 часа
+                        </label>
                     </div>
                     <z-select
                         if:true={settings.bathHouseBlack}
@@ -44,7 +46,9 @@
                             checked={bathHouseWhite}
                             class="step-additional-services__input step-additional-services__input_left"
                             name="bathHouseWhite" />
-                        <label for="bathHouseWhite" class="step-additional-services__label">{bathHouseWhiteLabel}</label>
+                        <label for="bathHouseWhite" class="step-additional-services__label">
+                            Баня по-белому <z-price-view price={bathHouseWhitePrice}></z-price-view> за 2 часа
+                        </label>
                     </div>
                     <z-select
                         if:true={settings.bathHouseWhite}
