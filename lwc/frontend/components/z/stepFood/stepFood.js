@@ -1,9 +1,27 @@
-import { LightningElement, api, track } from 'lwc'
+import { api } from 'lwc'
+import BaseElement from 'base/BaseElement'
+
 import './stepFood.scss'
 
-export default class StepFood extends LightningElement {
+export default class StepFood extends BaseElement {
     @api settings
-    @track error
+    error
+
+    get foodBreakfastPrice() {
+        return this.currencyModel(this.settings.foodBreakfastPrice)
+    }
+
+    get foodLunchPrice() {
+        return this.currencyModel(this.settings.foodLunchPrice)
+    }
+
+    get foodDinnerPrice() {
+        return this.currencyModel(this.settings.foodDinnerPrice)
+    }
+
+    get foodTripleSalePrice() {
+        return this.currencyModel(this.settings.foodTripleSalePrice)
+    }
 
     get isCustom() {
         return (

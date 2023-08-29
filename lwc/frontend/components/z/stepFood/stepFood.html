@@ -15,25 +15,21 @@
                         onchange={foodChange}
                         options={breakfastOptions}></z-select>
                     <div class="step-food__description">
-                        Стоимость одного завтрака <span class="number-value" data-after="руб">{settings.foodBreakfastPrice}</span> с человека
+                        Стоимость одного завтрака <z-price-view price={foodBreakfastPrice}></z-price-view> с человека
                     </div>
                 </div>
                 <div if:true={settings.foodLunchPrice} class="step-food__group">
                     <z-select data-name="foodLunch" label="Количество порций обедов" onchange={foodChange} options={lunchOptions}></z-select>
-                    <div class="step-food__description">
-                        Стоимость одного обеда <span class="number-value" data-after="руб">{settings.foodLunchPrice}</span> с человека
-                    </div>
+                    <div class="step-food__description">Стоимость одного обеда <z-price-view price={foodLunchPrice}></z-price-view> с человека</div>
                 </div>
                 <div if:true={settings.foodDinnerPrice} class="step-food__group">
                     <z-select data-name="foodDinner" label="Количество порций ужинов" onchange={foodChange} options={dinnerOptions}></z-select>
-                    <div class="step-food__description">
-                        Стоимость одного ужина <span class="number-value" data-after="руб">{settings.foodDinnerPrice}</span> с человека
-                    </div>
+                    <div class="step-food__description">Стоимость одного ужина <z-price-view price={foodDinnerPrice}></z-price-view> с человека</div>
                 </div>
                 <template if:true={settings.foodTripleSalePrice}>
                     <div class="step-food__help-text">
-                        При заказе трёхразового питания (завтрак, обед, ужин) <span class="step-food__sale">СКИДКА</span>:
-                        <z-number-value num={settings.foodTripleSalePrice} value="руб"></z-number-value> в сутки.
+                        При заказе трёхразового питания (завтрак, обед, ужин) <span class="step-food__sale">СКИДКА</span>: 
+                        <z-price-view price={foodTripleSalePrice}></z-price-view> в сутки.
                     </div>
                 </template>
 
