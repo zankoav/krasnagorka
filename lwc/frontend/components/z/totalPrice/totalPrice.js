@@ -5,7 +5,7 @@ export default class TotalPrice extends BaseBookingElement {
     isOpenTotalPrice
 
     get totalPrice() {
-        return this.currencyModel(this.settings.total.total_price);
+        return this.currencyModel(this.settings.total.total_price)
     }
 
     get classNameMore() {
@@ -15,10 +15,11 @@ export default class TotalPrice extends BaseBookingElement {
     }
 
     get prepaidPrice() {
-        const prepaid = parseInt(
-            (this.settings.total.total_price * this.settings.prepaidType) / 100
-        )
-        return prepaid == parseInt(this.settings.total.total_price) ? null : prepaid
+        return this.settings.prepaidType == 100
+            ? null
+            : this.currencyModel(
+                  (this.settings.total.total_price * this.settings.prepaidType) / 100
+              )
     }
 
     get onlyBookingEnabled() {

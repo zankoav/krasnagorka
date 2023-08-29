@@ -1,7 +1,14 @@
 .price-view {
     font-weight: 700;
     font-size: 16px;
-    color: #ed123d;
+
+    &_red {
+        color: #ed123d;
+    }
+
+    &_orange {
+        color: #ed7c12;
+    }
 
     &__penny {
         font-weight: 300;
