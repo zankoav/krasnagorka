@@ -114,6 +114,10 @@ class BaseModel extends ModelImpl
         $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
+        $babyBeadPrice = $bookingSettings['baby_bed_price'] ?? "0";
+        $babyBeadPrice = str_replace(",",".", $babyBeadPrice);
+        $babyBeadPrice = floatval($babyBeadPrice);
+
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
@@ -142,7 +146,7 @@ class BaseModel extends ModelImpl
                 "type"          => $type,
                 "contractOffer" => $this->themeOptions['contract_offer']
             ],
-            "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
+            "babyBedPrice" => $babyBeadPrice,
             "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
             "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
             
