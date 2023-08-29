@@ -99,8 +99,6 @@ export default class DecodingPrice extends BaseBookingElement {
             }
         }
 
-        console.log('this.currencyModel(total)', this.currencyModel(total));
-
         return this.currencyModel(total)
     }
 }

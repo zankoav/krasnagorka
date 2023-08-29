@@ -1,10 +1,11 @@
-import { LightningElement, api } from 'lwc'
+import { api } from 'lwc'
+import BaseBookingElement from 'base/baseBookingElement'
+
 import './seasonDetails.scss'
 
-export default class SeasonDetails extends LightningElement {
+export default class SeasonDetails extends BaseBookingElement {
     @api season
     @api house
-    @api settings
 
     get targetHouse() {
         return this.season.houses.find((house) => {
@@ -17,14 +18,18 @@ export default class SeasonDetails extends LightningElement {
     }
 
     get price() {
-        const price = parseInt(this.targetHouse.price)
-        return isNaN(price) ? null : price
+        // const price = parseInt(this.targetHouse.price)
+        // return isNaN(price) ? null : price
+        return this.targetHouse.price
+    }
+
+    get smartPrice() {
+        return this.currencyModel(this.targetHouse.price)
     }
 
     get minPricePerDay() {
-        const result =
-            parseFloat(this.price) * parseFloat(this.targetHouse.minPeople.replace(',', '.'))
-        return isNaN(result) ? null : parseInt(result)
+        const result = this.price * parseFloat(this.targetHouse.minPeople.replace(',', '.'))
+        return isNaN(result) ? null : this.currencyModel(result)
     }
 
     get minDays() {
@@ -32,15 +37,11 @@ export default class SeasonDetails extends LightningElement {
     }
 
     get smallAnimalPrice() {
-        return this.targetHouse.smallAnimalPrice
+        return this.currencyModel(this.targetHouse.smallAnimalPrice)
     }
 
     get bigAnimalPrice() {
-        return this.targetHouse.bigAnimalPrice
-    }
-
-    get smallAnimalsLabel() {
-        return 'Кошки и собаки мелких пород (высота в холке до 40 см) за ночь'
+        return this.currencyModel(this.targetHouse.bigAnimalPrice)
     }
 
     get showAnimalsService() {

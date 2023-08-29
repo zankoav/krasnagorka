@@ -1,20 +1,20 @@
 {
-    "id": "43",
+    "id": null,
     "admin": true,
     "webpaySandbox": {
-        "url": "https:\/\/payment.webpay.by",
+        "url": "https://payment.webpay.by",
         "wsb_storeid": "320460709",
         "wsb_test": "0"
     },
     "payment": true,
     "paymentMethod": "card",
     "prepaidType": 100,
-    "textFullCard": "*\u041e\u043f\u043b\u0430\u0442\u0430 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u043a\u0430\u0440\u0442 Visa\/MasterCard \u043e\u043d\u043b\u0430\u0439\u043d \u0441\u0435\u0439\u0447\u0430\u0441\r\n(\u0412\u044b \u0431\u0443\u0434\u0435\u0442\u0435 \u043f\u0435\u0440\u0435\u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443 \u043f\u043b\u0430\u0442\u0451\u0436\u043d\u043e\u0439 \u0441\u0438\u0441\u0442\u0435\u043c\u044b Webpay)",
-    "textPartCard": "*\u041f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430 50% \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u043a\u0430\u0440\u0442 Visa\/MasterCard \u043e\u043d\u043b\u0430\u0439\u043d \u0441\u0435\u0439\u0447\u0430\u0441\r\n(\u0412\u044b \u0431\u0443\u0434\u0435\u0442\u0435 \u043f\u0435\u0440\u0435\u043d\u0430\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u044b \u043d\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443 \u043f\u043b\u0430\u0442\u0451\u0436\u043d\u043e\u0439 \u0441\u0438\u0441\u0442\u0435\u043c\u044b Webpay)",
-    "textFullLaterCard": "*\u041e\u043f\u043b\u0430\u0442\u0430 \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u043a\u0430\u0440\u0442 Visa\/MasterCard \u043e\u043d\u043b\u0430\u0439\u043d \u043f\u043e\u0437\u0436\u0435\r\n(\u041d\u0430 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u0439 \u0432\u0430\u043c\u0438 e-mail \u043f\u0440\u0438\u0434\u0451\u0442 \u0441\u0441\u044b\u043b\u043a\u0430 \u0434\u043b\u044f \u043e\u043f\u043b\u0430\u0442\u044b, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0431\u0443\u0434\u0435\u0442 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u0430 \u0432 \u0442\u0435\u0447\u0435\u043d\u0438\u0435 2-\u0443\u0445 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u043d\u044b\u0445 \u0434\u043d\u0435\u0439)",
-    "textPartLaterCard": "*\u041f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430 50% \u0441 \u043f\u043e\u043c\u043e\u0449\u044c\u044e \u043a\u0430\u0440\u0442 Visa\/MasterCard \u043e\u043d\u043b\u0430\u0439\u043d \u043f\u043e\u0437\u0436\u0435\r\n(\u041d\u0430 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u044b\u0439 \u0432\u0430\u043c\u0438 e-mail \u043f\u0440\u0438\u0434\u0451\u0442 \u0441\u0441\u044b\u043b\u043a\u0430 \u0434\u043b\u044f \u043e\u043f\u043b\u0430\u0442\u044b, \u043a\u043e\u0442\u043e\u0440\u0430\u044f \u0431\u0443\u0434\u0435\u0442 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u044c\u043d\u0430 \u0432 \u0442\u0435\u0447\u0435\u043d\u0438\u0435 2-\u0443\u0445 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u043d\u044b\u0445 \u0434\u043d\u0435\u0439)",
-    "textFullOffice": "*\u041e\u043f\u043b\u0430\u0442\u0430 \u043d\u0430\u043b\u0438\u0447\u043d\u044b\u043c\u0438 \u0432 \u043d\u0430\u0448\u0435\u043c \u043e\u0444\u0438\u0441\u0435 \u0432 \u041c\u0438\u043d\u0441\u043a\u0435 \u043f\u043e\u0437\u0436\u0435 (\u0432 \u0442\u0435\u0447\u0435\u043d\u0438\u0435 2-\u0443\u0445 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u043d\u044b\u0445 \u0434\u043d\u0435\u0439, 1-\u044b\u0439 \u0422\u0432\u0451\u0440\u0434\u044b\u0439 \u043f\u0435\u0440., \u0434. 15, \u0432\u0440\u0435\u043c\u044f \u0441\u043e\u0433\u043b\u0430\u0441\u043e\u0432\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u043f\u043e \u0437\u0432\u043e\u043d\u043a\u0443)",
-    "textPartOffice": "*\u041f\u0440\u0435\u0434\u043e\u043f\u043b\u0430\u0442\u0430 50% \u043d\u0430\u043b\u0438\u0447\u043d\u044b\u043c\u0438 \u0432 \u043d\u0430\u0448\u0435\u043c \u043e\u0444\u0438\u0441\u0435 \u0432 \u041c\u0438\u043d\u0441\u043a\u0435 \u043f\u043e\u0437\u0436\u0435 (\u0432 \u0442\u0435\u0447\u0435\u043d\u0438\u0435 2-\u0443\u0445 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u043d\u044b\u0445 \u0434\u043d\u0435\u0439, 1-\u044b\u0439 \u0422\u0432\u0451\u0440\u0434\u044b\u0439 \u043f\u0435\u0440., \u0434. 15, \u0432\u0440\u0435\u043c\u044f \u0441\u043e\u0433\u043b\u0430\u0441\u043e\u0432\u044b\u0432\u0430\u0435\u0442\u0441\u044f \u043f\u043e \u0437\u0432\u043e\u043d\u043a\u0443)",
+    "textFullCard": "*Оплата с помощью карт Visa/MasterCard онлайн сейчас\\n(Вы будете перенаправлены на страницу платёжной системы Webpay)",
+    "textPartCard": "*Предоплата 50% с помощью карт Visa/MasterCard онлайн сейчас\\n(Вы будете перенаправлены на страницу платёжной системы Webpay)",
+    "textFullLaterCard": "*Оплата с помощью карт Visa/MasterCard онлайн позже\\n(На указанный вами e-mail придёт ссылка для оплаты, которая будет действительна в течение 2-ух календарных дней)",
+    "textPartLaterCard": "*Предоплата 50% с помощью карт Visa/MasterCard онлайн позже\\n(На указанный вами e-mail придёт ссылка для оплаты, которая будет действительна в течение 2-ух календарных дней)",
+    "textFullOffice": "*Оплата наличными в нашем офисе в Минске позже (в течение 2-ух календарных дней, 1-ый Твёрдый пер., д. 15, время согласовывается по звонку)",
+    "textPartOffice": "*Предоплата 50% наличными в нашем офисе в Минске позже (в течение 2-ух календарных дней, 1-ый Твёрдый пер., д. 15, время согласовывается по звонку)",
     "minPrice": 500,
     "prepaidOptions": [
         {
@@ -26,45 +26,45 @@
             "value": 50
         }
     ],
-    "maxCount": 3,
+    "maxCount": 99,
     "houses": [
         {
             "id": 12979,
-            "name": "\u041f\u0438\u043b\u0438\u0433\u0440\u0438\u043c"
+            "name": "Пилигрим"
         },
         {
             "id": 9486,
-            "name": "\u0422\u0435\u0440\u0435\u043c"
+            "name": "Терем"
         },
         {
             "id": 8838,
-            "name": "\u0411\u043e\u0436\u044c\u044f  \u043a\u043e\u0440\u043e\u0432\u043a\u0430"
+            "name": "Божья  коровка"
         },
         {
             "id": 8836,
-            "name": "\u0411\u0443\u043d\u0433\u0430\u043b\u043e"
+            "name": "Бунгало"
         },
         {
             "id": 8783,
-            "name": "\u0414\u0430\u0442\u0441\u043a\u0438\u0439"
+            "name": "Датский"
         },
         {
             "id": 8780,
-            "name": "\u0420\u044b\u0431\u0430\u0446\u043a\u0438\u0439"
+            "name": "Рыбацкий"
         },
         {
             "id": 8733,
-            "name": "\u0411\u0430\u0431\u043e\u0447\u043a\u0430"
+            "name": "Бабочка"
         },
         {
             "id": 8643,
-            "name": "\u0414\u043e\u043c\u0438\u043a \u0443 \u043f\u0440\u0438\u0447\u0430\u043b\u0430"
+            "name": "Домик у причала"
         }
     ],
     "calendars": [
         {
             "id": 14,
-            "name": "\u0411\u0430\u0431\u043e\u0447\u043a\u0430",
+            "name": "Бабочка",
             "slug": "babochka",
             "isTerem": "",
             "isDeprecatedBabyBed": false,
@@ -74,7 +74,7 @@
         },
         {
             "id": 16,
-            "name": "\u0411\u043e\u0436\u044c\u044f \u041a\u043e\u0440\u043e\u0432\u043a\u0430",
+            "name": "Божья Коровка",
             "slug": "bozhya-korovka",
             "isTerem": "",
             "isDeprecatedBabyBed": false,
@@ -84,7 +84,7 @@
         },
         {
             "id": 37,
-            "name": "\u0411\u0443\u043d\u0433\u0430\u043b\u043e",
+            "name": "Бунгало",
             "slug": "kepningovyj-domik",
             "isTerem": "",
             "isDeprecatedBabyBed": false,
@@ -94,7 +94,7 @@
         },
         {
             "id": 9,
-            "name": "\u0414\u0430\u0442\u0441\u043a\u0438\u0439",
+            "name": "Датский",
             "slug": "datskij",
             "isTerem": "",
             "isDeprecatedBabyBed": false,
@@ -104,17 +104,17 @@
         },
         {
             "id": 43,
-            "name": "\u041f\u0438\u043b\u0438\u0433\u0440\u0438\u043c",
+            "name": "Пилигрим",
             "slug": "piligrim",
             "isTerem": "",
             "isDeprecatedBabyBed": true,
             "isDeprecateAnimals": false,
             "maxChild": 1,
-            "selected": true
+            "selected": false
         },
         {
             "id": 13,
-            "name": "\u0420\u044b\u0431\u0430\u0446\u043a\u0438\u0439",
+            "name": "Рыбацкий",
             "slug": "rybatskij",
             "isTerem": "",
             "isDeprecatedBabyBed": false,
@@ -124,7 +124,7 @@
         },
         {
             "id": 18,
-            "name": "\u0422\u0435\u0440\u0435\u043c 1",
+            "name": "Терем 1",
             "slug": "terem-1",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -134,7 +134,7 @@
         },
         {
             "id": 27,
-            "name": "\u0422\u0435\u0440\u0435\u043c 10",
+            "name": "Терем 10",
             "slug": "terem-10",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -144,7 +144,7 @@
         },
         {
             "id": 28,
-            "name": "\u0422\u0435\u0440\u0435\u043c 11",
+            "name": "Терем 11",
             "slug": "terem-11",
             "isTerem": "on",
             "isDeprecatedBabyBed": true,
@@ -154,7 +154,7 @@
         },
         {
             "id": 29,
-            "name": "\u0422\u0435\u0440\u0435\u043c 12",
+            "name": "Терем 12",
             "slug": "terem-12",
             "isTerem": "on",
             "isDeprecatedBabyBed": true,
@@ -164,7 +164,7 @@
         },
         {
             "id": 19,
-            "name": "\u0422\u0435\u0440\u0435\u043c 2",
+            "name": "Терем 2",
             "slug": "terem-2",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -174,7 +174,7 @@
         },
         {
             "id": 20,
-            "name": "\u0422\u0435\u0440\u0435\u043c 3",
+            "name": "Терем 3",
             "slug": "terem-3",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -184,7 +184,7 @@
         },
         {
             "id": 21,
-            "name": "\u0422\u0435\u0440\u0435\u043c 4",
+            "name": "Терем 4",
             "slug": "terem-4",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -194,7 +194,7 @@
         },
         {
             "id": 22,
-            "name": "\u0422\u0435\u0440\u0435\u043c 5",
+            "name": "Терем 5",
             "slug": "terem-5",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -204,7 +204,7 @@
         },
         {
             "id": 23,
-            "name": "\u0422\u0435\u0440\u0435\u043c 6",
+            "name": "Терем 6",
             "slug": "terem-6",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -214,7 +214,7 @@
         },
         {
             "id": 24,
-            "name": "\u0422\u0435\u0440\u0435\u043c 7",
+            "name": "Терем 7",
             "slug": "terem-7",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -224,7 +224,7 @@
         },
         {
             "id": 25,
-            "name": "\u0422\u0435\u0440\u0435\u043c 8",
+            "name": "Терем 8",
             "slug": "terem-8",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -234,7 +234,7 @@
         },
         {
             "id": 26,
-            "name": "\u0422\u0435\u0440\u0435\u043c 9",
+            "name": "Терем 9",
             "slug": "terem-9",
             "isTerem": "on",
             "isDeprecatedBabyBed": false,
@@ -244,7 +244,7 @@
         },
         {
             "id": 15,
-            "name": "\u0423 \u043f\u0440\u0438\u0447\u0430\u043b\u0430",
+            "name": "У причала",
             "slug": "u-prichala",
             "isTerem": "",
             "isDeprecatedBabyBed": true,
@@ -253,102 +253,218 @@
             "selected": false
         }
     ],
-    "mainMenu": [
+    "seasons": [
         {
-            "key": 10588,
-            "label": "\u0413\u043b\u0430\u0432\u043d\u0430\u044f",
-            "href": "https:\/\/krasnagorka.by\/"
-        },
-        {
-            "key": 10567,
-            "label": "\u041d\u0430\u0448\u0438 \u0434\u043e\u043c\u0430",
-            "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/",
-            "subItems": [
+            "id": 27710,
+            "name": "Летний сезон (Июнь)",
+            "order": "0",
+            "current": false,
+            "houses": [
                 {
-                    "key": 10561,
-                    "label": "\u0411\u0443\u043d\u0433\u0430\u043b\u043e",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/bungalo\/",
-                    "parent": "10567"
+                    "id": 18,
+                    "price": "60,00",
+                    "minPeople": "3,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10562,
-                    "label": "\u0414\u043e\u043c\u0438\u043a \u0443 \u043f\u0440\u0438\u0447\u0430\u043b\u0430",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/domik-u-prichala\/",
-                    "parent": "10567"
+                    "id": 19,
+                    "price": "60,00",
+                    "minPeople": "3,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10563,
-                    "label": "\u0420\u044b\u0431\u0430\u0446\u043a\u0438\u0439",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/rybatskij\/",
-                    "parent": "10567"
+                    "id": 20,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10559,
-                    "label": "\u0414\u0430\u0442\u0441\u043a\u0438\u0439",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/datskij\/",
-                    "parent": "10567"
+                    "id": 21,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10560,
-                    "label": "\u0422\u0435\u0440\u0435\u043c",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/terem\/",
-                    "parent": "10567"
+                    "id": 22,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10564,
-                    "label": "\u0411\u0430\u0431\u043e\u0447\u043a\u0430",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/babochka\/",
-                    "parent": "10567"
+                    "id": 23,
+                    "price": "60,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 10565,
-                    "label": "\u0411\u043e\u0436\u044c\u044f  \u043a\u043e\u0440\u043e\u0432\u043a\u0430",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/bozhya-korovka\/",
-                    "parent": "10567"
+                    "id": 24,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 },
                 {
-                    "key": 13093,
-                    "label": "\u041f\u0438\u043b\u0438\u0433\u0440\u0438\u043c",
-                    "href": "https:\/\/krasnagorka.by\/dom-na-braslavskih-ozyorah\/piligrim\/",
-                    "parent": "10567"
+                    "id": 25,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 26,
+                    "price": "60,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 27,
+                    "price": "60,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 28,
+                    "price": "60,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 29,
+                    "price": "60,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 12979,
+                    "price": "80,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 9486,
+                    "price": "60,00",
+                    "minPeople": "",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8838,
+                    "price": "65,00",
+                    "minPeople": "5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8836,
+                    "price": "85,00",
+                    "minPeople": "",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8783,
+                    "price": "75,00",
+                    "minPeople": "6",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8780,
+                    "price": "65,00",
+                    "minPeople": "5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 0,
+                    "bigAnimalPrice": 0,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8733,
+                    "price": "65,00",
+                    "minPeople": "",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 8643,
+                    "price": "65,00",
+                    "minPeople": "6",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
                 }
             ]
         },
         {
-            "key": 10591,
-            "label": "\u0423\u0441\u043b\u0443\u0433\u0438 \u0438 \u0440\u0430\u0437\u0432\u043b\u0435\u0447\u0435\u043d\u0438\u044f",
-            "href": "https:\/\/krasnagorka.by\/otdyh-na-braslavah\/"
-        },
-        {
-            "key": 10592,
-            "label": "\u0410\u043a\u0446\u0438\u0438",
-            "href": "https:\/\/krasnagorka.by\/stocks\/"
-        },
-        {
-            "key": 10593,
-            "label": "\u0426\u0435\u043d\u044b",
-            "href": "https:\/\/krasnagorka.by\/tseny\/"
-        },
-        {
-            "key": 10594,
-            "label": "\u041c\u0435\u0441\u0442\u043e\u0440\u0430\u0441\u043f\u043e\u043b\u043e\u0436\u0435\u043d\u0438\u0435",
-            "href": "https:\/\/krasnagorka.by\/shema-proezda\/"
-        },
-        {
-            "key": 10590,
-            "label": "\u041a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u044c \u0431\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f",
-            "href": "https:\/\/krasnagorka.by\/kalendar-bronirovaniya\/"
-        },
-        {
-            "key": 17825,
-            "label": "\u041e\u0442\u0437\u044b\u0432\u044b",
-            "href": "https:\/\/krasnagorka.by\/otzyvy\/"
-        }
-    ],
-    "seasons": [
-        {
             "id": 25171,
-            "name": "14 \u0444\u0435\u0432\u0440\u0430\u043b\u044f (17.02 - 19.02)",
+            "name": "14 февраля (17.02 - 19.02)",
             "order": "0",
             "current": false,
             "houses": [
@@ -557,12 +673,12 @@
         {
             "id": 22792,
             "name": "Viva Braslav'23",
-            "order": "97",
+            "order": "0",
             "current": false,
             "houses": [
                 {
                     "id": 18,
-                    "price": "70,00",
+                    "price": "100,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -577,7 +693,7 @@
                 },
                 {
                     "id": 19,
-                    "price": "70,00",
+                    "price": "100,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -592,106 +708,6 @@
                 },
                 {
                     "id": 20,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 21,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 22,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 23,
-                    "price": "70,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 24,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 25,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 26,
-                    "price": "70,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 27,
-                    "price": "70,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 28,
-                    "price": "70,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 29,
-                    "price": "70,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 12979,
                     "price": "100,00",
                     "minPeople": "2,5",
                     "minDays": "",
@@ -701,8 +717,108 @@
                     "peoplesForSales": []
                 },
                 {
+                    "id": 21,
+                    "price": "100,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 22,
+                    "price": "100,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 23,
+                    "price": "100,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 24,
+                    "price": "100,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 25,
+                    "price": "100,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 26,
+                    "price": "100,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 27,
+                    "price": "100,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 28,
+                    "price": "100,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 29,
+                    "price": "100,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 12979,
+                    "price": "110,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
                     "id": 9486,
-                    "price": "70,00",
+                    "price": "100,00",
                     "minPeople": "",
                     "minDays": "",
                     "minPercent": "",
@@ -712,7 +828,7 @@
                 },
                 {
                     "id": 8838,
-                    "price": "80,00",
+                    "price": "85,00",
                     "minPeople": "5",
                     "minDays": "",
                     "minPercent": "",
@@ -727,7 +843,7 @@
                 },
                 {
                     "id": 8836,
-                    "price": "100,00",
+                    "price": "110,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -737,7 +853,7 @@
                 },
                 {
                     "id": 8783,
-                    "price": "100,00",
+                    "price": "110,00",
                     "minPeople": "8",
                     "minDays": "",
                     "minPercent": "",
@@ -752,7 +868,7 @@
                 },
                 {
                     "id": 8780,
-                    "price": "80,00",
+                    "price": "90,00",
                     "minPeople": "8",
                     "minDays": "",
                     "minPercent": "",
@@ -767,7 +883,7 @@
                 },
                 {
                     "id": 8733,
-                    "price": "80,00",
+                    "price": "85,00",
                     "minPeople": "5",
                     "minDays": "",
                     "minPercent": "",
@@ -782,7 +898,7 @@
                 },
                 {
                     "id": 8643,
-                    "price": "80,00",
+                    "price": "90,00",
                     "minPeople": "8",
                     "minDays": "",
                     "minPercent": "",
@@ -799,13 +915,13 @@
         },
         {
             "id": 19415,
-            "name": "\u0412\u0441\u0442\u0440\u0435\u0447\u0430\u0435\u043c \u041d\u043e\u0432\u044b\u0439 \u0433\u043e\u0434 (30.12 - 02.01, \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u043e\u0435 \u043f\u0440\u0435\u0434\u043b\u043e\u0436\u0435\u043d\u0438\u0435, \u0431\u0440\u043e\u043d\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u043c\u0438\u043d\u0438\u043c\u0443\u043c \u043d\u0430 3 \u043d\u043e\u0447\u0438)",
-            "order": "0",
+            "name": "Встречаем Новый год (30.12 - 02.01, специальное предложение, бронируется минимум на 3 ночи)",
+            "order": "2",
             "current": false,
             "houses": [
                 {
                     "id": 18,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "4",
                     "minDays": "3",
                     "minPercent": "30",
@@ -815,7 +931,7 @@
                 },
                 {
                     "id": 19,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "4",
                     "minDays": "3",
                     "minPercent": "30",
@@ -825,7 +941,7 @@
                 },
                 {
                     "id": 20,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -835,7 +951,7 @@
                 },
                 {
                     "id": 21,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -845,7 +961,7 @@
                 },
                 {
                     "id": 22,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -855,7 +971,7 @@
                 },
                 {
                     "id": 23,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -865,7 +981,7 @@
                 },
                 {
                     "id": 24,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -875,7 +991,7 @@
                 },
                 {
                     "id": 25,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -885,7 +1001,7 @@
                 },
                 {
                     "id": 26,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "2",
                     "minDays": "3",
                     "minPercent": "30",
@@ -895,7 +1011,7 @@
                 },
                 {
                     "id": 27,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "3",
                     "minDays": "3",
                     "minPercent": "30",
@@ -905,7 +1021,7 @@
                 },
                 {
                     "id": 28,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "2",
                     "minDays": "3",
                     "minPercent": "30",
@@ -915,17 +1031,17 @@
                 },
                 {
                     "id": 29,
-                    "price": "178,33",
-                    "minPeople": "2",
-                    "minDays": "3",
-                    "minPercent": "30",
+                    "price": "197,00",
+                    "minPeople": "0",
+                    "minDays": "0",
+                    "minPercent": "0",
                     "smallAnimalPrice": 10,
                     "bigAnimalPrice": 15,
                     "peoplesForSales": []
                 },
                 {
                     "id": 12979,
-                    "price": "198,33",
+                    "price": "205,00",
                     "minPeople": "3",
                     "minDays": "",
                     "minPercent": "",
@@ -935,7 +1051,7 @@
                 },
                 {
                     "id": 9486,
-                    "price": "178,33",
+                    "price": "197,00",
                     "minPeople": "",
                     "minDays": "",
                     "minPercent": "",
@@ -945,7 +1061,7 @@
                 },
                 {
                     "id": 8838,
-                    "price": "188,33",
+                    "price": "197,00",
                     "minPeople": "5",
                     "minDays": "3",
                     "minPercent": "30",
@@ -955,7 +1071,7 @@
                 },
                 {
                     "id": 8836,
-                    "price": "198,33",
+                    "price": "205,00",
                     "minPeople": "2",
                     "minDays": "3",
                     "minPercent": "30",
@@ -965,7 +1081,7 @@
                 },
                 {
                     "id": 8783,
-                    "price": "198,33",
+                    "price": "213,00",
                     "minPeople": "8",
                     "minDays": "3",
                     "minPercent": "",
@@ -975,7 +1091,7 @@
                 },
                 {
                     "id": 8780,
-                    "price": "188,33",
+                    "price": "197,00",
                     "minPeople": "8",
                     "minDays": "3",
                     "minPercent": "",
@@ -985,7 +1101,7 @@
                 },
                 {
                     "id": 8733,
-                    "price": "188,33",
+                    "price": "197,00",
                     "minPeople": "5",
                     "minDays": "3",
                     "minPercent": "",
@@ -995,7 +1111,7 @@
                 },
                 {
                     "id": 8643,
-                    "price": "188,33",
+                    "price": "197,00",
                     "minPeople": "8",
                     "minDays": "3",
                     "minPercent": "30",
@@ -1007,16 +1123,16 @@
         },
         {
             "id": 9898,
-            "name": "\u0412\u044b\u0445\u043e\u0434\u043d\u044b\u0435 \u0434\u043d\u0438  (\u0432\u043d\u0435\u0441\u0435\u0437\u043e\u043d\u043d\u044b\u0439 \u043f\u0435\u0440\u0438\u043e\u0434)",
-            "order": "99",
+            "name": "Выходные дни  (внесезонный период)",
+            "order": "95",
             "current": false,
             "houses": [
                 {
                     "id": 18,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "4",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1028,10 +1144,10 @@
                 },
                 {
                     "id": 19,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "4",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "30",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1043,57 +1159,57 @@
                 },
                 {
                     "id": 20,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 21,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 22,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 23,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 24,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 25,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
                     "minDays": "2",
                     "minPercent": "50",
@@ -1103,70 +1219,70 @@
                 },
                 {
                     "id": 26,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 27,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 28,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 29,
-                    "price": "32,00",
+                    "price": "50,00",
                     "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 12979,
-                    "price": "45,00",
+                    "price": "65,00",
                     "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 9486,
-                    "price": "32,00",
-                    "minPeople": "",
-                    "minDays": "",
-                    "minPercent": "",
+                    "price": "50,00",
+                    "minPeople": "2",
+                    "minDays": "2",
+                    "minPercent": "30",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 8838,
-                    "price": "33,00",
-                    "minPeople": "4",
-                    "minDays": "",
-                    "minPercent": "",
+                    "price": "50,00",
+                    "minPeople": "4,5",
+                    "minDays": "2",
+                    "minPercent": "30",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1178,20 +1294,20 @@
                 },
                 {
                     "id": 8836,
-                    "price": "42,00",
+                    "price": "65,00",
                     "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": []
                 },
                 {
                     "id": 8783,
-                    "price": "45,00",
+                    "price": "60,00",
                     "minPeople": "6",
-                    "minDays": "",
-                    "minPercent": "",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1203,10 +1319,10 @@
                 },
                 {
                     "id": 8780,
-                    "price": "35,00",
-                    "minPeople": "4",
-                    "minDays": "",
-                    "minPercent": "",
+                    "price": "50,00",
+                    "minPeople": "5,5",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1218,10 +1334,10 @@
                 },
                 {
                     "id": 8733,
-                    "price": "33,00",
-                    "minPeople": "4",
-                    "minDays": "",
-                    "minPercent": "",
+                    "price": "50,00",
+                    "minPeople": "4,5",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1233,10 +1349,10 @@
                 },
                 {
                     "id": 8643,
-                    "price": "35,00",
-                    "minPeople": "5",
-                    "minDays": "",
-                    "minPercent": "",
+                    "price": "50,00",
+                    "minPeople": "5,5",
+                    "minDays": "2",
+                    "minPercent": "50",
                     "smallAnimalPrice": 5,
                     "bigAnimalPrice": 10,
                     "peoplesForSales": [
@@ -1250,13 +1366,13 @@
         },
         {
             "id": 9897,
-            "name": "\u0426\u0435\u043d\u044b \u043d\u0430 \u043e\u0442\u0434\u044b\u0445 \u043d\u0430 \u043f\u0440\u0435\u0434\u0441\u0435\u0437\u043e\u043d\u043d\u044b\u0439 \u043f\u0435\u0440\u0438\u043e\u0434 \u0438 \u043c\u0430\u0439\u0441\u043a\u0438\u0435 \u043f\u0440\u0430\u0437\u0434\u043d\u0438\u043a\u0438 (27.04 - 09.05 \/ 27.05 - 09.06)",
-            "order": "98",
+            "name": "Цены на отдых на предсезонный период и майские праздники (28.04 - 01.05 / 06.05 - 09.05 / 26.05 - 09.06)",
+            "order": "1",
             "current": false,
             "houses": [
                 {
                     "id": 18,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1271,7 +1387,7 @@
                 },
                 {
                     "id": 19,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1286,7 +1402,7 @@
                 },
                 {
                     "id": 20,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1296,7 +1412,7 @@
                 },
                 {
                     "id": 21,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1306,7 +1422,7 @@
                 },
                 {
                     "id": 22,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1316,7 +1432,7 @@
                 },
                 {
                     "id": 23,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1326,7 +1442,7 @@
                 },
                 {
                     "id": 24,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1336,7 +1452,7 @@
                 },
                 {
                     "id": 25,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "2",
                     "minPercent": "50",
@@ -1346,7 +1462,7 @@
                 },
                 {
                     "id": 26,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1356,7 +1472,7 @@
                 },
                 {
                     "id": 27,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1366,7 +1482,7 @@
                 },
                 {
                     "id": 28,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1376,7 +1492,7 @@
                 },
                 {
                     "id": 29,
-                    "price": "35,00",
+                    "price": "45,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1386,7 +1502,7 @@
                 },
                 {
                     "id": 12979,
-                    "price": "50,00",
+                    "price": "60,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1396,7 +1512,7 @@
                 },
                 {
                     "id": 9486,
-                    "price": "40,00",
+                    "price": "45,00",
                     "minPeople": "",
                     "minDays": "",
                     "minPercent": "",
@@ -1406,7 +1522,7 @@
                 },
                 {
                     "id": 8838,
-                    "price": "40,00",
+                    "price": "50,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1421,7 +1537,7 @@
                 },
                 {
                     "id": 8836,
-                    "price": "55,00",
+                    "price": "65,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1431,7 +1547,7 @@
                 },
                 {
                     "id": 8783,
-                    "price": "55,00",
+                    "price": "60,00",
                     "minPeople": "6",
                     "minDays": "",
                     "minPercent": "",
@@ -1446,7 +1562,7 @@
                 },
                 {
                     "id": 8780,
-                    "price": "45,00",
+                    "price": "55,00",
                     "minPeople": "6",
                     "minDays": "",
                     "minPercent": "",
@@ -1461,7 +1577,7 @@
                 },
                 {
                     "id": 8733,
-                    "price": "40,00",
+                    "price": "50,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1476,7 +1592,7 @@
                 },
                 {
                     "id": 8643,
-                    "price": "45,00",
+                    "price": "55,00",
                     "minPeople": "6",
                     "minDays": "",
                     "minPercent": "",
@@ -1493,14 +1609,14 @@
         },
         {
             "id": 9619,
-            "name": "\u0426\u0435\u043d\u044b \u043d\u0430 \u043e\u0442\u0434\u044b\u0445 \u043d\u0430 \u0432\u043d\u0435\u0441\u0435\u0437\u043e\u043d\u043d\u044b\u0439 \u043f\u0435\u0440\u0438\u043e\u0434 \u043d\u0430 \u0411\u0440\u0430\u0441\u043b\u0430\u0432\u0441\u043a\u0438\u0445 \u043e\u0437\u0435\u0440\u0430\u0445",
-            "order": "100",
-            "current": true,
+            "name": "Цены на отдых на внесезонный период на Браславских озерах",
+            "order": "96",
+            "current": false,
             "houses": [
                 {
                     "id": 18,
-                    "price": "28,00",
-                    "minPeople": "4",
+                    "price": "40,00",
+                    "minPeople": "3,5",
                     "minDays": "",
                     "minPercent": "",
                     "smallAnimalPrice": 0,
@@ -1514,8 +1630,8 @@
                 },
                 {
                     "id": 19,
-                    "price": "28,00",
-                    "minPeople": "4",
+                    "price": "40,00",
+                    "minPeople": "3,5",
                     "minDays": "",
                     "minPercent": "",
                     "smallAnimalPrice": 0,
@@ -1529,7 +1645,7 @@
                 },
                 {
                     "id": 20,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1539,7 +1655,7 @@
                 },
                 {
                     "id": 21,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1549,7 +1665,7 @@
                 },
                 {
                     "id": 22,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1559,7 +1675,7 @@
                 },
                 {
                     "id": 23,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1569,7 +1685,7 @@
                 },
                 {
                     "id": 24,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1579,7 +1695,7 @@
                 },
                 {
                     "id": 25,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1589,7 +1705,7 @@
                 },
                 {
                     "id": 26,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1599,7 +1715,7 @@
                 },
                 {
                     "id": 27,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1609,7 +1725,7 @@
                 },
                 {
                     "id": 28,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1619,7 +1735,7 @@
                 },
                 {
                     "id": 29,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1629,7 +1745,7 @@
                 },
                 {
                     "id": 12979,
-                    "price": "40,00",
+                    "price": "55,00",
                     "minPeople": "2,5",
                     "minDays": "",
                     "minPercent": "",
@@ -1639,7 +1755,7 @@
                 },
                 {
                     "id": 9486,
-                    "price": "28,00",
+                    "price": "40,00",
                     "minPeople": "",
                     "minDays": "",
                     "minPercent": "",
@@ -1649,7 +1765,7 @@
                 },
                 {
                     "id": 8838,
-                    "price": "30,00",
+                    "price": "40,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1664,7 +1780,7 @@
                 },
                 {
                     "id": 8836,
-                    "price": "35,00",
+                    "price": "50,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1674,8 +1790,8 @@
                 },
                 {
                     "id": 8783,
-                    "price": "40,00",
-                    "minPeople": "6",
+                    "price": "50,00",
+                    "minPeople": "5",
                     "minDays": "",
                     "minPercent": "",
                     "smallAnimalPrice": 0,
@@ -1689,8 +1805,8 @@
                 },
                 {
                     "id": 8780,
-                    "price": "32,00",
-                    "minPeople": "4",
+                    "price": "40,00",
+                    "minPeople": "4,5",
                     "minDays": "",
                     "minPercent": "",
                     "smallAnimalPrice": 0,
@@ -1704,7 +1820,7 @@
                 },
                 {
                     "id": 8733,
-                    "price": "30,00",
+                    "price": "40,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1719,8 +1835,8 @@
                 },
                 {
                     "id": 8643,
-                    "price": "35,00",
-                    "minPeople": "4",
+                    "price": "40,00",
+                    "minPeople": "4,5",
                     "minDays": "",
                     "minPercent": "",
                     "smallAnimalPrice": 0,
@@ -1736,13 +1852,13 @@
         },
         {
             "id": 9618,
-            "name": "\u041b\u0435\u0442\u043d\u0438\u0439 \u0441\u0435\u0437\u043e\u043d (09.06 - 27.08)",
+            "name": "Летний сезон (09.06 - 01.09)",
             "order": "98",
-            "current": false,
+            "current": true,
             "houses": [
                 {
                     "id": 18,
-                    "price": "50,00",
+                    "price": "65,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1757,7 +1873,7 @@
                 },
                 {
                     "id": 19,
-                    "price": "50,00",
+                    "price": "65,00",
                     "minPeople": "4",
                     "minDays": "",
                     "minPercent": "",
@@ -1772,106 +1888,6 @@
                 },
                 {
                     "id": 20,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 21,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 22,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 23,
-                    "price": "50,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 24,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 25,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 26,
-                    "price": "50,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 27,
-                    "price": "50,00",
-                    "minPeople": "2,5",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 28,
-                    "price": "50,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 29,
-                    "price": "50,00",
-                    "minPeople": "2",
-                    "minDays": "",
-                    "minPercent": "",
-                    "smallAnimalPrice": 10,
-                    "bigAnimalPrice": 15,
-                    "peoplesForSales": []
-                },
-                {
-                    "id": 12979,
                     "price": "65,00",
                     "minPeople": "2,5",
                     "minDays": "",
@@ -1881,8 +1897,108 @@
                     "peoplesForSales": []
                 },
                 {
+                    "id": 21,
+                    "price": "65,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 22,
+                    "price": "65,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 23,
+                    "price": "65,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 24,
+                    "price": "65,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 25,
+                    "price": "65,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 26,
+                    "price": "65,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 27,
+                    "price": "65,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 28,
+                    "price": "65,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 29,
+                    "price": "65,00",
+                    "minPeople": "2",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
+                    "id": 12979,
+                    "price": "80,00",
+                    "minPeople": "2,5",
+                    "minDays": "",
+                    "minPercent": "",
+                    "smallAnimalPrice": 10,
+                    "bigAnimalPrice": 15,
+                    "peoplesForSales": []
+                },
+                {
                     "id": 9486,
-                    "price": "50,00",
+                    "price": "65,00",
                     "minPeople": "",
                     "minDays": "",
                     "minPercent": "",
@@ -1892,7 +2008,7 @@
                 },
                 {
                     "id": 8838,
-                    "price": "58,00",
+                    "price": "65,00",
                     "minPeople": "5",
                     "minDays": "",
                     "minPercent": "",
@@ -1907,7 +2023,7 @@
                 },
                 {
                     "id": 8836,
-                    "price": "60,00",
+                    "price": "85,00",
                     "minPeople": "2",
                     "minDays": "",
                     "minPercent": "",
@@ -1917,7 +2033,7 @@
                 },
                 {
                     "id": 8783,
-                    "price": "65,00",
+                    "price": "75,00",
                     "minPeople": "8",
                     "minDays": "",
                     "minPercent": "",
@@ -1932,7 +2048,7 @@
                 },
                 {
                     "id": 8780,
-                    "price": "55,00",
+                    "price": "65,00",
                     "minPeople": "7",
                     "minDays": "",
                     "minPercent": "",
@@ -1947,7 +2063,7 @@
                 },
                 {
                     "id": 8733,
-                    "price": "58,00",
+                    "price": "65,00",
                     "minPeople": "5",
                     "minDays": "",
                     "minPercent": "",
@@ -1962,7 +2078,7 @@
                 },
                 {
                     "id": 8643,
-                    "price": "55,00",
+                    "price": "65,00",
                     "minPeople": "7",
                     "minDays": "",
                     "minPercent": "",
@@ -1979,8 +2095,8 @@
         },
         {
             "id": 9617,
-            "name": "\u041d\u043e\u0432\u043e\u0433\u043e\u0434\u043d\u0438\u0439 \u0441\u0435\u0437\u043e\u043d (02.01 - 09.01)",
-            "order": "0",
+            "name": "Новогодний сезон",
+            "order": "2",
             "current": false,
             "houses": [
                 {
@@ -2186,91 +2302,165 @@
             ]
         }
     ],
-    "weather": {
-        "day": "1",
-        "temperature": 1,
-        "icon": "https:\/\/darksky.net\/images\/weather-icons\/fog.png",
-        "description": "\u0421\u043d\u0435\u0433 (1\u20134 \u0441\u043c.) \u043d\u043e\u0447\u044c\u044e.",
-        "firstDay": {
-            "day": "\u0432\u0442",
-            "icon": "https:\/\/darksky.net\/images\/weather-icons\/snow.png"
+    "pageTitle": "Бронирование",
+    "pageBannerSrc": "https://krasnagorka.by/wp-content/uploads/2022/11/IMG_1570_result.png",
+    "foodTripleSalePrice": 5,
+    "mainContent": {
+        "title": null,
+        "type": null,
+        "contractOffer": "https://krasnagorka.by/dogovor-prisoedineniya/"
+    },
+    "babyBedPrice": 5,
+    "bathHouseBlackPrice": 50,
+    "bathHouseWhitePrice": 70,
+    "foodBreakfastPrice": 15,
+    "foodLunchPrice": 17,
+    "foodDinnerPrice": 18,
+    "foodAvailable": true,
+    "foodNotAvailableText": "На данный момент заказ питания онлайн недоступен",
+    "foodPackageBreakfastAvailable": true,
+    "foodPackageBreakfastSale": 10,
+    "foodPackageBreakfastDescription": "В данный пакет включены завтраки на каждого человека, на все дни проживания",
+    "foodPackageFullAvailable": true,
+    "foodPackageFullSale": 15,
+    "foodPackageFullDescription": "В данный пакет включены завтраки, обеды и ужины на каждого человека, на все дни проживания (обед и ужин - в день заезда, завтрак - в день выезда)",
+    "foodVariant": "breakfast",
+    "scenario": "Basic",
+    "mainMenu": [
+        {
+            "key": 10588,
+            "label": "Главная",
+            "href": "https://krasnagorka.by/"
         },
-        "secondDay": {
-            "day": "\u0441\u0440",
-            "icon": "https:\/\/darksky.net\/images\/weather-icons\/partly-cloudy-day.png"
+        {
+            "key": 10567,
+            "label": "Наши дома",
+            "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/",
+            "subItems": [
+                {
+                    "key": 10561,
+                    "label": "Бунгало",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/bungalo/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10562,
+                    "label": "Домик у причала",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/domik-u-prichala/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10563,
+                    "label": "Рыбацкий",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/rybatskij/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10559,
+                    "label": "Датский",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/datskij/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10560,
+                    "label": "Терем",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/terem/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10564,
+                    "label": "Бабочка",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/babochka/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 10565,
+                    "label": "Божья  коровка",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/bozhya-korovka/",
+                    "parent": "10567"
+                },
+                {
+                    "key": 13093,
+                    "label": "Пилигрим",
+                    "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/piligrim/",
+                    "parent": "10567"
+                }
+            ]
         },
-        "thirdDay": {
-            "day": "\u0447\u0442",
-            "icon": "https:\/\/darksky.net\/images\/weather-icons\/partly-cloudy-day.png"
+        {
+            "key": 10591,
+            "label": "Услуги и развлечения",
+            "href": "https://krasnagorka.by/otdyh-na-braslavah/"
+        },
+        {
+            "key": 10592,
+            "label": "Акции",
+            "href": "https://krasnagorka.by/stocks/"
+        },
+        {
+            "key": 10593,
+            "label": "Цены",
+            "href": "https://krasnagorka.by/tseny/"
+        },
+        {
+            "key": 10594,
+            "label": "Месторасположение",
+            "href": "https://krasnagorka.by/shema-proezda/"
+        },
+        {
+            "key": 10590,
+            "label": "Календарь бронирования",
+            "href": "https://krasnagorka.by/kalendar-bronirovaniya/"
+        },
+        {
+            "key": 17825,
+            "label": "Отзывы",
+            "href": "https://krasnagorka.by/otzyvy/"
         }
+    ],
+    "footerBottom": {
+        "logo": "https://krasnagorka.by/wp-content/uploads/2019/05/footer-logo-160x160.png",
+        "unp": "<p>ИП Терещенко Иван Игоревич</p><p>УНП 192706366</p><p>РБ, Минск, ул. Мястровская, 28-81</p><p>Св-во о гос. регистрации №192706366 </p><p>от 19.12.2018 выдано Минским горисполкомом</p>",
+        "socials": [
+            {
+                "value": "insta",
+                "url": "https://www.instagram.com/krasnogorka.by/"
+            },
+            {
+                "value": "fb",
+                "url": "https://www.facebook.com/krasnagorka.by/"
+            },
+            {
+                "value": "ok",
+                "url": "https://m.ok.ru/profile/576548326340"
+            },
+            {
+                "value": "vk",
+                "url": "https://vk.com/krasnogorka_by"
+            },
+            {
+                "value": "youtube",
+                "url": "https://www.youtube.com/channel/UCT-5WXCDQ8_667Kq-rOWzIQ?pbjreload=10"
+            },
+            {
+                "value": "telegram",
+                "url": "https://t.me/krasnogorkaby"
+            }
+        ]
     },
-    "currencies": {
-        "byn": 1,
-        "rur": "3.4495",
-        "usd": "2.5552",
-        "eur": "3.0223"
-    },
-    "pageTitle": "\u0411\u0440\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435",
-    "pageBannerSrc": "https:\/\/krasnagorka.by\/wp-content\/uploads\/2022\/11\/IMG_1570_result.png",
     "popupContacts": {
         "a1": "+375 29 320 19 19",
         "mts": "+375 29 701 19 19",
         "life": null,
         "email": "info@krasnagorka.by",
-        "time": "9:00 - 20:00 \u043f\u043d-\u043f\u0442",
-        "weekend": "11:00 - 20:00 \u0441\u0431,\u0432\u0441"
+        "time": "9:00 - 20:00 пн-пт",
+        "weekend": "11:00 - 20:00 сб,вс"
     },
-    "foodTripleSalePrice": 5,
-    "mainContent": {
-        "title": "\u041f\u0438\u043b\u0438\u0433\u0440\u0438\u043c",
-        "type": "\u0414\u043e\u043c\u0438\u043a:",
-        "contractOffer": "https:\/\/krasnagorka.by\/dogovor-prisoedineniya\/"
-    },
-    "footerBottom": {
-        "logo": "https:\/\/krasnagorka.by\/wp-content\/uploads\/2019\/05\/footer-logo-160x160.png",
-        "unp": "<p>\u0418\u041f \u0422\u0435\u0440\u0435\u0449\u0435\u043d\u043a\u043e \u0418\u0432\u0430\u043d \u0418\u0433\u043e\u0440\u0435\u0432\u0438\u0447<\/p><p>\u0423\u041d\u041f 192706366<\/p><p>\u0420\u0435\u0441\u043f\u0443\u0431\u043b\u0438\u043a\u0430 \u0411\u0435\u043b\u0430\u0440\u0443\u0441\u044c, \u0411\u0440\u0430\u0441\u043b\u0430\u0432\u0441\u043a\u0438\u0439 <\/p><p>\u0440-\u043d., \u0434. \u041a\u0440\u0430\u0441\u043d\u043e\u0433\u043e\u0440\u043a\u0430<\/p>",
-        "socials": [
-            {
-                "value": "insta",
-                "url": "https:\/\/www.instagram.com\/krasnogorka.by\/"
-            },
-            {
-                "value": "fb",
-                "url": "https:\/\/www.facebook.com\/krasnagorka.by\/"
-            },
-            {
-                "value": "ok",
-                "url": "https:\/\/m.ok.ru\/profile\/576548326340"
-            },
-            {
-                "value": "vk",
-                "url": "https:\/\/vk.com\/krasnogorka_by"
-            },
-            {
-                "value": "youtube",
-                "url": "https:\/\/www.youtube.com\/channel\/UCT-5WXCDQ8_667Kq-rOWzIQ?pbjreload=10"
-            },
-            {
-                "value": "telegram",
-                "url": "https:\/\/t.me\/krasnogorkaby"
-            }
-        ]
-    },
-    "babyBedPrice": 5,
-    "bathHouseBlackPrice": 50,
-    "bathHouseWhitePrice": 50,
-    "foodBreakfastPrice": 15,
-    "foodLunchPrice": 15,
-    "foodDinnerPrice": 15,
-    "foodAvailable": true,
-    "foodNotAvailableText": "\u041d\u0430 \u0434\u0430\u043d\u043d\u044b\u0439 \u043c\u043e\u043c\u0435\u043d\u0442 \u0437\u0430\u043a\u0430\u0437 \u043f\u0438\u0442\u0430\u043d\u0438\u044f \u043e\u043d\u043b\u0430\u0439\u043d \u043d\u0435\u0434\u043e\u0441\u0442\u0443\u043f\u0435\u043d",
-    "foodPackageBreakfastAvailable": true,
-    "foodPackageBreakfastSale": 10,
-    "foodPackageBreakfastDescription": "\u0412 \u0434\u0430\u043d\u043d\u044b\u0439 \u043f\u0430\u043a\u0435\u0442 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u044b \u0437\u0430\u0432\u0442\u0440\u0430\u043a\u0438 \u043d\u0430 \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430, \u043d\u0430 \u0432\u0441\u0435 \u0434\u043d\u0438 \u043f\u0440\u043e\u0436\u0438\u0432\u0430\u043d\u0438\u044f",
-    "foodPackageFullAvailable": true,
-    "foodPackageFullSale": 15,
-    "foodPackageFullDescription": "\u0412 \u0434\u0430\u043d\u043d\u044b\u0439 \u043f\u0430\u043a\u0435\u0442 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u044b \u0437\u0430\u0432\u0442\u0440\u0430\u043a\u0438, \u043e\u0431\u0435\u0434\u044b \u0438 \u0443\u0436\u0438\u043d\u044b \u043d\u0430 \u043a\u0430\u0436\u0434\u043e\u0433\u043e \u0447\u0435\u043b\u043e\u0432\u0435\u043a\u0430, \u043d\u0430 \u0432\u0441\u0435 \u0434\u043d\u0438 \u043f\u0440\u043e\u0436\u0438\u0432\u0430\u043d\u0438\u044f (\u043e\u0431\u0435\u0434 \u0438 \u0443\u0436\u0438\u043d - \u0432 \u0434\u0435\u043d\u044c \u0437\u0430\u0435\u0437\u0434\u0430, \u0437\u0430\u0432\u0442\u0440\u0430\u043a - \u0432 \u0434\u0435\u043d\u044c \u0432\u044b\u0435\u0437\u0434\u0430)",
-    "foodVariant": "breakfast",
-    "dateFrom": "2023-03-24",
-    "dateTo": "2023-03-30"
+    "weather": [],
+    "currencies": {
+        "byn": 1,
+        "rur": "3.4495",
+        "usd": "2.5552",
+        "eur": "3.0223"
+    }
 }

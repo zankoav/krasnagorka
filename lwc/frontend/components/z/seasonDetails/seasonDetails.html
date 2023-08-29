@@ -3,22 +3,22 @@
         <div class="season-details__title">{season.name}</div>
         <div class="season-details__condition">
             <div class="season-details__subtitle">Условия:</div>
-            <div class="season-details__item">
+            <div if:true={smartPrice} class="season-details__item">
                 <div class="season-details__item-title">Стоимость спального места за ночь</div>
-                <z-number-value num={price} value="руб"></z-number-value>
+                <z-price-view price={smartPrice}></z-price-view>
             </div>
             <div if:true={minPricePerDay} class="season-details__item">
                 <div class="season-details__item-title">Минимальная стоимость за ночь</div>
-                <z-number-value num={minPricePerDay} value="руб"></z-number-value>
+                <z-price-view price={minPricePerDay}></z-price-view>
             </div>
             <template if:true={showAnimalsService}>
                 <div if:true={smallAnimalPrice} class="season-details__item">
-                    <div class="season-details__item-title">{smallAnimalsLabel}</div>
-                    <z-number-value num={smallAnimalPrice} value="руб"></z-number-value>
+                    <div class="season-details__item-title">Кошки и собаки мелких пород (высота в холке до 40 см) за ночь</div>
+                    <z-price-view price={smallAnimalPrice}></z-price-view>
                 </div>
                 <div if:true={bigAnimalPrice} class="season-details__item">
                     <div class="season-details__item-title">Собаки крупных пород (высота в холке более 40 см) за ночь</div>
-                    <z-number-value num={bigAnimalPrice} value="руб"></z-number-value>
+                    <z-price-view price={bigAnimalPrice}></z-price-view>
                 </div>
             </template>
             <template if:true={minDays}>
