@@ -500,8 +500,13 @@ class BaseModel extends ModelImpl
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
 
-                $roomSmallAnimalPrice = intval(get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0);
-                $roomBigAnimalPrice = intval(get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0);
+                $roomSmallAnimalPrice = get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0;
+                $roomSmallAnimalPrice = str_replace(",",".", $roomSmallAnimalPrice);
+                $roomSmallAnimalPrice = floatval($roomSmallAnimalPrice);
+                
+                $roomBigAnimalPrice = get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0;
+                $roomBigAnimalPrice = str_replace(",",".", $roomBigAnimalPrice);
+                $roomBigAnimalPrice = floatval($roomBigAnimalPrice);
 
                 $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
 
