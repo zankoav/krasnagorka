@@ -518,7 +518,9 @@ class PackageModel extends ModelImpl
             $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $freshPrice = $tabHouse['new_price'];
+                $newPrice = str_replace(",",".", $tabHouse['new_price']);
+                $newPrice  = floatval($newPrice );
+                $freshPrice = $newPrice ;
                 break;
             }
         }
@@ -572,7 +574,7 @@ class PackageModel extends ModelImpl
                 $roomPrice = get_post_meta($post->ID, "room_price_$room_id", true);
                 $roomPrice = str_replace(",",".", $roomPrice);
                 $roomPrice = floatval($roomPrice);
-                
+
                 $roomMinPeople = get_post_meta($post->ID, "room_min_people_$room_id", true);
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);

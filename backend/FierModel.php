@@ -481,7 +481,9 @@ class FierModel extends ModelImpl
             $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $freshPrice = $tabHouse['new_price'];
+                $newPrice = str_replace(",",".", $tabHouse['new_price']);
+                $newPrice  = floatval($newPrice );
+                $freshPrice = $newPrice ;
                 break;
             }
         }
