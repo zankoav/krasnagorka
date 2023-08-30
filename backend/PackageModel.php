@@ -46,7 +46,10 @@ class PackageModel extends ModelImpl
 
         if($showPrice){
             $showPayments = $bookingSettings['booking_payments_show'] == 'on';
-            $minPrepaidPrice = intval($bookingSettings['booking_payments_min_price']);
+            $minPrepaidPrice = $bookingSettings['booking_payments_min_price'] ?? "0";
+            $minPrepaidPrice = str_replace(",",".", $minPrepaidPrice);
+            $minPrepaidPrice = floatval($minPrepaidPrice);
+            
             $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
             $prepaidOptions = [
                 [
@@ -122,6 +125,34 @@ class PackageModel extends ModelImpl
         $textFullOffice =  !empty($bookingSettings['text_full_office']) ? $bookingSettings['text_full_office'] : '';
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
+        $babyBeadPrice = $bookingSettings['baby_bed_price'] ?? "0";
+        $babyBeadPrice = str_replace(",",".", $babyBeadPrice);
+        $babyBeadPrice = floatval($babyBeadPrice);
+
+        $bathHouseBlackPrice = $bookingSettings['bath_house_black_price'] ?? "0";
+        $bathHouseBlackPrice = str_replace(",",".", $bathHouseBlackPrice);
+        $bathHouseBlackPrice = floatval($bathHouseBlackPrice);
+
+        $bathHouseWhitePrice = $bookingSettings['bath_house_white_price'] ?? "0";
+        $bathHouseWhitePrice = str_replace(",",".", $bathHouseWhitePrice);
+        $bathHouseWhitePrice = floatval($bathHouseWhitePrice);
+
+        $foodBreakfastPrice = $bookingSettings['food_breakfast_price'] ?? "0";
+        $foodBreakfastPrice = str_replace(",",".", $foodBreakfastPrice);
+        $foodBreakfastPrice = floatval($foodBreakfastPrice);
+
+        $foodLunchPrice = $bookingSettings['food_lunch_price'] ?? "0";
+        $foodLunchPrice = str_replace(",",".", $foodLunchPrice);
+        $foodLunchPrice = floatval($foodLunchPrice);
+
+        $foodDinnerPrice = $bookingSettings['food_dinner_price'] ?? "0";
+        $foodDinnerPrice = str_replace(",",".", $foodDinnerPrice);
+        $foodDinnerPrice = floatval($foodDinnerPrice);
+
+        $foodTripleSalePrice = $bookingSettings['food_triple_sale_price'] ?? "0";
+        $foodTripleSalePrice = str_replace(",",".", $foodTripleSalePrice);
+        $foodTripleSalePrice = floatval($foodTripleSalePrice);
+
         $result        = [
             'id'                => $calendarId,
             'admin'             => $showPrice,
@@ -145,19 +176,19 @@ class PackageModel extends ModelImpl
             'seasons'       => $this->getAllSeasons($selectedSeasonId),
             'pageTitle'     => get_the_title(),
             'pageBannerSrc' => $pageBannerSrc,
-            'foodTripleSalePrice' => !empty($bookingSettings['food_triple_sale_price']) ? intval($bookingSettings['food_triple_sale_price']) : 0,
+            'foodTripleSalePrice' => $foodTripleSalePrice,
             'mainContent'   => [
                 "title"         => $title,
                 "type"          => $type,
                 "contractOffer" => $this->themeOptions['contract_offer']
             ],
-            "babyBedPrice" => !empty($bookingSettings['baby_bed_price']) ? intval($bookingSettings['baby_bed_price']) : null,
-            "bathHouseBlackPrice" => !empty($bookingSettings['bath_house_black_price']) ? intval($bookingSettings['bath_house_black_price']) : null,
-            "bathHouseWhitePrice" => !empty($bookingSettings['bath_house_white_price']) ? intval($bookingSettings['bath_house_white_price']) : null,
+            "babyBedPrice" => $babyBeadPrice,
+            "bathHouseBlackPrice" => $bathHouseBlackPrice,
+            "bathHouseWhitePrice" => $bathHouseWhitePrice,
             
-            "foodBreakfastPrice" => !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0,
-            "foodLunchPrice" => !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0,
-            "foodDinnerPrice" => !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0,
+            "foodBreakfastPrice" => $foodBreakfastPrice,
+            "foodLunchPrice" => $foodLunchPrice,
+            "foodDinnerPrice" => $foodDinnerPrice,
             "foodAvailable" => $bookingSettings['food_available'] == 'on',
             "foodNotAvailableText" => $bookingSettings['food_not_available_text'] ?? ''
         ];
@@ -223,8 +254,8 @@ class PackageModel extends ModelImpl
             
 
             $result['total'] = [
-                "accommodation" =>  intval($result['price']),
-                "total_price" => intval($result['price']),
+                "accommodation" =>  $result['price'],
+                "total_price" => $result['price'],
                 "only_booking_order" => [
                     "message" => "!!! Message",
                     "enabled" => false
@@ -296,9 +327,11 @@ class PackageModel extends ModelImpl
         foreach ((array) $calendars as $key => $entry) {
             if (isset($entry['calendar']) && isset($entry['package_price'])) {
                 $calendarId = intval($entry['calendar']);
+                $packagePrice = str_replace(",",".", $entry['package_price']);
+                $packagePrice = floatval($packagePrice);
                 $calendarsFormatted[$calendarId] = [
                     "id" => $calendarId,
-                    "price_person_night" => floatval($entry['package_price']),
+                    "price_person_night" => $packagePrice,
                     "min_people" => intval($entry['package_people_min'])
                 ];
             }
@@ -541,8 +574,13 @@ class PackageModel extends ModelImpl
                 $roomMinDays = get_post_meta($post->ID, "room_min_days_$room_id", true);
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
 
-                $roomSmallAnimalPrice = intval(get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0);
-                $roomBigAnimalPrice = intval(get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0);
+                $roomSmallAnimalPrice = get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0;
+                $roomSmallAnimalPrice = str_replace(",",".", $roomSmallAnimalPrice);
+                $roomSmallAnimalPrice = floatval($roomSmallAnimalPrice);
+
+                $roomBigAnimalPrice = get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0;
+                $roomBigAnimalPrice = str_replace(",",".", $roomBigAnimalPrice);
+                $roomBigAnimalPrice = floatval($roomBigAnimalPrice);
 
                 $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
 
@@ -581,8 +619,13 @@ class PackageModel extends ModelImpl
                 $houseMinDays = get_post_meta($post->ID, "house_min_days_$house->ID", true);
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
 
-                $houseSmallAnimalPrice = intval(get_post_meta($post->ID, "house_small_animal_price_$house->ID", true) ?? 0);
-                $houseBigAnimalPrice = intval(get_post_meta($post->ID, "house_big_animal_price_$house->ID", true) ?? 0);
+                $houseSmallAnimalPrice = get_post_meta($post->ID, "house_small_animal_price_$house->ID", true) ?? 0;
+                $houseSmallAnimalPrice = str_replace(",",".", $houseSmallAnimalPrice);
+                $houseSmallAnimalPrice = floatval($houseSmallAnimalPrice);
+                
+                $houseBigAnimalPrice = get_post_meta($post->ID, "house_big_animal_price_$house->ID", true) ?? 0;
+                $houseBigAnimalPrice = str_replace(",",".", $houseBigAnimalPrice);
+                $houseBigAnimalPrice = floatval($houseBigAnimalPrice);
 
                 $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_people_for_sale_$house->ID", true);
 
