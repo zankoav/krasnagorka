@@ -482,7 +482,7 @@ class BaseModel extends ModelImpl
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
                 $newPrice = str_replace(",",".", $tabHouse['new_price']);
                 $newPrice  = floatval($newPrice );
-                $freshPrice = $newPrice ;
+                $freshPrice = $newPrice;
                 break;
             }
         }

@@ -656,10 +656,13 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $babyBed = $request['babyBed'];
         if($babyBed){
             $dayCount = intval($result['days_count']);
-            $babyBedPrice = intval($bookingSettings['baby_bed_price']);
+
+            $babyBedPrice = str_replace(",",".", $bookingSettings['baby_bed_price']);
+            $babyBedPrice  = floatval($babyBedPrice );
+
             $babyBedTotalPrice = $babyBedPrice * $dayCount;
             if(!empty($daysSale)){
-                $babyBedTotalPrice =  round($babyBedTotalPrice * (1 - $daysSale / 100));
+                $babyBedTotalPrice =  $babyBedTotalPrice * (1 - $daysSale / 100);
             }
             $result['total_price'] += $babyBedTotalPrice;
             
@@ -671,7 +674,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ];
         }
 
-        $bathHouseWhitePrice = intval($bookingSettings['bath_house_white_price']);
+        $bathHouseWhitePrice = str_replace(",",".", $bookingSettings['bath_house_white_price']);
+        $bathHouseWhitePrice  = floatval($bathHouseWhitePrice );
 
         if(!empty($bathHouseWhite) and !empty($bathHouseWhitePrice)){
             $bathHouseWhite = intval($bathHouseWhite);
@@ -684,7 +688,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $result['total_price'] += $bathHouseWhiteTotalPrice;
         }
 
-        $bathHouseBlackPrice = intval($bookingSettings['bath_house_black_price']);
+        $bathHouseBlackPrice = str_replace(",",".", $bookingSettings['bath_house_black_price']);
+        $bathHouseBlackPrice  = floatval($bathHouseBlackPrice );
+
         if(!empty($bathHouseBlack) and !empty($bathHouseBlackPrice)){
 
             $bathHouseBlack = intval($bathHouseBlack);
@@ -702,10 +708,17 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         if($foodAvailable){
 
-            $foodBreakfastPrice = !empty($bookingSettings['food_breakfast_price']) ? intval($bookingSettings['food_breakfast_price']) : 0;
-            $foodLunchPrice = !empty($bookingSettings['food_lunch_price']) ? intval($bookingSettings['food_lunch_price']) : 0;
-            $foodDinnerPrice = !empty($bookingSettings['food_dinner_price']) ? intval($bookingSettings['food_dinner_price']) : 0;
-            
+            $foodBreakfastPrice = $bookingSettings['food_breakfast_price'] ?? "0";
+            $foodBreakfastPrice = str_replace(",",".", $foodBreakfastPrice);
+            $foodBreakfastPrice = floatval($foodBreakfastPrice);
+
+            $foodLunchPrice = $bookingSettings['food_lunch_price'] ?? "0";
+            $foodLunchPrice = str_replace(",",".", $foodLunchPrice);
+            $foodLunchPrice = floatval($foodLunchPrice);
+
+            $foodDinnerPrice = $bookingSettings['food_dinner_price'] ?? "0";
+            $foodDinnerPrice = str_replace(",",".", $foodDinnerPrice);
+            $foodDinnerPrice = floatval($foodDinnerPrice);
 
             $foodBreakfastCount = intval($request['foodBreakfast']);
             $foodLunchCount = intval($request['foodLunch']);
@@ -714,7 +727,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $foodTripleSale = 0;
 
             if(!empty($bookingSettings['food_triple_sale_price'])){
-                $foodTripleSalePrice = intval($bookingSettings['food_triple_sale_price']);
+                $foodTripleSalePrice = $bookingSettings['food_triple_sale_price'] ?? "0";
+                $foodTripleSalePrice = str_replace(",",".", $foodTripleSalePrice);
+                $foodTripleSalePrice = floatval($foodTripleSalePrice);
+
                 if($foodBreakfastCount > 0 && $foodLunchCount > 0 && $foodDinnerCount > 0){
                     $foodTripleSale = $foodTripleSalePrice * min($foodBreakfastCount, $foodLunchCount, $foodDinnerCount);
                 }
@@ -728,7 +744,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $foodPackageSale = 0;
             if(!empty($foodVariant) and $foodVariant != 'custom' and $foodVariant != 'no_food'){
                 $foodTripleSale = 0;
-                $foodPackageSale = !empty($bookingSettings["food_package_".$foodVariant."_sale"]) ? intval($bookingSettings["food_package_".$foodVariant."_sale"]) : 0;
+                $foodPackageSale = $bookingSettings["food_package_".$foodVariant."_sale"] ?? "0";
+                $foodPackageSale = str_replace(",",".", $foodPackageSale);
+                $foodPackageSale = floatval($foodPackageSale);
             }
 
             $result['food'] = [
@@ -811,7 +829,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateTabStart = date("Y-m-d", strtotime('+1 day', strtotime($tabHouse['from'])));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $price = intval($tabHouse['new_price']);
+                $newPrice = str_replace(",",".", $tabHouse['new_price']);
+                $newPrice  = floatval($newPrice );
+                $price = $newPrice;
                 break;
             }
         }
