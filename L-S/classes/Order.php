@@ -77,11 +77,11 @@ class Order {
 
     public int $leadId;
 
-    public float $price;
-    public float $subprice;
+    public int $price;
+    public int $subprice;
     
-    public float $foodPrice;
-    public float $accommodationPrice;
+    public int $foodPrice;
+    public int $accommodationPrice;
 
     public function eventVariant(){
         $result = null;

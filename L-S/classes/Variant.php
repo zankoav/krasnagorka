@@ -11,9 +11,9 @@ class Variant {
 
     public string $title;
 
-    public float $pricePerDay = 0;
+    public int $pricePerDay = 0;
     public string $descriptionPerDay;
 
-    public float $priceSingle = 0;
+    public int $priceSingle = 0;
     public string $descriptionSingle;
 }
