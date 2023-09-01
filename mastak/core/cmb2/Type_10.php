@@ -70,16 +70,28 @@
                     $dateStart = $interval['from'];
                     $dateEnd = $interval['to'];
 
+                    $oldPrice = str_replace(",",".", $item['old_price'] ?? "0");
+                    $oldPrice = floatval($oldPrice);
+
+                    $newPrice = str_replace(",",".", $item['new_price'] ?? "0");
+                    $newPrice = floatval($newPrice);
+
+                    $oldPriceChild = str_replace(",",".", $item['old_price_child'] ?? "0");
+                    $oldPriceChild = floatval($oldPriceChild);
+
+                    $newPriceChild = str_replace(",",".", $item['new_price_child'] ?? "0");
+                    $newPriceChild = floatval($newPriceChild);
+
                     $result['calendar'] = [
                         'calendar' => $calendarId,
                         'calendar_name' => $item['calendarName'],
                         'max_people' => intval($item['maxPeople']),
                         'house' => intval($item['house']),
                         'image' => $item['image'],
-                        'old_price' => intval($item['old_price']),
-                        'new_price' => intval($item['new_price']),
-                        'old_price_child' => intval($item['old_price_child']),
-                        'new_price_child' => intval($item['new_price_child']),
+                        'old_price' => $oldPrice,
+                        'new_price' => $newPrice,
+                        'old_price_child' => $oldPriceChild,
+                        'new_price_child' => $newPriceChild,
                         'enabled_child' => $item['enabled_child'] === 'on',
                         'min_people' => intval($item['peopleCount']),
                         'content' => $item['description'],
