@@ -416,12 +416,12 @@ function kg_clear_order()
         wp_schedule_event($time, 'quarter_day', 'kg_clear_order_quarter_day_min_event');
     }
 
-    if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
-        wp_schedule_event($time, 'one_day', 'kg_clear_order_1_day_min_event');
-    }
+    // if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
+    //     wp_schedule_event($time, 'one_day', 'kg_clear_order_1_day_min_event'); 
+    // }
 }
 
-add_action('kg_clear_order_1_day_min_event', 'kg_clear_orders_2');
+// add_action('kg_clear_order_1_day_min_event', 'kg_clear_orders_2');
 function kg_clear_orders_2()
 {
 
@@ -537,6 +537,8 @@ function kg_add_remind()
         Booking_Form_Controller::createAmoCrmTask('Напомнить клиенту оплатить свою бронь осталось 15 часов', $leadId);
         update_post_meta($order->ID, 'sbc_remind_task', 'Задача создана');
     }
+
+    kg_clear_orders_2();
 }
 
 // ADD ROLE Once!
