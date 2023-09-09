@@ -19,10 +19,23 @@
         border-radius: 6px;
     }
 
+    .house-booking__info-subtitle{
+        margin: 1rem 0;
+    }
+
+    .opportunity__price-subtitle_sale{
+        text-align: right;
+        display: block;
+    }
+
     @media (min-width: 768px){
         div.table-tab-col .house-booking__info_event{
             align-items: flex-end;
             text-align: right;
+        }
+
+        .house-booking__info-subtitle{
+            margin: initial;
         }
 
         .table-tab-price{
@@ -200,8 +213,8 @@
                         </span>
                         <?php endif; ?>
                     </p>
-                    <p class="house-booking__info house-booking__info_event">
-                        <span>Стоимость за ночь</span>
+                    <div class="house-booking__info house-booking__info_event">
+                        <p class="house-booking__info-subtitle">Стоимость за ночь</p>
                         <span class="house-booking__price-per-men js-currency"
                               data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_per_night_byn; ?>">
@@ -214,7 +227,7 @@
                             <?= $price_per_night_sale; ?>
                         </span>
                         <?php endif; ?>
-                    </p>
+                    </div>
                     <span class="opportunity__price-subtitle opportunity__price-subtitle_event opportunity__price-subtitle_sale">
 						<?= $item['sale_text']; ?></span>
                 </div>
