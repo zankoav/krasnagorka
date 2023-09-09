@@ -47,7 +47,7 @@ export default class StepFood extends BaseElement {
             result.push({
                 label: 'Полный пансион',
                 value: 'full',
-                postfix: `${this.settings.foodPackageFullSale}%`,
+                postfix: this.settings.foodPackageFullSale ? `${this.settings.foodPackageFullSale}%` : null,
                 description: this.settings.foodPackageFullDescription,
                 selected: this.settings.foodVariant == 'full'
             })

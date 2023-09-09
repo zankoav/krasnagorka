@@ -130,6 +130,27 @@
 
         $price = get_current_price($price_byn);
 
+        // $from = date("Y-m-d", strtotime($from));
+        // $to = date("Y-m-d", strtotime($to));
+
+        $dateEndDT = new \DateTime($to);
+        $period = new \DatePeriod(
+            new \DateTime($from),
+            new \DateInterval('P1D'),
+            $dateEndDT->modify( '+1 day' )
+        );
+        $night_count = iterator_count($period);
+        $price_per_night = $price / $night_count;
+        $price_per_night_byn = $price_byn / $night_count;
+
+        $price_per_night_sale = null;
+        $price_per_night_sale_byn = null;
+
+        if($price_byn_sale != null){
+            $price_per_night_sale = $price / $night_count;
+            $price_per_night_sale_byn = $price_byn / $night_count;
+        }
+
         ?>
         <div class="table-tab-row">
             <div class="table-tab-col">
@@ -178,9 +199,23 @@
                             <?= $price_sale; ?>
                         </span>
                         <?php endif; ?>
-                        <span class="opportunity__price-subtitle opportunity__price-subtitle_event opportunity__price-subtitle_sale">
-						<?= $item['sale_text']; ?></span>
                     </p>
+                    <p class="house-booking__info house-booking__info_event">
+                        <span class="house-booking__price-per-men js-currency"
+                              data-currency="<?= $currency_name; ?>"
+                              data-byn="<?= $price_per_night_byn; ?>">
+                            <?= $price_per_night; ?>
+                        </span>
+                        <?php if (!empty($price_byn_sale)): ?>
+                            <span class="house-booking__price-per-men house-booking__price-per-men_sale js-currency"
+                                  data-currency="<?= $currency_name; ?>"
+                                  data-byn="<?= $price_per_night_sale_byn; ?>">
+                            <?= $price_per_night_sale; ?>
+                        </span>
+                        <?php endif; ?>
+                    </p>
+                    <span class="opportunity__price-subtitle opportunity__price-subtitle_event opportunity__price-subtitle_sale">
+						<?= $item['sale_text']; ?></span>
                 </div>
             </div>
         </div>
