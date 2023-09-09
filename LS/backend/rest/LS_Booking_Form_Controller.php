@@ -243,6 +243,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $oldPrice = intval($request['oldPrice']);
         $newPrice = intval($request['newPrice']);
 
+        $dateEndDT = new \DateTime($dateTo);
+        $period = new \DatePeriod(
+            new \DateTime($dateFrom),
+            new \DateInterval('P1D'),
+            $dateEndDT
+        );
+        $night_count = iterator_count($period);
+        $newPricePerNight = $newPrice  / $night_count;
+        $oldPricePerNight = $oldPrice / $night_count;
+
         $index = intval($request['index']);
         $tabId = $request['postId'];
 
@@ -289,9 +299,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'to' => date("d.m.Y", strtotime($dateTo))
             ],
             'sale' => intval(100 - ($newPrice * 100) / $oldPrice),
+            'sale_per_night' => intval(100 - ($newPricePerNight * 100) / $oldPricePerNight),
             'price' => [
                 'old' => $oldPrice,
-                'new' => $newPrice
+                'new' => $newPrice,
+                'per_night_old' => $oldPricePerNight,
+                'per_night_new' => $newPricePerNight
             ],
             'order_link'=> $orderLink,
             'description'=> $description
