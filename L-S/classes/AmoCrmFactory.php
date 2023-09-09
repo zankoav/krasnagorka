@@ -498,7 +498,8 @@ class AmoCrmFactory {
                 $packageServicesStr = '';
                 foreach($order->getPackageServices() as $service){
                     if($service['id'] == '1'){
-                        $packageServicesStr .= $service['title']."\n";
+                        $foodPerPerson = intval($service['count']) / $order->peopleCount;
+                        $packageServicesStr .= $service['title']. " " .  $foodPerPerson. " шт.\n";
                     }else{
                         $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
                     }
