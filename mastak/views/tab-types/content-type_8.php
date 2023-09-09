@@ -24,11 +24,16 @@
     }
 
     .opportunity__price-subtitle_sale{
-        text-align: right;
+        text-align: center;
         display: block;
     }
 
     @media (min-width: 768px){
+
+        .opportunity__price-subtitle_sale{
+            text-align: right;
+        }
+
         div.table-tab-col .house-booking__info_event{
             align-items: flex-end;
             text-align: right;
@@ -143,14 +148,11 @@
 
         $price = get_current_price($price_byn);
 
-        // $from = date("Y-m-d", strtotime($from));
-        // $to = date("Y-m-d", strtotime($to));
-
         $dateEndDT = new \DateTime($to);
         $period = new \DatePeriod(
             new \DateTime($from),
             new \DateInterval('P1D'),
-            $dateEndDT->modify( '+1 day' )
+            $dateEndDT
         );
         $night_count = iterator_count($period);
         $price_per_night = $price / $night_count;
