@@ -105,10 +105,8 @@
                                         <div>Пакетный тур: <strong><?= $order->getPackageTitle(); ?></strong></div>
                                         <div>В пакетный тур включено:</div>
                                         <?php foreach($order->getPackageServices() as $service):?>
-                                            <?php if($service['id'] == '1'):
-                                                $foodPerPerson = intval($service['count']) / $order->peopleCount;
-                                            ?>
-                                                <div style="color:#999;"><?= $service['title'] . " " . $foodPerPerson . " шт."?></div>
+                                            <?php if($service['id'] == '1'):?>
+                                                <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт."?></div>
                                             <?php else:?>
                                                 <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт."?></div>
                                             <?php endif;?>

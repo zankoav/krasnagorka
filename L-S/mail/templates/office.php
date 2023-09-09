@@ -98,9 +98,8 @@
                                     <div>В пакетный тур включено:</div>
                                     <?php foreach($order->getPackageServices() as $service):?>
                                         <?php if($service['id'] == '1'):
-                                            $foodPerPerson = intval($service['count']) / $order->peopleCount;
                                         ?>
-                                            <div style="color:#999;"><?= $service['title'] . " " . $foodPerPerson . " шт."?></div>
+                                            <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт."?></div>
                                         <?php else:?>
                                             <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт."?></div>
                                         <?php endif;?>
