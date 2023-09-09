@@ -155,8 +155,8 @@
             $dateEndDT
         );
         $night_count = iterator_count($period);
-        $price_per_night = intval($price / $night_count);
-        $price_per_night_byn = intval($price_byn / $night_count);
+        $price_per_night = round($price / $night_count);
+        $price_per_night_byn = round($price_byn / $night_count);
 
         $price_per_night_sale = null;
         $price_per_night_sale_byn = null;

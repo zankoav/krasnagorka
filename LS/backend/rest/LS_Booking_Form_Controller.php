@@ -250,8 +250,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateEndDT
         );
         $night_count = iterator_count($period);
-        $newPricePerNight = intval($newPrice  / $night_count);
-        $oldPricePerNight = intval($oldPrice / $night_count);
+        $newPricePerNight = round($newPrice  / $night_count);
+        $oldPricePerNight = round($oldPrice / $night_count);
 
         $index = intval($request['index']);
         $tabId = $request['postId'];
