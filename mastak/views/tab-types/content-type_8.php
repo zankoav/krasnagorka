@@ -147,8 +147,8 @@
         $price_per_night_sale_byn = null;
 
         if($price_byn_sale != null){
-            $price_per_night_sale = $price / $night_count;
-            $price_per_night_sale_byn = $price_byn / $night_count;
+            $price_per_night_sale = $price_sale / $night_count;
+            $price_per_night_sale_byn = $price_byn_sale / $night_count;
         }
 
         ?>
@@ -201,6 +201,7 @@
                         <?php endif; ?>
                     </p>
                     <p class="house-booking__info house-booking__info_event">
+                        <span>Стоимость за ночь</span>
                         <span class="house-booking__price-per-men js-currency"
                               data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_per_night_byn; ?>">
