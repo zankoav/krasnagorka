@@ -201,7 +201,8 @@
             </div>
             <div class="table-tab-col">
                 <div class="table-tab-price">
-                    <p class="house-booking__info house-booking__info_event">
+                    <div class="house-booking__info house-booking__info_event">
+                        <p class="house-booking__info-subtitle">Общая стоимость</p>
                         <span class="house-booking__price-per-men js-currency"
                               data-currency="<?= $currency_name; ?>"
                               data-byn="<?= $price_byn; ?>">
@@ -214,7 +215,7 @@
                             <?= $price_sale; ?>
                         </span>
                         <?php endif; ?>
-                    </p>
+                    </div>
                     <div class="house-booking__info house-booking__info_event">
                         <p class="house-booking__info-subtitle">Стоимость за ночь</p>
                         <span class="house-booking__price-per-men js-currency"
