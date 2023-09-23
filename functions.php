@@ -5,6 +5,7 @@ if (!defined('ABSPATH')) { exit; }
 use LsFactory\PaymentService as PaymentService;
 use Ls\Wp\Log as Log;
 
+require __DIR__ . '/constants.php';
 // START
 
 function currencyModel($value){

@@ -41,7 +41,7 @@
             </style>
             <a href="#" class="our-house__button booking-houses__calendars-all-button">Открыть все календари</a>
             <select id="admin-years" name="admin-years">
-                <?php for ($year = 2015; $year < 2050; $year++): ?>
+                <?php for ($year = CALENDAR_HISTORY_YEARS_FROM; $year < CALENDAR_HISTORY_YEARS_TO; $year++): ?>
                     <option <?= $year == date('Y') ? 'selected' : ''; ?> value="<?= $year; ?>"><?= $year; ?></option>
                 <?php endfor; ?>
             </select>
