@@ -1,6 +1,8 @@
 <?php
 
-if (!defined('ABSPATH')) { exit; }
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 use LsFactory\PaymentService as PaymentService;
 use Ls\Wp\Log as Log;
@@ -8,7 +10,44 @@ use Ls\Wp\Log as Log;
 require __DIR__ . '/constants.php';
 // START
 
-function currencyModel($value){
+
+function array_sort($array, $on, $order = SORT_ASC)
+{
+    $new_array = array();
+    $sortable_array = array();
+
+    if (count($array) > 0) {
+        foreach ($array as $k => $v) {
+            if (is_array($v)) {
+                foreach ($v as $k2 => $v2) {
+                    if ($k2 == $on) {
+                        $sortable_array[$k] = $v2;
+                    }
+                }
+            } else {
+                $sortable_array[$k] = $v;
+            }
+        }
+
+        switch ($order) {
+            case SORT_ASC:
+                asort($sortable_array);
+                break;
+            case SORT_DESC:
+                arsort($sortable_array);
+                break;
+        }
+
+        foreach ($sortable_array as $k => $v) {
+            $new_array[$k] = $array[$k];
+        }
+    }
+
+    return $new_array;
+}
+
+function currencyModel($value)
+{
     $valueArr = explode('.', number_format($value, 2, '.', ''));
     return [
         'rub' => $valueArr[0],
@@ -71,14 +110,13 @@ function load_admin_style()
     wp_enqueue_style('admin_css', $uri  . '/admin-style.css', false, '1.0.0');
 
     wp_enqueue_style('events_tab_css', $uri  . '/css/tabs-event.css', false, '1.0.0');
-    wp_enqueue_script( 'events_tab_js', $uri . '/js/tabs-event.js', array( 'jquery' ), false, true );
+    wp_enqueue_script('events_tab_js', $uri . '/js/tabs-event.js', array('jquery'), false, true);
 
     wp_enqueue_style('fires_tab_css', $uri  . '/css/tabs-fire.css', false, '1.0.0');
-    wp_enqueue_script( 'fires_tab_js', $uri . '/js/tabs-fire.js', array( 'jquery' ), false, true );
+    wp_enqueue_script('fires_tab_js', $uri . '/js/tabs-fire.js', array('jquery'), false, true);
 
     wp_enqueue_style('package_css', $uri  . '/css/package-link.css', false, '1.0.0');
-    wp_enqueue_script( 'package_js', $uri . '/js/package-link.js', array( 'jquery' ), false, true );
-
+    wp_enqueue_script('package_js', $uri . '/js/package-link.js', array('jquery'), false, true);
 }
 
 
@@ -150,10 +188,11 @@ function getOrderStatus($calendarId, $dateStart, $dateEnd)
 // for delete
 
 if (!isset($content_width)) {
-    $content_width = 1200; 
+    $content_width = 1200;
 }
 
-function getHouseByCalendarId($calendarId){
+function getHouseByCalendarId($calendarId)
+{
     $result = [];
     $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1);
 
@@ -161,7 +200,7 @@ function getHouseByCalendarId($calendarId){
 
     $houseQuery = new WP_Query;
     $args = null;
-    if($isTeremRoom){
+    if ($isTeremRoom) {
         $args = array(
             'post_type' => 'house',
             'posts_per_page' => 1,
@@ -173,7 +212,7 @@ function getHouseByCalendarId($calendarId){
                 )
             )
         );
-    }else{
+    } else {
         $args = array(
             'post_type' => 'house',
             'posts_per_page' => 1,
@@ -188,8 +227,8 @@ function getHouseByCalendarId($calendarId){
     }
     $houses = $houseQuery->query($args);
     $houseId;
-    if(count($houses)){
-       $result['id'] = $houses[0]->ID;
+    if (count($houses)) {
+        $result['id'] = $houses[0]->ID;
     }
 
     return $result;
@@ -552,21 +591,22 @@ require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';
 
 
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'happy/v1', '/events/', [
+add_action('rest_api_init', function () {
+    register_rest_route('happy/v1', '/events/', [
         'methods'  => 'GET',
         'callback' => 'app_get_happy_events',
-    ] );
-} );
+    ]);
+});
 
-function app_get_happy_events() {
+function app_get_happy_events()
+{
     $result  = [
         "icon_path" => "https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/marketing/",
         "items" => []
     ];
     $args  = array(
         'post_type'      => 'event_tab',
-        'post_status'    => array( 'publish' ),
+        'post_status'    => array('publish'),
         'posts_per_page' => -1,
         'meta_query' => array(
             array(
@@ -576,31 +616,31 @@ function app_get_happy_events() {
             )
         )
     );
-    $query = new WP_Query( $args );
-    if ( $query->have_posts() ) : while ( $query->have_posts() ) : $query->the_post();
+    $query = new WP_Query($args);
+    if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
 
-        $intervalId  = get_post_meta( get_the_ID(), 'mastak_event_tab_type_10_interval', true );
-        $icon    = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_icon', true );
-        $description  = get_post_meta(  get_the_ID(), 'mastak_event_tab_type_10_description', true );
-        $start  = get_post_meta(  $intervalId, 'season_from', true );
-        $end    = get_post_meta(  $intervalId, 'season_to', true );
+            $intervalId  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_interval', true);
+            $icon    = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_icon', true);
+            $description  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_description', true);
+            $start  = get_post_meta($intervalId, 'season_from', true);
+            $end    = get_post_meta($intervalId, 'season_to', true);
 
-        $dateTo = new DateTime($end);
-        $dateFrom = new DateTime($start);
-        $period = new DatePeriod(
-            $dateFrom->modify('-1 day'),
-            new DateInterval('P1D'),
-            $dateTo->modify('+1 day')
-        );
+            $dateTo = new DateTime($end);
+            $dateFrom = new DateTime($start);
+            $period = new DatePeriod(
+                $dateFrom->modify('-1 day'),
+                new DateInterval('P1D'),
+                $dateTo->modify('+1 day')
+            );
 
-        foreach ($period as $key => $value) {
-            $result['items'][] = array(
-                'date'  => $value->format('Y-m-d'),
-                'icon'  => $icon,
-                'description' => $description
-            ); 
-        }			
-    endwhile;
+            foreach ($period as $key => $value) {
+                $result['items'][] = array(
+                    'date'  => $value->format('Y-m-d'),
+                    'icon'  => $icon,
+                    'description' => $description
+                );
+            }
+        endwhile;
         wp_reset_postdata();
     endif;
     return $result;

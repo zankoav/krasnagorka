@@ -1,40 +1,46 @@
 <?php
-    /**
-     *
-     * Template Name: Prices (redesign)
-     *
-     */
 
-    // File Security Check
-    if (!defined('ABSPATH')) {
-        exit;
+/**
+ *
+ * Template Name: Prices (redesign)
+ *
+ */
+
+// File Security Check
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+$current_season_id = get_option('mastak_theme_options')['current_season'];
+$seasons           = show_seasons_options();
+$houses            = show_house_options();
+$services          = show_service_options();
+$price             = get_current_price($price_byn);
+
+global $kgCooke;
+$currency_name = $kgCooke->getCurrnecy()["currency_selected"];
+
+get_header('mastak');
+get_template_part("mastak/views/header", "small-view"); ?>
+
+<style>
+    .js-accordion .header-title__subtitle.header-title__subtitle_service {
+        color: #6fb128;
     }
-
-    $current_season_id = get_option('mastak_theme_options')['current_season'];
-    $seasons           = show_seasons_options();
-    $houses            = show_house_options();
-    $services          = show_service_options();
-    $price             = get_current_price($price_byn);
-
-    global $kgCooke;
-    $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
-
-    get_header('mastak');
-    get_template_part("mastak/views/header", "small-view"); ?>
-
+</style>
 <div class="seasons">
     <?php foreach ($seasons as $season_id => $season_title) :
         $hide_season = get_post_meta($season_id, "hide_season_checkbox", true);
-        if($hide_season == 'on'){
+        if ($hide_season == 'on') {
             continue;
         }
         $order_data = get_post_meta($season_id, "season_order", true);
-        $season_order = -1*(int)(empty($order_data) ? 0 : $order_data);
-        ?>
+        $season_order = -1 * (int)(empty($order_data) ? 0 : $order_data);
+    ?>
         <div <?= $current_season_id != $season_id ? "style=\"order:$season_order;\"" : ''; ?> class="season-item <?= $current_season_id == $season_id ? 'season-item__current' : 'js-accordion' ?>">
             <section class="b-container header-title">
                 <h2 class="header-title__subtitle"><?= $season_title; ?></h2>
-                <?php if ($current_season_id == $season_id): ?>
+                <?php if ($current_season_id == $season_id) : ?>
                     <span class="header-title__current-label">текущий период</span>
                 <?php endif; ?>
             </section>
@@ -42,32 +48,29 @@
                 <div class="prices">
                     <table class="prices__table">
                         <tbody>
-                        <?php
+                            <?php
 
                             $houses_count    = count($houses);
                             $index_services  = 1;
-                            foreach ($houses as $house_id => $house_title):
+                            foreach ($houses as $house_id => $house_title) :
                                 $house_byn = (float)get_post_meta($season_id, "house_price_" . $house_id, true);
                                 $house_price = get_current_price($house_byn);
 
-                                ?>
+                            ?>
                                 <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
                                     <td class="prices__name prices__name_size_50per">
-                                        <a class="prices__link" href="<?= get_permalink($house_id); ?>"
-                                           target="_blank">
+                                        <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
                                             <?= $house_title; ?>
                                         </a>
                                     </td>
                                     <td class="prices__value prices__value_active">
-                            <span class="house-booking__price-per-men js-currency"
-                                  data-currency="<?= $currency_name; ?>"
-                                  data-byn="<?= $house_byn; ?>">
-                                <?= $house_price; ?>
-                            </span>
+                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
+                                            <?= $house_price; ?>
+                                        </span>
                                         с человека в сутки
                                     </td>
                                 </tr>
-                                <?php
+                            <?php
                                 $index_services++;
                             endforeach; ?>
                         </tbody>
@@ -78,28 +81,28 @@
             </div>
         </div>
 
-        <?php if($current_season_id == $season_id):?>
+        <?php if ($current_season_id == $season_id) : ?>
             <div class="b-container content-text season-text">
-            <div class="textwidget">
-                <?= wpautop(get_option( 'mastak_price_appearance_options' )['mastak_price_submenu_big_text']);?>
+                <div class="textwidget">
+                    <?= wpautop(get_option('mastak_price_appearance_options')['mastak_price_submenu_big_text']); ?>
+                </div>
             </div>
-        </div>
-        <?php endif;?>
+        <?php endif; ?>
     <?php endforeach; ?>
     <div class="seasons__added">
         <div class="js-accordion">
             <section class="b-container header-title">
-                <h2 class="header-title__subtitle">Цены на услуги</h2>
+                <h2 class="header-title__subtitle header-title__subtitle_service">Цены на услуги</h2>
             </section>
             <div class="b-container js-accordion-content">
                 <div class="prices">
                     <table class="prices__table">
                         <tbody>
-                        <?php
+                            <?php
 
                             $service_count  = count($services);
                             $index_services = 1;
-                            foreach ($services as $service_id => $service_title):
+                            foreach ($services as $service_id => $service_title) :
                                 $service_byn = (int)get_post_meta($service_id, "mastak_opportunity_price", true);
                                 if ($service_byn == 0) {
                                     $service_count--;
@@ -108,8 +111,8 @@
 
                                 $service_price    = get_current_price($service_byn);
                                 $service_subtitle = get_post_meta($service_id, "mastak_opportunity_price_subtitle", true);
-                                
-                                if('Питание' == $service_title){
+
+                                if ('Питание' == $service_title) {
                                     $bookingSettings = get_option('mastak_booking_appearance_options');
 
                                     $service_food_breackfast_byn = intval($bookingSettings['food_breakfast_price']);
@@ -122,44 +125,35 @@
                                     $service_food_dinner_price    = get_current_price($service_food_dinner_byn);
                                 }
 
-                                ?>
+                            ?>
                                 <tr class="<?= $index_services == $service_count ? "" : "prices__row"; ?>">
                                     <td class="prices__name prices__name_size_50per">
-                                        <a class="prices__link" href="<?= get_permalink($service_id); ?>"
-                                           target="_blank"><?= $service_title; ?></a>
+                                        <a class="prices__link" href="<?= get_permalink($service_id); ?>" target="_blank"><?= $service_title; ?></a>
                                     </td>
                                     <td class="prices__value prices__value_active">
-                                        <?php if('Питание' == $service_title):?> 
+                                        <?php if ('Питание' == $service_title) : ?>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
                                                 <span>Завтрак</span>
-                                                <span class="house-booking__price-per-men js-currency"
-                                                    data-currency="<?= $currency_name; ?>"
-                                                    data-byn="<?= $service_food_breackfast_byn; ?>"><?= $service_food_breackfast_price; ?>
+                                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_breackfast_byn; ?>"><?= $service_food_breackfast_price; ?>
                                                 </span> <?= $service_subtitle ?>
-                                            </div> 
+                                            </div>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
-                                            <span>Обед</span>
-                                                <span class="house-booking__price-per-men js-currency"
-                                                    data-currency="<?= $currency_name; ?>"
-                                                    data-byn="<?= $service_food_lunch_byn; ?>"><?= $service_food_lunch_price; ?>
+                                                <span>Обед</span>
+                                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_lunch_byn; ?>"><?= $service_food_lunch_price; ?>
                                                 </span> <?= $service_subtitle ?>
-                                            </div> 
+                                            </div>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
                                                 <span>Ужин</span>
-                                                <span class="house-booking__price-per-men js-currency"
-                                                    data-currency="<?= $currency_name; ?>"
-                                                    data-byn="<?= $service_food_dinner_byn; ?>"><?= $service_food_dinner_price; ?>
+                                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_dinner_byn; ?>"><?= $service_food_dinner_price; ?>
                                                 </span> <?= $service_subtitle ?>
-                                            </div> 
-                                        <?php else :?>
-                                            <span class="house-booking__price-per-men js-currency"
-                                                data-currency="<?= $currency_name; ?>"
-                                                data-byn="<?= $service_byn; ?>"><?= $service_price; ?>
+                                            </div>
+                                        <?php else : ?>
+                                            <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_byn; ?>"><?= $service_price; ?>
                                             </span> <?= $service_subtitle ?>
-                                        <?php endif;?>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
-                                <?php
+                            <?php
                                 $index_services++;
                             endforeach; ?>
                         </tbody>
@@ -170,21 +164,25 @@
         </div>
         <div class="js-accordion">
             <section class="b-container header-title">
-                <h2 class="header-title__subtitle">Цены на рыбалку</h2>
+                <h2 class="header-title__subtitle header-title__subtitle_service">Цены на рыбалку</h2>
             </section>
             <div class="b-container js-accordion-content">
                 <div class="prices">
                     <table class="prices__table">
                         <tbody>
-                        <?php
+                            <?php
 
-                            $fishing_services       = get_option('mastak_price_appearance_options')['fishing_group'];
+                            $fishing_services = get_option('mastak_price_appearance_options')['fishing_group'];
+                            $fishing_services = array_sort($fishing_services, 'name', SORT_ASC);
+
+                            // sort $fishing_services
+
                             $fishing_services_count = count($fishing_services);
                             $index_services         = 1;
                             $MAX_COUNT              = 8;
                             $BASE_MAX               = $fishing_services_count > $MAX_COUNT ? $MAX_COUNT : $fishing_services_count;
 
-                            foreach ($fishing_services as $service):
+                            foreach ($fishing_services as $service) :
 
                                 $service_byn = $service['price'];
 
@@ -196,23 +194,21 @@
                                 $service_price    = get_current_price($service_byn);
                                 $service_title    = $service['name'];
                                 $service_subtitle = $service['subtitle'];
-                                ?>
+                            ?>
                                 <tr class="<?= $index_services == $BASE_MAX ? "prices__row_last" : "prices__row"; ?>">
                                     <td class="prices__name prices__name_size_50per">
-                                    <span class="prices__link">
-                                        <?= $service_title; ?>
-                                    </span>
+                                        <span class="prices__link">
+                                            <?= $service_title; ?>
+                                        </span>
                                     </td>
                                     <td class="prices__value prices__value_active">
-                                    <span class="house-booking__price-per-men js-currency"
-                                          data-currency="<?= $currency_name; ?>"
-                                          data-byn="<?= $service_byn; ?>">
-                                        <?= $service_price; ?>
-                                    </span> <?= $service_subtitle ?>
+                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_byn; ?>">
+                                            <?= $service_price; ?>
+                                        </span> <?= $service_subtitle ?>
                                     </td>
                                 </tr>
 
-                                <?php
+                            <?php
                                 if ($index_services > $BASE_MAX - 1) {
                                     break;
                                 }
@@ -223,13 +219,13 @@
                     <div class="prices__table_hide">
                         <table class="prices__table">
                             <tbody>
-                            <?php
+                                <?php
 
                                 $index_services         = 1;
                                 $fishing_services_count = count($fishing_services);
 
 
-                                foreach ($fishing_services as $service):
+                                foreach ($fishing_services as $service) :
 
                                     if ($fishing_services_count === $BASE_MAX) {
                                         break;
@@ -251,33 +247,30 @@
                                     $service_price    = get_current_price($service_byn);
                                     $service_title    = $service['name'];
                                     $service_subtitle = $service['subtitle'];
-                                    ?>
+                                ?>
                                     <tr class="<?= $index_services == $fishing_services_count ? "" : "prices__row"; ?>">
                                         <td class="prices__name prices__name_size_50per">
-                                    <span class="prices__link">
-                                        <?= $service_title; ?>
-                                    </span>
+                                            <span class="prices__link">
+                                                <?= $service_title; ?>
+                                            </span>
                                         </td>
                                         <td class="prices__value prices__value_active">
-                                    <span class="house-booking__price-per-men js-currency"
-                                          data-currency="<?= $currency_name; ?>"
-                                          data-byn="<?= $service_byn; ?>">
-                                        <?= $service_price; ?>
-                                    </span> <?= $service_subtitle ?>
+                                            <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_byn; ?>">
+                                                <?= $service_price; ?>
+                                            </span> <?= $service_subtitle ?>
                                         </td>
                                     </tr>
-                                    <?php
+                                <?php
                                     $index_services++;
                                 endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <?php if ($fishing_services_count > $BASE_MAX): ?>
+                <?php if ($fishing_services_count > $BASE_MAX) : ?>
                     <div class="price__table-more-block">
                         <a href="#" class="price__table-more">
-                            <img class="price__arrow-more"
-                                 src=<?= CORE_PATH ?>"src/icons/left-arrow-gray.e83982.svg" alt="arrow">
+                            <img class="price__arrow-more" src=<?= CORE_PATH ?>"src/icons/left-arrow-gray.e83982.svg" alt="arrow">
                         </a>
                     </div>
                 <?php endif; ?>
@@ -289,6 +282,6 @@
     <?php get_template_part("mastak/views/reviews", "view"); ?>
 </div>
 <?php
-    get_template_part("mastak/views/footer", "view");
-    get_footer('mastak');
+get_template_part("mastak/views/footer", "view");
+get_footer('mastak');
 ?>
