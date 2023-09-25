@@ -15,7 +15,7 @@ $current_season_id = get_option('mastak_theme_options')['current_season'];
 $seasons           = show_seasons_options();
 $houses            = show_house_options();
 $services          = show_service_options();
-sort($services);
+asort($services);
 
 $price             = get_current_price($price_byn);
 
