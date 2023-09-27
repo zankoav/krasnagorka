@@ -7763,12 +7763,7 @@ button.swiper-pagination-bullet {
   display: flex;
   flex-direction: column;
 }
-.season-item__current {
-  order: -5000;
-}
-.seasons__added {
-  order: -1;
-}
+
 .season-item__current .header-title__subtitle {
   color: #d0021b;
 }
