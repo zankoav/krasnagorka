@@ -693,13 +693,15 @@ function getSeasonsForPricePage()
 
     $season_from_column = array_column($intervals, 'season_from');
     array_multisort($season_from_column, SORT_ASC, $intervals);
-    
+
     $result = [];
     foreach ($intervals as $interval) {
         if (!in_array($interval['season_id'], $result)) {
             $result[] = $interval['season_id'];
         }
     }
+
+    Log::info('result', $result);
 
     return $result;
 }
