@@ -682,6 +682,20 @@ function getSeasonsForPricePage()
     );
     $intervalsQuery = new \WP_Query;
     $intervals = $intervalsQuery->query($seasonsIntervalsParams);
+
+    function cube($n)
+    {
+        return ($n * $n * $n);
+    }
+
+    $intervals = array_map(function ($interval) {
+        return [
+            'season_from' => get_post_meta($interval->ID, 'season_from', 1),
+            'season_to' => get_post_meta($interval->ID, 'season_to', 1),
+            'season_id' => get_post_meta($interval->ID, 'season_id', 1)
+        ];
+    }, $intervals);
+
     Log::info('intervals', $intervals);
 }
 
