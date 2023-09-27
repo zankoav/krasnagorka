@@ -683,11 +683,6 @@ function getSeasonsForPricePage()
     $intervalsQuery = new \WP_Query;
     $intervals = $intervalsQuery->query($seasonsIntervalsParams);
 
-    function cube($n)
-    {
-        return ($n * $n * $n);
-    }
-
     $intervals = array_map(function ($interval) {
         return [
             'season_from' => get_post_meta($interval->ID, 'season_from', 1),
@@ -698,7 +693,13 @@ function getSeasonsForPricePage()
 
     $season_from_column = array_column($intervals, 'season_from');
     array_multisort($season_from_column, SORT_ASC, $intervals);
-    Log::info('intervals', $intervals);
+    $result = [];
+    foreach ($intervals as $interval) {
+        if (!in_array($interval['season_id'], $result)) {
+            $result[] = $interval['season_id'];
+        }
+    }
+    Log::info('seasons_id', $result);
 }
 
 
