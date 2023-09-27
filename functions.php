@@ -696,6 +696,8 @@ function getSeasonsForPricePage()
         ];
     }, $intervals);
 
+    $intervals = array_sort($intervals, 'season_from', SORT_ASC);
+
     Log::info('intervals', $intervals);
 }
 
