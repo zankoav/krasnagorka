@@ -1,4 +1,5 @@
 <?php
+
 namespace LsFactory;
 
 use LsFactory\ContactException;
@@ -11,14 +12,16 @@ use LsFactory\OrderException;
 use LsCalculate\PackageCalculate as PackageCalculate;
 
 
-class OrderFactory {
+class OrderFactory
+{
 
-    public static function initOrderByRequest($data): Order{
-        
+    public static function initOrderByRequest($data): Order
+    {
+
         $order = new Order();
 
         $order->type = Order::TYPE_RESERVED;
-        
+
         $order->scenario = $data['scenario'];
         $order->calendarId = $data['calendarId'];
         $order->dateStart = $data['dateStart'];
@@ -35,7 +38,7 @@ class OrderFactory {
         self::validateOrder($order);
 
         $order->comment = strval($data['comment']);
-        
+
         $order->childCount = intval($data['childCount']);
         $order->babyBed = boolval($data['babyBed']);
         $order->bathHouseWhite = intval($data['bathHouseWhite']);
@@ -49,30 +52,29 @@ class OrderFactory {
         $order->isTerem = get_term_meta($order->calendarId, 'kg_calendars_terem', 1) == 'on';
         $order->calendarName = get_term($order->calendarId)->name;
         $order->eventChilds = 0;
-        
-        if($order->scenario === 'Event'){
+
+        if ($order->scenario === 'Event') {
             $order->foodPrice = 0;
             $order->accommodationPrice = 0;
             $order->eventChilds = $data['eventModel']['childs'];
 
             $tab = new \Type_10($order->eventTabId);
-            $selectedCalendar = $tab->getSelectedCalendar($order->calendarId, $order->variantId  );
+            $selectedCalendar = $tab->getSelectedCalendar($order->calendarId, $order->variantId);
             $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
             $totalPrice = ($price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $order->peopleCount + $selectedCalendar['variant']->priceSingle;
 
             $enabled_child = $selectedCalendar['calendar']['enabled_child'];
-            $priceChild = $enabled_child ? 
-                (
-                    empty($selectedCalendar['calendar']['new_price_child']) ? 
-                    $selectedCalendar['calendar']['old_price_child'] : 
+            $priceChild = $enabled_child ?
+                (empty($selectedCalendar['calendar']['new_price_child']) ?
+                    $selectedCalendar['calendar']['old_price_child'] :
                     $selectedCalendar['calendar']['new_price_child']
-                ) 
+                )
                 : 0;
 
             $priceChild = ($priceChild + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1);
             $totalPrice += $priceChild * $order->eventChilds;
             $order->price = $totalPrice;
-        }else if ($order->scenario === 'Package'){
+        } else if ($order->scenario === 'Package') {
             $calculateModel = new PackageCalculate();
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($data['dateStart'])));
             $data['house'] = $data['houseId'];
@@ -83,27 +85,27 @@ class OrderFactory {
             $order->package = $result['result'];
             $order->accommodationPrice = $result['result']['total_price'];
             $order->price = $result['result']['total_price'];
-        }else{
+        } else {
             $tempDateStart = new \DateTime(date("Y-m-d", strtotime($order->dateStart)));
             $calculatedResult = \LS_Booking_Form_Controller::calculateResult(
                 array_merge(
-                    (array)$order, 
+                    (array)$order,
                     ['dateStart' => $tempDateStart->modify('+1 day')->format('Y-m-d')]
                 )
             );
-    
+
             $order->price = $calculatedResult['total_price'];
-    
-            if(isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])){
+
+            if (isset($calculatedResult['food']) && isset($calculatedResult['food']['total_price'])) {
                 $order->foodPrice = $calculatedResult['food']['total_price'];
-            }else{
+            } else {
                 $order->foodPrice = 0;
             }
-    
+
             $order->accommodationPrice = !empty($order->eventTabId) ? $calculatedResult['accommodation'] : $calculatedResult['accommodation_price'];
         }
-        
-        if(!empty($order->prepaidType)){
+
+        if (!empty($order->prepaidType)) {
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
         }
 
@@ -112,7 +114,8 @@ class OrderFactory {
         return $order;
     }
 
-    public static function isAvailableOrder(Order $order){
+    public static function isAvailableOrder(Order $order)
+    {
         self::validateOrder($order);
         $result = true;
 
@@ -147,7 +150,7 @@ class OrderFactory {
             $end = date('Y-m-d', $endTime);
             $parseResult[] = [$start, $end, $orderId];
         }
-        
+
         foreach ($parseResult as $r) {
             $from = $r[0];
             $to = $r[1];
@@ -164,14 +167,15 @@ class OrderFactory {
             if ($order->dateStart < $from and $order->dateEnd > $to) {
                 $result = false;
             }
-        }   
+        }
 
-        if(!$result){
+        if (!$result) {
             throw new OrderException('Order not available', 212);
         }
     }
 
-    public static function getResponse(Order $order){
+    public static function getResponse(Order $order)
+    {
         return [
             'data' => [
                 'ordered_only' => $order->isBookedOnly(),
@@ -181,7 +185,8 @@ class OrderFactory {
         ];
     }
 
-    public static function insert(Order $order) {
+    public static function insert(Order $order)
+    {
 
         ContactFactory::insert($order->contact);
 
@@ -203,30 +208,29 @@ class OrderFactory {
 
         $contactTemplate = ContactFactory::getTemplete($order->contact);
 
-        if(!empty($order->eventTabId) and !empty($order->eventId)){
+        if (!empty($order->eventTabId) and !empty($order->eventId)) {
             update_post_meta($order->id, 'sbc_order_event_id', $order->eventId);
             update_post_meta($order->id, 'sbc_order_event_variant_id', $order->variantId);
-
-        }else if(!empty($order->eventTabId)){
+        } else if (!empty($order->eventTabId)) {
             update_post_meta($order->id, 'sbc_order_is_event', 'on');
         }
 
         update_post_meta($order->id, 'sbc_order_scenario', $order->scenario);
 
-        if($order->scenario === 'Package'){
+        if ($order->scenario === 'Package') {
             update_post_meta($order->id, 'sbc_order_package_id', $order->package['id']);
             $packageServicesStr = "В пакетный тур включено:\n";
-            foreach($order->getPackageServices() as $service){
-                if($service['id'] == '1'){
-                    $foodPerPerson = intval($service['count']) / $order->peopleCount;
-                    $packageServicesStr .= $service['title']. " " .  $foodPerPerson. " шт.\n";
-                }else{
-                    $packageServicesStr .= $service['title'] . " " .  $service['count']. " шт.\n";
+            foreach ($order->getPackageServices() as $service) {
+                if ($service['id'] == '1') {
+                    $foodPerPerson = $service['count'];
+                    $packageServicesStr .= $service['title'] . " " .  $foodPerPerson . " шт.\n";
+                } else {
+                    $packageServicesStr .= $service['title'] . " " .  $service['count'] . " шт.\n";
                 }
             }
             update_post_meta($order->id, 'sbc_order_package_data', $packageServicesStr);
         }
-        
+
         update_post_meta($order->id, 'sbc_order_event_child', $order->eventChilds);
         update_post_meta($order->id, 'sbc_order_client', $contactTemplate);
         update_post_meta($order->id, 'sbc_order_select', $order->type);
@@ -243,62 +247,62 @@ class OrderFactory {
             // "Количество человек: {$order->peopleCount}"
         ];
 
-        if(!empty($order->comment)){
+        if (!empty($order->comment)) {
             $comment[] = $order->comment;
         }
 
-        if($order->smallAnimalCount > 0){
+        if ($order->smallAnimalCount > 0) {
             // $comment[] = "Кошки и собаки мелких пород (высота в холке до 40 см): {$order->smallAnimalCount}";
             update_post_meta($order->id, 'sbc_order_small_animlas_count', $order->smallAnimalCount);
         }
 
-        if($order->bigAnimalCount > 0){
+        if ($order->bigAnimalCount > 0) {
             // $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalCount}";
             update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalCount);
         }
 
-        if($order->foodBreakfast > 0){
+        if ($order->foodBreakfast > 0) {
             // $comment[] = "Завтраки: {$order->foodBreakfast}";
             update_post_meta($order->id, 'sbc_order_food_breakfast', $order->foodBreakfast);
         }
 
-        if($order->foodLunch > 0){
+        if ($order->foodLunch > 0) {
             // $comment[] = "Обеды: {$order->foodLunch}";
             update_post_meta($order->id, 'sbc_order_food_lunch', $order->foodLunch);
         }
 
-        if($order->foodDinner > 0){
+        if ($order->foodDinner > 0) {
             // $comment[] = "Ужины: {$order->foodDinner}";
             update_post_meta($order->id, 'sbc_order_food_dinner', $order->foodDinner);
         }
 
-        if(!empty($order->foodVariant)){
+        if (!empty($order->foodVariant)) {
             // $comment[] = "Вариант питания: {$order->foodVariant}";
             update_post_meta($order->id, 'sbc_order_food_variant', $order->foodVariant);
         }
 
-        if($order->babyBed){
+        if ($order->babyBed) {
             // $comment[] = "Детская кроватка: Да";
             update_post_meta($order->id, 'sbc_order_baby_bed', 'on');
         }
 
-        if($order->bathHouseWhite > 0){
+        if ($order->bathHouseWhite > 0) {
             // $comment[] = "Количество сеансов бани по-белому: {$order->bathHouseWhite}";
             update_post_meta($order->id, 'sbc_order_bath_house_white', $order->bathHouseWhite);
         }
 
-        if($order->bathHouseBlack > 0){
+        if ($order->bathHouseBlack > 0) {
             // $comment[] = "Количество сеансов бани по-черному: {$order->bathHouseBlack}";
             update_post_meta($order->id, 'sbc_order_bath_house_black', $order->bathHouseBlack);
         }
 
-        if($order->childCount > 0){
+        if ($order->childCount > 0) {
             // $comment[] = "Количество детей без спальных мест: {$order->childCount}";
             update_post_meta($order->id, 'sbc_order_childs', $order->childCount);
         }
 
         if (!empty($comment)) {
-            $order->note = array_merge($order->note, $comment) ;
+            $order->note = array_merge($order->note, $comment);
             update_post_meta($order->id, 'sbc_order_desc', implode("\n", $comment));
         }
 
@@ -311,11 +315,13 @@ class OrderFactory {
         }
 
         if (!empty($order->prepaidType)) {
-            update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType); 
+            update_post_meta($order->id, 'sbc_order_prepaid_percantage', $order->prepaidType);
         }
 
-        if( $order->paymentMethod === Order::METHOD_CARD_LAYTER || 
-            $order->paymentMethod === Order::METHOD_CARD) {
+        if (
+            $order->paymentMethod === Order::METHOD_CARD_LAYTER ||
+            $order->paymentMethod === Order::METHOD_CARD
+        ) {
 
             $sandbox = get_webpay_sandbox();
 
@@ -335,7 +341,7 @@ class OrderFactory {
                 ],
                 "values" => [
                     'wsb_storeid' => $wsb_storeid,
-                    'wsb_store' => 'ИП Терещенко Иван Игоревич', 
+                    'wsb_store' => 'ИП Терещенко Иван Игоревич',
                     'wsb_order_num' => $wsb_order_num,
                     'wsb_currency_id' => $wsb_currency_id,
                     'wsb_version' => "2",
@@ -360,68 +366,71 @@ class OrderFactory {
         }
     }
 
-    public static function validateOrder(Order $order){
+    public static function validateOrder(Order $order)
+    {
 
         $bookingSettings = get_option('mastak_booking_appearance_options');
 
-        if(empty($order->calendarId)){
+        if (empty($order->calendarId)) {
             throw new OrderException('Empty calendar id', 201);
-        }else if(!get_term($order->calendarId)){
+        } else if (!get_term($order->calendarId)) {
             throw new OrderException('Calendar id not exists', 202);
         }
 
-        if(empty($order->dateStart)){
+        if (empty($order->dateStart)) {
             throw new OrderException('Empty date start', 203);
         }
 
-        if(empty($order->dateEnd)){
+        if (empty($order->dateEnd)) {
             throw new OrderException('Empty date end', 204);
         }
 
-        if(empty($order->houseId)){
+        if (empty($order->houseId)) {
             throw new OrderException('Empty house id', 205);
-        }else if(!get_post($order->houseId)){
+        } else if (!get_post($order->houseId)) {
             throw new OrderException('House id not exists', 206);
         }
 
-        if(empty($order->peopleCount)){
+        if (empty($order->peopleCount)) {
             throw new OrderException('Empty people', 207);
-        }else if($order->peopleCount < 1){
+        } else if ($order->peopleCount < 1) {
             throw new OrderException('Invalid people value', 208);
         }
 
-        if(
+        if (
             array_search(
-                $order->paymentMethod, 
+                $order->paymentMethod,
                 [
-                    null, 
+                    null,
                     Order::METHOD_CARD_LAYTER,
                     Order::METHOD_CARD,
                     Order::METHOD_OFFICE
-                ], 
+                ],
                 true
-            ) === false) {
+            ) === false
+        ) {
             throw new OrderException('Invalid payment method', 209);
         }
 
-        if(
+        if (
             array_search(
-                $order->prepaidType, 
+                $order->prepaidType,
                 [
-                    null, 
+                    null,
                     100,
                     intval($bookingSettings['booking_payments_type_percentage'])
-                ], 
+                ],
                 true
-            ) === false) {
+            ) === false
+        ) {
             throw new OrderException('Invalid prepaid type', 210);
         }
-           
-        if( 
+
+        if (
             ($order->paymentMethod === null &&  $order->prepaidType !== null) ||
             ($order->paymentMethod !== null &&  $order->prepaidType === null)
         ) {
             throw new OrderException('Invalid prepaid type or payment method', 211);
-        } 
+        }
     }
 }

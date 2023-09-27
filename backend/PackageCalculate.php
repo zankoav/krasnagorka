@@ -77,7 +77,6 @@ class PackageCalculate extends CalculateImpl
         foreach ((array) $services as $key => $entry) {
             if (isset($entry['service'])) {
                 if($entry['service'] == '1'){
-                    $countFood = (2 + ($totalDays - 1 ) * 3);
                     $servicesFormatted[] = [
                         'id' => '1',
                         'title' => "Количество приемов пищи на 1 чел.",
