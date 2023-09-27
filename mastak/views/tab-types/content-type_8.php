@@ -162,8 +162,8 @@
         $price_per_night_sale_byn = null;
 
         if($price_byn_sale != null){
-            $price_per_night_sale = $price_sale / $night_count;
-            $price_per_night_sale_byn = $price_byn_sale / $night_count;
+            $price_per_night_sale = round($price_sale / $night_count);
+            $price_per_night_sale_byn = round($price_byn_sale / $night_count);
         }
 
         ?>
