@@ -701,8 +701,6 @@ function getSeasonsForPricePage()
         }
     }
 
-    Log::info('result', $result);
-
     return $result;
 }
 

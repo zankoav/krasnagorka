@@ -88,13 +88,6 @@ get_template_part("mastak/views/header", "small-view"); ?>
             continue;
         }
         $season_title = $seasons[$season_id];
-        // => $season_title
-        // $hide_season = get_post_meta($season_id, "hide_season_checkbox", true);
-        // if ($hide_season == 'on') {
-        //     continue;
-        // }
-        // $order_data = get_post_meta($season_id, "season_order", true);
-        // $season_order = -1 * (int)(empty($order_data) ? 0 : $order_data);
     ?>
         <div class="season-item js-accordion">
             <section class="b-container header-title">
