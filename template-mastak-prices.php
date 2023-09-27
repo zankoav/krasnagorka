@@ -31,7 +31,8 @@ get_template_part("mastak/views/header", "small-view"); ?>
         color: #6fb128;
     }
 
-    .seasons__added {
+    .seasons__added,
+    .season-text {
         order: initial;
     }
 </style>

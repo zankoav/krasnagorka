@@ -7778,9 +7778,6 @@ button.swiper-pagination-bullet {
     font-size: 1.5rem;
   }
 }
-.season-text {
-  order: -2000;
-}
 .js-accordion .js-accordion-content {
   display: none;
 }
