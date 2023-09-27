@@ -646,6 +646,45 @@ function app_get_happy_events()
     return $result;
 }
 
+function getSeasonsForPricePage()
+{
+    $today = current_datetime()->format('Y-m-d');
+    $seasonsIntervalsParams = array(
+        'post_type' => 'season_interval',
+        'posts_per_page' => -1,
+        'meta_query' => [
+            'relation' => 'OR',
+            [
+                'relation' => 'AND',
+                [
+                    'key'     => 'season_from',
+                    'value'   => $today,
+                    'type'    => 'DATE',
+                    'compare' => '<='
+                ],
+                [
+                    'key'     => 'season_to',
+                    'value'   => $today,
+                    'type'    => 'DATE',
+                    'compare' => '>='
+                ]
+            ],
+            [
+                'relation' => 'AND',
+                [
+                    'key'     => 'season_from',
+                    'value'   => $today,
+                    'type'    => 'DATE',
+                    'compare' => '>='
+                ]
+            ]
+        ]
+    );
+    $intervalsQuery = new \WP_Query;
+    $intervals = $intervalsQuery->query($seasonsIntervalsParams);
+    Log::info('intervals', $intervals);
+}
+
 
 // $hello = new PaymentService();
 // $hello_response = $hello->initRegisterDo();
