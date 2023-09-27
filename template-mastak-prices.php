@@ -30,6 +30,10 @@ get_template_part("mastak/views/header", "small-view"); ?>
     .js-accordion .header-title__subtitle.header-title__subtitle_service {
         color: #6fb128;
     }
+
+    .seasons__added {
+        order: initial;
+    }
 </style>
 <div class="seasons">
     <div class="season-item season-item__current">
