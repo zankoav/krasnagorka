@@ -245,19 +245,17 @@
 	}
 
 	function get_weather() {
-        $weather = get_option( 'mastak_weather' );
-		if ( ! empty( $weather ) ) {
-            $weatherArray = json_decode( $weather, true );
-            $dateNow = date( 'Y-m-d' );
-            $dateMeta = date('Y-m-d', ($weatherArray[1]['date'] / 1000) );
-			if (  $dateMeta != $dateNow ) {
-				return update_mastak_weather();
-			} else {
-				return $weatherArray;
-			}
-		} else {
-			return update_mastak_weather();
-		}
+        $weather = ls_get_weather();
+		$weatherArray = json_decode( $weather, true );
+		$weatherArray = array_map(function ($item){
+			return [
+				"text"    => $item['description'],
+				"weekday" => $item['day'],
+				"temp"    => $item['temperature'],
+				"icon"    => $item['icon_url'],
+			];
+		}, $weatherArray);
+		return $weatherArray;
 	}
 
 	function update_mastak_weather() {

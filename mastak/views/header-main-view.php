@@ -301,16 +301,16 @@
                             <div class="menu-bottom__date">
                                 <span><?= date('j'); ?></span><?= get_current_month_rus(); ?></div>
                         </div>
-                        <div style="display:none" class="menu-bottom__details-sunny">
+                        <div class="menu-bottom__details-sunny">
                             <img class="menu-bottom__sunny-icon" src="<?= $weather[1]["icon"]; ?>"
                                  alt="sunny">
                             <div class="menu-bottom__sunny"><?= $weather[1]["text"]; ?></div>
                         </div>
-                        <p style="display:none" class="menu-bottom__degrees"><?= $weather[1]["temp"]; ?>
+                        <p class="menu-bottom__degrees"><?= $weather[1]["temp"]; ?>
                             <span>&deg;C</span>
                         </p>
                     </div>
-                    <ul style="display:none" class="menu-bottom__days">
+                    <ul class="menu-bottom__days">
                         <li class="menu-bottom__day">
                             <p class="menu-bottom__day-text"><?= $weather[2]["weekday"]; ?></p>
                             <img src="<?= $weather[2]["icon"]; ?>" alt="weather"
