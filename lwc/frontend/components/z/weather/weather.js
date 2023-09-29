@@ -10,9 +10,8 @@ export default class Weather extends LightningElement {
         return this.weather[0]
     }
 
-    get todayText() {
-        console.log('this.weather[0].text', this.weather[0].text)
-        return this.weather[0].text
+    get todayTemp() {
+        return this.weather[0].temp.replace('&nbsp;', ' ')
     }
 
     get firstDay() {

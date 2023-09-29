@@ -1,10 +1,10 @@
 <template>
     <div class="weather">
         <div class="weather__current">
-            <p class="weather__current-degrees">{today.temp}</p>
+            <p class="weather__current-degrees">{todayTemp}</p>
             <div class="weather__current-content">
                 <img class="weather__current-icon mr-05" src={today.icon} alt="weather" />
-                <p class="weather__current-description">{todayText}</p>
+                <p class="weather__current-description">{today.text}</p>
             </div>
         </div>
         <ul class="weather__future">
