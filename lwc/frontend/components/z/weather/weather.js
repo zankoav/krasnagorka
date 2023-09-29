@@ -11,7 +11,7 @@ export default class Weather extends LightningElement {
     }
 
     get todayText() {
-        return this.weather[0].text.replace('&nbsp;', ' ')
+        return replaceNbsps(this.weather[0].text)
     }
 
     get firstDay() {
@@ -25,4 +25,9 @@ export default class Weather extends LightningElement {
     get thirdDay() {
         return this.weather[3]
     }
+}
+
+function replaceNbsps(str) {
+    var re = new RegExp(String.fromCharCode(160), 'g')
+    return str.replace(re, ' ')
 }
