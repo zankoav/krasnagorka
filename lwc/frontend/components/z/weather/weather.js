@@ -11,7 +11,8 @@ export default class Weather extends LightningElement {
     }
 
     get todayText() {
-        return this.weather[0].text.replace('&amp;nbsp;', ' ')
+        console.log('this.weather[0].text', this.weather[0].text)
+        return this.weather[0].text
     }
 
     get firstDay() {
@@ -26,4 +27,3 @@ export default class Weather extends LightningElement {
         return this.weather[3]
     }
 }
-
