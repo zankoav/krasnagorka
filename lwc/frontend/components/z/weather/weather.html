@@ -1,25 +1,21 @@
 <template>
     <div class="weather">
         <div class="weather__current">
-            <p class="weather__current-degrees">{weather.temperature}</p>
+            <p class="weather__current-degrees">{today.temp}</p>
             <div class="weather__current-content">
-                <img class="weather__current-icon mr-05" src={weather.icon}
-                     alt="weather">
-                <p class="weather__current-description">{weather.description}</p>
+                <img class="weather__current-icon mr-05" src={today.icon} alt="weather" />
+                <p class="weather__current-description">{today.text}</p>
             </div>
         </div>
         <ul class="weather__future">
-            <li if:true={weather.firstDay} class="weather__future-item" data-week-day={weather.firstDay.day}>
-                <img src={weather.firstDay.icon} alt="weather"
-                     class="weather__future-icon">
+            <li if:true={firstDay} class="weather__future-item" data-week-day={firstDay.weekday}>
+                <img src={firstDay.icon} alt="weather" class="weather__future-icon" />
             </li>
-            <li if:true={weather.secondDay}  class="weather__future-item" data-week-day={weather.secondDay.day}>
-                <img src={weather.secondDay.icon} alt="weather"
-                     class="weather__future-icon">
+            <li if:true={secondDay} class="weather__future-item" data-week-day={secondDay.weekday}>
+                <img src={secondDay.icon} alt="weather" class="weather__future-icon" />
             </li>
-            <li if:true={weather.thirdDay}  class="weather__future-item" data-week-day={weather.thirdDay.day}>
-                <img src={weather.thirdDay.icon} alt="weather"
-                     class="weather__future-icon">
+            <li if:true={thirdDay} class="weather__future-item" data-week-day={thirdDay.weekday}>
+                <img src={thirdDay.icon} alt="weather" class="weather__future-icon" />
             </li>
         </ul>
     </div>
