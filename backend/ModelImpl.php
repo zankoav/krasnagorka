@@ -1,4 +1,5 @@
 <?php
+
 namespace LsModel;
 
 use Ls\Wp\Log as Log;
@@ -16,13 +17,14 @@ abstract class ModelImpl
         $this->themeOptions = get_option('mastak_theme_options');
     }
 
-    public function getModel(){
+    public function getModel()
+    {
         $model = $this->createModel();
         $model['scenario']      = $this->scenario();
         $model['mainMenu']      = $this->getMainMenu();
         $model['footerBottom']  = $this->getFooterBottom();
         $model['popupContacts'] = $this->getPopupContacts();
-        $model['weather']       = [];
+        $model['weather']       = get_weather();
         $model['currencies']    = $this->getCurrencies();
         return json_encode($model);
     }
@@ -120,5 +122,4 @@ abstract class ModelImpl
             'eur' => get_option('eur_currency')
         ];
     }
-
 }

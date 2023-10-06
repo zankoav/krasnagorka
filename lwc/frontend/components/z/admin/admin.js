@@ -40,7 +40,6 @@ export default class Admin extends LightningElement {
     @track settings
 
     connectedCallback() {
-        console.log('this.model', this.model);
         if (this.model.eventId) {
             BASE_MENU = BASE_MENU.filter((item) => {
                 return ['food', 'additional_services'].indexOf(item.value) == -1

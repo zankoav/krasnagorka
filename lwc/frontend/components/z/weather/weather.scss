@@ -37,10 +37,6 @@
         min-width: 80px;
         font-size: 28px;
         font-family: AvenirNextCyr-UltraLight, sans-serif;
-
-        &:after {
-            content: " °C";
-        }
     }
 
     &__current-content {
