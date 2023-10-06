@@ -30,11 +30,13 @@
                                          alt="icon">
                                     <p class="apartment__title"><?= $list['item_title']; ?></p>
                                 </div>
-                                <ul class="apartment__items">
-									<?php foreach ( $list['item_text'] as $item ): ?>
-                                        <li class="apartment__item"><?= $item ?></li>
-									<?php endforeach; ?>
-                                </ul>
+                                <?php if(!empty($list['item_text'])):?>
+                                    <ul class="apartment__items">
+                                        <?php foreach ( $list['item_text'] as $item ): ?>
+                                            <li class="apartment__item"><?= $item ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                <?php endif?>
                             </div>
                         </div>
 					<?php

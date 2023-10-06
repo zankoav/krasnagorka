@@ -33,7 +33,7 @@
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
                         <?php if ($video): ?>
-                            <a href="#" class="online-video online-video--menu">
+                            <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank" class="online-video online-video--menu">
                                 <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg" alt="online-video"
                                      class="online-video__icon">
                                 <span class="online-video__title">смотреть ONLINE</span>
@@ -106,7 +106,7 @@
                 <img src="<?= $footer_logo_src[0]; ?>" alt="logo" class="logo__icon">
             </a>
             <?php if ($video): ?>
-                <a href="#" class="online-video">
+                <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg" alt="online-video"
                          class="online-video__icon">
                     <span class="online-video__title">смотреть ONLINE</span>

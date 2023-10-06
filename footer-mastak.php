@@ -357,18 +357,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
 
     }, false);
 
-    jQuery('.online-video').on('click', function() {
-        jQuery('.modal-online-video').fadeIn(function() {
-            var img = new Image();
-            img.src = 'http://375297763819.dyndns.mts.by:1081/videostream.cgi?user=veter&pwd=veter&resolution=32';
-            img.onload = function() {
-                var closeButton = document.createElement('div');
-                closeButton.setAttribute('class', 'modal-online-video__close');
-                closeButton.addEventListener('click', modalClose);
-                jQuery('.modal-online-video__video').empty().append(img).append(closeButton);
-            }
-        });
-    });
+    
 
     jQuery('.modal-online-video__container').on('click', modalClose);
 

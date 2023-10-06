@@ -491,7 +491,7 @@ if (!defined('ABSPATH')) {
 	<div class="modal-online-video">
 		<div class="modal-online-video__container">
 			<div class="modal-online-video__video">
-				<div class="modal-online-video__spinner"></div>
+				
 			</div>
 		</div>
 	</div>
