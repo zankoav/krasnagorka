@@ -652,4 +652,4 @@ endswitch;
             requestAnimationFrame(draw);
         })();
     </script>
-<?php endif; ?>
+<?php endif;?>
