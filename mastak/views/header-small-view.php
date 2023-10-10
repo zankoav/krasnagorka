@@ -351,11 +351,6 @@ endswitch;
                      class="online-video__icon">
                 <span class="online-video__title">смотреть ONLINE</span>
             </a>
-            <?php if ($video && !wp_is_mobile()) : ?>
-                <a href="#" class="online-video">
-                    <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg" alt="online-video" class="online-video__icon">
-                    <span class="online-video__title">смотреть ONLINE</span>
-                </a>
             <?php endif; ?>
         </div>
         <div class="menu-top__right contacts-menu">
