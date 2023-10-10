@@ -357,16 +357,6 @@ if (is_page_template('reviews-page-template.php')) : ?>
 
     }, false);
 
-    
-
-    jQuery('.modal-online-video__container').on('click', modalClose);
-
-    function modalClose() {
-        jQuery('.modal-online-video').fadeOut(function() {
-            jQuery('.modal-online-video__video').empty().html('<div class="modal-online-video__spinner"></div>');
-        })
-    }
-
 
     jQuery('.base-place__coordinate-inner')
         .on('click', function() {
