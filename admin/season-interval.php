@@ -49,7 +49,7 @@ foreach ($seasonIntervals as $interval) {
         "start" => $from . "T10:30:00",
         "end" => $to . "T11:30:00",
         "allDay" => false,
-        "color" => isset($seasonColor) ? $seasonColor : "#eee"
+        "color" => empty($seasonColor) ? "#a2a2a2" : $seasonColor
     ];
 }
 
@@ -107,7 +107,7 @@ foreach ($seasonIntervals as $interval) {
         display: inline-block;
         width: 20px;
         height: 20px;
-        background-color: #eee;
+        background-color: #a2a2a2;
         margin-right: .25rem;
 
     }
@@ -166,11 +166,11 @@ foreach ($seasonIntervals as $interval) {
                     <?php foreach ($seasons as $season) :
                         $bgc = get_post_meta($season->ID, 'season_color', 1);
                         if (empty($bgc)) {
-                            $bgc = '#eee';
+                            $bgc = '#a2a2a2';
                         }
                     ?>
                         <p>
-                            <b class="reserved-type" style="backgroun-color:<?= $bgc; ?>"></b><?= $season->post_title; ?>
+                            <b class="reserved-type" style="background-color:<?= $bgc; ?>"></b><?= $season->post_title; ?>
                         </p>
                     <?php endforeach; ?>
                 </div>
