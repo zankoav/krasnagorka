@@ -49,7 +49,7 @@ foreach ($seasonIntervals as $interval) {
         "start" => $from . "T10:30:00",
         "end" => $to . "T11:30:00",
         "allDay" => false,
-        "color" => isset($seasonColor) ? $seasonColor : "#2271b1"
+        "color" => isset($seasonColor) ? $seasonColor : "#eee"
     ];
 }
 
@@ -107,7 +107,7 @@ foreach ($seasonIntervals as $interval) {
         display: inline-block;
         width: 20px;
         height: 20px;
-        background-color: #2271b1;
+        background-color: #eee;
         margin-right: .25rem;
 
     }
@@ -162,7 +162,19 @@ foreach ($seasonIntervals as $interval) {
         <div class="calendar_block">
             <div id="calendar"></div>
             <div class="reserved-type-wrapper">
-                <b class="reserved-type"></b>Занято
+                <div>
+                    <?php foreach ($seasons as $season) :
+                        $bgc = get_post_meta($season->ID, 'season_color', 1);
+                        if (empty($bgc)) {
+                            $bgc = '#eee';
+                        }
+                    ?>
+                        <p>
+                            <b class="reserved-type" style="backgroun-color:<?= $bgc; ?>"></b><?= $season->post_title; ?>
+                        </p>
+                    <?php endforeach; ?>
+                </div>
+
                 <input type="button" id="z-clear" class="ml-20 button button-large" value="Очистить" />
             </div>
         </div>
