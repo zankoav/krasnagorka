@@ -1,78 +1,66 @@
 <?php
 
-    $seasons = get_posts(['post_type'   => 'season', 'numberposts' => -1]);
-    
-    $from = $_POST['from'];
-    $to = $_POST['to'];
-    $seasonId = $_POST['season'];
+$seasons = get_posts(['post_type'   => 'season', 'numberposts' => -1]);
 
-    if(isset($_POST['season-generator'], $from, $to, $seasonId) and !empty($from) and !empty($to)){
-        // Create post object
-        $seasonInterval = array(
-            'post_title'    => "С $from По $to",
-            'post_content'  => '',
-            'post_status'   => 'publish',
-            'post_author'   => 23,
-            'post_type' => 'season_interval'
-        );
-        
-        // Insert the post into the database
-        $seasonIntervalId = wp_insert_post( $seasonInterval );
-        update_post_meta($seasonIntervalId, 'season_id', $seasonId);
+$from = $_POST['from'];
+$to = $_POST['to'];
+$seasonId = $_POST['season'];
 
-        $dateFromFormat = (new DateTime($from))->format('Y-m-d');
-        update_post_meta($seasonIntervalId, 'season_from', $dateFromFormat);
+if (isset($_POST['season-generator'], $from, $to, $seasonId) and !empty($from) and !empty($to)) {
+    // Create post object
+    $seasonInterval = array(
+        'post_title'    => "С $from По $to",
+        'post_content'  => '',
+        'post_status'   => 'publish',
+        'post_author'   => 23,
+        'post_type' => 'season_interval'
+    );
 
-        $dateToFormat = (new DateTime($to))->format('Y-m-d');
-        update_post_meta($seasonIntervalId, 'season_to', $dateToFormat);
+    // Insert the post into the database
+    $seasonIntervalId = wp_insert_post($seasonInterval);
+    update_post_meta($seasonIntervalId, 'season_id', $seasonId);
 
-    }else if (isset($_POST['season-generator'])){
-        $errroMessage = 1;
-    }
+    $dateFromFormat = (new DateTime($from))->format('Y-m-d');
+    update_post_meta($seasonIntervalId, 'season_from', $dateFromFormat);
 
-    $seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
-    $result = [];
-    foreach($seasonIntervals as $interval){
-        $from = get_post_meta($interval->ID,'season_from',1);
-        $to = get_post_meta($interval->ID,'season_to',1);
+    $dateToFormat = (new DateTime($to))->format('Y-m-d');
+    update_post_meta($seasonIntervalId, 'season_to', $dateToFormat);
+} else if (isset($_POST['season-generator'])) {
+    $errroMessage = 1;
+}
 
-        $seasonId = get_post_meta($interval->ID,'season_id',1);
-        $seasonColor = get_post_meta($seasonId,'season_color',1);
+$seasonIntervals = get_posts(['post_type'   => 'season_interval', 'numberposts' => -1]);
+$result = [];
+foreach ($seasonIntervals as $interval) {
+    $from = get_post_meta($interval->ID, 'season_from', 1);
+    $to = get_post_meta($interval->ID, 'season_to', 1);
 
-        $dateFrom = new DateTime($from);
-        $from = $dateFrom->format('Y-m-d');
+    $seasonId = get_post_meta($interval->ID, 'season_id', 1);
+    $seasonColor = get_post_meta($seasonId, 'season_color', 1);
 
-        $dateTo = new DateTime($to);
-        $to = $dateTo->format('Y-m-d');
+    $dateFrom = new DateTime($from);
+    $from = $dateFrom->format('Y-m-d');
 
-        $result[]=[
-            "id" => $interval->ID, 
-            "start" => $from."T10:30:00", 
-            "end" => $to."T11:30:00",
-            "allDay" => false,
-            "color"=> $seasonColor ?? "#2271b1"
-        ];
-    }
+    $dateTo = new DateTime($to);
+    $to = $dateTo->format('Y-m-d');
+
+    $result[] = [
+        "id" => $interval->ID,
+        "start" => $from . "T10:30:00",
+        "end" => $to . "T11:30:00",
+        "allDay" => false,
+        "color" => isset($seasonColor) ? $seasonColor : "#2271b1"
+    ];
+}
 
 ?>
 
-<link href="https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/css/public_style.css"
-      rel="stylesheet" />
-<script type='text/javascript'
-        src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js'
-        id='jquery-core-js'></script>
-<script type='text/javascript'
-        src='https://krasnagorka.by/wp-includes/js/jquery/jquery-migrate.min.js'
-        id='jquery-migrate-js'></script>
-<script type='text/javascript'
-        src='https://krasnagorka.by/wp-includes/js/dist/vendor/moment.min.js'
-        id='moment-js'></script>
-<script type='text/javascript'
-        src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js'
-        id='fullcalendar-js'></script>
-<script type='text/javascript'
-        src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js'
-        id='ru-js'></script>
+<link href="https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/css/public_style.css" rel="stylesheet" />
+<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery-migrate.min.js' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/dist/vendor/moment.min.js' id='moment-js'></script>
+<script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/fullcalendar.min.js' id='fullcalendar-js'></script>
+<script type='text/javascript' src='https://krasnagorka.by/wp-content/themes/krasnagorka/inc/calendar/js/ru.js' id='ru-js'></script>
 
 <style>
     .cell-between,
@@ -175,56 +163,30 @@
             <div id="calendar"></div>
             <div class="reserved-type-wrapper">
                 <b class="reserved-type"></b>Занято
-                <input type="button"
-                       id="z-clear"
-                       class="ml-20 button button-large"
-                       value="Очистить" />
+                <input type="button" id="z-clear" class="ml-20 button button-large" value="Очистить" />
             </div>
         </div>
-        <form class="z-form"
-              action=""
-              method="POST">
+        <form class="z-form" action="" method="POST">
             <div class="mt-20 cmb-td">
-                <label class="z-form-group__label"
-                       for="season-name">Сезон</label>
-                <select class="cmb2_select"
-                        id="season-name"
-                        name="season">
-                    <?php foreach($seasons as $season):?>
-                    <option value="<?=$season->ID;?>">
-                        <?=$season->post_title;?>
-                    </option>
-                    <?php endforeach;?>
+                <label class="z-form-group__label" for="season-name">Сезон</label>
+                <select class="cmb2_select" id="season-name" name="season">
+                    <?php foreach ($seasons as $season) : ?>
+                        <option value="<?= $season->ID; ?>">
+                            <?= $season->post_title; ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="z-form-group">
-                <label class="z-form-group__label"
-                       for="season-from">Начало</label>
-                <input id="season-from"
-                       class="z-input"
-                       type="text"
-                       placeholder="Начало"
-                       name="from"
-                       readonly />
+                <label class="z-form-group__label" for="season-from">Начало</label>
+                <input id="season-from" class="z-input" type="text" placeholder="Начало" name="from" readonly />
             </div>
             <div class="z-form-group">
-                <label class="z-form-group__label"
-                       for="season-to">Конец</label>
-                <input id="season-to"
-                       class="z-input"
-                       type="text"
-                       placeholder="Конец"
-                       name="to"
-                       readonly />
+                <label class="z-form-group__label" for="season-to">Конец</label>
+                <input id="season-to" class="z-input" type="text" placeholder="Конец" name="to" readonly />
             </div>
-            <input id="season-id"
-                   type="hidden"
-                   name="season-id"
-                   readonly />
-            <input type="submit"
-                   class="button button-primary button-large"
-                   name="season-generator"
-                   value="Создать сезонный интервал" />
+            <input id="season-id" type="hidden" name="season-id" readonly />
+            <input type="submit" class="button button-primary button-large" name="season-generator" value="Создать сезонный интервал" />
         </form>
     </div>
 
@@ -232,22 +194,21 @@
 </div>
 
 <script>
-
     const message_1 = "Нельзя выбирать прошлые даты",
         message_2 = "Дата начала должна быть позже даты окончания интервала",
         message_3 = "Интервалы не должно пересекаться",
         message_4 = "Выберите свободную дату";
-        message_5 = "Заполните Даты";
+    message_5 = "Заполните Даты";
 
     let $ = jQuery;
-    let events = JSON.parse('<?=json_encode($result)?>');
+    let events = JSON.parse('<?= json_encode($result) ?>');
     let jsFromDate, jsToDate, $calendar;
-    const errorMessage = "<?=$errroMessage;?>";
-    if(errorMessage){
+    const errorMessage = "<?= $errroMessage; ?>";
+    if (errorMessage) {
         showMessage(message_5);
     }
 
-    $('#z-clear').click(function () {
+    $('#z-clear').click(function() {
         clearAll();
         fillCells();
         updateDates('', '');
@@ -283,13 +244,16 @@
                     `.fc-widget-content[data-date="${jsToDate.d}"]`
                 );
                 if (element) {
-                    jsToDate = { d: jsToDate.d, el: element };
+                    jsToDate = {
+                        d: jsToDate.d,
+                        el: element
+                    };
                     $(jsToDate.el).addClass("cell-range");
                 }
             }
             fillCells();
         },
-        dayClick: function (date, jsEvent, view) {
+        dayClick: function(date, jsEvent, view) {
             const cell = this;
             const datePressed = date.format("YYYY-MM-DD");
             const dateToday = (new moment(Date.now())).format("YYYY-MM-DD");
@@ -299,7 +263,10 @@
             } else if (datePressed < dateToday) {
                 showMessage(message_1);
             } else if (!jsFromDate) {
-                jsFromDate = { d: datePressed, el: cell };
+                jsFromDate = {
+                    d: datePressed,
+                    el: cell
+                };
                 const fromDateClearFormat = new moment(
                     jsFromDate.d,
                     "YYYY-MM-DD"
@@ -320,7 +287,10 @@
                     "YYYY-MM-DD"
                 );
 
-                jsToDate = { d: datePressed, el: cell };
+                jsToDate = {
+                    d: datePressed,
+                    el: cell
+                };
                 const toDateClearFormat = new moment(
                     jsToDate.d,
                     "YYYY-MM-DD"
@@ -374,7 +344,7 @@
     function fillCells() {
         $calendar.find(`.cell-between`).removeClass("cell-between");
         if (jsToDate) {
-            $calendar.find('.fc-day[data-date]').each(function () {
+            $calendar.find('.fc-day[data-date]').each(function() {
                 const $item = $(this);
                 const dateStr = $item.data("date");
                 if (jsFromDate.d <= dateStr && jsToDate.d >= dateStr) {
@@ -405,7 +375,7 @@
         );
         $(document.body).append(this.messageElement);
         setTimeout(() => {
-            this.messageElement.fadeIn(function () {
+            this.messageElement.fadeIn(function() {
                 $(this).remove();
             });
         }, 2000);
