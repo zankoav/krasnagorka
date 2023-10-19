@@ -36,6 +36,9 @@
         $from = get_post_meta($interval->ID,'season_from',1);
         $to = get_post_meta($interval->ID,'season_to',1);
 
+        $seasonId = get_post_meta($interval->ID,'season_id',1);
+        $seasonColor = get_post_meta($seasonId,'season_color',1);
+
         $dateFrom = new DateTime($from);
         $from = $dateFrom->format('Y-m-d');
 
@@ -47,7 +50,7 @@
             "start" => $from."T10:30:00", 
             "end" => $to."T11:30:00",
             "allDay" => false,
-            "color"=> "#2271b1"
+            "color"=> $seasonColor ?? "#2271b1"
         ];
     }
 
