@@ -127,6 +127,22 @@ function mastak_season()
         'Терем 12' => 29
     ];
 
+    $cmb_season_main = new_cmb2_box(array(
+        'id'           => 'season_option',
+        'title'        => esc_html__('Настройка Сезона', 'krasnagorka'),
+        'object_types' => array('season'), // Post type
+    ));
+
+    $cmb_season_main->add_field(array(
+        'name'          => 'Цвет сезона',
+        'id'            => 'season_color',
+        'type'          => 'colorpicker',
+        'attributes'    => array(
+            'readonly' => 'readonly'
+        )
+    ));
+
+
     $cmb_season = new_cmb2_box(array(
         'id'           => 'seasons_option',
         'title'        => esc_html__('Настройка Цен Сезона', 'krasnagorka'),
