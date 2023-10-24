@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 get_header('mastak');
-get_template_part("mastak/views/header", "small-view");
+get_template_part("mastak/views/header", "events-view");
 
 $one_day  = 24 * 60 * 60; //seconds
 $time_naw = time();
@@ -56,7 +56,6 @@ $subtitle_2 = get_option('mastak_event_appearance_options')['subtitle_2'];
 	</div>
 </div>
 
-<?php get_template_part("mastak/views/events", "slider"); ?>
 
 <section class="b-container header-title">
 	<h2 class="header-title__subtitle"><?= $subtitle_2; ?></h2>

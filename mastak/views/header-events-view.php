@@ -13,259 +13,10 @@ $weather = get_weather();
 global $kgCooke;
 $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 
-//    Banner
-$isBreadcrumbsBannerEnabled      = $options['breadcrumb_banner_is_open'];
-$isBreadcrumbsBannerTargetLink   = $options['breadcrumb_banner_is_target'] ? '_blank' : '_self';
-$breadcrumbsBannerText           = $options['breadcrumb_banner_text'];
-$breadcrumbsBannerLink           = $options['breadcrumb_banner_link'];
-$breadcrumbsBannerImg            = $options['breadcrumb_banner_img'];
-$breadcrumbsBannerImgDefault     = $options['breadcrumb_banner_img_default'];
-$breadcrumbsBannerAnimationType  = $options['breadcrumb_banner_animation_type'];
-$breadcrumbsBannerAnimationDelay = empty($options['breadcrumb_banner_animation_delay']) ? 0 : $options['breadcrumb_banner_animation_delay'];
+$main_slider       = get_option('mastak_event_appearance_options')['special_events'];
+$main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_delay'];
 
-switch ($breadcrumbsBannerAnimationType):
-    case 'fade': ?>
-        <style>
-            .breadcrumbs-wrapper__link {
-                opacity: 0;
-                animation-fill-mode: forwards;
-                animation-name: fadeBanner;
-                animation-duration: .6s;
-                animation-timing-function: ease-in;
-            }
-
-            @keyframes fadeBanner {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-            }
-        </style>
-    <?php break;
-    case 'fade_blink_infinity': ?>
-        <style>
-            .breadcrumbs-wrapper__link {
-                opacity: 0;
-                animation: fadeBanner 1s ease-in, blinkBanner 8s ease-in 4s infinite;
-                animation-fill-mode: forwards;
-            }
-
-            @keyframes fadeBanner {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes blinkBanner {
-                0% {
-                    color: #999;
-                }
-
-                40% {
-                    color: #999;
-                }
-
-                50% {
-                    color: #7ed321;
-                }
-
-                60% {
-                    color: #999;
-                }
-
-                100% {
-                    color: #999;
-                }
-            }
-        </style>
-    <?php break;
-    case 'fade_puls_icon': ?>
-        <style>
-            .breadcrumbs-wrapper__link {
-                opacity: 0;
-                animation-fill-mode: forwards;
-                animation-name: fadeBanner;
-                animation-duration: .6s;
-                animation-timing-function: ease-in;
-            }
-
-            .breadcrumbs-wrapper__link-img {
-                animation-name: pulsBanner;
-                animation-duration: 2s;
-                animation-timing-function: ease-in;
-                animation-iteration-count: infinite;
-            }
-
-            @keyframes fadeBanner {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes pulsBanner {
-                0% {
-                    transform: scale(1) rotate(0);
-                }
-
-                25% {
-                    transform: scale(1.2) rotate(5deg);
-                }
-
-                50% {
-                    transform: scale(1) rotate(0);
-                }
-
-                75% {
-                    transform: scale(1.2) rotate(-5deg);
-                }
-
-                100% {
-                    transform: scale(1) rotate(0);
-                }
-            }
-        </style>
-    <?php break;
-    case 'fade_puls_icon_only': ?>
-        <style>
-            .breadcrumbs-wrapper__link {
-                opacity: 0;
-                animation-fill-mode: forwards;
-                animation-name: fadeBanner;
-                animation-duration: .6s;
-                animation-timing-function: ease-in;
-            }
-
-            .breadcrumbs-wrapper__link-img {
-                animation-name: pulsBanner;
-                animation-duration: 2s;
-                animation-timing-function: ease-in;
-                animation-iteration-count: infinite;
-            }
-
-            @keyframes fadeBanner {
-                0% {
-                    opacity: 0;
-                }
-
-                100% {
-                    opacity: 1;
-                }
-            }
-
-            @keyframes pulsBanner {
-                0% {
-                    transform: scale(1);
-                }
-
-                25% {
-                    transform: scale(1.2);
-                }
-
-                50% {
-                    transform: scale(1);
-                }
-
-                75% {
-                    transform: scale(1.2);
-                }
-
-                100% {
-                    transform: scale(1);
-                }
-            }
-        </style>
-<?php break;
-    default:
-        break;
-endswitch;
 ?>
-
-<style>
-    @media(max-width:1025px) {
-        header.header-second {
-            min-height: initial;
-            height: initial;
-        }
-
-        .header-second .menu-top {
-            padding-bottom: 0;
-        }
-
-        .header-second .menu-bottom {
-            position: relative;
-        }
-
-        .header-second .menu-bottom__sunny {
-            display: none;
-        }
-
-        .header-second .menu-bottom__details {
-            margin-bottom: 0;
-        }
-
-        .header-second .menu-bottom__details-sunny {
-            margin: 0 .5rem 0 auto;
-        }
-
-        .header-second .menu-bottom__details-place {
-            align-self: initial;
-        }
-
-        .header-second .main-slide__slide-content-title {
-            position: relative;
-            z-index: 1;
-            padding: 2rem 1rem;
-            color: #ffffff;
-            font-size: 22px;
-        }
-
-        .header-second #canvas {
-            display: block;
-            width: 100%;
-            transform: rotate(180deg);
-        }
-
-        .header-second .main-slide__slide-img-wrapper:after {
-            content: none;
-        }
-
-        .header-title {
-            padding-top: 1.5rem;
-        }
-
-        .header-second .menu-bottom__right {
-            justify-content: initial;
-        }
-
-        .header-second .menu-bottom__right--wrapper {
-            width: 100%;
-        }
-
-        .header-second .menu-bottom__degrees {
-            margin-right: 0;
-            font-size: 24px;
-        }
-
-        .header-second .menu-bottom__sunny-icon {
-            width: 32px;
-        }
-
-        .header-second .menu-bottom__wrapper {
-            padding-bottom: 3rem;
-        }
-    }
-</style>
 
 <header class="header-second">
     <nav class="menu-top b-container">
@@ -403,27 +154,64 @@ endswitch;
 
         </div>
     </nav>
-    
+    <div class="swiper-container main-slider">
+        <div class="swiper-wrapper main-slider__wrapper">
+            <?php
+            $isFirst = true;
+            $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
+
+            foreach ($main_slider as $m_slide) : ?>
+                <div class="swiper-slide main-slider__slide" data-swiper-autoplay="<?= $main_slider_delay; ?>">
+
+                    <?php if ($m_slide["use_video"] and !wp_is_mobile()) :
+                        $video_url = esc_url($m_slide["slide_video"]); ?>
+                        <div class="main-slider__slide-img-wrapper">
+                            <video width="400" height="320" autoplay loop muted>
+                                <source src="<?= $video_url; ?>" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                                Тег video не поддерживается вашим браузером.
+                            </video>
+                        </div>
+                    <?php else : ?>
+                        <div class="main-slider__slide-img-wrapper">
+                            <img class="object-fit-img" src="<?= wp_get_attachment_image_url($m_slide["item_banner"], $image_size) ?>" srcset="<?= wp_get_attachment_image_srcset($m_slide["item_banner_id"], $image_size) ?>" sizes="<?= wp_get_attachment_image_sizes($m_slide["item_banner"], $image_size) ?>">
+                        </div>
+                    <?php endif; ?>
+                    <div class="main-slider__slide-content">
+                        <?php if ($isFirst) :
+                            $isFirst = false;
+                        ?>
+                            <h1 class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></h1>
+                        <?php else : ?>
+                            <p class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></p>
+                        <?php endif; ?>
+                        <p class="main-slider__slide-content-sub-title"><?= $m_slide["item_subtitle"]; ?></p>
+                        <?php if (!empty($m_slide["button_url"])) : ?>
+                            <a href="<?= $m_slide["button_url"]; ?>"  class="main-slider__slide-content-button ">
+                                <?= $m_slide["button_text"]; ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- Add Arrows -->
+        <div class="main-slider__next-prev">
+            <div class="b-container main-slider__next-prev-wrapper">
+                <div class="swiper-button-next main-slider__button-next"></div>
+                <div class="swiper-button-prev main-slider__button-prev"></div>
+            </div>
+        </div>
+        <div class="swiper-pagination main-slider__pagination"></div>
+
+    </div>
+
+
+
     <?php if (wp_is_mobile()) : ?>
         <?php do_action("mastak_header_small_view_title"); ?>
     <?php endif; ?>
-    <div class="main-slide">
-        <div class="main-slide__slide-img-wrapper">
-            <?php if (!wp_is_mobile()) : ?>
-                <?php
-                $image_size     = 'header_laptop_hd';
-                $slide_image_id = apply_filters("mastak_header_small_view_image", null); ?>
-                <img class="object-fit-img" src="<?= wp_get_attachment_image_url($slide_image_id, $image_size) ?>">
-            <?php else : ?>
-                <canvas id="canvas"></canvas>
-            <?php endif; ?>
-        </div>
-        <div class="main-slide__slide-content">
-            <?php if (!wp_is_mobile()) : ?>
-                <?php do_action("mastak_header_small_view_title"); ?>
-            <?php endif; ?>
-        </div>
-    </div>
+    
     <div class="menu-bottom">
         <div class="b-container menu-bottom__wrapper">
             <div class="menu-bottom__left">
@@ -649,4 +437,3 @@ endswitch;
         })();
         <?php endif;  ?>
     </script>
-<?php endif;?>
