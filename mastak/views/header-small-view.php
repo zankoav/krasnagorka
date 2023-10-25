@@ -647,6 +647,5 @@ endswitch;
             }
             requestAnimationFrame(draw);
         })();
-        <?php endif;  ?>
     </script>
 <?php endif;?>
