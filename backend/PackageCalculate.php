@@ -121,6 +121,14 @@ class PackageCalculate extends CalculateImpl
                         'count' => intval($totalDays / 2)
                     ];
                 }
+
+                if ($entry['service'] == '6') {
+                    $servicesFormatted[] = [
+                        'id' => '6',
+                        'title' => "Количество приемов пищи на 1 чел.",
+                        'count' => intval($totalDays)
+                    ];
+                }
             }
         }
 
