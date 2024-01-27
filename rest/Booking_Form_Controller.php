@@ -742,6 +742,9 @@ class Booking_Form_Controller extends WP_REST_Controller
             $templatePath = "L-S/mail/templates/$checkType";
         }
         
+        Log::info('templatePath', $templatePath);
+
+        
         if(!empty($subject) and !empty($templatePath)){
             $template = LS_Mailer::getTemplate($templatePath, $data);
             $result = LS_Mailer::sendMail($emailTo, $subject, $template, $checkType, $data);
