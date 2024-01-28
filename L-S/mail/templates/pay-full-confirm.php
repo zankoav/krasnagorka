@@ -94,11 +94,7 @@ $source = get_post_meta($order->id, 'sbc_order_prepaid_source', 1);
                                     <div>Пакетный тур: <strong><?= $order->getPackageTitle(); ?></strong></div>
                                     <div>В пакетный тур включено:</div>
                                     <?php foreach ($order->getPackageServices() as $service) : ?>
-                                        <?php if ($service['id'] == '1') : ?>
-                                            <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт." ?></div>
-                                        <?php else : ?>
-                                            <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт." ?></div>
-                                        <?php endif; ?>
+                                        <div style="color:#999;"><?= $service['title'] . " " . $service['count'] . " шт." ?></div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </td>

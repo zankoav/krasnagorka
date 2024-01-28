@@ -71,6 +71,13 @@ $eventTitle = $order['eventMainTitle'];
                                     <div>Пакет: <?= $order['variantTitle'] ?></div>
                                     <div style="color:#999;"><?= $order['variantDescription'] ?></div>
                                 <?php endif; ?>
+                                <?php if ($order['scenario'] == 'Package') : ?>
+                                    <div>Пакетный тур: <strong><?= $order['package']['title']; ?></strong></div>
+                                    <div>В пакетный тур включено:</div>
+                                    <?php foreach ($order['package']['services'] as $service) : ?>
+                                        <div style="color:#999;"><?= $service; ?></div>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             </td>
                         </tr>
                         <tr>

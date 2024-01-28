@@ -1,8 +1,11 @@
 <?php
 
-if (!defined('ABSPATH')) { exit; }
+if (!defined('ABSPATH')) {
+    exit;
+}
 
-function show_seasons_options() {
+function show_seasons_options()
+{
 
     $query = new WP_Query(array(
         'post_type'      => 'season',
@@ -18,35 +21,37 @@ function show_seasons_options() {
     return $seasons;
 }
 
-function get_webpay_sandbox($orgType = null){
+function get_webpay_sandbox($orgType = null)
+{
     $bookingSettings = get_option('mastak_booking_appearance_options');
     $isSandBoxEnabled =  $bookingSettings['is_sand_box_enabled'] == 'on';
 
     $prod = [
-        'url'=>'https://payment.webpay.by',
+        'url' => 'https://payment.webpay.by',
         'wsb_storeid' => '320460709',
         'wsb_test' => '0',
     ];
     $sandbox = [
-        'url'=>'https://securesandbox.webpay.by',
+        'url' => 'https://securesandbox.webpay.by',
         'wsb_storeid' => '515854557',
         'wsb_test' => '1',
     ];
 
     $org = $prod;
-    
-    if($orgType === '0'){
+
+    if ($orgType === '0') {
         $org = $prod;
-    }else if($orgType === '1'){
+    } else if ($orgType === '1') {
         $org = $sandbox;
-    }else if($isSandBoxEnabled and is_user_logged_in()){
+    } else if ($isSandBoxEnabled and is_user_logged_in()) {
         $org = $sandbox;
     }
 
     return $org;
 }
 
-function get_order_data($orderId){
+function get_order_data($orderId)
+{
     $created = get_the_date("d.m.Y", $orderId);
     $start = get_post_meta($orderId, 'sbc_order_start', 1);
     $end = get_post_meta($orderId, 'sbc_order_end', 1);
@@ -63,10 +68,10 @@ function get_order_data($orderId){
     $variantTitle;
     $variantDescription;
 
-    if(!empty($eventTitleId)){
+    if (!empty($eventTitleId)) {
         $eventTitle = get_the_title($eventTitleId);
-        $eventLink = get_permalink( $eventTitleId );
-    
+        $eventLink = get_permalink($eventTitleId);
+
         $variantId = get_post_meta($orderId, 'sbc_order_event_variant_id', 1);
 
         $per_day = get_post_meta($variantId, 'variant_description_per_day', 1);
@@ -74,12 +79,12 @@ function get_order_data($orderId){
 
         $variantDescription = $per_day;
         $variantTitle = get_the_title($variantId);
-                
-        if(!empty($single)){
+
+        if (!empty($single)) {
             $variantDescription  = empty($per_day) ? $single : "$per_day, $single";
         }
     }
-    
+
 
 
     $leadId = get_post_meta($orderId, 'sbc_lead_id', 1);
@@ -100,27 +105,26 @@ function get_order_data($orderId){
 
     $smallAnimalsCount = get_post_meta($orderId, 'sbc_order_small_animlas_count', 1) ?? 0;
     $bigAnimalsCount = get_post_meta($orderId, 'sbc_order_big_animlas_count', 1) ?? 0;
-    
+
     $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', 1) ?? 0;
     $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', 1) ?? 0;
     $foodDinner = get_post_meta($orderId, 'sbc_order_food_dinner', 1) ?? 0;
     $foodVariant = get_post_meta($orderId, 'sbc_order_food_variant', 1);
     $scenario = get_post_meta($orderId, 'sbc_order_scenario', 1);
-    $scenario = get_post_meta($orderId, 'sbc_order_scenario', 1);
     $eventChilds = intval(get_post_meta($orderId, 'sbc_order_event_child', 1));
 
     $foodVariants = [
-        'breakfast'=> 'Завтраки',
-        'full'=> 'Полный пансион',
-        'no_food'=> 'Без питания',
-        'custom'=> 'Индивидуальный подбор питания'
+        'breakfast' => 'Завтраки',
+        'full' => 'Полный пансион',
+        'no_food' => 'Без питания',
+        'custom' => 'Индивидуальный подбор питания'
     ];
-    
-    if(!empty($foodVariant)){
+
+    if (!empty($foodVariant)) {
         $foodVariant = $foodVariants[$foodVariant];
-    }else if(!empty($foodBreakfast) or !empty($foodLunch) or !empty($foodDinner)){
+    } else if (!empty($foodBreakfast) or !empty($foodLunch) or !empty($foodDinner)) {
         $foodVariant = 'Индивидуальный';
-    }else{
+    } else {
         $foodVariant = 'Без питания';
     }
 
@@ -135,18 +139,34 @@ function get_order_data($orderId){
     $email = getEmailFromOrder($orderId);
     $subprice = 0;
 
-    if(!empty($paymentMethod) and !empty($prepaidPercantage)){
+    if (!empty($paymentMethod) and !empty($prepaidPercantage)) {
         $subprice = intval($price * $prepaidPercantage / 100);
     }
 
     $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ';
-    if(!empty($eventTitle)){
+    if (!empty($eventTitle)) {
         $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по мероприятию';
-    }else if(!empty($eventTabId)){
+    } else if (!empty($eventTabId)) {
         $eventMainTitle = 'ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ по горящему предложению';
     }
-    
+
+    $package = null;
+
+    if ($scenario == 'Package') {
+        $servicesData = get_post_meta($orderId, 'sbc_order_package_data', 1);
+        $services = explode("\n", str_replace("\r", "", $servicesData));
+        array_shift($services);
+        $packageId = get_post_meta($orderId, 'sbc_order_package_id', 1);
+        $packageTitle = get_the_title($packageId);
+
+        $package = [
+            'title' => $packageTitle,
+            'services' => $services
+        ];
+    }
+
     return [
+        'package' => $package,
         'orderId' => $orderId,
         'created' => $created,
         'babyBed' => $babyBed == 'on',

@@ -971,21 +971,6 @@ class Booking_Form_Controller extends WP_REST_Controller
         }
     }
 
-    private function getOrderById($orderID)
-    {
-        $order = [];
-        try {
-            $order['start'] = get_post_meta($orderID, 'sbc_order_start', 1);
-            $order['end'] = get_post_meta($orderID, 'sbc_order_end', 1);
-            $order['price'] = get_post_meta($orderID, 'sbc_order_price', 1);
-            $order['leadId'] = get_post_meta($orderID, 'sbc_lead_id', 1);
-            $order['email'] = getEmailFromOrder($orderID);
-        } catch (Exception $e) {
-            Logger::log("getOrderById Exception:" . $e->getMessage());
-        }
-        return $order;
-    }
-
     private function createOrderForPay($request)
     {
         $result = ['status' => 0];
