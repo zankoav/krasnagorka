@@ -206,7 +206,7 @@ function cmb_package()
     ));
 
     $cmb_package->add_field(array(
-        'name'    => __('Скидка от количества дней', 'krasnagorka'),
+        'name'    => __('Скидка от количества ночей', 'krasnagorka'),
         'id'      => 'package_sale_days',
         'type'            => 'text',
         'attributes'      => array(
