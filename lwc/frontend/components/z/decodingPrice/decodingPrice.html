@@ -18,7 +18,7 @@
                 </template>
                 <template if:true={settings.total.days_sale}>
                     <z-price-view price={subPrice}></z-price-view> -
-                    <z-number-value num={settings.total.days_sale} value="шт."> </z-number-value> = <z-price-view price={totalPrice}></z-price-view>
+                    <z-number-value num={packageSale.sale} value="%"> </z-number-value> = <z-price-view price={totalPrice}></z-price-view>
                 </template>
                 <div class="decoding-price__baby-bed">
                     Итого: <z-price-view price={totalPrice}></z-price-view>
