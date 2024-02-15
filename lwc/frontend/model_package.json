@@ -94,33 +94,119 @@
         }
     ],
     "package": {
-        "id": "27079",
-        "title": "TEST",
-        "start_date": "10/01/2023",
-        "end_date": "11/01/2023",
+        "id": "29084",
+        "title": "Все включено",
+        "start_date": "09/29/2023",
+        "end_date": "03/07/2024",
         "min_night": 2,
         "services": [
             "1",
             "2",
-            "5"
+            "3",
+            "5",
+            "4"
         ],
         "calendars": {
+            "20": {
+                "id": 20,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "14": {
+                "id": 14,
+                "price_person_night": 74.75,
+                "min_people": 4
+            },
             "9": {
                 "id": 9,
-                "price_person_night": 109,
+                "price_person_night": 79.75,
+                "min_people": 6
+            },
+            "13": {
+                "id": 13,
+                "price_person_night": 74.75,
+                "min_people": 6
+            },
+            "19": {
+                "id": 19,
+                "price_person_night": 74.75,
+                "min_people": 4
+            },
+            "29": {
+                "id": 29,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "16": {
+                "id": 16,
+                "price_person_night": 74.75,
+                "min_people": 4
+            },
+            "21": {
+                "id": 21,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "25": {
+                "id": 25,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "22": {
+                "id": 22,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "23": {
+                "id": 23,
+                "price_person_night": 74.75,
                 "min_people": 2
             },
             "18": {
                 "id": 18,
-                "price_person_night": 56,
+                "price_person_night": 74.75,
                 "min_people": 4
+            },
+            "24": {
+                "id": 24,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "26": {
+                "id": 26,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "27": {
+                "id": 27,
+                "price_person_night": 74.75,
+                "min_people": 2
             },
             "15": {
                 "id": 15,
-                "price_person_night": 85,
+                "price_person_night": 74.75,
                 "min_people": 6
+            },
+            "28": {
+                "id": 28,
+                "price_person_night": 74.75,
+                "min_people": 2
+            },
+            "37": {
+                "id": 37,
+                "price_person_night": 79.75,
+                "min_people": 2
+            },
+            "43": {
+                "id": 43,
+                "price_person_night": 87.25,
+                "min_people": 3
             }
-        }
+        },
+        "depricatedDayes": [
+            "2024-02-20",
+            "2024-02-27"
+        ]
     },
     "seasons": [
         {
@@ -2325,7 +2411,50 @@
         "time": "9:00 - 20:00 пн-пт",
         "weekend": "11:00 - 20:00 сб,вс"
     },
-    "weather": [],
+    "weather": [
+        {
+            "text": "В основном облачно",
+            "weekday": "                                 Чт                            ",
+            "temp": "                                 1&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/20_iday.svg"
+        },
+        {
+            "text": "Туманно, кратковременный снегопад",
+            "weekday": "                                 Пт                            ",
+            "temp": "                                 3&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/13_iday.svg"
+        },
+        {
+            "text": "Туманно, кратковременные дожди",
+            "weekday": "                                 Сб                            ",
+            "temp": "                                 4&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/12_iday.svg"
+        },
+        {
+            "text": "Переменная облачность",
+            "weekday": "                                 Вс                            ",
+            "temp": "                                 1&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/03_iday.svg"
+        },
+        {
+            "text": "В основном облачно",
+            "weekday": "                                 Пн                            ",
+            "temp": "                                 0&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/20_iday.svg"
+        },
+        {
+            "text": "Пасмурно",
+            "weekday": "                                 Вт                            ",
+            "temp": "                                 0&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/04_iday.svg"
+        },
+        {
+            "text": "В основном облачно",
+            "weekday": "                                 Cр                            ",
+            "temp": "                                 1&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/20_iday.svg"
+        }
+    ],
     "currencies": {
         "byn": 1,
         "rur": "3.4495",

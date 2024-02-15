@@ -107,6 +107,10 @@ export default class Calendar extends LightningElement {
                         if (strDate < startDate || strDate > endDate) {
                             date.style.backgroundColor = '#eee'
                         }
+
+                        if (step.settings.package.depricatedDayes.indexOf(strDate) > -1) {
+                            date.style.backgroundColor = '#eee'
+                        }
                     })
                 }
             },
@@ -355,6 +359,11 @@ function initFrom(d, el, options = {}) {
             showMessage(message_5)
             return
         }
+
+        if (options.package.depricatedDayes.indexOf(d) > -1) {
+            showMessage(message_5)
+            return
+        }
     }
 
     if (d >= a.format('YYYY-MM-DD') && checkStartDate(events, d)) {
@@ -417,19 +426,33 @@ function checkDateRange(events, startDate, endDate, options = {}) {
             .format('YYYY-MM-DD')
         if (endPackageDate < endDate) {
             showMessage(message_5)
+            console.log('startDate', startDate)
+            console.log('endDate', endDate)
+            return false
+        }
+
+        let checkDepricatedDays = false
+
+        options.package.depricatedDayes.forEach((day) => {
+            if (startDate <= day && endDate >= day) {
+                checkDepricatedDays = true
+            }
+        })
+
+        if (checkDepricatedDays) {
+            showMessage(message_5)
             return false
         }
 
         const startDateMoment = moment(startDate)
         const endDateMoment = moment(endDate)
 
-        const nights = endDateMoment.diff(startDateMoment, 'days');
-        if(nights < options.package.min_night){
+        const nights = endDateMoment.diff(startDateMoment, 'days')
+        if (nights < options.package.min_night) {
             showMessage(`${message_6} ${options.package.min_night}`)
             return false
         }
     }
-    
 
     for (var i = 0; i < events.length; i++) {
         var event = events[i]
