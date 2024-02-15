@@ -1,4 +1,5 @@
 <?php
+
 namespace LsModel;
 
 /**
@@ -7,6 +8,7 @@ namespace LsModel;
  * Date: 10/28/19
  * Time: 9:27 AM
  */
+
 use Ls\Wp\Log as Log;
 
 use AmoCRM\Helpers\EntityTypesInterface;
@@ -30,42 +32,45 @@ class PackageModel extends ModelImpl
     private $packageId;
     private $package;
 
-    public function setPackageId($packageId){
+    public function setPackageId($packageId)
+    {
         $this->packageId = $packageId;
         $this->package = $this->getPackageValue();
     }
 
-    protected function scenario(){
+    protected function scenario()
+    {
         return 'Package';
     }
 
-    protected function createModel(){
+    protected function createModel()
+    {
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $showPrice = $bookingSettings['booking_price_show'] == 'on';
         $showPayments = false;
 
-        if($showPrice){
+        if ($showPrice) {
             $showPayments = $bookingSettings['booking_payments_show'] == 'on';
             $minPrepaidPrice = $bookingSettings['booking_payments_min_price'] ?? "0";
-            $minPrepaidPrice = str_replace(",",".", $minPrepaidPrice);
+            $minPrepaidPrice = str_replace(",", ".", $minPrepaidPrice);
             $minPrepaidPrice = floatval($minPrepaidPrice);
-            
+
             $prepaidPercantage = intval($bookingSettings['booking_payments_type_percentage']);
             $prepaidOptions = [
                 [
-                    "label"=> "100%",
-                    "value"=> 100
+                    "label" => "100%",
+                    "value" => 100
                 ]
             ];
 
-            if(isset($prepaidPercantage)){
+            if (isset($prepaidPercantage)) {
                 $prepaidOptions[] = [
-                    "label"=> $prepaidPercantage . '%',
-                    "value"=> $prepaidPercantage
+                    "label" => $prepaidPercantage . '%',
+                    "value" => $prepaidPercantage
                 ];
             }
         }
-        
+
         $bookingId = $_GET['booking'];
         $eventTabId = $_GET['eventTabId'];
         $dateFrom  = $_GET['from'];
@@ -73,7 +78,7 @@ class PackageModel extends ModelImpl
         $teremRoom = $_GET['terem'];
         $calendarId = $_GET['calendarId'];
 
-        if(isset($_GET['obj'])){
+        if (isset($_GET['obj'])) {
             $bookingId = $_GET['obj'];
         }
 
@@ -81,12 +86,12 @@ class PackageModel extends ModelImpl
         $variantId = $_GET['var'];
         $people = $_GET['people'];
 
-        if(!empty($eventId) && !empty($eventTabId)){
+        if (!empty($eventId) && !empty($eventTabId)) {
             $intervalId = get_post_meta($eventTabId, 'mastak_event_tab_type_10_interval', 1);
             $dateFrom  = get_post_meta($intervalId, "season_from", 1);
             $dateTo    = get_post_meta($intervalId, "season_to", 1);
         }
-        
+
         $title     = null;
         $type      = null;
 
@@ -113,7 +118,7 @@ class PackageModel extends ModelImpl
         }
         $sandbox = get_webpay_sandbox();
         $pageBannerSrc = get_option('mastak_booking_appearance_options')['mastak_booking_pageimage'];
-        
+
         $selectedSeasonId = null;
         if (!empty($dateFrom) and !empty($dateTo)) {
             $selectedSeasonId = self::getSelectedSeasonId($dateFrom);
@@ -126,31 +131,31 @@ class PackageModel extends ModelImpl
         $textPartOffice =  !empty($bookingSettings['text_part_office']) ? $bookingSettings['text_part_office'] : '';
 
         $babyBeadPrice = $bookingSettings['baby_bed_price'] ?? "0";
-        $babyBeadPrice = str_replace(",",".", $babyBeadPrice);
+        $babyBeadPrice = str_replace(",", ".", $babyBeadPrice);
         $babyBeadPrice = floatval($babyBeadPrice);
 
         $bathHouseBlackPrice = $bookingSettings['bath_house_black_price'] ?? "0";
-        $bathHouseBlackPrice = str_replace(",",".", $bathHouseBlackPrice);
+        $bathHouseBlackPrice = str_replace(",", ".", $bathHouseBlackPrice);
         $bathHouseBlackPrice = floatval($bathHouseBlackPrice);
 
         $bathHouseWhitePrice = $bookingSettings['bath_house_white_price'] ?? "0";
-        $bathHouseWhitePrice = str_replace(",",".", $bathHouseWhitePrice);
+        $bathHouseWhitePrice = str_replace(",", ".", $bathHouseWhitePrice);
         $bathHouseWhitePrice = floatval($bathHouseWhitePrice);
 
         $foodBreakfastPrice = $bookingSettings['food_breakfast_price'] ?? "0";
-        $foodBreakfastPrice = str_replace(",",".", $foodBreakfastPrice);
+        $foodBreakfastPrice = str_replace(",", ".", $foodBreakfastPrice);
         $foodBreakfastPrice = floatval($foodBreakfastPrice);
 
         $foodLunchPrice = $bookingSettings['food_lunch_price'] ?? "0";
-        $foodLunchPrice = str_replace(",",".", $foodLunchPrice);
+        $foodLunchPrice = str_replace(",", ".", $foodLunchPrice);
         $foodLunchPrice = floatval($foodLunchPrice);
 
         $foodDinnerPrice = $bookingSettings['food_dinner_price'] ?? "0";
-        $foodDinnerPrice = str_replace(",",".", $foodDinnerPrice);
+        $foodDinnerPrice = str_replace(",", ".", $foodDinnerPrice);
         $foodDinnerPrice = floatval($foodDinnerPrice);
 
         $foodTripleSalePrice = $bookingSettings['food_triple_sale_price'] ?? "0";
-        $foodTripleSalePrice = str_replace(",",".", $foodTripleSalePrice);
+        $foodTripleSalePrice = str_replace(",", ".", $foodTripleSalePrice);
         $foodTripleSalePrice = floatval($foodTripleSalePrice);
 
         $result        = [
@@ -185,7 +190,7 @@ class PackageModel extends ModelImpl
             "babyBedPrice" => $babyBeadPrice,
             "bathHouseBlackPrice" => $bathHouseBlackPrice,
             "bathHouseWhitePrice" => $bathHouseWhitePrice,
-            
+
             "foodBreakfastPrice" => $foodBreakfastPrice,
             "foodLunchPrice" => $foodLunchPrice,
             "foodDinnerPrice" => $foodDinnerPrice,
@@ -224,9 +229,9 @@ class PackageModel extends ModelImpl
             $_dateFrom = $result['dateFrom'];
             $_dateTo = $result['dateTo'];
 
-            if(!empty($eventId) && !empty($eventTabId)){
+            if (!empty($eventId) && !empty($eventTabId)) {
                 $tab = new Type_10($eventTabId);
-                $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId );
+                $selectedCalendar = $tab->getSelectedCalendar($calendarId, $variantId);
                 $price = empty($selectedCalendar['calendar']['new_price']) ? $selectedCalendar['calendar']['old_price'] : $selectedCalendar['calendar']['new_price'];
                 $result['price'] = ($price + $selectedCalendar['variant']->pricePerDay) * (count($selectedCalendar['interval']['days']) - 1) * $people + $selectedCalendar['variant']->priceSingle;
 
@@ -239,11 +244,10 @@ class PackageModel extends ModelImpl
                     'variant' => $selectedCalendar['variant']->title,
                     'variantId' => $selectedCalendar['variant']->id,
                     'content' => [$selectedCalendar['variant']->descriptionPerDay, $selectedCalendar['variant']->descriptionSingle]
-                    
+
                 ];
                 $result['dateFrom'] = $dFrom;
-
-            }else{
+            } else {
                 $result['price'] = $this->getPriceFromEvent(
                     $_eventTabId,
                     $calendarId,
@@ -251,7 +255,7 @@ class PackageModel extends ModelImpl
                     $_dateTo
                 );
             }
-            
+
 
             $result['total'] = [
                 "accommodation" =>  $result['price'],
@@ -264,7 +268,7 @@ class PackageModel extends ModelImpl
 
             $result['eventTabMessageInfo'] = 'При заказе горящего предложения, вы не можете изменить объект и даты проживания';
 
-            if(!empty($eventId) && !empty($eventTabId)){
+            if (!empty($eventId) && !empty($eventTabId)) {
                 $result['eventTabMessageInfo'] = '';
             }
 
@@ -310,9 +314,10 @@ class PackageModel extends ModelImpl
         return $result;
     }
 
-    private function getPackageValue(){
+    private function getPackageValue()
+    {
 
-        $services = get_post_meta($this->packageId,'package_services', 1);
+        $services = get_post_meta($this->packageId, 'package_services', 1);
         $servicesFormatted = [];
 
         foreach ((array) $services as $key => $entry) {
@@ -321,13 +326,13 @@ class PackageModel extends ModelImpl
             }
         }
 
-        $calendars = get_post_meta($this->packageId,'package_calendars', 1);
+        $calendars = get_post_meta($this->packageId, 'package_calendars', 1);
         $calendarsFormatted = [];
 
         foreach ((array) $calendars as $key => $entry) {
             if (isset($entry['calendar']) && isset($entry['package_price'])) {
                 $calendarId = intval($entry['calendar']);
-                $packagePrice = str_replace(",",".", $entry['package_price']);
+                $packagePrice = str_replace(",", ".", $entry['package_price']);
                 $packagePrice = floatval($packagePrice);
                 $calendarsFormatted[$calendarId] = [
                     "id" => $calendarId,
@@ -343,21 +348,35 @@ class PackageModel extends ModelImpl
             $daysDepricated = preg_split('/\r\n|\r|\n/', $depricatedStr);
         }
 
+        $saleDayes = get_post_meta($this->packageId, 'package_sale_days', 1);
+        $salePercent =  get_post_meta($this->packageId, 'package_sale_percent', 1);
+
+        $daysSales = [];
+        if (!empty($saleDayes) && !empty($salePercent)) {
+            $daysSales[] = [
+                "dayes" => intval($saleDayes),
+                "sale" => intval($salePercent)
+            ];
+        }
+
+
         return [
             "id" => $this->packageId,
             "title" => get_the_title($this->packageId),
-            "start_date" => get_post_meta($this->packageId,'package_start', 1),
-            "end_date" => get_post_meta($this->packageId,'package_end', 1),
-            "min_night" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
+            "start_date" => get_post_meta($this->packageId, 'package_start', 1),
+            "end_date" => get_post_meta($this->packageId, 'package_end', 1),
+            "min_night" => intval(get_post_meta($this->packageId, 'package_night_min', 1)),
             "services" => $servicesFormatted,
             "calendars" => $calendarsFormatted,
+            "daysSales" => $daysSales,
             "depricatedDayes" => $daysDepricated
         ];
     }
 
-    public static function getSelectedSeasonId($dateFrom){
+    public static function getSelectedSeasonId($dateFrom)
+    {
         $id = null;
-        
+
         $firstSeasonIntervalParams = array(
             'post_type' => 'season_interval',
             'posts_per_page' => 1,
@@ -382,8 +401,8 @@ class PackageModel extends ModelImpl
         );
         $intervalsQuery = new \WP_Query;
         $intervals = $intervalsQuery->query($firstSeasonIntervalParams);
-        if(count($intervals) > 0){
-            $id = get_post_meta($intervals[0]->ID,'season_id', 1);
+        if (count($intervals) > 0) {
+            $id = get_post_meta($intervals[0]->ID, 'season_id', 1);
         }
 
         return $id;
@@ -412,12 +431,12 @@ class PackageModel extends ModelImpl
         $result = [];
         foreach ($terms as $term) {
 
-            if(! in_array($term->term_id, $packageCalendars)){
+            if (!in_array($term->term_id, $packageCalendars)) {
                 continue;
             }
 
             $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
-           
+
             if (!$isAvailable) {
                 continue;
             }
@@ -525,9 +544,9 @@ class PackageModel extends ModelImpl
             $dateTabStart = date("Y-m-d", strtotime($tabHouse['from']));
             $dateTabEnd = date("Y-m-d", strtotime($tabHouse['to']));
             if ($tabHouse['calendar'] == $calendarId and $dateTabStart == $dateStart and $dateTabEnd == $dateEnd) {
-                $newPrice = str_replace(",",".", $tabHouse['new_price']);
-                $newPrice  = floatval($newPrice );
-                $freshPrice = $newPrice ;
+                $newPrice = str_replace(",", ".", $tabHouse['new_price']);
+                $newPrice  = floatval($newPrice);
+                $freshPrice = $newPrice;
                 break;
             }
         }
@@ -538,18 +557,18 @@ class PackageModel extends ModelImpl
     {
 
         $calendarsFromTerem = [
-            'Терем 1'=>18,
-            'Терем 2'=>19,
-            'Терем 3'=>20,
-            'Терем 4'=>21,
-            'Терем 5'=>22,
-            'Терем 6'=>23,
-            'Терем 7'=>24,
-            'Терем 8'=>25,
-            'Терем 9'=>26,
-            'Терем 10'=>27,
-            'Терем 11'=>28,
-            'Терем 12'=>29
+            'Терем 1' => 18,
+            'Терем 2' => 19,
+            'Терем 3' => 20,
+            'Терем 4' => 21,
+            'Терем 5' => 22,
+            'Терем 6' => 23,
+            'Терем 7' => 24,
+            'Терем 8' => 25,
+            'Терем 9' => 26,
+            'Терем 10' => 27,
+            'Терем 11' => 28,
+            'Терем 12' => 29
         ];
 
         $queryHouse = new \WP_Query(array(
@@ -577,9 +596,9 @@ class PackageModel extends ModelImpl
             $season["current"] = $selectedSeasonId == null ? ($post->ID == $current_season_id) : ($post->ID == $selectedSeasonId);
             $housesResult = [];
 
-            foreach($calendarsFromTerem as $room_name => $room_id){
+            foreach ($calendarsFromTerem as $room_name => $room_id) {
                 $roomPrice = get_post_meta($post->ID, "room_price_$room_id", true);
-                $roomPrice = str_replace(",",".", $roomPrice);
+                $roomPrice = str_replace(",", ".", $roomPrice);
                 $roomPrice = floatval($roomPrice);
 
                 $roomMinPeople = get_post_meta($post->ID, "room_min_people_$room_id", true);
@@ -587,11 +606,11 @@ class PackageModel extends ModelImpl
                 $roomMinPercent = get_post_meta($post->ID, "room_min_percent_$room_id", true);
 
                 $roomSmallAnimalPrice = get_post_meta($post->ID, "room_small_animal_price_$room_id", true) ?? 0;
-                $roomSmallAnimalPrice = str_replace(",",".", $roomSmallAnimalPrice);
+                $roomSmallAnimalPrice = str_replace(",", ".", $roomSmallAnimalPrice);
                 $roomSmallAnimalPrice = floatval($roomSmallAnimalPrice);
 
                 $roomBigAnimalPrice = get_post_meta($post->ID, "room_big_animal_price_$room_id", true) ?? 0;
-                $roomBigAnimalPrice = str_replace(",",".", $roomBigAnimalPrice);
+                $roomBigAnimalPrice = str_replace(",", ".", $roomBigAnimalPrice);
                 $roomBigAnimalPrice = floatval($roomBigAnimalPrice);
 
                 $roomPeoplesForSalesEntities = get_post_meta($post->ID, "room_people_for_sale_$room_id", true);
@@ -626,7 +645,7 @@ class PackageModel extends ModelImpl
 
             foreach ($houses as $house) {
                 $housePrice = get_post_meta($post->ID, "house_price_$house->ID", true);
-                $housePrice = str_replace(",",".", $housePrice);
+                $housePrice = str_replace(",", ".", $housePrice);
                 $housePrice = floatval($housePrice);
 
                 $houseMinPeople = get_post_meta($post->ID, "house_min_people_$house->ID", true);
@@ -634,11 +653,11 @@ class PackageModel extends ModelImpl
                 $houseMinPercent = get_post_meta($post->ID, "house_min_percent_$house->ID", true);
 
                 $houseSmallAnimalPrice = get_post_meta($post->ID, "house_small_animal_price_$house->ID", true) ?? 0;
-                $houseSmallAnimalPrice = str_replace(",",".", $houseSmallAnimalPrice);
+                $houseSmallAnimalPrice = str_replace(",", ".", $houseSmallAnimalPrice);
                 $houseSmallAnimalPrice = floatval($houseSmallAnimalPrice);
-                
+
                 $houseBigAnimalPrice = get_post_meta($post->ID, "house_big_animal_price_$house->ID", true) ?? 0;
-                $houseBigAnimalPrice = str_replace(",",".", $houseBigAnimalPrice);
+                $houseBigAnimalPrice = str_replace(",", ".", $houseBigAnimalPrice);
                 $houseBigAnimalPrice = floatval($houseBigAnimalPrice);
 
                 $housePeoplesForSalesEntities = get_post_meta($post->ID, "house_people_for_sale_$house->ID", true);
@@ -657,7 +676,7 @@ class PackageModel extends ModelImpl
                         $housePeoplesForSales[] = $housePeoplesForSale;
                     }
 
-                    
+
                     // Do something with the data
                 }
 
