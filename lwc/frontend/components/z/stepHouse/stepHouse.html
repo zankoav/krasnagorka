@@ -63,6 +63,14 @@
                                     </span>
                                 </template>
                             </div>
+                            <div if:true={showPackageDaylySales} class="step-house__sales">
+                                <template for:each={settings.package.daysSales} for:item="item">
+                                    <span key={item.sale} class="step-house__item-sale"
+                                        >от <span class="step-house__item-number">{item.dayes}</span> ночей скидка
+                                        <span class="step-house__item-percent"> -{item.sale}%</span>
+                                    </span>
+                                </template>
+                            </div>
                             <div if:true={settings.eventId} class="step-house__event">
                                 <h3 class="step-house__event-title">{settings.eventModel.title}</h3>
                                 <tab-line class="step-house__event-variant" title="Пакет" tooltip={eventOpportunities}>

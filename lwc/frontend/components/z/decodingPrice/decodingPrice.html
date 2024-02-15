@@ -3,9 +3,7 @@
         <div class="decoding-price__list">
             <template if:true={isEvent}>
                 <div class="decoding-price__subtitle">{subTitle}</div>
-                <div class="decoding-price__baby-bed">
-                    Цена за взрослого <z-price-view price={pricePeople}></z-price-view>
-                </div>
+                <div class="decoding-price__baby-bed">Цена за взрослого <z-price-view price={pricePeople}></z-price-view></div>
                 <div if:true={showEventChilds} class="decoding-price__baby-bed">
                     Цена за ребенка (до 12 лет) <z-price-view price={priceChild}></z-price-view>
                 </div>
@@ -18,7 +16,17 @@
                         {service.title} <z-number-value num={service.count} value="шт."> </z-number-value>
                     </div>
                 </template>
-                <div class="decoding-price__baby-bed">Итого: <z-price-view price={houseTotalPrice}></z-price-view></div>
+                <template if:true={settings.total.days_sale}>
+                    <z-price-view price={subPrice}></z-price-view> -
+                    <z-number-value num={settings.total.days_sale} value="шт."> </z-number-value> = <z-price-view price={totalPrice}></z-price-view>
+                </template>
+                <div class="decoding-price__baby-bed">
+                    Итого: <z-price-view price={totalPrice}></z-price-view>
+                    <span if:true={showPromo} class="decoding-price__sale"
+                        >При выборе от <span class="decoding-price__number">{packageSale.dayes}</span> дней, ваша скидка будет
+                        <span class="decoding-price__percent"> -{packageSale.sale}%</span>
+                    </span>
+                </div>
             </template>
             <template if:true={otherScenarios}>
                 <div class="decoding-price__subtitle">{subTitle}</div>

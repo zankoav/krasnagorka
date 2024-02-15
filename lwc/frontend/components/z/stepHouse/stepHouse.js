@@ -38,6 +38,10 @@ export default class StepHouse extends LightningElement {
         return !this.settings.eventId && this.settings.scenario !== 'Package'
     }
 
+    get showPackageDaylySales() {
+        return this.settings.scenario == 'Package' && this.settings.package.daysSales.length
+    }
+
     get showPackageInfo() {
         return this.settings.package
     }

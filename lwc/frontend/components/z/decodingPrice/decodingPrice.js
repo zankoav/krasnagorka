@@ -78,6 +78,21 @@ export default class DecodingPrice extends BaseBookingElement {
         return this.currencyModel(this.settings.total.total_price)
     }
 
+    get subPrice() {
+        return this.currencyModel(this.settings.total.sub_price)
+    }
+
+    get showPromo() {
+        return this.settings.package.daysSales.length && !this.settings.total.days_sale
+    }
+
+    get packageSale() {
+        return {
+            sale: this.settings.package.daysSales[0].sale,
+            dayes: this.settings.package.daysSales[0].dayes
+        }
+    }
+
     get showEventChilds() {
         return this.settings.eventModel.childs
     }

@@ -99,6 +99,12 @@
         "start_date": "09/29/2023",
         "end_date": "03/07/2024",
         "min_night": 2,
+        "daysSales": [
+            {
+                "dayes": 4,
+                "sale": 12
+            }
+        ],
         "services": [
             "1",
             "2",
@@ -203,10 +209,7 @@
                 "min_people": 3
             }
         },
-        "depricatedDayes": [
-            "2024-02-20",
-            "2024-02-27"
-        ]
+        "depricatedDayes": []
     },
     "seasons": [
         {
