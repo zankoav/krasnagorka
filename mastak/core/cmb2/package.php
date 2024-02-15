@@ -95,6 +95,13 @@ function cmb_package()
 		'type'            => 'textarea'
 	));
 
+	$cmb_package->add_field(array(
+		'name'            => 'Запрещенные дни для пакетного тура',
+		'id'              => 'package_depricated_days',
+		'description'     => __('Список дат в формате 2023-01-31', 'krasnagorka'),
+		'type'            => 'textarea'
+	));
+
     $cmb_package->add_field(array(
         'name'            => 'Минимальное количество ночей',
         'id'              => 'package_night_min',

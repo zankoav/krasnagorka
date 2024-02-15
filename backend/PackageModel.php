@@ -336,7 +336,13 @@ class PackageModel extends ModelImpl
                 ];
             }
         }
-        
+
+        $depricatedStr = get_post_meta($this->packageId, 'package_depricated_days', 1);
+        $daysDepricated = [];
+        if (!empty($depricatedStr)) {
+            $daysDepricated = preg_split('/\r\n|\r|\n/', $depricatedStr);
+        }
+
         return [
             "id" => $this->packageId,
             "title" => get_the_title($this->packageId),
@@ -345,6 +351,7 @@ class PackageModel extends ModelImpl
             "min_night" => intval(get_post_meta($this->packageId,'package_night_min', 1)),
             "services" => $servicesFormatted,
             "calendars" => $calendarsFormatted,
+            "depricatedDayes" => $daysDepricated
         ];
     }
 
