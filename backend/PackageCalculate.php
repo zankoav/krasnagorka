@@ -180,6 +180,16 @@ class PackageCalculate extends CalculateImpl
             }
         }
 
+        $saleDayes = get_post_meta($packageId, 'package_sale_days', 1);
+        $salePercent =  get_post_meta($packageId, 'package_sale_percent', 1);
+        $result['days_sale'] = false;
+
+        if (!empty($saleDayes) && !empty($salePercent) && $daysCount >= intval($saleDayes)) {
+            $result['days_sale'] = true;
+            $result['sub_price'] = $result['total_price'];
+            $result['total_price'] = round($result['total_price'] * (1 - intval($salePercent) / 100), 2);
+        }
+
         return $result;
     }
 }
