@@ -585,7 +585,47 @@ function kg_add_remind()
 // add_role( 'basic_contributor', 'Менеджер по объектам',
 //     [ 'read' => true ]
 // );
+
+
+    add_role('project_manager_fire',
+        'Менеджер по Горящим Предложениям',
+        array(
+            'read' => true,
+            'edit_posts' => false,
+            'delete_posts' => false,
+            'publish_posts' => false,
+            'upload_files' => true,
+        )
+    );
+      
 //END */
+
+add_action('admin_init','psp_add_role_caps',999);
+function psp_add_role_caps() {
+
+    // Add the roles you'd like to administer the custom post types
+    $roles = array('project_manager_fire','editor','administrator');
+    
+    // Loop through each role and assign capabilities
+    foreach($roles as $the_role) { 
+
+        $role = get_role($the_role);
+    
+        $role->add_cap( 'read' );
+        $role->add_cap( 'read_event_tab');
+        $role->add_cap( 'read_private_event_tabs' );
+        $role->add_cap( 'edit_event_tab' );
+        $role->add_cap( 'edit_event_tabs' );
+        $role->add_cap( 'edit_others_event_tabs' );
+        $role->add_cap( 'edit_published_event_tabs' );
+        $role->add_cap( 'publish_event_tabs' );
+        $role->add_cap( 'delete_others_event_tabs' );
+        $role->add_cap( 'delete_private_event_tabs' );
+        $role->add_cap( 'delete_published_event_tabs' );
+
+    }
+}
+    
 
 require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';

@@ -76,9 +76,9 @@
             'menu_position'       => 4,
             //    'menu_icon'           => null,
             'menu_icon'           => 'dashicons-format-aside',
-            //'capability_type'   => 'post',
+            'capability_type'   => array('event_tab','event_tabs'),
             //'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
-            //'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+            'map_meta_cap'      => true, // Ставим true чтобы включить дефолтный обработчик специальных прав
             //'hierarchical'        => false,
             'supports'            => array('title'),
             // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
