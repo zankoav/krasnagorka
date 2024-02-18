@@ -587,16 +587,16 @@ function kg_add_remind()
 // );
 
 
-    add_role('project_manager_fire',
-        'Менеджер по Горящим Предложениям',
-        array(
-            'read' => true,
-            'edit_posts' => false,
-            'delete_posts' => false,
-            'publish_posts' => false,
-            'upload_files' => true,
-        )
-    );
+    // add_role('project_manager_fire',
+    //     'Менеджер по Горящим Предложениям',
+    //     array(
+    //         'read' => true,
+    //         'edit_posts' => false,
+    //         'delete_posts' => false,
+    //         'publish_posts' => false,
+    //         'upload_files' => true,
+    //     )
+    // );
       
 //END */
 
