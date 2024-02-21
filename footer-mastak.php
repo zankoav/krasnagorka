@@ -83,7 +83,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
             return result;
         }
     </script>
-<?php endif;?>
+<?php endif; ?>
 
 <script type="text/javascript">
     (function($) {
@@ -297,7 +297,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
         });
     });
 
-    jQuery('.our-house__button-numbers').on('click', function(){
+    jQuery('.our-house__button-numbers').on('click', function() {
         jQuery('.terem-calendars').slideToggle();
     });
 
@@ -386,6 +386,14 @@ if (is_page_template('reviews-page-template.php')) : ?>
         animation: buttonShake .8s;
     }
 
+    img.footer-bottom-left-img {
+        margin-bottom: 0.5rem;
+    }
+
+    div.footer-bottom-left__socials {
+        text-align: center;
+    }
+
     @keyframes buttonShake {
         0% {
             background-color: #d0021b
@@ -467,7 +475,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
         background-color: rgb(188, 232, 241);
     }
 
-    .fc-day-event__icon{
+    .fc-day-event__icon {
         position: absolute;
         bottom: 4px;
         left: 4px;
