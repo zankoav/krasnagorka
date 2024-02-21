@@ -49,6 +49,7 @@
     $schema_services_id = $options['mastak_theme_options_schema_2_id'];
 
     $instagramm        = $options['mastak_theme_options_instagram'];
+    $tiktok            = $options['mastak_theme_options_tiktok'];
     $facebook          = $options['mastak_theme_options_facebook'];
     $odnoklassniki     = $options['mastak_theme_options_odnoklassniki'];
     $vk                = $options['mastak_theme_options_vkontakte'];

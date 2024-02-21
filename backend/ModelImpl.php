@@ -89,12 +89,12 @@ abstract class ModelImpl
                     'url'   => $this->themeOptions['mastak_theme_options_instagram'],
                 ],
                 [
-                    'value' => 'fb',
-                    'url'   => $this->themeOptions['mastak_theme_options_facebook'],
+                    'value' => 'tiktok',
+                    'url'   => $this->themeOptions['mastak_theme_options_tiktok'],
                 ],
                 [
-                    'value' => 'ok',
-                    'url'   => $this->themeOptions['mastak_theme_options_odnoklassniki'],
+                    'value' => 'telegram',
+                    'url'   => $this->themeOptions['mastak_theme_options_telegram'],
                 ],
                 [
                     'value' => 'vk',
@@ -105,8 +105,12 @@ abstract class ModelImpl
                     'url'   => $this->themeOptions['mastak_theme_options_youtube'],
                 ],
                 [
-                    'value' => 'telegram',
-                    'url'   => $this->themeOptions['mastak_theme_options_telegram'],
+                    'value' => 'fb',
+                    'url'   => $this->themeOptions['mastak_theme_options_facebook'],
+                ],
+                [
+                    'value' => 'ok',
+                    'url'   => $this->themeOptions['mastak_theme_options_odnoklassniki'],
                 ]
             ]
         ];

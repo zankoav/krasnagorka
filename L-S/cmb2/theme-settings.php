@@ -80,6 +80,12 @@ add_action('cmb2_admin_init', function () {
         'type' => 'text_url'
     ));
 
+    $tiktok = $cmb_options->add_field(array(
+        'desc' => 'TikTok (url)',
+        'id'   => 'mastak_theme_options_tiktok',
+        'type' => 'text_url'
+    ));
+
     $fb = $cmb_options->add_field(array(
         'desc' => 'Facebook (url)',
         'id'   => 'mastak_theme_options_facebook',
@@ -115,6 +121,8 @@ add_action('cmb2_admin_init', function () {
     $rowSocial_1->addColumns(array($insta,$fb,$ok));
     $rowSocial_2 = $cmb2Grid->addRow();
     $rowSocial_2->addColumns(array($vk,$youtube,$telegram));
+    $rowSocial_3 = $cmb2Grid->addRow();
+    $rowSocial_3->addColumns(array($tiktok));
    
 
 
