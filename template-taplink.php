@@ -11,8 +11,40 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+function getMenuItems($menuId)
+{
+    $menuItemsChildren = [];
+    $menuItemsParents  = [];
+    $items             = wp_get_nav_menu_items($menuId);
+    foreach ($items as $item) {
+        if ($item->menu_item_parent == 0) {
+            $menuItemsParents[$item->ID] = [
+                'key'   => $item->ID,
+                'label' => $item->title,
+                'href'  => $item->url,
+            ];
+        } else {
+            $menuItemsChildren[] = [
+                'key'    => $item->ID,
+                'label'  => $item->title,
+                'href'   => $item->url,
+                'parent' => $item->menu_item_parent
+            ];
+        }
+    }
+
+    foreach ($menuItemsChildren as $child) {
+        if (empty($menuItemsParents[$child['parent']]['subItems'])) {
+            $menuItemsParents[$child['parent']]['subItems'] = [$child];
+        } else {
+            $menuItemsParents[$child['parent']]['subItems'][] = $child;
+        }
+    }
+    return array_values($menuItemsParents);
+}
+
 $pageModel = [
-    'gg' => 'ff'
+    'menu' => getMenuItems(45)
 ];
 
 $model = json_encode($pageModel);
