@@ -14,6 +14,7 @@ module.exports = (env) => {
         entry: {
             cookie: './frontend/cookie.js',
             booking: './frontend/booking.js',
+            taplink: './frontend/taplink.js',
             tab_events: './frontend/tab_events.js'
         },
         optimization: {
@@ -109,6 +110,12 @@ module.exports = (env) => {
                 filename: `booking.html`,
                 template: './frontend/booking.pug',
                 chunks: ['booking']
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Taplink page',
+                filename: `taplink.html`,
+                template: './frontend/taplink.pug',
+                chunks: ['taplink']
             }),
             new HtmlWebpackPlugin({
                 title: 'Tab Events',
