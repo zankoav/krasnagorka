@@ -30,6 +30,13 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => __('Taplink Картинка', 'krasnagorka'),
+            'desc' => __('Картинка в слайдере (600 x 400)', 'krasnagorka'),
+            'id'   => $prefix . 'taplink_image',
+            'type' => 'file',
+        ));
+
+        $sbc_client->add_field(array(
             'name' => __('Краткое описание', 'krasnagorka'),
             'desc' => __('Краткое описание', 'krasnagorka'),
             'id'   => $prefix . 'description',
