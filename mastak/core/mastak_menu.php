@@ -2,7 +2,8 @@
 
 	add_action( 'after_setup_theme', 'mastak_register_nav_menu' );
 	function mastak_register_nav_menu() {
-		register_nav_menu( 'mastak', 'Мастак меню в шапке' );
+		register_nav_menu( 'mastak', 'Мастак меню в шапке');
+		register_nav_menu( 'taplink', 'Меню для Taplink' );
 	}
 
 	// И там, где нужно выводим меню так:
