@@ -182,7 +182,7 @@ $model = json_encode($pageModel);
         ga('require', 'displayfeatures');
         ga('send', 'pageview');
 
-        const model = `<?= $model; ?>`;
+        const model = <?= $model; ?>;
     </script>
     <script src="<?= $assets->js('taplink'); ?>"></script>
 </body>
