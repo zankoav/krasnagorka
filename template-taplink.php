@@ -74,18 +74,13 @@ $eventsModel = [];
 foreach ($events as $event) {
     $eventId = $event->ID;
     $start = get_post_meta($eventId, 'mastak_event_date_start', true);
-    $startTime = strtotime($start);
-    $start = date('Y-m-d', $startTime);
     $end = get_post_meta($eventId, 'mastak_event_date_finish', true);
-    $endTime = strtotime($end);
-    $end = date('Y-m-d', $endTime);
     $imageId = get_post_thumbnail_id($eventId);
     $imgLink = wp_get_attachment_image_url($imageId, 'welcome_tab_iphone_5');
     $mainImgLink = get_post_meta($eventId, "mastak_event_taplink_image", true);
     $imgUrl = empty($mainImgLink) ? $imgLink : $mainImgLink;
     $eventsModel[] = [
         'title' => get_the_title($eventId),
-        'subtitle' => get_post_meta($eventId, 'mastak_event_subtitle', true),
         'date_start' => $start,
         'date_end' => $end,
         'link' => get_the_permalink($eventId),
@@ -149,6 +144,8 @@ $model = json_encode($pageModel);
     <link rel="shortcut icon" href="<?= get_site_icon_url(); ?>" type="image/x-icon">
     <title><?= get_the_title(); ?></title>
     <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/fonts/AvenirNextCyr/fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
