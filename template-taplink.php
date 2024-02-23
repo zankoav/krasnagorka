@@ -81,8 +81,8 @@ foreach ($events as $event) {
     $imgUrl = empty($mainImgLink) ? $imgLink : $mainImgLink;
     $eventsModel[] = [
         'title' => get_the_title($eventId),
-        'date_start' => intval($start),
-        'date_end' => intval($end),
+        'date_start' => intval($start) * 1000,
+        'date_end' => intval($end) * 1000,
         'link' => get_the_permalink($eventId),
         'img' =>  $imgUrl,
     ];
