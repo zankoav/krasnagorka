@@ -1,4 +1,77 @@
 @import "./../../../common/mixins";
 
 .menu {
+    max-width: 300px;
+    margin: 3rem auto;
+    display: block;
+    flex-direction: column;
+
+    &__item {
+        background-color: $RED;
+        box-shadow: 0 2px 4px 0 rgba($RED, 0.5);
+        text-align: center;
+        margin-bottom: 2rem;
+        transition: all 0.3s;
+        border-radius: 6px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            background-color: $PRIMARY_1;
+            box-shadow: 0 2px 4px 0 rgba($PRIMARY_1, 0.5);
+        }
+
+        a {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
+            text-decoration: none;
+        }
+    }
+
+    &__contacts {
+        margin: 3rem 0;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+
+        a {
+            color: inherit;
+        }
+    }
+
+    &__contacts-list-messanger-icon {
+        width: 32px;
+        margin-left: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    &__contacts-list-messanger {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    &__contacts-item {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__phone-icon,
+    &__email-icon,
+    &__working-time-icon {
+        width: 24px;
+        object-fit: contain;
+        margin-right: 1rem;
+    }
 }

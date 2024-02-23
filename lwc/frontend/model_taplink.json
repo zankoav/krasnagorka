@@ -67,33 +67,29 @@
     "events": [
         {
             "title": "23 февраля",
-            "subtitle": "Настоящий мужской тур",
-            "date_start": "1970-01-01",
-            "date_end": "1970-01-01",
+            "date_start": "1708646400",
+            "date_end": "1708819200",
             "link": "https://krasnagorka.by/stocks/23-fevralya/",
             "img": "https://krasnagorka.by/wp-content/uploads/2023/11/photo_2023-11-10-12.28.03.jpeg"
         },
         {
             "title": "8 марта",
-            "subtitle": "8 марта",
-            "date_start": "1970-01-01",
-            "date_end": "1970-01-01",
+            "date_start": "1709769600",
+            "date_end": "1710028800",
             "link": "https://krasnagorka.by/stocks/8-marta/",
             "img": "https://krasnagorka.by/wp-content/uploads/2023/11/2023-11-10-12.27.11-320x214.jpg"
         },
         {
             "title": "Горящие предложения в Красногорке",
-            "subtitle": "Самые выгодные цены на ближайшие даты!",
-            "date_start": "1970-01-01",
-            "date_end": "1970-01-01",
+            "date_start": 1685577600,
+            "date_end": 1717113600,
             "link": "https://krasnagorka.by/stocks/last-chance/",
             "img": "https://krasnagorka.by/wp-content/uploads/2018/08/12.jpg"
         },
         {
-            "title": "Тур &#171;Все включено&#187;",
-            "subtitle": "Пакетный тур 'ВСЕ ВКЛЮЧЕНО'",
-            "date_start": "1970-01-01",
-            "date_end": "5200-02-22",
+            "title": "Тур «Все включено»",
+            "date_start": "1693526400",
+            "date_end": "1714435200",
             "link": "https://krasnagorka.by/stocks/tur-vse-vklyucheno/",
             "img": "https://krasnagorka.by/wp-content/uploads/2022/03/IMG_3614-1-320x214.jpg"
         }

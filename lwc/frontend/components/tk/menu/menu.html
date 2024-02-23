@@ -1,3 +1,74 @@
 <template>
-    <div class="menu">Menu</div>
+    <div class="menu">
+        <ul class="menu__list">
+            <template for:each={model.menu} for:item="item">
+                <li key={item.key} class="menu__item">
+                    <a href={item.href}>{item.label}</a>
+                </li>
+            </template>
+        </ul>
+        <div class="menu__contacts">
+            <div class="menu__contacts-wrapper">
+                <div class="menu__contacts-list-messanger">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/social/viber.svg"
+                        alt="icon-viber"
+                        class="menu__contacts-list-messanger-icon" />
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/social/whatsapp.svg"
+                        alt="icon-whatsapp"
+                        class="menu__contacts-list-messanger-icon" />
+                    <a href={telegramLink} target="_blank">
+                        <img
+                            width="32"
+                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/social/telegram.svg"
+                            alt="icon-telegram"
+                            class="menu__contacts-list-messanger-icon" />
+                    </a>
+                </div>
+                <div class="menu__contacts-item menu__phone">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/a1.png"
+                        alt="icon-a1"
+                        class="menu__phone-icon" />
+                    <a href={a1Link} class="menu__phone-link">{model.info.a1}</a>
+                </div>
+                <div class="menu__contacts-item menu__phone">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/mts.svg"
+                        alt="icon-mts"
+                        class="menu__phone-icon" />
+                    <a href={mtsLink} class="menu__phone-link">{model.info.mts}</a>
+                </div>
+                <div class="menu__contacts-item menu__email">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/envelope.svg"
+                        alt="icon-envelope"
+                        class="menu__email-icon" />
+                    <a href={mailLink} class="menu__email-link">{model.info.email}</a>
+                </div>
+                <div class="menu__contacts-item menu__working-time">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/clock.svg"
+                        alt="icon-clock"
+                        class="menu__working-time-icon" />
+                    <span class="menu__working-time-text">{model.info.time}</span>
+                </div>
+                <div class="menu__contacts-item menu__working-time">
+                    <img
+                        width="32"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/clock.svg"
+                        alt="icon-clock"
+                        class="menu__working-time-icon" />
+                    <span class="menu__working-time-text">{model.info.weekend}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

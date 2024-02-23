@@ -1,4 +1,52 @@
 @import "./../../../common/mixins";
 
+:root {
+    --swiper-theme-color: #fff;
+}
+
 .slider {
+    .swiper {
+        width: 100%;
+        height: 240px;
+
+        .swiper-slide {
+            width: 70%;
+
+            &__link {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                background-position: center center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;
+            }
+
+            &__title {
+                color: #fff;
+                font-weight: bold;
+                margin: 1.5rem;
+                font-size: 20px;
+                text-align: left;
+                text-shadow: 1px 1px 2px #666;
+            }
+
+            &__date {
+                position: absolute;
+                font-size: 16px;
+                bottom: 24px;
+                right: 24px;
+                color: #fff;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px #666;
+            }
+        }
+
+        .swiper-slide-next,
+        .swiper-slide-prev {
+            transition: all 0.3s;
+            filter: brightness(0.6);
+        }
+    }
 }
