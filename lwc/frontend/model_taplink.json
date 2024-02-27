@@ -1,4 +1,12 @@
 {
+    "weather": [
+        {
+            "text": "В основном облачно",
+            "weekday": "                                 Чт                            ",
+            "temp": "                                 1&nbsp;°C                            ",
+            "icon": "https://static.meteoblue.com/assets/images/picto/20_iday.svg"
+        }
+    ],
     "menu": [
         {
             "key": 31451,
@@ -67,29 +75,37 @@
     "events": [
         {
             "title": "23 февраля",
-            "date_start": "1708646400",
-            "date_end": "1708819200",
+            "price": "299.00",
+            "price_description": "на 2-х человек",
+            "date_start": 1708646400000,
+            "date_end": 1708819200000,
             "link": "https://krasnagorka.by/stocks/23-fevralya/",
             "img": "https://krasnagorka.by/wp-content/uploads/2023/11/photo_2023-11-10-12.28.03.jpeg"
         },
         {
             "title": "8 марта",
-            "date_start": "1709769600",
-            "date_end": "1710028800",
+            "price": "299.00",
+            "price_description": "на 2-х человек",
+            "date_start": 1709769600000,
+            "date_end": 1710028800000,
             "link": "https://krasnagorka.by/stocks/8-marta/",
             "img": "https://krasnagorka.by/wp-content/uploads/2023/11/2023-11-10-12.27.11-320x214.jpg"
         },
         {
             "title": "Горящие предложения в Красногорке",
-            "date_start": 1685577600,
-            "date_end": 1717113600,
+            "price": "299.00",
+            "price_description": "на 2-х человек",
+            "date_start": 1685577600000,
+            "date_end": 1717113600000,
             "link": "https://krasnagorka.by/stocks/last-chance/",
             "img": "https://krasnagorka.by/wp-content/uploads/2018/08/12.jpg"
         },
         {
             "title": "Тур «Все включено»",
-            "date_start": "1693526400",
-            "date_end": "1714435200",
+            "price": "299.00",
+            "price_description": "на 2-х человек",
+            "date_start": 1693526400000,
+            "date_end": 1714435200000,
             "link": "https://krasnagorka.by/stocks/tur-vse-vklyucheno/",
             "img": "https://krasnagorka.by/wp-content/uploads/2022/03/IMG_3614-1-320x214.jpg"
         }

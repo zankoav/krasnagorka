@@ -81,6 +81,8 @@ foreach ($events as $event) {
     $imgUrl = empty($mainImgLink) ? $imgLink : $mainImgLink;
     $eventsModel[] = [
         'title' => get_the_title($eventId),
+        'price' => get_post_meta($eventId, "mastak_event_price", true),
+        'price_description' => get_post_meta($eventId, "mastak_event_price_subtitle", true),
         'date_start' => intval($start) * 1000,
         'date_end' => intval($end) * 1000,
         'link' => get_the_permalink($eventId),
@@ -88,7 +90,9 @@ foreach ($events as $event) {
     ];
 }
 
+
 $pageModel = [
+    'weather' => get_weather(),
     'menu' => getMenuItems(45),
     'info' => [
         'a1'      => $themeOptions['mastak_theme_options_a1'],

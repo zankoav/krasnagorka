@@ -1,0 +1,24 @@
+<template>
+    <div class="header-taplink">
+        <div class="header-taplink__slide">
+            <div class="header-taplink__slide-img-wrapper">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <div class="header-taplink__main">
+            <a class="header-taplink__home-link" href="/">
+                <img
+                    src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/logo.png"
+                    alt="Краснагорка"
+                    class="header-taplink__logo" />
+            </a>
+            <tk-widgets model={model}></tk-widgets>
+            <div class="header-taplink__contacts">
+                <a class="header-taplink__navigation-phone-button" href="javascript:void(0);" onclick={toggleContacts}>
+                    <img src={contactIcon} alt="Phone" class="header-taplink__navigation-phone-icon" />
+                </a>
+                <z-contacts-popup model={contactsModel} onhidepopup={toggleContacts} is-open={contactsPopupIsOpen}></z-contacts-popup>
+            </div>
+        </div>
+    </div>
+</template>

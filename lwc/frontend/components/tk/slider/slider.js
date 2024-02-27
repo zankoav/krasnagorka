@@ -25,18 +25,23 @@ export default class Slider extends LightningElement {
 }
 
 function getSwiperTemplate(events) {
-    moment.locale('ru')
     const slides = events
         .map((event) => {
-            const timeFrom = new moment(event.date_start).format('D MMMM')
-            const timeEnd = new moment(event.date_end).format('D MMMM')
+            const timeFrom = new moment(event.date_start).format('DD.MM.YYYY')
+            const timeEnd = new moment(event.date_end).format('DD.MM.YYYY')
             return `
-                <div class="swiper-slide">
-                    <a class="swiper-slide__link" href="${event.link}" style="background-image:url(${event.img});">
+                <a class="swiper-slide" href="${event.link}">
+                    <div class="swiper-slide__link"  style="background-image:url(${event.img});">
+                    </div>
+                    <div class="swiper-slide__container">
                         <h3 class="swiper-slide__title">${event.title}</h3>
-                        <h6 class="swiper-slide__date">c ${timeFrom} по ${timeEnd}</h6>
-                    </a>
-                </div>
+                        <h6 class="swiper-slide__date">${timeFrom} - ${timeEnd}</h6>
+                        <p class="swiper-slide__price-info">
+                            <span class="swiper-slide__price-currency">${event.price} BYN</span>
+                            <span class="swiper-slide__price-description">${event.price_description}</span>
+                        </p>
+                    </div>
+                </a>
             `
         })
         .join('')

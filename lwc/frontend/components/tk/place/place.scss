@@ -1,0 +1,10 @@
+@import "./../../../common/mixins";
+
+.place {
+    font-size: 14px;
+    color: $WHITE;
+
+    &__day {
+        font-weight: 700;
+    }
+}

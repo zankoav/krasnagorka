@@ -1,0 +1,13 @@
+@import "./../../../common/mixins";
+
+.widgets {
+    display: flex;
+    flex-direction: column;
+
+    &__left {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

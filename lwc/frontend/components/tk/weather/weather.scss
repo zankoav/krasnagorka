@@ -1,0 +1,18 @@
+@import "./../../../common/mixins";
+
+.weather {
+    color: $WHITE;
+    display: flex;
+    height: 40px;
+    position: relative;
+    align-items: center;
+
+    &__degrees {
+        font-size: 28px;
+        font-family: Avenir_Next_UltraLight, sans-serif;
+    }
+
+    &__icon {
+        width: 40px;
+    }
+}

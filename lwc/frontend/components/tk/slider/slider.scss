@@ -1,22 +1,62 @@
 @import "./../../../common/mixins";
 
 :root {
-    --swiper-theme-color: #fff;
+    --swiper-theme-color: #bcbcbc;
+    --swiper-navigation-size: 40px;
+    --swiper-navigation-top-offset: 40%;
 }
 
 .slider {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__title {
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        font-family: AvenirNextCyr-Bold, sans-serif;
+        color: #4a4a4a;
+        text-transform: uppercase;
+
+        &:before,
+        &:after {
+            margin-right: 0.5rem;
+            color: #7ed321;
+            content: "/";
+        }
+
+        &:after {
+            margin-left: 0.5rem;
+            margin-right: 0;
+        }
+    }
+
     .swiper {
         width: 100%;
-        height: 240px;
+        color: $GRAY_1;
 
         .swiper-slide {
-            width: 70%;
+            width: 75%;
+            padding: 0 0.5rem;
+
+            &__container {
+                background-color: $WHITE;
+                padding: 1rem 1rem 1.5rem;
+                border-bottom-left-radius: 8px;
+                min-height: 160px;
+                border-bottom-right-radius: 8px;
+            }
 
             &__link {
                 display: flex;
+                border-radius: 8px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
                 flex-direction: column;
                 width: 100%;
-                height: 100%;
+                height: 180px;
                 background-position: center center;
                 background-size: cover;
                 background-repeat: no-repeat;
@@ -24,44 +64,68 @@
             }
 
             &__title {
-                color: #fff;
-                font-weight: bold;
-                margin: 1.5rem;
-                font-size: 20px;
-                text-align: left;
-                text-shadow: 1px 1px 2px #666;
+                font-size: 18px;
+                line-height: 1.25;
+                font-weight: 700;
+                text-align: center;
+                color: $GRAY_1;
+            }
+
+            &__date,
+            &__price-description {
+                font-size: 12px;
+                line-height: 16px;
+                font-weight: 300;
+                text-align: center;
+                color: $GRAY_7;
             }
 
             &__date {
-                position: absolute;
-                font-size: 16px;
-                bottom: 24px;
-                right: 24px;
-                color: #fff;
-                font-weight: bold;
-                text-shadow: 1px 1px 2px #666;
+                text-align: center;
+                color: $GRAY_9;
+                margin-top: 0.25rem;
+            }
+
+            &__price-info {
+                margin-top: 1.5rem;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__price-description {
+                font-size: 14px;
+            }
+
+            &__price-currency {
+                color: $RED_2;
+                text-align: center;
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 14px;
             }
         }
 
         .swiper-slide-next,
         .swiper-slide-prev {
-            transition: all 0.3s;
-            filter: brightness(0.6);
+            .swiper-slide__link {
+                transition: all 0.3s;
+                filter: brightness(0.5);
+            }
         }
-    }
 
-    &__logo {
-        padding: 2rem;
-        text-align: center;
-    }
+        .swiper-button-next,
+        .swiper-button-prev {
+            width: 40px;
+            height: 180px;
+            top: 0;
+            left: 0;
+            margin-top: 0;
+            outline: none;
+        }
 
-    &__logo-img {
-        width: 120px;
-    }
-
-    &__description {
-        text-transform: uppercase;
-        font-size: 12px;
-        color: $PRIMARY_10;
+        .swiper-button-next {
+            left: initial;
+            right: 0;
+        }
     }
 }
