@@ -21,13 +21,15 @@ function getMenuItems($menuId)
         $bgcMeta = get_post_meta($item->ID, 'test_color_field', true);
         if (!empty($bgcMeta) && $bgcMeta != '#000000') {
             $styles["background-color"] = $bgcMeta;
+            $styles["box-shadow"] = "0 2px 4px 0 rgba($bgcMeta, 0.5)";
         } else {
             $styles["background-color"] = "#ed123d";
+            $styles["box-shadow"] = "0 2px 4px 0 rgba(#ed123d, 0.5)";
         }
 
         $styleStr = '';
         foreach ($styles as $key => $value) {
-            $styleStr .= "$key:$value";
+            $styleStr .= "$key:$value;";
         }
 
         if ($item->menu_item_parent == 0) {
