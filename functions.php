@@ -88,6 +88,8 @@ require __DIR__ . '/mastak/init.php';
 require __DIR__ . '/LS/backend/rest/rest.php';
 require __DIR__ . '/rest/rest.php';
 
+WP_Nav_Menu_Taplink_Fields::init();
+
 
 add_filter('wp_mail_content_type', 'set_html_content_type');
 

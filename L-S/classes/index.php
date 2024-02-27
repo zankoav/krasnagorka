@@ -20,6 +20,7 @@ include_once __DIR__ . '/MailFactory.php';
 
 include_once __DIR__ . '/Variant.php';
 include_once __DIR__ . '/VariantFactory.php';
+include_once __DIR__ . '/WP_Nav_Menu_Taplink_Fields.php';
 
 
 
