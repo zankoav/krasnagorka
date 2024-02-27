@@ -11,31 +11,31 @@
         {
             "key": 31451,
             "label": "Наши Дома",
-            "style": "backgroud-color:#000000;",
+            "style": "background-color:#ed123d;",
             "href": "https://krasnagorka.by/dom-na-braslavskih-ozyorah/"
         },
         {
             "key": 31452,
             "label": "Цены",
-            "style": "backgroud-color:#000000;",
+            "style": "background-color:#ed123d;",
             "href": "https://krasnagorka.by/tseny/"
         },
         {
             "key": 31453,
             "label": "Услуги",
-            "style": "backgroud-color:#000000;",
+            "style": "background-color:#ed123d;",
             "href": "https://krasnagorka.by/otdyh-na-braslavah/"
         },
         {
             "key": 31454,
             "label": "Календарь бронирования",
-            "style": "backgroud-color:#000000;",
+            "style": "background-color:#ed123d;",
             "href": "https://krasnagorka.by/kalendar-bronirovaniya/"
         },
         {
             "key": 31455,
             "label": "Телеграм",
-            "style": "backgroud-color:#000000;",
+            "style": "background-color:#ed123d;",
             "href": "https://t.me/krasnogorkaby"
         }
     ],

@@ -39,13 +39,17 @@
 
         .swiper-slide {
             width: 75%;
+            height: initial;
             padding: 0 0.5rem;
+            display: flex;
+            flex-direction: column;
 
             &__container {
                 background-color: $WHITE;
                 padding: 1rem 1rem 1.5rem;
                 border-bottom-left-radius: 8px;
                 border-bottom-right-radius: 8px;
+                flex-grow: 1;
             }
 
             &__link {
