@@ -23,8 +23,8 @@ function getMenuItems($menuId)
             $styles["background-color"] = $bgcMeta;
             $styles["box-shadow"] = "0 2px 4px 0 rgba($bgcMeta, 0.5)";
         } else {
-            $styles["background-color"] = "#ed123d";
-            $styles["box-shadow"] = "0 2px 4px 0 rgba(#ed123d, 0.5)";
+            $styles["background-color"] = "#d0021b";
+            $styles["box-shadow"] = "0 2px 4px 0 rgba(#d0021b, 0.5)";
         }
 
         $styleStr = '';
