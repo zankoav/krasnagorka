@@ -2,7 +2,7 @@
     <div class="menu">
         <ul class="menu__list">
             <template for:each={model.menu} for:item="item">
-                <li key={item.key} class="menu__item">
+                <li key={item.key} class="menu__item" style={item.bgc}>
                     <a href={item.href}>{item.label}</a>
                 </li>
             </template>

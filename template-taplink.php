@@ -17,18 +17,25 @@ function getMenuItems($menuId)
     $menuItemsParents  = [];
     $items             = wp_get_nav_menu_items($menuId);
     foreach ($items as $item) {
+        $bgc = '';
+        $bgcMeta = get_post_meta($item->ID, 'test_color_field', true);
+        if (!empty($bgcMeta) && $bgcMeta != '#000000') {
+            $bgc = "background: $bgcMeta";
+        }
         if ($item->menu_item_parent == 0) {
             $menuItemsParents[$item->ID] = [
                 'key'   => $item->ID,
                 'label' => $item->title,
                 'href'  => $item->url,
+                'bgc' => $bgc
             ];
         } else {
             $menuItemsChildren[] = [
                 'key'    => $item->ID,
                 'label'  => $item->title,
                 'href'   => $item->url,
-                'parent' => $item->menu_item_parent
+                'parent' => $item->menu_item_parent,
+                'bgc' => $bgc
             ];
         }
     }

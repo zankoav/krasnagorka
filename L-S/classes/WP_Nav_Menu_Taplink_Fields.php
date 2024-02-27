@@ -1,14 +1,9 @@
 <?php
-
+// https://wp-kama.ru/id_15476/dopolnitelnye-polya-dlya-wp_nav_menu.html
 final class WP_Nav_Menu_Taplink_Fields
 {
 
     public static array $field_keys = [
-
-        // '_menu_item_svg_icon' => [
-        // 	'title' => 'SVG Icon Name',
-        // 	'desc' => 'Set svg icon name (not url)',
-        // ],
 
         'test_color_field' => [
             'title' => 'Цвет фона кнопки',
@@ -26,12 +21,6 @@ final class WP_Nav_Menu_Taplink_Fields
             add_action('wp_nav_menu_item_custom_fields', [__CLASS__, 'add_fileds'], 10, 2);
             add_action('wp_update_nav_menu_item', [__CLASS__, 'save_fields'], 10, 2);
         }
-        // front
-        // else {
-        // add_filter( 'walker_nav_menu_start_el', [ __CLASS__, 'nav_menu_start_el' ], 10, 2 );
-        // add_filter( 'wp_nav_menu_args', [ __CLASS__, 'nav_menu_args' ] );
-        // }
-
     }
 
     public static function add_fileds($item_id, $item)
@@ -80,24 +69,4 @@ final class WP_Nav_Menu_Taplink_Fields
             delete_post_meta($item_id, $meta_key);
         }
     }
-
-    // public static function nav_menu_start_el( $item_output, $post  ){
-
-    // 	$svg = $post->_menu_item_svg_icon ?: '';
-    // 	if( $svg ){
-    // 		$svg = get_svg( $svg );
-    // 	}
-
-    // 	return str_replace( '{SVG}', $svg, $item_output );
-    // }
-
-    // public static function nav_menu_args( $args ){
-
-    // 	if( empty( $args['link_before'] ) ){
-    // 		$args['link_before'] = '{SVG}';
-    // 	}
-
-    // 	return $args;
-    // }
-
 }
