@@ -21,10 +21,10 @@ function getMenuItems($menuId)
         $bgcMeta = get_post_meta($item->ID, 'test_color_field', true);
         if (!empty($bgcMeta) && $bgcMeta != '#000000') {
             $styles["background-color"] = $bgcMeta;
-            $styles["box-shadow"] = "0 2px 4px 0 rgba($bgcMeta, 0.5)";
+            $styles["box-shadow"] = "0 2px 4px 0 $bgcMeta" . "77";
         } else {
             $styles["background-color"] = "#d0021b";
-            $styles["box-shadow"] = "0 2px 4px 0 rgba(#d0021b, 0.5)";
+            $styles["box-shadow"] = "0 2px 4px 0 $bgcMeta" . "77";
         }
 
         $styleStr = '';
