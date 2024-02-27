@@ -82,6 +82,7 @@ foreach ($events as $event) {
     $eventsModel[] = [
         'title' => get_the_title($eventId),
         'price' => get_post_meta($eventId, "mastak_event_price", true),
+        'hide_date' => get_post_meta($eventId, "mastak_event_hide_date", true) == 'on',
         'price_description' => get_post_meta($eventId, "mastak_event_price_subtitle", true),
         'date_start' => intval($start) * 1000,
         'date_end' => intval($end) * 1000,

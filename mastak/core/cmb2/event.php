@@ -118,6 +118,13 @@
         ));
 
         $sbc_client->add_field(array(
+            'name' => __('Скрыть даты', 'krasnagorka'),
+            'id'   => $prefix . 'hide_date',
+            'type' => 'checkbox',
+        ));
+
+
+        $sbc_client->add_field(array(
             'name' => 'Не показывать в предстоящих акциях',
             'id'   => $prefix . 'hide_early',
             'type' => 'checkbox'

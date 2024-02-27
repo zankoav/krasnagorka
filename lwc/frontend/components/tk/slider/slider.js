@@ -29,15 +29,19 @@ function getSwiperTemplate(events) {
         .map((event) => {
             const timeFrom = new moment(event.date_start).format('DD.MM.YYYY')
             const timeEnd = new moment(event.date_end).format('DD.MM.YYYY')
+            let dateClass = 'swiper-slide__date'
+            if (event.hide_date) {
+                dateClass = 'swiper-slide__date swiper-slide__date_hide'
+            }
             return `
                 <a class="swiper-slide" href="${event.link}">
                     <div class="swiper-slide__link"  style="background-image:url(${event.img});">
                     </div>
                     <div class="swiper-slide__container">
                         <h3 class="swiper-slide__title">${event.title}</h3>
-                        <h6 class="swiper-slide__date">${timeFrom} - ${timeEnd}</h6>
+                        <h6 class="${dateClass}">${timeFrom} - ${timeEnd}</h6>
                         <p class="swiper-slide__price-info">
-                            <span class="swiper-slide__price-currency">${event.price} BYN</span>
+                            <span class="swiper-slide__price-currency">${event.price}</span>
                             <span class="swiper-slide__price-description">${event.price_description}</span>
                         </p>
                     </div>
