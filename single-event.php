@@ -17,6 +17,7 @@
 
     $date_start  = get_post_meta(get_the_ID(), "mastak_event_date_start", true);
     $date_end    = get_post_meta(get_the_ID(), "mastak_event_date_finish", true);
+    $hide_date    = get_post_meta(get_the_ID(), "mastak_event_hide_date", true) == 'on';
     $description = get_post_meta(get_the_ID(), "mastak_event_description", true);
     $subtitle    = get_post_meta(get_the_ID(), "mastak_event_subtitle", true);
     $linkTothirdPart    = get_post_meta(get_the_ID(), "mastak_event_link", true);
@@ -30,7 +31,7 @@
     <?php get_template_part("mastak/views/header", "small-view"); ?>
     <section class="b-container header-title">
         <h2 class="header-title__subtitle"><?= $subtitle; ?></h2>
-        <?php if (!empty($date_start)): ?>
+        <?php if (!empty($date_start) && !$hide_date ): ?>
             <div class="header-title__date">
                 <span><?= date('d.m.Y', $date_start); ?></span>
                 <span>&mdash;</span>
