@@ -21,6 +21,8 @@ function getMenuItems($menuId)
         $bgcMeta = get_post_meta($item->ID, 'test_color_field', true);
         if (!empty($bgcMeta) && $bgcMeta != '#000000') {
             $styles["background-color"] = $bgcMeta;
+        } else {
+            $styles["background-color"] = "#ed123d";
         }
 
         $styleStr = '';
