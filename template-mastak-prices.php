@@ -50,6 +50,24 @@ get_template_part("mastak/views/header", "small-view"); ?>
         flex-shrink: 0;
         background: url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg') no-repeat 50% 0%
     }
+
+    .prices__table {
+        line-height: 1;
+    }
+
+    @media (min-width: 1280px) {
+        .prices__value {
+            font-size: 16px;
+            line-height: 1.125;
+        }
+
+        .prices__room-value,
+        .prices__room-title {
+            padding: 0.75rem;
+            font-size: 14px;
+            line-height: 1;
+        }
+    }
 </style>
 <div class="seasons">
     <div class="season-item season-item__current">
