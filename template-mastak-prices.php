@@ -63,9 +63,14 @@ get_template_part("mastak/views/header", "small-view"); ?>
 
         .prices__room-value,
         .prices__room-title {
-            padding: 0.75rem;
+            padding: .5rem 0 .5rem 1rem;
             font-size: 14px;
             line-height: 1;
+        }
+
+        .prices__terem-rooms,
+        .prices__terem-values {
+            padding-bottom: 1rem;
         }
     }
 </style>
