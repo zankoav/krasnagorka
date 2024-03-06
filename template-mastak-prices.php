@@ -40,6 +40,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 22px;
     }
 
     .prices__terem-show-more-button {
@@ -63,13 +64,23 @@ get_template_part("mastak/views/header", "small-view"); ?>
     .prices__room-value,
     .prices__room-title {
         height: 38px;
-        padding: .5rem 0 .5rem 1rem;
+        padding: .5rem 0 .5rem .5rem;
         display: flex;
         align-items: center;
     }
 
+    .house-booking__price-per-men_room {
+        flex-shrink: 0;
+        margin-right: 0.25rem;
+    }
+
 
     @media (min-width: 1280px) {
+
+        .prices__terem-wrapper {
+            height: initial;
+        }
+
         .prices__value {
             font-size: 16px;
             line-height: 1.125;
@@ -79,6 +90,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
         .prices__room-title {
             font-size: 14px;
             line-height: 1;
+            padding: .5rem 0 .5rem 1rem;
             height: initial
         }
 
@@ -175,7 +187,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
                                         <div class="prices__terem-values">
                                             <?php foreach ($calendars as $calendar) : ?>
                                                 <div class="prices__room-value">
-                                                    <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $calendar["room_byn"]; ?>">
+                                                    <span class="house-booking__price-per-men house-booking__price-per-men_room js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $calendar["room_byn"]; ?>">
                                                         <?= $calendar["room_price"]; ?>
                                                     </span>
                                                     с человека в сутки
