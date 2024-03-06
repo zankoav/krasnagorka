@@ -475,7 +475,7 @@ get_footer('mastak');
 <script>
     (function($) {
         $('.prices__terem-show-more-button').on('click', function() {
-            const $parent = $(this).parent('.prices__row');
+            const $parent = $(this).closest('.prices__row');
             console.log('$parent', $parent);
             $parent.find('.prices__terem-rooms').slideToggle();
             $parent.find('.prices__terem-values').slideToggle();
