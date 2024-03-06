@@ -94,7 +94,9 @@ get_template_part("mastak/views/header", "small-view"); ?>
             height: initial
         }
 
-
+        .house-booking__price-per-men_room {
+            margin-right: initial
+        }
     }
 </style>
 <div class="seasons">
