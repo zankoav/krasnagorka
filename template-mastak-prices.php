@@ -70,7 +70,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
 
         .prices__terem-rooms,
         .prices__terem-values {
-            padding-bottom: 1rem;
+            padding-top: 1rem;
         }
     }
 </style>
