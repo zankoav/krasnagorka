@@ -52,6 +52,10 @@ get_template_part("mastak/views/header", "small-view"); ?>
         background: url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg') no-repeat 50% 0%
     }
 
+    .prices__terem-show-more-button_active{
+        transform: rotate(90deg);
+    }
+
     .prices__table {
         line-height: 1;
     }
@@ -476,6 +480,7 @@ get_footer('mastak');
     (function($) {
         $('.prices__terem-show-more-button').on('click', function() {
             const $parent = $(this).closest('.prices__row');
+            $(this).toggleClass('prices__terem-show-more-button_active');
             console.log('$parent', $parent);
             $parent.find('.prices__terem-rooms').slideToggle();
             $parent.find('.prices__terem-values').slideToggle();
