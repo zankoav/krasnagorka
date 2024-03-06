@@ -62,8 +62,10 @@ get_template_part("mastak/views/header", "small-view"); ?>
 
     .prices__room-value,
     .prices__room-title {
-        height: 32px;
+        height: 38px;
         padding: .5rem 0 .5rem 1rem;
+        display: flex;
+        align-items: center;
     }
 
 
