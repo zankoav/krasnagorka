@@ -52,7 +52,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
         background: url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg') no-repeat 50% 0%
     }
 
-    .prices__terem-show-more-button_active{
+    .prices__terem-show-more-button_active {
         transform: rotate(90deg);
     }
 
@@ -253,23 +253,105 @@ get_template_part("mastak/views/header", "small-view"); ?>
                             $houses_count    = count($houses);
                             $index_services  = 1;
                             foreach ($houses as $house_id => $house_title) :
+                                $isTerem   = get_post_meta($house_id, "mastak_house_is_it_terem", true) == 'on';
                                 $house_byn = (float)get_post_meta($season_id, "house_price_" . $house_id, true);
                                 $house_price = get_current_price($house_byn);
+                                if ($isTerem) {
+
+                                    $calendarsFromTerem = [
+                                        'Терем 1' => 18,
+                                        'Терем 2' => 19,
+                                        'Терем 3' => 20,
+                                        'Терем 4' => 21,
+                                        'Терем 5' => 22,
+                                        'Терем 6' => 23,
+                                        'Терем 7' => 24,
+                                        'Терем 8' => 25,
+                                        'Терем 9' => 26,
+                                        'Терем 10' => 27,
+                                        'Терем 11' => 28,
+                                        'Терем 12' => 29
+                                    ];
+
+                                    $calendars = [];
+                                    $minPriceRoom_byn = 100000000;
+                                    $maxPriceRoom_byn = 0;
+
+                                    foreach ($calendarsFromTerem as $room_name => $room_id) {
+                                        $room_byn = (float)get_post_meta($current_season_id, 'room_price_' . $room_id, true);
+                                        if ($minPriceRoom_byn >= $room_byn) {
+                                            $minPriceRoom_byn = $room_byn;
+                                        }
+                                        if ($maxPriceRoom_byn <= $room_byn) {
+                                            $maxPriceRoom_byn = $room_byn;
+                                        }
+                                        $room_price = get_current_price($room_byn);
+                                        $calendars[] = [
+                                            'room_name' => $room_name,
+                                            'room_byn' => $room_byn,
+                                            'room_price' => $room_price
+                                        ];
+                                    }
+                                }
+                                $minPriceRoom = get_current_price($minPriceRoom_byn);
+                                $maxPriceRoom = get_current_price($maxPriceRoom_byn);
 
                             ?>
-                                <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
-                                    <td class="prices__name prices__name_size_50per">
-                                        <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
-                                            <?= $house_title; ?>
-                                        </a>
-                                    </td>
-                                    <td class="prices__value prices__value_active">
-                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
-                                            <?= $house_price; ?>
-                                        </span>
-                                        с человека в сутки
-                                    </td>
-                                </tr>
+                                <?php if ($isTerem) : ?>
+                                    <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
+                                        <td class="prices__name prices__name_size_50per">
+                                            <div class="prices__terem-wrapper">
+                                                <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
+                                                    <?= $house_title; ?>
+                                                </a>
+                                                <div class="prices__terem-show-more-button"></div>
+                                            </div>
+                                            <div class="prices__terem-rooms">
+                                                <?php foreach ($calendars as $calendar) : ?>
+                                                    <div class="prices__room-title">
+                                                        <?= $calendar['room_name']; ?>
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </td>
+                                        <td class="prices__value prices__value_active">
+                                            <div class="prices__value-wrapper">
+                                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $minPriceRoom_byn; ?>">
+                                                    <?= $minPriceRoom; ?>
+                                                </span>
+                                                —
+                                                <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $maxPriceRoom_byn; ?>">
+                                                    <?= $maxPriceRoom; ?>
+                                                </span>
+                                                с человека в сутки
+                                            </div>
+                                            <div class="prices__terem-values">
+                                                <?php foreach ($calendars as $calendar) : ?>
+                                                    <div class="prices__room-value">
+                                                        <span class="house-booking__price-per-men house-booking__price-per-men_room js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $calendar["room_byn"]; ?>">
+                                                            <?= $calendar["room_price"]; ?>
+                                                        </span>
+                                                        с человека в сутки
+                                                    </div>
+                                                <?php endforeach; ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php else : ?>
+                                    <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
+                                        <td class="prices__name prices__name_size_50per">
+                                            <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
+                                                <?= $house_title; ?>
+                                            </a>
+                                        </td>
+                                        <td class="prices__value prices__value_active">
+                                            <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
+                                                <?= $house_price; ?>
+                                            </span>
+                                            с человека в сутки
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                             <?php
                                 $index_services++;
                             endforeach; ?>
