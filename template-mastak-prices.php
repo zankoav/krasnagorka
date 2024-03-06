@@ -74,7 +74,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
                                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
                                             <?= $house_price; ?>
                                         </span>
-                                        -
+                                        —
                                         <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
                                             <?= $house_price; ?>
                                         </span>
