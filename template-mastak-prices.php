@@ -59,6 +59,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
     .prices__terem-rooms,
     .prices__terem-values {
         padding-top: .5rem;
+        display: none;
     }
 
     .prices__room-value,
@@ -471,3 +472,13 @@ get_template_part("mastak/views/header", "small-view"); ?>
 get_template_part("mastak/views/footer", "view");
 get_footer('mastak');
 ?>
+<script>
+    (function($) {
+        $('.prices__terem-show-more-button').on('click', function() {
+            const $parent = $(this).parent('.prices__row');
+            console.log('$parent', $parent);
+            $parent.find('.prices__terem-rooms').slideToggle();
+            $parent.find('.prices__terem-values').slideToggle();
+        });
+    })(jQuery);
+</script>
