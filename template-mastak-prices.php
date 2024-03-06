@@ -66,6 +66,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
         height: 38px;
         padding: .5rem 0 .5rem .5rem;
         display: flex;
+        font-size: 11px;
         align-items: center;
     }
 
