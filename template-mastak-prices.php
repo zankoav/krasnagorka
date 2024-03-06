@@ -55,6 +55,18 @@ get_template_part("mastak/views/header", "small-view"); ?>
         line-height: 1;
     }
 
+    .prices__terem-rooms,
+    .prices__terem-values {
+        padding-top: .5rem;
+    }
+
+    .prices__room-value,
+    .prices__room-title {
+        height: 32px;
+        padding: .5rem 0 .5rem 1rem;
+    }
+
+
     @media (min-width: 1280px) {
         .prices__value {
             font-size: 16px;
@@ -63,15 +75,12 @@ get_template_part("mastak/views/header", "small-view"); ?>
 
         .prices__room-value,
         .prices__room-title {
-            padding: .5rem 0 .5rem 1rem;
             font-size: 14px;
             line-height: 1;
+            height: initial
         }
 
-        .prices__terem-rooms,
-        .prices__terem-values {
-            padding-top: .5rem;
-        }
+
     }
 </style>
 <div class="seasons">
