@@ -278,7 +278,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
                                     $maxPriceRoom_byn = 0;
 
                                     foreach ($calendarsFromTerem as $room_name => $room_id) {
-                                        $room_byn = (float)get_post_meta($current_season_id, 'room_price_' . $room_id, true);
+                                        $room_byn = (float)get_post_meta($season_id, 'room_price_' . $room_id, true);
                                         if ($minPriceRoom_byn >= $room_byn) {
                                             $minPriceRoom_byn = $room_byn;
                                         }
