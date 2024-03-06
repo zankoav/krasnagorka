@@ -51,23 +51,51 @@ get_template_part("mastak/views/header", "small-view"); ?>
                         $houses_count    = count($houses);
                         $index_services  = 1;
                         foreach ($houses as $house_id => $house_title) :
+
+                            $isTerem   = get_post_meta($house_id, "mastak_house_is_it_terem", true) == 'on';
                             $house_byn = (float)get_post_meta($current_season_id, "house_price_" . $house_id, true);
                             $house_price = get_current_price($house_byn);
-
+                            if ($isTerem) {
+                            } else {
+                            }
                         ?>
-                            <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
-                                <td class="prices__name prices__name_size_50per">
-                                    <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
-                                        <?= $house_title; ?>
-                                    </a>
-                                </td>
-                                <td class="prices__value prices__value_active">
-                                    <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
-                                        <?= $house_price; ?>
-                                    </span>
-                                    с человека в сутки
-                                </td>
-                            </tr>
+                            <?php if ($isTerem) : ?>
+                                <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
+                                    <td class="prices__name prices__name_size_50per">
+                                        <div class="prices__terem-wrapper">
+                                            <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
+                                                <?= $house_title; ?>
+                                            </a>
+                                            <div class="prices__terem-show-more-button" style="background:url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg')"></div>
+                                        </div>
+
+                                    </td>
+                                    <td class="prices__value prices__value_active">
+                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
+                                            <?= $house_price; ?>
+                                        </span>
+                                        -
+                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
+                                            <?= $house_price; ?>
+                                        </span>
+                                        с человека в сутки
+                                    </td>
+                                </tr>
+                            <?php else : ?>
+                                <tr class="<?= $index_services == $houses_count ? "" : "prices__row"; ?>">
+                                    <td class="prices__name prices__name_size_50per">
+                                        <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
+                                            <?= $house_title; ?>
+                                        </a>
+                                    </td>
+                                    <td class="prices__value prices__value_active">
+                                        <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $house_byn; ?>">
+                                            <?= $house_price; ?>
+                                        </span>
+                                        с человека в сутки
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php
                             $index_services++;
                         endforeach; ?>
