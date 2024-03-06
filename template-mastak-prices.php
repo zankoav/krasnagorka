@@ -35,6 +35,21 @@ get_template_part("mastak/views/header", "small-view"); ?>
     .season-text {
         order: initial;
     }
+
+    .prices__terem-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .prices__terem-show-more-button {
+        cursor: pointer;
+        width: 32px;
+        height: 18px;
+        transition: 0.4s;
+        flex-shrink: 0;
+        background: url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg') no-repeat 50% 0%
+    }
 </style>
 <div class="seasons">
     <div class="season-item season-item__current">
@@ -66,7 +81,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
                                             <a class="prices__link" href="<?= get_permalink($house_id); ?>" target="_blank">
                                                 <?= $house_title; ?>
                                             </a>
-                                            <div class="prices__terem-show-more-button" style="background:url('/wp-content/themes/krasnagorka/mastak/src/icons/accordion-arrow.svg')"></div>
+                                            <div class="prices__terem-show-more-button"></div>
                                         </div>
 
                                     </td>
