@@ -72,7 +72,7 @@ get_template_part("mastak/views/header", "small-view"); ?>
 
     .house-booking__price-per-men_room {
         flex-shrink: 0;
-        margin-right: 0.25rem;
+        margin-right: 0.5rem;
     }
 
 
