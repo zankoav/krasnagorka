@@ -323,6 +323,7 @@ class Booking_Form_Controller extends WP_REST_Controller
         $request['dateFrom'] = is_numeric($request['dateFrom']) ? $request['dateFrom'] : strtotime($request['dateFrom']);
         $request['dateTo'] = is_numeric($request['dateTo']) ? $request['dateTo'] : strtotime($request['dateTo']);
         $response = $this->insertWPLead($request);
+        header( 'Access-Control-Allow-Origin: *' );
         return new WP_REST_Response($response, 200);
     }
 
