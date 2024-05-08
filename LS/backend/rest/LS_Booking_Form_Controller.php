@@ -545,8 +545,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 $percentTotal = 0;
 
-
-
                 $upperPercent = false;
 
                 if (!$removeOrderIncrease) {
@@ -560,8 +558,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         }
                     }
                 }
-
-                Log::info('0', $percentTotal);
 
 
                 if ($upperPercent) {
@@ -579,8 +575,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $percentTotal -= $houseMinPercent;
                     }
                 }
-
-                Log::info('1', $percentTotal);
 
 
                 if (!$upperPercent) {
@@ -637,8 +631,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                 $deltaSale = 0;
                 
-                Log::info('2', $percentTotal);
-
                 if (!empty($peopleSale)) {
                     $deltaSale += $peopleSale;
                 }
@@ -650,8 +642,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 if (!$isAdminEvent) {
                     $percentTotal += $deltaSale;
                 }
-
-                Log::info('3', $percentTotal);
 
                 $priceBlockTotal = round(
                     ($basePrice * (1 - $percentTotal / 100)) *
