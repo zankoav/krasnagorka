@@ -575,7 +575,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     // if(!$onlyBookingOrder['hide_upper'] and empty($intervallId)){
                     //     $percentTotal -= $houseMinPercent;
                     // }
-                    if (empty($intervallId)) {
+                    if (!$removeOrderIncrease && empty($intervallId)) {
                         $percentTotal -= $houseMinPercent;
                     }
                 }
