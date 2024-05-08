@@ -561,6 +561,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     }
                 }
 
+                Log::inf('0', $percentTotal);
+
+
                 if ($upperPercent) {
                     $basePriceWithoutUpper = $basePrice;
                     // if(!$onlyBookingOrder['hide_upper']){
@@ -576,6 +579,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $percentTotal -= $houseMinPercent;
                     }
                 }
+
+                Log::inf('1', $percentTotal);
+
 
                 if (!$upperPercent) {
                     $houseMinPercent = null;
@@ -630,6 +636,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;
 
                 $deltaSale = 0;
+                
+                Log::inf('2', $percentTotal);
 
                 if (!empty($peopleSale)) {
                     $deltaSale += $peopleSale;
@@ -642,6 +650,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 if (!$isAdminEvent) {
                     $percentTotal += $deltaSale;
                 }
+
+                Log::inf('3', $percentTotal);
 
                 $priceBlockTotal = round(
                     ($basePrice * (1 - $percentTotal / 100)) *
