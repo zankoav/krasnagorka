@@ -23,13 +23,14 @@ $bookingModel = ModelFactory::getBookingModel();
 
 <body>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3BJFQZCBDC"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-859598761"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-3BJFQZCBDC');
+
+        gtag('config', 'AW-859598761');
     </script>
 
     <script>
