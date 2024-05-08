@@ -578,6 +578,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 }
 
                 if (!$upperPercent) {
+                    $percentTotal -= $houseMinPercent;
                     $houseMinPercent = null;
                     $basePriceWithoutUpper = null;
                 }
