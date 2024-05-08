@@ -946,13 +946,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'message' => $isOrderWithWindowsMessage
         ];
 
-
-        // if($dateStart == date("Y-m-d")){
-        //     $data['enabled'] = true;
-        //     $data['message'] = $isOrderWithDayInDayMessage;
-        //     $data['hide_upper'] = true;
-        // }
-
         return $data;
     }
 
@@ -999,6 +992,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ));
             $result = count($orders) === 2;
         }
+        Log::info('Is short window', $result);
         return $result;
     }
 
