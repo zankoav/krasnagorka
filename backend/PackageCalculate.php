@@ -13,7 +13,6 @@ class PackageCalculate extends CalculateImpl
 
     protected function calculate($request)
     {
-
         $packageId = $request['packageId'];
         $calendarId = $request['calendarId'];
         $dateStart = $request['dateStart'];
@@ -190,6 +189,14 @@ class PackageCalculate extends CalculateImpl
             $result['total_price'] = round($result['total_price'] * (1 - intval($salePercent) / 100), 2);
         }
 
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');
+        }
+        
+        $result['only_booking_order'] = \LS_Booking_Form_Controller::isOnlyBookingOrder($days, $calendarId, $houseId, $isTeremRoom);
+
         return $result;
     }
+
 }

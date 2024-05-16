@@ -861,7 +861,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         return $price;
     }
 
-    private static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem)
+    public static function isOnlyBookingOrder($days, $calendarId, $houseId, $isTerem)
     {
         $result = false;
         $bookingSettings = get_option('mastak_booking_appearance_options');
