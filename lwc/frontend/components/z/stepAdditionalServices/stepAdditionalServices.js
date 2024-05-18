@@ -38,10 +38,13 @@ export default class StepAdditionalServices extends BaseBookingElement {
     }
 
     get showBabyBedService() {
-        return !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed &&
-            this.settings.eventTabId
-            ? this.settings.baby_bed_available
-            : this.settings.total.baby_bed_available
+        let result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecatedBabyBed
+        if (result && this.settings.eventTabId) {
+            result = this.settings.baby_bed_available
+        } else if (result) {
+            result = this.settings.total.baby_bed_available
+        }
+        return result
     }
 
     get showAnimalsService() {
