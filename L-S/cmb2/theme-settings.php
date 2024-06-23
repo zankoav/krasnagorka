@@ -35,6 +35,9 @@ add_action('cmb2_admin_init', function () {
         'show_option_none' => true,
         'default'          => 'custom',
         'options_cb'       => 'show_seasons_options',
+        'attributes'     => array(
+            'readonly' => 'readonly'
+        )
     ));
 
 
