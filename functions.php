@@ -458,9 +458,61 @@ function kg_clear_order()
         wp_schedule_event($time, 'quarter_day', 'kg_clear_order_quarter_day_min_event');
     }
 
+    if (!wp_next_scheduled('update_current_season_per_day_event')) {
+        wp_schedule_event($time, 'one_day', 'update_current_season_per_day_event'); 
+    }
+
     // if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
     //     wp_schedule_event($time, 'one_day', 'kg_clear_order_1_day_min_event'); 
     // }
+}
+
+
+
+// add_action('update_current_season_per_day_event', 'update_current_season');
+function update_current_season(){
+    $mastak_theme_options = get_option('mastak_theme_options');
+    
+
+    $today = current_datetime()->format('Y-m-d');
+    $seasonsIntervalsParams = array(
+        'post_type' => 'season_interval',
+        'posts_per_page' => 1,
+        'meta_query' => [
+            'relation' => 'OR',
+            [
+                'relation' => 'AND',
+                [
+                    'key'     => 'season_from',
+                    'value'   => $today,
+                    'type'    => 'DATE',
+                    'compare' => '>='
+                ],
+                [
+                    'key'     => 'season_to',
+                    'value'   => $today,
+                    'type'    => 'DATE',
+                    'compare' => '<='
+                ]
+            ]
+        ]
+    );
+    $intervalsQuery = new \WP_Query;
+    $intervals = $intervalsQuery->query($seasonsIntervalsParams);
+
+    Log::info('intervals', $intervals);
+
+    // $intervals = array_map(function ($interval) {
+    //     return [
+    //         'season_from' => get_post_meta($interval->ID, 'season_from', 1),
+    //         'season_to' => get_post_meta($interval->ID, 'season_to', 1),
+    //         'season_id' => get_post_meta($interval->ID, 'season_id', 1)
+    //     ];
+    // }, $intervals);
+
+    // $current_season_id;
+    // $mastak_theme_options['current_season'] = $current_season_id;
+    // update_option( 'mastak_theme_options', $mastak_theme_options);
 }
 
 // add_action('kg_clear_order_1_day_min_event', 'kg_clear_orders_2');
