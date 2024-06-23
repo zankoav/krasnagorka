@@ -476,7 +476,7 @@ function update_current_season()
 
 
     $today = current_datetime()->format('Y-m-d');
-    $current_season_id = BaseModel::getSelectedSeasonId($today);
+    $current_season_id = \BaseModel::getSelectedSeasonId($today);
     Log::info('current_season_id', $current_season_id);
 
     // $current_season_id;
