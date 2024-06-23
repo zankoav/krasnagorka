@@ -476,12 +476,46 @@ function update_current_season()
 
 
     $today = current_datetime()->format('Y-m-d');
-    $current_season_id = \BaseModel::getSelectedSeasonId($today);
+    $current_season_id = getSelectedSeasonId($today);
     Log::info('current_season_id', $current_season_id);
 
     // $current_season_id;
     // $mastak_theme_options['current_season'] = $current_season_id;
     // update_option( 'mastak_theme_options', $mastak_theme_options);
+}
+
+function getSelectedSeasonId($dateFrom){
+    $id = null;
+    
+    $firstSeasonIntervalParams = array(
+        'post_type' => 'season_interval',
+        'posts_per_page' => 1,
+        'meta_query' => [
+            'relation' => 'OR',
+            [
+                'relation' => 'AND',
+                [
+                    'key'     => 'season_from',
+                    'value'   => $dateFrom,
+                    'type'    => 'DATE',
+                    'compare' => '<='
+                ],
+                [
+                    'key'     => 'season_to',
+                    'value'   => $dateFrom,
+                    'type'    => 'DATE',
+                    'compare' => '>='
+                ]
+            ]
+        ]
+    );
+    $intervalsQuery = new \WP_Query;
+    $intervals = $intervalsQuery->query($firstSeasonIntervalParams);
+    if(count($intervals) > 0){
+        $id = get_post_meta($intervals[0]->ID,'season_id', 1);
+    }
+
+    return $id;
 }
 
 // add_action('kg_clear_order_1_day_min_event', 'kg_clear_orders_2');
