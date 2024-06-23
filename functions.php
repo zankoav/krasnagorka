@@ -476,38 +476,8 @@ function update_current_season()
 
 
     $today = current_datetime()->format('Y-m-d');
-    Log::info('today', $today);
-    $seasonsIntervalsParams = array(
-        'post_type' => 'season_interval',
-        'posts_per_page' => 1,
-        'meta_query' => [
-            'relation' => 'AND',
-            [
-                'key'     => 'season_from',
-                'value'   => $today,
-                'type'    => 'DATE',
-                'compare' => '>='
-            ],
-            [
-                'key'     => 'season_to',
-                'value'   => $today,
-                'type'    => 'DATE',
-                'compare' => '<='
-            ]
-        ]
-    );
-    $intervalsQuery = new \WP_Query;
-    $intervals = $intervalsQuery->query($seasonsIntervalsParams);
-
-    Log::info('intervals', $intervals);
-
-    // $intervals = array_map(function ($interval) {
-    //     return [
-    //         'season_from' => get_post_meta($interval->ID, 'season_from', 1),
-    //         'season_to' => get_post_meta($interval->ID, 'season_to', 1),
-    //         'season_id' => get_post_meta($interval->ID, 'season_id', 1)
-    //     ];
-    // }, $intervals);
+    $current_season_id = BaseModel::getSelectedSeasonId($today);
+    Log::info('current_season_id', $current_season_id);
 
     // $current_season_id;
     // $mastak_theme_options['current_season'] = $current_season_id;
