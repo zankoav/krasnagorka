@@ -21,7 +21,6 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-update_current_season();
 ?>
 
 

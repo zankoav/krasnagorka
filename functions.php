@@ -469,7 +469,7 @@ function kg_clear_order()
 
 
 
-// add_action('update_current_season_per_day_event', 'update_current_season');
+add_action('update_current_season_per_day_event', 'update_current_season');
 function update_current_season()
 {
     $mastak_theme_options = get_option('mastak_theme_options');
