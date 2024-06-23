@@ -459,7 +459,7 @@ function kg_clear_order()
     }
 
     if (!wp_next_scheduled('update_current_season_per_day_event')) {
-        wp_schedule_event($time, 'one_day', 'update_current_season_per_day_event'); 
+        wp_schedule_event($time, 'one_day', 'update_current_season_per_day_event');
     }
 
     // if (!wp_next_scheduled('kg_clear_order_1_day_min_event')) {
@@ -470,30 +470,29 @@ function kg_clear_order()
 
 
 // add_action('update_current_season_per_day_event', 'update_current_season');
-function update_current_season(){
+function update_current_season()
+{
     $mastak_theme_options = get_option('mastak_theme_options');
-    
+
 
     $today = current_datetime()->format('Y-m-d');
+    Log::info('today', $today);
     $seasonsIntervalsParams = array(
         'post_type' => 'season_interval',
         'posts_per_page' => 1,
         'meta_query' => [
-            'relation' => 'OR',
+            'relation' => 'AND',
             [
-                'relation' => 'AND',
-                [
-                    'key'     => 'season_from',
-                    'value'   => $today,
-                    'type'    => 'DATE',
-                    'compare' => '>='
-                ],
-                [
-                    'key'     => 'season_to',
-                    'value'   => $today,
-                    'type'    => 'DATE',
-                    'compare' => '<='
-                ]
+                'key'     => 'season_from',
+                'value'   => $today,
+                'type'    => 'DATE',
+                'compare' => '>='
+            ],
+            [
+                'key'     => 'season_to',
+                'value'   => $today,
+                'type'    => 'DATE',
+                'compare' => '<='
             ]
         ]
     );
@@ -641,45 +640,45 @@ function kg_add_remind()
 // );
 
 
-    // add_role('project_manager_fire',
-    //     'Менеджер по Горящим Предложениям',
-    //     array(
-    //         'read' => true,
-    //         'edit_posts' => false,
-    //         'delete_posts' => false,
-    //         'publish_posts' => false,
-    //         'upload_files' => true,
-    //     )
-    // );
-      
+// add_role('project_manager_fire',
+//     'Менеджер по Горящим Предложениям',
+//     array(
+//         'read' => true,
+//         'edit_posts' => false,
+//         'delete_posts' => false,
+//         'publish_posts' => false,
+//         'upload_files' => true,
+//     )
+// );
+
 //END */
 
-add_action('admin_init','psp_add_role_caps',999);
-function psp_add_role_caps() {
+add_action('admin_init', 'psp_add_role_caps', 999);
+function psp_add_role_caps()
+{
 
     // Add the roles you'd like to administer the custom post types
-    $roles = array('project_manager_fire','editor','administrator');
-    
+    $roles = array('project_manager_fire', 'editor', 'administrator');
+
     // Loop through each role and assign capabilities
-    foreach($roles as $the_role) { 
+    foreach ($roles as $the_role) {
 
         $role = get_role($the_role);
-    
-        $role->add_cap( 'read' );
-        $role->add_cap( 'read_event_tab');
-        $role->add_cap( 'read_private_event_tabs' );
-        $role->add_cap( 'edit_event_tab' );
-        $role->add_cap( 'edit_event_tabs' );
-        $role->add_cap( 'edit_others_event_tabs' );
-        $role->add_cap( 'edit_published_event_tabs' );
-        $role->add_cap( 'publish_event_tabs' );
-        $role->add_cap( 'delete_others_event_tabs' );
-        $role->add_cap( 'delete_private_event_tabs' );
-        $role->add_cap( 'delete_published_event_tabs' );
 
+        $role->add_cap('read');
+        $role->add_cap('read_event_tab');
+        $role->add_cap('read_private_event_tabs');
+        $role->add_cap('edit_event_tab');
+        $role->add_cap('edit_event_tabs');
+        $role->add_cap('edit_others_event_tabs');
+        $role->add_cap('edit_published_event_tabs');
+        $role->add_cap('publish_event_tabs');
+        $role->add_cap('delete_others_event_tabs');
+        $role->add_cap('delete_private_event_tabs');
+        $role->add_cap('delete_published_event_tabs');
     }
 }
-    
+
 
 require_once __DIR__ . '/menu/orders-menu-item.php';
 require_once __DIR__ . '/tabs/index.php';
