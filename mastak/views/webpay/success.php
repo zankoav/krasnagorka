@@ -56,7 +56,7 @@ $order = $args['order'];
                                     даты:</div>
                                 <div>Заселение: <strong>
                                         <?= $order['from'] ?>
-                                    </strong> 14:00 – 22:00</div>
+                                    </strong> 15:00 – 22:00</div>
                                 <div>Выселение: <strong>
                                         <?= $order['to'] ?>
                                     </strong> 09:00 – 12:00</div>

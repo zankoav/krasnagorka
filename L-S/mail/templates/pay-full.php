@@ -55,7 +55,7 @@ $eventTitle = $order['eventMainTitle'];
                                     даты:</div>
                                 <div>Заселение: <strong>
                                         <?= date("d.m.Y", strtotime($order->dateStart)) ?>
-                                    </strong> 14:00 – 22:00</div>
+                                    </strong> 15:00 – 22:00</div>
                                 <div>Выселение: <strong>
                                         <?= date("d.m.Y", strtotime($order->dateEnd)) ?>
                                     </strong> 09:00 – 12:00</div>

@@ -208,7 +208,7 @@ class MailFactory {
         </tr>
         <tr>
         <td>Заселение:</td>
-        <td class='f-b'>".date("d.m.Y", strtotime($order->dateStart)) ." 14:00 – 22:00</td>
+        <td class='f-b'>".date("d.m.Y", strtotime($order->dateStart)) ." 15:00 – 22:00</td>
         </tr>
         <tr>
         <td>Выселение:</td>

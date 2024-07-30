@@ -147,7 +147,7 @@ class LS_Mailer {
         </tr>
         <tr>
         <td>Заселение:</td>
-        <td class='f-b'>".$data['from']." 14:00 – 22:00</td>
+        <td class='f-b'>".$data['from']." 15:00 – 22:00</td>
         </tr>
         <tr>
         <td>Выселение:</td>
