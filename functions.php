@@ -228,7 +228,6 @@ function getHouseByCalendarId($calendarId)
         );
     }
     $houses = $houseQuery->query($args);
-    $houseId;
     if (count($houses)) {
         $result['id'] = $houses[0]->ID;
     }
@@ -798,7 +797,7 @@ function getSeasonsForPricePage()
     return $result;
 }
 
-
+include('calendar-season-shortcodes.php');
 // $hello = new PaymentService();
 // $hello_response = $hello->initRegisterDo();
 
