@@ -343,7 +343,15 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                     </div>
                     <div data-mixed-conent="7" class="accordion-mixed__content">
                         <div class="accordion-mixed__content-inner booking-houses__text">
-                            <?= wpautop(get_post_meta(get_the_ID(), "mastak_house_residence", true)); ?>
+                            <?php
+                                global $wp_embed;
+                                $content = get_post_meta(get_the_ID(), "mastak_house_residence", true);
+                                $content = $wp_embed->autoembed( $content );
+                                $content = $wp_embed->run_shortcode( $content );
+                                $content = wpautop($content);
+                                $content = do_shortcode( $content );
+                                echo $content;
+                            ?>
                         </div>
                     </div>
                     <footer class="house-booking">
