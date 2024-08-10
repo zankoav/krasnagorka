@@ -386,34 +386,14 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             }
 
                             .prices__name {
-                                font-size: 11px;
-                                font-weight: 700;
-                                padding: 0.5rem 0.25rem;
-                                text-align: left;
+                                padding: 0.5rem 0.25rem 0.5rem 0;
                             }
 
                             .prices__name_size_50per {
-                                width: 50%;
-                            }
-
-                            @media (min-width: 768px) {
-                                .prices__name {
-                                    text-align: center;
-                                }
-                            }
-
-                            @media (min-width: 1024px) {
-                                .prices__name {
-                                    font-size: 14px;
-                                    letter-spacing: 3px;
-                                }
+                                width: 60%;
                             }
 
                             @media (min-width: 1280px) {
-                                .prices__name {
-                                    font-size: 18px;
-                                    letter-spacing: 4px;
-                                }
 
                                 .prices__name_size_50per {
                                     width: 75%;
@@ -422,38 +402,15 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 
                             .prices__link {
                                 color: #4a4a4a;
-                                transition: color 0.6s;
                             }
 
 
                             .prices__value {
-                                font-size: 11px;
+                                font-size: 16px;
                                 border-left: 1px solid #d8d8d8;
-                                display: none;
                                 padding: 0 0.25rem;
                             }
 
-                            .prices__value_active {
-                                display: table-cell;
-                            }
-
-                            @media (min-width: 768px) {
-                                .prices__value {
-                                    display: table-cell;
-                                }
-                            }
-
-                            @media (min-width: 1024px) {
-                                .prices__value {
-                                    font-size: 14px;
-                                }
-                            }
-
-                            @media (min-width: 1280px) {
-                                .prices__value {
-                                    font-size: 16px;
-                                }
-                            }
                         </style>
                         <div class="accordion-mixed__content-inner booking-houses__text">
                             <?php

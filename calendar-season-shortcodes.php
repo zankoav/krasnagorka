@@ -54,7 +54,7 @@ function calendar_seasons_action($atts)
 
     $content = '<table class="prices__table"><tbody>';
     foreach ($result as $s) {
-        $content .= '<tr class="prices__row"><td class="prices__name prices__name_size_50per prices__link">' . $s['title'] . '</td><td class="prices__value prices__value_active"><span class="house-booking__price-per-men js-currency" data-currency="' . $currency_name . '" data-byn="' . $s["price_byn"] . '">' . $s["price"] . '</span> с человека в сутки</td></tr>';
+        $content .= '<tr class="prices__row"><td class="prices__name prices__name_size_50per prices__link">' . $s['title'] . '</td><td class="prices__value"><span class="house-booking__price-per-men js-currency" data-currency="' . $currency_name . '" data-byn="' . $s["price_byn"] . '">' . $s["price"] . '</span> с человека в сутки</td></tr>';
     }
     $content .= '</tbody></table>';
 
