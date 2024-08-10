@@ -343,33 +343,6 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                     </div>
                     <div data-mixed-conent="7" class="accordion-mixed__content">
                         <style>
-                            .prices {
-                                padding: 1rem 1.5rem;
-                                background-color: #fff;
-                                -webkit-box-shadow: 0 2px 4px #bcbcbc;
-                                box-shadow: 0 2px 4px #bcbcbc;
-                                max-width: none;
-                                margin-left: -1.5rem;
-                                margin-right: -1.5rem;
-                                margin-bottom: 2rem;
-                            }
-
-                            @media (min-width: 768px) {
-                                .prices {
-                                    padding: 1rem 2rem;
-                                    margin-left: -2rem;
-                                    margin-right: -2rem;
-                                }
-                            }
-
-                            @media (min-width: 1280px) {
-                                .prices {
-                                    max-width: 100%;
-                                    margin-left: 0;
-                                    margin-right: 0;
-                                }
-                            }
-
                             .prices__table {
                                 width: 100%;
                                 color: #4a4a4a;
@@ -381,8 +354,8 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                 border-bottom: 1px solid #d8d8d8;
                             }
 
-                            .prices__row:last-child {
-                                border-bottom: none;
+                            .prices__row:first-child {
+                                border-top: 1px solid #d8d8d8;
                             }
 
                             .prices__name {
@@ -390,7 +363,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             }
 
                             .prices__name_size_50per {
-                                width: 60%;
+                                width: 70%;
                             }
 
                             @media (min-width: 1280px) {
@@ -410,7 +383,6 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                 border-left: 1px solid #d8d8d8;
                                 padding: 0 0.25rem;
                             }
-
                         </style>
                         <div class="accordion-mixed__content-inner booking-houses__text">
                             <?php
