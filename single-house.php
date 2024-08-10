@@ -342,15 +342,122 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                         Условия и цены
                     </div>
                     <div data-mixed-conent="7" class="accordion-mixed__content">
+                        <style>
+                            .prices {
+                                padding: 1rem 1.5rem;
+                                background-color: #fff;
+                                -webkit-box-shadow: 0 2px 4px #bcbcbc;
+                                box-shadow: 0 2px 4px #bcbcbc;
+                                max-width: none;
+                                margin-left: -1.5rem;
+                                margin-right: -1.5rem;
+                                margin-bottom: 2rem;
+                            }
+
+                            @media (min-width: 768px) {
+                                .prices {
+                                    padding: 1rem 2rem;
+                                    margin-left: -2rem;
+                                    margin-right: -2rem;
+                                }
+                            }
+
+                            @media (min-width: 1280px) {
+                                .prices {
+                                    max-width: 100%;
+                                    margin-left: 0;
+                                    margin-right: 0;
+                                }
+                            }
+
+                            .prices__table {
+                                width: 100%;
+                                color: #4a4a4a;
+                                text-align: center;
+                                border-collapse: collapse;
+                            }
+
+                            .prices__row {
+                                border-bottom: 1px solid #d8d8d8;
+                            }
+
+                            .prices__name {
+                                font-size: 11px;
+                                text-transform: uppercase;
+                                letter-spacing: 2.5px;
+                                font-weight: 700;
+                                padding: 0.5rem 0.25rem;
+                                text-align: left;
+                            }
+
+                            .prices__name_size_50per {
+                                width: 50%;
+                            }
+
+                            @media (min-width: 768px) {
+                                .prices__name {
+                                    text-align: center;
+                                }
+                            }
+
+                            @media (min-width: 1024px) {
+                                .prices__name {
+                                    font-size: 14px;
+                                    letter-spacing: 3px;
+                                }
+                            }
+
+                            @media (min-width: 1280px) {
+                                .prices__name {
+                                    font-size: 18px;
+                                    letter-spacing: 4px;
+                                }
+                            }
+
+                            .prices__link {
+                                color: #4a4a4a;
+                                transition: color 0.6s;
+                            }
+
+
+                            .prices__value {
+                                font-size: 11px;
+                                border-left: 1px solid #d8d8d8;
+                                display: none;
+                                padding: 0 0.25rem;
+                            }
+
+                            .prices__value_active {
+                                display: table-cell;
+                            }
+
+                            @media (min-width: 768px) {
+                                .prices__value {
+                                    display: table-cell;
+                                }
+                            }
+
+                            @media (min-width: 1024px) {
+                                .prices__value {
+                                    font-size: 14px;
+                                }
+                            }
+
+                            @media (min-width: 1280px) {
+                                .prices__value {
+                                    font-size: 16px;
+                                }
+                            }
+                        </style>
                         <div class="accordion-mixed__content-inner booking-houses__text">
                             <?php
-                                global $wp_embed;
-                                $content = get_post_meta(get_the_ID(), "mastak_house_residence", true);
-                                $content = $wp_embed->autoembed( $content );
-                                $content = $wp_embed->run_shortcode( $content );
-                                $content = wpautop($content);
-                                $content = do_shortcode( $content );
-                                echo $content;
+                            global $wp_embed;
+                            $content = get_post_meta(get_the_ID(), "mastak_house_residence", true);
+                            $content = $wp_embed->autoembed($content);
+                            $content = $wp_embed->run_shortcode($content);
+                            $content = wpautop($content);
+                            $content = do_shortcode($content);
+                            echo $content;
                             ?>
                         </div>
                     </div>
