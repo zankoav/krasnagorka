@@ -381,10 +381,12 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                 border-bottom: 1px solid #d8d8d8;
                             }
 
+                            .prices__row:last-child {
+                                border-bottom: none;
+                            }
+
                             .prices__name {
                                 font-size: 11px;
-                                text-transform: uppercase;
-                                letter-spacing: 2.5px;
                                 font-weight: 700;
                                 padding: 0.5rem 0.25rem;
                                 text-align: left;
@@ -411,6 +413,10 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                 .prices__name {
                                     font-size: 18px;
                                     letter-spacing: 4px;
+                                }
+
+                                .prices__name_size_50per {
+                                    width: 75%;
                                 }
                             }
 
