@@ -798,6 +798,7 @@ function getSeasonsForPricePage()
 }
 
 include('calendar-season-shortcodes.php');
+include('discounts-shortcodes.php');
 // $hello = new PaymentService();
 // $hello_response = $hello->initRegisterDo();
 
