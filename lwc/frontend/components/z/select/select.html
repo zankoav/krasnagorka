@@ -1,5 +1,5 @@
 <template>
-    <div class="select" tabindex="0" onblur={closeHandler}>
+    <div class="select" onblur={closeHandler}>
         <template if:true={disabled}>
             <div class={selectBlockCss}>
                 <div if:true={label} class="select__label">{label}</div>
