@@ -103,6 +103,13 @@ export default class StepHouse extends LightningElement {
         }
     }
 
+    renderedCallback() {
+        const title = this.template.querySelector('.step-house__subtitle')
+        if (title && this.settings.package) {
+            title.innerHTML = this.settings.package.title
+        }
+    }
+
     async initHouse(calendarId, isTeremCalendar) {
         const id = parseInt(calendarId)
         this.error = false
