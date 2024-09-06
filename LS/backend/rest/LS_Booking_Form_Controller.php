@@ -879,7 +879,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             Log::info('SEASONS', [
                 'seasonIdStart' => $seasonIdStart,
-                'seasonIdStart' => $seasonIdStart,
+                'seasonIdEnd' => $seasonIdEnd,
             ]);
 
             $isHiddenSeasonStart = get_post_meta($seasonIdStart, "season_day_per_day_off", true) == 'on';
