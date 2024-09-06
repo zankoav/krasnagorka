@@ -873,54 +873,39 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
             $dateEnd = end($days);
 
-            $right = [
-                date("Y-m-d", strtotime("+1 day", strtotime($dateEnd))),
-                date("Y-m-d", strtotime("+$windowNumber day", strtotime($dateEnd)))
-            ];
+            $seasonIdStart = BaseModel::getSelectedSeasonId($dateStart);
+            $seasonIdEnd = BaseModel::getSelectedSeasonId($dateEnd);
 
-            $left = [
-                date("Y-m-d", strtotime("-$windowNumber day", strtotime($dateStart))),
-                date("Y-m-d", strtotime("-1 day", strtotime($dateStart)))
-            ];
 
-            $cId = false;
-            if ($isTerem) {
-                $cId = $calendarId;
+            Log::info('SEASONS', [
+                'seasonIdStart' => $seasonIdStart,
+                'seasonIdStart' => $seasonIdStart,
+            ]);
+
+            $isHiddenSeasonStart = get_post_meta($seasonIdStart, "season_day_per_day_off", true) == 'on';
+            $isHiddenSeasonEnd = get_post_meta($seasonIdEnd, "season_day_per_day_off", true) == 'on';
+
+            if ($isHiddenSeasonStart && $isHiddenSeasonEnd) {
+                $result = false;
             } else {
-                $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
-                $cId = getCalendarId($calendarShortCode);
-            }
+                $right = [
+                    date("Y-m-d", strtotime("+1 day", strtotime($dateEnd))),
+                    date("Y-m-d", strtotime("+$windowNumber day", strtotime($dateEnd)))
+                ];
 
-            $ordersQuery = new WP_Query;
-            $orders = $ordersQuery->query(array(
-                'post_type' => 'sbc_orders',
-                'posts_per_page' => -1,
-                'tax_query' => [
-                    [
-                        'taxonomy' => 'sbc_calendars',
-                        'terms' => [$cId]
-                    ]
-                ],
-                'meta_query' => array(
-                    'relation' => 'OR',
-                    array(
-                        'key'     => 'sbc_order_end',
-                        'value'   => $left,
-                        'type'      =>  'date',
-                        'compare' =>  'between'
-                    ),
-                    array(
-                        'key'     => 'sbc_order_start',
-                        'value'   =>  $right,
-                        'type'      =>  'date',
-                        'compare' =>  'between'
-                    )
-                )
-            ));
-            $numOrder = count($orders);
-            $result = $numOrder > 0;
+                $left = [
+                    date("Y-m-d", strtotime("-$windowNumber day", strtotime($dateStart))),
+                    date("Y-m-d", strtotime("-1 day", strtotime($dateStart)))
+                ];
 
-            if ($result) {
+                $cId = false;
+                if ($isTerem) {
+                    $cId = $calendarId;
+                } else {
+                    $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
+                    $cId = getCalendarId($calendarShortCode);
+                }
+
                 $ordersQuery = new WP_Query;
                 $orders = $ordersQuery->query(array(
                     'post_type' => 'sbc_orders',
@@ -934,20 +919,51 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     'meta_query' => array(
                         'relation' => 'OR',
                         array(
-                            'key'     => 'sbc_order_start',
-                            'value'   => $left[1],
+                            'key'     => 'sbc_order_end',
+                            'value'   => $left,
                             'type'      =>  'date',
-                            'compare' =>  '='
+                            'compare' =>  'between'
                         ),
                         array(
-                            'key'     => 'sbc_order_end',
-                            'value'   =>  $right[0],
+                            'key'     => 'sbc_order_start',
+                            'value'   =>  $right,
                             'type'      =>  'date',
-                            'compare' =>  '='
+                            'compare' =>  'between'
                         )
                     )
                 ));
-                $result = ($numOrder - count($orders)) > 0;
+                $numOrder = count($orders);
+                $result = $numOrder > 0;
+
+                if ($result) {
+                    $ordersQuery = new WP_Query;
+                    $orders = $ordersQuery->query(array(
+                        'post_type' => 'sbc_orders',
+                        'posts_per_page' => -1,
+                        'tax_query' => [
+                            [
+                                'taxonomy' => 'sbc_calendars',
+                                'terms' => [$cId]
+                            ]
+                        ],
+                        'meta_query' => array(
+                            'relation' => 'OR',
+                            array(
+                                'key'     => 'sbc_order_start',
+                                'value'   => $left[1],
+                                'type'      =>  'date',
+                                'compare' =>  '='
+                            ),
+                            array(
+                                'key'     => 'sbc_order_end',
+                                'value'   =>  $right[0],
+                                'type'      =>  'date',
+                                'compare' =>  '='
+                            )
+                        )
+                    ));
+                    $result = ($numOrder - count($orders)) > 0;
+                }
             }
         }
 

@@ -142,6 +142,12 @@ function mastak_season()
         )
     ));
 
+    $cmb_season_main->add_field(array(
+        'name'          => 'Отключить функционал день в день',
+        'id'            => 'season_day_per_day_off',
+        'type'          => 'checkbox'
+    ));
+
 
     $cmb_season = new_cmb2_box(array(
         'id'           => 'seasons_option',
