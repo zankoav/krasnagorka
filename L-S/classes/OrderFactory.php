@@ -107,6 +107,8 @@ class OrderFactory
 
         if (!empty($order->prepaidType)) {
             $order->subprice = (int)($order->price * $order->prepaidType / 100);
+        }else if($order->isBookedOnly()){
+            $order->subprice = (int) $order->price;
         }
 
         $order->note = [];
