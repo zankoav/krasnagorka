@@ -15,7 +15,7 @@ export default class TotalPrice extends BaseBookingElement {
     }
 
     get prepaidPrice() {
-        return this.settings.prepaidType == 100
+        return this.settings.payment && this.settings.prepaidType == 100
             ? null
             : this.currencyModel(
                   (this.settings.total.total_price * this.settings.prepaidType) / 100
