@@ -9,6 +9,6 @@
         </p>
     </div>
     <div class="opportunity__image-wrapper">
-        <?php the_post_thumbnail('opportunity_small_iphone_5', ['class' => 'object-fit-img']); ?>
+        <?php the_post_thumbnail('header_tablet_l', ['class' => 'object-fit-img']); ?>
     </div>
 </a>
