@@ -24,6 +24,7 @@ $bookingModel = ModelFactory::getBookingModel();
 <body>
 
     <script>
+        window.gtag = window.gtag || () => {}; 
         const model = `<?= $bookingModel; ?>`;
     </script>
     <script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
