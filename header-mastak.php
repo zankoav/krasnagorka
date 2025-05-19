@@ -9,16 +9,6 @@ if (!defined('ABSPATH')) {
 <html lang="ru">
 
 <head>
-	<!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-859598761"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'AW-859598761');
-    </script>
-	
 	<meta charset="<?php bloginfo('charset'); ?>" />
 	<title>
 		<?= wp_title(); ?>
@@ -380,22 +370,6 @@ if (!defined('ABSPATH')) {
 	</style>
 	<!-- Calendar Delimeter End-->
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-    ym(37788340, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true,
-            webvisor:true
-    });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-
 	<script type="text/javascript">
 		//Facebook Pixel Code
 
@@ -419,22 +393,6 @@ if (!defined('ABSPATH')) {
 			'https://connect.facebook.net/en_US/fbevents.js');
 		fbq('init', '1020781118034010');
 		fbq('track', 'PageView');
-
-
-		(function(w, d, s, l, i) {
-			w[l] = w[l] || [];
-			w[l].push({
-				'gtm.start': new Date().getTime(),
-				event: 'gtm.js'
-			});
-			var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s),
-				dl = l != 'dataLayer' ? '&l=' + l : '';
-			j.async = true;
-			j.src =
-				'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-			f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-KDZSH92');
 	</script>
 
     <?php if(is_post_type_archive( 'house' )) :?>
@@ -477,18 +435,6 @@ if (!defined('ABSPATH')) {
 																	: "logoKG.png";
 																?>" alt="spinner" class="kg-loader__img">
 	</div>
-	<noscript>
-		<div><img src="https://mc.yandex.ru/watch/37788340" style="position:absolute; left:-9999px;" alt="" /></div>
-	</noscript>
-	<!-- /Yandex.Metrika counter -->
-	<noscript>
-		<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1020781118034010&ev=PageView&noscript=1" />
-	</noscript>
-	<!-- Google Tag Manager (noscript) -->
-	<noscript>
-		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KDZSH92" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-	</noscript>
-	<!-- End Google Tag Manager (noscript) -->
 	<div class="modal-online-video">
 		<div class="modal-online-video__container">
 			<div class="modal-online-video__video">
