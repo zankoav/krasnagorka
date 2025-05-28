@@ -586,6 +586,7 @@ endswitch;
                         flex-shrink: 0;
                         margin-right: 1rem;
                         max-height: 1.5rem;
+                        max-width: 1.5rem;
                         display: inline-block;
                     }
 

@@ -373,6 +373,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                     .breadcrumbs-wrapper__link-img {
                         flex-shrink: 0;
                         margin-right: 1rem;
+                        max-width: 1.5rem;
                         max-height: 1.5rem;
                         display: inline-block;
                     }
