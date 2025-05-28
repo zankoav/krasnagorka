@@ -42,121 +42,6 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
             </section>
             <div class="b-container b-p-sm-0">
                 <div class="accordion-mixed">
-                    <div data-mixed-tab="1" class="accordion-mixed__tab <?= $isEmployment ? '' : 'accordion-mixed__tab--active' ?>">
-                        ОПИСАНИЕ
-                    </div>
-                    <div data-mixed-conent="1" class="accordion-mixed__content <?= $isEmployment ? '' : 'accordion-mixed__content--active' ?>">
-                        <div class="accordion-mixed__content-inner">
-                            <div class="house-description">
-                                <div class="house-description__header">
-                                    <img class="house-description__image" src="<?= wp_get_attachment_image_url($imageId, $size); ?>" srcset="<?= wp_get_attachment_image_srcset($imageId, $size); ?>" sizes="<?= wp_get_attachment_image_sizes($imageId, $size); ?>">
-                                    <?php the_title('<h3 class="house-description__title">', '</h3>'); ?>
-                                    <div class="house-description__text big-text content-text">
-                                        <?php the_content(); ?>
-                                    </div>
-                                </div>
-                                <div class="house-description__apartments">
-                                    <div class="house-description__item house-description__item_width_100">
-                                        <div class="apartment__wrapper">
-
-                                            <div class="apartment apartment_width_50">
-                                                <div class="apartment__header">
-                                                    <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/teamwork.svg" alt="icon">
-                                                    <h3 class="apartment__title">Кол-во гостей</h3>
-                                                </div>
-
-                                                <ul class="apartment__items">
-                                                    <li class="apartment__item">
-                                                        <?= get_post_meta(get_the_ID(), "mastak_house_guests", true); ?>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="apartment apartment_width_50">
-                                                <div class="apartment__header">
-                                                    <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/grill.svg" alt="icon">
-                                                    <h3 class="apartment__title">Мангал</h3>
-                                                </div>
-
-                                                <ul class="apartment__items">
-                                                    <li class="apartment__item">
-                                                        <?php
-                                                        $barbecu = get_post_meta(get_the_ID(), "mastak_house_barbecu", true);
-                                                        echo empty($barbecu) ? 'нет' : $barbecu;
-                                                        ?>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="house-description__item">
-                                        <div class="apartment">
-                                            <div class="apartment__header">
-                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/double-king-size-bed.svg" alt="icon">
-                                                <h3 class="apartment__title">Комнаты</h3>
-                                            </div>
-
-                                            <ul class="apartment__items">
-                                                <?php $rooms = mastak_get_house_rooms();
-                                                foreach ($rooms as $room) : ?>
-                                                    <li class="apartment__item"><?= $room; ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="house-description__item">
-                                        <div class="apartment">
-                                            <div class="apartment__header">
-                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/sofa.svg" alt="icon">
-                                                <h3 class="apartment__title">Удобства</h3>
-                                            </div>
-
-                                            <ul class="apartment__items">
-                                                <?php $conveniences = mastak_get_house_conveniences();
-                                                foreach ($conveniences as $convenience) : ?>
-                                                    <li class="apartment__item"><?= $convenience; ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="house-description__item">
-                                        <div class="apartment">
-                                            <div class="apartment__header">
-                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/restaurant-cutlery.svg" alt="icon">
-                                                <h3 class="apartment__title">Кухня</h3>
-                                            </div>
-
-                                            <ul class="apartment__items">
-
-                                                <?php $kitchens = mastak_get_house_kitchen();
-                                                foreach ($kitchens as $kitchen) : ?>
-                                                    <li class="apartment__item"><?= $kitchen; ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="house-description__item">
-                                        <div class="apartment">
-                                            <div class="apartment__header">
-                                                <img class="apartment__icon apartment__icon_clear" src="<?= CORE_PATH ?>assets/icons/shower.svg" alt="shower">
-                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/toilet.svg" alt="toilet">
-                                                <h3 class="apartment__title">Ванная</h3>
-                                            </div>
-
-                                            <ul class="apartment__items">
-
-                                                <?php $bathrooms = mastak_get_house_bathroom();
-                                                foreach ($bathrooms as $bathroom) : ?>
-                                                    <li class="apartment__item"><?= $bathroom; ?></li>
-                                                <?php endforeach; ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div data-mixed-tab="2" class="accordion-mixed__tab">
                         ФОТОГАЛЕРЕЯ
                     </div>
@@ -394,6 +279,121 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             $content = do_shortcode($content);
                             echo $content;
                             ?>
+                        </div>
+                    </div>
+                    <div data-mixed-tab="1" class="accordion-mixed__tab <?= $isEmployment ? '' : 'accordion-mixed__tab--active' ?>">
+                        ОПИСАНИЕ
+                    </div>
+                    <div data-mixed-conent="1" class="accordion-mixed__content <?= $isEmployment ? '' : 'accordion-mixed__content--active' ?>">
+                        <div class="accordion-mixed__content-inner">
+                            <div class="house-description">
+                                <div class="house-description__header">
+                                    <img class="house-description__image" src="<?= wp_get_attachment_image_url($imageId, $size); ?>" srcset="<?= wp_get_attachment_image_srcset($imageId, $size); ?>" sizes="<?= wp_get_attachment_image_sizes($imageId, $size); ?>">
+                                    <?php the_title('<h3 class="house-description__title">', '</h3>'); ?>
+                                    <div class="house-description__text big-text content-text">
+                                        <?php the_content(); ?>
+                                    </div>
+                                </div>
+                                <div class="house-description__apartments">
+                                    <div class="house-description__item house-description__item_width_100">
+                                        <div class="apartment__wrapper">
+
+                                            <div class="apartment apartment_width_50">
+                                                <div class="apartment__header">
+                                                    <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/teamwork.svg" alt="icon">
+                                                    <h3 class="apartment__title">Кол-во гостей</h3>
+                                                </div>
+
+                                                <ul class="apartment__items">
+                                                    <li class="apartment__item">
+                                                        <?= get_post_meta(get_the_ID(), "mastak_house_guests", true); ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="apartment apartment_width_50">
+                                                <div class="apartment__header">
+                                                    <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/grill.svg" alt="icon">
+                                                    <h3 class="apartment__title">Мангал</h3>
+                                                </div>
+
+                                                <ul class="apartment__items">
+                                                    <li class="apartment__item">
+                                                        <?php
+                                                        $barbecu = get_post_meta(get_the_ID(), "mastak_house_barbecu", true);
+                                                        echo empty($barbecu) ? 'нет' : $barbecu;
+                                                        ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="house-description__item">
+                                        <div class="apartment">
+                                            <div class="apartment__header">
+                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/double-king-size-bed.svg" alt="icon">
+                                                <h3 class="apartment__title">Комнаты</h3>
+                                            </div>
+
+                                            <ul class="apartment__items">
+                                                <?php $rooms = mastak_get_house_rooms();
+                                                foreach ($rooms as $room) : ?>
+                                                    <li class="apartment__item"><?= $room; ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="house-description__item">
+                                        <div class="apartment">
+                                            <div class="apartment__header">
+                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/sofa.svg" alt="icon">
+                                                <h3 class="apartment__title">Удобства</h3>
+                                            </div>
+
+                                            <ul class="apartment__items">
+                                                <?php $conveniences = mastak_get_house_conveniences();
+                                                foreach ($conveniences as $convenience) : ?>
+                                                    <li class="apartment__item"><?= $convenience; ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="house-description__item">
+                                        <div class="apartment">
+                                            <div class="apartment__header">
+                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/restaurant-cutlery.svg" alt="icon">
+                                                <h3 class="apartment__title">Кухня</h3>
+                                            </div>
+
+                                            <ul class="apartment__items">
+
+                                                <?php $kitchens = mastak_get_house_kitchen();
+                                                foreach ($kitchens as $kitchen) : ?>
+                                                    <li class="apartment__item"><?= $kitchen; ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="house-description__item">
+                                        <div class="apartment">
+                                            <div class="apartment__header">
+                                                <img class="apartment__icon apartment__icon_clear" src="<?= CORE_PATH ?>assets/icons/shower.svg" alt="shower">
+                                                <img class="apartment__icon" src="<?= CORE_PATH ?>assets/icons/toilet.svg" alt="toilet">
+                                                <h3 class="apartment__title">Ванная</h3>
+                                            </div>
+
+                                            <ul class="apartment__items">
+
+                                                <?php $bathrooms = mastak_get_house_bathroom();
+                                                foreach ($bathrooms as $bathroom) : ?>
+                                                    <li class="apartment__item"><?= $bathroom; ?></li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <footer class="house-booking">
