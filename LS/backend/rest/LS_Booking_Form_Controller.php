@@ -284,6 +284,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if ($house['terem'] == 'on') {
             $calendarTitle = $house['calendar'];
             $orderLink .= "&terem=$calendarTitle";
+
+            $terem_options = get_option('mastak_terem_appearance_options');
+            $kalendars = $terem_options['kalendar'];
+            foreach ($kalendars as $kalendar) {
+                if ($kalendar['title'] == $calendarTitle) {
+                    $house['photo'] = $kalendar['picture'];
+                    break;
+                }
+            }
         }
 
         $result = [
@@ -630,7 +639,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $result['seasons_group'][$season->ID]['price_block']['people_sale_next'] = $peopleSaleNext;
 
                 $deltaSale = 0;
-                
+
                 if (!empty($peopleSale)) {
                     $deltaSale += $peopleSale;
                 }
