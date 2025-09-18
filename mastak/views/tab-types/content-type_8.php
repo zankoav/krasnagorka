@@ -1,94 +1,98 @@
 <style>
-    .tab-house__from-top{
+    .tab-house__from-top {
         text-align: center;
         margin-bottom: 1rem;
     }
 
-    .tab-house__button-wrapper{
+    .tab-house__button-wrapper {
         display: flex;
         justify-content: center;
         margin-bottom: 1rem;
     }
 
-    .tab-house__reserved{
+    .tab-house__reserved {
         text-align: center;
         font-weight: bold;
     }
 
-    .table-tab-house__img{
+    .table-tab-house__img {
         border-radius: 6px;
     }
 
-    .house-booking__info-subtitle{
+    .house-booking__info-subtitle {
         margin: 1rem 0;
     }
 
-    .opportunity__price-subtitle_sale{
+    .opportunity__price-subtitle_sale {
         text-align: center;
         display: block;
     }
 
-    @media (min-width: 768px){
+    @media (min-width: 768px) {
 
-        .opportunity__price-subtitle_sale{
+        .opportunity__price-subtitle_sale {
             text-align: right;
         }
 
-        div.table-tab-col .house-booking__info_event{
+        div.table-tab-col .house-booking__info_event {
             align-items: flex-end;
             text-align: right;
         }
 
-        .house-booking__info-subtitle{
+        .house-booking__info-subtitle {
             margin: initial;
         }
 
-        .table-tab-price{
+        .table-tab-price {
             align-self: flex-start;
         }
     }
 </style>
 
 <?php
-    /**
-     * @var Type_8 $tab
-     */
+/**
+ * @var Type_8 $tab
+ */
 
-    global $currency_name;
-    $teremItemsIds = array(18,19,20,21,22,23,24,25,26,27,28,29);
+global $currency_name;
+$teremItemsIds = array(18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29);
 ?>
 <div class="accordion-mixed__content-inner">
-    <?php 
+    <?php
     $items = $tab->getItems();
 
-    function sort_nested_arrays( $array, $args = array('from' => 'asc', 'to' => 'asc', 'new_price'=>'asc') ){
-        usort( $array, function( $a, $b ) use ( $args ){
+    function sort_nested_arrays($array, $args = array('from' => 'asc', 'to' => 'asc', 'new_price' => 'asc'))
+    {
+        usort($array, function ($a, $b) use ($args) {
             $res = 0;
-    
+
             $a = (object) $a;
             $b = (object) $b;
-    
-            foreach( $args as $k => $v ){
-                if( $a->$k == $b->$k ) continue;
-    
-                $res = ( $a->$k < $b->$k ) ? -1 : 1;
-                if( $v=='desc' ) $res= -$res;
+
+            foreach ($args as $k => $v) {
+                if ($a->$k == $b->$k) continue;
+
+                $res = ($a->$k < $b->$k) ? -1 : 1;
+                if ($v == 'desc') $res = -$res;
                 break;
             }
-    
+
             return $res;
-        } );
-    
+        });
+
         return $array;
     }
-    
+
     $items = sort_nested_arrays($items);
+
+    $terem_options = get_option('mastak_terem_appearance_options');
+    $kalendars     = $terem_options['kalendar'];
 
     foreach ($items as $item) :
 
         $from = $item['from'];
 
-        if(date("Ymd", strtotime($from)) <  date("Ymd")){
+        if (date("Ymd", strtotime($from)) <  date("Ymd")) {
             continue;
         }
 
@@ -96,7 +100,7 @@
         $calendarId = $item['calendar'];
 
         $orderStatus = getOrderStatus($calendarId, $from, $to);
-        if($orderStatus == 'prepaid' || $orderStatus == 'booked'){
+        if ($orderStatus == 'prepaid' || $orderStatus == 'booked') {
             continue;
         }
 
@@ -104,8 +108,21 @@
         $house_title = get_the_title($item['house']);
         $house_link = get_the_permalink($item['house']);
         $house_img = $item['image'];
-        if(empty($house_img)){
+        if (empty($house_img)) {
             $house_img = get_the_post_thumbnail_url($item['house'], 'houses_last_iphone_5');
+        }
+
+
+        $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1);
+        if ($isTeremRoom) {
+            $term = get_term($calendarId, 'sbc_calendars');
+            $house_title = $term->name;
+            foreach ($kalendars as $kalendar) {
+                if ($kalendar['title'] == $house_title) {
+                    $house_img = $kalendar['picture'];
+                    break;
+                }
+            }
         }
 
         /**
@@ -133,7 +150,6 @@
             $price_byn_sale = $old_price;
             $price_sale     = get_current_price($price_byn_sale);
             $price_byn      = (int)$new_price;
-
         } else if (!empty($new_price)) {
 
             if ($price_byn != 0) {
@@ -143,7 +159,6 @@
             }
 
             $price_byn = (int)$new_price;
-
         }
 
         $price = get_current_price($price_byn);
@@ -161,12 +176,12 @@
         $price_per_night_sale = null;
         $price_per_night_sale_byn = null;
 
-        if($price_byn_sale != null){
+        if ($price_byn_sale != null) {
             $price_per_night_sale = round($price_sale / $night_count);
             $price_per_night_sale_byn = round($price_byn_sale / $night_count);
         }
 
-        ?>
+    ?>
         <div class="table-tab-row">
             <div class="table-tab-col">
                 <a href="<?= $house_link ?>" class="table-tab-house">
@@ -183,59 +198,58 @@
                 <div class="table-tab-text big-text content-text">
                     <?= wpautop($item['description']); ?>
                 </div>
-                <div class="tab-house__from-top">c <?=date("d.m", strtotime($from))?> по <?=date("d.m", strtotime($to))?></div>
-                <?php 
-                    $term = get_term( $calendarId, 'sbc_calendars' );
-                    $teremName = in_array($calendarId, $teremItemsIds) ? "&terem=$term->name": ''; 
-                if( $orderStatus === false):?>
+                <div class="tab-house__from-top">c <?= date("d.m", strtotime($from)) ?> по <?= date("d.m", strtotime($to)) ?></div>
+                <?php
+                $term = get_term($calendarId, 'sbc_calendars');
+                $teremName = in_array($calendarId, $teremItemsIds) ? "&terem=$term->name" : '';
+                if ($orderStatus === false): ?>
                     <div class="tab-house__button-wrapper">
-                        <a href="/booking-form/?eventTabId=<?=$tab->getId();?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from))?>&to=<?=date("Y-m-d", strtotime($to))?><?= $teremName;?>" 
-                            class="our-house__button" 
+                        <a href="/booking-form/?eventTabId=<?= $tab->getId(); ?>&booking=<?= $item['house']; ?>&calendarId=<?= $calendarId; ?>&from=<?= date("Y-m-d", strtotime($from)) ?>&to=<?= date("Y-m-d", strtotime($to)) ?><?= $teremName; ?>"
+                            class="our-house__button"
                             target="_blank">
                             забронировать / рассчитать
                         </a>
                     </div>
-                <?php else:?>
+                <?php else: ?>
                     <div class="tab-house__reserved">Зарезервировано</div>
-                <?php endif;?>
+                <?php endif; ?>
             </div>
             <div class="table-tab-col">
                 <div class="table-tab-price">
                     <div class="house-booking__info house-booking__info_event">
                         <p class="house-booking__info-subtitle">Общая стоимость</p>
                         <span class="house-booking__price-per-men js-currency"
-                              data-currency="<?= $currency_name; ?>"
-                              data-byn="<?= $price_byn; ?>">
+                            data-currency="<?= $currency_name; ?>"
+                            data-byn="<?= $price_byn; ?>">
                             <?= $price; ?>
                         </span>
                         <?php if (!empty($price_byn_sale)): ?>
                             <span class="house-booking__price-per-men house-booking__price-per-men_sale js-currency"
-                                  data-currency="<?= $currency_name; ?>"
-                                  data-byn="<?= $price_byn_sale; ?>">
-                            <?= $price_sale; ?>
-                        </span>
+                                data-currency="<?= $currency_name; ?>"
+                                data-byn="<?= $price_byn_sale; ?>">
+                                <?= $price_sale; ?>
+                            </span>
                         <?php endif; ?>
                     </div>
                     <div class="house-booking__info house-booking__info_event">
                         <p class="house-booking__info-subtitle">Стоимость за ночь</p>
                         <span class="house-booking__price-per-men js-currency"
-                              data-currency="<?= $currency_name; ?>"
-                              data-byn="<?= $price_per_night_byn; ?>">
+                            data-currency="<?= $currency_name; ?>"
+                            data-byn="<?= $price_per_night_byn; ?>">
                             <?= $price_per_night; ?>
                         </span>
                         <?php if (!empty($price_byn_sale)): ?>
                             <span class="house-booking__price-per-men house-booking__price-per-men_sale js-currency"
-                                  data-currency="<?= $currency_name; ?>"
-                                  data-byn="<?= $price_per_night_sale_byn; ?>">
-                            <?= $price_per_night_sale; ?>
-                        </span>
+                                data-currency="<?= $currency_name; ?>"
+                                data-byn="<?= $price_per_night_sale_byn; ?>">
+                                <?= $price_per_night_sale; ?>
+                            </span>
                         <?php endif; ?>
                     </div>
                     <span class="opportunity__price-subtitle opportunity__price-subtitle_event opportunity__price-subtitle_sale">
-						<?= $item['sale_text']; ?></span>
+                        <?= $item['sale_text']; ?></span>
                 </div>
             </div>
         </div>
     <?php endforeach; ?>
 </div>
-
