@@ -112,7 +112,7 @@ jQuery(document).on('ready', function () {
                     }
                 }
             })
-            $('#mastak_event_tab_type_8 .js-calculate-copy').on('click', function () {
+            $('#mastak_event_tab_type_8 .js-telegram-copy').on('click', function () {
                 console.log('123', 123)
             })
         }
