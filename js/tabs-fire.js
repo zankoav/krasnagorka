@@ -25,6 +25,7 @@ jQuery(document).on('ready', function () {
             setTimeout(() => {
                 $('#mastak_event_tab_type_8 .js-calculate').off('click')
                 $('#mastak_event_tab_type_8 .js-telegram').off('click')
+                $('#mastak_event_tab_type_8 .js-telegram-copy').off('click')
                 initCalculations()
                 initTelegram()
             }, 500)
@@ -110,6 +111,9 @@ jQuery(document).on('ready', function () {
                         $spinner.removeClass('spinner_show')
                     }
                 }
+            })
+            $('#mastak_event_tab_type_8 .js-calculate-copy').on('click', function () {
+                console.log('123', 123)
             })
         }
 

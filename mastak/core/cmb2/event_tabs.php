@@ -519,6 +519,12 @@ function mastak_event_tab_type_8()
     ));
 
     $sbc_client->add_group_field($group_field_event, array(
+        'name'    => __('Перенести в текс телеграм', 'cmb2'),
+        'id'      => 'telegram_copy',
+        'type'    => 'telegram_copy'
+    ));
+
+    $sbc_client->add_group_field($group_field_event, array(
         'name' => 'Текст для Телеграма',
         'id'   => 'tg_description',
         'type' => 'textarea',
@@ -534,6 +540,16 @@ function cmb2_render_telegram_post($field, $escaped_value, $object_id, $object_t
 }
 
 add_action('cmb2_render_telegram_post', 'cmb2_render_telegram_post', 10, 6);
+
+function cmb2_render_telegram_copy($field, $escaped_value, $object_id, $object_type, $field_type_object)
+{
+
+    $view = '<div class="telegram-field"><div><button type="button" class="js-telegram-copy button-secondary">Перенести</button></div></div>';
+    $view .= $field_type_object->_desc(true);
+    echo $view;
+}
+
+add_action('cmb2_render_telegram_copy', 'cmb2_render_telegram_copy', 10, 6);
 
 
 function cmb2_render_calculate($field, $escaped_value, $object_id, $object_type, $field_type_object)
