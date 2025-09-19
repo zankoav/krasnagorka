@@ -114,7 +114,24 @@ jQuery(document).on('ready', function () {
             })
             $('#mastak_event_tab_type_8 .js-telegram-copy').on('click', function () {
                 console.log('123', 123)
+                const $parent = $(this).parents('.inside.cmb-field-list')
+                const iframe = $parent.find('iframe')[0]
+                const text = getIframeBodyContent(iframe)
+                console.log(text);
             })
+        }
+
+        function getIframeBodyContent(iframe) {
+            // Check for same-origin policy limitations
+            if (iframe.contentWindow.document) {
+                const iframeDocument = iframe.contentWindow.document
+                const iframeBodyHTML = iframeDocument.body.innerHTML
+                console.log('Iframe Body HTML:', iframeBodyHTML)
+                return iframeBodyHTML
+            } else {
+                console.error('Cannot access iframe content due to same-origin policy.')
+                return null
+            }
         }
 
         initInputHandler()
