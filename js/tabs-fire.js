@@ -119,8 +119,9 @@ jQuery(document).on('ready', function () {
                 console.log('1 text', text);
                 text = text.replace(/<\/p>/g, '\n').replace(/<p>/g, "").trim();
                 console.log('2 text', text);
-                const targetPlace = $parent.find('textarea')[0]
-                targetPlace.value = text;
+                const $targetPlace = $parent.find('textarea')
+                console.log('$targetPlace', $targetPlace);
+                $targetPlace.val(text);
             })
         }
 
