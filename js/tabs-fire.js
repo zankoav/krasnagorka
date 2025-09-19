@@ -116,12 +116,10 @@ jQuery(document).on('ready', function () {
                 const $parent = $(this).parents('.inside.cmb-field-list')
                 const iframe = $parent.find('iframe')[0]
                 let text = getIframeBodyContent(iframe)
-                console.log('1 text', text);
-                text = text.replace(/<\/p>/g, '\n').replace(/<p>/g, "").trim();
-                console.log('2 text', text);
+                console.log('text ===', text)
+                text = text.replace(/<\/p>/g, '\n').replace(/<p>/g, '').trim()
                 const $targetPlace = $parent.find('textarea')
-                console.log('$targetPlace', $targetPlace);
-                $targetPlace.val(text);
+                $targetPlace.val(text)
             })
         }
 
