@@ -117,7 +117,7 @@ jQuery(document).on('ready', function () {
                 const iframe = $parent.find('iframe')[0]
                 let text = getIframeBodyContent(iframe)
                 console.log('text ===', text)
-                text = text.replace(/<\/p>/g, '\n').replace(/<p>/g, '').trim()
+                // text = text.replace(/<\/p>/g, '\n').replace(/<p>/g, '').trim()
                 const $targetPlace = $parent.find('textarea')
                 $targetPlace.val(text)
             })
@@ -127,7 +127,7 @@ jQuery(document).on('ready', function () {
             // Check for same-origin policy limitations
             if (iframe.contentWindow.document) {
                 const iframeDocument = iframe.contentWindow.document
-                const iframeBodyHTML = iframeDocument.body.innerHTML
+                const iframeBodyHTML = iframeDocument.body.innerText
                 return iframeBodyHTML
             } else {
                 console.error('Cannot access iframe content due to same-origin policy.')
