@@ -8175,10 +8175,13 @@ button.swiper-pagination-bullet {
   }
 }
 
-.mobile-delimeter-mt-2{
-    margin-top: 2rem;
+@media (max-width: 768px) {
+    .mobile-delimeter-mt-2{
+        margin-top: 2rem;
+    }
+
+    .mobile-delimeter-mb-2{
+        margin-bottom: 2rem;
+    }
 }
 
-.mobile-delimeter-mb-2{
-    margin-bottom: 2rem;
-}
