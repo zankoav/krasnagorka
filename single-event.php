@@ -98,11 +98,11 @@ $dateAgree   = $dateCurrent < (int)$date_end;
                 <div class="b-light-line"></div>
             </div>
         </section>
-        <div class="b-mt-2"></div>
+        <div class="mobile-delimeter-mt-2"></div>
         <?php
         get_template_part("mastak/views/upcoming", "events");
         ?>
-        <div class="b-mb-2"></div>
+        <div class="mobile-delimeter-mb-2"></div>
         <?php
         get_template_part("mastak/views/reviews", "view");
         get_template_part("mastak/views/footer", "view");

@@ -8174,3 +8174,11 @@ button.swiper-pagination-bullet {
     font-size: 19px;
   }
 }
+
+.mobile-delimeter-mt-2{
+    margin-top: 2rem;
+}
+
+.mobile-delimeter-mb-2{
+    margin-bottom: 2rem;
+}
