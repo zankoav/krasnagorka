@@ -280,8 +280,8 @@ if (!defined('ABSPATH')) {
 
         .added-info-price_location{
             display: flex;
-            align-items: center;
             gap: .25rem;
+            text-align: initial;
         }
 
 		@media (min-width:768px) {
