@@ -5462,6 +5462,7 @@ button.swiper-pagination-bullet {
   margin-bottom: 1.5rem;
 }
 .opportunity__image-wrapper {
+  height: 180px;
   overflow: hidden;
   position: relative;
   border-radius: 6px 6px 0 0;
