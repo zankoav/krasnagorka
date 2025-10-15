@@ -48,8 +48,8 @@
                     alt="icon-telegram" 
                     class="phone-item__icon phone-item__icon--small phone-item__icon--telegram" 
                     style="position:initial;display:inline-block;margin-left: 8px;margin-bottom: -6px;">
-        </a>
-</p>
+            </a>
+        </p>
     </section>
     <div class="b-container b-p-sm-0">
         <div class="accordion-mixed <?= $accordion ? 'accordion-mixed_open' : '' ?>">
@@ -99,6 +99,7 @@
         </div>
     </section>
     <?php
+    get_template_part("mastak/views/upcoming", "events");
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");
     ?>
