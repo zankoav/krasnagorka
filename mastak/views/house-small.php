@@ -136,7 +136,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                 </div>
                 <p class="added-info-price added-info-price_first"><span class="added-info-price__star">*</span>Цена актуальна на текущий период, цены на другие даты смотрите в <a href="https://krasnagorka.by/tseny/" target="_blank">разделе цены</a>
                 <p class="added-info-price added-info-price_first">
-                    <a href="https://krasnagorka.by/shema-proezda/" target="_blank">
+                    <a class="added-info-price_location" href="https://krasnagorka.by/shema-proezda/" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="14px" viewBox="0 0 18 25" version="1.1">
                             <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
                                 <g id="t_g-contacts-footer" transform="translate(-568.000000, -63.000000)" fill-rule="nonzero" stroke="#23C4FC">

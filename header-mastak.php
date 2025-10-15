@@ -278,6 +278,12 @@ if (!defined('ABSPATH')) {
 			color: #23C4FC;
 		}
 
+        .added-info-price_location{
+            display: flex;
+            align-items: center;
+            gap: .25rem;
+        }
+
 		@media (min-width:768px) {
 			.added-info-price{
 				margin-top:4px;
