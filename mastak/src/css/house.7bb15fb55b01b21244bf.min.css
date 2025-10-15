@@ -7778,6 +7778,7 @@ button.swiper-pagination-bullet {
   order: 1;
   margin-top: 0.75rem;
   flex-shrink: 0;
+  align-self: flex-start;
 }
 .house-booking__button:hover {
   background-color: #23c4f5;
