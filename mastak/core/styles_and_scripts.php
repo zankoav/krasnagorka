@@ -34,7 +34,8 @@
 		if ( is_singular( array( 'opportunity', 'event' ) ) ) {
 
 			$scriptsData = get_assets_json( "house" );
-
+            $scriptsDataEvents = get_assets_json( "events" );
+            
             wp_dequeue_script('jquery');
             wp_dequeue_script('jquery-core');
             wp_dequeue_script('jquery-migrate');
@@ -43,8 +44,8 @@
             wp_enqueue_script('jquery-migrate', false, array(), false, true);
             wp_enqueue_script( 'zoom', $themeUri . '/mastak/src/js/jquery.zoom.min.js', false, null, true );
 			wp_enqueue_script( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["js"], false, null, true );
+            wp_enqueue_script( 'events', $themeUri . '/mastak' . $scriptsDataEvents["events"]["js"], false, null, true );
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsData["house"]["js"], false, null, true );
-
 			wp_dequeue_script( 'public_calendar' ); //If you're using disqus, etc.
             wp_dequeue_script( 'moment' ); //If you're using disqus, etc.
             wp_dequeue_script( 'fullcalendar_locale' ); //If you're using disqus, etc.
