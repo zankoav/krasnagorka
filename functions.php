@@ -716,8 +716,6 @@ function app_get_happy_events()
             $description  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_description', true);
             $start  = get_post_meta($intervalId, 'season_from', true);
             $end    = get_post_meta($intervalId, 'season_to', true);
-            Log::info('ID', get_the_ID());
-            Log::info('intervalId', $intervalId);
             $dateTo = new DateTime($end);
             $dateFrom = new DateTime($start);
             $period = new DatePeriod(
@@ -726,7 +724,6 @@ function app_get_happy_events()
                 $dateTo->modify('+1 day')
             );
 
-            Log::info('period', $period);
 
             foreach ($period as $key => $value) {
                 $result['items'][] = array(
