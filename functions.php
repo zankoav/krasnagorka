@@ -710,9 +710,7 @@ function app_get_happy_events()
         )
     );
     $query = new WP_Query($args);
-    Log::info('query', $query->found_posts);
     if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
-
             $intervalId  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_interval', true);
             $icon    = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_icon', true);
             $description  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_description', true);
@@ -726,6 +724,8 @@ function app_get_happy_events()
                 new DateInterval('P1D'),
                 $dateTo->modify('+1 day')
             );
+
+            Log::info('period', $period);
 
             foreach ($period as $key => $value) {
                 $result['items'][] = array(
