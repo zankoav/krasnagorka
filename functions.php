@@ -710,13 +710,13 @@ function app_get_happy_events()
         )
     );
     $query = new WP_Query($args);
-    Log::info('query', $query);
     if ($query->have_posts()) : while ($query->have_posts()) : $query->the_post();
             $intervalId  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_interval', true);
             $icon    = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_icon', true);
             $description  = get_post_meta(get_the_ID(), 'mastak_event_tab_type_10_description', true);
             $start  = get_post_meta($intervalId, 'season_from', true);
             $end    = get_post_meta($intervalId, 'season_to', true);
+            Log::info('ID', get_the_ID());
             Log::info('intervalId', $intervalId);
             $dateTo = new DateTime($end);
             $dateFrom = new DateTime($start);
