@@ -19,6 +19,8 @@ class PackageCalculate extends CalculateImpl
         $dateEnd = $request['dateEnd'];
         $houseId = $request['house'];
         $babyBed = $request['babyBed'];
+        $bathHouseWhite = $request['bathHouseWhite'];
+        $bathHouseBlack = $request['bathHouseBlack'];
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $peopleCount = $request['peopleCount'];
 
@@ -26,6 +28,8 @@ class PackageCalculate extends CalculateImpl
 
         $calendars = get_post_meta($packageId, 'package_calendars', 1);
         $title = get_the_title($packageId);
+        $bookingSettings = get_option('mastak_booking_appearance_options');
+
         $min_people;
         $price_person_night;
         $price_person_night_weekend;
@@ -163,8 +167,6 @@ class PackageCalculate extends CalculateImpl
             $result['baby_bed_available'] = $babyBedAvailable;
 
             if ($babyBed) {
-                $bookingSettings = get_option('mastak_booking_appearance_options');
-
                 $babyBedPrice = intval($bookingSettings['baby_bed_price']);
                 $babyBedTotalPrice = $babyBedPrice * $daysCount;
 
@@ -195,6 +197,35 @@ class PackageCalculate extends CalculateImpl
         }
         
         $result['only_booking_order'] = \LS_Booking_Form_Controller::isOnlyBookingOrder($days, $calendarId, $houseId, $isTeremRoom);
+
+        $bathHouseWhitePrice = str_replace(",", ".", $bookingSettings['bath_house_white_price']);
+        $bathHouseWhitePrice  = floatval($bathHouseWhitePrice);
+
+        if (!empty($bathHouseWhite) and !empty($bathHouseWhitePrice)) {
+            $bathHouseWhite = intval($bathHouseWhite);
+            $bathHouseWhiteTotalPrice = $bathHouseWhitePrice * $bathHouseWhite;
+            $result['bath_house_white'] = [
+                'total_price' => $bathHouseWhiteTotalPrice,
+                'price' => $bathHouseWhitePrice,
+                'count' => $bathHouseWhite
+            ];
+            $result['total_price'] += $bathHouseWhiteTotalPrice;
+        }
+
+        $bathHouseBlackPrice = str_replace(",", ".", $bookingSettings['bath_house_black_price']);
+        $bathHouseBlackPrice  = floatval($bathHouseBlackPrice);
+
+        if (!empty($bathHouseBlack) and !empty($bathHouseBlackPrice)) {
+
+            $bathHouseBlack = intval($bathHouseBlack);
+            $bathHouseBlackTotalPrice = $bathHouseBlackPrice * $bathHouseBlack;
+            $result['bath_house_black'] = [
+                'total_price' => $bathHouseBlackTotalPrice,
+                'price' => $bathHouseBlackPrice,
+                'count' => $bathHouseBlack
+            ];
+            $result['total_price'] += $bathHouseBlackTotalPrice;
+        }
 
         return $result;
     }
