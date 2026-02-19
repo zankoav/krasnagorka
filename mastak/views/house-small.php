@@ -175,7 +175,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
                     <div class="booking-houses__wrapper booking-houses__wrapper_terem">
                         <div class="booking-houses__item">
                             <div class="booking-houses__header">
-                                <h2 class="booking-houses__title our-house__title"><?= $kalendar['title']; ?></h2>
+                                <h3 class="booking-houses__title our-house__title"><?= $kalendar['title']; ?></h3>
                             </div>
                             <a href="<?= get_the_permalink(); ?>" target="_blank"
                                 class="booking-houses__image-wrapper">
