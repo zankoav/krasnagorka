@@ -120,7 +120,7 @@ if (!defined('ABSPATH')) {
         }
 
         @keyframes kgSpinner {
-            0%.100% {
+            0%, 100% {
                 transform: scale(1)
             }
 
