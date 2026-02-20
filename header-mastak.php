@@ -328,6 +328,7 @@ if (!defined('ABSPATH')) {
 
         body .big-text p {
             margin: 0.75rem 0;
+            line-height: 1.6;
         }
 
         .big-text img {
@@ -343,6 +344,7 @@ if (!defined('ABSPATH')) {
             margin-left: 36px;
             flex-direction: column;
             gap: 8px;
+            line-height: 1.6;
         }
 
         .big-text em {
