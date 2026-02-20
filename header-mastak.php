@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
     <meta name="keywords" content="<?= mastak_seo_meta_title(); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11" />
 
-    <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/fonts/AvenirNextCyr/fonts.css" rel="stylesheet"/>
+    <link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/fonts/AvenirNextCyr/fonts.css" rel="stylesheet" />
 
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -120,7 +120,9 @@ if (!defined('ABSPATH')) {
         }
 
         @keyframes kgSpinner {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1)
             }
 
@@ -324,10 +326,27 @@ if (!defined('ABSPATH')) {
             color: #1498c6;
         }
 
+        body .big-text p {
+            margin: 0.75rem 0;
+        }
+
         .big-text img {
             display: block;
             width: 100%;
             margin: 1rem 0;
+        }
+
+        .big-text ul,
+        .big-text ol {
+            list-style: disc;
+            display: flex;
+            margin-left: 36px;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .big-text em {
+            font-style: italic;
         }
     </style>
 
