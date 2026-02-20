@@ -331,6 +331,10 @@ if (!defined('ABSPATH')) {
             line-height: 1.6;
         }
 
+        .main-slide__slide-content-title {
+            max-width: 1200px;
+        }
+
         .big-text img {
             display: block;
             width: 100%;
