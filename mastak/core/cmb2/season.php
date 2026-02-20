@@ -173,18 +173,18 @@ function mastak_season()
             'type'            => 'text_small',
         ));
 
-        $cmb_season->add_field(array(
-            'name' => "$house_title (мин. кол-во дней без надбавки)",
-            'id'   =>  'house_min_days_' . $house_id,
-            'type'            => 'text_small',
-        ));
+        // $cmb_season->add_field(array(
+        //     'name' => "$house_title (мин. кол-во дней без надбавки)",
+        //     'id'   =>  'house_min_days_' . $house_id,
+        //     'type'            => 'text_small',
+        // ));
 
-        $cmb_season->add_field(array(
-            'name' => "$house_title (надбавка на меньшее кол-во дней)",
-            'id'   =>  'house_min_percent_' . $house_id,
-            'type'            => 'text_small',
-            'after_field' => '%'
-        ));
+        // $cmb_season->add_field(array(
+        //     'name' => "$house_title (надбавка на меньшее кол-во дней)",
+        //     'id'   =>  'house_min_percent_' . $house_id,
+        //     'type'            => 'text_small',
+        //     'after_field' => '%'
+        // ));
 
         $cmb_season->add_field(array(
             'name' => "$house_title (Кошки и собаки мелких пород (высота в холке до 40 см))",
@@ -284,18 +284,18 @@ function mastak_season()
             'type'            => 'text_small',
         ));
 
-        $cmb_season->add_field(array(
-            'name' => "$room_name (мин. кол-во дней без надбавки)",
-            'id'   =>  'room_min_days_' . $room_id,
-            'type'            => 'text_small',
-        ));
+        // $cmb_season->add_field(array(
+        //     'name' => "$room_name (мин. кол-во дней без надбавки)",
+        //     'id'   =>  'room_min_days_' . $room_id,
+        //     'type'            => 'text_small',
+        // ));
 
-        $cmb_season->add_field(array(
-            'name' => "$room_name (надбавка на меньшее кол-во дней)",
-            'id'   =>  'room_min_percent_' . $room_id,
-            'type'            => 'text_small',
-            'after_field' => '%'
-        ));
+        // $cmb_season->add_field(array(
+        //     'name' => "$room_name (надбавка на меньшее кол-во дней)",
+        //     'id'   =>  'room_min_percent_' . $room_id,
+        //     'type'            => 'text_small',
+        //     'after_field' => '%'
+        // ));
 
         $cmb_season->add_field(array(
             'name' => "$room_name (Кошки и собаки мелких пород (высота в холке до 40 см))",
