@@ -6,3 +6,4 @@ function discounts_shortcodes()
 }
 
 add_shortcode('discounts', 'discounts_shortcodes');
+?>
