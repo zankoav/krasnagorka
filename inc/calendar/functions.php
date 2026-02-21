@@ -418,4 +418,10 @@ function update_db_order_end_date()
         }
     }
 }
-?>
+
+add_action('init', function () {
+    ob_clean();
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+});
