@@ -2,9 +2,6 @@
 	add_action( 'add_meta_boxes', 'remove_sbc_orders_wp_seo_meta_box', 100 );
 	add_filter( 'manage_edit-sbc_orders_columns', 'yoast_seo_remove_columns' );
 
-	/**
-	 * YOAST SEO remove meta box from 'sbc_orders'
-	 */
 	function remove_sbc_orders_wp_seo_meta_box() {
 		remove_meta_box( 'wpseo_meta', 'sbc_orders', 'normal' );
 	}
@@ -67,46 +64,15 @@
 		}
 	}
 
-
-	/**
-	 * START VIEW USER FIELD
-	 */
-
-	function order_show_uer_info( $field_args, $field ) {
-
-//		$client_email = get_post_meta( $field->value, 'sbc_client_email', true );
-//		$client_phone = get_post_meta( $field->value, 'sbc_client_phone', true );
-//		$client_desc  = get_post_meta( $field->value, 'sbc_client_desc', true );
-//		$client_name  = get_the_title( $field->value );
-		echo $field->value;
-//		echo '<div>' . $client_name . '</div>';
-//		echo '<div>' . $client_phone . '</div>';
-//		echo '<div>' . $client_email . '</div>';
-//		echo '<div>' . $client_desc . '</div>';
-//		echo '<a href="' . get_edit_post_link( $field->value ) . '" target="_blank">Edit</a>';
-	}
-
-	/**
-	 * END VIEW USER FIELD
-	 */
-
-	/**
-	 * START FILTERS
-	 */
-
 	add_filter( 'query_vars', 'sbc_register_query_vars' );
 	function sbc_register_query_vars( $qvars ) {
-
-		//Add these query variables
 		$qvars[] = 'custom_month';
-
 		return $qvars;
 	}
 
 	add_action( 'restrict_manage_posts', 'rudr_posts_taxonomy_filter' );
 
 	function rudr_posts_taxonomy_filter() {
-
 		global $typenow; // this variable stores the current custom post type
 		if ( $typenow == 'sbc_orders' ) { // choose one or more post types to apply taxonomy filter for them if( in_array( $typenow  array('post','games') )
 			$taxonomy_names = array( 'sbc_calendars' );
@@ -129,7 +95,6 @@
 
 	add_action( 'restrict_manage_posts', 'sbc_restrict_posts_by_metavalue' );
 	function sbc_restrict_posts_by_metavalue() {
-
 		global $typenow;
 		$months = sbc_get_months();
 		if ( $typenow == 'sbc_orders' ) {
@@ -156,9 +121,6 @@
 	add_action( 'restrict_manage_posts', 'filter_view_post_status' );
 
 	function filter_view_post_status() {
-
-		//change this to the list of values you want to show
-		//in 'label' => 'value' format
 		$values = array(
 			'Зарезервирован' => 'reserved',
 			'Предоплачен'    => 'prepaid',

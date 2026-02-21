@@ -45,7 +45,6 @@ function sbc_order_info_metabox() {
             'post_status'		=> array( 'publish' ),
             'posts_per_page'	=> -1
         ),
-        //'display_cb' => 'order_show_uer_info',
         'column' => array(
             'position' => 6,
             'name'     => esc_html__( 'Клиент', 'sbc' ),
