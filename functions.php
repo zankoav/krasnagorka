@@ -796,3 +796,4 @@ function getSeasonsForPricePage()
 
 include('calendar-season-shortcodes.php');
 include('discounts-shortcodes.php');
+?>
