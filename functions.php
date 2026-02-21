@@ -8,8 +8,6 @@ use LsFactory\PaymentService as PaymentService;
 use Ls\Wp\Log as Log;
 
 require __DIR__ . '/constants.php';
-// START
-
 
 function array_sort($array, $on, $order = SORT_ASC)
 {
@@ -798,7 +796,3 @@ function getSeasonsForPricePage()
 
 include('calendar-season-shortcodes.php');
 include('discounts-shortcodes.php');
-// $hello = new PaymentService();
-// $hello_response = $hello->initRegisterDo();
-
-// Log::info('hello_response', $hello_response);
