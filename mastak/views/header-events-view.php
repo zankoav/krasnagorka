@@ -1,5 +1,4 @@
 <?php
-
 $options = get_option('mastak_theme_options');
 $email   = $options['mastak_theme_options_email'];
 $life    = $options['mastak_theme_options_life'];
@@ -15,9 +14,7 @@ $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 
 $main_slider       = get_option('mastak_event_appearance_options')['special_events'];
 $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_delay'];
-
 ?>
-
 <header class="header-second">
     <nav class="menu-top b-container">
         <div class="menu-top__left menu-main">
@@ -30,7 +27,6 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                 <div class="menu-main__scroll-content">
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
-
                         <?php if ($video): ?>
                         <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank"
                            class="online-video online-video--menu">

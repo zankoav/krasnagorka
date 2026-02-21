@@ -1,5 +1,4 @@
 <?php
-
 $options = get_option('mastak_theme_options');
 $email   = $options['mastak_theme_options_email'];
 $life    = $options['mastak_theme_options_life'];

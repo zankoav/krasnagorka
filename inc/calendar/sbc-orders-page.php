@@ -1,9 +1,6 @@
 <?php
-
 	add_action( 'add_meta_boxes', 'remove_sbc_orders_wp_seo_meta_box', 100 );
-
 	add_filter( 'manage_edit-sbc_orders_columns', 'yoast_seo_remove_columns' );
-
 
 	/**
 	 * YOAST SEO remove meta box from 'sbc_orders'
@@ -267,7 +264,4 @@
 
 		}
 	}
-
-/**
- * END ORDER BLOCK
- */
+?>
