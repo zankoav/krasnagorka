@@ -1,5 +1,5 @@
 import { api } from 'lwc'
-import BaseElement from 'base/BaseElement'
+import BaseElement from 'base/baseElement'
 
 import './stepFood.scss'
 

@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .footer-bottom {
     background-color: $PRIMARY_10;
@@ -9,7 +10,7 @@
         flex-direction: column;
         text-align: center;
 
-        @include sm {
+        @include media.sm {
             flex-direction: row;
             justify-content: space-between;
             text-align: initial;
@@ -27,13 +28,13 @@
         align-items: center;
         justify-content: center;
 
-        @include sm {
+        @include media.sm {
             justify-content: flex-start;
         }
     }
 
     &__socials-item {
-        @include sm {
+        @include media.sm {
             &:first-child {
                 padding-left: 0;
             }
@@ -45,7 +46,7 @@
         height: 36px;
         object-fit: contain;
 
-        @include sm {
+        @include media.sm {
             height: 20px;
         }
     }
@@ -57,13 +58,13 @@
     &__right-side {
         font-size: 13px;
 
-        @include sm {
+        @include media.sm {
             text-align: right;
         }
     }
 
     &__left-side {
-        @include sm {
+        @include media.sm {
             display: flex;
             align-items: center;
         }
@@ -83,7 +84,7 @@
         object-fit: contain;
         padding: 0.5rem;
 
-        @include sm {
+        @include media.sm {
             margin-left: 20%;
             width: 60%;
         }

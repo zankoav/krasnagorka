@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .radio-button {
     cursor: pointer;
@@ -11,7 +12,7 @@
     align-items: center;
     justify-content: center;
 
-    @include sm {
+    @include media.sm {
         font-size: 14px;
     }
 

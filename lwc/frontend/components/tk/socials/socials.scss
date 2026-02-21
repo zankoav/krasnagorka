@@ -1,4 +1,4 @@
-@import "./../../../common/mixins";
+@use "@styles/constants";
 
 .socials {
     display: flex;
@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     padding: 12px;
-    background-color: $PRIMARY_10;
+    background-color: constants.$PRIMARY_10;
 
     &__item-icon {
         max-width: 42px;

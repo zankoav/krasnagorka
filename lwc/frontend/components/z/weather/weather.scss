@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .weather {
     color: $WHITE;
@@ -8,7 +9,7 @@
     position: relative;
     margin-top: 1rem;
 
-    @include sm {
+    @include media.sm {
         height: initial;
         flex-direction: row;
         align-items: center;
@@ -26,7 +27,7 @@
         transition: opacity;
         animation: weather-current 8s infinite;
 
-        @include sm {
+        @include media.sm {
             position: static;
             width: initial;
             animation: none;
@@ -64,7 +65,7 @@
         transition: opacity;
         animation: weather-future 8s infinite;
 
-        @include sm {
+        @include media.sm {
             position: static;
             width: initial;
             opacity: 1;
@@ -80,7 +81,7 @@
         text-align: center;
         margin: 0 0.25rem;
 
-        @include sm {
+        @include media.sm {
             margin: 0 0 0 0.5rem;
         }
 

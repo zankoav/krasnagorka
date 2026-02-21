@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .radio-buttons {
     display: flex;
@@ -46,7 +47,7 @@
     &__item-column-postfix {
         color: $RED_2;
         font-weight: 700;
-        margin-left: .5rem;
+        margin-left: 0.5rem;
     }
 
     &__item-description {
@@ -54,12 +55,12 @@
         font-size: 12px;
         color: #808080;
 
-        &_prefix{
+        &_prefix {
             margin-bottom: 0.5rem;
         }
 
         &_star::before {
-            content: '*';
+            content: "*";
             color: $RED_2;
             margin-right: 0.25rem;
         }

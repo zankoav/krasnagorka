@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .footer-top {
     background-color: green;

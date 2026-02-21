@@ -1,4 +1,4 @@
-@import "./../../../common/mixins";
+@use "@styles/constants" as *;
 
 .line {
     display: flex;

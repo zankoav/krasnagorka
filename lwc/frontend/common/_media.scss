@@ -1,4 +1,6 @@
 //MEDIA SCREENS:
+@use "sass:map";
+
 $MEDIA: (
     SM: 768px,
     MD: 1024px,
@@ -10,49 +12,49 @@ $MEDIA: (
 );
 
 @mixin m-land {
-    @media (max-width: map_get($MEDIA, SM) - 1px) and (orientation: landscape) {
+    @media (max-width: map.get($MEDIA, SM) - 1px) and (orientation: landscape) {
         @content;
     }
 }
 
 @mixin sm {
-    @media (min-width: map_get($MEDIA, SM)) {
+    @media (min-width: map.get($MEDIA, SM)) {
         @content;
     }
 }
 
 @mixin md {
-    @media (min-width: map_get($MEDIA, MD)) {
+    @media (min-width: map.get($MEDIA, MD)) {
         @content;
     }
 }
 
 @mixin lg {
-    @media (min-width: map_get($MEDIA, LG)) {
+    @media (min-width: map.get($MEDIA, LG)) {
         @content;
     }
 }
 
 @mixin xl {
-    @media (min-width: map_get($MEDIA, XL)) {
+    @media (min-width: map.get($MEDIA, XL)) {
         @content;
     }
 }
 
 @mixin xll {
-    @media (min-width: map_get($MEDIA, XLL)) {
+    @media (min-width: map.get($MEDIA, XLL)) {
         @content;
     }
 }
 
 @mixin hd {
-    @media (min-width: map_get($MEDIA, HD)) {
+    @media (min-width: map.get($MEDIA, HD)) {
         @content;
     }
 }
 
 @mixin xhd {
-    @media (min-width: map_get($MEDIA, XHD)) {
+    @media (min-width: map.get($MEDIA, XHD)) {
         @content;
     }
 }

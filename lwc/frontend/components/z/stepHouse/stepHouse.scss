@@ -1,9 +1,10 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .step-house {
     padding: 20px 12px 32px;
 
-    @include md {
+    @include media.md {
         padding: 24px 32px 32px;
     }
 
@@ -13,7 +14,7 @@
         color: $GRAY_1;
         margin-bottom: 2rem;
 
-        @include sm {
+        @include media.sm {
             margin-bottom: 0;
         }
     }
@@ -36,7 +37,7 @@
         border-bottom: 1px solid #f7f7f7;
         padding: 1.5rem 0;
 
-        @include lg {
+        @include media.lg {
             border-bottom: 0;
         }
     }
@@ -82,7 +83,7 @@
         padding-bottom: 1rem;
         min-height: 100px;
 
-        @include sm {
+        @include media.sm {
             padding-bottom: 1.5rem;
         }
     }
@@ -91,12 +92,12 @@
         display: flex;
         margin: 1rem 0 0 0;
 
-        @include sm {
+        @include media.sm {
             margin: 1.5rem 0 0 0;
         }
     }
 
-    &__subtitle{
+    &__subtitle {
         font-size: 16px;
         color: $PRIMARY_10;
         font-weight: 700;
@@ -119,7 +120,7 @@
         border-radius: 4px;
         max-width: 100px;
 
-        @include sm {
+        @include media.sm {
             max-width: 140px;
         }
     }
@@ -160,7 +161,7 @@
         display: block;
         margin: 1.5rem 0 2rem;
 
-        @include sm {
+        @include media.sm {
             margin: 1.5rem 0;
         }
     }
@@ -194,7 +195,7 @@
         margin: 0 -1rem;
         max-width: initial;
 
-        @include sm {
+        @include media.sm {
             display: flex;
         }
     }
@@ -202,7 +203,7 @@
     &__col {
         padding: 0 1rem;
 
-        @include sm {
+        @include media.sm {
             max-width: 50%;
             flex: 1 0 50%;
         }
@@ -210,7 +211,7 @@
         &:last-child {
             margin-top: 1rem;
 
-            @include sm {
+            @include media.sm {
                 margin-top: 0;
             }
         }
@@ -240,7 +241,7 @@
             margin-right: 1rem;
         }
 
-        &_small{
+        &_small {
             margin-bottom: 1rem;
         }
     }

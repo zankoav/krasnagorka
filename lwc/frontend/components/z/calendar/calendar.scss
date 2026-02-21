@@ -1,7 +1,7 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .calendar {
-
     &_event {
         .main-table {
             background-color: #f7f7f7;

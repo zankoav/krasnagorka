@@ -1,4 +1,4 @@
-@import "./../../../common/mixins";
+@use "@styles/constants";
 
 :root {
     --swiper-theme-color: #bcbcbc;
@@ -35,7 +35,7 @@
 
     .swiper {
         width: 100%;
-        color: $GRAY_1;
+        color: constants.$GRAY_1;
 
         .swiper-slide {
             width: 75%;
@@ -45,7 +45,7 @@
             flex-direction: column;
 
             &__container {
-                background-color: $WHITE;
+                background-color: #fff;
                 padding: 1rem 1rem 1.5rem;
                 border-bottom-left-radius: 8px;
                 border-bottom-right-radius: 8px;
@@ -71,7 +71,7 @@
                 line-height: 1.25;
                 font-weight: 700;
                 text-align: center;
-                color: $GRAY_1;
+                color: constants.$GRAY_1;
             }
 
             &__date,
@@ -80,7 +80,7 @@
                 line-height: 16px;
                 font-weight: 300;
                 text-align: center;
-                color: $GRAY_7;
+                color: constants.$GRAY_7;
 
                 &:empty {
                     display: none;
@@ -89,7 +89,7 @@
 
             &__date {
                 text-align: center;
-                color: $GRAY_9;
+                color: constants.$GRAY_9;
                 margin-top: 0.25rem;
 
                 &_hide {
@@ -108,7 +108,7 @@
             }
 
             &__price-currency {
-                color: $RED_2;
+                color: constants.$RED_2;
                 text-align: center;
                 text-transform: uppercase;
                 font-weight: 700;

@@ -1,45 +1,45 @@
-@mixin margin() {
+@use "@styles/media";
 
+@mixin margin() {
     .mb-10 {
-        margin-bottom : 1rem;
+        margin-bottom: 1rem;
     }
 
     .mb-15 {
-        margin-bottom : 1.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .mb-20 {
-        margin-bottom : 2rem;
+        margin-bottom: 2rem;
     }
 
     .mb-30 {
-        margin-bottom : 3rem;
+        margin-bottom: 3rem;
     }
 
     .mb-sm-025 {
-        @include sm {
-            margin-bottom : .25rem;
+        @include media.sm {
+            margin-bottom: 0.25rem;
         }
     }
 
     .mr-sm-15 {
-        @include sm {
-            margin-right : 1.5rem;
+        @include media.sm {
+            margin-right: 1.5rem;
         }
     }
 
     .mb-sm-none {
-        @include sm {
-            margin-bottom : 0;
+        @include media.sm {
+            margin-bottom: 0;
         }
     }
 
     .mr-05 {
-        margin-right : .5rem;
+        margin-right: 0.5rem;
     }
 
     .mt-10 {
-        margin-top : 1rem;
+        margin-top: 1rem;
     }
-
 }

@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .payment-methods {
     &__title {
@@ -15,7 +16,7 @@
         color: $GRAY_4;
         text-transform: uppercase;
 
-        @include sm {
+        @include media.sm {
             margin-bottom: 0;
             width: 140px;
         }
@@ -26,7 +27,7 @@
             margin-bottom: 1rem;
         }
 
-        @include sm {
+        @include media.sm {
             display: flex;
             align-items: center;
             justify-content: center;

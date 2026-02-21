@@ -72,11 +72,13 @@
                 </div>
                 <template if:true={settings.animalsShow}>
                     <z-select
+                        if:true={smallAnimalsAvailable}
                         data-name="smallAnimalCount"
                         label="Кошки и собаки мелких пород (высота в холке до 40 см)"
                         onchange={animalsChange}
                         options={smallAnimalOptions}></z-select>
                     <z-select
+                        if:true={bigAnimalsAvailable}
                         class="step-additional-services__select step-additional-services__select_bottom"
                         data-name="bigAnimalCount"
                         label="Собаки крупных пород (высота в холке более 40 см)"

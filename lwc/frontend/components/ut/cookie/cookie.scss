@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants";
 
 .cookie {
     position: fixed;
@@ -23,7 +24,7 @@
         font-weight: bold;
         margin-right: 1.5rem;
 
-        @include sm {
+        @include media.sm {
             font-size: 20px;
             margin-right: 2rem;
         }
@@ -31,13 +32,13 @@
 
     &__button {
         color: #fff;
-        background-color: $RED_2;
+        background-color: constants.$RED_2;
         font-weight: bold;
         border-radius: 8px;
         padding: 0.5rem 2rem;
         font-size: 16px;
 
-        @include sm {
+        @include media.sm {
             padding: 0.5rem 2rem;
             font-size: 18px;
         }

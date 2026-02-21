@@ -1,9 +1,10 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .step-contact {
     padding: 20px 12px 32px;
 
-    @include md {
+    @include media.md {
         padding: 24px 32px 32px;
     }
 

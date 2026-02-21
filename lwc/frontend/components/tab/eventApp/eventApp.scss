@@ -1,6 +1,6 @@
-@import "./../../../common/mixins";
+@use "@styles/constants";
 
-@include editor();
+@include constants.editor();
 
 .event-app {
     &__item {

@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .menu {
     display: flex;
@@ -7,7 +8,7 @@
     padding: 0 0.25rem;
     margin: 0 -0.25rem;
 
-    @include lg {
+    @include media.lg {
         overflow: initial;
         padding: initial;
     }
@@ -17,7 +18,7 @@
         flex-direction: column;
         align-items: center;
 
-        @include lg {
+        @include media.lg {
             flex-direction: row;
         }
     }
@@ -26,7 +27,7 @@
         display: flex;
         align-items: center;
 
-        @include lg {
+        @include media.lg {
             margin-left: 3rem;
         }
     }
@@ -57,7 +58,7 @@
     &__navigation {
         order: -1;
 
-        @include lg {
+        @include media.lg {
             order: 0;
             margin-left: auto;
         }
@@ -68,7 +69,7 @@
         overflow-y: auto;
         padding: 1rem 2rem;
 
-        @include lg {
+        @include media.lg {
             max-height: initial;
             overflow-y: initial;
             display: flex;
@@ -78,7 +79,7 @@
     }
 
     &__navigation-mobile-button {
-        @include lg {
+        @include media.lg {
             display: none;
         }
     }
@@ -95,7 +96,7 @@
         z-index: 999;
         background-color: $GRAY;
 
-        @include sm {
+        @include media.sm {
             max-width: 360px;
             transform: translateX(-360px);
         }
@@ -103,12 +104,12 @@
         &_active {
             transform: translateX(0);
 
-            @include lg {
+            @include media.lg {
                 transform: initial;
             }
         }
 
-        @include lg {
+        @include media.lg {
             background-color: initial;
             display: block;
             max-width: 100%;
@@ -127,7 +128,7 @@
     &__navigation-mobile-icon {
         width: 44px;
 
-        @include lg {
+        @include media.lg {
             width: 28px;
             height: 28px;
         }
@@ -140,7 +141,7 @@
     &__navigation-item {
         position: relative;
 
-        @include lg {
+        @include media.lg {
             margin: 0 0.5rem;
             line-height: 13px;
 
@@ -159,7 +160,7 @@
                 color: $PRIMARY;
             }
 
-            @include lg {
+            @include media.lg {
                 display: initial;
                 font-size: 13px;
                 padding: 0.25rem 0;
@@ -170,7 +171,7 @@
         &_active {
             a {
                 color: $PRIMARY;
-                @include lg {
+                @include media.lg {
                     border-bottom: 1px solid $WHITE;
                     color: $WHITE;
                     &:hover {
@@ -198,7 +199,7 @@
             }
         }
 
-        @include lg {
+        @include media.lg {
             position: absolute;
             left: 0;
             margin-left: initial;
@@ -239,7 +240,7 @@
         padding: 0 2rem 1.5rem;
         box-shadow: 0 4px 6px -3px rgba($BLACK, 0.2);
 
-        @include lg {
+        @include media.lg {
             display: none;
         }
     }

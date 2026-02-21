@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .select {
     position: relative;
@@ -46,7 +47,7 @@
             }
         }
 
-        &_disabled{
+        &_disabled {
             cursor: initial;
             background-color: $GRAY;
             border-color: $GRAY;

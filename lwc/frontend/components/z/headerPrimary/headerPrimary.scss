@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .header-primary {
     position: relative;
@@ -36,12 +37,12 @@
         font-size: 26px;
         font-family: AvenirNextCyr-Bold, sans-serif;
 
-        @include sm {
+        @include media.sm {
             font-size: 40px;
             padding: 2rem 0 3rem;
         }
 
-        @include lg {
+        @include media.lg {
             padding: 4rem 0 5rem;
         }
     }

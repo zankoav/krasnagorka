@@ -21,6 +21,18 @@ export default class StepAdditionalServices extends BaseBookingElement {
         return `Домашние животные`
     }
 
+    get smallAnimalsAvailable() {
+        return this.settings.seasons
+            .find((s) => s.current)
+            .houses.find((h) => h.id == this.settings.house.id).smallAnimalPrice
+    }
+    
+    get bigAnimalsAvailable() {
+        return this.settings.seasons
+            .find((s) => s.current)
+            .houses.find((h) => h.id == this.settings.house.id).bigAnimalPrice
+    }
+
     get showBathHouses() {
         let result = true
         if (this.settings.package?.services?.find((item) => item == '5')) {

@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/constants";
+@use "@styles/media";
 
 .contacts-popup {
     animation: fadeIn 0.4s ease-in;
@@ -14,15 +15,15 @@
         display: block;
     }
 
-    @include lg {
+    @include media.lg {
         top: 40px;
     }
 
     &__card {
-        background-color: $WHITE;
-        color: $GRAY_1;
+        background-color: constants.$WHITE;
+        color: constants.$GRAY_1;
         border-radius: 8px;
-        box-shadow: 0 4px 8px $GRAY_2;
+        box-shadow: 0 4px 8px constants.$GRAY_2;
         position: relative;
         padding: 1.5rem 1.5rem 0.75rem;
         line-height: 1;
@@ -33,7 +34,7 @@
     &__item {
         position: relative;
         padding: 0.75rem 0;
-        border-bottom: 1px solid $GRAY_3;
+        border-bottom: 1px solid constants.$GRAY_3;
 
         &:last-child {
             border-bottom: 0;
@@ -74,7 +75,7 @@
             right: 1rem;
         }
 
-        @include sm {
+        @include media.sm {
             width: 20px;
             height: 20px;
             top: -26px;
@@ -82,9 +83,9 @@
     }
 
     &__item-text {
-        color: $PRIMARY;
+        color: constants.$PRIMARY;
         &_gray {
-            color: $GRAY_1;
+            color: constants.$GRAY_1;
         }
     }
 }

@@ -1,19 +1,19 @@
-@import 'constants';
-@import 'media';
-@import './../common/_container';
-@import './../common/_padding';
-@import './../common/_margin';
+@use "constants";
+@use "_media";
+@use "./../common/_container";
+@use "./../common/_padding";
+@use "./../common/_margin";
 
-@mixin button{
+@mixin button {
     text-decoration: none;
     border-radius: 6px;
-    padding: .5rem 1rem;
-    background-color: $RED;
-    color: $WHITE;
+    padding: 0.5rem 1rem;
+    background-color: constants.$RED;
+    color: constants.$WHITE;
     font-weight: 700;
     text-align: center;
     display: inline-block;
     min-width: 150px;
     font-size: 14px;
-    box-shadow: 0 2px 4px 0 rgba($BLACK,.5);
+    box-shadow: 0 2px 4px 0 rgba(constants.$BLACK, 0.5);
 }

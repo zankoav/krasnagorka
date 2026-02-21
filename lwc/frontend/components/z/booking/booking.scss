@@ -1,13 +1,14 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .booking {
-    @include lg {
+    @include media.lg {
         margin: 2rem 0;
     }
 
     .container {
         padding: 0;
-        @include lg {
+        @include media.lg {
             padding: 0 2rem;
             max-width: 900px;
         }
@@ -42,14 +43,14 @@
         color: $GRAY_5;
         margin: 0 auto;
 
-        @include sm {
+        @include media.sm {
             max-width: 400px;
         }
     }
 
     &__card {
         background-color: $WHITE;
-        @include lg {
+        @include media.lg {
             border-radius: 8px;
             box-shadow: 0 2px 4px $GRAY_6;
         }

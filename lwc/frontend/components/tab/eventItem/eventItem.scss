@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .event-item {
     background: $WHITE;
@@ -6,7 +7,7 @@
     border-radius: 0.5rem;
     font-size: 14px;
 
-    @include lg {
+    @include media.lg {
         display: flex;
         font-size: 16px;
     }
@@ -15,7 +16,7 @@
         overflow: hidden;
         border-top-left-radius: 0.5rem;
         border-top-right-radius: 0.5rem;
-        @include lg {
+        @include media.lg {
             max-width: 300px;
             flex: 1 0 300px;
             border-top-right-radius: 0;
@@ -29,7 +30,7 @@
         display: block;
         object-fit: cover;
 
-        @include lg {
+        @include media.lg {
             height: 100%;
         }
     }
@@ -38,7 +39,7 @@
         padding: 0.5rem 0.75rem;
         color: $GRAY_1;
 
-        @include lg {
+        @include media.lg {
             flex-grow: 1;
             padding: 0.75rem 1rem;
         }
@@ -51,7 +52,7 @@
         padding: 1rem;
         border-top: 1px dashed #eeeeee;
 
-        @include lg {
+        @include media.lg {
             max-width: 300px;
             flex: 1 0 300px;
             border-top: 0;
@@ -63,14 +64,14 @@
 
     &__date-desktop {
         display: none;
-        @include lg {
+        @include media.lg {
             display: block;
         }
     }
 
     &__date-mobile {
         display: block;
-        @include lg {
+        @include media.lg {
             display: none;
         }
     }
@@ -84,7 +85,7 @@
         padding: 0.5rem 1rem;
         font-weight: 600;
 
-        @include lg {
+        @include media.lg {
             align-self: center;
             margin-top: auto;
         }
@@ -96,7 +97,7 @@
         height: 32px;
 
         &_price {
-            @include lg {
+            @include media.lg {
                 display: none;
             }
         }
@@ -104,7 +105,7 @@
         &_desktop {
             display: none;
 
-            @include lg {
+            @include media.lg {
                 display: block;
                 margin: 0.25rem 0;
             }
@@ -118,14 +119,13 @@
     &__order-title {
         display: none;
 
-        @include lg {
+        @include media.lg {
             display: block;
             text-align: center;
             font-weight: 600;
             font-size: 20px;
             color: #4a4a4a;
             margin-bottom: 1rem;
-
         }
     }
 
@@ -149,7 +149,7 @@
     &__order-price {
         display: none;
 
-        @include lg {
+        @include media.lg {
             display: inline-block;
             color: $RED;
             font-weight: 700;

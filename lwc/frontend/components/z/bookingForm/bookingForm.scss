@@ -1,11 +1,13 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
+@use "mixins";
 
 .booking-form {
-    @include sm {
+    @include media.sm {
         margin: 2rem 0;
     }
 
-    @include lg {
+    @include media.lg {
         margin: 3rem 0;
     }
 
@@ -15,13 +17,13 @@
         padding: 2rem;
         margin: 0 -1rem;
 
-        @include sm {
+        @include media.sm {
             border-radius: 0.5rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        @include lg {
+        @include media.lg {
             max-width: 700px;
         }
     }
@@ -39,7 +41,7 @@
             font-weight: 400;
         }
 
-        @include sm {
+        @include media.sm {
             font-size: 24px;
         }
     }
@@ -103,7 +105,7 @@
         padding-top: 1.5rem;
         border-top: 1px solid $GRAY;
 
-        @include sm {
+        @include media.sm {
             flex-direction: row;
             justify-content: space-between;
         }
@@ -114,7 +116,7 @@
     }
 
     &__send-button {
-        @include button;
+        @include mixins.button;
 
         &_deprecated {
             background-color: $GRAY_1;
@@ -151,7 +153,7 @@
         text-align: center;
         margin-bottom: 1rem;
 
-        @include sm {
+        @include media.sm {
             margin-bottom: 0;
         }
     }

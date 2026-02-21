@@ -1,4 +1,5 @@
-@import "./../../../common/mixins";
+@use "@styles/media";
+@use "@styles/constants" as *;
 
 .steps-navigator {
     overflow: hidden;
@@ -22,7 +23,7 @@
         background: linear-gradient(90deg, rgba($WHITE, 0) 0%, $WHITE 100%);
     }
 
-    @include sm {
+    @include media.sm {
         &:before {
             left: 0;
             background: linear-gradient(90deg, $WHITE 0%, rgba($WHITE, 0) 100%);
@@ -37,7 +38,7 @@
         height: 1px;
         background-color: $GRAY_6;
 
-        @include sm {
+        @include media.sm {
             bottom: 1px;
         }
     }
@@ -59,7 +60,7 @@
         font-size: 11px;
         font-weight: 600;
 
-        @include sm {
+        @include media.sm {
             border-bottom-width: 3px;
             padding: 20px 20px 14px;
 

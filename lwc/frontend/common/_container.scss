@@ -1,30 +1,31 @@
+@use "@styles/media";
+
 $MAX-WIDTH_LG: 1264px;
 $MAX-WIDTH_HD: 1600px;
 $MAX-WIDTH_SMALL: 900px;
 
 @mixin container() {
-
     .container {
         padding: 0 1rem;
         position: relative;
         width: 100%;
 
-        @include md {
+        @include media.md {
             padding: 0 2rem;
         }
 
-        @include lg {
+        @include media.lg {
             max-width: $MAX-WIDTH_LG;
             margin-left: auto;
             margin-right: auto;
         }
 
-        @include hd {
+        @include media.hd {
             max-width: $MAX-WIDTH_HD;
         }
 
         &_small {
-            @include lg {
+            @include media.lg {
                 max-width: $MAX-WIDTH_SMALL;
             }
         }

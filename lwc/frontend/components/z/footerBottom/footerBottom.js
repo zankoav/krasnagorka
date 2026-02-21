@@ -2,13 +2,13 @@
 /* eslint-disable no-await-in-loop */
 import { LightningElement, api, track } from 'lwc'
 import './footerBottom.scss'
-import ICON_VK from './../../../icons/socials/vk.svg'
-import ICON_OK from './../../../icons/socials/ok.svg'
-import ICON_INSTA from './../../../icons/socials/insta.svg'
-import ICON_FB from './../../../icons/socials/fb.svg'
-import ICON_YOUTUBE from './../../../icons/socials/youtube.svg'
-import ICON_TELEGRAM from './../../../icons/socials/telegram.svg'
-import ICON_TIKTOK from './../../../icons/socials/tiktok.svg'
+import ICON_VK from 'img/socials/vk.svg'
+import ICON_OK from 'img/socials/ok.svg'
+import ICON_INSTA from 'img/socials/insta.svg'
+import ICON_FB from 'img/socials/fb.svg'
+import ICON_YOUTUBE from 'img/socials/youtube.svg'
+import ICON_TELEGRAM from 'img/socials/tg.svg'
+import ICON_TIKTOK from 'img/socials/tiktok.svg'
 
 const SOCIALS_ICONS = {
     insta: ICON_INSTA,
