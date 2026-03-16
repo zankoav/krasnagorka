@@ -172,7 +172,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                         </div>
                     <?php endif; ?>
                     <div class="main-slider__slide-content">
-                        <p class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></p>
+                        <div class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></div>
                         <p class="main-slider__slide-content-sub-title"><?= $m_slide["item_subtitle"]; ?></p>
                         <?php if (!empty($m_slide["button_url"])) : ?>
                             <a href="<?= $m_slide["button_url"]; ?>" class="main-slider__slide-content-button ">

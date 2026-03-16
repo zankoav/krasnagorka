@@ -168,7 +168,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                         </div>
                     <?php endif; ?>
                     <div class="main-slider__slide-content">
-                        <p class="main-slider__slide-content-title"><?= $m_slide["slide_title"]; ?></p>
+                        <div class="main-slider__slide-content-title"><?= $m_slide["slide_title"]; ?></div>
                         <p class="main-slider__slide-content-sub-title"><?= $m_slide["slide_description"]; ?></p>
                         <?php if (!empty($m_slide["slide_button_url"])) : ?>
                             <a href="<?= $m_slide["slide_button_url"]; ?>" target="<?= $m_slide["slide_button_open_type"] ? '_blank' : '_self'; ?>" class="main-slider__slide-content-button ">
