@@ -150,12 +150,10 @@ $footer_logo_id    = $options['footer_logo_id'];
     <div class="swiper-container main-slider">
         <div class="swiper-wrapper main-slider__wrapper">
             <?php
-            $isFirst = true;
             $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
 
             foreach ($main_slider as $m_slide) : ?>
                 <div class="swiper-slide main-slider__slide" data-swiper-autoplay="<?= $main_slider_delay; ?>">
-
                     <?php if ($m_slide["use_video"] and !wp_is_mobile()) :
                         $video_url = esc_url($m_slide["slide_video"]); ?>
                         <div class="main-slider__slide-img-wrapper">
@@ -170,13 +168,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                         </div>
                     <?php endif; ?>
                     <div class="main-slider__slide-content">
-                        <?php if ($isFirst) :
-                            $isFirst = false;
-                        ?>
-                            <h1 class="main-slider__slide-content-title"><?= $m_slide["slide_title"]; ?></h1>
-                        <?php else : ?>
-                            <p class="main-slider__slide-content-title"><?= $m_slide["slide_title"]; ?></p>
-                        <?php endif; ?>
+                        <p class="main-slider__slide-content-title"><?= $m_slide["slide_title"]; ?></p>
                         <p class="main-slider__slide-content-sub-title"><?= $m_slide["slide_description"]; ?></p>
                         <?php if (!empty($m_slide["slide_button_url"])) : ?>
                             <a href="<?= $m_slide["slide_button_url"]; ?>" target="<?= $m_slide["slide_button_open_type"] ? '_blank' : '_self'; ?>" class="main-slider__slide-content-button ">

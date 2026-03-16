@@ -28,13 +28,13 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
                         <?php if ($video): ?>
-                        <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank"
-                           class="online-video online-video--menu">
-                            <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg"
-                                 alt="online-video"
-                                 class="online-video__icon">
-                            <span class="online-video__title">смотреть ONLINE</span>
-                        </a>
+                            <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank"
+                                class="online-video online-video--menu">
+                                <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg"
+                                    alt="online-video"
+                                    class="online-video__icon">
+                                <span class="online-video__title">смотреть ONLINE</span>
+                            </a>
                         <?php endif; ?>
                         <div class="menu-main__currency currency">
                             <label class="currency__label currency__label--gray">Выберите <br>
@@ -85,19 +85,19 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
         </div>
         <div class="menu-top__center">
             <a href="/"
-               class="logo">
+                class="logo">
                 <img src="<?= CORE_PATH; ?>assets/icons/logo.png"
-                     alt="logo"
-                     class="logo__icon">
+                    alt="logo"
+                    class="logo__icon">
             </a>
             <?php if ($video && !wp_is_mobile()): ?>
-            <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru"
-                target="_blank" class="online-video">
-                <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg"
-                     alt="online-video"
-                     class="online-video__icon">
-                <span class="online-video__title">смотреть ONLINE</span>
-            </a>
+                <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru"
+                    target="_blank" class="online-video">
+                    <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg"
+                        alt="online-video"
+                        class="online-video__icon">
+                    <span class="online-video__title">смотреть ONLINE</span>
+                </a>
             <?php endif; ?>
         </div>
         <div class="menu-top__right contacts-menu">
@@ -153,7 +153,6 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
     <div class="swiper-container main-slider">
         <div class="swiper-wrapper main-slider__wrapper">
             <?php
-            $isFirst = true;
             $image_size = wp_is_mobile() ? 'header_iphone_5' : 'header_laptop_hd';
 
             foreach ($main_slider as $m_slide) : ?>
@@ -173,16 +172,10 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                         </div>
                     <?php endif; ?>
                     <div class="main-slider__slide-content">
-                        <?php if ($isFirst) :
-                            $isFirst = false;
-                        ?>
-                            <h1 class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></h1>
-                        <?php else : ?>
-                            <p class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></p>
-                        <?php endif; ?>
+                        <p class="main-slider__slide-content-title"><?= $m_slide["item_name"]; ?></p>
                         <p class="main-slider__slide-content-sub-title"><?= $m_slide["item_subtitle"]; ?></p>
                         <?php if (!empty($m_slide["button_url"])) : ?>
-                            <a href="<?= $m_slide["button_url"]; ?>"  class="main-slider__slide-content-button ">
+                            <a href="<?= $m_slide["button_url"]; ?>" class="main-slider__slide-content-button ">
                                 <?= $m_slide["button_text"]; ?>
                             </a>
                         <?php endif; ?>
@@ -207,7 +200,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
     <?php if (wp_is_mobile()) : ?>
         <?php do_action("mastak_header_small_view_title"); ?>
     <?php endif; ?>
-    
+
     <div class="menu-bottom">
         <div class="b-container menu-bottom__wrapper">
             <div class="menu-bottom__left">
