@@ -105,6 +105,7 @@ function get_order_data($orderId)
 
     $smallAnimalsCount = get_post_meta($orderId, 'sbc_order_small_animlas_count', 1) ?? 0;
     $bigAnimalsCount = get_post_meta($orderId, 'sbc_order_big_animlas_count', 1) ?? 0;
+    $animalsNotAvailable = get_post_meta($orderId, 'sbc_order_animals_not_available', 1);
 
     $foodBreakfast = get_post_meta($orderId, 'sbc_order_food_breakfast', 1) ?? 0;
     $foodLunch = get_post_meta($orderId, 'sbc_order_food_lunch', 1) ?? 0;
@@ -181,6 +182,7 @@ function get_order_data($orderId)
         'bathHouseBlack' => $bathHouseBlack,
         'smallAnimalsCount' => $smallAnimalsCount,
         'bigAnimalsCount' => $bigAnimalsCount,
+        'animalsNotAvailable' => $animalsNotAvailable == 'on',
         'foodBreakfast' => intval($foodBreakfast),
         'foodLunch' => intval($foodLunch),
         'foodDinner' => intval($foodDinner),

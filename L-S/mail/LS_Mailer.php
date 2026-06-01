@@ -62,6 +62,7 @@ class LS_Mailer {
         $bathHouseBlack = '';
         $smallAnimalsCount = '';
         $bigAnimalsCount = '';
+        $animalsNotAvailable = '';
         $foodBreakfast = '';
         $foodLunch = '';
         $foodDinner = '';
@@ -121,6 +122,14 @@ class LS_Mailer {
             <td class='f-b'>".$data['bigAnimalsCount']."</td>
             </tr>";
         }
+
+        if ($data['animalsNotAvailable']) {
+            $animalsNotAvailable = "<tr>
+            <td class='f-b'>Внимание! В этом объекте проживание с домашними животными не допускается.</td>
+            <td class='f-b'></td>
+            </tr>";
+        }
+
 
         $eventTitle = self::getSubject($data);
 
@@ -184,6 +193,7 @@ class LS_Mailer {
         ".$bathHouseBlack."
         ".$smallAnimalsCount."
         ".$bigAnimalsCount."
+        ".$animalsNotAvailable."
         ".$foodBreakfast."
         ".$foodLunch."
         ".$foodDinner."
