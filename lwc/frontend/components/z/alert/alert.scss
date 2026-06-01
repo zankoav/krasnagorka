@@ -1,0 +1,15 @@
+.alert {
+    display: flex;
+    gap: 8px;
+
+    &__icon {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+    }
+
+    &__message {
+        color: #f5a623;
+        font-size: 14px;
+    }
+}

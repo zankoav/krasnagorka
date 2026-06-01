@@ -266,6 +266,15 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => 'Животные не допускаются',
+        'id'   => 'sbc_order_animals_not_available',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+        'type' => 'checkbox'
+    ) );
+
+    $sbc_order->add_field( array(
         'name' => 'Детская кроватка',
         'id'   => 'sbc_order_baby_bed',
         'attributes' => array(

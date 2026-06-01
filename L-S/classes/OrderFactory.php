@@ -45,6 +45,7 @@ class OrderFactory
         $order->bathHouseBlack = intval($data['bathHouseBlack']);
         $order->smallAnimalCount = intval($data['smallAnimalCount']);
         $order->bigAnimalCount = intval($data['bigAnimalCount']);
+        $order->animalsNotAvailable = boolval($data['animalsNotAvailable']);
         $order->foodBreakfast = intval($data['foodBreakfast']);
         $order->foodLunch = intval($data['foodLunch']);
         $order->foodDinner = intval($data['foodDinner']);
@@ -262,6 +263,9 @@ class OrderFactory
             // $comment[] = "Собаки крупных пород (высота в холке более 40 см): {$order->bigAnimalCount}";
             update_post_meta($order->id, 'sbc_order_big_animlas_count', $order->bigAnimalCount);
         }
+
+        update_post_meta($order->id, 'sbc_order_animals_not_available', $order->animalsNotAvailable); 
+        
 
         if ($order->foodBreakfast > 0) {
             // $comment[] = "Завтраки: {$order->foodBreakfast}";

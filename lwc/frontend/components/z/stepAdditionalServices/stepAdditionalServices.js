@@ -22,15 +22,27 @@ export default class StepAdditionalServices extends BaseBookingElement {
     }
 
     get smallAnimalsAvailable() {
-        return this.settings.seasons
-            .find((s) => s.current)
-            .houses.find((h) => h.id == this.settings.house.id).smallAnimalPrice
+        let result = true
+        for (const key in this.settings.total.seasons_group) {
+            const season = this.settings.total.seasons_group[key]
+            if (!season.house_small_animal_price) {
+                result = false
+                break
+            }
+        }
+        return result
     }
-    
+
     get bigAnimalsAvailable() {
-        return this.settings.seasons
-            .find((s) => s.current)
-            .houses.find((h) => h.id == this.settings.house.id).bigAnimalPrice
+        let result = true
+        for (const key in this.settings.total.seasons_group) {
+            const season = this.settings.total.seasons_group[key]
+            if (!season.house_big_animal_price) {
+                result = false
+                break
+            }
+        }
+        return result
     }
 
     get showBathHouses() {
@@ -68,6 +80,11 @@ export default class StepAdditionalServices extends BaseBookingElement {
         } else {
             result = !this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
         }
+
+        if (result && !this.smallAnimalsAvailable && !this.bigAnimalsAvailable) {
+            result = false
+        }
+
         return result
     }
 
@@ -109,6 +126,14 @@ export default class StepAdditionalServices extends BaseBookingElement {
                 selected: this.settings.bigAnimalCount === item
             }
         })
+    }
+
+    animalsNotAvailable() {
+        let result = this.settings.calendars.find((cr) => cr.selected)?.isDeprecateAnimals
+        if (!result) {
+            result = !this.smallAnimalsAvailable && !this.bigAnimalsAvailable
+        }
+        return result
     }
 
     changeBabyBadHandler(event) {
@@ -213,6 +238,7 @@ export default class StepAdditionalServices extends BaseBookingElement {
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {
+                    animalsNotAvailable: this.animalsNotAvailable(),
                     menu: newMenu
                 },
                 bubbles: true,

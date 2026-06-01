@@ -66,6 +66,7 @@ class Order {
     public ?int $prepaidType;
     public int $childCount;
     public bool $babyBed;
+    public ?bool $animalsNotAvailable;
     public int $bathHouseWhite;
     public int $bathHouseBlack;
     public int $smallAnimalCount;
