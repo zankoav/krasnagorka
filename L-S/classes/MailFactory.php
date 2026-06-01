@@ -111,6 +111,7 @@ class MailFactory
         $bathHouseBlack = '';
         $smallAnimalsCount = '';
         $bigAnimalsCount = '';
+        $animalsNotAvailable = '';
         $foodBreakfast = '';
         $foodLunch = '';
         $foodDinner = '';
@@ -169,6 +170,13 @@ class MailFactory
             $bigAnimalsCount = "<tr>
             <td>Собаки крупных пород (высота в холке более 40 см):</td>
             <td class='f-b'>{$order->bigAnimalsCount}</td>
+            </tr>";
+        }
+
+        if ($order->animalsNotAvailable) {
+            $animalsNotAvailable = "<tr>
+            <td class='f-b'>Внимание! В этом объекте проживание с домашними животными не допускается.</td>
+            <td class='f-b'></td>
             </tr>";
         }
 
@@ -247,6 +255,7 @@ class MailFactory
         " . $bathHouseBlack . "
         " . $smallAnimalsCount . "
         " . $bigAnimalsCount . "
+        " . $animalsNotAvailable . "
         " . $foodBreakfast . "
         " . $foodLunch . "
         " . $foodDinner . "

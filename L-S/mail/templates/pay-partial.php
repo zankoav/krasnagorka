@@ -118,6 +118,9 @@ $created = get_the_date("d.m.Y", $order->id);
                                 <?php if ($order->bigAnimalCount > 0) : ?>
                                     <div>Собаки крупных пород (высота в холке более 40 см): <strong><?= $order->bigAnimalCount ?></strong></div>
                                 <?php endif; ?>
+                                <?php if ($order->animalsNotAvailable) : ?>
+                                    <div><strong>Внимание! В этом объекте проживание с домашними животными не допускается.</strong></div>
+                                <?php endif; ?>
                                 <?php if (!empty($order->foodVariant) && $order->scenario != 'Event') : ?>
                                     <div>Пакет питания: <strong><?= $order->getFoodVariant() ?></strong></div>
                                 <?php endif; ?>
