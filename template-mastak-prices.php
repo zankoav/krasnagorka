@@ -408,17 +408,17 @@ get_template_part("mastak/views/header", "small-view"); ?>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
                                                 <span>Завтрак</span>
                                                 <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_breackfast_byn; ?>"><?= $service_food_breackfast_price; ?>
-                                                </span> <?= $service_subtitle ?>
+                                                </span> за 1 прием пищи
                                             </div>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
                                                 <span>Обед</span>
                                                 <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_lunch_byn; ?>"><?= $service_food_lunch_price; ?>
-                                                </span> <?= $service_subtitle ?>
+                                                </span> за 1 прием пищи
                                             </div>
                                             <div class="house-booking__price-per-men-wrapp" style="margin: 4px 0;">
                                                 <span>Ужин</span>
                                                 <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_food_dinner_byn; ?>"><?= $service_food_dinner_price; ?>
-                                                </span> <?= $service_subtitle ?>
+                                                </span> за 1 прием пищи
                                             </div>
                                         <?php else : ?>
                                             <span class="house-booking__price-per-men js-currency" data-currency="<?= $currency_name; ?>" data-byn="<?= $service_byn; ?>"><?= $service_price; ?>
