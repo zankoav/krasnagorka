@@ -528,8 +528,8 @@ if (!defined('ABSPATH')) {
         or is_page_template("template-mastak-map.php")
         or is_page_template("template-page-posts.php"))
     ? "b-bgc-wrapper"
-    : is_singular('event') ? "b-bgc-wrapper" :
-    is_post_type_archive('event') ? "b-bgc-wrapper" : "";
+    : (is_singular('event') ? "b-bgc-wrapper" :
+    (is_post_type_archive('event') ? "b-bgc-wrapper" : ""));
 ?>
 
 <body <?php
