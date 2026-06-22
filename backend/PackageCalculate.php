@@ -24,7 +24,7 @@ class PackageCalculate extends CalculateImpl
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $peopleCount = $request['peopleCount'];
 
-        Log::info('calculate package', $request);
+        Log::info('calculate package 1', $packageId);
         $min_night = intval(get_post_meta($packageId, 'package_night_min', 1));
 
         $calendars = get_post_meta($packageId, 'package_calendars', 1);
@@ -34,7 +34,7 @@ class PackageCalculate extends CalculateImpl
         $min_people;
         $price_person_night;
         $price_person_night_weekend;
-
+        Log::info('calculate package 2', $calendarId);
         foreach ((array) $calendars as $key => $entry) {
             if ($calendarId == intval($entry['calendar'])) {
                 $min_people = intval($entry['package_people_min']);
