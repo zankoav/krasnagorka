@@ -32,6 +32,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 ?>
 
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
         <?php
         get_template_part("mastak/views/header", "small-view");
         $imageId = get_post_thumbnail_id(); ?>
