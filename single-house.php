@@ -76,7 +76,144 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </div>
+                    <div data-mixed-tab="3" class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '' : ' js-add-public-calendar-single'; ?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
+                        <?= $isTerem ? 'КАЛЕНДАРИ БРОНИРОВАНИЯ' : 'КАЛЕНДАРЬ БРОНИРОВАНИЯ'; ?>
+                    </div>
+                    <div data-mixed-conent="3" class="accordion-mixed__content <?= $isEmployment ? 'accordion-mixed__content--active' : '' ?>">
+                        <?php if (!$isTerem) : ?>
+                            <div class="accordion-mixed__content-inner">
+                                <div class="booking-houses__calendars-inner">
+                                    <a href="#" data-calendar='<?= get_post_meta(get_the_ID(), "mastak_house_calendar", true); ?>' class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                        Показать календарь
+                                    </a>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <div class="booking-houses">
+                                <div class="booking-houses__icons-description">
+                                    <?php get_template_part('mastak/views/icons-description'); ?>
+                                    <div class="select-helper select-helper_header">
+                                        <img src="/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png" class="select-helper__img" alt="Выделение дат заезда и выезда">
+                                        <p class="select-helper__text"><?= get_option('mastak_theme_options')['calendar_settings_message_before']; ?></p>
+                                    </div>
+                                </div>
+                                <?php foreach ($kalendars as $kalendar) : ?>
+                                    <div class="booking-houses__wrapper">
+                                        <div class="booking-houses__item">
+                                            <p class="booking-houses__title"><?= $kalendar['title']; ?></p>
+                                            <div class="booking-houses__image-wrapper">
+                                                <img class="booking-houses__image" src="<?= $kalendar['picture']; ?>" alt="<?= $kalendar['title']; ?>">
+                                            </div>
+                                            <div class="booking-houses__header">
+                                                <p class="booking-houses__description">
+                                                    <?php if (!empty($kalendar['min_people'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['min_people']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/min-01.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['max_people'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['max_people']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/max-01.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['double_bed'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['double_bed']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/double-king-size-bed.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['single_bed'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['single_bed']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/single-king-size-bed.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['toilet_and_shower'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['toilet_and_shower']; ?>">
+                                                            <img class="apartment__icon apartment__icon_mr--4px" src="<?= CORE_PATH ?>assets/icons/toilet.svg" alt="icon">
+                                                            <img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/shower.svg" alt="icon">
+                                                            x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['toilet'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['toilet']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/toilet.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['bed_rooms'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['bed_rooms']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/br-01.svg" alt="icon">x</span>
+                                                    <?php endif;
+                                                    if (!empty($kalendar['triple_bed'])) : ?>
+                                                        <span class="booking-houses__description-item" data-info="<?= $kalendar['triple_bed']; ?>"><img class="apartment__icon apartment__icon_mr-4px" src="<?= CORE_PATH ?>assets/icons/br-01.svg" alt="icon">x</span>
+                                                    <?php endif; ?>
+                                                </p>
+                                            </div>
+                                            <div class="booking-houses__calendars">
+                                                <div class="booking-houses__calendars-inner">
+                                                    <a href="#" data-calendar='<?= $kalendar['calendar']; ?>' class="our-house__button our-house__button--green booking-houses__calendars-button">
+                                                        Показать календарь
+                                                    </a>
+                                                </div>
+                                                <?php
+                                                $calendarTeremId = getCalendarId($kalendar['calendar']);
+                                                ?>
+                                                <a href="/booking-form/?booking=<?= get_the_ID() ?>&calendarId=<?= $calendarTeremId; ?>&terem=<?= $kalendar['title']; ?>" data-name="<?= $kalendar['title']; ?>" data-cd="<?= $calendarTeremId; ?>" data-id="<?= get_the_ID(); ?>" target="_blank" class="is-terem-js our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
+                                                    забронировать / рассчитать
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                   
                     
+                    <div data-mixed-tab="7" class="accordion-mixed__tab">
+                        Условия и цены
+                    </div>
+                    <div data-mixed-conent="7" class="accordion-mixed__content">
+                        <style>
+                            .prices__table {
+                                width: 100%;
+                                color: #4a4a4a;
+                                text-align: center;
+                                border-collapse: collapse;
+                            }
+
+                            .prices__row {
+                                border-bottom: 1px solid #d8d8d8;
+                            }
+
+                            .prices__row:first-child {
+                                border-top: 1px solid #d8d8d8;
+                            }
+
+                            .prices__name {
+                                padding: 0.5rem 0.25rem 0.5rem 0;
+                            }
+
+                            .prices__name_size_50per {
+                                width: 70%;
+                            }
+
+                            @media (min-width: 1280px) {
+
+                                .prices__name_size_50per {
+                                    width: 75%;
+                                }
+                            }
+
+                            .prices__link {
+                                color: #4a4a4a;
+                            }
+
+
+                            .prices__value {
+                                font-size: 16px;
+                                border-left: 1px solid #d8d8d8;
+                                padding: 0 0.25rem;
+                            }
+                        </style>
+                        <div class="accordion-mixed__content-inner booking-houses__text">
+                            <?php
+                            global $wp_embed;
+                            $content = get_post_meta(get_the_ID(), "mastak_house_residence", true);
+                            $content = $wp_embed->autoembed($content);
+                            $content = $wp_embed->run_shortcode($content);
+                            $content = wpautop($content);
+                            $content = do_shortcode($content);
+                            echo $content;
+                            ?>
+                        </div>
+                    </div>
                     <div data-mixed-tab="1" class="accordion-mixed__tab <?= $isEmployment ? '' : 'accordion-mixed__tab--active' ?>">
                         ОПИСАНИЕ
                     </div>
