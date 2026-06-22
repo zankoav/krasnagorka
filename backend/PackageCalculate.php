@@ -24,6 +24,7 @@ class PackageCalculate extends CalculateImpl
         $isTeremRoom = get_term_meta($calendarId, 'kg_calendars_terem', 1) == 'on';
         $peopleCount = $request['peopleCount'];
 
+        Log::info('calculate package', $request);
         $min_night = intval(get_post_meta($packageId, 'package_night_min', 1));
 
         $calendars = get_post_meta($packageId, 'package_calendars', 1);
