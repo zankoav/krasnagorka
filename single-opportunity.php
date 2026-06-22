@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <? endif; ?>
+                        <?php endif; ?>
                     <div data-mixed-tab="6" class="accordion-mixed__tab">
                         Правила пользования
                     </div>
