@@ -42,6 +42,40 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
             </section>
             <div class="b-container b-p-sm-0">
                 <div class="accordion-mixed">
+                    <div data-mixed-tab="2" class="accordion-mixed__tab">
+                        ФОТОГАЛЕРЕЯ
+                    </div>
+                    <div data-mixed-conent="2" class="accordion-mixed__content">
+                        <?php if (!$isTerem) : ?>
+                            <div class="swiper-container accordion-mixed__content-inner house-media-library__container">
+                                <div class="swiper-wrapper house-media-library">
+                                    <?php get_model_gallary('medium', "mastak_house_gallery"); ?>
+                                </div>
+                                <div class="house-media-library__container">
+                                    <div class="b-container house-media-library__container-wrapper">
+                                        <div class="swiper-button-next house-media-library__button-next"></div>
+                                        <div class="swiper-button-prev house-media-library__button-prev"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <?php
+                            foreach ($galleries as $gallery) : ?>
+                                <p class="terem__gallery-title"><?= $gallery['subtitle']; ?></p>
+                                <div class="swiper-container accordion-mixed__content-inner house-media-library__container">
+                                    <div class="swiper-wrapper house-media-library">
+                                        <?php get_terem_gallary($gallery['gallary']); ?>
+                                    </div>
+                                    <div class="house-media-library__container">
+                                        <div class="b-container house-media-library__container-wrapper">
+                                            <div class="swiper-button-next house-media-library__button-next"></div>
+                                            <div class="swiper-button-prev house-media-library__button-prev"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
                     
                     <div data-mixed-tab="1" class="accordion-mixed__tab <?= $isEmployment ? '' : 'accordion-mixed__tab--active' ?>">
                         ОПИСАНИЕ
