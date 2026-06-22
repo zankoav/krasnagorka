@@ -235,6 +235,8 @@ class PackageCalculate extends CalculateImpl
             throw new Exception("calculate package error");
         }
 
+        Log::info('calculate package', $result);
+
         return $result;
     }
 
