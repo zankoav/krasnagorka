@@ -154,7 +154,23 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             </div>
                         <?php endif; ?>
                     </div>
-                    
+                    <div data-mixed-tab="4" class="accordion-mixed__tab">
+                        расположение
+                    </div>
+                    <div data-mixed-conent="4" class="accordion-mixed__content">
+                        <div class="accordion-mixed__content-inner">
+                            <div class="base-place b-mb-2">
+                                <div class="base-place__image">
+                                    <img src="<?= get_post_meta(get_the_ID(), "mastak_house_map", true); ?>" alt="map" class="base-place__image-inner">
+                                </div>
+                                <div class="base-place__content">
+                                    <div class="big-text content-text">
+                                        <?= wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true)); ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div data-mixed-tab="7" class="accordion-mixed__tab">
                         Условия и цены
