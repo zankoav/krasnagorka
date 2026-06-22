@@ -171,7 +171,57 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             </div>
                         </div>
                     </div>
-                    
+                    <?php $video = get_post_meta(get_the_ID(), "mastak_house_video", true);
+                    if (!empty($video)) : ?>
+                        <div data-mixed-tab="5" class="accordion-mixed__tab">
+                            ВИДЕО
+                        </div>
+                        <div data-mixed-conent="5" class="accordion-mixed__content">
+                            <div class="accordion-mixed__content-inner">
+                                <div class="video_wrapper">
+                                    <script>
+                                        setTimeout(function() {
+                                            jQuery('.video_wrapper').append('<iframe src="https://www.youtube.com/embed/<?= $video; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                        }, 3000);
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <?php
+                    if (get_post_meta(get_the_ID(), "mastak_house_is_terem", true)) : ?>
+                        <div data-mixed-tab="6" class="accordion-mixed__tab">
+                            Планировка
+                        </div>
+                        <div data-mixed-conent="6" class="accordion-mixed__content">
+                            <div class="accordion-mixed__content-inner">
+                                <div class="map-zooming">
+                                    <?php
+                                    $plan_1 = get_post_meta(get_the_ID(), "mastak_house_plan", true);
+                                    if (isset($plan_1) and !empty($plan_1)) : ?>
+                                        <div id="ex4" class="map-zoom">
+                                            <img src="<?= $plan_1; ?>" alt="map" class="map-zoom__image" data-big="<?= $plan_1; ?>">
+                                            <p class="map-zoom__title">Кликни</p>
+                                        </div>
+                                    <?php endif;
+                                    $plan_2 = get_post_meta(get_the_ID(), "mastak_house_plan_2", true);
+                                    if (isset($plan_2) and !empty($plan_2)) : ?>
+                                        <div id="ex5" class="map-zoom">
+                                            <img src="<?= $plan_2; ?>" alt="map" class="map-zoom__image" data-big="<?= $plan_2; ?>">
+                                            <p class="map-zoom__title">Кликни</p>
+                                        </div>
+                                    <?php endif;
+                                    $plan_3 = get_post_meta(get_the_ID(), "mastak_house_plan_3", true);
+                                    if (isset($plan_3) and !empty($plan_3)) : ?>
+                                        <div id="ex6" class="map-zoom">
+                                            <img src="<?= $plan_3; ?>" alt="map" class="map-zoom__image" data-big="<?= $plan_3; ?>">
+                                            <p class="map-zoom__title">Кликни</p>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
                     <div data-mixed-tab="7" class="accordion-mixed__tab">
                         Условия и цены
                     </div>
