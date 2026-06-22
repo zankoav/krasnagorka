@@ -56,6 +56,12 @@ class PackageCalculate extends CalculateImpl
             $dateEndDT->modify('+1 day')
         );
 
+        $days = [];
+        foreach ($period as $key => $value) {
+            $days[] = $value->format('Y-m-d');
+        }
+
+
         $daysCount = iterator_count($period);
         $daysWorkday = [];
         $daysWeekend = [];
@@ -167,8 +173,6 @@ class PackageCalculate extends CalculateImpl
         Log::info('calculate package 1', $days);
 
         $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
-
-        Log::info('calculate package 2', $babyBedAvailable);
 
         if ($babyBedAvailable) {
             $result['baby_bed_available'] = $babyBedAvailable;
