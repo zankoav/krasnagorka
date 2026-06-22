@@ -31,10 +31,11 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 
 ?>
 
-<?php while (have_posts()): 
-        the_post(); 
-        get_template_part("mastak/views/header", "small-view");
-        $imageId = get_post_thumbnail_id(); ?>
+<?php while (have_posts()): the_post(); ?> 
+        <?php 
+            get_template_part("mastak/views/header", "small-view");
+            $imageId = get_post_thumbnail_id(); 
+        ?>
         <div class="b-bgc-wrapper">
             <section class="b-container header-title">
                 <h2 class="header-title__subtitle"><?= $subtitle; ?></h2>
@@ -431,7 +432,8 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
             </div>
         </section>
         <?php
-        get_template_part("mastak/views/reviews", "view");
-        get_template_part("mastak/views/footer", "view");?>
-<?php endwhile;
-get_footer('mastak'); ?>
+            get_template_part("mastak/views/reviews", "view");
+            get_template_part("mastak/views/footer", "view");
+        ?>
+<?php endwhile; ?>
+<?php get_footer('mastak'); ?>
