@@ -811,6 +811,9 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $bookingSettings = get_option('mastak_booking_appearance_options');
         $babyBedTotalCount = !empty($bookingSettings['baby_bed_count']) ? intval($bookingSettings['baby_bed_count']) : 0;
 
+        Log::info('isAvailableBabyBed 1', $babyBedTotalCount);
+
+
         $cId = false;
         if ($isTerem) {
             $cId = $calendarId;
@@ -818,6 +821,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $calendarShortCode =  get_post_meta($houseId, "mastak_house_calendar", true);
             $cId = getCalendarId($calendarShortCode);
         }
+
+        Log::info('isAvailableBabyBed 2', $cId);
 
         $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
         $dateEnd = end($days);
@@ -850,6 +855,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             }
         }
 
+         Log::info('isAvailableBabyBed 3', $babyBedCount > 0);
         return $babyBedCount > 0;
     }
 
