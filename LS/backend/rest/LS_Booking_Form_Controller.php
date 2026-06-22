@@ -822,6 +822,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $cId = getCalendarId($calendarShortCode);
         }
 
+        try{
         Log::info('isAvailableBabyBed 2', $cId);
 
         $dateStart = date("Y-m-d", strtotime('-1 day', strtotime($days[0])));
@@ -853,6 +854,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $babyBedCount--;
                 }
             }
+        }
+
+        } catch (Throwable $e) {
+            Log::info('isAvailableBabyBed error', $e->getMessage());
+            throw new Exception("calculate package error");
         }
 
          Log::info('isAvailableBabyBed 3', $babyBedCount > 0);
