@@ -435,5 +435,5 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
             get_template_part("mastak/views/reviews", "view");
             get_template_part("mastak/views/footer", "view");
         ?>
-<?php endif; ?>
+<?php endwhile; ?>
 <?php get_footer('mastak'); ?>

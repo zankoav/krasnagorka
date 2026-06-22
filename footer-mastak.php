@@ -485,6 +485,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
     }
 </style>
 <script>
+    
     jQuery(document).ready(function() {
         jQuery("#kg-loader").delay(1000).fadeOut(300, function() {
             jQuery("#kg-loader").remove();
