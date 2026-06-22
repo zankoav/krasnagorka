@@ -164,7 +164,7 @@ class PackageCalculate extends CalculateImpl
             'total_price' => $accomodationPrice
         ];
 
-        Log::info('calculate package 1', $result);
+        Log::info('calculate package 1', $days);
 
         $babyBedAvailable = \LS_Booking_Form_Controller::isAvailableBabyBed($days, $calendarId, $houseId, $isTeremRoom);
 
@@ -208,7 +208,7 @@ class PackageCalculate extends CalculateImpl
         $result['only_booking_order'] = \LS_Booking_Form_Controller::isOnlyBookingOrder($days, $calendarId, $houseId, $isTeremRoom);
 
         Log::info('calculate package 4', $result);
-        
+
         $bathHouseWhitePrice = str_replace(",", ".", $bookingSettings['bath_house_white_price']);
         $bathHouseWhitePrice  = floatval($bathHouseWhitePrice);
 
