@@ -858,6 +858,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
         } catch (Throwable $e) {
             Log::info('isAvailableBabyBed error', $e->getMessage());
+            Log::info('isAvailableBabyBed trace', $e->getTrace());
             throw new Exception("calculate package error");
         }
 
