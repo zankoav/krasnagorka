@@ -41,12 +41,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
             </section>
             <div class="b-container b-p-sm-0">
                 <div class="accordion-mixed">
-                    <div data-mixed-tab="2" class="accordion-mixed__tab">
-                        ФОТОГАЛЕРЕЯ
-                    </div>
-                    <div data-mixed-conent="2" class="accordion-mixed__content">
-                        
-                    </div>
+                    
                     <div data-mixed-tab="3" class="accordion-mixed__tab js-add-public-calendar <?= $isTerem ? '' : ' js-add-public-calendar-single'; ?> <?= $isEmployment ? 'accordion-mixed__tab--active' : '' ?>">
                         <?= $isTerem ? 'КАЛЕНДАРИ БРОНИРОВАНИЯ' : 'КАЛЕНДАРЬ БРОНИРОВАНИЯ'; ?>
                     </div>
