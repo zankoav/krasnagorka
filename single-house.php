@@ -154,7 +154,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                             </div>
                         <?php endif; ?>
                     </div>
-                   
+                    
                     
                     <div data-mixed-tab="7" class="accordion-mixed__tab">
                         Условия и цены
