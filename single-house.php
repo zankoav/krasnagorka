@@ -32,7 +32,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
 ?>
 
 <?php if (have_posts()) :
-    while (have_posts()) : 
+    while (have_posts()) { 
         the_post(); 
         get_template_part("mastak/views/header", "small-view");
         $imageId = get_post_thumbnail_id(); ?>
@@ -434,7 +434,6 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
         <?php
         get_template_part("mastak/views/reviews", "view");
         get_template_part("mastak/views/footer", "view");?>
-<?php 
-    endwhile;
+<?php }
 endif; // end of the loop.
 get_footer('mastak'); ?>
