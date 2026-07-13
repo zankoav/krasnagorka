@@ -796,4 +796,11 @@ function getSeasonsForPricePage()
 
 include('calendar-season-shortcodes.php');
 include('discounts-shortcodes.php');
+
+function free_date_query_vars( $vars ) {
+    $vars[] = 'free_date_from'; 
+    $vars[] = 'free_date_to';
+    return $vars;
+}
+add_filter( 'query_vars', 'free_date_query_vars' );
 ?>

@@ -28,6 +28,16 @@
         'order'          => 'ASC'
     ));
 
+    $free_date_from = get_query_var( 'free_date_from' );
+    $free_date_to = get_query_var( 'free_date_to' );
+    $check_free_date = false;
+
+    if ( !empty( $free_date_from ) &&  !empty( $free_date_to )) {
+        var_dump($free_date_from);
+        var_dump($free_date_to);
+        $check_free_date = true;
+    }
+
 ?>
     <section class="b-container header-title">
         <?php if (is_user_logged_in()): ?>
