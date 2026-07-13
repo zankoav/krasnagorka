@@ -19,15 +19,6 @@
     get_header('mastak');
     get_template_part("mastak/views/header", "small-view");
 
-    $houses_query = new WP_Query(array(
-        'post_type'      => 'house',
-        'post_status'    => 'publish',
-        'posts_per_page' => -1,
-        'meta_key'       => 'mastak_house_order',
-        'orderby'        => 'meta_value_num',
-        'order'          => 'ASC'
-    ));
-
     $free_date_from = get_query_var( 'free_date_from' );
     $free_date_to = get_query_var( 'free_date_to' );
     
@@ -91,6 +82,15 @@
     // } else {
     //     echo 'Даты валидны и актуальны!';
     // }
+
+    $houses_query = new WP_Query(array(
+        'post_type'      => 'house',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'meta_key'       => 'mastak_house_order',
+        'orderby'        => 'meta_value_num',
+        'order'          => 'ASC'
+    ));
 
 ?>
     <section class="b-container header-title">
