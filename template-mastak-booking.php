@@ -84,13 +84,13 @@
     }
 
     // 5. Обработка результата
-    if ( ! empty( $errors ) ) {
-        foreach ( $errors as $error ) {
-            echo '<div class="error-msg">' . esc_html( $error ) . '</div>';
-        }
-    } else {
-        echo 'Даты валидны и актуальны!';
-    }
+    // if ( ! empty( $errors ) ) {
+    //     foreach ( $errors as $error ) {
+    //         echo '<div class="error-msg">' . esc_html( $error ) . '</div>';
+    //     }
+    // } else {
+    //     echo 'Даты валидны и актуальны!';
+    // }
 
 ?>
     <section class="b-container header-title">
