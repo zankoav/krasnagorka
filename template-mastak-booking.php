@@ -26,6 +26,7 @@
     $date_from = null;
     $date_to = null;
     $isFreeDateScenarioAvailable = false;
+    $freeCalendarsIds = [];
 
     if(isset($free_date_from) && isset($free_date_to)){
         // 1. Получаем и очищаем данные из параметров
@@ -80,14 +81,12 @@
         $isFreeDateScenarioAvailable = empty( $errors );
 
         if($isFreeDateScenarioAvailable){
-            echo $date_from->format("Y-m-d") . '   ' . $date_to->format("Y-m-d");
-            $result = get_free_date_calendars($date_from, $date_to);
-            var_dump($result);
+            $freeCalendarsIds = get_free_date_calendars($date_from, $date_to);
+            if(empty($freeCalendarsIds)){
+                $isFreeDateScenarioAvailable = false;
+            }
         }
     }
-
-
-    
 
     $houses_query = new WP_Query(array(
         'post_type'      => 'house',
@@ -145,11 +144,20 @@
                 $houses_query->the_post();
                 $isTerem = get_post_meta(get_the_ID(), 'mastak_house_is_it_terem', true);
                 if (!$isTerem) {
-                    get_template_part('mastak/views/booking', 'house');
+                    get_template_part('mastak/views/booking', 'house', array(
+                        'isFreeDateScenarioAvailable'   => $isFreeDateScenarioAvailable,
+                        'freeCalendarsIds'   => $freeCalendarsIds
+                    ));
                 } else if ($isTerem) {
                     $terem_options = get_option('mastak_terem_appearance_options');
                     $kalendars     = $terem_options['kalendar'];
                     foreach ($kalendars as $kalendar) : ?>
+                        <?php $calendarTeremId = getCalendarId($kalendar['calendar']);?>
+                        <?php 
+                            if($isFreeDateScenarioAvailable && !in_array($calendarTeremId, $freeCalendarsIds)){
+                                continue;
+                            }
+                        ?>
                         <div class="booking-houses__wrapper booking-houses__wrapper_terem">
                             <div class="booking-houses__item">
                                 <div class="booking-houses__header">
@@ -224,9 +232,6 @@
                                             <?php endif; ?>
                                     </p>
                                 </div>
-                                <?php 
-                                    $calendarTeremId = getCalendarId($kalendar['calendar']);
-                                ?>
                                 <div class="booking-houses__calendars">
                                     <div class="booking-houses__calendars-inner">
                                         <a href="#" data-calendar='<?= $kalendar['calendar']; ?>'

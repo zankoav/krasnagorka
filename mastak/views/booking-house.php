@@ -9,9 +9,15 @@ $toilet            = get_post_meta(get_the_ID(), 'toilet', 1);
 $bed_rooms         = get_post_meta(get_the_ID(), 'bed_rooms', 1);
 $triple_bed        = get_post_meta(get_the_ID(), 'triple_bed', 1);
 $calendarShortCode =  get_post_meta(get_the_ID(), "mastak_house_calendar", true);
-$calendarId = getCalendarId($calendarShortCode);
+$calendarId = (int)getCalendarId($calendarShortCode);
+
+
+$isFreeDateScenarioAvailable = $args['isFreeDateScenarioAvailable'];
+$freeCalendarsIds = $args['freeCalendarsIds'];
+
 ?>
 
+<?php if(!$isFreeDateScenarioAvailable || in_array($calendarId, $freeCalendarsIds)):?>
 <div class="booking-houses__wrapper">
     <div class="booking-houses__item">
         <div class="booking-houses__header">
@@ -63,3 +69,4 @@ $calendarId = getCalendarId($calendarShortCode);
         </div>
     </div>
 </div>
+<?php endif;?>
