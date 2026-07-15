@@ -810,8 +810,8 @@ add_filter( 'query_vars', 'free_date_query_vars' );
  */
 function check_free_dates($request){
     $calendarId = $request['calendarId'];
-    $dateStart = date("Y-m-d", strtotime($request['dateStart']));
-    $dateEnd =  date("Y-m-d", strtotime($request['dateEnd']));
+    $dateStart = $request['dateStart']->format("Y-m-d");
+    $dateEnd =  $request['dateEnd']->format("Y-m-d");
     $toDay = date("Y-m-d");
 
     $result = [
