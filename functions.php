@@ -808,90 +808,88 @@ add_filter( 'query_vars', 'free_date_query_vars' );
  * @param array [calendarId, dateStart, dateEnd]
  * date format Y-m-d
  */
-function check_free_dates($request)
-    {
-        $calendarId = $request['calendarId'];
-        $dateStart = date("Y-m-d", strtotime($request['dateStart']));
-        $dateEnd =  date("Y-m-d", strtotime($request['dateEnd']));
-        $toDay = date("Y-m-d");
+function check_free_dates($request){
+    $calendarId = $request['calendarId'];
+    $dateStart = date("Y-m-d", strtotime($request['dateStart']));
+    $dateEnd =  date("Y-m-d", strtotime($request['dateEnd']));
+    $toDay = date("Y-m-d");
 
-        $result = [
-            'available' => true
-        ];
+    $result = [
+        'available' => true
+    ];
 
-        $ordersQuery = new WP_Query;
-        $orders = $ordersQuery->query(array(
-            'post_type' => 'sbc_orders',
-            'posts_per_page' => -1,
-            'tax_query' => [
-                [
-                    'taxonomy' => 'sbc_calendars',
-                    'terms' => [$calendarId]
-                ]
-            ],
-            'meta_query' => array(
-                array(
-                    'key'     => 'sbc_order_end',
-                    'value'   => $dateStart,
-                    'compare' => '>=',
-                )
+    $ordersQuery = new WP_Query;
+    $orders = $ordersQuery->query(array(
+        'post_type' => 'sbc_orders',
+        'posts_per_page' => -1,
+        'tax_query' => [
+            [
+                'taxonomy' => 'sbc_calendars',
+                'terms' => [$calendarId]
+            ]
+        ],
+        'meta_query' => array(
+            array(
+                'key'     => 'sbc_order_end',
+                'value'   => $dateStart,
+                'compare' => '>=',
             )
-        ));
+        )
+    ));
 
-        $parseResult = [];
+    $parseResult = [];
 
-        foreach ($orders  as $item) {
-            $orderId = $item->ID;
-            $start = get_post_meta($orderId, 'sbc_order_start', true);
-            $startTime = strtotime($start);
-            $start = date('Y-m-d', $startTime);
-            $end = get_post_meta($orderId, 'sbc_order_end', true);
-            $endTime = strtotime($end);
-            $end = date('Y-m-d', $endTime);
-            $parseResult[] = [$start, $end, $orderId];
-        }
-
-        foreach ($parseResult as $r) {
-            $from = $r[0];
-            $to = $r[1];
-            $orId = $r[2];
-
-            if ($dateStart >= $from and $dateStart < $to) {
-                $result['available'] = false;
-            }
-
-            if ($dateEnd > $from and $dateEnd <= $to) {
-                $result['available'] = false;
-            }
-
-            if ($dateStart < $from and $dateEnd > $to) {
-                $result['available'] = false;
-            }
-        }
-
-        if (!$result['available']) {
-            $result['message'] = 'Упс! Бронь уже занята :(';
-        }
-
-        return $result;
+    foreach ($orders  as $item) {
+        $orderId = $item->ID;
+        $start = get_post_meta($orderId, 'sbc_order_start', true);
+        $startTime = strtotime($start);
+        $start = date('Y-m-d', $startTime);
+        $end = get_post_meta($orderId, 'sbc_order_end', true);
+        $endTime = strtotime($end);
+        $end = date('Y-m-d', $endTime);
+        $parseResult[] = [$start, $end, $orderId];
     }
 
-    private function get_free_date_calendars($dateStart, $dateEnd)
-    {
-        $terms = get_terms(['taxonomy' => 'sbc_calendars']);
-        $result = [];
-        foreach ($terms as $term) {
+    foreach ($parseResult as $r) {
+        $from = $r[0];
+        $to = $r[1];
+        $orId = $r[2];
 
-            $isCalendarVailable = check_free_dates([
-                "calendarId" => $term->term_id, 
-                "dateStart" => $dateStart, 
-                "dateEnd" => $dateEnd
-            ]);
-            
-            if($isCalendarVailable['available']){
-                $result[] = $term->term_id;
-            }
+        if ($dateStart >= $from and $dateStart < $to) {
+            $result['available'] = false;
         }
-        return $result;
+
+        if ($dateEnd > $from and $dateEnd <= $to) {
+            $result['available'] = false;
+        }
+
+        if ($dateStart < $from and $dateEnd > $to) {
+            $result['available'] = false;
+        }
     }
+
+    if (!$result['available']) {
+        $result['message'] = 'Упс! Бронь уже занята :(';
+    }
+
+    return $result;
+}
+
+ function get_free_date_calendars($dateStart, $dateEnd){
+    $terms = get_terms(['taxonomy' => 'sbc_calendars']);
+    $result = [];
+    foreach ($terms as $term) {
+
+        $isCalendarVailable = check_free_dates([
+            "calendarId" => $term->term_id, 
+            "dateStart" => $dateStart, 
+            "dateEnd" => $dateEnd
+        ]);
+        
+        if($isCalendarVailable['available']){
+            $result[] = $term->term_id;
+        }
+    }
+    return $result;
+}
 ?>
