@@ -273,16 +273,17 @@
     <?php if($isFreeDateScenarioAvailable):?>
         <script>
             jQuery(document).ready(async function ($) {
-                setTimeout(()=>{
-                    let cButtons = document.querySelectorAll('.booking-houses__calendars-button')
-                    console.log('cButtons', cButtons);
-                    for (let button of cButtons) {
-                        $(button).trigger('click')
-                        await new Promise((resolve) => {
-                            setTimeout(resolve, 2000)
-                        })
-                    }
-                }, 3000)
+                await new Promise((resolve) => {
+                    setTimeout(resolve, 2000)
+                })
+                let cButtons = document.querySelectorAll('.booking-houses__calendars-button')
+                console.log('cButtons', cButtons);
+                for (let button of cButtons) {
+                    $(button).trigger('click')
+                    await new Promise((resolve) => {
+                        setTimeout(resolve, 2000)
+                    })
+                }
             });
         </script>
     <?php endif;?>
