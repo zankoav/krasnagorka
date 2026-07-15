@@ -80,8 +80,7 @@
         $isFreeDateScenarioAvailable = empty( $errors );
 
         if($isFreeDateScenarioAvailable){
-            var_dump($date_from);
-            var_dump($date_to);
+            echo $date_from->format("Y-m-d") . '   ' . $date_to->format("Y-m-d");
             $result = get_free_date_calendars($date_from, $date_to);
             var_dump($result);
         }
