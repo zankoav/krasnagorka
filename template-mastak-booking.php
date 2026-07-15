@@ -270,6 +270,21 @@
             margin-top : 1.5rem;
         }
     </style>
+    <?php if($isFreeDateScenarioAvailable):?>
+        <script>
+            jQuery(document).ready(async function ($) {
+                async function openCalendars() {
+                    let cButtons = document.querySelectorAll('.booking-houses__calendars-button')
+                    for (let button of cButtons) {
+                        $(button).trigger('click')
+                        await new Promise((resolve) => {
+                            setTimeout(resolve, 2000)
+                        })
+                    }
+                }
+            });
+        </script>
+    <?php endif;?>
 <?php
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");
