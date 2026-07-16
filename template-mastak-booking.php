@@ -28,10 +28,10 @@
     $isFreeDateScenarioAvailable = false;
     $freeCalendarsIds = [];
 
-    if(isset($free_date_from) && isset($free_date_to)){
+    if(!empty($free_date_from) && !empty($free_date_to)){
         // 1. Получаем и очищаем данные из параметров
         $date_from_raw = isset($free_date_from) ? sanitize_text_field($free_date_from) : '';
-        $date_to_raw   = isset($free_date_to)   ? sanitize_text_field($free_date_to)   : '';
+        $date_to_raw = isset($free_date_to) ? sanitize_text_field($free_date_to)   : '';
 
         // Ожидаемый формат даты (ГГГГ-ММ-ДД)
         $date_format = 'Y-m-d'; 
