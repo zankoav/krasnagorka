@@ -415,10 +415,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }
 
         if($errors != null){
-            $result[
-                "status" => 400
-                "errorMessage" => $errors
-            ];
+            $result["status"] = 400;
+            $result["errorMessage"] = $errors;
         }
 
         return new WP_REST_Response($result, 200);
