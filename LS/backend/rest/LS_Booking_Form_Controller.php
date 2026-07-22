@@ -58,6 +58,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'check_order_permissions_check')
             ),
         ]);
+
+        register_rest_route($namespace, '/ls/freeDate/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'freeDate'),
+                'permission_callback' => array($this, 'freeDate_permissions_check')
+            ),
+        ]);
+    }
+
+    public function freeDate_permissions_check($request)
+    {
+        return true;
     }
 
     public function check_order_permissions_check($request)
@@ -323,6 +336,16 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             'description' => $description
         ];
 
+        return new WP_REST_Response($result, 200);
+    }
+
+    public function freeDate($request){
+        $from = $request['free_date_from'];
+        $to = $request['free_date_to'];
+        $result = [
+            "from"=> $from,
+            "to"=> $to,
+        ];
         return new WP_REST_Response($result, 200);
     }
 
