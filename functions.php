@@ -890,6 +890,8 @@ function check_free_dates($request){
             $result[] = $term->term_id;
         }
     }
+
+    $result = array_diff($result, [30, 33, 41, 17, 32]);
     return $result;
 }
 ?>
