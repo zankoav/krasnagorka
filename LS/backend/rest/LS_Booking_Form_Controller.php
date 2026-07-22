@@ -407,6 +407,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             if($isFreeDateScenarioAvailable){
                 $freeCalendarsIds = get_free_date_calendars($date_from, $date_to);
+                $result["freeCalendarsIds"] = $freeCalendarsIds;
                 if(empty($freeCalendarsIds)){
                     $isFreeDateScenarioAvailable = false;
                     $errors = 'К сожалению на данные даты все номера заняты. Попробуйте выбрать другие даты.';
