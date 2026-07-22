@@ -343,8 +343,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $from = $request['free_date_from'];
         $to = $request['free_date_to'];
         $result = [
-            "from"=> $from,
-            "to"=> $to,
+            "status" => 200
         ];
         return new WP_REST_Response($result, 200);
     }
