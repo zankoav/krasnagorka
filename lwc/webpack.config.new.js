@@ -17,7 +17,8 @@ module.exports = (env) => {
             cookie: './frontend/cookie.js',
             booking: './frontend/booking.js',
             taplink: './frontend/taplink.js',
-            tab_events: './frontend/tab_events.js'
+            tab_events: './frontend/tab_events.js',
+            free_date: './frontend/free_date.js'
         },
         optimization: {
             minimize: true,
@@ -128,6 +129,12 @@ module.exports = (env) => {
                 inject: 'body',
                 template: './frontend/taplink.pug',
                 chunks: ['taplink']
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Free Date',
+                filename: `free-date.html`,
+                template: './frontend/free_date.pug',
+                chunks: ['free_date']
             }),
             new HtmlWebpackPlugin({
                 title: 'Tab Events',

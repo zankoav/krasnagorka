@@ -1,0 +1,280 @@
+/* Главный контейнер модуля */
+.free-date {
+    display: flex;
+    flex-wrap: wrap; /* Позволяет элементам переноситься на новые строки */
+    gap: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    width: 100%;
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+
+/* Красивый крупный заголовок */
+.free-date__title {
+    width: 100%; /* Занимает всю верхнюю строчку */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Отступ между иконкой и текстом */
+    font-size: 19px;
+    font-weight: 800; /* Выразительный жирный шрифт */
+    letter-spacing: -0.4px;
+    padding-bottom: 14px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #edf2f7; /* Тонкая линия снизу */
+
+    /* Элегантный сине-лазурный градиент вместо черного */
+    background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Отдельный независимый элемент иконки */
+.free-date__title-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0; /* Защищает иконку от сжатия */
+}
+
+/* Блок с инпутами (делит строку с кнопкой) */
+.free-date__input-block {
+    display: flex;
+    gap: 16px;
+    flex: 1; /* Занимает всё пространство слева от кнопки */
+    min-width: 280px;
+}
+
+/* Стилизация тега label */
+.free-date__input-block label {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Текстовая надпись (Дата заезда / Дата выезда) */
+.free-date__input-block .free-date__label-info {
+    font-size: 12px;
+    font-weight: 600;
+    color: #718096;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Дизайн полей ввода */
+.free-date__input-block input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2d3748;
+    background-color: #f7fafc;
+    border: 1px solid #cbd5e0;
+    border-radius: 10px;
+    outline: none;
+    font-family: inherit;
+    padding: 14px 44px 14px 16px;
+    transition: all 0.2s ease-in-out;
+}
+
+.free-date__input-block input[type="date"]:hover {
+    border-color: #a0aec0;
+    background-color: #edf2f7;
+}
+
+.free-date__input-block input[type="date"]:focus {
+    background-color: #ffffff;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+/* Иконка календаря */
+.free-date__input-block label::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    bottom: 15px;
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%233182ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Скрытый клик-триггер */
+.free-date__input-block input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Блок кнопки / спиннера (в строке с инпутами) */
+.free-date__button-block {
+    display: flex;
+    align-items: flex-end; /* Опускает кнопку строго под линию инпутов */
+    min-width: 160px;
+}
+
+/* Кнопка "Найти" */
+.free-date__button {
+    width: 100%;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg, #3182ce 0%, #2b6cb0 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(49, 130, 206, 0.25);
+    transition: all 0.2s ease-in-out;
+    height: 48px; /* Фиксированная высота */
+}
+
+.free-date__button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(49, 130, 206, 0.35);
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+}
+
+.free-date__button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(49, 130, 206, 0.25);
+}
+
+/* Спиннер загрузки */
+.free-date__spinner-block {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    width: 100%;
+}
+
+.free-date__spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(49, 130, 206, 0.15);
+    border-top-color: #3182ce;
+    border-radius: 50%;
+    animation: freeDateSpin 0.8s linear infinite;
+}
+
+.free-date__spinner-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* ==========================================================================
+   НОВЫЕ СТИЛИ: Плашки во всю ширину (перенесены в корень)
+   ========================================================================== */
+
+/* Блок успешного поиска (Свободные номера найдены) */
+.free-date__link-block {
+    width: 100%; /* Растягиваем на 100% ширины в самый низ */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    background-color: #f0fff4; /* Мягкий зеленый фон */
+    border: 1px solid #c6f6d5;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #22543d;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+}
+
+.free-date__link {
+    color: #38a169;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px dashed #38a169;
+    transition: color 0.2s ease;
+}
+
+.free-date__link:hover {
+    color: #276749;
+    border-bottom-style: solid;
+}
+
+/* Блок вывода ошибки (Если номеров нет) */
+.free-date__error-block {
+    width: 100%; /* Растягиваем на 100% ширины в самый низ */
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: #fff5f5; /* Мягкий красный фон */
+    border: 1px solid #fed7d7;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #c53030;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Анимации */
+@keyframes freeDateSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ ПОД МОБИЛЬНЫЕ ЭКРАНЫ
+   ========================================================================== */
+@media (max-width: 768px) {
+    .free-date {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .free-date__title {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .free-date__input-block {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .free-date__button-block {
+        width: 100%;
+        margin-top: 4px;
+    }
+}

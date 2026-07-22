@@ -1,0 +1,42 @@
+<template lwc:render-mode="light">
+    <div class="free-date">
+        <div class="free-date__title">
+            <svg
+                class="free-date__title-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#3182ce"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+            Поиск свободных номеров по датам:
+        </div>
+        <div class="free-date__input-block">
+            <label for="free_date_from"
+                ><span class="free-date__label-info">Дата заезда:</span>
+                <input id="free_date_from" type="date" name="free_date_from" onchange={handleChange} />
+            </label>
+            <label for="free_date_to"
+                ><span class="free-date__label-info">Дата выезда:</span>
+                <input id="free_date_to" type="date" name="free_date_to" onchange={handleChange} />
+            </label>
+        </div>
+        <div class="free-date__button-block">
+            <button if:false={loading} class="free-date__button" onclick={handleFind}>Найти</button>
+            <div if:true={loading} class="free-date__spinner-block">
+                <div class="free-date__spinner"></div>
+                <div class="free-date__spinner-text">Поиск номеров ...</div>
+            </div>
+        </div>
+        <div if:true={link} class="free-date__link-block">
+            <span class="free-date__link-label">Есть свободные номера: </span><a class="free-date__link" target="_blank" href={link}>посмотреть</a>
+        </div>
+        <div if:true={errorMessage} class="free-date__error-block">{errorMessage}</div>
+    </div>
+</template>

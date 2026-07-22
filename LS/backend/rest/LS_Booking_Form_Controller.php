@@ -370,12 +370,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $date_from = DateTime::createFromFormat( $date_format, $date_from_raw );
                 
                 if ( ! $date_from || $date_from->format( $date_format ) !== $date_from_raw ) {
-                    $errors = 'Неверный формат даты "от". Используйте ГГГГ-ММ-ДД.';
+                    $errors = 'Неверный формат даты "заезда". Используйте ГГГГ-ММ-ДД.';
                 } else {
                     // Проверка: дата не должна быть в прошлом
                     $date_from->setTime(0, 0, 0);
                     if ( $date_from < $today ) {
-                        $errors = 'Дата "от" не может быть в прошлом.';
+                        $errors = 'Дата "заезда" не может быть в прошлом.';
                     }
                 }
             }
@@ -385,12 +385,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $date_to = DateTime::createFromFormat( $date_format, $date_to_raw );
                 
                 if ( ! $date_to || $date_to->format( $date_format ) !== $date_to_raw ) {
-                    $errors = 'Неверный формат даты "до". Используйте ГГГГ-ММ-ДД.';
+                    $errors = 'Неверный формат даты "выезда". Используйте ГГГГ-ММ-ДД.';
                 } else {
                     // Проверка: дата не должна быть в прошлом
                     $date_to->setTime(0, 0, 0);
                     if ( $date_to < $today ) {
-                       $errors = 'Дата "до" не может быть в прошлом.';
+                       $errors = 'Дата "выезда" не может быть в прошлом.';
                     }
                 }
             }
@@ -398,7 +398,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             // 4. Проверка логики диапазона (дата "от" <= дата "до")
             if (  $errors == null && $date_from && $date_to ) {
                 if ( $date_from > $date_to ) {
-                    $errors = 'Дата "от" не может быть позже, чем дата "до".';
+                    $errors = 'Дата "заезда" не может быть позже, чем дата "выезда".';
                 }
             }
 

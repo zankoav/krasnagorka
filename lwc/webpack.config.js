@@ -13,6 +13,7 @@ module.exports = (env) => {
     const settins = {
         entry: {
             cookie: './frontend/cookie.js',
+            free_date: './frontend/free_date.js',
             booking: './frontend/booking.js',
             taplink: './frontend/taplink.js',
             tab_events: './frontend/tab_events.js'
@@ -122,6 +123,12 @@ module.exports = (env) => {
                 filename: `tab-events.html`,
                 template: './frontend/tab_events.pug',
                 chunks: ['tab_events']
+            }),
+            new HtmlWebpackPlugin({
+                title: 'Free Date',
+                filename: `free-date.html`,
+                template: './frontend/free_date.pug',
+                chunks: ['free_date']
             }),
             new LWCWebpackPlugin(),
             new webpack.DefinePlugin({
