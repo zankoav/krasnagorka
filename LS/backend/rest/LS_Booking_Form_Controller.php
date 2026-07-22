@@ -415,6 +415,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $errors = 'К сожалению на данные даты все номера заняты. Попробуйте выбрать другие даты.';
                 }
             }
+        }else if(empty($free_date_from) || empty($free_date_to)){
+            $errors = "Пожалуйста выберите даты заезда и выезда";
         }
 
         if($errors != null){
