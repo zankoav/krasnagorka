@@ -340,11 +340,87 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function freeDate($request){
-        $from = $request['free_date_from'];
-        $to = $request['free_date_to'];
         $result = [
             "status" => 200
         ];
+
+        $free_date_from = $request['free_date_from'];
+        $free_date_to = $request['free_date_to'];
+        
+        $errors = null;
+        $date_from = null;
+        $date_to = null;
+        $isFreeDateScenarioAvailable = false;
+        $freeCalendarsIds = [];
+
+        if(!empty($free_date_from) && !empty($free_date_to)){
+            // 1. Получаем и очищаем данные из параметров
+            $date_from_raw = isset($free_date_from) ? sanitize_text_field($free_date_from) : '';
+            $date_to_raw = isset($free_date_to) ? sanitize_text_field($free_date_to)   : '';
+
+            // Ожидаемый формат даты (ГГГГ-ММ-ДД)
+            $date_format = 'Y-m-d'; 
+
+            // Получаем текущую дату с обнуленным временем (00:00:00) для точного сравнения дней
+            $today = new DateTime();
+            $today->setTime(0, 0, 0);
+
+            // 2. Валидация даты "от"
+            if ( ! empty( $date_from_raw ) ) {
+                $date_from = DateTime::createFromFormat( $date_format, $date_from_raw );
+                
+                if ( ! $date_from || $date_from->format( $date_format ) !== $date_from_raw ) {
+                    $errors = 'Неверный формат даты "от". Используйте ГГГГ-ММ-ДД.';
+                } else {
+                    // Проверка: дата не должна быть в прошлом
+                    $date_from->setTime(0, 0, 0);
+                    if ( $date_from < $today ) {
+                        $errors = 'Дата "от" не может быть в прошлом.';
+                    }
+                }
+            }
+
+            // 3. Валидация даты "до"
+            if ( ! empty( $date_to_raw ) ) {
+                $date_to = DateTime::createFromFormat( $date_format, $date_to_raw );
+                
+                if ( ! $date_to || $date_to->format( $date_format ) !== $date_to_raw ) {
+                    $errors = 'Неверный формат даты "до". Используйте ГГГГ-ММ-ДД.';
+                } else {
+                    // Проверка: дата не должна быть в прошлом
+                    $date_to->setTime(0, 0, 0);
+                    if ( $date_to < $today ) {
+                       $errors = 'Дата "до" не может быть в прошлом.';
+                    }
+                }
+            }
+
+            // 4. Проверка логики диапазона (дата "от" <= дата "до")
+            if (  $errors == null && $date_from && $date_to ) {
+                if ( $date_from > $date_to ) {
+                    $errors = 'Дата "от" не может быть позже, чем дата "до".';
+                }
+            }
+
+            // 5. Обработка результата
+            $isFreeDateScenarioAvailable = $errors == null;
+
+            if($isFreeDateScenarioAvailable){
+                $freeCalendarsIds = get_free_date_calendars($date_from, $date_to);
+                if(empty($freeCalendarsIds)){
+                    $isFreeDateScenarioAvailable = false;
+                    $errors = 'К сожалению на данные даты все номера заняты. Попробуйте выбрать другие даты.';
+                }
+            }
+        }
+
+        if($errors != null){
+            $result[
+                "status" => 400
+                "errorMessage" => $errors
+            ];
+        }
+
         return new WP_REST_Response($result, 200);
     }
 
