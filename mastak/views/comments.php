@@ -1,3 +1,4 @@
+<section class="b-container free-date-wrapper"></section>
 <section class="b-container header-title">
     <h2 class="header-title__subtitle">Оставить отзыв</h2>
 </section>
