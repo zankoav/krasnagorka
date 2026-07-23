@@ -5,4 +5,6 @@ import FreeDate from 'fd/freeDate'
 
 const appEl = createElement('fd-free-date', { is: FreeDate })
 const freeDateWrapperEl = document.querySelector('.free-date-wrapper')
-freeDateWrapperEl.appendChild(appEl)
+if (freeDateWrapperEl) {
+    freeDateWrapperEl.appendChild(appEl)
+}
