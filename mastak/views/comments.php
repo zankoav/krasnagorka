@@ -73,6 +73,9 @@
             ?>
         </div>
     </div>
+</div>
+
+<div class="b-container">
     <div class="review-form__out">
         <span class="review-form__out-title">Оставьте свой отзыв в:</span>
         <div class="review-form__out-container">
