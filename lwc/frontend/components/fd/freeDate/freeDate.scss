@@ -230,6 +230,15 @@
     color: #c53030;
     box-sizing: border-box;
     animation: fadeIn 0.3s ease;
+
+    p {
+        line-height: 1.41;
+    }
+
+    a {
+        color: #3182ce !important;
+        text-decoration: underline;
+    }
 }
 
 /* Анимации */

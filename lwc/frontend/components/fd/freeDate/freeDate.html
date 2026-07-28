@@ -36,7 +36,7 @@
         <div if:true={link} class="free-date__link-block">
             <span class="free-date__link-label">Есть свободные номера: </span><a class="free-date__link" target="_blank" href={link}>посмотреть</a>
         </div>
-        <div if:true={errorMessage} class="free-date__error-block">{errorMessage}</div>
+        <div lwc:if={errorMessage} lwc:inner-html={errorMessage} class="free-date__error-block"></div>
         <template lwc:if={content}>
             <ul class="icons-description">
                 <li class="icons__description-item">

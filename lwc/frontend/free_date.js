@@ -1,7 +1,12 @@
 import './common/common.scss'
-import '@lwc/synthetic-shadow'
-import { createElement } from 'lwc'
+import { createElement, setHooks } from 'lwc'
 import FreeDate from 'fd/freeDate'
+
+setHooks({
+    sanitizeHtmlContent(content) {
+        return content
+    }
+})
 
 const appEl = createElement('fd-free-date', { is: FreeDate })
 const freeDateWrapperEl = document.querySelector('.free-date-wrapper')
