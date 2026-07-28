@@ -162,10 +162,6 @@
 			wp_enqueue_script( 'commons', $themeUri . '/mastak' . $scriptsData["common"]["js"], false, null, true );
 			wp_enqueue_script( 'booking', $themeUri . '/mastak' . $scriptsData["booking"]["js"], false, null, true );
             wp_enqueue_script( 'house', $themeUri . '/mastak' . $scriptsHouseData["house"]["js"], false, null, true );
-
-//            wp_dequeue_script('jquery-fancybox');
-//            wp_dequeue_script('jquery-easing');
-//            wp_dequeue_script('jquery-mousewheel');
             
             
             wp_dequeue_script( 'fullcalendar_locale' ); //If you're using disqus, etc.
@@ -180,7 +176,7 @@
 
 		}
 
-		if ( is_page_template( 'template-mastak-map.php' ) or is_page_template( 'template-payed-success.php' )) {
+		if ( is_page('podbor-dat') || is_page_template( 'template-mastak-map.php' ) || is_page_template( 'template-payed-success.php' )) {
 
 			$scriptsData = get_assets_json( "booking" );
             $scriptsHouseData = get_assets_json( "house" );
