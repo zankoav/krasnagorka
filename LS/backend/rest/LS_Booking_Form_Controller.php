@@ -414,8 +414,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $errors = '<p>К сожалению, на выбранные даты нет доступных вариантов размещения.<br>Попробуйте выбрать другие даты или свяжитесь с нашим отделом бронирования по телефону <a href="tel:+375293201919">+375293201919</a> для консультации и подбора подходящего варианта размещения.</p>';
                 }else{
                     $terms = get_terms([
-                        'taxonomy' => 'sbc_calendars'
-                        'include'    => $freeCalendarsIds,
+                        'taxonomy'  => 'sbc_calendars',
+                        'include'   => $freeCalendarsIds
                     ]);
                     $calendars = [];
 
