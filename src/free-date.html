@@ -1,3 +1,349 @@
 <!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="initial-scale=1,width=device-width"><title>Free Date</title><link href="https://krasnagorka.by/wp-content/themes/krasnagorka/lwc/frontend/fonts/AvenirNextCyr/fonts.css" rel="stylesheet"/><style>body{
           background: #f0f0f0;
-      }</style><script defer="defer" src="/wp-content/themes/krasnagorka/src/javascript/free_date.7d200409cce0f8190562.min.js"></script></head><body><div class="free-date-wrapper"></div></body></html>
+      }    
+      
+      .booking-houses {
+          display: flex;
+          flex-direction: column;
+      }
+      
+      @media (min-width: 768px) {
+          .booking-houses {
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              margin: 0 -1rem;
+              max-width: none;
+          }
+      }
+      
+      .booking-houses__item {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          background-color: #fff;
+          padding: 1.5rem 0;
+          overflow: hidden;
+          -webkit-box-shadow: 0 2px 4px 0 #bcbcbc;
+          box-shadow: 0 2px 4px 0 #bcbcbc;
+          margin-bottom: 0.25rem;
+          margin-left: -2rem;
+          margin-right: -2rem;
+          max-width: none;
+      }
+      
+      @media (min-width: 768px) {
+          .booking-houses__item {
+              border-radius: 0.5rem;
+              margin-left: 0;
+              margin-right: 0;
+              margin-bottom: 0;
+              max-width: 100%;
+              padding: 0;
+          }
+      }
+      
+      @media (min-width: 1024px) {
+          .booking-houses__item {
+              padding: 1.5rem;
+              max-width: none;
+          }
+      }
+      
+      @media (min-width: 768px) {
+          .booking-houses__wrapper {
+              border-radius: 0.5rem;
+              margin-left: 0;
+              margin-right: 0;
+              max-width: 50%;
+              flex: 1 0 50%;
+              padding: 0 1rem;
+              margin-bottom: 2rem;
+          }
+      }
+      
+      @media (min-width: 1280px) {
+          .booking-houses__wrapper {
+              max-width: 33.33333%;
+              flex: 1 0 33.33333%;
+          }
+      }
+      
+      .booking-houses__header {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-flex: 1;
+          -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+          padding: 0.5rem 0;
+      }
+      
+      .booking-houses__title {
+          font-size: 18px;
+          font-weight: 700;
+          text-transform: uppercase;
+          color: #4a4a4a;
+          letter-spacing: 4px;
+          padding-bottom: 1rem;
+          width: 100%;
+          text-align: center;
+      }
+      
+      .booking-houses__calendar-statuses {
+          display: none;
+      }
+      .booking-houses__calendar-status {
+          color: #7d8798;
+          font-size: 12px;
+          margin: 0 0.75rem;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+      }
+      .booking-houses__calendar-status:before {
+          content: "";
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          margin-right: 0.5rem;
+      }
+      .booking-houses__calendar-status_type_get:before {
+          background-color: #65b2ed;
+      }
+      .booking-houses__calendar-status_type_prebuy:before {
+          background-color: #ffc108;
+      }
+      .booking-houses__calendar-status_type_buyed:before {
+          background-color: #e91f63;
+      }
+      .booking-houses__image,
+      .booking-houses__image-wrapper {
+          width: 100%;
+      }
+      .booking-houses__calendars {
+          -webkit-box-flex: 1;
+          -ms-flex: 1;
+          flex: 1;
+          padding: 2rem;
+          position: relative;
+      }
+      .booking-houses__calendars .calendar_block {
+          margin: 0;
+      }
+      @media (min-width: 768px) {
+          .booking-houses__calendars {
+              padding: 1rem;
+          }
+      }
+      @media (min-width: 1024px) {
+          .booking-houses__calendars {
+              padding: 0.5px;
+              padding-top: 1rem;
+          }
+      }
+      .review-form__subtitle_success {
+          color: #c2ef91;
+      }
+      .booking-houses__description {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          font-size: 14px;
+      }
+      @media (max-width: 767px) {
+          .booking-houses__description {
+              padding: 0 2rem;
+          }
+      }
+      .booking-houses__description-item {
+          margin: 0 1rem;
+          color: #4a4a4a;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0.25rem 0.375rem;
+      }
+      @media (min-width: 768px) {
+          .booking-houses__description-item {
+              margin: 0.5rem 0.5rem;
+          }
+      }
+      .booking-houses__description-item::after {
+          content: attr(data-info);
+          margin-left: 4px;
+          font-weight: 700;
+      }
+      .booking-houses__description-item::after {
+          content: attr(data-info);
+          margin-left: 4px;
+          font-weight: 700;
+      }
+      .apartment {
+          margin-bottom: 1rem;
+      }
+      .apartment_width_50 {
+          max-width: 50%;
+          -webkit-box-flex: 1;
+          -ms-flex: 1 0 50%;
+          flex: 1 0 50%;
+      }
+      @media (min-width: 768px) {
+      .apartment {
+          max-width: 100%;
+          -webkit-box-flex: 1;
+          -ms-flex: 1 0 100%;
+          flex: 1 0 100%;
+      }
+      }
+      .apartment__header {
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+      }
+      .apartment__icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 10px;
+      }
+      .apartment__icon_clear {
+          margin-right: 0;
+      }
+      .apartment__icon_mr-4px {
+          margin-right: 4px;
+      }
+      .apartment__icon_mr--4px {
+          margin-right: -4px;
+      }
+      .icons-description {
+          margin-bottom: 1rem;
+      }
+      @media (min-width: 768px) {
+      .icons-description {
+          display: flex;
+          flex-wrap: wrap;
+          max-width: initial;
+          margin-left: -0.5rem;
+          margin-right: -0.5rem;
+      }
+      }
+      @media (min-width: 1280px) {
+      .icons-description {
+          margin-bottom: 2rem;
+      }
+      }
+      .icons__description-item {
+          display: flex;
+          padding: 0.5rem 0;
+          font-size: 14px;
+      }
+      @media (min-width: 768px) {
+      .icons__description-item {
+          align-items: center;
+          padding: 0.375rem 0.5rem;
+          flex: 1 0 50%;
+          max-width: 50%;
+          font-size: 16px;
+      }
+      }
+      @media (min-width: 1280px) {
+      .icons__description-item {
+          flex: 1 0 33.333%;
+          max-width: 33.333%;
+      }
+      }
+      @media (min-width: 768px) {
+      .booking-houses__icons-description {
+          padding: 0 1rem;
+      }
+      }
+      .house-booking__info_event:after {
+      display: none;
+      }
+      
+      .select-helper_header {
+          font-size: 14px;
+          padding: 0 0 1rem;
+          align-items: flex-start;
+      }
+      
+      .select-helper {
+          display: flex;
+          align-items: center;
+          padding: 15px 15px 0 15px;
+      }
+      
+      .select-helper_header .select-helper__img {
+          max-width: 26px;
+      }
+      .select-helper__img {
+          flex-shrink: 0;
+          max-width: 2.5rem;
+          margin-right: 1rem;
+      }
+      .select-helper__img {
+          flex-shrink: 0;
+          max-width: 2rem;
+          margin-right: 1rem;
+      }
+      .our-house__button_mt_15 {
+          margin-top: 1.5rem;
+      }
+      .our-house__button_mt_15 {
+          margin-top: 1.5rem;
+      }
+      .our-house__button {
+          text-decoration: none;
+          border-radius: 6px;
+          padding: 0.7rem 1rem;
+          background-color: #d0021b;
+          color: #fff;
+          font-weight: 700;
+          font-size: 20px;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+          -webkit-transition: all 0.4s;
+          -o-transition: all 0.4s;
+          transition: all 0.4s;
+          min-width: 150px;
+          font-size: 14px;
+          width: 100%;
+          text-align: center;
+      }
+      .our-house__button--green {
+          width: initial;
+          background-color: #04a89f;
+          color: #ffffff;
+      }
+      .our-house__button--green:hover {
+          background-color: #01867f;
+      }
+      a {
+          text-decoration: none;
+      }
+      .our-house__button_mt_15 {
+          margin-top: 1.5rem;
+      }
+      .our-house__button-hidden {
+          display: none;
+      }</style><script defer="defer" src="/wp-content/themes/krasnagorka/src/javascript/free_date.85164578e2027e355a9d.min.js"></script></head><body><div class="free-date-wrapper"></div></body></html>

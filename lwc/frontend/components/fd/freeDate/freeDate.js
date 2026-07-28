@@ -32,8 +32,7 @@ export default class FreeDate extends LightningElement {
         })
         const responseData = await response.json()
         if (responseData?.status == 200) {
-            this.calendarsAvailable = true
-            this.content = responseData.data
+            this.content = responseData
         } else if (responseData?.status == 400) {
             this.errorMessage = responseData.errorMessage
         } else {

@@ -14,7 +14,7 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            Поиск свободных номеров по датам:
+            Поиск свободных вариантов размещения по датам:
         </div>
         <div class="free-date__input-block">
             <label for="free_date_from"
@@ -97,7 +97,97 @@
                     src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png"
                     class="select-helper__img"
                     alt="Выделение дат заезда и выезда" />
-                <p class="select-helper__text">{content.textDescription}</p>
+                <p class="select-helper__text">{content.data.textDescription}</p>
+            </div>
+            <div class="booking-houses">
+                <template for:each={content.calendars} for:item="calendar">
+                    <div key={calendar.id} class="booking-houses__wrapper">
+                        <div class="booking-houses__item">
+                            <div class="booking-houses__header">
+                                <p class="booking-houses__title our-house__title">{calendar.name}</p>
+                            </div>
+                            <a
+                                href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/bozhya-korovka/"
+                                target="_blank"
+                                class="booking-houses__image-wrapper">
+                                <img
+                                    class="booking-houses__image"
+                                    src="https://krasnagorka.by/wp-content/uploads/2020/05/MF8A3595-726x220.jpg"
+                                    alt="Божья  коровка" />
+                            </a>
+                            <div class="booking-houses__header">
+                                <p class="booking-houses__description">
+                                    <span class="booking-houses__description-item" data-info="5"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/min-01.svg"
+                                            alt="icon" />x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="7"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/max-01.svg"
+                                            alt="icon" />x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="2"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/double-king-size-bed.svg"
+                                            alt="icon" />x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="1"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/single-king-size-bed.svg"
+                                            alt="icon" />x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="1">
+                                        <img
+                                            class="apartment__icon apartment__icon_mr--4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                                            alt="icon" />
+                                        <img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/shower.svg"
+                                            alt="icon" />
+                                        x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="1"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                                            alt="icon" />x</span
+                                    >
+                                    <span class="booking-houses__description-item" data-info="2"
+                                        ><img
+                                            class="apartment__icon apartment__icon_mr-4px"
+                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/br-01.svg"
+                                            alt="icon" />x</span
+                                    >
+                                </p>
+                            </div>
+                            <div class="booking-houses__calendars">
+                                <div class="booking-houses__calendars-inner">
+                                    <a
+                                        href="#"
+                                        data-calendar='[sbc_calendar id="16" slug="bozhya-korovka"]'
+                                        class="our-house__button our-house__button--green booking-houses__calendars-button"
+                                        >Показать календарь
+                                    </a>
+                                </div>
+                                <a
+                                    href="/booking-form/?booking=8838&amp;calendarId=16"
+                                    data-cd="16"
+                                    data-name="Божья  коровка"
+                                    data-id="8838"
+                                    target="_blank"
+                                    class="our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
+                                    забронировать / рассчитать
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
         </template>
     </div>
