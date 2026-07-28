@@ -431,10 +431,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $calendars[] = [
                             'id' => $term->term_id,
                             'name' => $term->name,
-                            'isTerem' => $isTeremRoom,
+                            'isTerem' => $isTeremRoom == 'on',
                             'personsCount' => intval($personsCount)
                         ];
                     }
+                    usort(
+                        $calendars,
+                        fn($a, $b) => $b['isTerem'] <=> $a['isTerem']
+                    );
 
                     $result["calendars"] = $calendars;
                 }
