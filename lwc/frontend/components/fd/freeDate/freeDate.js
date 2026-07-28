@@ -5,8 +5,8 @@ export default class FreeDate extends LightningElement {
     static renderMode = 'light'
 
     loading = false
-    link
     errorMessage
+    content
     dateInfo = {
         free_date_from: null,
         free_date_to: null
@@ -19,9 +19,9 @@ export default class FreeDate extends LightningElement {
 
     async handleFind() {
         this.loading = true
+        this.content = null
         const from = this.dateInfo.free_date_from
         const to = this.dateInfo.free_date_to
-        this.link = null
         this.errorMessage = null
         const response = await fetch('https://krasnagorka.by/wp-json/krasnagorka/v1/ls/freeDate/', {
             method: 'POST',
@@ -32,7 +32,8 @@ export default class FreeDate extends LightningElement {
         })
         const responseData = await response.json()
         if (responseData?.status == 200) {
-            this.link = `https://krasnagorka.by/kalendar-bronirovaniya/?free_date_from=${from}&free_date_to=${to}`
+            this.calendarsAvailable = true
+            this.content = responseData.data
         } else if (responseData?.status == 400) {
             this.errorMessage = responseData.errorMessage
         } else {

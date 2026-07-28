@@ -38,5 +38,68 @@
             <span class="free-date__link-label">Есть свободные номера: </span><a class="free-date__link" target="_blank" href={link}>посмотреть</a>
         </div>
         <div if:true={errorMessage} class="free-date__error-block">{errorMessage}</div>
+        <section lwc:if={content} class="b-container">
+            <ul class="icons-description">
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/min-01.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Минимальное количество человек
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/max-01.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Максимальное количество человек
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/double-king-size-bed.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество двухспальных кроватей
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/single-king-size-bed.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество односпальных кроватей
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr--4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                        alt="icon" />
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/shower.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество сан.узлов с душем
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество сан.узлов
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/br-01.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество спальных комнат
+                </li>
+                <li class="icons__description-item">
+                    <img
+                        class="apartment__icon apartment__icon_mr-4px"
+                        src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/triple-bed.svg"
+                        alt="icon" />&nbsp;&mdash;&nbsp;Количество 3-спальных 2-ярусных кроватей
+                </li>
+            </ul>
+            <div class="select-helper select-helper_header">
+                <img
+                    src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/date-clicking-selecting.png"
+                    class="select-helper__img"
+                    alt="Выделение дат заезда и выезда" />
+                <p class="select-helper__text">{content.textDescription}</p>
+            </div>
+        </section>
     </div>
 </template>
