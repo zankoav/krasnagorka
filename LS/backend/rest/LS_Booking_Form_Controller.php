@@ -422,7 +422,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if($errors != null){
             $result["status"] = 400;
             $result["errorMessage"] = $errors;
+        }else{
+            $result["data"] = [
+                "textDescription" => get_option('mastak_theme_options')['calendar_settings_message_before'],
+                
+            ];
         }
+
+
 
         return new WP_REST_Response($result, 200);
     }
