@@ -113,7 +113,7 @@
                                 <img
                                     class="booking-houses__image"
                                     src="https://krasnagorka.by/wp-content/uploads/2020/05/MF8A3595-726x220.jpg"
-                                    alt="Божья  коровка" />
+                                    alt={calendar.name} />
                             </a>
                             <div class="booking-houses__header">
                                 <p class="booking-houses__description">
@@ -170,15 +170,15 @@
                                 <div class="booking-houses__calendars-inner">
                                     <a
                                         href="#"
-                                        data-calendar='[sbc_calendar id="16" slug="bozhya-korovka"]'
+                                        data-calendar="[sbc_calendar id='16' slug='bozhya-korovka']"
                                         class="our-house__button our-house__button--green booking-houses__calendars-button"
                                         >Показать календарь
                                     </a>
                                 </div>
                                 <a
-                                    href="/booking-form/?booking=8838&amp;calendarId=16"
-                                    data-cd="16"
-                                    data-name="Божья  коровка"
+                                    href="/booking-form/?booking=8838&calendarId=16"
+                                    data-cd={calendar.id}
+                                    data-name={calendar.name}
                                     data-id="8838"
                                     target="_blank"
                                     class="our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
