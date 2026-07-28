@@ -19,75 +19,6 @@
     get_header('mastak');
     get_template_part("mastak/views/header", "small-view");
 
-    $free_date_from = get_query_var( 'free_date_from' );
-    $free_date_to = get_query_var( 'free_date_to' );
-    
-    $errors = [];
-    $date_from = null;
-    $date_to = null;
-    $isFreeDateScenarioAvailable = false;
-    $freeCalendarsIds = [];
-
-    if(!empty($free_date_from) && !empty($free_date_to)){
-        // 1. Получаем и очищаем данные из параметров
-        $date_from_raw = isset($free_date_from) ? sanitize_text_field($free_date_from) : '';
-        $date_to_raw = isset($free_date_to) ? sanitize_text_field($free_date_to)   : '';
-
-        // Ожидаемый формат даты (ГГГГ-ММ-ДД)
-        $date_format = 'Y-m-d'; 
-
-        // Получаем текущую дату с обнуленным временем (00:00:00) для точного сравнения дней
-        $today = new DateTime();
-        $today->setTime(0, 0, 0);
-
-        // 2. Валидация даты "от"
-        if ( ! empty( $date_from_raw ) ) {
-            $date_from = DateTime::createFromFormat( $date_format, $date_from_raw );
-            
-            if ( ! $date_from || $date_from->format( $date_format ) !== $date_from_raw ) {
-                $errors[] = 'Неверный формат даты "от". Используйте ГГГГ-ММ-ДД.';
-            } else {
-                // Проверка: дата не должна быть в прошлом
-                $date_from->setTime(0, 0, 0);
-                if ( $date_from < $today ) {
-                    $errors[] = 'Дата "от" не может быть в прошлом.';
-                }
-            }
-        }
-
-        // 3. Валидация даты "до"
-        if ( ! empty( $date_to_raw ) ) {
-            $date_to = DateTime::createFromFormat( $date_format, $date_to_raw );
-            
-            if ( ! $date_to || $date_to->format( $date_format ) !== $date_to_raw ) {
-                $errors[] = 'Неверный формат даты "до". Используйте ГГГГ-ММ-ДД.';
-            } else {
-                // Проверка: дата не должна быть в прошлом
-                $date_to->setTime(0, 0, 0);
-                if ( $date_to < $today ) {
-                    $errors[] = 'Дата "до" не может быть в прошлом.';
-                }
-            }
-        }
-
-        // 4. Проверка логики диапазона (дата "от" <= дата "до")
-        if ( empty( $errors ) && $date_from && $date_to ) {
-            if ( $date_from > $date_to ) {
-                $errors[] = 'Дата "от" не может быть позже, чем дата "до".';
-            }
-        }
-
-        // 5. Обработка результата
-        $isFreeDateScenarioAvailable = empty( $errors );
-
-        if($isFreeDateScenarioAvailable){
-            $freeCalendarsIds = get_free_date_calendars($date_from, $date_to);
-            if(empty($freeCalendarsIds)){
-                $isFreeDateScenarioAvailable = false;
-            }
-        }
-    }
-
     $houses_query = new WP_Query(array(
         'post_type'      => 'house',
         'post_status'    => 'publish',
@@ -144,20 +75,12 @@
                 $houses_query->the_post();
                 $isTerem = get_post_meta(get_the_ID(), 'mastak_house_is_it_terem', true);
                 if (!$isTerem) {
-                    get_template_part('mastak/views/booking', 'house', array(
-                        'isFreeDateScenarioAvailable'   => $isFreeDateScenarioAvailable,
-                        'freeCalendarsIds'   => $freeCalendarsIds
-                    ));
+                    get_template_part('mastak/views/booking', 'house');
                 } else if ($isTerem) {
                     $terem_options = get_option('mastak_terem_appearance_options');
                     $kalendars     = $terem_options['kalendar'];
                     foreach ($kalendars as $kalendar) : ?>
                         <?php $calendarTeremId = getCalendarId($kalendar['calendar']);?>
-                        <?php 
-                            if($isFreeDateScenarioAvailable && !in_array($calendarTeremId, $freeCalendarsIds)){
-                                continue;
-                            }
-                        ?>
                         <div class="booking-houses__wrapper booking-houses__wrapper_terem">
                             <div class="booking-houses__item">
                                 <div class="booking-houses__header">
@@ -270,22 +193,6 @@
             margin-top : 1.5rem;
         }
     </style>
-    <?php if($isFreeDateScenarioAvailable):?>
-        <script>
-            jQuery(document).ready(async function ($) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, 2000)
-                })
-                let cButtons = document.querySelectorAll('.booking-houses__calendars-button')
-                for (let button of cButtons) {
-                    $(button).trigger('click')
-                    await new Promise((resolve) => {
-                        setTimeout(resolve, 2000)
-                    })
-                }
-            });
-        </script>
-    <?php endif;?>
 <?php
     get_template_part("mastak/views/reviews", "view");
     get_template_part("mastak/views/footer", "view");

@@ -11,13 +11,8 @@ $triple_bed        = get_post_meta(get_the_ID(), 'triple_bed', 1);
 $calendarShortCode =  get_post_meta(get_the_ID(), "mastak_house_calendar", true);
 $calendarId = (int)getCalendarId($calendarShortCode);
 
-
-$isFreeDateScenarioAvailable = $args['isFreeDateScenarioAvailable'];
-$freeCalendarsIds = $args['freeCalendarsIds'];
-
 ?>
 
-<?php if(!$isFreeDateScenarioAvailable || in_array($calendarId, $freeCalendarsIds)):?>
 <div class="booking-houses__wrapper">
     <div class="booking-houses__item">
         <div class="booking-houses__header">
@@ -69,4 +64,3 @@ $freeCalendarsIds = $args['freeCalendarsIds'];
         </div>
     </div>
 </div>
-<?php endif;?>
