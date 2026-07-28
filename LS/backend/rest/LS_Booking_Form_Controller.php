@@ -465,7 +465,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                             'dataImage' => $dataImage,
                             'isTerem' => $isTeremRoom == 'on',
                             'min_people' => $min_people,
-                            'max_people' => $max_people
+                            'max_people' => $max_people,
                             'double_bed' => $double_bed,
                             'single_bed' => $single_bed,
                             'toilet_and_shower' => $toilet_and_shower,
