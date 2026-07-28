@@ -370,12 +370,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $date_from = DateTime::createFromFormat( $date_format, $date_from_raw );
                 
                 if ( ! $date_from || $date_from->format( $date_format ) !== $date_from_raw ) {
-                    $errors = 'Неверный формат даты "заезда". Используйте ГГГГ-ММ-ДД.';
+                    $errors = '<p>Неверный формат даты "заезда". Используйте ГГГГ-ММ-ДД.</p>';
                 } else {
                     // Проверка: дата не должна быть в прошлом
                     $date_from->setTime(0, 0, 0);
                     if ( $date_from < $today ) {
-                        $errors = 'Дата "заезда" не может быть в прошлом.';
+                        $errors = '<p>Дата "заезда" не может быть в прошлом.</p>';
                     }
                 }
             }
@@ -385,12 +385,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 $date_to = DateTime::createFromFormat( $date_format, $date_to_raw );
                 
                 if ( ! $date_to || $date_to->format( $date_format ) !== $date_to_raw ) {
-                    $errors = 'Неверный формат даты "выезда". Используйте ГГГГ-ММ-ДД.';
+                    $errors = '<p>Неверный формат даты "выезда". Используйте ГГГГ-ММ-ДД.</p>';
                 } else {
                     // Проверка: дата не должна быть в прошлом
                     $date_to->setTime(0, 0, 0);
                     if ( $date_to < $today ) {
-                       $errors = 'Дата "выезда" не может быть в прошлом.';
+                       $errors = '<p>Дата "выезда" не может быть в прошлом.</p>';
                     }
                 }
             }
@@ -398,7 +398,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             // 4. Проверка логики диапазона (дата "от" <= дата "до")
             if (  $errors == null && $date_from && $date_to ) {
                 if ( $date_from > $date_to ) {
-                    $errors = 'Дата "заезда" не может быть позже, чем дата "выезда".';
+                    $errors = '<p>Дата "заезда" не может быть позже, чем дата "выезда".</p>';
                 }
             }
 
@@ -412,11 +412,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 
                 if(empty($freeCalendarsIds)){
                     $isFreeDateScenarioAvailable = false;
-                    $errors = 'К сожалению на данные даты все номера заняты. Попробуйте выбрать другие даты.';
+                    $errors = '<p>К сожалению, на выбранные даты нет доступных вариантов размещения. <br><br>Попробуйте выбрать другие даты или свяжитесь с нашим отделом бронирования по телефону <a href="tel:+375293201919">+375293201919</a> для консультации и подбора подходящего варианта размещения.</p>';
                 }
             }
         }else if(empty($free_date_from) || empty($free_date_to)){
-            $errors = "Пожалуйста выберите даты заезда и выезда";
+            $errors = "<p>Пожалуйста выберите даты заезда и выезда</p>";
         }
 
         if($errors != null){
@@ -425,7 +425,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         }else{
             $result["data"] = [
                 "textDescription" => get_option('mastak_theme_options')['calendar_settings_message_before'],
-                
             ];
         }
 
