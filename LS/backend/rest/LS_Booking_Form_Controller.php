@@ -408,11 +408,35 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             if($isFreeDateScenarioAvailable){
                 $freeCalendarsIds = get_free_date_calendars($date_from, $date_to);
                 
-                $result["freeCalendarsIds"] = $freeCalendarsIds;
                 
                 if(empty($freeCalendarsIds)){
                     $isFreeDateScenarioAvailable = false;
                     $errors = '<p>К сожалению, на выбранные даты нет доступных вариантов размещения.<br>Попробуйте выбрать другие даты или свяжитесь с нашим отделом бронирования по телефону <a href="tel:+375293201919">+375293201919</a> для консультации и подбора подходящего варианта размещения.</p>';
+                }else{
+                    $terms = get_terms([
+                        'taxonomy' => 'sbc_calendars'
+                        'include'    => $freeCalendarsIds,
+                    ]);
+                    $calendars = [];
+
+                    foreach ($terms as $term) {
+
+                        $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
+                        $isTeremRoom = get_term_meta($term->term_id, 'kg_calendars_terem', 1);
+                        $personsCount = get_term_meta($term->term_id, 'kg_calendars_persons_count', 1);
+
+                        if (!$isAvailable) {
+                            continue;
+                        }
+                        $calendars[] = [
+                            'id' => $term->term_id,
+                            'name' => $term->name,
+                            'isTerem' => $isTeremRoom,
+                            'personsCount' => intval($personsCount)
+                        ];
+                    }
+
+                    $result["calendars"] = $calendars;
                 }
             }
         }else if(empty($free_date_from) || empty($free_date_to)){
