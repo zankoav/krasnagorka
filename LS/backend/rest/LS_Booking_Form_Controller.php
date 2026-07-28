@@ -436,17 +436,19 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         ];
                     }
 
-                    $collator = new \Collator('ru_RU');
+                    // $collator = new \Collator('ru_RU');
 
-                    usort(
-                        $calendars,
-                        fn($a, $b) => $collator->compare($a['name'], $b['name'])
-                    );
-
+                    
                     usort(
                         $calendars,
                         fn($a, $b) => $a['isTerem'] <=> $b['isTerem']
                     );
+
+                    usort(
+                        $calendars,
+                        fn($a, $b) => $a['term_id'] > $b['term_id']
+                    );
+
 
                     $result["calendars"] = $calendars;
                 }
