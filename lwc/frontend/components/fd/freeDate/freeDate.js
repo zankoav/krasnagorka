@@ -33,6 +33,13 @@ export default class FreeDate extends LightningElement {
         const responseData = await response.json()
         if (responseData?.status == 200) {
             this.content = responseData
+            this.content.calendars = this.content.calendars.map((calendar) => {
+                return {
+                    ...calendar,
+                    dataShortCode: `[sbc_calendar id='${calendar.id}' slug='${calendar.slug}']`,
+                    dataBookingLink: `/booking-form/?booking=${calendar.houseId}&calendarId=${calendar.id}`,
+                }
+            })
         } else if (responseData?.status == 400) {
             this.errorMessage = responseData.errorMessage
         } else {

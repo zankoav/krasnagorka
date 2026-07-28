@@ -428,11 +428,51 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         if (!$isAvailable) {
                             continue;
                         }
+
+                        $house = getHouseByCalendarId($term->term_id);
+
+                        if($isTeremRoom == 'on'){
+                            $min_people        = null;
+                            $max_people        = null;
+                            $double_bed        = null;
+                            $single_bed        = null;
+                            $toilet_and_shower = null;
+                            $toilet            = null;
+                            $bed_rooms         = null;
+                            $triple_bed        = null;
+                            $calendarShortCode = null;
+                            $dataImage = null;
+                        }else{
+                            $min_people        = get_post_meta($house["id"], 'min_people', 1);
+                            $max_people        = get_post_meta($house["id"], 'max_people', 1);
+                            $double_bed        = get_post_meta($house["id"], 'double_bed', 1);
+                            $single_bed        = get_post_meta($house["id"], 'single_bed', 1);
+                            $toilet_and_shower = get_post_meta($house["id"], 'toilet_and_shower', 1);
+                            $toilet            = get_post_meta($house["id"], 'toilet', 1);
+                            $bed_rooms         = get_post_meta($house["id"], 'bed_rooms', 1);
+                            $triple_bed        = get_post_meta($house["id"], 'triple_bed', 1);
+                            $calendarShortCode = get_post_meta($house["id"], "mastak_house_calendar", true);
+                            $calendarShortCode = get_post_meta($house["id"], "mastak_house_calendar", true);
+                            $dataImage         = get_the_post_thumbnail_url($house["id"], 'calendar-thumb');
+                        }
+                        
                         $calendars[] = [
                             'id' => $term->term_id,
                             'name' => $term->name,
+                            'slug' => $term->slug,
+                            'houseId' => $house["id"],
+                            'dataLink' => get_permalink($house["id"]),
+                            'dataImage' => $dataImage,
                             'isTerem' => $isTeremRoom == 'on',
-                            'personsCount' => intval($personsCount)
+                            'min_people' => $min_people,
+                            'max_people' => $max_people
+                            'double_bed' => $double_bed,
+                            'single_bed' => $single_bed,
+                            'toilet_and_shower' => $toilet_and_shower,
+                            'toilet' => $toilet,
+                            'bed_rooms' => $bed_rooms,
+                            'triple_bed' => $triple_bed,
+                            'calendarShortCode' => $calendarShortCode
                         ];
                     }
 

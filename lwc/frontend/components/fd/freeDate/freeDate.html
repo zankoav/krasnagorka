@@ -107,12 +107,12 @@
                                 <p class="booking-houses__title our-house__title">{calendar.name}</p>
                             </div>
                             <a
-                                href="https://krasnagorka.by/dom-na-braslavskih-ozyorah/bozhya-korovka/"
+                                href={calendar.dataLink}
                                 target="_blank"
                                 class="booking-houses__image-wrapper">
                                 <img
                                     class="booking-houses__image"
-                                    src="https://krasnagorka.by/wp-content/uploads/2020/05/MF8A3595-726x220.jpg"
+                                    src={calendar.dataImage}
                                     alt={calendar.name} />
                             </a>
                             <div class="booking-houses__header">
@@ -170,16 +170,16 @@
                                 <div class="booking-houses__calendars-inner">
                                     <a
                                         href="#"
-                                        data-calendar="[sbc_calendar id='16' slug='bozhya-korovka']"
+                                        data-calendar={calendar.dataShortCode}
                                         class="our-house__button our-house__button--green booking-houses__calendars-button"
                                         >Показать календарь
                                     </a>
                                 </div>
                                 <a
-                                    href="/booking-form/?booking=8838&calendarId=16"
+                                    href={calendar.dataBookingLink}
                                     data-cd={calendar.id}
                                     data-name={calendar.name}
-                                    data-id="8838"
+                                    data-id={calendar.houseId}
                                     target="_blank"
                                     class="our-house__button our-house__button_media_xs our-house__button-hidden our-house__button_mt_15">
                                     забронировать / рассчитать
