@@ -477,7 +477,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     }
 
                     $collator = new \Collator('ru_RU');
-
+                    $collator->setAttribute(
+                        \Collator::NUMERIC_COLLATION,
+                        \Collator::ON
+                    );
+                    
                     usort(
                         $calendars,
                         fn($a, $b) => $collator->compare($a['name'], $b['name'])
