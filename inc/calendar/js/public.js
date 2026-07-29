@@ -3,7 +3,9 @@ const message_1 = 'Нельзя бронировать прошлые даты',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
     message_4 = 'Выберите свободную дату';
 
-jQuery(document).ready(async function ($) {
+jQuery(document).ready(initCalendars)
+
+async function initCalendars($) {
     var targetMargin,
         scriptFullCalendar,
         scriptLocalCalendar,
@@ -457,7 +459,7 @@ jQuery(document).ready(async function ($) {
             })
         }, 2000)
     }
-})
+}
 
 const delimeterFromView = `<div class="date-delimiter date-delimiter_from">
                                 <div class="date-delimiter__line"></div>
