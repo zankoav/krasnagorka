@@ -177,8 +177,8 @@ async function initCalendars($) {
                                 console.log('Ошибка загрузки данных')
                             }
                         },
-                        eventRender: function (eventObj, $el) {
-                            console.log('$el', $el)
+                        viewRender: function (view, element ) {
+                            console.log('element', element)
                             jQuery('.zanko-month').text(function (_, text) {
                                 return text.replaceAll('undefined', '')
                             })
