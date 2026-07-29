@@ -117,53 +117,41 @@
                             </a>
                             <div class="booking-houses__header">
                                 <p class="booking-houses__description">
-                                    <span class="booking-houses__description-item" data-info="5"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/min-01.svg"
-                                            alt="icon" />x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="7"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/max-01.svg"
-                                            alt="icon" />x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="2"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/double-king-size-bed.svg"
-                                            alt="icon" />x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="1"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/single-king-size-bed.svg"
-                                            alt="icon" />x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="1">
-                                        <img
-                                            class="apartment__icon apartment__icon_mr--4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
-                                            alt="icon" />
-                                        <img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/shower.svg"
-                                            alt="icon" />
-                                        x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="1"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
-                                            alt="icon" />x</span
-                                    >
-                                    <span class="booking-houses__description-item" data-info="2"
-                                        ><img
-                                            class="apartment__icon apartment__icon_mr-4px"
-                                            src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/br-01.svg"
-                                            alt="icon" />x</span
-                                    >
+                                    <span lwc:if={calendar.min_people} class="booking-houses__description-item" data-info={calendar.min_people}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/min-01.svg"
+                                                alt="icon">x</span>
+                                    <span lwc:if={calendar.max_people} class="booking-houses__description-item" data-info={calendar.max_people}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/max-01.svg"
+                                                alt="icon" />x</span>
+                                    <span lwc:if={calendar.double_bed} class="booking-houses__description-item" data-info={calendar.double_bed}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/double-king-size-bed.svg"
+                                                alt="icon" />x</span>
+                                    <span lwc:if={calendar.single_bed} class="booking-houses__description-item" data-info={calendar.single_bed}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/single-king-size-bed.svg"
+                                                alt="icon" />x</span>    
+                                    <span lwc:if={calendar.toilet_and_shower} class="booking-houses__description-item" data-info={calendar.toilet_and_shower}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                                                alt="icon" />
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/shower.svg"
+                                                alt="icon" />x</span>    
+                                    <span lwc:if={calendar.toilet} class="booking-houses__description-item" data-info={calendar.toilet}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/toilet.svg"
+                                                alt="icon" />x</span>
+                                    <span lwc:if={calendar.bed_rooms} class="booking-houses__description-item" data-info={calendar.bed_rooms}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/br-01.svg"
+                                                alt="icon" />x</span>    
+                                    <span lwc:if={calendar.triple_bed} class="booking-houses__description-item" data-info={calendar.triple_bed}>
+                                        <img    class="apartment__icon apartment__icon_mr-4px"
+                                                src="https://krasnagorka.by/wp-content/themes/krasnagorka/mastak/assets/icons/triple-bed.svg"
+                                                alt="icon" />x</span>    
                                 </p>
                             </div>
                             <div class="booking-houses__calendars">
