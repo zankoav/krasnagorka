@@ -177,10 +177,13 @@ async function initCalendars($) {
                                 console.log('Ошибка загрузки данных')
                             }
                         },
-                        eventAfterAllRender: function () {
+                        loading: function () {
+                            console.log('loading')
                             jQuery('.zanko-month').text(function (_, text) {
                                 return text.replaceAll('undefined', '')
                             })
+                        },
+                        eventAfterAllRender: function () {
                             if (jsFromDate) {
                                 var element = document.querySelector(
                                     `#calendar_${currentCalendarId} .fc-widget-content[data-date="${jsFromDate.d}"]`
