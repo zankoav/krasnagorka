@@ -40,7 +40,7 @@ export default class FreeDate extends LightningElement {
                 }
                 return {
                     ...calendar,
-                    dataShortCode: `[sbc_calendar id='${calendar.id}' slug='${calendar.slug}']`,
+                    dataShortCode: `[sbc_calendar id="${calendar.id}" slug="${calendar.slug}"]`,
                     dataBookingLink: `/booking-form/?booking=${calendar.houseId}&calendarId=${calendar.id}`
                 }
             })
