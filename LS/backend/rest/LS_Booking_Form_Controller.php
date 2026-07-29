@@ -419,6 +419,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     ]);
                     $calendars = [];
 
+                    $terem_options = get_option('mastak_terem_appearance_options');
+                    $kalendars     = $terem_options['kalendar'];
+                    $associativeCalendars = array_column($kalendars, null, 'calendar');
+
                     foreach ($terms as $term) {
 
                         $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
@@ -432,16 +436,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $house = getHouseByCalendarId($term->term_id);
 
                         if($isTeremRoom == 'on'){
-                            $min_people        = null;
-                            $max_people        = null;
-                            $double_bed        = null;
-                            $single_bed        = null;
-                            $toilet_and_shower = null;
-                            $toilet            = null;
-                            $bed_rooms         = null;
-                            $triple_bed        = null;
-                            $calendarShortCode = null;
-                            $dataImage = null;
+                            $min_people        = $associativeCalendars[$term->term_id]["min_people"];
+                            $max_people        = $associativeCalendars[$term->term_id]["max_people"];
+                            $double_bed        = $associativeCalendars[$term->term_id]["double_bed"];
+                            $single_bed        = $associativeCalendars[$term->term_id]["single_bed"];
+                            $toilet_and_shower = $associativeCalendars[$term->term_id]["toilet_and_shower"];
+                            $toilet            = $associativeCalendars[$term->term_id]["toilet"];
+                            $bed_rooms         = $associativeCalendars[$term->term_id]["bed_rooms"];
+                            $triple_bed        = $associativeCalendars[$term->term_id]["triple_bed"];
+                            $dataImage         = wp_get_attachment_image_url( $associativeCalendars[$term->term_id]['picture_id'], 'calendar-thumb', false );
                         }else{
                             $min_people        = get_post_meta($house["id"], 'min_people', 1);
                             $max_people        = get_post_meta($house["id"], 'max_people', 1);
@@ -451,8 +454,6 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                             $toilet            = get_post_meta($house["id"], 'toilet', 1);
                             $bed_rooms         = get_post_meta($house["id"], 'bed_rooms', 1);
                             $triple_bed        = get_post_meta($house["id"], 'triple_bed', 1);
-                            $calendarShortCode = get_post_meta($house["id"], "mastak_house_calendar", true);
-                            $calendarShortCode = get_post_meta($house["id"], "mastak_house_calendar", true);
                             $dataImage         = get_the_post_thumbnail_url($house["id"], 'calendar-thumb');
                         }
                         
@@ -481,7 +482,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         \Collator::NUMERIC_COLLATION,
                         \Collator::ON
                     );
-                    
+
                     usort(
                         $calendars,
                         fn($a, $b) => $collator->compare($a['name'], $b['name'])
