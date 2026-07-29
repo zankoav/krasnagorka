@@ -425,7 +425,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                         $kalendar['id'] = getCalendarId($kalendar['calendar']);
                     }
                     $associativeCalendars = array_column($kalendars, null, 'id');
-                    $result['temp'] = $associativeCalendars;
+                    $result['associativeCalendars'] = $associativeCalendars;
+                    $result['kalendars'] = $kalendars;
                     foreach ($terms as $term) {
 
                         $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
