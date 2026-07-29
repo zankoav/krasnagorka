@@ -1,7 +1,7 @@
 const message_1 = 'Нельзя бронировать прошлые даты',
     message_2 = 'Дата выезда должна быть позже даты заезда',
     message_3 = 'В интервале бронирования не должно быть занятых дат',
-    message_4 = 'Выберите свободную дату';
+    message_4 = 'Выберите свободную дату'
 
 jQuery(document).ready(initCalendars)
 
@@ -74,14 +74,12 @@ async function initCalendars($) {
 
     function loadCalendar() {
         var calendarShortcod = $(this).data('calendar')
-        console.log('calendarShortcod', calendarShortcod);
         var attArray = calendarShortcod.split('"')
         var data = {
             action: 'calendar_action',
             id: attArray[1],
             slug: attArray[3]
         }
-        console.log('data', data);
         var $parent = $(this).parent().parent().parent().find('.booking-houses__calendars-inner')
         var $title = $(this).parent().parent().parent().find('.booking-houses__title')
         var $parentDate = $(this).parent().parent().parent().find('.our-house__date')
@@ -180,6 +178,9 @@ async function initCalendars($) {
                             }
                         },
                         eventAfterAllRender: function () {
+                            jQuery('.zanko-month').text(function (_, text) {
+                                return text.replaceAll('undefined', '')
+                            })
                             if (jsFromDate) {
                                 var element = document.querySelector(
                                     `#calendar_${currentCalendarId} .fc-widget-content[data-date="${jsFromDate.d}"]`
