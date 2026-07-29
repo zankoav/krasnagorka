@@ -177,11 +177,15 @@ async function initCalendars($) {
                                 console.log('Ошибка загрузки данных')
                             }
                         },
-                        loading: function () {
-                            console.log('loading')
-                            jQuery('.zanko-month').text(function (_, text) {
-                                return text.replaceAll('undefined', '')
-                            })
+                        loading: function (isLoading) {
+                            if (isLoading) {
+                                console.log('loading start')
+                                jQuery('.zanko-month').text(function (_, text) {
+                                    return text.replaceAll('undefined', '')
+                                })
+                            } else {
+                                console.log('loading end')
+                            }
                         },
                         eventAfterAllRender: function () {
                             if (jsFromDate) {
