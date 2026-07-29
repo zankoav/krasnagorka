@@ -177,8 +177,7 @@ async function initCalendars($) {
                                 console.log('Ошибка загрузки данных')
                             }
                         },
-                        viewRender: function (view, element ) {
-                            console.log('element', element)
+                        viewRender: function (view, element) {
                             jQuery('.zanko-month').text(function (_, text) {
                                 return text.replaceAll('undefined', '')
                             })
@@ -344,7 +343,16 @@ async function initCalendars($) {
                     }
 
                     var isAdmin = document.getElementById('wpadminbar')
-                    if (isAdmin && month) {
+                    var isFreeDate = document.querySelector('.free-date')
+                    if (isFreeDate) {
+                        let fromDateString = document.getElementById('free_date_from').value
+                        if (fromDateString) {
+                            const tempDate = new Date(fromDateString)
+                            year = tempDate.getFullYear()
+                            month = String(tempDate.getMonth() + 1).padStart(2, '0')
+                        }
+                    }
+                    if ((isAdmin && month) || (isFreeDate && month && year)) {
                         var noTime = jQuery.fullCalendar.moment(year + '-' + month + '-01')
                         $calendar.fullCalendar('gotoDate', noTime)
                     }
