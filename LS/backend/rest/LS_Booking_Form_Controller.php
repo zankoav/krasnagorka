@@ -421,12 +421,15 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
                     $terem_options = get_option('mastak_terem_appearance_options');
                     $kalendars     = $terem_options['kalendar'];
+                     $result['temp'] = [];
                     foreach ($kalendars as $kalendar) {
                         $kalendar['id'] = getCalendarId($kalendar['calendar']);
+                        $result['temp'][] = $kalendar['id'];
                     }
                     $associativeCalendars = array_column($kalendars, null, 'id');
                     $result['associativeCalendars'] = $associativeCalendars;
                     $result['kalendars'] = $kalendars;
+
                     foreach ($terms as $term) {
 
                         $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
