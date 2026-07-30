@@ -280,12 +280,12 @@ endswitch;
                         <?php mastak_nav_menu(); ?>
 
                         <?php if ($video): ?>
-                        <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru" target="_blank"
+                        <a href="https://krasnagorka.by/podbor-dat/" target="_blank"
                            class="online-video online-video--menu">
-                            <img src="<?= CORE_PATH; ?>assets/icons/online-video-gray.svg"
+                            <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg"
                                  alt="online-video"
                                  class="online-video__icon">
-                            <span class="online-video__title">смотреть ONLINE</span>
+                            <span class="online-video__title">подбор дат</span>
                         </a>
                         <?php endif; ?>
                         <div class="menu-main__currency currency">
@@ -343,12 +343,12 @@ endswitch;
                      class="logo__icon">
             </a>
             <?php if ($video && !wp_is_mobile()): ?>
-            <a href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru"
+            <a href="https://krasnagorka.by/podbor-dat/"
                 target="_blank" class="online-video">
-                <img src="<?= CORE_PATH; ?>assets/icons/online-video.svg"
+                <img src="<?= CORE_PATH; ?>assets/icons/search.svg"
                      alt="online-video"
                      class="online-video__icon">
-                <span class="online-video__title">смотреть ONLINE</span>
+                <span class="online-video__title">подбор дат</span>
             </a>
             <?php endif; ?>
         </div>

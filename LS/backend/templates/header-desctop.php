@@ -14,9 +14,9 @@
             <div class="header-widgets container"><a class="header-widgets__logo" href="/"><img
                         class="header-widgets__logo-icon"
                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/logo.8e731a.png"></a>
-                <div class="header-widgets__video"><a class="video" href="https://public.ivideon.com/embed/v3/?server=100-Zkn8nBIwRPePMTeUfZtRVW&camera=0&width=&height=&lang=ru"><img class="video__icon"
+                <div class="header-widgets__video"><a class="video" href="https://krasnagorka.by/podbor-dat/"><img class="video__icon"
                             src="/wp-content/themes/krasnagorka/LS/frontend/src/img/online-video.2386e3.svg"><span
-                            class="video__title">смотреть ONLINE</span></a></div>
+                            class="video__title">подбор дат</span></a></div>
                 <nav class="header-widgets__menu">
                     <?php ls_nav_menu(); ?>
                 </nav>
