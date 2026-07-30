@@ -3,7 +3,6 @@
 import { LightningElement, track, api } from 'lwc'
 import './menu.scss'
 
-import ONLINE_VIDEO from './../../../icons/online-video.svg'
 import MENU_ICON from './../../../icons/menu-icon.svg'
 import PHONE_ICON from './../../../icons/contacts-icon.svg'
 import CLOSE_ICON from './../../../icons/menu-close.svg'
@@ -23,7 +22,6 @@ export default class Menu extends LightningElement {
     @track isVideoLoaded
     @track videoOpened
     @track icons = {
-        onlineVideo: ONLINE_VIDEO,
         menuIcon: MENU_ICON,
         phone: PHONE_ICON,
         closeIcon: CLOSE_ICON,
