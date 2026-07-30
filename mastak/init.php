@@ -396,7 +396,7 @@
 			'</h1>';
 		} else if ( is_page('podbor-dat') ) {
 			echo '<h1 class="main-slide__slide-content-title">',
-            'Подбор дат',
+            'Подбор Дат',
 			'</h1>';
 		} else {
 			echo '<h2 class="main-slide__slide-content-title">',

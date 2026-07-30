@@ -35,7 +35,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                             <a href="https://krasnagorka.by/podbor-dat/" target="_blank" class="online-video online-video--menu">
                                 <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg" alt="online-video"
                                      class="online-video__icon">
-                                <span class="online-video__title">подбор дат</span>
+                                <span class="online-video__title">Подбор Дат</span>
                             </a>
                         <?php endif; ?>
                         <div class="menu-main__currency currency">
@@ -94,7 +94,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                 <a href="https://krasnagorka.by/podbor-dat/" target="_blank" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/search.svg" alt="online-video"
                          class="online-video__icon">
-                    <span class="online-video__title">подбор дат</span>
+                    <span class="online-video__title">Подбор Дат</span>
                 </a>
             <?php endif; ?>
         </div>

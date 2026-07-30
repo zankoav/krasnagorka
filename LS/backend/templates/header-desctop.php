@@ -16,7 +16,7 @@
                         src="/wp-content/themes/krasnagorka/LS/frontend/src/img/logo.8e731a.png"></a>
                 <div class="header-widgets__video"><a class="video" href="https://krasnagorka.by/podbor-dat/"><img class="video__icon"
                             src="/wp-content/themes/krasnagorka/LS/frontend/src/img/online-video.2386e3.svg"><span
-                            class="video__title">подбор дат</span></a></div>
+                            class="video__title">Подбор Дат</span></a></div>
                 <nav class="header-widgets__menu">
                     <?php ls_nav_menu(); ?>
                 </nav>
