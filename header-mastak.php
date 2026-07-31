@@ -405,7 +405,6 @@ if (!defined('ABSPATH')) {
             padding: 8px;
             border: 1px solid #fff;
             margin-top: 16px;
-            transition: all .3s ease-in;
         }
 
         @media (min-width:1280px) {
