@@ -33,7 +33,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                                 <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg"
                                     alt="online-video"
                                     class="online-video__icon">
-                                <span class="online-video__title">Подбор Дат</span>
+                                <span class="online-video__title">Подбор дат</span>
                             </a>
                         <?php endif; ?>
                         <div class="menu-main__currency currency">
@@ -96,7 +96,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                     <img src="<?= CORE_PATH; ?>assets/icons/search.svg"
                         alt="online-video"
                         class="online-video__icon">
-                    <span class="online-video__title">Подбор Дат</span>
+                    <span class="online-video__title">Подбор дат</span>
                 </a>
             <?php endif; ?>
         </div>
