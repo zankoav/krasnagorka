@@ -5,7 +5,6 @@
     gap: 20px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     width: 100%;
-    padding: 24px 0;
     border-radius: 16px;
     box-sizing: border-box;
 }
@@ -266,13 +265,11 @@
     .free-date {
         flex-direction: column;
         align-items: stretch;
-        padding: 20px;
         gap: 16px;
     }
 
     .free-date__title {
         font-size: 16px;
-        text-align: center;
     }
 
     .free-date__input-block {
