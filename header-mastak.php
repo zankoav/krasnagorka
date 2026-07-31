@@ -399,6 +399,12 @@ if (!defined('ABSPATH')) {
             bottom: 25%;
             left: 50%;
         }
+
+        .online-video {
+            align-self: anchor-center;
+            padding: 8px;
+            border: 1px solid #fff;
+        }
     </style>
     <!-- Calendar Delimeter End-->
 
