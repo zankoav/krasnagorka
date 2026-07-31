@@ -26,6 +26,9 @@
     &__online-video {
         display: flex;
         align-items: center;
+        border: 1px solid #fff;
+        padding-left: 8px;
+        padding-right: 8px;
 
         @include media.lg {
             margin-left: 3rem;
