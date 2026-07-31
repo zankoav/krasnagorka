@@ -29,9 +29,15 @@
         border: 1px solid #fff;
         padding-left: 8px;
         padding-right: 8px;
+        margin-top: 16px;
+
+        &:hover {
+            filter: invert(47%) sepia(85%) saturate(1437%) hue-rotate(164deg) brightness(96%) contrast(90%);
+        }
 
         @include media.lg {
             margin-left: 3rem;
+            margin-top: 0;
         }
     }
 

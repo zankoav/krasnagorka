@@ -404,6 +404,23 @@ if (!defined('ABSPATH')) {
             align-self: anchor-center;
             padding: 8px;
             border: 1px solid #fff;
+            margin-top: 16px;
+        }
+
+        @media (min-width:1280px) {
+            .online-video {
+                margin-top: 0;
+            }
+        }
+
+        .online-video:hover {
+            filter: invert(47%) sepia(85%) saturate(1437%) hue-rotate(164deg) brightness(96%) contrast(90%);
+        }
+
+        .online-video--menu{
+            padding: 16px 0 0;
+            border: initial;
+            margin-top: 0;
         }
     </style>
     <!-- Calendar Delimeter End-->
