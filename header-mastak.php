@@ -412,6 +412,24 @@ if (!defined('ABSPATH')) {
             font-size: 16px;
         }
 
+        .home .menu-top__center .online-video {
+            background-color: #04a89f;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+            font-weight: 700;
+            color: #FFF;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.125);
+        }
+
+        .home .menu-top__center .online-video:hover {
+            background-color: #01867f;    
+        } 
+
+        .home .menu-top__center .online-video__title{
+            font-size: 16px;
+        }
+
         @media (min-width:1280px) {
             .online-video {
                 background-color: #04a89f;
@@ -428,7 +446,7 @@ if (!defined('ABSPATH')) {
                 background-color: #01867f;    
             }
 
-            .online-video__title{
+            .online-video__title, .home .menu-top__center .online-video__title{
                 font-size: 13px;
             }
         }
