@@ -406,7 +406,6 @@ if (!defined('ABSPATH')) {
             box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
             border-radius: 6px;
             transition: all 0.3s;
-            opacity: 0.85;
             padding: 8px 12px;
             color: #fff;
             font-weight: 700;
