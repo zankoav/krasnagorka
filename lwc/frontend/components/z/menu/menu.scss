@@ -26,13 +26,18 @@
     &__online-video {
         display: flex;
         align-items: center;
-        border: 1px solid #fff;
-        padding-left: 8px;
-        padding-right: 8px;
+        background-color: #07b8cc;
+        box-shadow: 0 1px 2px 0 #07b8cc;
+        border-radius: 6px;
+        transition: all 0.3s;
+        opacity: 0.85;
+        padding: 8px 12px;
+        color: #fff;
+        font-weight: 700;
         margin-top: 16px;
 
         &:hover {
-            filter: invert(47%) sepia(85%) saturate(1437%) hue-rotate(164deg) brightness(96%) contrast(90%);
+            opacity: 1;
         }
 
         @include media.lg {

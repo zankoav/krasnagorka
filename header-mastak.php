@@ -402,8 +402,14 @@ if (!defined('ABSPATH')) {
 
         .online-video {
             align-self: anchor-center;
-            padding: 8px;
-            border: 1px solid #fff;
+            background-color: #07b8cc;
+            box-shadow: 0 1px 2px 0 #07b8cc;
+            border-radius: 6px;
+            transition: all 0.3s;
+            opacity: 0.85;
+            padding: 8px 12px;
+            color: #fff;
+            font-weight: 700;
             margin-top: 16px;
         }
 
@@ -414,7 +420,7 @@ if (!defined('ABSPATH')) {
         }
 
         .online-video:hover {
-            filter: invert(47%) sepia(85%) saturate(1437%) hue-rotate(164deg) brightness(96%) contrast(90%);
+            opacity: 1;        
         }
 
         .online-video--menu{
