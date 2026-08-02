@@ -403,7 +403,7 @@ if (!defined('ABSPATH')) {
         .online-video {
             align-self: anchor-center;
             background-color: #04a89f;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.125);
             border-radius: 6px;
             transition: all 0.3s;
             padding: 8px 12px;
