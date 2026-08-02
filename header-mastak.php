@@ -409,18 +409,27 @@ if (!defined('ABSPATH')) {
             font-size: 16px;
         }
 
+        .online-video__title{
+            font-size: 16px;
+        }
+
         @media (min-width:1280px) {
             .online-video {
                 background-color: #04a89f;
                 border-radius: 6px;
                 font-size: 13px;
                 transition: all 0.3s;
+                color: #FFF;
                 box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.125);
                 margin-top: 0;
             }
 
             .online-video:hover {
                 background-color: #01867f;    
+            }
+
+            .online-video__title{
+                font-size: 13px;
             }
         }
 
