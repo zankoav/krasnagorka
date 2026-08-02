@@ -402,8 +402,8 @@ if (!defined('ABSPATH')) {
 
         .online-video {
             align-self: anchor-center;
-            background-color: #07b8cc;
-            box-shadow: 0 1px 2px 0 #07b8cc;
+            background-color: #08d1e8;
+            box-shadow: 0 1px 2px 0 #08d1e8;
             border-radius: 6px;
             transition: all 0.3s;
             opacity: 0.85;
@@ -420,7 +420,8 @@ if (!defined('ABSPATH')) {
         }
 
         .online-video:hover {
-            opacity: 1;        
+            background-color: #07b8cc;
+            box-shadow: 0 1px 2px 0 #07b8cc;    
         }
 
         .online-video--menu{

@@ -26,18 +26,18 @@
     &__online-video {
         display: flex;
         align-items: center;
-        background-color: #07b8cc;
-        box-shadow: 0 1px 2px 0 #07b8cc;
+        background-color: #08d1e8;
+        box-shadow: 0 1px 2px 0 #08d1e8;
         border-radius: 6px;
         transition: all 0.3s;
-        opacity: 0.85;
         padding: 8px 12px;
         color: #fff;
         font-weight: 700;
         margin-top: 16px;
 
         &:hover {
-            opacity: 1;
+            background-color: #07b8cc;
+            box-shadow: 0 1px 2px 0 #07b8cc;
         }
 
         @include media.lg {
