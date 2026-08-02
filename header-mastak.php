@@ -404,7 +404,6 @@ if (!defined('ABSPATH')) {
             align-self: anchor-center;
             padding: 8px 12px;
             color: #4a4a4a;
-            font-weight: 700;
             margin-top: 16px;
             font-size: 16px;
         }
@@ -419,6 +418,7 @@ if (!defined('ABSPATH')) {
                 border-radius: 6px;
                 font-size: 13px;
                 transition: all 0.3s;
+                font-weight: 700;
                 color: #FFF;
                 box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.125);
                 margin-top: 0;
