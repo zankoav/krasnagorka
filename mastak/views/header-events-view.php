@@ -83,14 +83,14 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
             </div>
             <div class="menu-main__glass"></div>
         </div>
-        <div class="menu-top__center" data-video="<?=$video;?>">
+        <div class="menu-top__center">
             <a href="/"
                 class="logo">
                 <img src="<?= CORE_PATH; ?>assets/icons/logo.png"
                     alt="logo"
                     class="logo__icon">
             </a>
-            <?php if ($video && !wp_is_mobile()): ?>
+            <?php if ($video): ?>
                 <a href="https://krasnagorka.by/podbor-dat/"
                     target="_blank" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/search.svg"

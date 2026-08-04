@@ -342,7 +342,7 @@ endswitch;
                      alt="logo"
                      class="logo__icon">
             </a>
-            <?php if ($video && !wp_is_mobile()): ?>
+            <?php if ($video): ?>
             <a href="https://krasnagorka.by/podbor-dat/"
                 target="_blank" class="online-video">
                 <img src="<?= CORE_PATH; ?>assets/icons/search.svg"
