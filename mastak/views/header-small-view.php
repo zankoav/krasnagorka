@@ -7,7 +7,7 @@ $mts     = $options['mastak_theme_options_mts'];
 $telegram       = $options['mastak_theme_options_telegram'];
 $weekend = $options['mastak_theme_options_weekend'];
 $time    = $options['mastak_theme_options_time'];
-$video   = $options['mastak_theme_options_video'];
+$video   = $options['mastak_theme_options_video'] == 'on';
 $weather = get_weather();
 global $kgCooke;
 $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
