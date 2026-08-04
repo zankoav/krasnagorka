@@ -83,7 +83,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
             </div>
             <div class="menu-main__glass"></div>
         </div>
-        <div class="menu-top__center">
+        <div class="menu-top__center" data-video="<?=$video;?>">
             <a href="/"
                 class="logo">
                 <img src="<?= CORE_PATH; ?>assets/icons/logo.png"
