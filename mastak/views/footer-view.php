@@ -420,7 +420,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                 const submitConsent = ({ preferences, statistics, marketing }) => {
                     const cookiebot = getCookiebot();
-
+                    console.log('cookiebot', cookiebot);
                     if (cookiebot && typeof cookiebot.submitCustomConsent === "function") {
                         updateMeasurementConsent({ preferences, statistics, marketing });
                         cookiebot.submitCustomConsent(preferences, statistics, marketing);
