@@ -303,7 +303,9 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                 const saveButton = document.querySelector("[data-cookie-save]");
                 const declineButton = document.querySelector("[data-cookie-decline]");
                 const orderCookieNames = ["kg_email", "kg_name", "kg_phone"];
-
+                console.log('acceptButton', acceptButton)
+                console.log('saveButton', saveButton)
+                console.log('declineButton', declineButton)
                 if (!widget || !status) {
                     return;
                 }
