@@ -119,6 +119,12 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                                     <span class="contacts-data__item-text">Договор присоединения</span>
                                 </div>
                             </a>
+                            <a href="#" class="contacts-data__item" data-cookie-trigger>
+                                <img src="<?= CORE_PATH ?>assets/icons/contacts-data/cookie-icon-white.svg" alt="cookie" class="contacts-data__item-icon">
+                                <div class="contacts-data__item-text-wrapper">
+                                    <span class="contacts-data__item-text">Cookie</span>
+                                </div>
+                            </a>
                             <a href="https://krasnagorka.by/novosti/" class="contacts-data__item">
                                 <img src="<?= CORE_PATH ?>assets/icons/contacts-data/news.svg" alt="support" class="contacts-data__item-icon">
                                 <div class="contacts-data__item-text-wrapper">
@@ -223,4 +229,295 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
         <img class="footer-bottom__payments" src="https://krasnagorka.by/wp-content/uploads/2023/03/HORIZONTAL-WHITE.png" alt="payment systems">
         <img class="footer-bottom__payments footer-bottom__payments_white" src="https://krasnagorka.by/wp-content/uploads/2022/05/image_2022-05-26_09-51-49.png" alt="payment systems 2">
     </div>
+    <!-- Cookie widget START-->
+    <div class="cookie_widget" data-cookie-widget hidden>
+      <div class="cookie_widget__content">
+        <div class="cookie_widget__header">
+          <span class="cookie_widget__icon" aria-hidden="true">i</span>
+          <div>
+            <h2 class="cookie_widget__title">Настройки cookie</h2>
+            <p class="cookie_widget__text">
+              <span data-cookie-status>Проверяем текущий выбор...</span>
+              Подробнее — в
+              <a href="/cookie-policy/" class="cookie_widget__link">Политике использования cookie</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="cookie_widget__toggles" aria-label="Категории cookie">
+          <label class="cookie_widget__toggle cookie_widget__toggle_locked">
+            <input class="cookie_widget__checkbox" type="checkbox" checked disabled>
+            <span class="cookie_widget__toggle_content">
+              <strong class="cookie_widget__toggle_title">Необходимые</strong>
+              <small class="cookie_widget__toggle_description">Всегда активны: безопасность, согласие и базовая работа сайта</small>
+            </span>
+          </label>
+
+          <label class="cookie_widget__toggle">
+            <input class="cookie_widget__checkbox" type="checkbox" name="preferences" data-consent-option>
+            <span class="cookie_widget__toggle_content">
+              <strong class="cookie_widget__toggle_title">Предпочтения</strong>
+              <small class="cookie_widget__toggle_description">Автозаполнение имени и телефона заказа</small>
+            </span>
+          </label>
+
+          <label class="cookie_widget__toggle">
+            <input class="cookie_widget__checkbox" type="checkbox" name="statistics" data-consent-option>
+            <span class="cookie_widget__toggle_content">
+              <strong class="cookie_widget__toggle_title">Статистика</strong>
+              <small class="cookie_widget__toggle_description">Google Analytics и Yandex Metrica для анализа посещений</small>
+            </span>
+          </label>
+
+          <label class="cookie_widget__toggle">
+            <input class="cookie_widget__checkbox" type="checkbox" name="marketing" data-consent-option>
+            <span class="cookie_widget__toggle_content">
+              <strong class="cookie_widget__toggle_title">Маркетинг</strong>
+              <small class="cookie_widget__toggle_description">Google Ads, ремаркетинг и персонализированные предложения</small>
+            </span>
+          </label>
+        </div>
+
+        <div class="cookie_widget__actions">
+          <button class="cookie_widget__button cookie_widget__button_primary" type="button" data-cookie-accept>
+            Принять все
+          </button>
+          <button class="cookie_widget__button" type="button" data-cookie-save>
+            Сохранить выбор
+          </button>
+          <button class="cookie_widget__button cookie_widget__button_ghost" type="button" data-cookie-decline>
+            Отказаться
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+        (function () {
+            const widget = document.querySelector("[data-cookie-widget]");
+            const triggers = Array.from(document.querySelectorAll("[data-cookie-trigger]"));
+            const status = document.querySelector("[data-cookie-status]");
+            const options = Array.from(document.querySelectorAll("[data-consent-option]"));
+            const acceptButton = document.querySelector("[data-cookie-accept]");
+            const saveButton = document.querySelector("[data-cookie-save]");
+            const declineButton = document.querySelector("[data-cookie-decline]");
+            const orderCookieNames = ["order_name", "order_phone"];
+
+            if (!widget || !status) {
+                return;
+            }
+
+            const getCookiebot = () => window.Cookiebot;
+            const getDataLayer = () => {
+                window.dataLayer = window.dataLayer || [];
+                return window.dataLayer;
+            };
+
+            const consentValue = (isGranted) => (isGranted ? "granted" : "denied");
+            const hasSecureContext = () => window.location.protocol === "https:";
+
+            const setCookie = (name, value, maxAgeSeconds) => {
+                const secureFlag = hasSecureContext() ? "; Secure" : "";
+                document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; Max-Age=${maxAgeSeconds}; SameSite=Lax${secureFlag}`;
+            };
+
+            const deleteCookie = (name) => {
+                document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;
+            };
+
+            const clearOrderCookies = () => {
+                orderCookieNames.forEach(deleteCookie);
+            };
+
+            const setWidgetOpen = (isOpen) => {
+                widget.hidden = !isOpen;
+            };
+
+            const setOptions = ({ preferences, statistics, marketing }) => {
+                options.forEach((option) => {
+                option.checked = Boolean({ preferences, statistics, marketing }[option.name]);
+                });
+            };
+
+            const readOptions = () => ({
+                preferences: options.find((option) => option.name === "preferences")?.checked || false,
+                statistics: options.find((option) => option.name === "statistics")?.checked || false,
+                marketing: options.find((option) => option.name === "marketing")?.checked || false,
+            });
+
+            const syncFromCookiebot = () => {
+                const cookiebot = getCookiebot();
+
+                if (!cookiebot) {
+                status.textContent =
+                    "Cookiebot еще не загружен. Выбор сохранится через Cookiebot, когда скрипт будет доступен.";
+                setWidgetOpen(true);
+                return;
+                }
+
+                setOptions(cookiebot.consent || {});
+
+                if (!cookiebot.hasResponse) {
+                status.textContent = "Выберите, какие cookie можно использовать.";
+                setWidgetOpen(true);
+                return;
+                }
+
+                if (cookiebot.declined) {
+                status.textContent = "Сейчас активны только необходимые cookie.";
+                setWidgetOpen(true);
+                return;
+                }
+
+                if (
+                !cookiebot.consent?.preferences &&
+                !cookiebot.consent?.statistics &&
+                !cookiebot.consent?.marketing
+                ) {
+                status.textContent = "Выберите, какие дополнительные cookie можно использовать.";
+                setWidgetOpen(true);
+                return;
+                } else {
+                status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
+                }
+
+                setWidgetOpen(false);
+            };
+
+            const updateMeasurementConsent = ({ preferences, statistics, marketing }) => {
+                const consentUpdate = {
+                ad_storage: consentValue(marketing),
+                ad_user_data: consentValue(marketing),
+                ad_personalization: consentValue(marketing),
+                analytics_storage: consentValue(statistics),
+                functionality_storage: consentValue(preferences),
+                personalization_storage: consentValue(preferences || marketing),
+                security_storage: "granted",
+                };
+
+                if (typeof window.gtag === "function") {
+                window.gtag("consent", "update", consentUpdate);
+                } else {
+                getDataLayer().push(["consent", "update", consentUpdate]);
+                }
+
+                getDataLayer().push({
+                event: "cookie_consent_update",
+                cookiebot_preferences: preferences,
+                cookiebot_statistics: statistics,
+                cookiebot_marketing: marketing,
+                order_data_allowed: preferences,
+                yandex_metrica_allowed: statistics,
+                });
+
+                if (!preferences) {
+                clearOrderCookies();
+                }
+            };
+
+            const submitConsent = ({ preferences, statistics, marketing }) => {
+                const cookiebot = getCookiebot();
+
+                if (cookiebot && typeof cookiebot.submitCustomConsent === "function") {
+                updateMeasurementConsent({ preferences, statistics, marketing });
+                cookiebot.submitCustomConsent(preferences, statistics, marketing);
+                syncFromCookiebot();
+                return;
+                }
+
+                status.textContent = "Cookiebot недоступен. Проверьте Domain Group ID и загрузку uc.js.";
+            };
+
+            const updateMeasurementConsentFromCookiebot = () => {
+                const cookiebot = getCookiebot();
+
+                if (!cookiebot?.hasResponse) {
+                return;
+                }
+
+                const consent = cookiebot.consent || {};
+
+                updateMeasurementConsent({
+                preferences: Boolean(consent.preferences),
+                statistics: Boolean(consent.statistics),
+                marketing: Boolean(consent.marketing),
+                });
+            };
+
+            const openPreferenceCenter = () => {
+                const cookiebot = getCookiebot();
+
+                if (cookiebot && typeof cookiebot.renew === "function") {
+                cookiebot.renew();
+                }
+
+                setWidgetOpen(true);
+            };
+
+            triggers.forEach((trigger) => {
+                trigger.addEventListener("click", (event) => {
+                event.preventDefault();
+                openPreferenceCenter();
+                });
+            });
+
+            acceptButton?.addEventListener("click", () => {
+                submitConsent({ preferences: true, statistics: true, marketing: true });
+            });
+
+            saveButton?.addEventListener("click", () => {
+                submitConsent(readOptions());
+            });
+
+            declineButton?.addEventListener("click", () => {
+                submitConsent({ preferences: false, statistics: false, marketing: false });
+            });
+
+            window.addEventListener("CookiebotOnConsentReady", () => {
+                updateMeasurementConsentFromCookiebot();
+                syncFromCookiebot();
+            });
+            window.addEventListener("CookiebotOnAccept", () => {
+                updateMeasurementConsentFromCookiebot();
+                syncFromCookiebot();
+            });
+            window.addEventListener("CookiebotOnDecline", () => {
+                updateMeasurementConsent({
+                preferences: false,
+                statistics: false,
+                marketing: false,
+                });
+                syncFromCookiebot();
+            });
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", syncFromCookiebot);
+            } else {
+                syncFromCookiebot();
+            }
+
+            window.CookieConsentWidget = {
+                saveOrderDraft(orderDraft) {
+                const cookiebot = getCookiebot();
+
+                if (!cookiebot?.consent?.preferences) {
+                    clearOrderCookies();
+                    return false;
+                }
+
+                if (typeof orderDraft.order_name === "string") {
+                    setCookie("order_name", orderDraft.order_name.trim(), 60 * 60 * 24 * 30);
+                }
+
+                if (typeof orderDraft.order_phone === "string") {
+                    setCookie("order_phone", orderDraft.order_phone.trim(), 60 * 60 * 24 * 30);
+                }
+
+                return true;
+                },
+                clearOrderCookies,
+            };
+        })();
+
+    </script>
+    <!-- Cookie widget END-->
 </footer>
