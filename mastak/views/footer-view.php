@@ -302,15 +302,15 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                 const acceptButton = document.querySelector("[data-cookie-accept]");
                 const saveButton = document.querySelector("[data-cookie-save]");
                 const declineButton = document.querySelector("[data-cookie-decline]");
-                const orderCookieNames = ["kg_email", "kg_name", "kg_phone"];
-                console.log('acceptButton', acceptButton)
-                console.log('saveButton', saveButton)
-                console.log('declineButton', declineButton)
+
+                const consentCookieName = "kg_cookie_consent";
+                const consentCookieMaxAge = 60 * 60 * 24 * 365;
+                const orderCookieNames = ["kg_name", "kg_phone", "kg_email"];
+
                 if (!widget || !status) {
                     return;
                 }
 
-                const getCookiebot = () => window.Cookiebot;
                 const getDataLayer = () => {
                     window.dataLayer = window.dataLayer || [];
                     return window.dataLayer;
@@ -324,6 +324,17 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     document.cookie = `${name}=${encodeURIComponent(value)}; Path=/; Max-Age=${maxAgeSeconds}; SameSite=Lax${secureFlag}`;
                 };
 
+                const getCookie = (name) => {
+                    const cookies = document.cookie ? document.cookie.split("; ") : [];
+                    const cookie = cookies.find((item) => item.startsWith(`${name}=`));
+
+                    if (!cookie) {
+                    return null;
+                    }
+
+                    return decodeURIComponent(cookie.slice(name.length + 1));
+                };
+
                 const deleteCookie = (name) => {
                     document.cookie = `${name}=; Path=/; Max-Age=0; SameSite=Lax`;
                 };
@@ -332,126 +343,134 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     orderCookieNames.forEach(deleteCookie);
                 };
 
+                const normalizeConsent = (consent) => ({
+                    preferences: Boolean(consent?.preferences),
+                    statistics: Boolean(consent?.statistics),
+                    marketing: Boolean(consent?.marketing),
+                });
+
+                const hasOptionalConsent = (consent) =>
+                    Boolean(consent.preferences || consent.statistics || consent.marketing);
+
                 const setWidgetOpen = (isOpen) => {
                     widget.hidden = !isOpen;
                 };
 
-                const setOptions = ({ preferences, statistics, marketing }) => {
+                const setOptions = (consent) => {
                     options.forEach((option) => {
-                    option.checked = Boolean({ preferences, statistics, marketing }[option.name]);
+                    option.checked = Boolean(consent[option.name]);
                     });
                 };
 
-                const readOptions = () => ({
-                    preferences: options.find((option) => option.name === "preferences")?.checked || false,
-                    statistics: options.find((option) => option.name === "statistics")?.checked || false,
-                    marketing: options.find((option) => option.name === "marketing")?.checked || false,
-                });
+                const readOptions = () =>
+                    normalizeConsent({
+                    preferences: options.find((option) => option.name === "preferences")?.checked,
+                    statistics: options.find((option) => option.name === "statistics")?.checked,
+                    marketing: options.find((option) => option.name === "marketing")?.checked,
+                    });
 
-                const syncFromCookiebot = () => {
-                    const cookiebot = getCookiebot();
+                const readSavedConsent = () => {
+                    const rawConsent = getCookie(consentCookieName);
 
-                    if (!cookiebot) {
-                        status.textContent =
-                            "Cookiebot еще не загружен. Выбор сохранится через Cookiebot, когда скрипт будет доступен.";
-                        setWidgetOpen(true);
-                        return;
+                    if (!rawConsent) {
+                    return null;
                     }
 
-                    setOptions(cookiebot.consent || {});
+                    try {
+                    const parsedConsent = JSON.parse(rawConsent);
 
-                    if (!cookiebot.hasResponse) {
-                        status.textContent = "Выберите, какие cookie можно использовать.";
-                        setWidgetOpen(true);
-                        return;
+                    if (parsedConsent && parsedConsent.version === 1) {
+                        return normalizeConsent(parsedConsent.categories);
+                    }
+                    } catch (error) {
+                    deleteCookie(consentCookieName);
                     }
 
-                    if (cookiebot.declined) {
-                        status.textContent = "Сейчас активны только необходимые cookie.";
-                        setWidgetOpen(true);
-                        return;
-                    }
-
-                    if (
-                        !cookiebot.consent?.preferences &&
-                        !cookiebot.consent?.statistics &&
-                        !cookiebot.consent?.marketing
-                    ) {
-                        status.textContent = "Выберите, какие дополнительные cookie можно использовать.";
-                        setWidgetOpen(true);
-                        return;
-                    } else {
-                        status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
-                    }
-
-                    setWidgetOpen(false);
+                    return null;
                 };
 
-                const updateMeasurementConsent = ({ preferences, statistics, marketing }) => {
+                const saveConsent = (consent) => {
+                    setCookie(
+                    consentCookieName,
+                    JSON.stringify({
+                        version: 1,
+                        saved_at: new Date().toISOString(),
+                        categories: normalizeConsent(consent),
+                    }),
+                    consentCookieMaxAge
+                    );
+                };
+
+                const updateMeasurementConsent = (consent) => {
+                    const normalizedConsent = normalizeConsent(consent);
                     const consentUpdate = {
-                        ad_storage: consentValue(marketing),
-                        ad_user_data: consentValue(marketing),
-                        ad_personalization: consentValue(marketing),
-                        analytics_storage: consentValue(statistics),
-                        functionality_storage: consentValue(preferences),
-                        personalization_storage: consentValue(preferences || marketing),
-                        security_storage: "granted",
+                    ad_storage: consentValue(normalizedConsent.marketing),
+                    ad_user_data: consentValue(normalizedConsent.marketing),
+                    ad_personalization: consentValue(normalizedConsent.marketing),
+                    analytics_storage: consentValue(normalizedConsent.statistics),
+                    functionality_storage: consentValue(normalizedConsent.preferences),
+                    personalization_storage: consentValue(
+                        normalizedConsent.preferences || normalizedConsent.marketing
+                    ),
+                    security_storage: "granted",
                     };
 
                     if (typeof window.gtag === "function") {
-                        window.gtag("consent", "update", consentUpdate);
+                    window.gtag("consent", "update", consentUpdate);
                     } else {
-                        getDataLayer().push(["consent", "update", consentUpdate]);
+                    getDataLayer().push(["consent", "update", consentUpdate]);
                     }
 
                     getDataLayer().push({
-                        event: "cookie_consent_update",
-                        cookiebot_preferences: preferences,
-                        cookiebot_statistics: statistics,
-                        cookiebot_marketing: marketing,
-                        order_data_allowed: preferences,
-                        yandex_metrica_allowed: statistics,
+                    event: "cookie_consent_update",
+                    cookie_preferences: normalizedConsent.preferences,
+                    cookie_statistics: normalizedConsent.statistics,
+                    cookie_marketing: normalizedConsent.marketing,
+                    kg_contact_data_allowed: normalizedConsent.preferences,
+                    yandex_metrica_allowed: normalizedConsent.statistics,
                     });
 
-                    if (!preferences) {
-                        clearOrderCookies();
+                    if (!normalizedConsent.preferences) {
+                    clearOrderCookies();
                     }
                 };
 
-                const submitConsent = ({ preferences, statistics, marketing }) => {
-                    const cookiebot = getCookiebot();
-                    console.log('cookiebot', cookiebot);
-                    if (cookiebot && typeof cookiebot.submitCustomConsent === "function") {
-                        updateMeasurementConsent({ preferences, statistics, marketing });
-                        cookiebot.submitCustomConsent(preferences, statistics, marketing);
-                        syncFromCookiebot();
-                        return;
+                const syncWidget = () => {
+                    const savedConsent = readSavedConsent();
+
+                    if (!savedConsent) {
+                    status.textContent = "Выберите, какие cookie можно использовать.";
+                    setOptions({ preferences: false, statistics: false, marketing: false });
+                    setWidgetOpen(true);
+                    return;
                     }
 
-                    status.textContent = "Cookiebot недоступен. Проверьте Domain Group ID и загрузку uc.js.";
+                    setOptions(savedConsent);
+                    updateMeasurementConsent(savedConsent);
+
+                    if (!hasOptionalConsent(savedConsent)) {
+                    status.textContent = "Сейчас активны только необходимые cookie.";
+                    setWidgetOpen(true);
+                    return;
+                    }
+
+                    status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
+                    setWidgetOpen(false);
                 };
 
-                const updateMeasurementConsentFromCookiebot = () => {
-                    const cookiebot = getCookiebot();
+                const submitConsent = (consent) => {
+                    const normalizedConsent = normalizeConsent(consent);
 
-                    if (!cookiebot?.hasResponse) {
-                        return;
-                    }
-
-                    const consent = cookiebot.consent || {};
-
-                        updateMeasurementConsent({
-                        preferences: Boolean(consent.preferences),
-                        statistics: Boolean(consent.statistics),
-                        marketing: Boolean(consent.marketing),
-                    });
+                    saveConsent(normalizedConsent);
+                    updateMeasurementConsent(normalizedConsent);
+                    syncWidget();
                 };
 
                 const openPreferenceCenter = () => {
-                    const cookiebot = getCookiebot();
+                    const savedConsent = readSavedConsent();
 
-                    if (cookiebot && typeof cookiebot.renew === "function") {
-                        cookiebot.renew();
+                    if (savedConsent) {
+                    setOptions(savedConsent);
                     }
 
                     setWidgetOpen(true);
@@ -459,8 +478,8 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                 triggers.forEach((trigger) => {
                     trigger.addEventListener("click", (event) => {
-                        event.preventDefault();
-                        openPreferenceCenter();
+                    event.preventDefault();
+                    openPreferenceCenter();
                     });
                 });
 
@@ -476,56 +495,47 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     submitConsent({ preferences: false, statistics: false, marketing: false });
                 });
 
-                window.addEventListener("CookiebotOnConsentReady", () => {
-                    updateMeasurementConsentFromCookiebot();
-                    syncFromCookiebot();
-                });
-                window.addEventListener("CookiebotOnAccept", () => {
-                    updateMeasurementConsentFromCookiebot();
-                    syncFromCookiebot();
-                });
-                window.addEventListener("CookiebotOnDecline", () => {
-                    updateMeasurementConsent({
-                        preferences: false,
-                        statistics: false,
-                        marketing: false,
-                    });
-                    syncFromCookiebot();
-                });
-
                 if (document.readyState === "loading") {
-                    document.addEventListener("DOMContentLoaded", syncFromCookiebot);
+                    document.addEventListener("DOMContentLoaded", syncWidget);
                 } else {
-                    syncFromCookiebot();
+                    syncWidget();
                 }
 
                 window.CookieConsentWidget = {
+                    open: openPreferenceCenter,
+                    getConsent: readSavedConsent,
+                    saveContactDraft(contactDraft) {
+                    const savedConsent = readSavedConsent();
+
+                    if (!savedConsent?.preferences) {
+                        clearOrderCookies();
+                        return false;
+                    }
+
+                    if (typeof contactDraft.kg_name === "string") {
+                        setCookie("kg_name", contactDraft.kg_name.trim(), 60 * 60 * 24 * 30);
+                    }
+
+                    if (typeof contactDraft.kg_phone === "string") {
+                        setCookie("kg_phone", contactDraft.kg_phone.trim(), 60 * 60 * 24 * 30);
+                    }
+
+                    if (typeof contactDraft.kg_email === "string") {
+                        setCookie("kg_email", contactDraft.kg_email.trim(), 60 * 60 * 24 * 30);
+                    }
+
+                    return true;
+                    },
                     saveOrderDraft(orderDraft) {
-                        const cookiebot = getCookiebot();
-
-                        if (!cookiebot?.consent?.preferences) {
-                            clearOrderCookies();
-                            return false;
-                        }
-
-                        if (typeof orderDraft.kg_name === "string") {
-                            setCookie("kg_name", orderDraft.kg_name.trim(), 60 * 60 * 24 * 30);
-                        }
-
-                        if (typeof orderDraft.kg_phone === "string") {
-                            setCookie("kg_phone", orderDraft.kg_phone.trim(), 60 * 60 * 24 * 30);
-                        }
-                        
-                        if (typeof orderDraft.kg_email === "string") {
-                            setCookie("kg_email", orderDraft.kg_email.trim(), 60 * 60 * 24 * 30);
-                        }
-
-                        return true;
+                    return this.saveContactDraft({
+                        kg_name: orderDraft.kg_name ,
+                        kg_phone: orderDraft.kg_phone,
+                        kg_email: orderDraft.kg_email
+                    });
                     },
                     clearOrderCookies,
                 };
             })();
-
         </script>
         <!-- Cookie widget END-->
      <?php endif;?>
