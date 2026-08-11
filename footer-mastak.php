@@ -492,7 +492,6 @@ if (is_page_template('reviews-page-template.php')) : ?>
         });
     });
 </script>
-<script src="<?= $assets->js('cookie'); ?>"></script>
 </body>
 
 </html>
