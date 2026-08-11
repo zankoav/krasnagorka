@@ -230,7 +230,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
         <img class="footer-bottom__payments footer-bottom__payments_white" src="https://krasnagorka.by/wp-content/uploads/2022/05/image_2022-05-26_09-51-49.png" alt="payment systems 2">
     </div>
     
-     <?php if(is_admin()):?>
+     <?php if(is_page_template("template-mastak-prices.php")):?>
         <!-- Cookie widget START-->
         <div class="cookie_widget" data-cookie-widget hidden>
         <div class="cookie_widget__content">
@@ -302,7 +302,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                 const acceptButton = document.querySelector("[data-cookie-accept]");
                 const saveButton = document.querySelector("[data-cookie-save]");
                 const declineButton = document.querySelector("[data-cookie-decline]");
-                const orderCookieNames = ["order_name", "order_phone"];
+                const orderCookieNames = ["kg_email", "kg_name", "kg_phone"];
 
                 if (!widget || !status) {
                     return;
@@ -350,36 +350,36 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     const cookiebot = getCookiebot();
 
                     if (!cookiebot) {
-                    status.textContent =
-                        "Cookiebot еще не загружен. Выбор сохранится через Cookiebot, когда скрипт будет доступен.";
-                    setWidgetOpen(true);
-                    return;
+                        status.textContent =
+                            "Cookiebot еще не загружен. Выбор сохранится через Cookiebot, когда скрипт будет доступен.";
+                        setWidgetOpen(true);
+                        return;
                     }
 
                     setOptions(cookiebot.consent || {});
 
                     if (!cookiebot.hasResponse) {
-                    status.textContent = "Выберите, какие cookie можно использовать.";
-                    setWidgetOpen(true);
-                    return;
+                        status.textContent = "Выберите, какие cookie можно использовать.";
+                        setWidgetOpen(true);
+                        return;
                     }
 
                     if (cookiebot.declined) {
-                    status.textContent = "Сейчас активны только необходимые cookie.";
-                    setWidgetOpen(true);
-                    return;
+                        status.textContent = "Сейчас активны только необходимые cookie.";
+                        setWidgetOpen(true);
+                        return;
                     }
 
                     if (
-                    !cookiebot.consent?.preferences &&
-                    !cookiebot.consent?.statistics &&
-                    !cookiebot.consent?.marketing
+                        !cookiebot.consent?.preferences &&
+                        !cookiebot.consent?.statistics &&
+                        !cookiebot.consent?.marketing
                     ) {
-                    status.textContent = "Выберите, какие дополнительные cookie можно использовать.";
-                    setWidgetOpen(true);
-                    return;
+                        status.textContent = "Выберите, какие дополнительные cookie можно использовать.";
+                        setWidgetOpen(true);
+                        return;
                     } else {
-                    status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
+                        status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
                     }
 
                     setWidgetOpen(false);
@@ -387,32 +387,32 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                 const updateMeasurementConsent = ({ preferences, statistics, marketing }) => {
                     const consentUpdate = {
-                    ad_storage: consentValue(marketing),
-                    ad_user_data: consentValue(marketing),
-                    ad_personalization: consentValue(marketing),
-                    analytics_storage: consentValue(statistics),
-                    functionality_storage: consentValue(preferences),
-                    personalization_storage: consentValue(preferences || marketing),
-                    security_storage: "granted",
+                        ad_storage: consentValue(marketing),
+                        ad_user_data: consentValue(marketing),
+                        ad_personalization: consentValue(marketing),
+                        analytics_storage: consentValue(statistics),
+                        functionality_storage: consentValue(preferences),
+                        personalization_storage: consentValue(preferences || marketing),
+                        security_storage: "granted",
                     };
 
                     if (typeof window.gtag === "function") {
-                    window.gtag("consent", "update", consentUpdate);
+                        window.gtag("consent", "update", consentUpdate);
                     } else {
-                    getDataLayer().push(["consent", "update", consentUpdate]);
+                        getDataLayer().push(["consent", "update", consentUpdate]);
                     }
 
                     getDataLayer().push({
-                    event: "cookie_consent_update",
-                    cookiebot_preferences: preferences,
-                    cookiebot_statistics: statistics,
-                    cookiebot_marketing: marketing,
-                    order_data_allowed: preferences,
-                    yandex_metrica_allowed: statistics,
+                        event: "cookie_consent_update",
+                        cookiebot_preferences: preferences,
+                        cookiebot_statistics: statistics,
+                        cookiebot_marketing: marketing,
+                        order_data_allowed: preferences,
+                        yandex_metrica_allowed: statistics,
                     });
 
                     if (!preferences) {
-                    clearOrderCookies();
+                        clearOrderCookies();
                     }
                 };
 
@@ -420,10 +420,10 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     const cookiebot = getCookiebot();
 
                     if (cookiebot && typeof cookiebot.submitCustomConsent === "function") {
-                    updateMeasurementConsent({ preferences, statistics, marketing });
-                    cookiebot.submitCustomConsent(preferences, statistics, marketing);
-                    syncFromCookiebot();
-                    return;
+                        updateMeasurementConsent({ preferences, statistics, marketing });
+                        cookiebot.submitCustomConsent(preferences, statistics, marketing);
+                        syncFromCookiebot();
+                        return;
                     }
 
                     status.textContent = "Cookiebot недоступен. Проверьте Domain Group ID и загрузку uc.js.";
@@ -433,15 +433,15 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     const cookiebot = getCookiebot();
 
                     if (!cookiebot?.hasResponse) {
-                    return;
+                        return;
                     }
 
                     const consent = cookiebot.consent || {};
 
-                    updateMeasurementConsent({
-                    preferences: Boolean(consent.preferences),
-                    statistics: Boolean(consent.statistics),
-                    marketing: Boolean(consent.marketing),
+                        updateMeasurementConsent({
+                        preferences: Boolean(consent.preferences),
+                        statistics: Boolean(consent.statistics),
+                        marketing: Boolean(consent.marketing),
                     });
                 };
 
@@ -449,7 +449,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     const cookiebot = getCookiebot();
 
                     if (cookiebot && typeof cookiebot.renew === "function") {
-                    cookiebot.renew();
+                        cookiebot.renew();
                     }
 
                     setWidgetOpen(true);
@@ -457,8 +457,8 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                 triggers.forEach((trigger) => {
                     trigger.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    openPreferenceCenter();
+                        event.preventDefault();
+                        openPreferenceCenter();
                     });
                 });
 
@@ -484,9 +484,9 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                 });
                 window.addEventListener("CookiebotOnDecline", () => {
                     updateMeasurementConsent({
-                    preferences: false,
-                    statistics: false,
-                    marketing: false,
+                        preferences: false,
+                        statistics: false,
+                        marketing: false,
                     });
                     syncFromCookiebot();
                 });
@@ -499,22 +499,26 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                 window.CookieConsentWidget = {
                     saveOrderDraft(orderDraft) {
-                    const cookiebot = getCookiebot();
+                        const cookiebot = getCookiebot();
 
-                    if (!cookiebot?.consent?.preferences) {
-                        clearOrderCookies();
-                        return false;
-                    }
+                        if (!cookiebot?.consent?.preferences) {
+                            clearOrderCookies();
+                            return false;
+                        }
 
-                    if (typeof orderDraft.order_name === "string") {
-                        setCookie("order_name", orderDraft.order_name.trim(), 60 * 60 * 24 * 30);
-                    }
+                        if (typeof orderDraft.kg_name === "string") {
+                            setCookie("kg_name", orderDraft.kg_name.trim(), 60 * 60 * 24 * 30);
+                        }
 
-                    if (typeof orderDraft.order_phone === "string") {
-                        setCookie("order_phone", orderDraft.order_phone.trim(), 60 * 60 * 24 * 30);
-                    }
+                        if (typeof orderDraft.kg_phone === "string") {
+                            setCookie("kg_phone", orderDraft.kg_phone.trim(), 60 * 60 * 24 * 30);
+                        }
+                        
+                        if (typeof orderDraft.kg_email === "string") {
+                            setCookie("kg_email", orderDraft.kg_email.trim(), 60 * 60 * 24 * 30);
+                        }
 
-                    return true;
+                        return true;
                     },
                     clearOrderCookies,
                 };
