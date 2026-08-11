@@ -450,11 +450,10 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                     if (!hasOptionalConsent(savedConsent)) {
                     status.textContent = "Сейчас активны только необходимые cookie.";
-                    setWidgetOpen(true);
-                    return;
+                    } else {
+                    status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
                     }
 
-                    status.textContent = "Ваш выбор сохранен. Его можно изменить в любой момент.";
                     setWidgetOpen(false);
                 };
 
@@ -528,9 +527,9 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                     },
                     saveOrderDraft(orderDraft) {
                     return this.saveContactDraft({
-                        kg_name: orderDraft.kg_name ,
-                        kg_phone: orderDraft.kg_phone,
-                        kg_email: orderDraft.kg_email
+                        kg_name: orderDraft.kg_name ?? orderDraft.order_name,
+                        kg_phone: orderDraft.kg_phone ?? orderDraft.order_phone,
+                        kg_email: orderDraft.kg_email ?? orderDraft.order_email,
                     });
                     },
                     clearOrderCookies,
