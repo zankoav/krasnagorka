@@ -3667,7 +3667,8 @@ a {
   font-style: normal;
   font-weight: 900;
   src: url(/wp-content/themes/krasnagorka/mastak/src/fonts/fa-solid-900.d9824d.eot);
-  src: url(/wp-content/themes/krasnagorka/mastak/src/fonts/fa-solid-900.d9824d.eot)
+  src:
+    url(/wp-content/themes/krasnagorka/mastak/src/fonts/fa-solid-900.d9824d.eot)
       format("embedded-opentype"),
     url(/wp-content/themes/krasnagorka/mastak/src/fonts/fa-solid-900.18d234.woff2)
       format("woff2"),
@@ -4353,7 +4354,9 @@ body {
   transition-property: -webkit-transform;
   -o-transition-property: transform;
   transition-property: transform;
-  transition-property: transform, -webkit-transform;
+  transition-property:
+    transform,
+    -webkit-transform;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
@@ -4384,7 +4387,9 @@ body {
   transition-property: -webkit-transform;
   -o-transition-property: transform;
   transition-property: transform;
-  transition-property: transform, -webkit-transform;
+  transition-property:
+    transform,
+    -webkit-transform;
 }
 .swiper-invisible-blank-slide {
   visibility: hidden;
@@ -4398,11 +4403,18 @@ body {
   -webkit-align-items: flex-start;
   -ms-flex-align: start;
   align-items: flex-start;
-  -webkit-transition-property: height, -webkit-transform;
-  transition-property: height, -webkit-transform;
+  -webkit-transition-property:
+    height,
+    -webkit-transform;
+  transition-property:
+    height,
+    -webkit-transform;
   -o-transition-property: transform, height;
   transition-property: transform, height;
-  transition-property: transform, height, -webkit-transform;
+  transition-property:
+    transform,
+    height,
+    -webkit-transform;
 }
 .swiper-container-3d {
   -webkit-perspective: 1200px;
@@ -4659,11 +4671,22 @@ button.swiper-pagination-bullet {
   > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
   .swiper-pagination-bullet {
   display: inline-block;
-  -webkit-transition: top 0.2s, -webkit-transform 0.2s;
-  transition: top 0.2s, -webkit-transform 0.2s;
-  -o-transition: 0.2s transform, 0.2s top;
-  transition: transform 0.2s, top 0.2s;
-  transition: transform 0.2s, top 0.2s, -webkit-transform 0.2s;
+  -webkit-transition:
+    top 0.2s,
+    -webkit-transform 0.2s;
+  transition:
+    top 0.2s,
+    -webkit-transform 0.2s;
+  -o-transition:
+    0.2s transform,
+    0.2s top;
+  transition:
+    transform 0.2s,
+    top 0.2s;
+  transition:
+    transform 0.2s,
+    top 0.2s,
+    -webkit-transform 0.2s;
 }
 .swiper-container-horizontal
   > .swiper-pagination-bullets
@@ -4681,20 +4704,42 @@ button.swiper-pagination-bullet {
 .swiper-container-horizontal
   > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic
   .swiper-pagination-bullet {
-  -webkit-transition: left 0.2s, -webkit-transform 0.2s;
-  transition: left 0.2s, -webkit-transform 0.2s;
-  -o-transition: 0.2s transform, 0.2s left;
-  transition: transform 0.2s, left 0.2s;
-  transition: transform 0.2s, left 0.2s, -webkit-transform 0.2s;
+  -webkit-transition:
+    left 0.2s,
+    -webkit-transform 0.2s;
+  transition:
+    left 0.2s,
+    -webkit-transform 0.2s;
+  -o-transition:
+    0.2s transform,
+    0.2s left;
+  transition:
+    transform 0.2s,
+    left 0.2s;
+  transition:
+    transform 0.2s,
+    left 0.2s,
+    -webkit-transform 0.2s;
 }
 .swiper-container-horizontal.swiper-container-rtl
   > .swiper-pagination-bullets-dynamic
   .swiper-pagination-bullet {
-  -webkit-transition: right 0.2s, -webkit-transform 0.2s;
-  transition: right 0.2s, -webkit-transform 0.2s;
-  -o-transition: 0.2s transform, 0.2s right;
-  transition: transform 0.2s, right 0.2s;
-  transition: transform 0.2s, right 0.2s, -webkit-transform 0.2s;
+  -webkit-transition:
+    right 0.2s,
+    -webkit-transform 0.2s;
+  transition:
+    right 0.2s,
+    -webkit-transform 0.2s;
+  -o-transition:
+    0.2s transform,
+    0.2s right;
+  transition:
+    transform 0.2s,
+    right 0.2s;
+  transition:
+    transform 0.2s,
+    right 0.2s,
+    -webkit-transform 0.2s;
 }
 .swiper-pagination-progressbar {
   background: rgba(0, 0, 0, 0.25);
@@ -5937,7 +5982,6 @@ button.swiper-pagination-bullet {
   color: #fff;
   font-size: 14px;
   line-height: 14px;
-  margin-bottom: 0.5rem;
 }
 .contacts-form {
   color: #fff;
