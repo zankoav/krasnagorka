@@ -75,7 +75,7 @@ export default class Calendar extends LightningElement {
 
         const oneMonthAgo = moment().subtract(1, 'months')
         // Format it as a readable string (e.g., "2026-07-12")
-        let formattedDate = moment().subtract(1, 'months').format('YYYY-MM-DD')
+        let formattedDate = moment().subtract(1, 'months').startOf('month').format('YYYY-MM-DD')
 
         $calendar.fullCalendar({
             height: 380,
