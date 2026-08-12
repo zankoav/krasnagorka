@@ -22,6 +22,7 @@ async function initCalendars($) {
     const happyEventsResponse = await fetch(`https://krasnagorka.by/wp-json/happy/v1/events/`)
 
     const happyEvents = await happyEventsResponse.json()
+    const isAdmin = document.getElementById('wpadminbar')
 
     $('.booking-houses__calendars-all-button').on('click', function (event) {
         event.preventDefault()
@@ -135,13 +136,12 @@ async function initCalendars($) {
                     // Format it as a readable string (e.g., "2026-07-12")
                     let formattedDate = moment().subtract(1, 'months').format('YYYY-MM-DD')
 
-                    if ($('.booking-houses__calendars-all-button').length > 0) {
-                        formattedDate = null
+                    if (isAdmin) {
+                        formattedDate = ''
                     }
                     $calendar.fullCalendar({
-                        defaultView: 'month',
                         validRange: {
-                            start: formattedDate
+                            start: ''
                         },
                         height: 300,
                         loading: function (r) {
@@ -354,7 +354,6 @@ async function initCalendars($) {
                         jsFromDate = null
                     }
 
-                    var isAdmin = document.getElementById('wpadminbar')
                     var isFreeDate = document.querySelector('.free-date')
                     if (isFreeDate) {
                         let fromDateString = document.getElementById('free_date_from').value
