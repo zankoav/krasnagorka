@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc'
-import { getCookie, setCookie } from 'z/utils'
+import { getCookie, setCookie, deleteCookie } from 'z/utils'
 import './booking.scss'
 
 const MAX_AGE = 3600 * 24 * 100
@@ -182,9 +182,16 @@ export default class BookingForm extends LightningElement {
                     this.showError()
                 }
             } else if (response.data) {
-                setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
-                setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
-                setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
+                if (window.CookieConsentWidget?.getConsent().preferences) {
+                    setCookie('kg_name', this.settings.fio, { 'max-age': MAX_AGE })
+                    setCookie('kg_phone', this.settings.phone, { 'max-age': MAX_AGE })
+                    setCookie('kg_email', this.settings.email, { 'max-age': MAX_AGE })
+                } else {
+                    deleteCookie('kg_name')
+                    deleteCookie('kg_phone')
+                    deleteCookie('kg_email')
+                }
+
                 gtag('event', 'create_lead')
 
                 if (response.data.template) {
