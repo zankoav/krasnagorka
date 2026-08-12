@@ -130,8 +130,6 @@ async function initCalendars($) {
                     $orderBookingButton.removeClass('our-house__button-hidden')
                     var $calendar = $parent.find('[data-url]')
                     var cUrl = $calendar.data('url')
-                    const fromDateClearFormat = new moment(jsFromDate.d, 'YYYY-MM-DD')
-
                     // Returns a modified moment object
                     const oneMonthAgo = moment().subtract(1, 'months'); 
                     // Format it as a readable string (e.g., "2026-07-12")
