@@ -140,9 +140,8 @@ async function initCalendars($) {
                         formattedDate = ''
                     }
                     $calendar.fullCalendar({
-                        defaultView: 'month',
                         validRange: {
-                            start: ''
+                            start: formattedDate
                         },
                         height: 300,
                         loading: function (r) {
