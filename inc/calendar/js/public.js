@@ -131,10 +131,13 @@ async function initCalendars($) {
                     var $calendar = $parent.find('[data-url]')
                     var cUrl = $calendar.data('url')
                     // Returns a modified moment object
-                    const oneMonthAgo = moment().subtract(1, 'months'); 
+                    const oneMonthAgo = moment().subtract(1, 'months')
                     // Format it as a readable string (e.g., "2026-07-12")
-                    const formattedDate = moment().subtract(1, 'months').format('YYYY-MM-DD');
-                    console.log('formattedDate', formattedDate);
+                    let formattedDate = moment().subtract(1, 'months').format('YYYY-MM-DD')
+
+                    if ($('.booking-houses__calendars-all-button').length > 0) {
+                        formattedDate = null
+                    }
                     $calendar.fullCalendar({
                         defaultView: 'month',
                         validRange: {
