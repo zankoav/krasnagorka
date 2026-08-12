@@ -130,7 +130,18 @@ async function initCalendars($) {
                     $orderBookingButton.removeClass('our-house__button-hidden')
                     var $calendar = $parent.find('[data-url]')
                     var cUrl = $calendar.data('url')
+                    const fromDateClearFormat = new moment(jsFromDate.d, 'YYYY-MM-DD')
+
+                    // Returns a modified moment object
+                    const oneMonthAgo = moment().subtract(1, 'months'); 
+                    // Format it as a readable string (e.g., "2026-07-12")
+                    const formattedDate = moment().subtract(1, 'months').format('YYYY-MM-DD');
+                    console.log('formattedDate', formattedDate);
                     $calendar.fullCalendar({
+                        defaultView: 'month',
+                        validRange: {
+                            start: formattedDate
+                        },
                         height: 300,
                         loading: function (r) {
                             $parentDate.css({ 'max-width': 292 })
