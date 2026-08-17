@@ -119,6 +119,12 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                                     <span class="contacts-data__item-text">Договор присоединения</span>
                                 </div>
                             </a>
+                            <a href="https://krasnagorka.by/wp-content/uploads/2026/08/politika-obrabotki-personalnyh-dannyh-krasnagorka.pdf" class="contacts-data__item" data-cookie-trigger>
+                                <img src="<?= CORE_PATH ?>assets/icons/contacts-data/privacy-policy-icon.svg" alt="cookie" class="contacts-data__item-icon">
+                                <div class="contacts-data__item-text-wrapper">
+                                    <span class="contacts-data__item-text">Политика конфиденциальности</span>
+                                </div>
+                            </a>
                             <a href="#" class="contacts-data__item" data-cookie-trigger>
                                 <img src="<?= CORE_PATH ?>assets/icons/contacts-data/cookie-icon-white.svg" alt="cookie" class="contacts-data__item-icon">
                                 <div class="contacts-data__item-text-wrapper">
