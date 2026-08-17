@@ -5971,7 +5971,7 @@ button.swiper-pagination-bullet {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 .contacts-data__item-icon {
   margin-right: 1rem;
