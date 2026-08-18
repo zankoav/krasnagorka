@@ -89,6 +89,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
     (function($) {
 
         document.addEventListener('wpcf7mailsent', function(event) {
+            console.log('contactFormId', event.detail.contactFormId);
             if (event.detail.contactFormId == '2730') {
                 var year = 3600 * 24 * 365;
                 var $inputName = $('[name="your-name"]');

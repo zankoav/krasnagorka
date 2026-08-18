@@ -161,12 +161,6 @@
         get_template_part("mastak/views/reviews", "view");
         get_template_part("mastak/views/footer", "view");
         ?>
-        <div style="display:none" class="fancybox-hidden">
-            <div id="booking-order">
-                <p class="booking-order__title"></p>
-                <?= do_shortcode('[contact-form-7 id="2730" title="Отправить заявку на бронирование"]'); ?>
-            </div>
-        </div>
     <?php endwhile; endif; // end of the loop. ?>
 
 <?php get_footer('mastak'); ?>
