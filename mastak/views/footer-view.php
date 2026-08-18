@@ -168,6 +168,10 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                         [data-name=acceptance-512] {
                             text-align: left;
                         }
+                        [data-name=acceptance-512] label a{
+                            color: #1498c6 !important;
+                        }
+
                         [data-name=acceptance-512] label {
                             display: flex;
                             align-items: flex-start;

@@ -197,6 +197,14 @@ if (!defined('ABSPATH')) {
             flex: 1 0 100%;
         }
 
+
+        #footer-submit-form[disabled] {
+            background: #ffa2ad !important;
+            cursor: not-allowed;
+        }
+
+
+
         .contacts-form__item:last-child {
             flex-wrap: wrap;
         }
