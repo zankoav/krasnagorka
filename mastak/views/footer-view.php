@@ -175,9 +175,9 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                         [data-name=acceptance-512] input {
                             flex-shrink:0;
-                            -webkit-appearance: initial !important;
-                            -moz-appearance: initial !important;
-                            appearance: initial !important;
+                            -webkit-appearance: auto !important;
+                            -moz-appearance: auto !important;
+                            appearance: auto !important;
                         }
                     </style>
                     <?= do_shortcode('[contact-form-7 id="8893" title="Mastak footer" html_class="contacts-form__forma"]'); ?>
