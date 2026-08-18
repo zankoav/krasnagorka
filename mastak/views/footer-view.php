@@ -175,6 +175,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
 
                         [data-name=acceptance-512] input {
                             flex-shrink:0;
+                            width: initial;
                             -webkit-appearance: auto !important;
                             -moz-appearance: auto !important;
                             appearance: auto !important;
