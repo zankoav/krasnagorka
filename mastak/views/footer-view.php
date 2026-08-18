@@ -169,7 +169,7 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                             text-align: left;
                         }
                         [data-name=acceptance-512] label a{
-                            color: #1498c6 !important;
+                            color: #2a3959 !important;
                         }
 
                         [data-name=acceptance-512] label {
