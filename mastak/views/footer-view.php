@@ -170,12 +170,14 @@ $raiting = "Рейтинг: " . $ratingValue . " - " . $ratingCount . " голо
                         }
                         [data-name=acceptance-512] label {
                             display: flex;
+                            align-items: flex-start;
                             gap: 12px;
                         }
 
                         [data-name=acceptance-512] input {
                             flex-shrink:0;
-                            width: initial;
+                            width: 20px;
+                            height: 20px;
                             -webkit-appearance: auto !important;
                             -moz-appearance: auto !important;
                             appearance: auto !important;
