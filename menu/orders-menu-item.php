@@ -5,7 +5,7 @@
  */
 function order_view_page()
 {
-    add_menu_page( 'Заказы на ближайшие 10 дней', 'Заказы', 'read', 'orders-view', 'orders_ref_page_callback', 'dashicons-palmtree', 1 );
+    add_menu_page( 'Заезды на ближайшие 10 дней', 'Заезды', 'read', 'orders-view', 'orders_ref_page_callback', 'dashicons-palmtree', 1 );
 
 }
 

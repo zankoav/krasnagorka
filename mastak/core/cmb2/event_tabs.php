@@ -706,7 +706,7 @@ function mastak_event_tab_type_10()
     ));
 
     $sbc_client->add_field(array(
-        'name' => 'Пакеты услуг',
+        'name' => 'Пакеты услуг (НГ)',
         'id'   => $prefix . '_variants',
         'type'             => 'multicheck_inline',
         'options_cb'       => 'show_variants_options',

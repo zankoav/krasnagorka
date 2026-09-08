@@ -159,7 +159,7 @@
          */
         $sbc_client = new_cmb2_box(array(
             'id'           => $prefix . 'data',
-            'title'        => esc_html__('Табы', 'krasnagorka'),
+            'title'        => esc_html__('Табы (вкладки)', 'krasnagorka'),
             'object_types' => array('event'), // Post type
             'context'      => 'normal',
             'priority'     => 'high',

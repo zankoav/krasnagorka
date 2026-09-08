@@ -53,7 +53,7 @@
                 'search_items'       => __('Найти Таб'),
                 'not_found'          => __('Таб не найден'),
                 'not_found_in_trash' => __('В корзине Таба не найдено'),
-                'menu_name'          => 'Табы',
+                'menu_name'          => 'Табы (вкладки)',
                 'items_archive'      => 'Архив Табов',
             ),
             'description'         => '',
