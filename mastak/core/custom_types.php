@@ -64,7 +64,7 @@
             // зависит от public
             'show_ui'             => true,
             // зависит от public
-            'show_in_menu'        => null,
+            'show_in_menu'        => 'edit.php?post_type=event',
             // показывать ли в меню адмнки
             'show_in_admin_bar'   => null,
             // по умолчанию значение show_in_menu
