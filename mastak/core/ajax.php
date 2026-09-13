@@ -252,7 +252,9 @@
                 'background'    => $statuses[$status]['background'],
                 'foodInfo'    => $foodInfo,
                 'additionalServices'    => $additionalServices,
-                'services' => $services
+                'services' => $services,
+                'orderId' => $orderId,
+                'contactId' => $contactId
             ];
 
             if($scenario === 'Package'){
