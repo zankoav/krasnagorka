@@ -178,7 +178,7 @@
             $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
             $fio = get_the_title($clientId);
             $fio = explode("+", $fio);
-            $contact = "$fio, $phone";
+            $contact = $fio[0] .", $phone";
             $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
             $accommodationPrice = get_post_meta($orderId, 'sbc_order_accommodation_price', true);
             $food = get_post_meta($orderId, 'sbc_order_food_price', true);
