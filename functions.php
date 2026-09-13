@@ -158,6 +158,168 @@ function kg_admin_menu_order($menu_order)
     return $ordered_menu;
 }
 
+add_action('admin_menu', 'kg_restrict_editor_admin_menu', 999);
+add_action('admin_init', 'kg_restrict_editor_admin_pages');
+
+function kg_is_editor_role()
+{
+    $user = wp_get_current_user();
+
+    return in_array('editor', (array) $user->roles, true)
+        && !in_array('administrator', (array) $user->roles, true);
+}
+
+function kg_editor_allowed_menu_pages()
+{
+    return [
+        'orders-view',
+        'edit.php?post_type=event',
+        'edit.php?post_type=opportunity',
+        'edit.php?post_type=house',
+        'edit.php?post_type=page',
+        'upload.php',
+        'edit-comments.php',
+        'edit.php?post_type=sbc_orders',
+        'edit.php?post_type=sbc_clients',
+    ];
+}
+
+function kg_editor_allowed_post_types()
+{
+    return [
+        'event',
+        'opportunity',
+        'house',
+        'page',
+        'attachment',
+        'sbc_orders',
+        'sbc_clients',
+    ];
+}
+
+function kg_editor_post_type_from_admin_url($url)
+{
+    $query = wp_parse_url($url, PHP_URL_QUERY);
+
+    if (!$query) {
+        return strpos($url, 'edit.php') === 0 || strpos($url, 'post-new.php') === 0 ? 'post' : '';
+    }
+
+    parse_str($query, $args);
+
+    return !empty($args['post_type']) ? sanitize_key($args['post_type']) : 'post';
+}
+
+function kg_restrict_editor_admin_menu()
+{
+    if (!kg_is_editor_role()) {
+        return;
+    }
+
+    global $menu, $submenu;
+
+    $allowed_pages = kg_editor_allowed_menu_pages();
+
+    foreach ($menu as $menu_item) {
+        if (empty($menu_item[2]) || in_array($menu_item[2], $allowed_pages, true)) {
+            continue;
+        }
+
+        remove_menu_page($menu_item[2]);
+    }
+
+    foreach ($submenu as $parent => $submenu_items) {
+        if (!in_array($parent, $allowed_pages, true)) {
+            unset($submenu[$parent]);
+            continue;
+        }
+
+        foreach ($submenu_items as $index => $submenu_item) {
+            if (empty($submenu_item[2])) {
+                continue;
+            }
+
+            $submenu_url = $submenu_item[2];
+            $post_type = kg_editor_post_type_from_admin_url($submenu_url);
+            $is_allowed_submenu = $submenu_url === $parent
+                || (
+                    (strpos($submenu_url, 'post-new.php') === 0 || strpos($submenu_url, 'edit.php') === 0)
+                    && in_array($post_type, kg_editor_allowed_post_types(), true)
+                )
+                || $submenu_url === 'media-new.php'
+                || $submenu_url === 'edit-comments.php';
+
+            if (!$is_allowed_submenu) {
+                unset($submenu[$parent][$index]);
+            }
+        }
+    }
+}
+
+function kg_restrict_editor_admin_pages()
+{
+    if (!kg_is_editor_role() || (function_exists('wp_doing_ajax') && wp_doing_ajax())) {
+        return;
+    }
+
+    global $pagenow;
+
+    $allowed_pages = [
+        'admin-ajax.php',
+        'admin-post.php',
+        'admin.php',
+        'async-upload.php',
+        'comment.php',
+        'edit-comments.php',
+        'edit.php',
+        'media-upload.php',
+        'media-new.php',
+        'post.php',
+        'post-new.php',
+        'upload.php',
+    ];
+
+    if (!in_array($pagenow, $allowed_pages, true)) {
+        wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+        exit;
+    }
+
+    if ($pagenow === 'admin.php' && (empty($_GET['page']) || $_GET['page'] !== 'orders-view')) {
+        wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+        exit;
+    }
+
+    if (in_array($pagenow, ['edit.php', 'post-new.php'], true)) {
+        $post_type = isset($_GET['post_type']) ? sanitize_key($_GET['post_type']) : 'post';
+
+        if (!in_array($post_type, kg_editor_allowed_post_types(), true)) {
+            wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+            exit;
+        }
+    }
+
+    if ($pagenow === 'post.php') {
+        $post_type = '';
+
+        if (!empty($_GET['post'])) {
+            $post_type = get_post_type(absint($_GET['post']));
+        }
+
+        if (!$post_type && !empty($_POST['post_ID'])) {
+            $post_type = get_post_type(absint($_POST['post_ID']));
+        }
+
+        if (!$post_type && !empty($_POST['post_type'])) {
+            $post_type = sanitize_key($_POST['post_type']);
+        }
+
+        if (!in_array($post_type, kg_editor_allowed_post_types(), true)) {
+            wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+            exit;
+        }
+    }
+}
+
 
 function getOrderStatus($calendarId, $dateStart, $dateEnd)
 {
