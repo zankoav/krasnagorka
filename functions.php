@@ -121,6 +121,7 @@ function load_admin_style()
 
 add_filter('custom_menu_order', '__return_true');
 add_filter('menu_order', 'kg_admin_menu_order');
+add_action('admin_menu', 'kg_rename_comments_menu', 999);
 
 function kg_admin_menu_order($menu_order)
 {
@@ -156,6 +157,18 @@ function kg_admin_menu_order($menu_order)
     }
 
     return $ordered_menu;
+}
+
+function kg_rename_comments_menu()
+{
+    global $menu;
+
+    foreach ($menu as $index => $menu_item) {
+        if (!empty($menu_item[2]) && $menu_item[2] === 'edit-comments.php') {
+            $menu[$index][0] = 'Отзывы';
+            break;
+        }
+    }
 }
 
 add_action('admin_menu', 'kg_restrict_editor_admin_menu', 999);
