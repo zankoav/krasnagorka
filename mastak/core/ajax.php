@@ -172,8 +172,13 @@
             $end = date("d.m.Y", strtotime($end));
             $status = get_post_meta($orderId, 'sbc_order_select', true);
             $comment = get_post_meta($orderId, 'sbc_order_desc', true);
-            $contactId = get_post_meta($orderId, 'sbc_order_client', true);
-            $contact = get_the_title($contactId);
+            $client = get_post_meta($orderId, 'sbc_order_client', 1);
+            $pieces = explode(" ", $client);
+            $clientId = $pieces[0];
+            $phone = get_post_meta($clientId, 'sbc_client_phone', 1);
+            $fio = get_the_title($clientId);
+            $fio = explode("+", $fio);
+            $contact = "$fio, $phone";
             $prepaid = get_post_meta($orderId, 'sbc_order_prepaid', true);
             $accommodationPrice = get_post_meta($orderId, 'sbc_order_accommodation_price', true);
             $food = get_post_meta($orderId, 'sbc_order_food_price', true);
