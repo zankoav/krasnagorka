@@ -119,6 +119,45 @@ function load_admin_style()
     wp_enqueue_script('package_js', $uri . '/js/package-link.js', array('jquery'), false, true);
 }
 
+add_filter('custom_menu_order', '__return_true');
+add_filter('menu_order', 'kg_admin_menu_order');
+
+function kg_admin_menu_order($menu_order)
+{
+    $placements = [
+        'edit.php?post_type=sbc_clients' => [
+            'index.php',
+            'edit.php',
+            'edit-comments.php',
+            'users.php',
+        ],
+        'edit.php?post_type=page' => [
+            'upload.php',
+        ],
+    ];
+
+    $items_to_move = [];
+    foreach ($placements as $items) {
+        $items_to_move = array_merge($items_to_move, $items);
+    }
+
+    $ordered_menu = array_values(array_diff($menu_order, $items_to_move));
+
+    foreach ($placements as $anchor => $items) {
+        $anchor_position = array_search($anchor, $ordered_menu, true);
+
+        if ($anchor_position === false) {
+            continue;
+        }
+
+        $items = array_values(array_intersect($items, $menu_order));
+
+        array_splice($ordered_menu, $anchor_position + 1, 0, $items);
+    }
+
+    return $ordered_menu;
+}
+
 
 function getOrderStatus($calendarId, $dateStart, $dateEnd)
 {
