@@ -201,26 +201,24 @@ function kg_editor_allowed_post_types()
 {
     return [
         'event',
+        'event_tab',
         'opportunity',
         'house',
         'page',
         'attachment',
+        'variant',
+        'package',
         'sbc_orders',
         'sbc_clients',
     ];
 }
 
-function kg_editor_post_type_from_admin_url($url)
+function kg_editor_allowed_taxonomies()
 {
-    $query = wp_parse_url($url, PHP_URL_QUERY);
-
-    if (!$query) {
-        return strpos($url, 'edit.php') === 0 || strpos($url, 'post-new.php') === 0 ? 'post' : '';
-    }
-
-    parse_str($query, $args);
-
-    return !empty($args['post_type']) ? sanitize_key($args['post_type']) : 'post';
+    return [
+        'sbc_calendars',
+        'sbc_clients_type',
+    ];
 }
 
 function kg_restrict_editor_admin_menu()
@@ -244,27 +242,6 @@ function kg_restrict_editor_admin_menu()
     foreach ($submenu as $parent => $submenu_items) {
         if (!in_array($parent, $allowed_pages, true)) {
             unset($submenu[$parent]);
-            continue;
-        }
-
-        foreach ($submenu_items as $index => $submenu_item) {
-            if (empty($submenu_item[2])) {
-                continue;
-            }
-
-            $submenu_url = $submenu_item[2];
-            $post_type = kg_editor_post_type_from_admin_url($submenu_url);
-            $is_allowed_submenu = $submenu_url === $parent
-                || (
-                    (strpos($submenu_url, 'post-new.php') === 0 || strpos($submenu_url, 'edit.php') === 0)
-                    && in_array($post_type, kg_editor_allowed_post_types(), true)
-                )
-                || $submenu_url === 'media-new.php'
-                || $submenu_url === 'edit-comments.php';
-
-            if (!$is_allowed_submenu) {
-                unset($submenu[$parent][$index]);
-            }
         }
     }
 }
@@ -285,10 +262,12 @@ function kg_restrict_editor_admin_pages()
         'comment.php',
         'edit-comments.php',
         'edit.php',
+        'edit-tags.php',
         'media-upload.php',
         'media-new.php',
         'post.php',
         'post-new.php',
+        'term.php',
         'upload.php',
     ];
 
@@ -327,6 +306,15 @@ function kg_restrict_editor_admin_pages()
         }
 
         if (!in_array($post_type, kg_editor_allowed_post_types(), true)) {
+            wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+            exit;
+        }
+    }
+
+    if (in_array($pagenow, ['edit-tags.php', 'term.php'], true)) {
+        $taxonomy = isset($_GET['taxonomy']) ? sanitize_key($_GET['taxonomy']) : '';
+
+        if (!in_array($taxonomy, kg_editor_allowed_taxonomies(), true)) {
             wp_safe_redirect(admin_url('admin.php?page=orders-view'));
             exit;
         }
