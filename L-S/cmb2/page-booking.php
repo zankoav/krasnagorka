@@ -11,7 +11,8 @@ function cmb2_booking_page() {
         'title'        => esc_html__('Настройки страницы бронирования', 'krasnagorka'),
         'object_types' => array('options-page'),
         'option_key'   => 'mastak_booking_appearance_options',
-        'parent_slug'  => 'edit.php?post_type=page'
+        'parent_slug'  => 'edit.php?post_type=page',
+        'capability'   => 'edit_posts',
     ));
 
     $cmb_options->add_field(array(

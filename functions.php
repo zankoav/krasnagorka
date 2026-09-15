@@ -197,6 +197,23 @@ function kg_editor_allowed_menu_pages()
     ];
 }
 
+function kg_editor_allowed_admin_pages()
+{
+    return [
+        'orders-view',
+        'mastak_event_appearance_options',
+        'mastak_opportunities_appearance_options',
+        'mastak_houses_appearance_options',
+        'mastak_terem_appearance_options',
+        'mastak_booking_appearance_options',
+        'mastak_reviews_appearance_options',
+        'mastak_price_appearance_options',
+        'mastak_home_appearance_options',
+        'mastak_map_appearance_options',
+        'news_page_appearance_options',
+    ];
+}
+
 function kg_editor_allowed_post_types()
 {
     return [
@@ -276,9 +293,13 @@ function kg_restrict_editor_admin_pages()
         exit;
     }
 
-    if ($pagenow === 'admin.php' && (empty($_GET['page']) || $_GET['page'] !== 'orders-view')) {
-        wp_safe_redirect(admin_url('admin.php?page=orders-view'));
-        exit;
+    if ($pagenow === 'admin.php') {
+        $admin_page = !empty($_GET['page']) ? sanitize_key($_GET['page']) : '';
+
+        if (!in_array($admin_page, kg_editor_allowed_admin_pages(), true)) {
+            wp_safe_redirect(admin_url('admin.php?page=orders-view'));
+            exit;
+        }
     }
 
     if (in_array($pagenow, ['edit.php', 'post-new.php'], true)) {
