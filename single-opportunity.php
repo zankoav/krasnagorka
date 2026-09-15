@@ -141,7 +141,7 @@
                                 </p>
                             <?php endif; ?>
                             <?php if ($addOrderButton): ?>
-                                <a href="#booking-order" data-event="<?= get_the_title(); ?>"
+                                <a href="/booking-order" data-event="<?= get_the_title(); ?>"
                                    class="fancybox-inline house-booking__button">забронировать / рассчитать
                                 </a>
                             <?php endif; ?>
