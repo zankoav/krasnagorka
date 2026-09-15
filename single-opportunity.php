@@ -141,7 +141,7 @@
                                 </p>
                             <?php endif; ?>
                             <?php if ($addOrderButton): ?>
-                                <a href="/booking-order" class="house-booking__button">забронировать / рассчитать
+                                <a href="/booking-form" target="_blank" class="house-booking__button">забронировать / рассчитать
                                 </a>
                             <?php endif; ?>
                         </footer>
