@@ -332,6 +332,20 @@ function mastak_event_tab_type_6()
             'add_upload_file_text' => 'Выбрать MP4',
         ),
     ));
+
+    $sbc_client->add_group_field($group_field_event, array(
+        'name'       => 'Ширина на десктопе, %',
+        'desc'       => 'От 1 до 100. На мобильных устройствах видео всегда занимает всю ширину.',
+        'id'         => 'desktop_width',
+        'type'       => 'text_small',
+        'default'    => '100',
+        'attributes' => array(
+            'type' => 'number',
+            'min'  => '1',
+            'max'  => '100',
+            'step' => '1',
+        ),
+    ));
 }
 
 function mastak_event_tab_type_7()
