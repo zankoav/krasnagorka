@@ -7,15 +7,25 @@
     <div class="video-tab-row">
         <?php
 
-            $mod = ((count($tab->getVideos()) > 3 or (count($tab->getVideos()) === 2)) and count($tab->getVideos()) % 2 === 0) ? 'video-tab-col_full-width' : '';
-            foreach ($tab->getVideos() as $index => $video) :?>
-                <div class="video-tab-col <?= (count($tab->getVideos()) === $index + 1) ? $mod : ''; ?>">
+            $videos = (array) $tab->getVideos();
+            $mod = ((count($videos) > 3 or (count($videos) === 2)) and count($videos) % 2 === 0) ? 'video-tab-col_full-width' : '';
+            foreach ($videos as $index => $video) :
+                $video_file = !empty($video['video_file']) ? $video['video_file'] : '';
+                ?>
+                <div class="video-tab-col <?= (count($videos) === $index + 1) ? $mod : ''; ?>">
                     <div id="vide-<?= $index?>" class="video-tab-wrapper">
-                        <script>
-                            setTimeout(function () {
-                                jQuery('#vide-<?= $index?>').append('<iframe src="https://www.youtube.com/embed/<?= $video['video']; ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
-                            }, 3000);
-                        </script>
+                        <?php if ($video_file) : ?>
+                            <video controls preload="metadata" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <source src="<?= esc_url($video_file); ?>" type="video/mp4">
+                                Ваш браузер не поддерживает воспроизведение видео.
+                            </video>
+                        <?php elseif (!empty($video['video'])) : ?>
+                            <script>
+                                setTimeout(function () {
+                                    jQuery('#vide-<?= esc_attr($index); ?>').append('<iframe src="https://www.youtube.com/embed/<?= esc_js($video['video']); ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                }, 3000);
+                            </script>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>

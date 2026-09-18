@@ -319,6 +319,19 @@ function mastak_event_tab_type_6()
         'id'   => 'video',
         'type' => 'oembed',
     ));
+
+    $sbc_client->add_group_field($group_field_event, array(
+        'name'    => 'Видео из медиатеки',
+        'desc'    => 'Выберите или загрузите файл в формате MP4. Если поле заполнено, на сайте будет показан этот файл вместо ссылки выше.',
+        'id'      => 'video_file',
+        'type'    => 'file',
+        'options' => array(
+            'url' => false,
+        ),
+        'text'    => array(
+            'add_upload_file_text' => 'Выбрать MP4',
+        ),
+    ));
 }
 
 function mastak_event_tab_type_7()
