@@ -29,9 +29,9 @@
                             }
                         }
                     </style>
-                    <div id="<?= esc_attr($wrapper_id); ?>" class="video-tab-wrapper">
+                    <div id="<?= esc_attr($wrapper_id); ?>" class="video-tab-wrapper<?= $video_file ? ' video-tab-wrapper--file' : ''; ?>"<?= $video_file ? ' style="padding-top:0;"' : ''; ?>>
                         <?php if ($video_file) : ?>
-                            <video controls preload="metadata" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                            <video controls preload="metadata" style="display:block;width:100%;height:auto;">
                                 <source src="<?= esc_url($video_file); ?>" type="video/mp4">
                                 Ваш браузер не поддерживает воспроизведение видео.
                             </video>
