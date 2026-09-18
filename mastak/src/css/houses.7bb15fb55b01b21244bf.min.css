@@ -7369,6 +7369,11 @@ button.swiper-pagination-bullet {
   max-width: initial;
 }
 @media (min-width: 768px) {
+  .video-tab-col {
+    max-width: 100%;
+    flex: 1 0 100%;
+    padding: 0 1.5rem 2rem;
+  }
   .video-tab-col:first-child {
     max-width: 100%;
     flex: 1 0 100%;
@@ -15611,6 +15616,11 @@ button.swiper-pagination-bullet {
   max-width: initial;
 }
 @media (min-width: 768px) {
+  .video-tab-col {
+    max-width: 100%;
+    flex: 1 0 100%;
+    padding: 0 1.5rem 2rem;
+  }
   .video-tab-col:first-child {
     max-width: 100%;
     flex: 1 0 100%;
