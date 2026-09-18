@@ -5,6 +5,11 @@
 ?>
 <div class="accordion-mixed__content-inner">
     <div class="video-tab-row">
+        <style>
+            .video-tab-row .video-tab-col:last-child {
+                padding-bottom: 0;
+            }
+        </style>
         <?php
 
             $videos = (array) $tab->getVideos();
