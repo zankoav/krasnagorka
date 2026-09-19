@@ -40,12 +40,9 @@
                                 <source src="<?= esc_url($video_file); ?>" type="video/mp4">
                                 Ваш браузер не поддерживает воспроизведение видео.
                             </video>
-                        <?php elseif (!empty($video['video'])) : ?>
-                            <script>
-                                setTimeout(function () {
-                                    jQuery('#<?= esc_js($wrapper_id); ?>').append('<iframe src="<?= esc_js($video['video']); ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
-                                }, 3000);
-                            </script>
+                        <?php elseif (!empty($video['video'])) : 
+                            echo wp_kses_post( wp_oembed_get( $video['video'] ) );
+                        ?>
                         <?php endif; ?>
                     </div>
                 </div>
