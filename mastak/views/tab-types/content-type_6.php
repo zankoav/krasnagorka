@@ -17,18 +17,24 @@
             foreach ($videos as $index => $video) :
                 $video_file = !empty($video['video_file']) ? $video['video_file'] : '';
                 $video_url = !empty($video['video']) ? esc_url_raw(trim((string) $video['video'])) : '';
+                $video_host = $video_url ? strtolower((string) wp_parse_url($video_url, PHP_URL_HOST)) : '';
+                $video_is_instagram = in_array($video_host, array('instagram.com', 'www.instagram.com'), true);
                 $video_embed = $video_url ? wp_oembed_get($video_url) : '';
+
+                if (!$video_embed && $video_url && function_exists('mastak_get_instagram_oembed')) {
+                    $video_embed = mastak_get_instagram_oembed($video_url);
+                }
 
                 // Some hosting providers block WordPress's request to the YouTube oEmbed API.
                 // Build a safe player URL as a fallback for regular and short YouTube links.
                 if (!$video_embed && $video_url) {
                     $video_parts = wp_parse_url($video_url);
-                    $video_host = !empty($video_parts['host']) ? strtolower($video_parts['host']) : '';
+                    $youtube_host = !empty($video_parts['host']) ? strtolower($video_parts['host']) : '';
                     $video_id = '';
 
-                    if (in_array($video_host, array('youtu.be', 'www.youtu.be'), true)) {
+                    if (in_array($youtube_host, array('youtu.be', 'www.youtu.be'), true)) {
                         $video_id = trim($video_parts['path'] ?? '', '/');
-                    } elseif (in_array($video_host, array('youtube.com', 'www.youtube.com', 'm.youtube.com'), true)) {
+                    } elseif (in_array($youtube_host, array('youtube.com', 'www.youtube.com', 'm.youtube.com'), true)) {
                         parse_str($video_parts['query'] ?? '', $video_query);
                         $video_id = $video_query['v'] ?? '';
                     }
@@ -58,7 +64,7 @@
                             }
                         }
                     </style>
-                    <div id="<?= esc_attr($wrapper_id); ?>" class="video-tab-wrapper<?= $video_file ? ' video-tab-wrapper--file' : ''; ?>"<?= $video_file ? ' style="padding-top:0;"' : ''; ?>>
+                    <div id="<?= esc_attr($wrapper_id); ?>" class="video-tab-wrapper<?= $video_file ? ' video-tab-wrapper--file' : ''; ?><?= $video_is_instagram ? ' video-tab-wrapper--instagram' : ''; ?>"<?= ($video_file || $video_is_instagram) ? ' style="padding-top:0;"' : ''; ?>>
                         <?php if ($video_file) : ?>
                             <video controls preload="metadata" style="display:block;width:100%;height:auto;">
                                 <source src="<?= esc_url($video_file); ?>" type="video/mp4">

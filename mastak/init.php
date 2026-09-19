@@ -17,6 +17,7 @@
 	require_once __DIR__ . "/core/cookie/KGCookie.php";
 	require_once __DIR__ . "/core/styles_and_scripts.php";
 	require_once __DIR__ . "/core/ajax.php";
+	require_once __DIR__ . "/core/instagram-oembed.php";
 
 	require __DIR__ . "/core/cmb2/BaseMeta.php";
 	require __DIR__ . "/core/cmb2/Type_1.php";
