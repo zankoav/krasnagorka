@@ -315,7 +315,7 @@ function mastak_event_tab_type_6()
 
     $sbc_client->add_group_field($group_field_event, array(
         'name' => 'Видео',
-        'desc' => 'Enter a youtube, twitter, or instagram URL. Supports services listed at <a href="http://codex.wordpress.org/Embeds">http://codex.wordpress.org/Embeds</a>.',
+        'desc' => 'Enter a youtube or instagram URL. Supports services listed at <a href="http://codex.wordpress.org/Embeds">http://codex.wordpress.org/Embeds</a>.',
         'id'   => 'video',
         'type' => 'oembed',
     ));
