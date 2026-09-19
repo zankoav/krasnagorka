@@ -16,6 +16,8 @@
             $mod = ((count($videos) > 3 or (count($videos) === 2)) and count($videos) % 2 === 0) ? 'video-tab-col_full-width' : '';
             foreach ($videos as $index => $video) :
                 $video_file = !empty($video['video_file']) ? $video['video_file'] : '';
+                $video_url = !empty($video['video']) ? esc_url_raw(trim((string) $video['video'])) : '';
+                $video_embed = $video_url ? wp_oembed_get($video_url) : '';
                 $desktop_width = !empty($video['desktop_width']) ? (int) $video['desktop_width'] : 100;
                 $desktop_width = min(100, max(1, $desktop_width));
                 $wrapper_id = 'vide-' . $tab->getId() . '-' . $index;
@@ -40,9 +42,12 @@
                                 <source src="<?= esc_url($video_file); ?>" type="video/mp4">
                                 Ваш браузер не поддерживает воспроизведение видео.
                             </video>
-                        <?php elseif (!empty($video['video'])) : 
-                            echo 'ok';
-                            echo wp_kses_post( wp_oembed_get( $video['video'] ) );
+                        <?php elseif ($video_embed) : ?>
+                            <?= wp_kses_post($video_embed); ?>
+                        <?php elseif ($video_url) : ?>
+                            <a href="<?= esc_url($video_url); ?>" target="_blank" rel="noopener noreferrer">
+                                Смотреть видео
+                            </a>
                         ?>
                         <?php endif; ?>
                     </div>
