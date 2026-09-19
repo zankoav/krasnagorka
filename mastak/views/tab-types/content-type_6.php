@@ -48,7 +48,6 @@
                             <a href="<?= esc_url($video_url); ?>" target="_blank" rel="noopener noreferrer">
                                 Смотреть видео
                             </a>
-                        ?>
                         <?php endif; ?>
                     </div>
                 </div>
