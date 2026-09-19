@@ -126,7 +126,7 @@ add_action('cmb2_admin_init', function () {
 
     $cmb_options->add_field(array(
         'name' => __('Instagram oEmbed', 'krasnagorka'),
-        'desc' => __('Meta access token для вывода публикаций и Reels из Instagram. Токен не выводится на сайте.', 'krasnagorka'),
+        'desc' => __('Необязательно. Meta access token для Instagram oEmbed; токен не выводится на сайте.', 'krasnagorka'),
         'id'   => 'mastak_theme_options_instagram_oembed_token',
         'type' => 'text',
         'attributes' => array(

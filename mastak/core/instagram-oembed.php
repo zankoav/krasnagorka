@@ -5,8 +5,8 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Gets Instagram embed HTML through the authenticated Meta oEmbed endpoint.
- * The access token stays on the server; successful responses are cached.
+ * Gets Instagram embed HTML through Meta's oEmbed endpoint.
+ * A token is optional; successful responses are cached.
  *
  * @param string $url Instagram post, Reel, or TV URL.
  * @return string Embed HTML, or an empty string when it cannot be embedded.
@@ -26,10 +26,6 @@ function mastak_get_instagram_oembed($url)
         ? trim($options['mastak_theme_options_instagram_oembed_token'])
         : '';
 
-    if (!$access_token) {
-        return '';
-    }
-
     $cache_key = 'mastak_instagram_oembed_' . md5($url);
     $cached_html = get_transient($cache_key);
 
@@ -41,13 +37,18 @@ function mastak_get_instagram_oembed($url)
 
     $endpoint = apply_filters(
         'mastak_instagram_oembed_endpoint',
-        'https://graph.facebook.com/v22.0/instagram_oembed'
+        'https://graph.facebook.com/v26.0/instagram_oembed'
     );
-    $response = wp_safe_remote_get(add_query_arg(array(
+    $request_args = array(
         'url'          => $url,
-        'access_token' => $access_token,
         'omitscript'   => 'true',
-    ), $endpoint), array(
+    );
+
+    if ($access_token) {
+        $request_args['access_token'] = $access_token;
+    }
+
+    $response = wp_safe_remote_get(add_query_arg($request_args, $endpoint), array(
         'timeout' => 10,
     ));
 
