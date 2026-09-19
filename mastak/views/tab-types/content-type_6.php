@@ -43,7 +43,7 @@
                         <?php elseif (!empty($video['video'])) : ?>
                             <script>
                                 setTimeout(function () {
-                                    jQuery('#<?= esc_js($wrapper_id); ?>').append('<iframe src="https://www.youtube.com/embed/<?= esc_js($video['video']); ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
+                                    jQuery('#<?= esc_js($wrapper_id); ?>').append('<iframe src="<?= esc_js($video['video']); ?>" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>');
                                 }, 3000);
                             </script>
                         <?php endif; ?>
