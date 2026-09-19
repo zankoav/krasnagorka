@@ -41,6 +41,7 @@
                                 Ваш браузер не поддерживает воспроизведение видео.
                             </video>
                         <?php elseif (!empty($video['video'])) : 
+                            echo 'ok';
                             echo wp_kses_post( wp_oembed_get( $video['video'] ) );
                         ?>
                         <?php endif; ?>
