@@ -4,6 +4,45 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+function mastak_enqueue_instagram_embed_script()
+{
+    static $enqueued = false;
+
+    if ($enqueued) {
+        return;
+    }
+
+    $enqueued = true;
+    wp_enqueue_script('mastak-instagram-embed', 'https://www.instagram.com/embed.js', array(), null, true);
+    wp_add_inline_script('mastak-instagram-embed', <<<'JS'
+(function () {
+    function resizeInstagramEmbed(frame) {
+        var height = parseInt(frame.getAttribute('height'), 10);
+
+        frame.style.setProperty('position', 'relative', 'important');
+
+        if (height) {
+            frame.style.setProperty('height', height + 'px', 'important');
+        }
+    }
+
+    function resizeAllInstagramEmbeds() {
+        document.querySelectorAll('.video-tab-wrapper--instagram iframe').forEach(resizeInstagramEmbed);
+    }
+
+    resizeAllInstagramEmbeds();
+
+    new MutationObserver(resizeAllInstagramEmbeds).observe(document.body, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+        attributeFilter: ['height']
+    });
+}());
+JS
+    , 'after');
+}
+
 /**
  * Gets Instagram embed HTML through Meta's oEmbed endpoint.
  * A token is optional; successful responses are cached.
@@ -30,7 +69,7 @@ function mastak_get_instagram_oembed($url)
     $cached_html = get_transient($cache_key);
 
     if (false !== $cached_html) {
-        wp_enqueue_script('mastak-instagram-embed', 'https://www.instagram.com/embed.js', array(), null, true);
+        mastak_enqueue_instagram_embed_script();
 
         return $cached_html;
     }
@@ -64,7 +103,7 @@ function mastak_get_instagram_oembed($url)
     }
 
     set_transient($cache_key, $html, 12 * HOUR_IN_SECONDS);
-    wp_enqueue_script('mastak-instagram-embed', 'https://www.instagram.com/embed.js', array(), null, true);
+    mastak_enqueue_instagram_embed_script();
 
     return $html;
 }
