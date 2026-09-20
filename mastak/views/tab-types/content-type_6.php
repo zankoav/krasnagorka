@@ -68,6 +68,8 @@
                         #<?= esc_attr($wrapper_id); ?>.video-tab-wrapper--instagram iframe {
                             margin-left: auto !important;
                             margin-right: auto !important;
+                            max-width: none !important;
+                            width: 100% !important;
                         }
                     </style>
                     <div id="<?= esc_attr($wrapper_id); ?>" class="video-tab-wrapper<?= $video_file ? ' video-tab-wrapper--file' : ''; ?><?= $video_is_instagram ? ' video-tab-wrapper--instagram' : ''; ?>"<?= ($video_file || $video_is_instagram) ? ' style="padding-top:0;"' : ''; ?>>
