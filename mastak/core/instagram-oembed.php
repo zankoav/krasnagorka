@@ -107,3 +107,50 @@ function mastak_get_instagram_oembed($url)
 
     return $html;
 }
+
+/**
+ * Converts a public video URL into embed HTML, with fallbacks for Instagram
+ * and YouTube when the generic WordPress oEmbed request is unavailable.
+ *
+ * @param string $url Video URL.
+ * @return string Embed HTML, or an empty string.
+ */
+function mastak_get_video_embed_html($url)
+{
+    $url = esc_url_raw(trim((string) $url));
+
+    if (!$url) {
+        return '';
+    }
+
+    $parts = wp_parse_url($url);
+    $host = !empty($parts['host']) ? strtolower($parts['host']) : '';
+
+    if (in_array($host, array('instagram.com', 'www.instagram.com'), true)) {
+        return mastak_get_instagram_oembed($url);
+    }
+
+    $embed_html = wp_oembed_get($url);
+
+    if ($embed_html) {
+        return $embed_html;
+    }
+
+    $video_id = '';
+
+    if (in_array($host, array('youtu.be', 'www.youtu.be'), true)) {
+        $video_id = trim($parts['path'] ?? '', '/');
+    } elseif (in_array($host, array('youtube.com', 'www.youtube.com', 'm.youtube.com'), true)) {
+        parse_str($parts['query'] ?? '', $query);
+        $video_id = $query['v'] ?? '';
+    }
+
+    if (!preg_match('/^[A-Za-z0-9_-]{11}$/', $video_id)) {
+        return '';
+    }
+
+    return sprintf(
+        '<iframe src="https://www.youtube-nocookie.com/embed/%s" title="YouTube video player" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+        esc_attr($video_id)
+    );
+}

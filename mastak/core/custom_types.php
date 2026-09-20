@@ -293,10 +293,30 @@
         ));
 
         $sbc_client->add_field(array(
-            'name' => __('Видео', 'krasnagorka'),
-            'desc' => __('https://www.youtube.com/watch?v=cYjuu7C-_sk код <strong style="color:black;">cYjuu7C-_sk</strong>', 'krasnagorka'),
+            'name' => __('Видео (старое поле)', 'krasnagorka'),
+            'desc' => __('Сохранено для ранее добавленных роликов. Для новых используйте поле «Видео (несколько)» ниже.', 'krasnagorka'),
             'id'   => $prefix . 'video',
             'type' => 'text',
+        ));
+
+        $house_videos_group = $sbc_client->add_field(array(
+            'name'        => __('Видео (несколько)', 'krasnagorka'),
+            'id'          => $prefix . 'videos',
+            'type'        => 'group',
+            'description' => __('Вставляйте полные ссылки на YouTube, Instagram и другие oEmbed-сервисы.', 'krasnagorka'),
+            'options'     => array(
+                'group_title'   => __('Видео {#}', 'krasnagorka'),
+                'add_button'    => __('Добавить видео', 'krasnagorka'),
+                'remove_button' => __('Удалить видео', 'krasnagorka'),
+                'sortable'      => true,
+                'closed'        => true,
+            ),
+        ));
+
+        $sbc_client->add_group_field($house_videos_group, array(
+            'name' => __('Ссылка на видео', 'krasnagorka'),
+            'id'   => 'video',
+            'type' => 'oembed',
         ));
 
         $sbc_client->add_field(array(
@@ -642,10 +662,30 @@
         ));
 
         $sbc_client->add_field(array(
-            'name' => __('Видео', 'krasnagorka'),
-            'desc' => __('https://www.youtube.com/watch?v=cYjuu7C-_sk код <strong style="color:black;">cYjuu7C-_sk</strong>', 'krasnagorka'),
+            'name' => __('Видео (старое поле)', 'krasnagorka'),
+            'desc' => __('Сохранено для ранее добавленных роликов. Для новых используйте поле «Видео (несколько)» ниже.', 'krasnagorka'),
             'id'   => $prefix . 'video',
             'type' => 'text',
+        ));
+
+        $opportunity_videos_group = $sbc_client->add_field(array(
+            'name'        => __('Видео (несколько)', 'krasnagorka'),
+            'id'          => $prefix . 'videos',
+            'type'        => 'group',
+            'description' => __('Вставляйте полные ссылки на YouTube, Instagram и другие oEmbed-сервисы.', 'krasnagorka'),
+            'options'     => array(
+                'group_title'   => __('Видео {#}', 'krasnagorka'),
+                'add_button'    => __('Добавить видео', 'krasnagorka'),
+                'remove_button' => __('Удалить видео', 'krasnagorka'),
+                'sortable'      => true,
+                'closed'        => true,
+            ),
+        ));
+
+        $sbc_client->add_group_field($opportunity_videos_group, array(
+            'name' => __('Ссылка на видео', 'krasnagorka'),
+            'id'   => 'video',
+            'type' => 'oembed',
         ));
 
         $sbc_client->add_field(array(
