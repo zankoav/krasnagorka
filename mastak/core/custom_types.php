@@ -319,6 +319,24 @@
             'type' => 'oembed',
         ));
 
+        $sbc_client->add_group_field($house_videos_group, array(
+            'name'    => __('Видео из медиатеки', 'krasnagorka'),
+            'desc'    => __('Загрузите MP4. Если заполнено, будет показано вместо ссылки.', 'krasnagorka'),
+            'id'      => 'video_file',
+            'type'    => 'file',
+            'options' => array('url' => false),
+            'text'    => array('add_upload_file_text' => __('Выбрать MP4', 'krasnagorka')),
+        ));
+
+        $sbc_client->add_group_field($house_videos_group, array(
+            'name'       => __('Ширина на десктопе, %', 'krasnagorka'),
+            'desc'       => __('От 1 до 100. На мобильном — всегда 100%.', 'krasnagorka'),
+            'id'         => 'desktop_width',
+            'type'       => 'text_small',
+            'default'    => '100',
+            'attributes' => array('type' => 'number', 'min' => '1', 'max' => '100'),
+        ));
+
         $sbc_client->add_field(array(
             'name' => __('Включить планировку?', 'krasnagorka'),
             'id'   => $prefix . 'is_terem',
@@ -686,6 +704,24 @@
             'name' => __('Ссылка на видео', 'krasnagorka'),
             'id'   => 'video',
             'type' => 'oembed',
+        ));
+
+        $sbc_client->add_group_field($opportunity_videos_group, array(
+            'name'    => __('Видео из медиатеки', 'krasnagorka'),
+            'desc'    => __('Загрузите MP4. Если заполнено, будет показано вместо ссылки.', 'krasnagorka'),
+            'id'      => 'video_file',
+            'type'    => 'file',
+            'options' => array('url' => false),
+            'text'    => array('add_upload_file_text' => __('Выбрать MP4', 'krasnagorka')),
+        ));
+
+        $sbc_client->add_group_field($opportunity_videos_group, array(
+            'name'       => __('Ширина на десктопе, %', 'krasnagorka'),
+            'desc'       => __('От 1 до 100. На мобильном — всегда 100%.', 'krasnagorka'),
+            'id'         => 'desktop_width',
+            'type'       => 'text_small',
+            'default'    => '100',
+            'attributes' => array('type' => 'number', 'min' => '1', 'max' => '100'),
         ));
 
         $sbc_client->add_field(array(
