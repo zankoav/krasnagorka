@@ -292,13 +292,6 @@
             'type' => 'text',
         ));
 
-        $sbc_client->add_field(array(
-            'name' => __('Видео (старое поле)', 'krasnagorka'),
-            'desc' => __('Сохранено для ранее добавленных роликов. Для новых используйте поле «Видео (несколько)» ниже.', 'krasnagorka'),
-            'id'   => $prefix . 'video',
-            'type' => 'text',
-        ));
-
         $house_videos_group = $sbc_client->add_field(array(
             'name'        => __('Видео (несколько)', 'krasnagorka'),
             'id'          => $prefix . 'videos',
@@ -677,13 +670,6 @@
             'desc' => __('Фотогалерея 900x690', 'krasnagorka'),
             'id'   => $prefix . 'gallery',
             'type' => 'file_list'
-        ));
-
-        $sbc_client->add_field(array(
-            'name' => __('Видео (старое поле)', 'krasnagorka'),
-            'desc' => __('Сохранено для ранее добавленных роликов. Для новых используйте поле «Видео (несколько)» ниже.', 'krasnagorka'),
-            'id'   => $prefix . 'video',
-            'type' => 'text',
         ));
 
         $opportunity_videos_group = $sbc_client->add_field(array(

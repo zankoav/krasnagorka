@@ -172,18 +172,8 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                         </div>
                     </div>
                     <?php
-                    $legacy_video = get_post_meta(get_the_ID(), 'mastak_house_video', true);
                     $video_rows = get_post_meta(get_the_ID(), 'mastak_house_videos', true);
                     $video_items = array();
-
-                    if (!empty($legacy_video)) {
-                        $video_items[] = array(
-                            'video'         => preg_match('/^[A-Za-z0-9_-]{11}$/', $legacy_video)
-                                ? 'https://youtu.be/' . $legacy_video
-                                : $legacy_video,
-                            'desktop_width' => 100,
-                        );
-                    }
 
                     foreach ((array) $video_rows as $video_row) {
                         if (!empty($video_row['video']) || !empty($video_row['video_file'])) {
