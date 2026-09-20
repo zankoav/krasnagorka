@@ -53,6 +53,7 @@ JS
 function mastak_get_instagram_oembed($url)
 {
     $url = esc_url_raw($url);
+    $url = preg_replace('#^(https?://(?:www\.)?instagram\.com)/reels/#i', '$1/reel/', $url);
     $parts = wp_parse_url($url);
     $host = !empty($parts['host']) ? strtolower($parts['host']) : '';
 
@@ -118,6 +119,7 @@ function mastak_get_instagram_oembed($url)
 function mastak_get_video_embed_html($url)
 {
     $url = esc_url_raw(trim((string) $url));
+    $url = preg_replace('#^(https?://(?:www\.)?instagram\.com)/reels/#i', '$1/reel/', $url);
 
     if (!$url) {
         return '';
