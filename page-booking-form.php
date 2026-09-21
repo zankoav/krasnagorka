@@ -700,6 +700,70 @@ $bookingModel = ModelFactory::getBookingModel();
         })();
     </script>
     <!-- Cookie widget END-->
+
+    <!-- SCRIPT FOR GTM -->
+    <script>
+        (function() {
+            if (window.__preciseBookingTrackerInit) return;
+            window.__preciseBookingTrackerInit = true;
+
+            function pushFinalBookingEvent(source) {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                'event': 'booking_completed',
+                'booking_id': '12979',
+                'booking_value': 162.50,
+                'currency': 'BYN',
+                'trigger_source': source
+                });
+                console.log('[Analytics Audit] Успешная фиксация конверсии via ' + source);
+            }
+
+            // 1. Точечный перехват клика по кнопке "Забронировать" через Shadow DOM composedPath
+            document.addEventListener('click', function(event) {
+                var path = event.composedPath ? event.composedPath() : [];
+                
+                for (var i = 0; i < path.length; i++) {
+                var node = path[i];
+                if (node && node.nodeType === 1) {
+                    var text = (node.innerText || node.textContent || '').trim().toLowerCase();
+                    
+                    // Проверяем, что кликнутый элемент — именно кнопка "Забронировать" на финальном шаге
+                    if (text === 'забронировать' && (node.tagName === 'A' || node.classList.contains('step-button-navigation__button'))) {
+                    pushFinalBookingEvent('Final Button Click');
+                    break;
+                    }
+                }
+                }
+            }, true);
+
+            // 2. Строгий перехватчик сетевых POST-запросов (исключает GET-запросы календаря)
+            var originalFetch = window.fetch;
+            if (originalFetch) {
+                window.fetch = function() {
+                var args = arguments;
+                var method = 'GET';
+                
+                if (args[1] && args[1].method) {
+                    method = args[1].method.toUpperCase();
+                }
+
+                // Перехватываем ТОЛЬКО POST/PUT запросы (отправка формы заказа)
+                return originalFetch.apply(this, args).then(function(response) {
+                    if (response && response.ok && (method === 'POST' || method === 'PUT')) {
+                    var url = (typeof args[0] === 'string') ? args[0] : (args[0] && args[0].url) ? args[0].url : '';
+                    
+                    if (url.indexOf('booking') !== -1 || url.indexOf('order') !== -1 || url.indexOf('save') !== -1) {
+                        pushFinalBookingEvent('POST Fetch API');
+                    }
+                    }
+                    return response;
+                });
+                };
+            }
+        })();
+    </script>
+    <!-- SCRIPT FOR GTM END-->
 </body>
 
 </html>
