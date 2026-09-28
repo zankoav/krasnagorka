@@ -139,6 +139,22 @@ class PackageCalculate extends CalculateImpl
                         'count' => intval($totalDays)
                     ];
                 }
+
+                if ($entry['service'] == '7') {
+                    $servicesFormatted[] = [
+                        'id' => '7',
+                        'title' => 'Аренда моторной лодки 5 часов',
+                        'count' => intval($peopleCount * 0.5)
+                    ];
+                }
+
+                if ($entry['service'] == '8') {
+                    $servicesFormatted[] = [
+                        'id' => '8',
+                        'title' => 'Прогулка на моторной лодке 15 минут',
+                        'count' => intval($peopleCount * 0.5)
+                    ];
+                }
             }
         }
 
