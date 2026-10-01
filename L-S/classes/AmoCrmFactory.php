@@ -92,21 +92,59 @@ class AmoCrmFactory {
             $stageId = $order->isBookedOnly() ? 19518940 : 35452366; // Подтвердить бронирование | Сделка Из Сайта (webpay)
             
             $noteStr = implode("\n", $order->note);
+
+            $utmAttribution = json_decode($order->utmAttribution, true);
+            $utmLast = is_array($utmAttribution['last'] ?? null)
+                ? $utmAttribution['last']
+                : [];
             
             $lead->setName($leadName);
             $lead->setStatusId($stageId);
-            $lead->setTags((new TagsCollection())
-                    ->add(
-                        (new TagModel())
-                            ->setId(1181317)
-                            ->setName('Страница Бронирования')
-                    )
+            $tags = (new TagsCollection())
+                ->add(
+                    (new TagModel())
+                        ->setId(1181317)
+                        ->setName('Страница Бронирования')
             );
+
+            if (($utmLast['utm_source'] ?? null) === 'google'
+                && ($utmLast['utm_medium'] ?? null) === 'cpc') {
+                $tags->add(
+                    (new TagModel())
+                        ->setId(1214429)
+                        ->setName('Контекстная реклама')
+                );
+            }
+
+            $lead->setTags($tags);
 
             // Total Price
             $lead->setPrice($order->price);
 
             $leadCustomFields = new CustomFieldsValuesCollection();
+
+            $utmFields = [
+                752633 => $utmAttribution['landing_page'] ?? null,
+                634173 => $utmLast['gclid'] ?? null,
+                127167 => $utmLast['utm_source'] ?? null,
+                752625 => $utmLast['utm_campaign'] ?? null,
+                127171 => $utmLast['utm_term'] ?? null,
+                127169 => $utmLast['utm_medium'] ?? null,
+            ];
+
+            foreach ($utmFields as $fieldId => $value) {
+                if (!is_string($value) || $value === '') {
+                    continue;
+                }
+
+                $utmFieldValueModel = new TextCustomFieldValuesModel();
+                $utmFieldValueModel->setFieldId($fieldId);
+                $utmFieldValueModel->setValues(
+                    (new TextCustomFieldValueCollection())
+                        ->add((new TextCustomFieldValueModel())->setValue($value))
+                );
+                $leadCustomFields->add($utmFieldValueModel);
+            }
 
             // Order food price 
             $foodPriceFieldValueModel = new TextCustomFieldValuesModel();
@@ -526,6 +564,58 @@ class AmoCrmFactory {
             $order->note[] = "Паспорт №: {$order->contact->passport}";
             $order->note[] = "Способ оплтаты: {$order->getPaymentMethod()}";
             $order->note[] = "Оплата %: {$notePrepaidType}";
+
+            $utmFirst = is_array($utmAttribution['first'] ?? null)
+                ? $utmAttribution['first']
+                : [];
+            $utmFirstNoteFields = [
+                'Page' => $utmAttribution['landing_page'] ?? null,
+                'GOOGLE_ID' => $utmFirst['gclid'] ?? null,
+                'utm_source' => $utmFirst['utm_source'] ?? null,
+                'utm_campaign' => $utmFirst['utm_campaign'] ?? null,
+                'utm_term' => $utmFirst['utm_term'] ?? null,
+                'utm_medium' => $utmFirst['utm_medium'] ?? null,
+            ];
+            $utmNote = ['UTM-атрибуция:'];
+
+            $utmFirstNote = [];
+            foreach ($utmFirstNoteFields as $label => $value) {
+                if (is_string($value) && $value !== '') {
+                    $utmFirstNote[] = "{$label}: {$value}";
+                }
+            }
+
+            if ($utmFirstNote) {
+                $utmNote[] = 'Первая атрибуция:';
+                $utmNote = array_merge($utmNote, $utmFirstNote);
+            }
+
+            $utmLastNote = [];
+            foreach ($utmFields as $fieldId => $value) {
+                $label = [
+                    634173 => 'GOOGLE_ID',
+                    127167 => 'utm_source',
+                    752625 => 'utm_campaign',
+                    127171 => 'utm_term',
+                    127169 => 'utm_medium',
+                ][$fieldId] ?? null;
+
+                if ($label && is_string($value) && $value !== '') {
+                    $utmLastNote[] = "{$label}: {$value}";
+                }
+            }
+
+            if ($utmLastNote) {
+                if (count($utmNote) > 1) {
+                    $utmNote[] = '';
+                }
+                $utmNote[] = 'Последняя атрибуция:';
+                $utmNote = array_merge($utmNote, $utmLastNote);
+            }
+
+            if (count($utmNote) > 1) {
+                $order->note[] = implode("\n", $utmNote);
+            }
 
             $noteStr = implode("\n", $order->note);
 
