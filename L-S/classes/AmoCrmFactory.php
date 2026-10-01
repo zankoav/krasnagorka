@@ -577,6 +577,7 @@ class AmoCrmFactory {
                 'utm_medium' => $utmFirst['utm_medium'] ?? null,
             ];
             $utmNote = ['UTM-атрибуция:'];
+            $utmNote[] = '';
 
             $utmFirstNote = [];
             foreach ($utmFirstNoteFields as $label => $value) {
@@ -614,6 +615,7 @@ class AmoCrmFactory {
             }
 
             if (count($utmNote) > 1) {
+                $order->note[] = '';
                 $order->note[] = implode("\n", $utmNote);
             }
 
