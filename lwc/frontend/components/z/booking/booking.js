@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc'
-import { getCookie, setCookie, deleteCookie } from 'z/utils'
+import { getCookie, setCookie, deleteCookie, gtmEvent } from 'z/utils'
 import './booking.scss'
 
 const MAX_AGE = 3600 * 24 * 100
@@ -199,8 +199,6 @@ export default class BookingForm extends LightningElement {
                     deleteCookie('kg_email')
                 }
 
-                gtag('event', 'create_lead')
-
                 if (response.data.template) {
                     this.dispatchEvent(
                         new CustomEvent('update', {
@@ -212,6 +210,12 @@ export default class BookingForm extends LightningElement {
                             composed: true
                         })
                     )
+                    gtmEvent({
+                        event: 'booking_completed',
+                        source: requestData.utmAttribution.last
+                            ? requestData.utmAttribution.last.utm_source
+                            : null
+                    })
                 } else if (response.data.redirect) {
                     response.data.redirect.values.wsb_storeid =
                         this.settings.webpaySandbox.wsb_storeid

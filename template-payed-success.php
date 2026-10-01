@@ -76,6 +76,31 @@ strong {
         <?= $template;?>
     </section>
 </div>
+
+<script>
+
+    function getAttribution() {
+        return window.KGAttribution && typeof window.KGAttribution.get === 'function'
+            ? window.KGAttribution.get()
+            : {}
+    } 
+
+    function gtmEvent({ event, source }) {
+        window.dataLayer = window.dataLayer || []
+        window.dataLayer.push({
+            event: event,
+            trigger_source: source
+        })
+    }
+
+    const utmAttribution = getAttribution();
+
+    gtmEvent({
+        event: 'payment_completed',
+        source: utmAttribution.last ? utmAttribution.last.utm_source : null
+    })
+    
+</script>
 <?php
 
     get_template_part("mastak/views/footer", "view");

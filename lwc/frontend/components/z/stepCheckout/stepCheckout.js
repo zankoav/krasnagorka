@@ -77,13 +77,6 @@ export default class StepCheckout extends BaseBookingElement {
         return this.settings.total?.bath_house_white
     }
 
-    connectedCallback() {
-        gtag('event', 'step_navigation', {
-            step: 'checkout',
-            type: 'view'
-        })
-    }
-
     async bookingHandler() {
         this.dispatchEvent(
             new CustomEvent('update', {

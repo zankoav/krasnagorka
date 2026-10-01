@@ -93,10 +93,6 @@ export default class StepHouse extends LightningElement {
     }
 
     connectedCallback() {
-        gtag('event', 'step_navigation', {
-            step: 'house',
-            type: 'view'
-        })
         const calendar = this.settings.calendars.find((c) => c.selected)
         if (calendar && !this.settings.house) {
             this.initHouse(calendar.id, calendar.isTerem)
