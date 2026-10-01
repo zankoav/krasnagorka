@@ -29,6 +29,7 @@ $bookingModel = ModelFactory::getBookingModel();
         })(window, document, 'script', 'dataLayer', 'GTM-W8CMVRDC');
     </script>
     <!-- End Google Tag Manager -->
+    <script src="<?= esc_url(get_template_directory_uri() . '/assets/js/utm-attribution.js'); ?>"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">

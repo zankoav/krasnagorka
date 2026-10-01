@@ -26,6 +26,7 @@ if (!defined('ABSPATH')) {
         })(window, document, 'script', 'dataLayer', 'GTM-W8CMVRDC');
     </script>
     <!-- End Google Tag Manager -->
+    <script src="<?= esc_url(get_template_directory_uri() . '/assets/js/utm-attribution.js'); ?>"></script>
     <meta charset="<?php bloginfo('charset'); ?>" />
     <title>
         <?= wp_title(); ?>
