@@ -33,6 +33,7 @@ class OrderFactory
         $order->eventTabId = $data['eventTabId'];
         $order->eventId = $data['eventId'];
         $order->variantId = $data['variantId'];
+        $order->utmAttribution = self::serializeUtmAttribution($data['utmAttribution'] ?? []);
         $order->contact = ContactFactory::initContactByRequest($data['contact']);
 
         self::validateOrder($order);
@@ -115,6 +116,18 @@ class OrderFactory
         $order->note = [];
 
         return $order;
+    }
+
+    private static function serializeUtmAttribution($utmAttribution): string
+    {
+        if (!is_array($utmAttribution)) {
+            return '{}';
+        }
+
+        return wp_json_encode(
+            $utmAttribution,
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT
+        ) ?: '{}';
     }
 
     public static function isAvailableOrder(Order $order)
@@ -219,6 +232,7 @@ class OrderFactory
         }
 
         update_post_meta($order->id, 'sbc_order_scenario', $order->scenario);
+        update_post_meta($order->id, 'sbc_order_utm_attribution', $order->utmAttribution);
 
         if ($order->scenario === 'Package') {
             update_post_meta($order->id, 'sbc_order_package_id', $order->package['id']);

@@ -230,6 +230,15 @@ function sbc_order_info_metabox() {
     ) );
 
     $sbc_order->add_field( array(
+        'name' => esc_html__( 'UTM-атрибуция', 'sbc' ),
+        'id'   => 'sbc_order_utm_attribution',
+        'type' => 'textarea_code',
+        'attributes' => array(
+            'readonly' => 'readonly'
+        ),
+    ) );
+
+    $sbc_order->add_field( array(
         'name' => esc_html__( 'Количество спальных мест', 'sbc' ),
         'id'   => 'sbc_order_people_count',
         'type' => 'text'

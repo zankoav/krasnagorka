@@ -29,6 +29,12 @@ const SUCCESS = {
     }
 }
 
+function getAttribution() {
+    return window.KGAttribution && typeof window.KGAttribution.get === 'function'
+        ? window.KGAttribution.get()
+        : {}
+}
+
 export default class BookingForm extends LightningElement {
     @api model
     @api settings
@@ -154,7 +160,8 @@ export default class BookingForm extends LightningElement {
             eventModel: this.settings.eventModel,
             eventId: this.settings.eventId,
             variantId: this.settings.eventModel?.variantId,
-            animalsNotAvailable: this.settings.animalsNotAvailable
+            animalsNotAvailable: this.settings.animalsNotAvailable,
+            utmAttribution: getAttribution()
         }
 
         const response = await fetch('https://krasnagorka.by/wp-json/amocrm/v4/create-order/', {

@@ -75,6 +75,7 @@ class Order {
     public int $foodLunch;
     public int $foodDinner;
     public ?string $foodVariant;
+    public string $utmAttribution = '{}';
 
     public int $leadId;
 
