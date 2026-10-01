@@ -13,6 +13,7 @@
         'wbraid'
     ];
     var MAX_VALUE_LENGTH = 500;
+    var FIRST_TOUCH_TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
     function readStoredAttribution() {
         try {
@@ -43,7 +44,18 @@
         }
 
         var attribution = readStoredAttribution();
-        attribution.first = attribution.first || {};
+        var now = new Date();
+        var firstVisitAt = Date.parse(attribution.first_visit_at || '');
+        var firstTouchExpired = !firstVisitAt || now.getTime() - firstVisitAt >= FIRST_TOUCH_TTL_MS;
+
+        if (firstTouchExpired) {
+            attribution.first = {};
+            attribution.landing_page = window.location.href;
+            attribution.first_visit_at = now.toISOString();
+        } else {
+            attribution.first = attribution.first || {};
+        }
+
         attribution.last = attribution.last || {};
 
         Object.keys(values).forEach(function (key) {
@@ -55,8 +67,8 @@
         });
 
         attribution.landing_page = attribution.landing_page || window.location.href;
-        attribution.first_visit_at = attribution.first_visit_at || new Date().toISOString();
-        attribution.last_visit_at = new Date().toISOString();
+        attribution.first_visit_at = attribution.first_visit_at || now.toISOString();
+        attribution.last_visit_at = now.toISOString();
 
         try {
             window.localStorage.setItem(STORAGE_KEY, JSON.stringify(attribution));
