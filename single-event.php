@@ -12,7 +12,7 @@ $price          = get_current_price($price_byn);
 $price_subtitle = get_post_meta(get_the_ID(), "mastak_event_price_subtitle", true);
 global $kgCooke;
 $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
-$accordion     = get_post_meta(get_the_ID(), "mastak_event_accordion", true);
+$accordion     = get_post_meta(get_the_ID(), "mastak_event_accordion", true) == 'on';
 $tabs          = mastak_get_event_tabs();
 
 $date_start  = get_post_meta(get_the_ID(), "mastak_event_date_start", true);
