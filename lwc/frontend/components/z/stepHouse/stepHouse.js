@@ -7,12 +7,21 @@ export default class StepHouse extends LightningElement {
     @track loading
     @track bookingImg = IMG_BOOKING
     @track error
+    @track priceInfoExpanded = false
 
     happyEventsObj
     happyEventsObjRange
 
     get showPriceInfo() {
         return !this.settings.eventId && !this.settings.package
+    }
+
+    get priceInfoContentClass() {
+        return `step-house__info-content${this.priceInfoExpanded ? ' step-house__info-content_open' : ''}`
+    }
+
+    get priceInfoHidden() {
+        return !this.priceInfoExpanded
     }
 
     get peopleCountLabel() {
@@ -103,6 +112,17 @@ export default class StepHouse extends LightningElement {
         const title = this.template.querySelector('.step-house__subtitle')
         if (title && this.settings.package) {
             title.innerHTML = this.settings.package.title
+        }
+    }
+
+    togglePriceInfo() {
+        this.priceInfoExpanded = !this.priceInfoExpanded
+    }
+
+    handlePriceInfoKeydown(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            this.togglePriceInfo()
         }
     }
 

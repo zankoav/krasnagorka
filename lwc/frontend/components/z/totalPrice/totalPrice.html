@@ -21,7 +21,11 @@
                     <div class="total-price__warning-message">{settings.total.only_booking_order.message}</div>
                 </div>
             </div>
-            <z-decoding-price if:true={isOpenTotalPrice} class="total-price__decoding-price" settings={settings}></z-decoding-price>
+            <div class={decodingPriceClass} aria-hidden={decodingPriceHidden}>
+                <div class="total-price__decoding-price-inner">
+                    <z-decoding-price class="total-price__decoding-price" settings={settings}></z-decoding-price>
+                </div>
+            </div>
             <div if:true={prepaidPrice} class="total-price">
                 <div class="total-price__title">К оплате: <z-price-view color="orange" price={prepaidPrice}></z-price-view></div>
             </div>

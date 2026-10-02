@@ -14,6 +14,16 @@ export default class TotalPrice extends BaseBookingElement {
             : 'total-price__more'
     }
 
+    get decodingPriceClass() {
+        return this.isOpenTotalPrice
+            ? 'total-price__decoding-price-wrapper total-price__decoding-price-wrapper_open'
+            : 'total-price__decoding-price-wrapper'
+    }
+
+    get decodingPriceHidden() {
+        return !this.isOpenTotalPrice
+    }
+
     get prepaidPrice() {
         return !this.settings.payment || this.settings.prepaidType == 100
             ? null

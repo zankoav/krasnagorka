@@ -95,26 +95,34 @@
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
-                    <!-- <tempalte if:true={showPackageInfo}>
-                        <div class="step-house__delimeter">ТУР: {settings.package.title}</div>
-                    </tempalte> -->
-
-                    <tempalte if:true={showPriceInfo}>
-                        <div class="step-house__delimeter">ИНФОРМАЦИЯ О ЦЕНАХ</div>
-                        <div class="step-house__row">
-                            <template if:true={settings.seasonsLoading}>
-                                <z-loader class="step-house__season-loading"></z-loader>
-                            </template>
-                            <template if:false={settings.seasonsLoading}>
-                                <div class="step-house__col">
-                                    <z-house-info onchangeseason={seasonsChange} settings={settings}></z-house-info>
-                                </div>
-                                <div class="step-house__col">
-                                    <z-season-details season={currentSeason} house={settings.house} settings={settings}></z-season-details>
-                                </div>
-                            </template>
+                    <div class="step-house__info-block" if:true={showPriceInfo}>
+                        <div
+                            class="step-house__delimeter step-house__delimeter_toggle"
+                            role="button"
+                            tabindex="0"
+                            aria-expanded={priceInfoExpanded}
+                            onclick={togglePriceInfo}
+                            onkeydown={handlePriceInfoKeydown}>
+                            информация о ценах
                         </div>
-                    </tempalte>
+                        <div class={priceInfoContentClass} aria-hidden={priceInfoHidden}>
+                            <div class="step-house__info-content-inner">
+                                <div class="step-house__row">
+                                    <template if:true={settings.seasonsLoading}>
+                                        <z-loader class="step-house__season-loading"></z-loader>
+                                    </template>
+                                    <template if:false={settings.seasonsLoading}>
+                                        <div class="step-house__col">
+                                            <z-house-info onchangeseason={seasonsChange} settings={settings}></z-house-info>
+                                        </div>
+                                        <div class="step-house__col">
+                                            <z-season-details season={currentSeason} house={settings.house} settings={settings}></z-season-details>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </template>
             </template>
         </div>
