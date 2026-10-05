@@ -144,7 +144,7 @@ class PackageCalculate extends CalculateImpl
                     $servicesFormatted[] = [
                         'id' => '7',
                         'title' => 'Аренда моторной лодки 5 часов',
-                        'count' => intval($peopleCount * 0.5)
+                        'count' => intval($totalDays * 0.5)
                     ];
                 }
 
