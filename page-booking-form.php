@@ -387,7 +387,7 @@ $bookingModel = ModelFactory::getBookingModel();
 
     <script>
         window.gtag = window.gtag || function () {}; 
-        const model = `<?= $bookingModel; ?>`;
+        const model = <?= wp_json_encode($bookingModel, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
     </script>
     <script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery.min.js' id='jquery-core-js'></script>
     <script type='text/javascript' src='https://krasnagorka.by/wp-includes/js/jquery/jquery-migrate.min.js' id='jquery-migrate-js'></script>

@@ -193,7 +193,7 @@ $model = json_encode($pageModel);
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <script>
-        const model = `<?= $model; ?>`;
+        const model = <?= wp_json_encode($model, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
     </script>
     <script src="<?= $assets->js('taplink'); ?>"></script>
 </body>
