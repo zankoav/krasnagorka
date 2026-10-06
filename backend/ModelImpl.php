@@ -26,7 +26,32 @@ abstract class ModelImpl
         $model['popupContacts'] = $this->getPopupContacts();
         $model['weather']       = get_weather();
         $model['currencies']    = $this->getCurrencies();
+        $model['fier_events']   = $this->getFireEvents();
+        $model['package_tour']  = $this->getPackageTours();
         return json_encode($model);
+    }
+
+    public function getFireEvents()
+    {
+        $tabId = absint($this->themeOptions['booking_fire_events_tab'] ?? 0);
+
+        if (
+            !$tabId
+            || get_post_type($tabId) !== 'event_tab'
+            || get_post_status($tabId) !== 'publish'
+            || get_post_meta($tabId, 'tab_type', true) !== 'type_8'
+        ) {
+            return [];
+        }
+
+        $events = (new \Type_8($tabId))->getItems();
+
+        return is_array($events) ? $events : [];
+    }
+
+    public function getPackageTours()
+    {
+        return [];
     }
 
     public function getPopupContacts()

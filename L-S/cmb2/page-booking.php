@@ -23,6 +23,15 @@ function cmb2_booking_page() {
     ));
 
     $cmb_options->add_field(array(
+        'name'             => __('Таб горящих предложений', 'krasnagorka'),
+        'desc'             => __('Предложения из выбранного таба будут переданы в модель бронирования.', 'krasnagorka'),
+        'id'               => 'booking_fire_events_tab',
+        'type'             => 'select',
+        'show_option_none' => __('Не выбран', 'krasnagorka'),
+        'options_cb'       => 'kg_get_fire_event_tab_options',
+    ));
+
+    $cmb_options->add_field(array(
         'name' => 'Показывать калькулятор цен',
         'id'   => 'booking_price_show',
         'type' => 'checkbox',
@@ -262,6 +271,26 @@ function cmb2_booking_page() {
         )
     ));
 
+}
+
+function kg_get_fire_event_tab_options()
+{
+    $tabs = get_posts(array(
+        'post_type'      => 'event_tab',
+        'post_status'    => 'publish',
+        'posts_per_page' => -1,
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+        'meta_key'       => 'tab_type',
+        'meta_value'     => 'type_8',
+    ));
+
+    $options = array();
+    foreach ($tabs as $tab) {
+        $options[$tab->ID] = $tab->post_title;
+    }
+
+    return $options;
 }
 
 add_action('cmb2_admin_init', 'cmb2_booking_page');
