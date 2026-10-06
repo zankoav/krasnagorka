@@ -30,7 +30,7 @@ abstract class ModelImpl
         $model['currencies']    = $this->getCurrencies();
         $model['fier_events']   = $this->getFireEvents();
         $model['package_tour']  = $this->getPackageTours();
-        return json_encode($model);
+        return json_encode($model, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 
     public function getFireEvents()
