@@ -7,6 +7,7 @@ use Ls\Wp\Log as Log;
 abstract class ModelImpl
 {
     protected $themeOptions;
+    protected $bookingOptions;
     protected $DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
 
     abstract protected function scenario();
@@ -15,6 +16,7 @@ abstract class ModelImpl
     public function __construct()
     {
         $this->themeOptions = get_option('mastak_theme_options');
+        $this->bookingOptions = get_option('mastak_booking_appearance_options');
     }
 
     public function getModel()
@@ -33,7 +35,7 @@ abstract class ModelImpl
 
     public function getFireEvents()
     {
-        $tabId = absint($this->themeOptions['booking_fire_events_tab'] ?? 0);
+        $tabId = absint($this->bookingOptions['booking_fire_events_tab'] ?? 0);
         Log::info('tabId', $tabId);
 
         if (
