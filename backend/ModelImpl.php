@@ -47,12 +47,69 @@ abstract class ModelImpl
         }
 
         $events = (new \Type_8($tabId))->getItems();
-        return is_array($events) ? $events : [];
+        if (!is_array($events)) {
+            return [];
+        }
+
+        $today = current_time('Y-m-d');
+        $events = array_filter($events, function ($event) use ($today) {
+            if (empty($event['calendar']) || empty($event['from']) || empty($event['to'])) {
+                return false;
+            }
+
+            $dateFrom = strtotime($event['from']);
+            $dateTo = strtotime($event['to']);
+            if ($dateFrom === false || $dateTo === false || $dateFrom >= $dateTo) {
+                return false;
+            }
+
+            $dateFrom = date('Y-m-d', $dateFrom);
+            $dateTo = date('Y-m-d', $dateTo);
+
+            return $dateFrom >= $today
+                && \Booking_Form_Controller::isAvailableOrder((int) $event['calendar'], $dateFrom, $dateTo, false);
+        });
+
+        return array_values($events);
     }
 
     public function getPackageTours()
     {
-        return [];
+        $today = strtotime(current_time('Y-m-d'));
+        $query = new \WP_Query([
+            'post_type'      => 'event',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'meta_query'     => [
+                [
+                    'key'     => 'mastak_event_date_finish',
+                    'value'   => $today,
+                    'compare' => '>=',
+                    'type'    => 'NUMERIC',
+                ],
+            ],
+            'meta_key'       => 'mastak_event_order',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'ASC',
+        ]);
+
+        return array_map(function ($event) {
+            $eventId = $event->ID;
+
+            return [
+                'id'          => $eventId,
+                'title'       => $event->post_title,
+                'description' => get_post_meta($eventId, 'mastak_event_description', true),
+                'image'       => get_the_post_thumbnail_url($eventId, 'header_tablet_l'),
+                'link'        => get_permalink($eventId),
+                'date_start'  => (int) get_post_meta($eventId, 'mastak_event_date_start', true),
+                'date_finish' => (int) get_post_meta($eventId, 'mastak_event_date_finish', true),
+                'price'       => get_post_meta($eventId, 'mastak_event_price', true),
+                'price_subtitle' => get_post_meta($eventId, 'mastak_event_price_subtitle', true),
+                'frame_color' => get_post_meta($eventId, 'mastak_event_frame_color', true),
+                'icon'        => get_post_meta($eventId, 'mastak_event_icon', true),
+            ];
+        }, $query->posts);
     }
 
     public function getPopupContacts()
