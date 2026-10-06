@@ -36,7 +36,6 @@ abstract class ModelImpl
     public function getFireEvents()
     {
         $tabId = absint($this->bookingOptions['booking_fire_events_tab'] ?? 0);
-        Log::info('tabId', $tabId);
 
         if (
             !$tabId
@@ -44,12 +43,10 @@ abstract class ModelImpl
             || get_post_status($tabId) !== 'publish'
             || get_post_meta($tabId, 'tab_type', true) !== 'type_8'
         ) {
-            Log::info('tabId', 'NO');
             return [];
         }
 
         $events = (new \Type_8($tabId))->getItems();
-        Log::info('tabId', $events);
         return is_array($events) ? $events : [];
     }
 
