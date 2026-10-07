@@ -69,9 +69,23 @@ abstract class ModelImpl
             return $dateFrom >= $today
                 && \Booking_Form_Controller::isAvailableOrder((int) $event['calendar'], $dateFrom, $dateTo, false);
         });
+        
+        $terem_options = get_option('mastak_terem_appearance_options');
+        $kalendars     = $terem_options['kalendar'];
 
         return array_values(array_map(function ($event) use ($tabId) {
             $event['tab_id'] = $tabId;
+            $isTeremRoom = get_term_meta($event['calendar'], 'kg_calendars_terem', 1);
+            if ($isTeremRoom) {
+                $term = get_term($calendarId, 'sbc_calendars');
+                $house_title = $term->name;
+                foreach ($kalendars as $kalendar) {
+                    if ($kalendar['title'] == $house_title) {
+                        $event['image'] = $kalendar['picture'];
+                        break;
+                    }
+                }
+            }
             return $event;
         }, $events));
     }
