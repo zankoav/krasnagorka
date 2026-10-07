@@ -114,9 +114,14 @@
                                 <a key={fireEvent.id} href={fireEvent.link} target="_blank" class="step-house__opportunities-item">
                                     <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
                                     <div class="step-house__opportunities-item-content">
-                                        <h4 class="step-house__opportunities-item-title">{fireEvent.title}</h4>
-                                        <span class="step-house__opportunities-item-description" lwc:inner-html={fireEvent.description}></span>
-                                        <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                                        <div class="step-house__opportunities-item-content-header">
+                                            <span class="step-house__opportunities-item-title">{fireEvent.title}</span>
+                                            <span class="step-house__opportunities-item-description">{fireEvent.dates}</span>
+                                        </div>
+                                        <div class="step-house__opportunities-item-content-text">
+                                            <span class="step-house__opportunities-item-description" lwc:inner-html={fireEvent.description}></span>
+                                            <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                                        </div>
                                     </div>
                                 </a>
                             </template>

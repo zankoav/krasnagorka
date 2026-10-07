@@ -47,14 +47,15 @@ export default class StepHouse extends LightningElement {
                 .map((item) => {
                     const from = new moment(item.from, 'MM/DD/YYYY').format('YYYY-MM-DD')
                     const to = new moment(item.to, 'MM/DD/YYYY').format('YYYY-MM-DD')
-                    const fromDisplay = new moment(item.to, 'MM/DD/YYYY').format('DD.MM.YYYY')
+                    const fromDisplay = new moment(item.from, 'MM/DD/YYYY').format('DD.MM.YYYY')
                     const toDisplay = new moment(item.to, 'MM/DD/YYYY').format('DD.MM.YYYY')
                     const terem = calendar.isTerem ? `&terem=${calendar.name}` : ''
                     return {
                         id: item.from,
                         link: `https://krasnagorka.by/booking-form/?eventTabId=${item.tab_id}&booking=${item.house}&calendarId=${item.calendar}&from=${from}&to=${to}${terem}`,
                         title: calendar.name,
-                        description: `c ${fromDisplay} по ${toDisplay}`,
+                        description: item.tg_description?.replace(/[\t\n\r]+/g, ' '),
+                        dates: `${fromDisplay} - ${toDisplay}`,
                         price: {
                             rub: item.new_price,
                             penny: '00'
