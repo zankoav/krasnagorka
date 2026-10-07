@@ -40,16 +40,22 @@ export default class StepHouse extends LightningElement {
     }
 
     get fireEvents() {
+        const calendar = this.settings.calendars.find((c) => c.selected)
         return (
-            this.settings.fier_events?.map((item) => {
-                return {
-                    id: item.calendar,
-                    link: '#',
-                    title: '$',
-                    description: item.description,
-                    image: item.image
-                }
-            }) || []
+            this.settings.fier_events
+                ?.filter((item) => item.calendar == calendar.id)
+                .map((item) => {
+                    const from = new moment(item.from, 'MM/DD/YYYY').format('YYYY-MM-DD')
+                    const to = new moment(item.to, 'MM/DD/YYYY').format('YYYY-MM-DD')
+                    const terem = calendar.isTerem ? `&terem=${calendar.name}` : ''
+                    return {
+                        id: item.from,
+                        link: `https://krasnagorka.by/booking-form/?eventTabId=${item.tab_id}&booking=${item.house}&calendarId=${item.calendar}&from=${from}&to=${to}${terem}`,
+                        title: calendar.name,
+                        description: `c ${from} по ${to} - ${item.new_price} руб.`,
+                        image: item.image
+                    }
+                }) || []
         )
     }
 

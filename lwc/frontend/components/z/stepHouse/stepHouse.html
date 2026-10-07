@@ -104,7 +104,7 @@
                                         <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
                                         <div class="step-house__opportunities-item-content">
                                             <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
-                                            <p class="step-house__opportunities-item-description">{soonEvent.description}</p>
+                                            <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
                                         </div>
                                     </a>
                                 </template>
@@ -118,7 +118,7 @@
                                         <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
                                         <div class="step-house__opportunities-item-content">
                                             <h4 class="step-house__opportunities-item-title">{fireEvent.title}</h4>
-                                            <p class="step-house__opportunities-item-description">{fireEvent.description}</p>
+                                            <p class="step-house__opportunities-item-description" lwc:inner-html={fireEvent.description}></p>
                                         </div>
                                     </a>
                                 </template>

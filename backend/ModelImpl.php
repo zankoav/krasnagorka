@@ -70,7 +70,10 @@ abstract class ModelImpl
                 && \Booking_Form_Controller::isAvailableOrder((int) $event['calendar'], $dateFrom, $dateTo, false);
         });
 
-        return array_values($events);
+        return array_values(array_map(function ($event) use ($tabId) {
+            $event['tab_id'] = $tabId;
+            return $event;
+        }, $events));
     }
 
     public function getPackageTours()
