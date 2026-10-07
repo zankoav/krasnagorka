@@ -39,6 +39,14 @@ export default class StepHouse extends LightningElement {
         ]
     }
 
+    get fireEvents() {
+        return this.settings.fier_events || []
+    }
+
+    get soonEvents() {
+        return this.settings.package_tour || []
+    }
+
     get showChilds() {
         return this.settings.scenario === 'Event' && this.settings.eventModel.enabled_child
     }

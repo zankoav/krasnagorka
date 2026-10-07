@@ -217,6 +217,16 @@
         @include media.sm {
             display: flex;
         }
+
+        &_opportunities {
+            display: none;
+            flex-wrap: wrap;
+
+            .step-house__col {
+                max-width: 100%;
+                flex: 1 0 100%;
+            }
+        }
     }
 
     &__col {

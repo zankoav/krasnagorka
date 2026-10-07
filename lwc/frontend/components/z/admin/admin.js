@@ -112,7 +112,9 @@ export default class Admin extends LightningElement {
             foodVariant: this.model.eventId ? 'no_food' : this.model.foodVariant,
 
             baby_bed_available: this.model.baby_bed_available,
-            total: this.model.total
+            total: this.model.total,
+            fier_events: this.model.fier_events,
+            package_tour: this.model.package_tour
         }
 
         if (this.model.eventTabId) {
@@ -354,8 +356,7 @@ export default class Admin extends LightningElement {
                     total: data
                 })
 
-                console.log('data', data);
-
+                console.log('data', data)
             }
         }
     }
