@@ -40,7 +40,17 @@ export default class StepHouse extends LightningElement {
     }
 
     get fireEvents() {
-        return this.settings.fier_events || []
+        return (
+            this.settings.fier_events?.map((item) => {
+                return {
+                    id: item.calendar,
+                    link: '#',
+                    title: '$',
+                    description: item.description,
+                    image: item.image
+                }
+            }) || []
+        )
     }
 
     get soonEvents() {

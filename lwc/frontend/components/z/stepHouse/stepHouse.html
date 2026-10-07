@@ -99,8 +99,8 @@
                         <div class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Скорые Мероприятия</div>
                             <template for:each={soonEvents} for:item="soonEvent">
-                                <a key={soonEvent.href} href={soonEvent.href} target="_blank" class="step-house__opportunities-item">
-                                    <img class="step-house__opportunities-item-img" src={fireEvent.img} alt={soonEvent.title} />
+                                <a key={soonEvent.id} href={soonEvent.link} target="_blank" class="step-house__opportunities-item">
+                                    <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={soonEvent.title} />
                                     <div class="step-house__opportunities-item-content">
                                         <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
                                         <p class="step-house__opportunities-item-description">{soonEvent.description}</p>
@@ -111,8 +111,8 @@
                         <div class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Горящие Предложения</div>
                             <template for:each={fireEvents} for:item="fireEvent">
-                                <a key={fireEvent.href} href={fireEvent.href} target="_blank" class="step-house__opportunities-item">
-                                    <img class="step-house__opportunities-item-img" src={fireEvent.img} alt={fireEvent.title} />
+                                <a key={fireEvent.id} href={fireEvent.link} target="_blank" class="step-house__opportunities-item">
+                                    <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
                                     <div class="step-house__opportunities-item-content">
                                         <h4 class="step-house__opportunities-item-title">{fireEvent.title}</h4>
                                         <p class="step-house__opportunities-item-description">{fireEvent.description}</p>
