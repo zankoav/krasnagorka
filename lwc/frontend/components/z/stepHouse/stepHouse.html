@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="step-house__row step-house__row_opportunities">
-                        <div lwc:if={soonEvents.length} class="step-house__col">
+                        <div lwc:if={soonEvents.length} class="step-house__col" style="display: none">
                             <div class="step-house__delimeter step-house__delimeter_small">Скорые Мероприятия</div>
                             <template for:each={soonEvents} for:item="soonEvent">
                                 <a key={soonEvent.id} href={soonEvent.link} target="_blank" class="step-house__opportunities-item">
@@ -108,7 +108,7 @@
                                 </a>
                             </template>
                         </div>
-                        <div lwc:if={fireEvents.length} class="step-house__col" style="display: none">
+                        <div lwc:if={fireEvents.length} class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Горящие Предложения</div>
                             <template for:each={fireEvents} for:item="fireEvent">
                                 <a key={fireEvent.id} href={fireEvent.link} target="_blank" class="step-house__opportunities-item">
