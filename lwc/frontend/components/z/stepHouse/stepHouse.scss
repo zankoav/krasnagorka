@@ -362,6 +362,11 @@
         display: flex;
         align-items: flex-start;
         gap: 16px;
+        margin-bottom: 1rem;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__opportunities-item-img {
@@ -370,5 +375,16 @@
         height: 45px;
         object-fit: cover;
         flex: 1 0 80px;
+    }
+
+    &__opportunities-item-title {
+        font-size: 16px;
+        color: #212e35;
+        margin-bottom: 4px;
+    }
+
+    &__opportunities-item-description {
+        font-size: 14px;
+        color: gray;
     }
 }
