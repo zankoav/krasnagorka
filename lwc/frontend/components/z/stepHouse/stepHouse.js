@@ -55,7 +55,10 @@ export default class StepHouse extends LightningElement {
                         link: `https://krasnagorka.by/booking-form/?eventTabId=${item.tab_id}&booking=${item.house}&calendarId=${item.calendar}&from=${from}&to=${to}${terem}`,
                         title: calendar.name,
                         description: `c ${fromDisplay} по ${toDisplay}`,
-                        price: item.new_price,
+                        price: {
+                            rub: item.new_price,
+                            penny: '00'
+                        },
                         image: item.image
                     }
                 }) || []

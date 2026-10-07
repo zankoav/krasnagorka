@@ -85,6 +85,8 @@ abstract class ModelImpl
                         break;
                     }
                 }
+            }else if($event['image_id']){
+                $event['image'] = wp_get_attachment_image_url($event['image_id'], 'welcome_tab_laptop');
             }
             return $event;
         }, $events));
