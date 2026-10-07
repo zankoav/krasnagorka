@@ -59,7 +59,7 @@ export default class StepHouse extends LightningElement {
                             rub: item.new_price,
                             penny: '00'
                         },
-                        image: item.image
+                        image: this.settings.house.picture
                     }
                 }) || []
         )

@@ -108,7 +108,7 @@
                                 </a>
                             </template>
                         </div>
-                        <div lwc:if={fireEvents.length} class="step-house__col">
+                        <div lwc:if={fireEvents.length} class="step-house__col" style="display: none">
                             <div class="step-house__delimeter step-house__delimeter_small">Горящие Предложения</div>
                             <template for:each={fireEvents} for:item="fireEvent">
                                 <a key={fireEvent.id} href={fireEvent.link} target="_blank" class="step-house__opportunities-item">

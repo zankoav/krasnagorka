@@ -219,7 +219,7 @@
         }
 
         &_opportunities {
-            display: none;
+            display: flex;
             flex-wrap: wrap;
 
             .step-house__col {
@@ -393,5 +393,6 @@
     &__opportunities-item-description {
         font-size: 14px;
         color: gray;
+        margin-right: 4px;
     }
 }
