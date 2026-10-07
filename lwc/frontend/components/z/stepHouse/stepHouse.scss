@@ -387,17 +387,28 @@
     &__opportunities-item-title {
         font-size: 16px;
         color: #212e35;
-        margin-bottom: 4px;
     }
 
     &__opportunities-item-description {
         font-size: 14px;
         color: gray;
-        margin-right: 4px;
+    }
+
+    &__opportunities-item-dates {
+        font-size: 13px;
+        color: gray;
     }
 
     &__opportunities-item-content-text {
         display: flex;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    &__opportunities-item-content-header {
+        margin-bottom: 8px;
+        display: flex;
+        gap: 8px;
         justify-content: space-between;
     }
 }
