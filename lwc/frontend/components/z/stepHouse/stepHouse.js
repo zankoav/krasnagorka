@@ -60,7 +60,7 @@ export default class StepHouse extends LightningElement {
                             ...(calendar.isTerem ? { terem: calendar.name } : {})
                         },
                         title: calendar.name,
-                        description: item.tg_description?.replace(/[\t\n\r]+/g, ' '),
+                        description: item.sale_text?.replace(/[\t\n\r]+/g, ' '),
                         dates: `${fromDisplay} - ${toDisplay}`,
                         price: {
                             rub: item.new_price,

@@ -110,7 +110,7 @@
                                 </template>
                             </div>
                         </div>
-                        <div lwc:if={fireEvents.length} class="step-house__col" style="display: none">
+                        <div lwc:if={fireEvents.length} class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Горящие предложения на выбранный объект</div>
                             <div class="step-house__opportunities-fire">
                                 <template for:each={fireEvents} for:item="fireEvent">

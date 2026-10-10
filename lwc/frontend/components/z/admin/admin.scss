@@ -1,2 +1,9 @@
 @use "@styles/media";
 @use "@styles/constants" as *;
+
+.admin-loader {
+    .loader {
+        background-color: initial;
+        min-height: 100%;
+    }
+}

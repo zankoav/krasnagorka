@@ -1,7 +1,7 @@
 <template>
     <z-app if:true={model}>
         <z-header-primary model={model} slot="header"></z-header-primary>
-        <z-loader if:true={loading} slot="main"></z-loader>
+        <z-loader if:true={loading} slot="main" class="admin-loader"></z-loader>
         <z-booking if:false={loading} onupdate={updateSettings} onloadbookingmodel={loadBookingModel} settings={settings} model={model} slot="main"> </z-booking>
         <z-footer model={model} slot="footer"></z-footer>
     </z-app>
