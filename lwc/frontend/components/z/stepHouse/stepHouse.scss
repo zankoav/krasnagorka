@@ -398,6 +398,10 @@
         color: gray;
     }
 
+    &__opportunities-item-content {
+        flex: 1;
+    }
+
     &__opportunities-item-content-text {
         display: flex;
         justify-content: space-between;
@@ -409,6 +413,7 @@
         display: flex;
         gap: 8px;
         justify-content: space-between;
+        align-items: end;
     }
 
     &__opportunities-fire,
