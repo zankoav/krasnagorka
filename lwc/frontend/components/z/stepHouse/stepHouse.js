@@ -213,6 +213,8 @@ export default class StepHouse extends LightningElement {
             (item) => String(item.id) === event.currentTarget.dataset.id
         )
         const selectedCalendar = this.settings.calendars.find((item) => item.selected)
+        const selectedPeople = this.settings.counts?.find((item) => item.selected)?.name
+        const selectedChild = this.settings.childCounts?.find((item) => item.selected)?.name
 
         if (!soonEvent || !selectedCalendar) {
             return
@@ -223,6 +225,8 @@ export default class StepHouse extends LightningElement {
             calendarId: selectedCalendar.id,
             from: moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD'),
             to: moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+            ...(selectedPeople ? { people: selectedPeople } : {}),
+            ...(selectedChild !== undefined ? { child: selectedChild } : {}),
             ...(selectedCalendar.isTerem ? { terem: selectedCalendar.name } : {})
         })
     }
@@ -284,7 +288,7 @@ export default class StepHouse extends LightningElement {
         const childCounts = Array.from(Array(maxChild), (_, i) => i).map((it) => {
             return {
                 id: it,
-                selected: false,
+                selected: this.settings.child !== undefined && this.settings.child == it,
                 name: it
             }
         })
@@ -365,7 +369,8 @@ export default class StepHouse extends LightningElement {
         this.dispatchEvent(
             new CustomEvent('update', {
                 detail: {
-                    childCounts: newChildCounts
+                    childCounts: newChildCounts,
+                    child: id
                 },
                 bubbles: true,
                 composed: true
