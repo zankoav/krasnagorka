@@ -10,8 +10,16 @@
         exit;
     }
 
-    $wsbId = $_GET['wsb_tid'];
-    $orderId = $_GET['wsb_order_num'];
+    $wsbId = isset($_GET['wsb_tid']) ? sanitize_text_field(wp_unslash($_GET['wsb_tid'])) : '';
+    $orderId = isset($_GET['wsb_order_num']) ? absint($_GET['wsb_order_num']) : 0;
+
+    if (empty($wsbId) || empty($orderId)) {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        get_template_part(404);
+        exit();
+    }
 
     $order = get_order_data($orderId);
     $templatePath = $order['prepaidType'] == 100 ? "L-S/mail/templates/tmpl-pay-full" : "L-S/mail/templates/tmpl-pay-partial";
@@ -22,11 +30,11 @@
 
     $wsbIdStore = get_post_meta($orderId, 'sbc_webpay_transaction_id', 1);
 
-    if($wsbId != $wsbIdStore){
+    if ((string) $wsbId !== (string) $wsbIdStore) {
         global $wp_query;
         $wp_query->set_404();
-        status_header( 404 );
-        get_template_part( 404 ); 
+        status_header(404);
+        get_template_part(404);
         exit();
     }
 
