@@ -100,13 +100,19 @@
                             <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
                             <div class="step-house__opportunities-events">
                                 <template for:each={soonEvents} for:item="soonEvent">
-                                    <a key={soonEvent.id} href={soonEvent.link} target="_blank" class="step-house__opportunities-item">
+                                    <div
+                                        key={soonEvent.id}
+                                        class="step-house__opportunities-item"
+                                        data-id={soonEvent.id}
+                                        role="button"
+                                        tabindex="0"
+                                        onclick={loadSoonEvent}>
                                         <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
                                         <div class="step-house__opportunities-item-content">
                                             <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
                                             <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
                                         </div>
-                                    </a>
+                                    </div>
                                 </template>
                             </div>
                         </div>

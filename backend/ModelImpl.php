@@ -139,6 +139,7 @@ abstract class ModelImpl
                 'description' => get_post_meta($eventId, 'mastak_event_description', true),
                 'image'       => get_the_post_thumbnail_url($eventId, 'header_tablet_l'),
                 'link'        => get_permalink($eventId),
+                'event_link'  => get_post_meta($eventId, 'mastak_event_link', true),
                 'date_start'  => (int) get_post_meta($eventId, 'mastak_event_date_start', true),
                 'date_finish' => (int) get_post_meta($eventId, 'mastak_event_date_finish', true),
                 'price'       => get_post_meta($eventId, 'mastak_event_price', true),

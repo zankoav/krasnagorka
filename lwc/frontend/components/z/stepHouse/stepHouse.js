@@ -73,7 +73,14 @@ export default class StepHouse extends LightningElement {
     }
 
     get soonEvents() {
-        return this.settings.package_tour || []
+        return (this.settings.package_tour || []).map((item) => {
+            const url = new URL(item.event_link, window.location.origin)
+
+            return {
+                ...item,
+                params: Object.fromEntries(url.searchParams.entries())
+            }
+        })
     }
 
     get showChilds() {
@@ -163,9 +170,23 @@ export default class StepHouse extends LightningElement {
             return
         }
 
+        this.loadBookingModel(fireEvent.params)
+    }
+
+    loadSoonEvent(event) {
+        const soonEvent = this.soonEvents.find((item) => item.id === event.currentTarget.dataset.id)
+
+        if (!soonEvent) {
+            return
+        }
+
+        this.loadBookingModel(soonEvent.params)
+    }
+
+    loadBookingModel(params) {
         this.dispatchEvent(
             new CustomEvent('loadbookingmodel', {
-                detail: fireEvent.params,
+                detail: params,
                 bubbles: true,
                 composed: true
             })
