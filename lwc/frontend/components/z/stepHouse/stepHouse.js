@@ -73,14 +73,47 @@ export default class StepHouse extends LightningElement {
     }
 
     get soonEvents() {
-        return (this.settings.package_tour || []).map((item) => {
-            const url = new URL(item.event_link, window.location.origin)
+        const selectedDateStart = this.settings.dateStart
+            ? moment(this.settings.dateStart, 'DD-MM-YYYY')
+            : null
+        const selectedDateEnd = this.settings.dateEnd
+            ? moment(this.settings.dateEnd, 'DD-MM-YYYY')
+            : null
 
-            return {
-                ...item,
-                params: Object.fromEntries(url.searchParams.entries())
-            }
-        })
+        return (this.settings.package_tour || [])
+            .filter((item) => {
+                if (!selectedDateStart || !selectedDateEnd) {
+                    return false
+                }
+
+                const eventDateStart = moment.unix(item.date_start).startOf('day')
+                const eventDateEnd = moment.unix(item.date_finish).endOf('day')
+
+                return (
+                    selectedDateStart.isSameOrAfter(eventDateStart, 'day') &&
+                    selectedDateEnd.isSameOrBefore(eventDateEnd, 'day')
+                )
+            })
+            .map((item) => {
+                const url = new URL(item.event_link, window.location.origin)
+
+                return {
+                    ...item,
+                    params: Object.fromEntries(url.searchParams.entries())
+                }
+            })
+    }
+
+    get showSoonEvents() {
+        const selectedCalendar = this.settings.calendars?.find((item) => item.selected)
+
+        return Boolean(
+            this.soonEvents.length &&
+                this.settings.house &&
+                selectedCalendar &&
+                this.settings.dateStart &&
+                this.settings.dateEnd
+        )
     }
 
     get showChilds() {
@@ -164,7 +197,9 @@ export default class StepHouse extends LightningElement {
     }
 
     loadFireEvent(event) {
-        const fireEvent = this.fireEvents.find((item) => String(item.id) === event.currentTarget.dataset.id)
+        const fireEvent = this.fireEvents.find(
+            (item) => String(item.id) === event.currentTarget.dataset.id
+        )
 
         if (!fireEvent) {
             return
@@ -174,8 +209,9 @@ export default class StepHouse extends LightningElement {
     }
 
     loadSoonEvent(event) {
-        const soonEvent = this.soonEvents.find((item) => String(item.id) === event.currentTarget.dataset.id)
-        console.log('soonEvent', soonEvent)
+        const soonEvent = this.soonEvents.find(
+            (item) => String(item.id) === event.currentTarget.dataset.id
+        )
         if (!soonEvent) {
             return
         }
