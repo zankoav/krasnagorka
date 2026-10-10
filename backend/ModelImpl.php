@@ -146,7 +146,7 @@ abstract class ModelImpl
                 'frame_color' => get_post_meta($eventId, 'mastak_event_frame_color', true),
                 'icon'        => get_post_meta($eventId, 'mastak_event_icon', true),
             ];
-        }, $query->posts);
+        }, $events));
     }
 
     public function getPopupContacts()
