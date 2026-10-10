@@ -367,16 +367,16 @@
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease-in;
-        flex: 1 0 calc(50% - 6px);
-        max-width: calc(50% - 6px);
+        flex: 1 0 calc(100%);
+        max-width: calc(100%);
 
         &:hover {
             border-color: #80d3dd;
         }
 
         @include media.sm {
-            flex: 1 0 calc(100%);
-            max-width: calc(100%);
+            flex: 1 0 calc(50% - 6px);
+            max-width: calc(50% - 6px);
         }
     }
 
