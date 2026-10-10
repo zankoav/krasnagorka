@@ -373,6 +373,11 @@
         &:hover {
             border-color: #80d3dd;
         }
+
+        @include media.sm {
+            flex: 1 0 calc(100%);
+            max-width: calc(100%);
+        }
     }
 
     &__opportunities-item-img {
