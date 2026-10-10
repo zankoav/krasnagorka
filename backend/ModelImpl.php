@@ -100,11 +100,17 @@ abstract class ModelImpl
             'post_status'    => 'publish',
             'posts_per_page' => -1,
             'meta_query'     => [
+                'relation' => 'AND',
                 [
                     'key'     => 'mastak_event_date_finish',
                     'value'   => $today,
                     'compare' => '>=',
                     'type'    => 'NUMERIC',
+                ],
+                [
+                    'key'     => 'mastak_event_link',
+                    'value'   => 'package-id=',
+                    'compare' => 'LIKE',
                 ],
             ],
             'meta_key'       => 'mastak_event_order',
@@ -112,7 +118,19 @@ abstract class ModelImpl
             'order'          => 'ASC',
         ]);
 
-        return array_map(function ($event) {
+        $events = array_filter($query->posts, function ($event) {
+            $link = get_post_meta($event->ID, 'mastak_event_link', true);
+            $query = wp_parse_url($link, PHP_URL_QUERY);
+
+            if (empty($query)) {
+                return false;
+            }
+
+            parse_str($query, $params);
+            return !empty($params['package-id']);
+        });
+
+        return array_values(array_map(function ($event) {
             $eventId = $event->ID;
 
             return [
