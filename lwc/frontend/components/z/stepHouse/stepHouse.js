@@ -79,10 +79,11 @@ export default class StepHouse extends LightningElement {
         const selectedDateEnd = this.settings.dateEnd
             ? moment(this.settings.dateEnd, 'DD-MM-YYYY')
             : null
+        const selectedCalendarId = this.settings.calendars?.find((item) => item.selected)?.id
 
         return (this.settings.package_tour || [])
             .filter((item) => {
-                if (!selectedDateStart || !selectedDateEnd) {
+                if (!selectedDateStart || !selectedDateEnd || !selectedCalendarId) {
                     return false
                 }
 
@@ -91,7 +92,8 @@ export default class StepHouse extends LightningElement {
 
                 return (
                     selectedDateStart.isSameOrAfter(eventDateStart, 'day') &&
-                    selectedDateEnd.isSameOrBefore(eventDateEnd, 'day')
+                    selectedDateEnd.isSameOrBefore(eventDateEnd, 'day') &&
+                    item.calendarIds?.some((calendarId) => String(calendarId) === String(selectedCalendarId))
                 )
             })
             .map((item) => {

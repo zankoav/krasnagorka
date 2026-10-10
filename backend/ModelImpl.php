@@ -132,6 +132,17 @@ abstract class ModelImpl
 
         return array_values(array_map(function ($event) {
             $eventId = $event->ID;
+            $eventLink = get_post_meta($eventId, 'mastak_event_link', true);
+            $eventQuery = wp_parse_url($eventLink, PHP_URL_QUERY);
+            parse_str($eventQuery, $eventParams);
+            $packageCalendars = get_post_meta((int) $eventParams['package-id'], 'package_calendars', true);
+            $calendarIds = [];
+
+            foreach ((array) $packageCalendars as $calendar) {
+                if (!empty($calendar['calendar'])) {
+                    $calendarIds[] = (int) $calendar['calendar'];
+                }
+            }
 
             return [
                 'id'          => $eventId,
@@ -139,7 +150,8 @@ abstract class ModelImpl
                 'description' => get_post_meta($eventId, 'mastak_event_description', true),
                 'image'       => get_the_post_thumbnail_url($eventId, 'header_tablet_l'),
                 'link'        => get_permalink($eventId),
-                'event_link'  => get_post_meta($eventId, 'mastak_event_link', true),
+                'event_link'  => $eventLink,
+                'calendarIds' => $calendarIds,
                 'date_start'  => (int) get_post_meta($eventId, 'mastak_event_date_start', true),
                 'date_finish' => (int) get_post_meta($eventId, 'mastak_event_date_finish', true),
                 'price'       => get_post_meta($eventId, 'mastak_event_price', true),
