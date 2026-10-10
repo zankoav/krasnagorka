@@ -174,8 +174,8 @@ export default class StepHouse extends LightningElement {
     }
 
     loadSoonEvent(event) {
-        const soonEvent = this.soonEvents.find((item) => item.id === event.currentTarget.dataset.id)
-
+        const soonEvent = this.soonEvents.find((item) => item.id === event.target.dataset.id)
+        console.log('soonEvent', soonEvent)
         if (!soonEvent) {
             return
         }
