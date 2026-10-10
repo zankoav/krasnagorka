@@ -365,11 +365,10 @@
         padding: 12px;
         border: 2px #eee solid;
         border-radius: 8px;
+        cursor: pointer;
         transition: all 0.3s ease-in;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
+        flex: 1 0 calc(50% - 6px);
+        max-width: calc(50% - 6px);
 
         &:hover {
             border-color: #80d3dd;
@@ -410,5 +409,12 @@
         display: flex;
         gap: 8px;
         justify-content: space-between;
+    }
+
+    &__opportunities-fire,
+    &__opportunities-events {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
     }
 }

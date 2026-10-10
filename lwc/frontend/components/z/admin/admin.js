@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc'
 import { getCookie } from 'z/utils'
 import './admin.scss'
 
-let BASE_MENU = [
+const BASE_MENU = [
     {
         label: 'Выбор Домика',
         value: 'house',
@@ -38,14 +38,21 @@ let BASE_MENU = [
 export default class Admin extends LightningElement {
     @api model
     @track settings
+    @track loading = false
 
     connectedCallback() {
+        this.initializeModel()
+    }
+
+    initializeModel() {
+        let menu = BASE_MENU.map((item) => ({ ...item }))
+
         if (this.model.eventId) {
-            BASE_MENU = BASE_MENU.filter((item) => {
+            menu = menu.filter((item) => {
                 return ['food', 'additional_services'].indexOf(item.value) == -1
             })
         } else if (this.model.package?.services?.find((item) => item == '1')) {
-            BASE_MENU = BASE_MENU.filter((item) => {
+            menu = menu.filter((item) => {
                 return ['food'].indexOf(item.value) == -1
             })
         }
@@ -89,7 +96,7 @@ export default class Admin extends LightningElement {
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
             calendars: this.model.calendars ? [...this.model.calendars] : null,
-            menu: BASE_MENU,
+            menu,
             babyBed: false,
             babyBedPrice: this.model.babyBedPrice,
             bathHouseBlackPrice: this.model.bathHouseBlackPrice,
@@ -126,6 +133,44 @@ export default class Admin extends LightningElement {
             detail: this.settings,
             kgInit: true
         })
+    }
+
+    async loadBookingModel(event) {
+        const params = event.detail
+        this.loading = true
+
+        try {
+            const response = await fetch('/wp-json/krasnagorka/v1/ls/booking-model/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(params)
+            })
+
+            if (!response.ok) {
+                throw new Error(`Unable to load booking model: ${response.status}`)
+            }
+
+            const serializedModel = await response.json()
+            this.model = JSON.parse(serializedModel.replace(/\r\n/g, '\\n'))
+
+            const searchParams = new URLSearchParams()
+            Object.entries(params).forEach(([key, value]) => {
+                if (value !== null && value !== undefined && value !== '') {
+                    searchParams.set(key, String(value))
+                }
+            })
+
+            const query = searchParams.toString()
+            const url = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`
+            window.history.replaceState(window.history.state, '', url)
+
+            this.initializeModel()
+            return this.model
+        } finally {
+            this.loading = false
+        }
     }
 
     updateSettings(event) {

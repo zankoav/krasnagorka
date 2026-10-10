@@ -2,6 +2,7 @@
 
 use Ls\Wp\Log as Log;
 use LsModel\BaseModel as BaseModel;
+use LsModel\ModelFactory as ModelFactory;
 use LsCalculate\PackageAdminCalculate as PackageAdminCalculate;
 use LsCalculate\PackageCalculate as PackageCalculate;
 
@@ -66,6 +67,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'permission_callback' => array($this, 'freeDate_permissions_check')
             ),
         ]);
+
+        register_rest_route($namespace, '/ls/booking-model/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'booking_model'),
+                'permission_callback' => array($this, 'booking_model_permissions_check')
+            ),
+        ]);
     }
 
     public function freeDate_permissions_check($request)
@@ -91,6 +100,31 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     public function current_season_permissions_check($request)
     {
         return true;
+    }
+
+    public function booking_model_permissions_check($request)
+    {
+        return true;
+    }
+
+    /**
+     * Returns the booking model selected by ModelFactory.
+     *
+     * Booking models use $_GET internally. The request parameters are exposed
+     * there only for the duration of this call to preserve existing behaviour.
+     */
+    public function booking_model($request)
+    {
+        $originalGet = $_GET;
+        $_GET = array_merge($_GET, $request->get_params());
+
+        try {
+            $model = ModelFactory::getBookingModel();
+        } finally {
+            $_GET = $originalGet;
+        }
+
+        return new WP_REST_Response($model, 200);
     }
 
     public function check_order($request)

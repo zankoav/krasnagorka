@@ -97,34 +97,46 @@
                     </div>
                     <div class="step-house__row step-house__row_opportunities">
                         <div lwc:if={soonEvents.length} class="step-house__col" style="display: none">
-                            <div class="step-house__delimeter step-house__delimeter_small">Скорые Мероприятия</div>
-                            <template for:each={soonEvents} for:item="soonEvent">
-                                <a key={soonEvent.id} href={soonEvent.link} target="_blank" class="step-house__opportunities-item">
-                                    <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
-                                    <div class="step-house__opportunities-item-content">
-                                        <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
-                                        <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
-                                    </div>
-                                </a>
-                            </template>
+                            <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
+                            <div class="step-house__opportunities-events">
+                                <template for:each={soonEvents} for:item="soonEvent">
+                                    <a key={soonEvent.id} href={soonEvent.link} target="_blank" class="step-house__opportunities-item">
+                                        <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
+                                        <div class="step-house__opportunities-item-content">
+                                            <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
+                                            <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
+                                        </div>
+                                    </a>
+                                </template>
+                            </div>
                         </div>
                         <div lwc:if={fireEvents.length} class="step-house__col" style="display: none">
-                            <div class="step-house__delimeter step-house__delimeter_small">Горящие Предложения</div>
-                            <template for:each={fireEvents} for:item="fireEvent">
-                                <a key={fireEvent.id} href={fireEvent.link} target="_blank" class="step-house__opportunities-item">
-                                    <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
-                                    <div class="step-house__opportunities-item-content">
-                                        <div class="step-house__opportunities-item-content-header">
-                                            <span class="step-house__opportunities-item-title">{fireEvent.title}</span>
-                                            <span class="step-house__opportunities-item-dates">{fireEvent.dates}</span>
-                                        </div>
-                                        <div class="step-house__opportunities-item-content-text">
-                                            <span class="step-house__opportunities-item-description" lwc:inner-html={fireEvent.description}></span>
-                                            <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                            <div class="step-house__delimeter step-house__delimeter_small">Горящие предложения на выбранный объект</div>
+                            <div class="step-house__opportunities-fire">
+                                <template for:each={fireEvents} for:item="fireEvent">
+                                    <div
+                                        key={fireEvent.id}
+                                        class="step-house__opportunities-item"
+                                        data-id={fireEvent.id}
+                                        role="button"
+                                        tabindex="0"
+                                        onclick={loadFireEvent}>
+                                        <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
+                                        <div class="step-house__opportunities-item-content">
+                                            <div class="step-house__opportunities-item-content-header">
+                                                <span class="step-house__opportunities-item-title">{fireEvent.title}</span>
+                                                <span class="step-house__opportunities-item-dates">{fireEvent.dates}</span>
+                                            </div>
+                                            <div class="step-house__opportunities-item-content-text">
+                                                <span
+                                                    class="step-house__opportunities-item-description"
+                                                    lwc:inner-html={fireEvent.description}></span>
+                                                <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                                            </div>
                                         </div>
                                     </div>
-                                </a>
-                            </template>
+                                </template>
+                            </div>
                         </div>
                     </div>
                     <div class="step-house__info-block" if:true={showPriceInfo}>
@@ -135,7 +147,7 @@
                             aria-expanded={priceInfoExpanded}
                             onclick={togglePriceInfo}
                             onkeydown={handlePriceInfoKeydown}>
-                            информация о ценах
+                            информация о ценах в зависимости от сезона
                         </div>
                         <div class={priceInfoContentClass} aria-hidden={priceInfoHidden}>
                             <div class="step-house__info-content-inner">

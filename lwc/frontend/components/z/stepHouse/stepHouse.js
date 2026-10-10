@@ -49,10 +49,16 @@ export default class StepHouse extends LightningElement {
                     const to = new moment(item.to, 'MM/DD/YYYY').format('YYYY-MM-DD')
                     const fromDisplay = new moment(item.from, 'MM/DD/YYYY').format('DD.MM.YYYY')
                     const toDisplay = new moment(item.to, 'MM/DD/YYYY').format('DD.MM.YYYY')
-                    const terem = calendar.isTerem ? `&terem=${calendar.name}` : ''
                     return {
-                        id: item.from,
-                        link: `https://krasnagorka.by/booking-form/?eventTabId=${item.tab_id}&booking=${item.house}&calendarId=${item.calendar}&from=${from}&to=${to}${terem}`,
+                        id: `${item.tab_id}-${item.calendar}-${from}-${to}`,
+                        params: {
+                            eventTabId: item.tab_id,
+                            booking: item.house,
+                            calendarId: item.calendar,
+                            from,
+                            to,
+                            ...(calendar.isTerem ? { terem: calendar.name } : {})
+                        },
                         title: calendar.name,
                         description: item.tg_description?.replace(/[\t\n\r]+/g, ' '),
                         dates: `${fromDisplay} - ${toDisplay}`,
@@ -148,6 +154,22 @@ export default class StepHouse extends LightningElement {
 
     togglePriceInfo() {
         this.priceInfoExpanded = !this.priceInfoExpanded
+    }
+
+    loadFireEvent(event) {
+        const fireEvent = this.fireEvents.find((item) => item.id === event.currentTarget.dataset.id)
+
+        if (!fireEvent) {
+            return
+        }
+
+        this.dispatchEvent(
+            new CustomEvent('loadbookingmodel', {
+                detail: fireEvent.params,
+                bubbles: true,
+                composed: true
+            })
+        )
     }
 
     handlePriceInfoKeydown(event) {
