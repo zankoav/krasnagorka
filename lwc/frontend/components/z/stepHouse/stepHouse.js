@@ -212,11 +212,19 @@ export default class StepHouse extends LightningElement {
         const soonEvent = this.soonEvents.find(
             (item) => String(item.id) === event.currentTarget.dataset.id
         )
-        if (!soonEvent) {
+        const selectedCalendar = this.settings.calendars.find((item) => item.selected)
+
+        if (!soonEvent || !selectedCalendar) {
             return
         }
 
-        this.loadBookingModel(soonEvent.params)
+        this.loadBookingModel({
+            ...soonEvent.params,
+            calendarId: selectedCalendar.id,
+            from: moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+            to: moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+            ...(selectedCalendar.isTerem ? { terem: selectedCalendar.name } : {})
+        })
     }
 
     loadBookingModel(params) {
