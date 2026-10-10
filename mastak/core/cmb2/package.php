@@ -114,6 +114,13 @@ function cmb_package()
         'escape_cb'       => 'absint',
     ));
 
+    $cmb_package->add_field(array(
+        'name'        => 'Что включено в тур',
+        'id'          => 'package_description',
+        'description' => __('Краткое описание пакетного тура для карточки бронирования', 'krasnagorka'),
+        'type'        => 'textarea',
+    ));
+
     $group_field_event = $cmb_package->add_field(array(
         'id'          => 'package_services',
         'type'        => 'group',

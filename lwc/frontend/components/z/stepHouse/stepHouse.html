@@ -109,7 +109,9 @@
                                         onclick={loadSoonEvent}>
                                         <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
                                         <div class="step-house__opportunities-item-content">
-                                            <h4 class="step-house__opportunities-item-title">{soonEvent.title}</h4>
+                                            <h4 class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8">
+                                                {soonEvent.title}
+                                            </h4>
                                             <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
                                         </div>
                                     </div>
