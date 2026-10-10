@@ -96,7 +96,12 @@ export default class Admin extends LightningElement {
             passport: null,
             agreement: false,
             linkAgreement: this.model.mainContent.contractOffer,
-            calendars: this.model.calendars ? [...this.model.calendars] : null,
+            calendars: this.model.calendars
+                ? this.model.calendars.map((calendar) => ({
+                      ...calendar,
+                      selected: String(calendar.id) === String(this.model.id)
+                  }))
+                : null,
             menu,
             babyBed: false,
             babyBedPrice: this.model.babyBedPrice,
