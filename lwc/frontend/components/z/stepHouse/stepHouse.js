@@ -202,12 +202,18 @@ export default class StepHouse extends LightningElement {
         const fireEvent = this.fireEvents.find(
             (item) => String(item.id) === event.currentTarget.dataset.id
         )
+        const selectedPeople = this.settings.counts?.find((item) => item.selected)?.name
+        const selectedChild = this.settings.childCounts?.find((item) => item.selected)?.name
 
         if (!fireEvent) {
             return
         }
 
-        this.loadBookingModel(fireEvent.params)
+        this.loadBookingModel({
+            ...fireEvent.params,
+            ...(selectedPeople ? { people: selectedPeople } : {}),
+            ...(selectedChild !== undefined ? { child: selectedChild } : {})
+        })
     }
 
     loadSoonEvent(event) {
