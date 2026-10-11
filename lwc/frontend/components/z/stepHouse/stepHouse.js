@@ -10,7 +10,7 @@ export default class StepHouse extends LightningElement {
     @track priceInfoExpanded = false
     @track soonEventsLoading = false
     @track soonEventsWithPrice = []
-    @track soonEventsPeopleUnavailable = false
+    @track soonEventsUnavailable = false
 
     happyEventsObj
     happyEventsObjRange
@@ -141,7 +141,7 @@ export default class StepHouse extends LightningElement {
         return Boolean(
             signature &&
                 (this.soonEventsLoading ||
-                    (this.soonEventsPeopleUnavailable && this.soonEventsWithPriceSignature === signature) ||
+                    (this.soonEventsUnavailable && this.soonEventsWithPriceSignature === signature) ||
                     (this.soonEventsWithPrice.length && this.soonEventsWithPriceSignature === signature))
         )
     }
@@ -259,7 +259,7 @@ export default class StepHouse extends LightningElement {
             this.soonEventsLoading = false
             this.soonEventsWithPrice = []
             this.soonEventsWithPriceSignature = null
-            this.soonEventsPeopleUnavailable = false
+            this.soonEventsUnavailable = false
             return
         }
 
@@ -277,7 +277,7 @@ export default class StepHouse extends LightningElement {
         this.soonEventsLoading = true
         this.soonEventsWithPrice = []
         this.soonEventsWithPriceSignature = null
-        this.soonEventsPeopleUnavailable = false
+        this.soonEventsUnavailable = false
 
         try {
             const calculatedEvents = await Promise.all(
@@ -309,13 +309,13 @@ export default class StepHouse extends LightningElement {
                     const totalPrice = Number(data.result?.total_price)
 
                     if (data.scenario !== 'Package' || !Number.isFinite(totalPrice)) {
-                        return { unavailableForPeople: false }
+                        return { unavailable: false }
                     }
 
                     if (data.result?.error) {
                         return {
-                            unavailableForPeople: data.result.error.includes(
-                                'Минимальное количество человек'
+                            unavailable: ['Минимальное количество человек', 'Минимальное количество ночей'].some(
+                                (message) => data.result.error.includes(message)
                             )
                         }
                     }
@@ -327,7 +327,7 @@ export default class StepHouse extends LightningElement {
                             ...event,
                             price: { rub, penny }
                         },
-                        unavailableForPeople: false
+                        unavailable: false
                     }
                 })
             )
@@ -337,15 +337,15 @@ export default class StepHouse extends LightningElement {
                     .filter((item) => item.event)
                     .map((item) => item.event)
                 this.soonEventsWithPriceSignature = signature
-                this.soonEventsPeopleUnavailable =
+                this.soonEventsUnavailable =
                     calculatedEvents.length > 0 &&
-                    calculatedEvents.every((item) => item.unavailableForPeople)
+                    calculatedEvents.every((item) => item.unavailable)
             }
         } catch (error) {
             if (requestId === this.soonEventsRequestId) {
                 this.soonEventsWithPrice = []
                 this.soonEventsWithPriceSignature = null
-                this.soonEventsPeopleUnavailable = false
+                this.soonEventsUnavailable = false
                 console.error('Unable to calculate package prices', error)
             }
         } finally {
