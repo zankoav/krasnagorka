@@ -86,8 +86,8 @@ export default class StepHouse extends LightningElement {
             : null
         const selectedCalendarId = this.settings.calendars?.find((item) => item.selected)?.id
 
-        const fromDisplay = new moment(this.settings.dateStart).format('DD.MM.YYYY')
-        const toDisplay = new moment(this.settings.dateEnd).format('DD.MM.YYYY')
+        const fromDisplay = new moment(selectedDateStart).format('DD.MM.YYYY')
+        const toDisplay = new moment(selectedDateEnd).format('DD.MM.YYYY')
 
         return (this.settings.package_tour || [])
             .filter((item) => {
