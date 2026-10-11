@@ -98,7 +98,8 @@
                     <div class="step-house__row step-house__row_opportunities">
                         <div lwc:if={showSoonEvents} class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
-                            <div class="step-house__opportunities-events">
+                            <z-loader if:true={soonEventsLoading}></z-loader>
+                            <div if:false={soonEventsLoading} class="step-house__opportunities-events">
                                 <template for:each={soonEvents} for:item="soonEvent">
                                     <div
                                         key={soonEvent.id}
@@ -112,7 +113,11 @@
                                             <h4 class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8">
                                                 {soonEvent.title}
                                             </h4>
-                                            <p class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.description}></p>
+                                            <p class="step-house__opportunities-item-description step-house__opportunities-item-description_mb_8" lwc:inner-html={soonEvent.description}></p>
+                                            <div class="step-house__opportunities-item-footer">
+                                                <span class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.dates}></span>
+                                                <z-price-view class="step-house__opportunities-item-price" price={soonEvent.price}></z-price-view>
+                                            </div>
                                         </div>
                                     </div>
                                 </template>

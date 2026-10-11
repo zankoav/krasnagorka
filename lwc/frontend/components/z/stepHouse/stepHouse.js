@@ -8,9 +8,14 @@ export default class StepHouse extends LightningElement {
     @track bookingImg = IMG_BOOKING
     @track error
     @track priceInfoExpanded = false
+    @track soonEventsLoading = false
+    @track soonEventsWithPrice = []
 
     happyEventsObj
     happyEventsObjRange
+    soonEventsRequestId = 0
+    soonEventsSignature
+    soonEventsWithPriceSignature
 
     get showPriceInfo() {
         return !this.settings.eventId && !this.settings.package
@@ -72,7 +77,7 @@ export default class StepHouse extends LightningElement {
         )
     }
 
-    get soonEvents() {
+    get availableSoonEvents() {
         const selectedDateStart = this.settings.dateStart
             ? moment(this.settings.dateStart, 'DD-MM-YYYY')
             : null
@@ -80,6 +85,9 @@ export default class StepHouse extends LightningElement {
             ? moment(this.settings.dateEnd, 'DD-MM-YYYY')
             : null
         const selectedCalendarId = this.settings.calendars?.find((item) => item.selected)?.id
+
+        const fromDisplay = new moment(this.settings.dateStart).format('DD.MM.YYYY')
+        const toDisplay = new moment(this.settings.dateEnd).format('DD.MM.YYYY')
 
         return (this.settings.package_tour || [])
             .filter((item) => {
@@ -93,7 +101,9 @@ export default class StepHouse extends LightningElement {
                 return (
                     selectedDateStart.isSameOrAfter(eventDateStart, 'day') &&
                     selectedDateEnd.isSameOrBefore(eventDateEnd, 'day') &&
-                    item.calendarIds?.some((calendarId) => String(calendarId) === String(selectedCalendarId))
+                    item.calendarIds?.some(
+                        (calendarId) => String(calendarId) === String(selectedCalendarId)
+                    )
                 )
             })
             .map((item) => {
@@ -101,21 +111,41 @@ export default class StepHouse extends LightningElement {
 
                 return {
                     ...item,
+                    dates: `${fromDisplay} - ${toDisplay}`,
                     params: Object.fromEntries(url.searchParams.entries())
                 }
             })
     }
 
-    get showSoonEvents() {
+    get selectedPeople() {
+        return this.settings.counts?.find((item) => item.selected)?.name
+    }
+
+    get canCalculateSoonEvents() {
         const selectedCalendar = this.settings.calendars?.find((item) => item.selected)
 
         return Boolean(
-            this.soonEvents.length &&
-                this.settings.house &&
+            this.availableSoonEvents.length &&
+                this.settings.house?.id &&
                 selectedCalendar &&
                 this.settings.dateStart &&
-                this.settings.dateEnd
+                this.settings.dateEnd &&
+                this.selectedPeople
         )
+    }
+
+    get showSoonEvents() {
+        const signature = this.getSoonEventsSignature()
+
+        return Boolean(
+            signature &&
+                (this.soonEventsLoading ||
+                    (this.soonEventsWithPrice.length && this.soonEventsWithPriceSignature === signature))
+        )
+    }
+
+    get soonEvents() {
+        return this.soonEventsWithPrice
     }
 
     get showChilds() {
@@ -191,6 +221,116 @@ export default class StepHouse extends LightningElement {
         const title = this.template.querySelector('.step-house__subtitle')
         if (title && this.settings.package) {
             title.innerHTML = this.settings.package.title
+        }
+
+        this.refreshSoonEventsPrices()
+    }
+
+    getSoonEventsSignature() {
+        if (!this.canCalculateSoonEvents) {
+            return null
+        }
+
+        const calendar = this.settings.calendars.find((item) => item.selected)
+
+        return JSON.stringify({
+            eventIds: this.availableSoonEvents.map((item) => item.id),
+            calendarId: calendar.id,
+            dateStart: this.settings.dateStart,
+            dateEnd: this.settings.dateEnd,
+            peopleCount: this.selectedPeople,
+            houseId: this.settings.house.id
+        })
+    }
+
+    refreshSoonEventsPrices() {
+        const signature = this.getSoonEventsSignature()
+
+        if (signature === this.soonEventsSignature) {
+            return
+        }
+
+        this.soonEventsSignature = signature
+
+        if (!signature) {
+            this.soonEventsRequestId += 1
+            this.soonEventsLoading = false
+            this.soonEventsWithPrice = []
+            this.soonEventsWithPriceSignature = null
+            return
+        }
+
+        this.calculateSoonEventsPrices(signature, this.availableSoonEvents)
+    }
+
+    async calculateSoonEventsPrices(signature, events) {
+        const requestId = ++this.soonEventsRequestId
+        const calendar = this.settings.calendars.find((item) => item.selected)
+        const dateStart = new moment(this.settings.dateStart, 'DD-MM-YYYY')
+            .add(1, 'days')
+            .format('YYYY-MM-DD')
+        const dateEnd = new moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD')
+
+        this.soonEventsLoading = true
+        this.soonEventsWithPrice = []
+        this.soonEventsWithPriceSignature = null
+
+        try {
+            const calculatedEvents = await Promise.all(
+                events.map(async (event) => {
+                    const response = await fetch('/wp-json/krasnagorka/v1/ls/calculate/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json; charset=utf-8'
+                        },
+                        body: JSON.stringify({
+                            scenario: 'Package',
+                            packageId: event.params['package-id'],
+                            calendarId: calendar.id,
+                            dateStart,
+                            dateEnd,
+                            house: this.settings.house.id,
+                            peopleCount: this.selectedPeople,
+                            babyBed: false,
+                            bathHouseWhite: false,
+                            bathHouseBlack: false
+                        })
+                    })
+
+                    if (!response.ok) {
+                        throw new Error(`Unable to calculate package price: ${response.status}`)
+                    }
+
+                    const data = await response.json()
+                    const totalPrice = Number(data.result?.total_price)
+
+                    if (data.scenario !== 'Package' || data.result?.error || !Number.isFinite(totalPrice)) {
+                        return null
+                    }
+
+                    const [rub, penny] = totalPrice.toFixed(2).split('.')
+
+                    return {
+                        ...event,
+                        price: { rub, penny }
+                    }
+                })
+            )
+
+            if (requestId === this.soonEventsRequestId && signature === this.soonEventsSignature) {
+                this.soonEventsWithPrice = calculatedEvents.filter(Boolean)
+                this.soonEventsWithPriceSignature = signature
+            }
+        } catch (error) {
+            if (requestId === this.soonEventsRequestId) {
+                this.soonEventsWithPrice = []
+                this.soonEventsWithPriceSignature = null
+                console.error('Unable to calculate package prices', error)
+            }
+        } finally {
+            if (requestId === this.soonEventsRequestId) {
+                this.soonEventsLoading = false
+            }
         }
     }
 
