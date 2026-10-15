@@ -382,10 +382,15 @@
 
     &__opportunities-item-img {
         border-radius: 8px;
-        max-width: 80px;
+        max-width: 56px;
         height: 45px;
         object-fit: cover;
-        flex: 1 0 80px;
+        flex: 1 0 56px;
+
+        @include media.sm {
+            max-width: 80px;
+            flex: 1 0 80px;
+        }
     }
 
     &__opportunities-item-title {
@@ -423,7 +428,7 @@
     &__opportunities-item-footer {
         display: flex;
         justify-content: space-between;
-        gap: 12px;
+        gap: 8px;
         align-items: end;
     }
 
