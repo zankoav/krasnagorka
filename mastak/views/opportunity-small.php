@@ -8,7 +8,7 @@
     $currency_name = $kgCooke->getCurrnecy()["currency_selected"];
 
     $targetOpen = get_post_meta(get_the_ID(), "new_page", true) ? '_blank' : '_self';
-    $size       = wp_is_mobile() ? 'opportunity_small_iphone_5' : 'Map_laptop'; //opportunity_small_laptop
+    $size       = wp_is_mobile() ? 'opportunity_small_iphone_6_plus' : 'Map_laptop'; //opportunity_small_iphone_5 | opportunity_small_laptop
     $icon_id    = get_post_thumbnail_id();
 ?>
 
