@@ -99,7 +99,7 @@
                         <div lwc:if={showSoonEvents} class="step-house__col">
                             <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
                             <z-loader if:true={soonEventsLoading}></z-loader>
-                            <p if:true={soonEventsUnavailable} class="step-house__opportunities-item-description">
+                            <p if:true={soonEventsUnavailable} class="step-house__opportunities-item-description step-house__opportunities-item-description_center">
                                 К сожалению, нет доступных предложений по выбранным условиям.
                             </p>
                             <div if:false={soonEventsLoading} class="step-house__opportunities-events">
