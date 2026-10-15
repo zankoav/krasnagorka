@@ -100,7 +100,7 @@
                             <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
                             <z-loader if:true={soonEventsLoading}></z-loader>
                             <p if:true={soonEventsUnavailable} class="step-house__opportunities-item-description">
-                                К сожалению, мероприятия на данный объект бронирования недоступны по выбранному количеству человек или дней.
+                                К сожалению, нет доступных предложений по выбранным условиям.
                             </p>
                             <div if:false={soonEventsLoading} class="step-house__opportunities-events">
                                 <template for:each={soonEvents} for:item="soonEvent">
