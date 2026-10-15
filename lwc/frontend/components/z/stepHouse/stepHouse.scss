@@ -370,6 +370,10 @@
         flex: 1 0 calc(100%);
         max-width: calc(100%);
 
+        &:last-child {
+            margin-bottom: 0rem;
+        }
+
         &:hover {
             border-color: #80d3dd;
         }
