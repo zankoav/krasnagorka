@@ -76,6 +76,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
+        register_rest_route($namespace, '/ls/big-events/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'big_events'),
+                'permission_callback' => array($this, 'big_events_permissions_check')
+            ),
+        ]);
+
         register_rest_route($namespace, '/ls/booking-model/', [
             array(
                 'methods'             => 'POST',
@@ -91,6 +99,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function available_calendars_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function big_events_permissions_check($request)
     {
         return true;
     }
@@ -240,6 +253,127 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $tabId = absint($request['tabId']);
         $tab = new Type_10($tabId);
         return new WP_REST_Response($tab->getData(), 200);
+    }
+
+    /**
+     * Возвращает табы «Мероприятие» из опубликованных, ещё не завершившихся акций.
+     */
+    public function big_events($request)
+    {
+        $peopleCount = max(1, absint($request->get_param('people')));
+        $childCount = max(0, absint($request->get_param('child')));
+        $today = strtotime(current_time('Y-m-d'));
+        $events = (new WP_Query([
+            'post_type'      => 'event',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'meta_query'     => [[
+                'key'     => 'mastak_event_date_finish',
+                'value'   => $today,
+                'compare' => '>=',
+                'type'    => 'NUMERIC',
+            ]],
+            'meta_key'       => 'mastak_event_order',
+            'orderby'        => 'meta_value_num',
+            'order'          => 'ASC',
+        ]))->posts;
+
+        $bigEvents = [];
+        foreach ($events as $event) {
+            $tabs = get_post_meta($event->ID, 'mastak_event_tabs_event_list', true);
+
+            foreach ((array) $tabs as $tab) {
+                $tabId = absint($tab['tab'] ?? 0);
+                if (
+                    !$tabId
+                    || get_post_type($tabId) !== 'event_tab'
+                    || get_post_status($tabId) !== 'publish'
+                    || get_post_meta($tabId, 'tab_type', true) !== 'type_10'
+                ) {
+                    continue;
+                }
+
+                $eventTab = new Type_10($tabId);
+                $bigEvent = $eventTab->getData();
+                $variant = $this->big_event_default_variant($bigEvent);
+                $prices = [];
+
+                if ($variant) {
+                    $availableCalendars = [];
+                    foreach ($bigEvent['calendars'] as $calendar) {
+                        if (
+                            $peopleCount + $childCount < (int) $calendar['min_people']
+                            || $peopleCount + $childCount > (int) $calendar['max_people']
+                            || ($childCount > 0 && !$calendar['enabled_child'])
+                        ) {
+                            continue;
+                        }
+
+                        $selectedCalendar = $eventTab->getSelectedCalendar(
+                            $calendar['calendar'],
+                            $variant->id
+                        );
+                        $calendar['price'] = $this->big_event_price(
+                            $selectedCalendar,
+                            $peopleCount,
+                            $childCount
+                        );
+                        $calendar['variantId'] = $variant->id;
+                        $prices[] = $calendar['price'];
+                        $availableCalendars[] = $calendar;
+                    }
+                    $bigEvent['calendars'] = $availableCalendars;
+                }
+
+                if (empty($bigEvent['calendars'])) {
+                    continue;
+                }
+
+                $bigEvents[] = array_merge($bigEvent, [
+                    'name'            => $tab['tab_name'] ?? get_the_title($tabId),
+                    'eventId'         => (int) $event->ID,
+                    'eventTitle'      => $event->post_title,
+                    'eventImage'      => get_the_post_thumbnail_url($event->ID, 'header_tablet_l'),
+                    'eventDateStart'  => (int) get_post_meta($event->ID, 'mastak_event_date_start', true),
+                    'eventDateFinish' => (int) get_post_meta($event->ID, 'mastak_event_date_finish', true),
+                    'price'           => $prices ? min($prices) : null,
+                ]);
+            }
+        }
+
+        return new WP_REST_Response(['big_events' => $bigEvents], 200);
+    }
+
+    private function big_event_default_variant($event)
+    {
+        foreach ($event['variants'] as $variant) {
+            if ((int) $variant->id === (int) $event['variant_default']) {
+                return $variant;
+            }
+        }
+
+        return $event['variants'][0] ?? null;
+    }
+
+    private function big_event_price($selectedCalendar, $peopleCount, $childCount)
+    {
+        $calendar = $selectedCalendar['calendar'];
+        $variant = $selectedCalendar['variant'];
+        $nights = count($selectedCalendar['interval']['days']) - 1;
+        $adultPrice = empty($calendar['new_price'])
+            ? $calendar['old_price']
+            : $calendar['new_price'];
+        $totalPrice = ($adultPrice + $variant->pricePerDay) * $nights * $peopleCount
+            + $variant->priceSingle;
+
+        if ($calendar['enabled_child']) {
+            $childPrice = empty($calendar['new_price_child'])
+                ? $calendar['old_price_child']
+                : $calendar['new_price_child'];
+            $totalPrice += ($childPrice + $variant->pricePerDay) * $nights * $childCount;
+        }
+
+        return (float) $totalPrice;
     }
 
     public function order_house($request)
