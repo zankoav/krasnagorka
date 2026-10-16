@@ -797,7 +797,29 @@ class AmoCrmFactory {
             }
            
         } catch (AmoCRMApiException $e) {
-            throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}", 301);
+            $context = [
+                'amoMessage' => $e->getMessage(),
+                'amoCode' => $e->getCode(),
+                'order' => [
+                    'id' => $order->id ?? null,
+                    'calendarId' => $order->calendarId,
+                    'dateStart' => $order->dateStart,
+                    'dateEnd' => $order->dateEnd,
+                    'scenario' => $order->scenario,
+                    'price' => $order->price,
+                    'paymentMethod' => $order->paymentMethod
+                ]
+            ];
+
+            if (method_exists($e, 'getErrorCode')) {
+                $context['amoErrorCode'] = $e->getErrorCode();
+            }
+
+            if (method_exists($e, 'getValidationErrors')) {
+                $context['validationErrors'] = $e->getValidationErrors();
+            }
+
+            throw new AmoCrmException("AmoCRMApiException {$e->getMessage()}", 301, $context);
         } catch (Exception $e) {
             throw new AmoCrmException("Exception {$e->getMessage()}", 302);
         }
