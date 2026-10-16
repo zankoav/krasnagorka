@@ -628,6 +628,12 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $packageCalendarIds = null;
 
         if ($packageId) {
+            $packageName = preg_replace(
+                '/^Тур\s+/ui',
+                '',
+                wp_specialchars_decode(get_the_title($packageId), ENT_QUOTES)
+            );
+            $packageUnavailableMessage = "На эти даты тур {$packageName} не доступен";
             $packageCalendars = get_post_meta($packageId, 'package_calendars', 1);
             $packageCalendarIds = array_filter(array_map(
                 static function ($calendar) {
@@ -649,7 +655,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 ($packageStart && $packageStart->format('m/d/Y') === $packageStartRaw && $dateStart < $packageStart) ||
                 ($packageEnd && $packageEnd->format('m/d/Y') === $packageEndRaw && $dateEnd > $packageEnd)
             ) {
-                return $this->available_calendars_error('На эти даты пакетный тур не доступен.');
+                return $this->available_calendars_error($packageUnavailableMessage);
             }
 
             $minimumNights = (int) get_post_meta($packageId, 'package_night_min', 1);
@@ -667,7 +673,7 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
             foreach ($deprecatedDays as $deprecatedDay) {
                 if ($dateStartRaw <= $deprecatedDay && $dateEndRaw >= $deprecatedDay) {
-                    return $this->available_calendars_error('На эти даты пакетный тур не доступен.');
+                    return $this->available_calendars_error($packageUnavailableMessage);
                 }
             }
         }
