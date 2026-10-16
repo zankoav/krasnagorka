@@ -452,18 +452,23 @@ class PackageModel extends ModelImpl
             $maxChild = get_term_meta($term->term_id, 'kg_calendars_max_child', 1);
             $peopleMaxCount = (int) get_term_meta($term->term_id, 'kg_calendars_persons_count', 1);
 
+            $house = getHouseByCalendarId($term->term_id);
+
             if ($isTeremRoom != 'on') {
-                $house = getHouseByCalendarId($term->term_id);
                 $peopleMaxCount = (int) get_post_meta($house['id'] ?? 0, 'max_people', 1);
             }
 
             $peopleMaxCount = $peopleMaxCount ?: 99;
+            $picture = !empty($house['id'])
+                ? get_the_post_thumbnail_url($house['id'], 'welcome_tab_laptop')
+                : null;
 
             $selected = $calendarId == $term->term_id;
             $result[] = [
                 'id' => $term->term_id,
                 'name' => $term->name,
                 'slug' => $term->slug,
+                'picture' => $picture,
                 'isTerem' => $isTeremRoom,
                 'isDeprecatedBabyBed' => $isDeprecateBabyBed == 'on',
                 'isDeprecateAnimals' => $isDeprecateAnimals == 'on',
