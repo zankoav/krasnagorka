@@ -143,6 +143,7 @@
                                     </span>
                                 </template>
                             </div>
+                            <h3 if:true={settings.package} class="step-house__event-title">{settings.package.title}</h3>
                             <div if:true={settings.eventId} class="step-house__event">
                                 <h3 class="step-house__event-title">{settings.eventModel.title}</h3>
                                 <tab-line class="step-house__event-variant" title="Пакет" tooltip={eventOpportunities}>
