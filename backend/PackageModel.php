@@ -450,6 +450,7 @@ class PackageModel extends ModelImpl
             $isDeprecateBabyBed = get_term_meta($term->term_id, 'kg_calendars_deprecate_baby_bed', 1);
             $isDeprecateAnimals = get_term_meta($term->term_id, 'kg_calendars_deprecate_animals', 1);
             $maxChild = get_term_meta($term->term_id, 'kg_calendars_max_child', 1);
+            $peopleMaxCount = (int) get_term_meta($term->term_id, 'kg_calendars_persons_count', 1);
 
             $selected = $calendarId == $term->term_id;
             $result[] = [
@@ -460,6 +461,7 @@ class PackageModel extends ModelImpl
                 'isDeprecatedBabyBed' => $isDeprecateBabyBed == 'on',
                 'isDeprecateAnimals' => $isDeprecateAnimals == 'on',
                 'maxChild' => intval($maxChild),
+                'peopleMaxCount' => $peopleMaxCount ?: 99,
                 'isTerem' => $isTeremRoom,
                 'selected' => $selected
             ];
