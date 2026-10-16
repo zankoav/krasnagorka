@@ -147,13 +147,16 @@ export default class Admin extends LightningElement {
         this.loading = true
 
         try {
-            const response = await fetch('/wp-json/krasnagorka/v1/ls/booking-model/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json; charset=utf-8'
-                },
-                body: JSON.stringify(params)
-            })
+            const response = await fetch(
+                'https://krasnagorka.by/wp-json/krasnagorka/v1/ls/booking-model/',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
+                    body: JSON.stringify(params)
+                }
+            )
 
             if (!response.ok) {
                 throw new Error(`Unable to load booking model: ${response.status}`)

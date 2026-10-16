@@ -1,0 +1,18 @@
+<template lwc:render-mode="light">
+    <div class="event-item">
+        <div class="event-item__image-wrapper">
+            <img class="event-item__image" src={img} alt="Мероприятие" />
+        </div>
+        <div class="event-item__content">
+            <h4 class="event-item__title">{group.eventTitle}</h4>
+            <div class="event-item__dates">{dateFrom} - {dateTo}</div>
+            <tab-line class="event-item__line" title="Пакет" tooltip={variantTooltip}>
+                <tab-select onchange={variantsHandler} options={variantsOptions}></tab-select>
+            </tab-line>
+        </div>
+        <div class="event-item__order">
+            <z-price-view price={priceView}></z-price-view>
+            <button type="button" class="event-item__order-button" onclick={selectBooking}>Выбрать</button>
+        </div>
+    </div>
+</template>

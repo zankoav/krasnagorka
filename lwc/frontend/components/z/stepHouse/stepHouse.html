@@ -167,70 +167,84 @@
                             <z-calendar settings={settings}></z-calendar>
                         </div>
                     </div>
-                    <div class="step-house__row step-house__row_opportunities">
-                        <div lwc:if={showSoonEvents} class="step-house__col">
-                            <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
-                            <z-loader if:true={soonEventsLoading}></z-loader>
-                            <p
-                                if:true={soonEventsUnavailable}
-                                class="step-house__opportunities-item-description step-house__opportunities-item-description_center">
-                                К сожалению, нет доступных акций по выбранным условиям. Попробуйте поменять кол-во человек или даты.
-                            </p>
-                            <div if:false={soonEventsLoading} class="step-house__opportunities-events">
-                                <template for:each={soonEvents} for:item="soonEvent">
-                                    <div
-                                        key={soonEvent.id}
-                                        class="step-house__opportunities-item"
-                                        data-id={soonEvent.id}
-                                        role="button"
-                                        tabindex="0"
-                                        onclick={loadSoonEvent}>
-                                        <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
-                                        <div class="step-house__opportunities-item-content">
-                                            <h4 class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8">
-                                                {soonEvent.title}
-                                            </h4>
-                                            <p
-                                                class="step-house__opportunities-item-description step-house__opportunities-item-description_mb_8"
-                                                lwc:inner-html={soonEvent.description}></p>
-                                            <div class="step-house__opportunities-item-footer">
-                                                <span class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.dates}></span>
-                                                <z-price-view class="step-house__opportunities-item-price" price={soonEvent.price}></z-price-view>
+                    <template if:true={showOffersSections}>
+                        <z-loader if:true={offersLoading}></z-loader>
+                        <template if:false={offersLoading}>
+                            <div if:true={showSoonOrFireEvents} class="step-house__row step-house__row_opportunities">
+                                <div lwc:if={showSoonEvents} class="step-house__col">
+                                    <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
+                                    <p
+                                        if:true={soonEventsUnavailable}
+                                        class="step-house__opportunities-item-description step-house__opportunities-item-description_center">
+                                        К сожалению, нет доступных акций по выбранным условиям. Попробуйте поменять кол-во человек или даты.
+                                    </p>
+                                    <div class="step-house__opportunities-events">
+                                        <template for:each={soonEvents} for:item="soonEvent">
+                                            <div
+                                                key={soonEvent.id}
+                                                class="step-house__opportunities-item"
+                                                data-id={soonEvent.id}
+                                                role="button"
+                                                tabindex="0"
+                                                onclick={loadSoonEvent}>
+                                                <img class="step-house__opportunities-item-img" src={soonEvent.image} alt={soonEvent.title} />
+                                                <div class="step-house__opportunities-item-content">
+                                                    <h4 class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8">
+                                                        {soonEvent.title}
+                                                    </h4>
+                                                    <p
+                                                        class="step-house__opportunities-item-description step-house__opportunities-item-description_mb_8"
+                                                        lwc:inner-html={soonEvent.description}></p>
+                                                    <div class="step-house__opportunities-item-footer">
+                                                        <span class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.dates}></span>
+                                                        <z-price-view class="step-house__opportunities-item-price" price={soonEvent.price}></z-price-view>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </template>
                                     </div>
-                                </template>
-                            </div>
-                        </div>
-                        <div lwc:if={fireEvents.length} class="step-house__col">
-                            <div class="step-house__delimeter step-house__delimeter_small">Горящие предложения на выбранный объект</div>
-                            <div class="step-house__opportunities-fire">
-                                <template for:each={fireEvents} for:item="fireEvent">
-                                    <div
-                                        key={fireEvent.id}
-                                        class="step-house__opportunities-item"
-                                        data-id={fireEvent.id}
-                                        role="button"
-                                        tabindex="0"
-                                        onclick={loadFireEvent}>
-                                        <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
-                                        <div class="step-house__opportunities-item-content">
-                                            <div class="step-house__opportunities-item-content-header">
-                                                <span class="step-house__opportunities-item-title">{fireEvent.title}</span>
-                                                <span
-                                                    class="step-house__opportunities-item-description"
-                                                    lwc:inner-html={fireEvent.description}></span>
+                                </div>
+                                <div lwc:if={fireEvents.length} class="step-house__col">
+                                    <div class="step-house__delimeter step-house__delimeter_small">Горящие предложения на выбранный объект</div>
+                                    <div class="step-house__opportunities-fire">
+                                        <template for:each={fireEvents} for:item="fireEvent">
+                                            <div
+                                                key={fireEvent.id}
+                                                class="step-house__opportunities-item"
+                                                data-id={fireEvent.id}
+                                                role="button"
+                                                tabindex="0"
+                                                onclick={loadFireEvent}>
+                                                <img class="step-house__opportunities-item-img" src={fireEvent.image} alt={fireEvent.title} />
+                                                <div class="step-house__opportunities-item-content">
+                                                    <div class="step-house__opportunities-item-content-header">
+                                                        <span class="step-house__opportunities-item-title">{fireEvent.title}</span>
+                                                        <span
+                                                            class="step-house__opportunities-item-description"
+                                                            lwc:inner-html={fireEvent.description}></span>
+                                                    </div>
+                                                    <div class="step-house__opportunities-item-content-text">
+                                                        <span class="step-house__opportunities-item-dates">{fireEvent.dates}</span>
+                                                        <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="step-house__opportunities-item-content-text">
-                                                <span class="step-house__opportunities-item-dates">{fireEvent.dates}</span>
-                                                <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
-                                            </div>
-                                        </div>
+                                        </template>
                                     </div>
-                                </template>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <div if:true={showBigEvents} class="step-house__row step-house__row_opportunities">
+                                <div class="step-house__col">
+                                    <div class="step-house__delimeter step-house__delimeter_small">Предстоящие мероприятия</div>
+                                    <div class="step-house__big-events">
+                                        <template for:each={bigEventGroups} for:item="group">
+                                            <z-event-item key={group.id} group={group}></z-event-item>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
                     <div class="step-house__info-block" if:true={showPriceInfo}>
                         <div
                             class="step-house__delimeter step-house__delimeter_toggle"

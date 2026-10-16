@@ -1,0 +1,137 @@
+@use "@styles/media";
+@use "@styles/constants" as *;
+
+.event-item {
+    background: $WHITE;
+    border: 2px #eee solid;
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 12px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+
+    @include media.sm {
+        flex-direction: row;
+        font-size: 16px;
+    }
+
+    .select__value {
+        font-size: 14px;
+    }
+
+    &__image-wrapper {
+        width: 100%;
+        height: 160px;
+        overflow: hidden;
+        border-radius: 0.5rem;
+
+        @include media.sm {
+            max-width: 160px;
+            flex: 0 0 160px;
+            height: 90px;
+        }
+    }
+
+    &__image {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+    }
+
+    &__content {
+        color: $GRAY_1;
+
+        @include media.sm {
+            flex-grow: 1;
+        }
+    }
+
+    &__order {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 16px 0 4px 0;
+        gap: 12px;
+        border-top: 1px dashed #eeeeee;
+
+        @include media.sm {
+            border-top: 0;
+            border-left: 1px dashed #eeeeee;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+    }
+
+    &__title {
+        font-size: 16px;
+        color: #212e35;
+        margin-bottom: 8px;
+
+        @include media.lg {
+            margin-top: 4px;
+        }
+    }
+
+    &__dates {
+        font-size: 14px;
+        color: gray;
+    }
+
+    &__order-button {
+        display: inline-block;
+        background: transparent;
+        border: 1px solid $PRIMARY_1;
+        border-radius: 6px;
+        text-align: center;
+        color: $PRIMARY_1;
+        padding: 8px 12px;
+        font-weight: 700;
+        font-size: 14px;
+        transition: all 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            background: transparent;
+        }
+
+        @include media.lg {
+            align-self: center;
+        }
+    }
+
+    &__line {
+        display: block;
+        margin: 0.5rem 0;
+        height: 32px;
+        font-size: 14px;
+
+        &_price {
+            @include media.lg {
+                display: none;
+            }
+        }
+
+        &_desktop {
+            display: none;
+
+            @include media.lg {
+                display: block;
+                margin: 0.25rem 0;
+            }
+        }
+
+        .line {
+            justify-content: flex-start;
+            gap: 12px;
+        }
+    }
+
+    &__line-value {
+        font-weight: 600;
+    }
+}

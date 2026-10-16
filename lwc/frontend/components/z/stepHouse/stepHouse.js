@@ -14,6 +14,8 @@ export default class StepHouse extends LightningElement {
     @track soonEventsUnavailable = false
     @track availableCalendars = []
     @track availableCalendarsError
+    @track bigEvents = []
+    @track bigEventsLoading = false
 
     happyEventsObj
     happyEventsObjRange
@@ -21,6 +23,8 @@ export default class StepHouse extends LightningElement {
     soonEventsSignature
     soonEventsWithPriceSignature
     availableCalendarsRequestId = 0
+    bigEventsRequestId = 0
+    bigEventsSignature
 
     get showPriceInfo() {
         return !this.settings.eventId && !this.settings.package
@@ -126,6 +130,10 @@ export default class StepHouse extends LightningElement {
         return this.settings.counts?.find((item) => item.selected)?.name
     }
 
+    get selectedCalendarId() {
+        return this.settings.calendars?.find((item) => item.selected)?.id
+    }
+
     get canCalculateSoonEvents() {
         const selectedCalendar = this.settings.calendars?.find((item) => item.selected)
 
@@ -137,6 +145,74 @@ export default class StepHouse extends LightningElement {
                 this.settings.dateEnd &&
                 this.selectedPeople
         )
+    }
+
+    get canLoadBigEvents() {
+        return Boolean(
+            this.settings.house?.id &&
+                this.selectedCalendarId &&
+                this.settings.dateStart &&
+                this.settings.dateEnd &&
+                this.selectedPeople
+        )
+    }
+
+    get bigEventGroups() {
+        const groups = []
+
+        this.bigEvents.forEach((bigEvent) => {
+            const eventGroups = {}
+            const calendars = bigEvent.calendars || []
+
+            calendars.forEach((calendar) => {
+                const groupId = calendar.group || 'other'
+                if (!eventGroups[groupId]) {
+                    eventGroups[groupId] = {
+                        id: `${bigEvent.id}-${groupId}`,
+                        items: [],
+                        variants: bigEvent.variants || [],
+                        variant_default: bigEvent.variant_default,
+                        days: bigEvent.interval,
+                        eventTabId: bigEvent.id,
+                        eventId: bigEvent.eventId,
+                        eventTitle: bigEvent.eventTitle,
+                        peopleCount: Number(this.selectedPeople),
+                        childCount: Number(this.settings.child) || 0
+                    }
+                }
+
+                eventGroups[groupId].items.push({
+                    ...calendar,
+                    image: bigEvent.eventImage || calendar.image,
+                    selected: !eventGroups[groupId].items.length
+                })
+            })
+
+            groups.push(...Object.values(eventGroups))
+        })
+
+        return groups
+    }
+
+    get showBigEvents() {
+        return this.canLoadBigEvents && (this.bigEventsLoading || this.bigEventGroups.length)
+    }
+
+    get offersLoading() {
+        return this.soonEventsLoading || this.bigEventsLoading
+    }
+
+    get showOffersSections() {
+        return Boolean(
+            this.offersLoading ||
+                this.showSoonEvents ||
+                this.fireEvents.length ||
+                this.showBigEvents
+        )
+    }
+
+    get showSoonOrFireEvents() {
+        return this.showSoonEvents || this.fireEvents.length
     }
 
     get showSoonEvents() {
@@ -374,6 +450,76 @@ export default class StepHouse extends LightningElement {
         }
     }
 
+    getBigEventsSignature() {
+        if (!this.canLoadBigEvents) {
+            return null
+        }
+
+        return JSON.stringify({
+            dateStart: this.settings.dateStart,
+            dateEnd: this.settings.dateEnd,
+            people: this.selectedPeople,
+            child: Number(this.settings.child) || 0,
+            houseId: this.settings.house.id,
+            calendarId: this.selectedCalendarId
+        })
+    }
+
+    refreshBigEvents() {
+        const signature = this.getBigEventsSignature()
+        if (signature === this.bigEventsSignature) {
+            return
+        }
+
+        this.bigEventsSignature = signature
+
+        if (!signature) {
+            this.bigEventsRequestId += 1
+            this.bigEventsLoading = false
+            this.bigEvents = []
+            return
+        }
+
+        this.loadBigEvents(signature)
+    }
+
+    async loadBigEvents(signature) {
+        const requestId = ++this.bigEventsRequestId
+        this.bigEventsLoading = true
+
+        try {
+            const response = await fetch('https://krasnagorka.by/wp-json/krasnagorka/v1/ls/big-events/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify({
+                    house: this.settings.house.id,
+                    calendarId: this.selectedCalendarId,
+                    people: Number(this.selectedPeople),
+                    child: Number(this.settings.child) || 0
+                })
+            })
+            if (!response.ok) {
+                throw new Error(`Unable to load big events: ${response.status}`)
+            }
+
+            const data = await response.json()
+            if (requestId === this.bigEventsRequestId && signature === this.bigEventsSignature) {
+                this.bigEvents = data.big_events || []
+            }
+        } catch (error) {
+            if (requestId === this.bigEventsRequestId && signature === this.bigEventsSignature) {
+                this.bigEvents = []
+                console.error('Unable to load big events', error)
+            }
+        } finally {
+            if (requestId === this.bigEventsRequestId) {
+                this.bigEventsLoading = false
+            }
+        }
+    }
+
     renderedCallback() {
         const title = this.template.querySelector('.step-house__subtitle')
         if (title && this.settings.package) {
@@ -384,6 +530,7 @@ export default class StepHouse extends LightningElement {
         }
 
         this.refreshSoonEventsPrices()
+        this.refreshBigEvents()
     }
 
     getSoonEventsSignature() {
@@ -440,7 +587,7 @@ export default class StepHouse extends LightningElement {
         try {
             const calculatedEvents = await Promise.all(
                 events.map(async (event) => {
-                    const response = await fetch('/wp-json/krasnagorka/v1/ls/calculate/', {
+                    const response = await fetch('https://krasnagorka.by/wp-json/krasnagorka/v1/ls/calculate/', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json; charset=utf-8'

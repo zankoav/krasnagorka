@@ -555,6 +555,11 @@
         }
     }
 
+    &__big-events {
+        display: grid;
+        gap: 1rem;
+    }
+
     &__opportunities-item-img {
         border-radius: 8px;
         max-width: 56px;
