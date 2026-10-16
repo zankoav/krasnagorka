@@ -7,16 +7,20 @@ export default class StepHouse extends LightningElement {
     @track loading
     @track bookingImg = IMG_BOOKING
     @track error
+    @track fieldsError
     @track priceInfoExpanded = false
     @track soonEventsLoading = false
     @track soonEventsWithPrice = []
     @track soonEventsUnavailable = false
+    @track availableCalendars = []
+    @track availableCalendarsError
 
     happyEventsObj
     happyEventsObjRange
     soonEventsRequestId = 0
     soonEventsSignature
     soonEventsWithPriceSignature
+    availableCalendarsRequestId = 0
 
     get showPriceInfo() {
         return !this.settings.eventId && !this.settings.package
@@ -200,6 +204,157 @@ export default class StepHouse extends LightningElement {
         return this.settings.dateEnd ? this.settings.dateEnd.replace(/-/g, '.') : '—'
     }
 
+    get dateStartPicker() {
+        return this.toPickerDate(this.settings.dateStart)
+    }
+
+    get dateEndPicker() {
+        return this.toPickerDate(this.settings.dateEnd)
+    }
+
+    get classForNextButton() {
+        const baseClass = 'step-button-navigation__button'
+
+        return this.fieldsAreValid ? `${baseClass} step-button-navigation__button_available` : baseClass
+    }
+
+    get fieldsAreValid() {
+        return !this.getFieldsValidationError()
+    }
+
+    get packageCalendarIds() {
+        return Object.keys(this.settings.package?.calendars || {}).map(String)
+    }
+
+    get selectableCalendars() {
+        const calendars = this.settings.calendars || []
+
+        if (!this.settings.package || !this.packageCalendarIds.length) {
+            return calendars
+        }
+
+        return calendars.filter((calendar) => this.packageCalendarIds.includes(String(calendar.id)))
+    }
+
+    get packageTitle() {
+        const title = this.settings.package?.title || ''
+        const textArea = document.createElement('textarea')
+
+        textArea.innerHTML = title
+
+        return textArea.value.replace(/^Тур\s+/i, '')
+    }
+
+    get packageUnavailableMessage() {
+        return `На эти даты тур ${this.packageTitle} не доступен`
+    }
+
+    getFieldsValidationError() {
+        const dateStart = moment(this.settings.dateStart, 'DD-MM-YYYY', true)
+        const dateEnd = moment(this.settings.dateEnd, 'DD-MM-YYYY', true)
+        const people = Number(this.settings.people)
+
+        if (!this.settings.dateStart || !dateStart.isValid()) {
+            return 'Выберите дату заезда'
+        }
+
+        if (!this.settings.dateEnd || !dateEnd.isValid()) {
+            return 'Выберите дату выезда'
+        }
+
+        if (dateStart.isBefore(moment().startOf('day'), 'day')) {
+            return 'Нельзя бронировать прошлые даты'
+        }
+
+        if (!dateEnd.isAfter(dateStart, 'day')) {
+            return 'Дата выезда должна быть позже даты заезда'
+        }
+
+        if (!Number.isFinite(people) || people <= 0) {
+            return 'Выберите количество отдыхающих'
+        }
+
+        if (this.settings.package) {
+            const packageStart = moment(this.settings.package.start_date, 'MM/DD/YYYY', true)
+            const packageEnd = moment(this.settings.package.end_date, 'MM/DD/YYYY', true)
+            const minimumNights = Number(this.settings.package.min_night) || 0
+
+            if (
+                (packageStart.isValid() && dateStart.isBefore(packageStart, 'day')) ||
+                (packageEnd.isValid() && dateEnd.isAfter(packageEnd, 'day'))
+            ) {
+                return this.packageUnavailableMessage
+            }
+
+            const isDeprecatedDay = (this.settings.package.depricatedDayes || []).some(
+                (day) => dateStart.format('YYYY-MM-DD') <= day && dateEnd.format('YYYY-MM-DD') >= day
+            )
+
+            if (isDeprecatedDay) {
+                return this.packageUnavailableMessage
+            }
+
+            if (minimumNights && dateEnd.diff(dateStart, 'days') < minimumNights) {
+                return `Минимальное количество ночей: ${minimumNights}`
+            }
+
+            const hasAvailablePackageCalendar = this.selectableCalendars.some((calendar) => {
+                const packageCalendar = this.settings.package.calendars?.[calendar.id]
+                const minPeople = Number(packageCalendar?.min_people) || 0
+                const maxPeople = Number(calendar.peopleMaxCount)
+
+                return (
+                    people >= minPeople &&
+                    (!Number.isFinite(maxPeople) || maxPeople <= 0 || people <= maxPeople)
+                )
+            })
+
+            if (!hasAvailablePackageCalendar) {
+                return 'Для выбранного количества отдыхающих нет доступных объектов в пакетном туре'
+            }
+        }
+
+        return null
+    }
+
+    get peopleOptions() {
+        return this.getCountOptions(1, this.maxPeopleCount, this.settings.people)
+    }
+
+    get maxPeopleCount() {
+        const peopleLimits = this.selectableCalendars
+            .map((calendar) => Number(calendar.peopleMaxCount))
+            .filter((limit) => Number.isFinite(limit) && limit > 0)
+        const fallbackMaxCount = Number(this.settings.maxCount)
+
+        if (peopleLimits.length) {
+            return Math.max(...peopleLimits)
+        }
+
+        return Number.isFinite(fallbackMaxCount) && fallbackMaxCount > 0
+            ? Math.floor(fallbackMaxCount)
+            : 15
+    }
+
+    get childOptions() {
+        return this.getCountOptions(0, this.maxChildCount, this.settings.child)
+    }
+
+    get showAvailableCalendars() {
+        return Boolean(
+            this.availableCalendarsError ||
+                this.availableCalendars.length
+        )
+    }
+
+    get maxChildCount() {
+        const childLimits = this.selectableCalendars
+            .map((calendar) => Number(calendar.maxChild))
+            .filter((limit) => Number.isFinite(limit))
+
+        return Math.max(0, ...childLimits)
+    }
+
     get currentSeason() {
         return this.settings.seasons.find((season) => season.current)
     }
@@ -222,7 +377,10 @@ export default class StepHouse extends LightningElement {
     renderedCallback() {
         const title = this.template.querySelector('.step-house__subtitle')
         if (title && this.settings.package) {
-            title.innerHTML = this.settings.package.title
+            const packageStart = moment(this.settings.package.start_date, 'MM/DD/YYYY').format('DD.MM.YYYY')
+            const packageEnd = moment(this.settings.package.end_date, 'MM/DD/YYYY').format('DD.MM.YYYY')
+
+            title.innerHTML = `${this.settings.package.title} <div class="step-house__subtitle-small">${packageStart} - ${packageEnd}</div>`
         }
 
         this.refreshSoonEventsPrices()
@@ -546,6 +704,178 @@ export default class StepHouse extends LightningElement {
             })
         )
         this.error = false
+    }
+
+    datePickerChange(event) {
+        const date = moment(event.target.value, 'YYYY-MM-DD', true)
+        const field = event.target.dataset.field
+
+        this.clearFieldsError()
+        this.updateSettings({
+            [field]: date.isValid() ? date.format('DD-MM-YYYY') : null
+        })
+    }
+
+    openNativeDatePicker(event) {
+        const input = event.target
+
+        if (typeof input.showPicker === 'function') {
+            try {
+                input.showPicker()
+            } catch (error) {
+                // Some browsers allow the native picker only after a direct click.
+            }
+        }
+    }
+
+    peopleChange(event) {
+        this.clearFieldsError()
+        this.updateSettings({ people: Number(event.detail) })
+    }
+
+    childChange(event) {
+        this.clearFieldsError()
+        this.updateSettings({ child: Number(event.detail) })
+    }
+
+    async fieldsNextButtonHandler() {
+        const dateStart = moment(this.settings.dateStart, 'DD-MM-YYYY', true)
+        const dateEnd = moment(this.settings.dateEnd, 'DD-MM-YYYY', true)
+        const people = Number(this.settings.people)
+        const error = this.getFieldsValidationError()
+
+        this.fieldsError = error
+
+        if (error || this.loading) {
+            return
+        }
+
+        const requestId = ++this.availableCalendarsRequestId
+        this.loading = true
+        this.availableCalendars = []
+        this.availableCalendarsError = null
+
+        try {
+            const response = await fetch('https://krasnagorka.by/wp-json/krasnagorka/v1/ls/available-calendars/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify({
+                    dateStart: dateStart.format('YYYY-MM-DD'),
+                    dateEnd: dateEnd.format('YYYY-MM-DD'),
+                    people,
+                    child: Number(this.settings.child) || 0,
+                    packageId: this.settings.package?.id || null
+                })
+            })
+            const data = await response.json()
+
+            if (!response.ok) {
+                throw new Error(data.errorMessage || 'Не удалось подобрать объект размещения')
+            }
+
+            if (requestId === this.availableCalendarsRequestId) {
+                this.availableCalendars = this.filterAvailableCalendarsForPackage(data.calendars || []).map(
+                    (calendar) => ({
+                        ...calendar,
+                        price: this.toPrice(calendar.price)
+                    })
+                )
+                this.availableCalendarsError = this.availableCalendars.length
+                    ? null
+                    : 'К сожалению, по выбранным условиям ничего не найдено.'
+            }
+        } catch (requestError) {
+            if (requestId === this.availableCalendarsRequestId) {
+                this.availableCalendarsError = requestError.message || 'Не удалось подобрать объект размещения'
+            }
+        } finally {
+            if (requestId === this.availableCalendarsRequestId) {
+                this.loading = false
+            }
+        }
+    }
+
+    selectAvailableCalendar(event) {
+        if (
+            event.type === 'keydown' &&
+            event.key !== 'Enter' &&
+            event.key !== ' '
+        ) {
+            return
+        }
+
+        if (event.type === 'keydown') {
+            event.preventDefault()
+        }
+
+        const calendar = this.availableCalendars.find(
+            (item) => String(item.id) === event.currentTarget.dataset.id
+        )
+
+        if (calendar) {
+            this.initHouse(calendar.id, calendar.isTerem)
+        }
+    }
+
+    clearFieldsError() {
+        this.fieldsError = null
+        this.resetAvailableCalendars()
+    }
+
+    resetAvailableCalendars() {
+        this.availableCalendarsRequestId += 1
+        this.availableCalendars = []
+        this.availableCalendarsError = null
+    }
+
+    getCountOptions(min, max, selectedValue) {
+        const hasSelectedValue = selectedValue !== null && selectedValue !== undefined && selectedValue !== ''
+
+        return Array.from({ length: max - min + 1 }, (_, index) => {
+            const value = min + index
+
+            return {
+                id: value,
+                name: value,
+                selected: hasSelectedValue && value === Number(selectedValue)
+            }
+        })
+    }
+
+    toPickerDate(value) {
+        return value ? moment(value, 'DD-MM-YYYY').format('YYYY-MM-DD') : null
+    }
+
+    toPrice(value) {
+        const price = Number(value)
+
+        if (!Number.isFinite(price)) {
+            return null
+        }
+
+        const [rub, penny] = price.toFixed(2).split('.')
+
+        return { rub, penny }
+    }
+
+    filterAvailableCalendarsForPackage(calendars) {
+        if (!this.settings.package || !this.packageCalendarIds.length) {
+            return calendars
+        }
+
+        return calendars.filter((calendar) => this.packageCalendarIds.includes(String(calendar.id)))
+    }
+
+    updateSettings(detail) {
+        this.dispatchEvent(
+            new CustomEvent('update', {
+                detail,
+                bubbles: true,
+                composed: true
+            })
+        )
     }
 
     nextButtonHandler() {
