@@ -68,6 +68,14 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             ),
         ]);
 
+        register_rest_route($namespace, '/ls/available-calendars/', [
+            array(
+                'methods'             => 'POST',
+                'callback'            => array($this, 'available_calendars'),
+                'permission_callback' => array($this, 'available_calendars_permissions_check')
+            ),
+        ]);
+
         register_rest_route($namespace, '/ls/booking-model/', [
             array(
                 'methods'             => 'POST',
@@ -78,6 +86,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
     }
 
     public function freeDate_permissions_check($request)
+    {
+        return true;
+    }
+
+    public function available_calendars_permissions_check($request)
     {
         return true;
     }
@@ -550,6 +563,125 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
 
 
         return new WP_REST_Response($result, 200);
+    }
+
+    /**
+     * Returns calendars that are available for the complete date range and
+     * support the requested number of guests and children.
+     *
+     * Request body:
+     * {
+     *   "dateStart": "YYYY-MM-DD",
+     *   "dateEnd": "YYYY-MM-DD",
+     *   "people": 1,
+     *   "child": 0
+     * }
+     */
+    public function available_calendars($request)
+    {
+        $dateFormat = 'Y-m-d';
+        $dateStartRaw = sanitize_text_field((string) $request->get_param('dateStart'));
+        $dateEndRaw = sanitize_text_field((string) $request->get_param('dateEnd'));
+        $dateStart = DateTime::createFromFormat('!' . $dateFormat, $dateStartRaw);
+        $dateEnd = DateTime::createFromFormat('!' . $dateFormat, $dateEndRaw);
+        $people = filter_var($request->get_param('people'), FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 1]
+        ]);
+        $childValue = $request->get_param('child');
+        $child = ($childValue === null || $childValue === '') ? 0 : filter_var($childValue, FILTER_VALIDATE_INT, [
+            'options' => ['min_range' => 0]
+        ]);
+
+        if (!$dateStart || $dateStart->format($dateFormat) !== $dateStartRaw) {
+            return $this->available_calendars_error('Неверный формат даты заезда. Используйте YYYY-MM-DD.');
+        }
+
+        if (!$dateEnd || $dateEnd->format($dateFormat) !== $dateEndRaw) {
+            return $this->available_calendars_error('Неверный формат даты выезда. Используйте YYYY-MM-DD.');
+        }
+
+        if ($dateStart < new DateTime('today')) {
+            return $this->available_calendars_error('Дата заезда не может быть в прошлом.');
+        }
+
+        if ($dateEnd <= $dateStart) {
+            return $this->available_calendars_error('Дата выезда должна быть позже даты заезда.');
+        }
+
+        if ($people === false) {
+            return $this->available_calendars_error('Количество отдыхающих должно быть больше нуля.');
+        }
+
+        if ($child === false) {
+            return $this->available_calendars_error('Количество детей не может быть отрицательным.');
+        }
+
+        $freeCalendarIds = get_free_date_calendars($dateStart, $dateEnd);
+
+        if (empty($freeCalendarIds)) {
+            return new WP_REST_Response([
+                'status' => 200,
+                'calendars' => []
+            ], 200);
+        }
+
+        $terms = get_terms([
+            'taxonomy' => 'sbc_calendars',
+            'include' => $freeCalendarIds
+        ]);
+        $calendars = [];
+
+        foreach ($terms as $term) {
+            $isAvailable = get_term_meta($term->term_id, 'kg_calendars_visible', 1);
+            $isTeremRoom = get_term_meta($term->term_id, 'kg_calendars_terem', 1);
+            $peopleMaxCount = (int) get_term_meta($term->term_id, 'kg_calendars_persons_count', 1);
+            $maxChild = (int) get_term_meta($term->term_id, 'kg_calendars_max_child', 1);
+
+            if (!$isAvailable) {
+                continue;
+            }
+
+            $house = getHouseByCalendarId($term->term_id);
+
+            if ($isTeremRoom != 'on') {
+                $peopleMaxCount = (int) get_post_meta($house['id'] ?? 0, 'max_people', 1);
+            }
+
+            $peopleMaxCount = $peopleMaxCount ?: 99;
+            $picture = !empty($house['id'])
+                ? get_the_post_thumbnail_url($house['id'], 'welcome_tab_laptop')
+                : null;
+
+            if ($people > $peopleMaxCount || $child > $maxChild) {
+                continue;
+            }
+
+            $calendars[] = [
+                'id' => $term->term_id,
+                'name' => $term->name,
+                'slug' => $term->slug,
+                'picture' => $picture,
+                'isTerem' => $isTeremRoom,
+                'isDeprecatedBabyBed' => get_term_meta($term->term_id, 'kg_calendars_deprecate_baby_bed', 1) == 'on',
+                'isDeprecateAnimals' => get_term_meta($term->term_id, 'kg_calendars_deprecate_animals', 1) == 'on',
+                'maxChild' => $maxChild,
+                'peopleMaxCount' => $peopleMaxCount
+            ];
+        }
+
+        return new WP_REST_Response([
+            'status' => 200,
+            'calendars' => $calendars
+        ], 200);
+    }
+
+    private function available_calendars_error($message)
+    {
+        return new WP_REST_Response([
+            'status' => 400,
+            'errorMessage' => $message,
+            'calendars' => []
+        ], 400);
     }
 
     public function calculate($request)

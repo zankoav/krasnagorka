@@ -380,6 +380,13 @@ class BaseModel extends ModelImpl
             $maxChild = get_term_meta($term->term_id, 'kg_calendars_max_child', 1);
             $peopleMaxCount = (int) get_term_meta($term->term_id, 'kg_calendars_persons_count', 1);
 
+            if ($isTeremRoom != 'on') {
+                $house = getHouseByCalendarId($term->term_id);
+                $peopleMaxCount = (int) get_post_meta($house['id'] ?? 0, 'max_people', 1);
+            }
+
+            $peopleMaxCount = $peopleMaxCount ?: 99;
+
             if (!$isAvailable) {
                 continue;
             }
@@ -392,7 +399,7 @@ class BaseModel extends ModelImpl
                 'isDeprecatedBabyBed' => $isDeprecateBabyBed == 'on',
                 'isDeprecateAnimals' => $isDeprecateAnimals == 'on',
                 'maxChild' => intval($maxChild),
-                'peopleMaxCount' => $peopleMaxCount ?: 99,
+                'peopleMaxCount' => $peopleMaxCount,
                 'isTerem' => $isTeremRoom,
                 'selected' => $selected
             ];
