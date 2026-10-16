@@ -696,6 +696,7 @@ export default class StepHouse extends LightningElement {
 
         this.loadBookingModel({
             ...soonEvent.params,
+            promotionId: soonEvent.id,
             calendarId: selectedCalendar.id,
             from: moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD'),
             to: moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD'),

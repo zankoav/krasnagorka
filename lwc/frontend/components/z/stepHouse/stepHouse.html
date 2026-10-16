@@ -47,16 +47,11 @@
                         </div>
                     </div>
                     <div class="step-button-navigation__button-next-wrapper">
-                        <a
-                            href="javascript:void(0)"
-                            onclick={fieldsNextButtonHandler}
-                            class={classForNextButton}>Подобрать объект размещения</a>
+                        <a href="javascript:void(0)" onclick={fieldsNextButtonHandler} class={classForNextButton}>Подобрать объект размещения</a>
                         <p if:true={fieldsError} class="step-button-navigation__error">{fieldsError}</p>
                     </div>
                     <div if:true={showAvailableCalendars} class="step-house__available-calendars">
-                        <p if:true={availableCalendarsError} class="step-house__available-calendars-message">
-                            {availableCalendarsError}
-                        </p>
+                        <p if:true={availableCalendarsError} class="step-house__available-calendars-message">{availableCalendarsError}</p>
                         <div class="step-house__available-calendars-list">
                             <template for:each={availableCalendars} for:item="calendar">
                                 <div
@@ -67,13 +62,15 @@
                                     tabindex="0"
                                     onclick={selectAvailableCalendar}
                                     onkeydown={selectAvailableCalendar}>
-                                    <img if:true={calendar.picture} class="step-house__available-calendar-img" src={calendar.picture} alt={calendar.name} />
+                                    <img
+                                        if:true={calendar.picture}
+                                        class="step-house__available-calendar-img"
+                                        src={calendar.picture}
+                                        alt={calendar.name} />
                                     <div class="step-house__available-calendar-content">
                                         <h4 class="step-house__available-calendar-title">{calendar.name}</h4>
                                         <div class="step-house__available-calendar-footer">
-                                            <span class="step-house__available-calendar-description">
-                                                До {calendar.peopleMaxCount} человек
-                                            </span>
+                                            <span class="step-house__available-calendar-description"> До {calendar.peopleMaxCount} человек </span>
                                             <span if:true={calendar.price} class="step-house__available-calendar-price">
                                                 <z-price-view price={calendar.price}></z-price-view>
                                             </span>
@@ -144,9 +141,9 @@
                                 </template>
                             </div>
                             <h3
-                                if:true={settings.package}
-                                class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8 step-house__opportunities-item-title_mt_8"
-                                lwc:inner-html={settings.package.title}></h3>
+                                if:true={settings.promotionTitle}
+                                class="step-house__opportunities-item-title step-house__opportunities-item-title_mb_8 step-house__opportunities-item-title_mt_16"
+                                lwc:inner-html={settings.promotionTitle}></h3>
                             <div if:true={settings.eventId} class="step-house__event">
                                 <h3 class="step-house__event-title">{settings.eventModel.title}</h3>
                                 <tab-line class="step-house__event-variant" title="Пакет" tooltip={eventOpportunities}>
@@ -176,7 +173,9 @@
                         <template if:false={offersLoading}>
                             <div if:true={showSoonOrFireEvents} class="step-house__row step-house__row_opportunities">
                                 <div lwc:if={showSoonEvents} class="step-house__col">
-                                    <div class="step-house__delimeter step-house__delimeter_small">Доступные акционные предложения на выбранные даты</div>
+                                    <div class="step-house__delimeter step-house__delimeter_small">
+                                        Доступные акционные предложения на выбранные даты
+                                    </div>
                                     <p
                                         if:true={soonEventsUnavailable}
                                         class="step-house__opportunities-item-description step-house__opportunities-item-description_center">
@@ -200,8 +199,12 @@
                                                         class="step-house__opportunities-item-description step-house__opportunities-item-description_mb_8"
                                                         lwc:inner-html={soonEvent.description}></p>
                                                     <div class="step-house__opportunities-item-footer">
-                                                        <span class="step-house__opportunities-item-description" lwc:inner-html={soonEvent.dates}></span>
-                                                        <z-price-view class="step-house__opportunities-item-price" price={soonEvent.price}></z-price-view>
+                                                        <span
+                                                            class="step-house__opportunities-item-description"
+                                                            lwc:inner-html={soonEvent.dates}></span>
+                                                        <z-price-view
+                                                            class="step-house__opportunities-item-price"
+                                                            price={soonEvent.price}></z-price-view>
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,7 +232,9 @@
                                                     </div>
                                                     <div class="step-house__opportunities-item-content-text">
                                                         <span class="step-house__opportunities-item-dates">{fireEvent.dates}</span>
-                                                        <z-price-view class="step-house__opportunities-item-price" price={fireEvent.price}></z-price-view>
+                                                        <z-price-view
+                                                            class="step-house__opportunities-item-price"
+                                                            price={fireEvent.price}></z-price-view>
                                                     </div>
                                                 </div>
                                             </div>

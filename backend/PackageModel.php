@@ -86,6 +86,7 @@ class PackageModel extends ModelImpl
         $variantId = $_GET['var'];
         $people = $_GET['people'];
         $child = $_GET['child'];
+        $promotionId = isset($_GET['promotionId']) ? absint($_GET['promotionId']) : 0;
 
         if (!empty($eventId) && !empty($eventTabId)) {
             $intervalId = get_post_meta($eventTabId, 'mastak_event_tab_type_10_interval', 1);
@@ -218,6 +219,10 @@ class PackageModel extends ModelImpl
 
         if (isset($child) && $child !== '') {
             $result['child'] = $child;
+        }
+
+        if ($promotionId && get_post_type($promotionId) === 'event') {
+            $result['promotionTitle'] = get_the_title($promotionId);
         }
 
         if (!empty($teremRoom)) {

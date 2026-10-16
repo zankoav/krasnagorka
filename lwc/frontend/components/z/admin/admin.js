@@ -62,6 +62,7 @@ export default class Admin extends LightningElement {
             admin: this.model.admin,
             scenario: this.model.scenario,
             package: this.model.package,
+            promotionTitle: this.model.promotionTitle,
             payment: this.model.payment,
             prepaidType: this.model.prepaidType,
             paymentMethod: this.model.paymentMethod,
