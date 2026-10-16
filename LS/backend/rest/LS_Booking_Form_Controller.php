@@ -574,7 +574,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
      *   "dateStart": "YYYY-MM-DD",
      *   "dateEnd": "YYYY-MM-DD",
      *   "people": 1,
-     *   "child": 0
+     *   "child": 0,
+     *   "packageId": 123
      * }
      */
     public function available_calendars($request)
@@ -591,6 +592,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         $child = ($childValue === null || $childValue === '') ? 0 : filter_var($childValue, FILTER_VALIDATE_INT, [
             'options' => ['min_range' => 0]
         ]);
+        $packageIdValue = $request->get_param('packageId');
+        $packageId = ($packageIdValue === null || $packageIdValue === '')
+            ? null
+            : filter_var($packageIdValue, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
 
         if (!$dateStart || $dateStart->format($dateFormat) !== $dateStartRaw) {
             return $this->available_calendars_error('Неверный формат даты заезда. Используйте YYYY-MM-DD.');
@@ -616,7 +621,62 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             return $this->available_calendars_error('Количество детей не может быть отрицательным.');
         }
 
+        if ($packageId === false) {
+            return $this->available_calendars_error('Не удалось определить пакетный тур.');
+        }
+
+        $packageCalendarIds = null;
+
+        if ($packageId) {
+            $packageCalendars = get_post_meta($packageId, 'package_calendars', 1);
+            $packageCalendarIds = array_filter(array_map(
+                static function ($calendar) {
+                    return isset($calendar['calendar']) ? (int) $calendar['calendar'] : 0;
+                },
+                (array) $packageCalendars
+            ));
+
+            if (empty($packageCalendarIds)) {
+                return $this->available_calendars_error('Для пакетного тура не найдены объекты размещения.');
+            }
+
+            $packageStartRaw = get_post_meta($packageId, 'package_start', 1);
+            $packageEndRaw = get_post_meta($packageId, 'package_end', 1);
+            $packageStart = DateTime::createFromFormat('!m/d/Y', $packageStartRaw);
+            $packageEnd = DateTime::createFromFormat('!m/d/Y', $packageEndRaw);
+
+            if (
+                ($packageStart && $packageStart->format('m/d/Y') === $packageStartRaw && $dateStart < $packageStart) ||
+                ($packageEnd && $packageEnd->format('m/d/Y') === $packageEndRaw && $dateEnd > $packageEnd)
+            ) {
+                return $this->available_calendars_error('На эти даты пакетный тур не доступен.');
+            }
+
+            $minimumNights = (int) get_post_meta($packageId, 'package_night_min', 1);
+
+            if ($minimumNights && $dateStart->diff($dateEnd)->days < $minimumNights) {
+                return $this->available_calendars_error("Минимальное количество ночей: {$minimumNights}.");
+            }
+
+            $deprecatedDays = preg_split(
+                '/\r\n|\r|\n/',
+                (string) get_post_meta($packageId, 'package_depricated_days', 1),
+                -1,
+                PREG_SPLIT_NO_EMPTY
+            );
+
+            foreach ($deprecatedDays as $deprecatedDay) {
+                if ($dateStartRaw <= $deprecatedDay && $dateEndRaw >= $deprecatedDay) {
+                    return $this->available_calendars_error('На эти даты пакетный тур не доступен.');
+                }
+            }
+        }
+
         $freeCalendarIds = get_free_date_calendars($dateStart, $dateEnd);
+
+        if ($packageCalendarIds !== null) {
+            $freeCalendarIds = array_values(array_intersect($freeCalendarIds, $packageCalendarIds));
+        }
 
         if (empty($freeCalendarIds)) {
             return new WP_REST_Response([
@@ -656,28 +716,40 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 continue;
             }
 
-            $priceResult = self::calculateResult([
+            $priceRequest = [
                 'house' => $house['id'] ?? 0,
                 'calendarId' => $term->term_id,
                 'dateStart' => (clone $dateStart)->modify('+1 day')->format($dateFormat),
                 'dateEnd' => $dateEnd->format($dateFormat),
                 'peopleCount' => $people,
-                'isTerem' => $isTeremRoom == 'on',
-                'is_admin_event' => false,
-                'intervallId' => null,
-                'eventTabId' => null,
-                'eventId' => null,
-                'variantId' => null,
                 'babyBed' => false,
-                'smallAnimalCount' => 0,
-                'bigAnimalCount' => 0,
                 'bathHouseWhite' => false,
-                'bathHouseBlack' => false,
-                'foodBreakfast' => 0,
-                'foodLunch' => 0,
-                'foodDinner' => 0,
-                'foodVariant' => 'no_food'
-            ]);
+                'bathHouseBlack' => false
+            ];
+
+            if ($packageId) {
+                $priceRequest['packageId'] = $packageId;
+                $priceResult = (new PackageCalculate())->response($priceRequest)['result'];
+
+                if (!empty($priceResult['error'])) {
+                    continue;
+                }
+            } else {
+                $priceResult = self::calculateResult(array_merge($priceRequest, [
+                    'isTerem' => $isTeremRoom == 'on',
+                    'is_admin_event' => false,
+                    'intervallId' => null,
+                    'eventTabId' => null,
+                    'eventId' => null,
+                    'variantId' => null,
+                    'smallAnimalCount' => 0,
+                    'bigAnimalCount' => 0,
+                    'foodBreakfast' => 0,
+                    'foodLunch' => 0,
+                    'foodDinner' => 0,
+                    'foodVariant' => 'no_food'
+                ]));
+            }
 
             $calendars[] = [
                 'id' => $term->term_id,
