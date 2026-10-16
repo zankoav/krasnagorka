@@ -158,6 +158,11 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
         if ($toDay > $dateStart) {
             $result['available'] = false;
             $result['message'] = 'Упс! Устаревшая бронь :(';
+            Log::info('check-order: попытка проверить устаревшую бронь', [
+                'calendarId' => (int) $calendarId,
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd
+            ]);
             return new WP_REST_Response($result, 200);
         }
 
@@ -193,26 +198,35 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
             $parseResult[] = [$start, $end, $orderId];
         }
 
+        $conflictingOrders = [];
+
         foreach ($parseResult as $r) {
             $from = $r[0];
             $to = $r[1];
             $orId = $r[2];
 
-            if ($dateStart >= $from and $dateStart < $to) {
+            if (
+                ($dateStart >= $from and $dateStart < $to) ||
+                ($dateEnd > $from and $dateEnd <= $to) ||
+                ($dateStart < $from and $dateEnd > $to)
+            ) {
                 $result['available'] = false;
-            }
-
-            if ($dateEnd > $from and $dateEnd <= $to) {
-                $result['available'] = false;
-            }
-
-            if ($dateStart < $from and $dateEnd > $to) {
-                $result['available'] = false;
+                $conflictingOrders[] = [
+                    'orderId' => $orId,
+                    'dateStart' => $from,
+                    'dateEnd' => $to
+                ];
             }
         }
 
         if (!$result['available']) {
             $result['message'] = 'Упс! Бронь уже занята :(';
+            Log::info('check-order: объект недоступен из-за пересечения бронирований', [
+                'calendarId' => (int) $calendarId,
+                'dateStart' => $dateStart,
+                'dateEnd' => $dateEnd,
+                'conflictingOrders' => $conflictingOrders
+            ]);
         }
 
         return new WP_REST_Response($result, 200);

@@ -42,11 +42,14 @@ export default class BookingForm extends LightningElement {
     @track okImage = OK
     @track errorImage = ERROR
     orderValidateProcess = false
+    orderValidationRequestId = 0
+    bookingInProgress = false
 
     connectedCallback() {
         if (this.settings.dateStart && this.settings.dateEnd) {
             this.loading = true
             this.orderValidateProcess = true
+            const requestId = ++this.orderValidationRequestId
 
             const calendar = this.settings.calendars.find((c) => c.selected)
 
@@ -56,13 +59,17 @@ export default class BookingForm extends LightningElement {
                     'Content-Type': 'application/json; charset=utf-8'
                 },
                 body: JSON.stringify({
-                    dateStart: this.settings.dateStart,
-                    dateEnd: this.settings.dateEnd,
+                    dateStart: moment(this.settings.dateStart, 'DD-MM-YYYY').format('YYYY-MM-DD'),
+                    dateEnd: moment(this.settings.dateEnd, 'DD-MM-YYYY').format('YYYY-MM-DD'),
                     calendarId: calendar?.id
                 })
             })
                 .then((data) => data.json())
                 .then((data) => {
+                    if (requestId !== this.orderValidationRequestId || this.bookingInProgress) {
+                        return
+                    }
+
                     this.loading = false
                     this.orderValidateProcess = false
 
@@ -71,6 +78,15 @@ export default class BookingForm extends LightningElement {
                     } else if (!data.available) {
                         this.showOps(data.message)
                     }
+                })
+                .catch(() => {
+                    if (requestId !== this.orderValidationRequestId || this.bookingInProgress) {
+                        return
+                    }
+
+                    this.loading = false
+                    this.orderValidateProcess = false
+                    this.showError()
                 })
         }
     }
@@ -127,6 +143,8 @@ export default class BookingForm extends LightningElement {
     }
 
     async bookingOrder() {
+        this.bookingInProgress = true
+        this.orderValidationRequestId += 1
         this.loading = true
 
         const requestData = {
@@ -164,13 +182,22 @@ export default class BookingForm extends LightningElement {
             utmAttribution: getAttribution()
         }
 
-        const response = await fetch('https://krasnagorka.by/wp-json/amocrm/v4/create-order/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8'
-            },
-            body: JSON.stringify(requestData)
-        }).then((data) => data.json())
+        let response
+
+        try {
+            response = await fetch('https://krasnagorka.by/wp-json/amocrm/v4/create-order/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(requestData)
+            }).then((data) => data.json())
+        } catch (error) {
+            this.showError()
+            this.loading = false
+            this.bookingInProgress = false
+            return
+        }
 
         if (response) {
             if (response.error) {
@@ -254,6 +281,7 @@ export default class BookingForm extends LightningElement {
             this.showError()
         }
         this.loading = false
+        this.bookingInProgress = false
     }
 
     async sendOrder() {
