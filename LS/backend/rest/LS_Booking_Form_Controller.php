@@ -656,6 +656,29 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 continue;
             }
 
+            $priceResult = self::calculateResult([
+                'house' => $house['id'] ?? 0,
+                'calendarId' => $term->term_id,
+                'dateStart' => (clone $dateStart)->modify('+1 day')->format($dateFormat),
+                'dateEnd' => $dateEnd->format($dateFormat),
+                'peopleCount' => $people,
+                'isTerem' => $isTeremRoom == 'on',
+                'is_admin_event' => false,
+                'intervallId' => null,
+                'eventTabId' => null,
+                'eventId' => null,
+                'variantId' => null,
+                'babyBed' => false,
+                'smallAnimalCount' => 0,
+                'bigAnimalCount' => 0,
+                'bathHouseWhite' => false,
+                'bathHouseBlack' => false,
+                'foodBreakfast' => 0,
+                'foodLunch' => 0,
+                'foodDinner' => 0,
+                'foodVariant' => 'no_food'
+            ]);
+
             $calendars[] = [
                 'id' => $term->term_id,
                 'name' => $term->name,
@@ -665,7 +688,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                 'isDeprecatedBabyBed' => get_term_meta($term->term_id, 'kg_calendars_deprecate_baby_bed', 1) == 'on',
                 'isDeprecateAnimals' => get_term_meta($term->term_id, 'kg_calendars_deprecate_animals', 1) == 'on',
                 'maxChild' => $maxChild,
-                'peopleMaxCount' => $peopleMaxCount
+                'peopleMaxCount' => $peopleMaxCount,
+                'price' => (float) ($priceResult['total_price'] ?? 0)
             ];
         }
 
