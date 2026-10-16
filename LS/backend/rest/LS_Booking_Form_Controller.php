@@ -260,6 +260,8 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
      */
     public function big_events($request)
     {
+        $houseId = absint($request->get_param('house'));
+        $calendarId = absint($request->get_param('calendarId'));
         $peopleCount = max(1, absint($request->get_param('people')));
         $childCount = max(0, absint($request->get_param('child')));
         $today = strtotime(current_time('Y-m-d'));
@@ -302,6 +304,10 @@ class LS_Booking_Form_Controller extends WP_REST_Controller
                     $availableCalendars = [];
                     foreach ($bigEvent['calendars'] as $calendar) {
                         if (
+                            ($houseId && $houseId !== (int) $calendar['house'])
+                            ||
+                            ($calendarId && $calendarId !== (int) $calendar['calendar'])
+                            ||
                             $peopleCount + $childCount < (int) $calendar['min_people']
                             || $peopleCount + $childCount > (int) $calendar['max_people']
                             || ($childCount > 0 && !$calendar['enabled_child'])
