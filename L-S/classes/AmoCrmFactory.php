@@ -137,6 +137,10 @@ class AmoCrmFactory {
                     continue;
                 }
 
+                if ($fieldId === 752633) {
+                    $value = substr($value, 0, 220);
+                }
+
                 $utmFieldValueModel = new TextCustomFieldValuesModel();
                 $utmFieldValueModel->setFieldId($fieldId);
                 $utmFieldValueModel->setValues(
