@@ -28,7 +28,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
                         <?php if ($video): ?>
-                            <a href="https://krasnagorka.by/podbor-dat/" target="_blank"
+                            <a href="https://krasnagorka.by/booking-form/" target="_blank"
                                 class="online-video online-video--menu">
                                 <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg"
                                     alt="online-video"
@@ -91,7 +91,7 @@ $main_slider_delay = get_option('mastak_event_appearance_options')['main_slider_
                     class="logo__icon">
             </a>
             <?php if ($video): ?>
-                <a href="https://krasnagorka.by/podbor-dat/"
+                <a href="https://krasnagorka.by/booking-form/"
                     target="_blank" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/search.svg"
                         alt="online-video"

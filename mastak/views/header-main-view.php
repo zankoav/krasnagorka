@@ -32,7 +32,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                     <div class="menu-main__scroll-content-wrapper">
                         <?php mastak_nav_menu(); ?>
                         <?php if ($video): ?>
-                            <a href="https://krasnagorka.by/podbor-dat/" target="_blank" class="online-video online-video--menu">
+                            <a href="https://krasnagorka.by/booking-form/" target="_blank" class="online-video online-video--menu">
                                 <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg" alt="online-video"
                                      class="online-video__icon">
                                 <span class="online-video__title">Подбор дат</span>
@@ -91,7 +91,7 @@ $footer_logo_id    = $options['footer_logo_id'];
                 <img src="<?= $footer_logo_src[0]; ?>" alt="logo" class="logo__icon">
             </a>
             <?php if ($video): ?>
-                <a href="https://krasnagorka.by/podbor-dat/" target="_blank" class="online-video">
+                <a href="https://krasnagorka.by/booking-form/" target="_blank" class="online-video">
                     <img src="<?= CORE_PATH; ?>assets/icons/search.svg" alt="online-video"
                          class="online-video__icon">
                     <span class="online-video__title">Подбор дат</span>

@@ -280,7 +280,7 @@ endswitch;
                         <?php mastak_nav_menu(); ?>
 
                         <?php if ($video): ?>
-                        <a href="https://krasnagorka.by/podbor-dat/" target="_blank"
+                        <a href="https://krasnagorka.by/booking-form/" target="_blank"
                            class="online-video online-video--menu">
                             <img src="<?= CORE_PATH; ?>assets/icons/search-gray.svg"
                                  alt="online-video"
@@ -343,7 +343,7 @@ endswitch;
                      class="logo__icon">
             </a>
             <?php if ($video): ?>
-            <a href="https://krasnagorka.by/podbor-dat/"
+            <a href="https://krasnagorka.by/booking-form/"
                 target="_blank" class="online-video">
                 <img src="<?= CORE_PATH; ?>assets/icons/search.svg"
                      alt="online-video"
