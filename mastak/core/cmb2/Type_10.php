@@ -130,7 +130,7 @@
 
             $dFrom = new DateTime($result['from']);
             $dFrom = $dFrom->modify('-1 day');
-            $result['from'] = $dFrom;
+            $result['from'] = $dFrom->format('Y-m-d');
 
             $dateEndDT = new DateTime($result['to']);
             $period = new DatePeriod(
