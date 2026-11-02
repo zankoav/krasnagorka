@@ -50,7 +50,7 @@ $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
         <div class="base-place__content">
             <div class="big-text content-text">
                 <div class="textwidget">
-                    <?= wpautop(get_option('mastak_map_appearance_options')['mastak_map_big_text_houses']); ?>
+                    <?= trim(wpautop(get_option('mastak_map_appearance_options')['mastak_map_big_text_houses'])); ?>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@ $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
         <div class="base-place__content" style="padding-bottom:0">
             <div class="big-text content-text">
                 <div class="textwidget">
-                    <?= wpautop(get_option('mastak_map_appearance_options')['mastak_map_big_text_opportunities']); ?>
+                    <?= trim(wpautop(get_option('mastak_map_appearance_options')['mastak_map_big_text_opportunities'])); ?>
                 </div>
             </div>
         </div>
