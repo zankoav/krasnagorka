@@ -265,22 +265,22 @@ endswitch;
         .header-second .menu-bottom__wrapper {
             padding-bottom: 3rem;
         }
-
-
-        .page-template-template-mastak-map .base-place__image-inner{
-            width: 100%;
-        }
-
-        .page-template-template-mastak-map .base-place__image{
-            max-width: initial;
-            flex-grow: 1;
-        }
-
-        .page-template-template-mastak-map .base-place__content:has(.textwidget:empty){
-            display: none;
-        }
-        
+   
     }
+
+    .page-template-template-mastak-map .base-place__image-inner{
+        width: 100%;
+    }
+
+    .page-template-template-mastak-map .base-place__image{
+        max-width: initial;
+        flex-grow: 1;
+    }
+
+    .page-template-template-mastak-map .base-place__content:has(.textwidget:empty){
+        display: none;
+    }`
+    
 </style>
 
 <header class="header-second">
