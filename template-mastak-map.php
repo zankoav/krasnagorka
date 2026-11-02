@@ -45,7 +45,7 @@ $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
     <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта домов</h2>
     <div class="base-place b-mb-2">
         <a rel="group" href="<?= wp_get_attachment_image_url($schema_houses_id, 'full'); ?>" class="base-place__image fancybox image">
-            <img class="base-place__image-inner" alt="Карта домов" src="<?= wp_get_attachment_image_url($schema_houses_id, $image_size_schema) ?>" srcset="<?= wp_get_attachment_image_srcset($schema_houses_id, $image_size_schema) ?>" sizes="<?= wp_get_attachment_image_sizes($schema_houses_id, $image_size_schema) ?>">
+            <img class="base-place__image-inner" alt="Карта домов" src="<?= wp_get_attachment_image_url($schema_houses_id, 'full') ?>">
         </a>
         <div class="base-place__content">
             <div class="big-text content-text">
@@ -56,7 +56,7 @@ $image_size_schema = wp_is_mobile() ? 'map_iphone_5' : 'map_laptop';
     <h2 class="header-title__subtitle b-mb-2 b-mt-3">Карта услуг</h2>
     <div class="base-place">
         <a rel="group" href="<?= wp_get_attachment_image_url($schema_services_id, 'full'); ?>" class="base-place__image fancybox image">
-            <img class="base-place__image-inner" alt="Карта услуг" src="<?= wp_get_attachment_image_url($schema_services_id, $image_size_schema) ?>" srcset="<?= wp_get_attachment_image_srcset($schema_services_id, $image_size_schema) ?>" sizes="<?= wp_get_attachment_image_sizes($schema_services_id, $image_size_schema) ?>">
+            <img class="base-place__image-inner" alt="Карта услуг" src="<?= wp_get_attachment_image_url($schema_services_id, 'full') ?>">
         </a>
         <div class="base-place__content" style="padding-bottom:0">
             <div class="big-text content-text">
