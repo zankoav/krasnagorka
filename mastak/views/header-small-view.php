@@ -279,7 +279,7 @@ endswitch;
 
     .page-template-template-mastak-map .base-place__content:has(.textwidget:empty){
         display: none;
-    }`
+    }
     
 </style>
 
