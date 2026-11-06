@@ -164,9 +164,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                     <img src="<?= get_post_meta(get_the_ID(), "mastak_house_map", true); ?>" alt="map" class="base-place__image-inner">
                                 </div>
                                 <div class="base-place__content">
-                                    <div class="big-text content-text">
-                                        <?= wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true)); ?>
-                                    </div>
+                                    <div class="big-text content-text"><?= trim(wpautop(get_post_meta(get_the_ID(), "mastak_house_text_map", true))); ?></div>
                                 </div>
                             </div>
                         </div>
