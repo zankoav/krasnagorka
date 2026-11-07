@@ -309,7 +309,7 @@ $size          = wp_is_mobile() ? 'welcome_tab_iphone_5' : 'welcome_tab_laptop';
                                 padding: 0 0.25rem;
                             }
                         </style>
-                        <div class="accordion-mixed__content-inner booking-houses__text">
+                        <div class="accordion-mixed__content-inner booking-houses__text big-text content-text">
                             <?php
                             global $wp_embed;
                             $content = get_post_meta(get_the_ID(), "mastak_house_residence", true);

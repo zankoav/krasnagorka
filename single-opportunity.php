@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="base-place__content">
                                     <div class="big-text content-text">
-                                        <?= wpautop(get_post_meta($post_id, "mastak_opportunity_text_map", true)); ?>
+                                        <?= trim(wpautop(get_post_meta($post_id, "mastak_opportunity_text_map", true))); ?>
                                     </div>
                                 </div>
                             </div>
@@ -164,8 +164,16 @@
                         Правила пользования
                     </div>
                     <div data-mixed-conent="6" class="accordion-mixed__content">
-                        <div class="accordion-mixed__content-inner booking-houses__text">
-                            <?= get_post_meta($post_id, "mastak_opportunity_residence", true); ?>
+                        <div class="accordion-mixed__content-inner booking-houses__text big-text content-text">
+                            <?php
+                                global $wp_embed;
+                                $content = get_post_meta($post_id, "mastak_opportunity_residence", true);
+                                $content = $wp_embed->autoembed($content);
+                                $content = $wp_embed->run_shortcode($content);
+                                $content = wpautop($content);
+                                $content = do_shortcode($content);
+                                echo $content;
+                            ?>
                         </div>
                     </div>
                     <?php if ($price != 0 or $addOrderButton): ?>

@@ -268,16 +268,22 @@ endswitch;
    
     }
 
-    .page-template-template-mastak-map .base-place__image-inner, .single-house .base-place__image-inner{
+    .page-template-template-mastak-map .base-place__image-inner, 
+    .single-opportunity .base-place__image-inner, 
+    .single-house .base-place__image-inner {
         width: 100%;
     }
 
-    .page-template-template-mastak-map .base-place__image, .single-house .base-place__image{
+    .page-template-template-mastak-map .base-place__image, 
+    .single-opportunity .base-place__image, 
+    .single-house .base-place__image {
         max-width: initial;
         flex-grow: 1;
     }
 
-    .page-template-template-mastak-map .base-place__content:has(.textwidget:empty), .single-house .base-place__content:has(.content-text:empty){
+    .page-template-template-mastak-map .base-place__content:has(.textwidget:empty), 
+    .single-opportunity .base-place__content:has(.content-text:empty), 
+    .single-house .base-place__content:has(.content-text:empty) {
         display: none;
     }
     
