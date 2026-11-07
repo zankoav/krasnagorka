@@ -155,6 +155,14 @@ class PackageCalculate extends CalculateImpl
                         'count' => intval($peopleCount * 0.5)
                     ];
                 }
+
+                if ($entry['service'] == '9') {
+                    $servicesFormatted[] = [
+                        'id' => '9',
+                        'title' => 'Покатушки на снегоходе 10 минут',
+                        'count' => intval($peopleCount * 0.5)
+                    ];
+                }
             }
         }
 
