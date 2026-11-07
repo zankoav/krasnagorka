@@ -93,9 +93,7 @@
                                          class="base-place__image-inner">
                                 </div>
                                 <div class="base-place__content">
-                                    <div class="big-text content-text">
-                                        <?= trim(wpautop(get_post_meta($post_id, "mastak_opportunity_text_map", true))); ?>
-                                    </div>
+                                    <div class="big-text content-text"><?= trim(wpautop(get_post_meta($post_id, "mastak_opportunity_text_map", true))); ?></div>
                                 </div>
                             </div>
                         </div>
