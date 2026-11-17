@@ -359,7 +359,7 @@
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_post_meta( get_the_ID(), "mastak_house_header_title", true ),
 			'</h1>';
-		} else if ( is_singular( array( 'opportunity', 'event', 'post' ) ) ) {
+		} else if ( is_singular( array( 'opportunity', 'event', 'post' ) ) or is_page (array('f-a-q','dogovor-prisoedineniya', 'novosti', 'cookie-policy')) ) {
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h1>';
@@ -381,8 +381,7 @@
 			'</h1>';
 		} else if ( 
 			is_page_template( "mastak-page-default-template.php" )  
-			or is_page_template( "template-page-posts.php" )  
-			or (is_single() && 'post' == get_post_type()) 
+			or is_page_template( "template-page-posts.php" )
 		) {
 			echo '<h2 class="main-slide__slide-content-title">',
 			get_the_title(),
@@ -395,7 +394,7 @@
 			echo '<h1 class="main-slide__slide-content-title">',
             'Ваше бронирование',
 			'</h1>';
-		} else if ( is_page('podbor-dat') ) {
+		} else if ( is_page('podbor-dat')) {
 			echo '<h1 class="main-slide__slide-content-title">',
             'Подбор дат',
 			'</h1>';
