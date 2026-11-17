@@ -28,9 +28,6 @@ if (!defined('ABSPATH')) {
     <!-- End Google Tag Manager -->
     <script src="<?= esc_url(get_template_directory_uri() . '/assets/js/utm-attribution.js'); ?>"></script>
     <meta charset="<?php bloginfo('charset'); ?>" />
-    <title>
-        <?= wp_title(); ?>
-    </title>
     <meta name="keywords" content="<?= mastak_seo_meta_title(); ?>" />
     <link rel="profile" href="http://gmpg.org/xfn/11" />
 

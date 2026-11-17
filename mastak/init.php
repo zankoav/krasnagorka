@@ -359,7 +359,7 @@
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_post_meta( get_the_ID(), "mastak_house_header_title", true ),
 			'</h1>';
-		} else if ( is_singular( array( 'opportunity', 'event' ) ) ) {
+		} else if ( is_singular( array( 'opportunity', 'event', 'post' ) ) ) {
 			echo '<h1 class="main-slide__slide-content-title">',
 			get_the_title(),
 			'</h1>';

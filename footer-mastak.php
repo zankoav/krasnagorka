@@ -511,7 +511,7 @@ if (is_page_template('reviews-page-template.php')) : ?>
         <div class="cookie_widget__header">
         <span class="cookie_widget__icon" aria-hidden="true">i</span>
         <div>
-            <h2 class="cookie_widget__title">Настройки cookie</h2>
+            <div class="cookie_widget__title">Настройки cookie</div>
             <p class="cookie_widget__text">
             <span data-cookie-status>Проверяем текущий выбор...</span>
             Подробнее — в
